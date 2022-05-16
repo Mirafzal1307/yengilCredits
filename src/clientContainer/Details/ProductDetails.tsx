@@ -510,14 +510,17 @@ const ProductDetails = () => {
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
                       <Link to={`/product/client/details/${item.id}`}>
-                        <img 
-                          src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photo}`}
-                          alt="img"
-                          style={{ width: "150px", height: "150px" }}
-                          onClick={()=> {
-                            refresh()
-                          }}
-                        />
+                      {
+                        
+                        item?.photos.map((photo:any)=> (
+                           <img
+                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                         alt="img"
+                         style={{ width: "150px", height: "150px" }}
+                       />
+                        ))
+                        
+                      }
                       </Link>
                       <h6
                         className={classes.cardTitle}
@@ -638,14 +641,17 @@ const ProductDetails = () => {
                     <Box className={classes.bodyCard} key={item.id}>
                       <Box>
                         <Link to={`/product/client/details/${item.id}`}>
-                          <img
-                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photo}`}
-                            alt="img"
-                            style={{ width: "150px", height: "150px" }}
-                            onClick={()=> {
-                              refresh()
-                            }}
-                          />
+                        {
+                        
+                        item?.photos.map((photo:any)=> (
+                           <img
+                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                         alt="img"
+                         style={{ width: "150px", height: "150px" }}
+                       />
+                        ))
+                        
+                      }
                         </Link>
                         <h6
                           className={classes.cardTitle}

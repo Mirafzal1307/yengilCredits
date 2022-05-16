@@ -81,7 +81,7 @@ const BeforeFooter = () => {
               </Grid>
               <Grid item xs={12} md={matches ? 6 : 12}>
                 <span className={classes.FooterTopTitle}>
-                  Bektexno.uz onlayn do'koni - xarid qilish uchun qulay
+                  YengilSavdo.uz onlayn do'koni - xarid qilish uchun qulay
                   gipermarket
                 </span>
                 <p
