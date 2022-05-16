@@ -74,7 +74,7 @@ const useStyles = makeStyles({
     bigSecondBOX: {
       background: "#FFFFFF",
       boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
-      borderRadius: "5px",
+      borderRadius: "6px",
       padding: "40px 20px 50px",
     },
   });
