@@ -1,0 +1,27 @@
+.css-1qgma8u-MuiButtonBase-root-MuiTableSortLabel-root{
+    color: #065374 !important; 
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 10px 20px 10px !important;
+}
+.css-1869usk-MuiFormControl-root{
+    margin: 0 !important;
+}
+
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+    background-color: #065374 !important;
+    color: white !important;
+}
+
+.css-1ex1afd-MuiTableCell-root{
+    padding: 0 !important;
+}
+
+
+.active{
+    border: 2px solid red !important;
+}
