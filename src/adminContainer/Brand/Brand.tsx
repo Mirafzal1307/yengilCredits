@@ -71,7 +71,7 @@ const useStyles = makeStyles({
       justifyContent: "space-between",
       flexDirection: "column",
     },
-    bigSecondBox: {
+    bigSecondBOX: {
       background: "#FFFFFF",
       boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
       borderRadius: "5px",
@@ -93,7 +93,7 @@ const BrandList: React.FC = () => {
             <BrandCreate />
           </Grid>
           <Grid item xs={7}>
-            <Box className={classes.bigSecondBox}>
+            <Box className={classes.bigSecondBOX}>
               <BrandRead />
             </Box>
           </Grid>
