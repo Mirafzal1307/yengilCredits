@@ -8,6 +8,7 @@ import CardProducts from "./CardProducts";
 import { Container } from "@mui/material";
 import { useState } from "react";
 import Navbarbottom from "./Navbar/Navbarbottom";
+import Partner from "./Navbar/ourClient";
 
 
 const useStyles = makeStyles((theme) => {
@@ -95,7 +96,9 @@ const Header = () => {
     
       <Navbarbottom />
       <CardProducts />
+      <Partner/>
       <BeforeFooter />
+
       <Footer />
     </>
   );

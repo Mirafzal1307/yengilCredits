@@ -143,7 +143,7 @@ const CardProducts = () => {
   let last = products?.last_added_products;
   let popular = products?.popular_products;
   let recommended = products?.recommended_products;
-console.log(recommended);
+  console.log(recommended);
 
   let { darktheme } = useSelector((state: rootState) => state.productsReducer);
 
@@ -161,8 +161,8 @@ console.log(recommended);
   }
   var num: number = 1234567890,
     result = num.toLocaleString();
-    console.log(result);
-     // result will equal to "1 234 567 890"
+  console.log(result);
+  // result will equal to "1 234 567 890"
 
   return (
     <>
@@ -222,18 +222,18 @@ console.log(recommended);
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
                       <Link to={`/product/client/details/${item.id}`}>
-                       {
-                        
-                         item?.photos.map((photo:any)=> (
+                        {
+
+                          item?.photos.map((photo: any) => (
                             <img
-                          src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                          alt="img"
-                          style={{ width: "150px", height: "150px" }}
-                        />
-                         ))
-                         
-                       }
-                       
+                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                              alt="img"
+                              style={{ width: "150px", height: "150px" }}
+                            />
+                          ))
+
+                        }
+
                       </Link>
                       <h6
                         className={classes.cardTitle}
@@ -305,12 +305,26 @@ console.log(recommended);
                           Sotuvda yo'q
                         </button>
                       )}
-                      <span
-                        className={classes.cardSpan}
-                        style={{ fontWeight: "600" }}
-                      >
-                        {item.discount}% 
-                      </span>
+                      {
+
+
+                        item.discount === 0 ?
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'none !important' }}
+                          >
+
+                          </span>
+                          :
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'block !important' }}
+                          >
+                            {item.discount !== 0 ? item.discount : null}%
+                          </span>
+
+                      }
+
                     </Box>
                   </Box>
                 </SplideSlide>
@@ -378,17 +392,17 @@ console.log(recommended);
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
                       <Link to={`/product/client/details/${item.id}`}>
-                      {
-                        
-                        item?.photos.map((photo:any)=> (
-                           <img
-                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                         alt="img"
-                         style={{ width: "150px", height: "150px" }}
-                       />
-                        ))
-                        
-                      }
+                        {
+
+                          item?.photos.map((photo: any) => (
+                            <img
+                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                              alt="img"
+                              style={{ width: "150px", height: "150px" }}
+                            />
+                          ))
+
+                        }
                       </Link>
                       <h6
                         className={classes.cardTitle}
@@ -461,12 +475,25 @@ console.log(recommended);
                           Sotuvda yo'q
                         </button>
                       )}
-                      <span
-                        className={classes.cardSpan}
-                        style={{ fontWeight: "600" }}
-                      >
-                        {item.discount}% 
-                      </span>
+                      {
+
+
+                        item.discount === 0 ?
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'none !important' }}
+                          >
+
+                          </span>
+                          :
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'block !important' }}
+                          >
+                            {item.discount !== 0 ? item.discount : null}%
+                          </span>
+
+                      }
                     </Box>
                   </Box>
                 </SplideSlide>
@@ -538,17 +565,17 @@ console.log(recommended);
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
                       <Link to={`/product/client/details/${item.id}`}>
-                      {
-                        
-                        item?.photos.map((photo:any)=> (
-                           <img
-                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                         alt="img"
-                         style={{ width: "150px", height: "150px" }}
-                       />
-                        ))
-                        
-                      }
+                        {
+
+                          item?.photos.map((photo: any) => (
+                            <img
+                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                              alt="img"
+                              style={{ width: "150px", height: "150px" }}
+                            />
+                          ))
+
+                        }
                       </Link>
                       <h6
                         className={classes.cardTitle}
@@ -620,12 +647,25 @@ console.log(recommended);
                           Sotuvda yo'q
                         </button>
                       )}
-                      <span
-                        className={classes.cardSpan}
-                        style={{ fontWeight: "600" }}
-                      >
-                        {item.discount}% 
-                      </span>
+                      {
+
+
+                        item.discount === 0 ?
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'none !important' }}
+                          >
+
+                          </span>
+                          :
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'block !important' }}
+                          >
+                            {item.discount !== 0 ? item.discount : null}%
+                          </span>
+
+                      }
                     </Box>
                   </Box>
                 </SplideSlide>
@@ -698,17 +738,17 @@ console.log(recommended);
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
                       <Link to={`/product/client/details/${item.id}`}>
-                      {
-                        
-                        item?.photos.map((photo:any)=> (
-                           <img
-                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                         alt="img"
-                         style={{ width: "150px", height: "150px" }}
-                       />
-                        ))
-                        
-                      }
+                        {
+
+                          item?.photos.map((photo: any) => (
+                            <img
+                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                              alt="img"
+                              style={{ width: "150px", height: "150px" }}
+                            />
+                          ))
+
+                        }
                       </Link>
                       <h6
                         className={classes.cardTitle}
@@ -780,12 +820,25 @@ console.log(recommended);
                           Sotuvda yo'q
                         </button>
                       )}
-                      <span
-                        className={classes.cardSpan}
-                        style={{ fontWeight: "600" }}
-                      >
-                        {item.discount}% 
-                      </span>
+                      {
+
+
+                        item.discount === 0 ?
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'none !important' }}
+                          >
+
+                          </span>
+                          :
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'block !important' }}
+                          >
+                            {item.discount !== 0 ? item.discount : null}%
+                          </span>
+
+                      }
                     </Box>
                   </Box>
                 </SplideSlide>
