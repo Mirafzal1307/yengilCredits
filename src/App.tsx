@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { fetchProducts } from "./redux/cart/action";
 import AllCards from "./clientContainer/Home/AllCards";
 import OrderDetails from "./adminContainer/Order/OrderDetails";
+import NestedList from "./clientContainer/Home/Navbar/demo";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
             path="/category/admin/edit-page/:id"
             element={<CategoryEdit />}
           />
+          <Route path="/demomenu" element={<NestedList />} />
           <Route path="/category/by-id/:id" element={<CategoryDetails />} />
           <Route path="/product" element={<Product />} />
           <Route path="/order" element={<Order />} />
@@ -49,7 +51,10 @@ function App() {
           />
           <Route path="/product/edit/:id" element={<EditProductList />} />
           <Route path="/product/details/:id" element={<ProductDetails />} />
-          <Route path="/product/client/details/:id" element={<ClientProductDetails />} />
+          <Route
+            path="/product/client/details/:id"
+            element={<ClientProductDetails />}
+          />
           <Route path="/product/create" element={<CreateProduct />} />
           <Route path="/product/by-brand/:id" element={<BrandPage />} />
           <Route

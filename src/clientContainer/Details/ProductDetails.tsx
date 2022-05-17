@@ -135,7 +135,7 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     top: 0,
     left: 0,
-    background: "#C33E4D",
+    background: "#dd0820",
     paddingLeft: "4px",
     paddingRight: "4px",
     color: "#fff",
@@ -312,8 +312,8 @@ const ProductDetails = () => {
 
   const { id } = useParams();
   const classes = useStyles()
-   
-   const photo = pro?.map((i:any)=> i?.photos[0]) ;
+
+  const photo = pro?.map((i: any) => i?.photos[0]);
 
   const [notify, setNotify] = useState<any>({
     isOpen: false,
@@ -427,24 +427,24 @@ const ProductDetails = () => {
             <Grid container item md={6} xs={12} className={classes.right}>
               <Grid item xs={12} md={9}>
                 {
-                  photo?.map((item:any) => (
-                     <img style={{ width: '100%', height: '500px', borderRadius: '10px', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />  
+                  photo?.map((item: any) => (
+                    <img style={{ width: '100%', height: '500px', borderRadius: '10px', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
                   ))
                 }
-                
+
               </Grid>
               <Grid item xs={12} md={3} className={classes.right2}>
-                
-                    <div className={classes.imgDiv}>
-                    {
-                  photo?.map((item:any) => (
-                     <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />  
-                  ))
-                }
-                
-                    </div>
-              
-               
+
+                <div className={classes.imgDiv}>
+                  {
+                    photo?.map((item: any) => (
+                      <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
+                    ))
+                  }
+
+                </div>
+
+
               </Grid>
             </Grid>
           </Grid>
@@ -452,16 +452,16 @@ const ProductDetails = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px' }} >
               <div>
                 <h3 className={classes.ProductBottomName} >
-                  {pro?.map((i:any ) => i?.name)}
+                  {pro?.map((i: any) => i?.name)}
                 </h3>
-                <h4 className={classes.ShortName} >{pro?.map((i:any ) => i?.short_name)}</h4>
+                <h4 className={classes.ShortName} >{pro?.map((i: any) => i?.short_name)}</h4>
               </div>
               <div>
 
                 <div>
-                  <p className={classes.price} > {pro?.map((i:any ) => i?.price.toLocaleString())} so'm </p>
-                  <p className={classes.afterDiscount} > {pro?.map((i:any ) => i?.after_discount.toLocaleString())} so'm </p>
-                  <p className={classes.discount} > {pro?.map((i:any ) => i?.discount)} %</p>
+                  <p className={classes.price} > {pro?.map((i: any) => i?.price.toLocaleString())} so'm </p>
+                  <p className={classes.afterDiscount} > {pro?.map((i: any) => i?.after_discount.toLocaleString())} so'm </p>
+                  <p className={classes.discount} > {pro?.map((i: any) => i?.discount)} %</p>
                 </div>
               </div>
             </div>
@@ -510,17 +510,17 @@ const ProductDetails = () => {
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
                       <Link to={`/product/client/details/${item.id}`}>
-                      {
-                        
-                        item?.photos.map((photo:any)=> (
-                           <img
-                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                         alt="img"
-                         style={{ width: "150px", height: "150px" }}
-                       />
-                        ))
-                        
-                      }
+                        {
+
+                          item?.photos.map((photo: any) => (
+                            <img
+                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                              alt="img"
+                              style={{ width: "150px", height: "150px" }}
+                            />
+                          ))
+
+                        }
                       </Link>
                       <h6
                         className={classes.cardTitle}
@@ -581,9 +581,25 @@ const ProductDetails = () => {
                           Sotuvda yo'q
                         </button>
                       )}
-                      <span className={classes.cardSpan} style={{ fontWeight: '600' }}>
-                        {item.discount}% off
-                      </span>
+                      {
+
+
+                        item.discount === 0 ?
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'none !important' }}
+                          >
+
+                          </span>
+                          :
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'block !important' }}
+                          >
+                            {item.discount !== 0 ? item.discount : null}%
+                          </span>
+
+                      }
                     </Box>
                   </Box>
                 </SplideSlide>
@@ -641,17 +657,17 @@ const ProductDetails = () => {
                     <Box className={classes.bodyCard} key={item.id}>
                       <Box>
                         <Link to={`/product/client/details/${item.id}`}>
-                        {
-                        
-                        item?.photos.map((photo:any)=> (
-                           <img
-                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                         alt="img"
-                         style={{ width: "150px", height: "150px" }}
-                       />
-                        ))
-                        
-                      }
+                          {
+
+                            item?.photos.map((photo: any) => (
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                                alt="img"
+                                style={{ width: "150px", height: "150px" }}
+                              />
+                            ))
+
+                          }
                         </Link>
                         <h6
                           className={classes.cardTitle}
@@ -714,9 +730,25 @@ const ProductDetails = () => {
                             Sotuvda yo'q
                           </button>
                         )}
-                        <span className={classes.cardSpan}>
-                          {item.discount}%
-                        </span>
+                        {
+
+
+                          item.discount === 0 ?
+                            <span
+                              className={classes.cardSpan}
+                              style={{ fontWeight: "600", display: 'none !important' }}
+                            >
+
+                            </span>
+                            :
+                            <span
+                              className={classes.cardSpan}
+                              style={{ fontWeight: "600", display: 'block !important' }}
+                            >
+                              {item.discount !== 0 ? item.discount : null}%
+                            </span>
+
+                        }
                       </Box>
                     </Box>
                   </SplideSlide>

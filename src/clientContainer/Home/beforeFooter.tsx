@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => {
       fontFamily: "Poppins",
       fontWeight: 400,
       fontSize: "17px",
+      textAlign: "left",
       [theme.breakpoints.down("md")]: {
         fontSize: "16px",
         textAlign: "center",
@@ -81,25 +82,15 @@ const BeforeFooter = () => {
               </Grid>
               <Grid item xs={12} md={matches ? 6 : 12}>
                 <span className={classes.FooterTopTitle}>
-                  YengilSavdo.uz onlayn do'koni - xarid qilish uchun qulay
-                  gipermarket
+                  Qadrli hamshaharlar !!!
                 </span>
                 <p
-                  style={{ textIndent: "5%" }}
+                  // style={{ textIndent: "5%" }}
                   className={classes.footerTopText}
                 >
-                  Har qanday insoning hayoti va qulay sharoitlarini zamonaviy
-                  texnologiyalarsiz tasavvur qilib bo'lmaydi. Ish va shaxsiy
-                  savollar smart- fonda, sevimli filmlar, seriallar va
-                  teleko'rsatuvlar - televizor, tozalash, yig’ishtirish –
-                  changyutgich, pishirish, tayyorlash - pechka, pech va ko'plab
-                  kichikroq, ammo undan kam bo'lmagan foydali qurilmalar va
-                  mahsulotlar. Bundan tashqari, texnologiyalar rivojlanmoqda va
-                  shuning uchun jihozlar muntazam yangilanishlarni talab qiladi,
-                  men yangi modellarni sinab, tekshirib ko'rishni xohlayman
-                  lekin mavjud qurilmalar va texnikalarning kuchi yetarli emas.
+                  bizning shahrimizda ilh bor online savdo sayti rasman ishga tushdi.
                 </p>
-                <ul className="ul">
+                {/* <ul className="ul">
                   <li className={classes.ul}>
                     Shu nuqtai nazardan, maishiy texnika sotib olish uchun
                     xavfsiz va qulay joy, online-do’kon bo'lishi foydalidir.
@@ -110,13 +101,9 @@ const BeforeFooter = () => {
                     yangi modellarni sinab, tekshirib ko'rishni xohlayman lekin
                     mavjud qurilmalar va texnikalarning kuchi yetarli emas.
                   </li>
-                </ul>
-                <p className={classes.footerTopText}>
-                  Agar siz hali o'zingiz uchun mahsulot - tovar topa olmagan
-                  bo'lsangiz, biz sizni web - saytimizda bir necha daqiqa
-                  qolishga taklif qilamiz. Sizni ishontirib aytamizki,
-                  vaqtingizni behuda sarf qilmaganli-ginggizga ishonch hosil
-                  qilasiz.
+                </ul> */}
+                <p style={{ marginTop: "50px" }} className={classes.footerTopText}>
+                  Biz uchun har biringiz muhimsiz azizlar.
                 </p>
               </Grid>
             </Grid>
