@@ -161,8 +161,6 @@ console.log(recommended);
   }
   var num: number = 1234567890,
     result = num.toLocaleString();
-    console.log(result);
-     // result will equal to "1 234 567 890"
 
   return (
     <>
