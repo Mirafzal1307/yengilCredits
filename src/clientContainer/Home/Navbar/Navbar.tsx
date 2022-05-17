@@ -10,7 +10,7 @@ import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Zoom from "@mui/material/Zoom";
 import { makeStyles } from "@material-ui/core/styles";
-import Bt from "../../../Images/Logo1.svg";
+import Ys from "../../../Images/Logo Ys.svg";
 import Search from "../../../Images/one.svg";
 import Basket from "../../../Images/two.svg";
 import Lang from "../../../Images/three.svg";
@@ -301,7 +301,7 @@ const BackToTop = () => {
               >
                 <Link to="/">
                   <div>
-                    <img src={Bt} alt="Logo" className={classes.Logo} />
+                    <img src={Ys} alt="Logo" className={classes.Logo} />
                   </div>
                 </Link>
                 <Menu

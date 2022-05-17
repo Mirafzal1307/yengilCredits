@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FooterLeft from "../../Images/footer_left.svg";
 import Logo from "../../Images/Logo1.svg";
 import { green } from "@mui/material/colors";
-import FootLogo from '../../Images/Group 233.png'
+import FootLogo from '../../Images/FootLogo.png'
 import InstagramImg from '../../Images/Group 227.png'
 import TelegramImg from '../../Images/telegram(1).png'
 import AppleImg from '../../Images/Group 240.png'
@@ -102,27 +102,31 @@ const Footer = () => {
             <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
               <div className={classes.ItemButton}>
                 <h3>Katalog</h3>
-                <Link to='https://www.instagram.com/itechcompany_uz/'>
+                {/* <Link to='https://www.instagram.com/itechcompany_uz/'> */}
+                <a href="https://play.google.com/store/apps/details?id=jp.konami.pesam">
                   <button>
                     <div>
                       <img src={AppleImg} alt="" />
                       App store
                     </div>
                   </button>
-                </Link>
+                </a>
+                {/* </Link> */}
               </div>
             </Grid>
             <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
               <div className={classes.ItemButton}>
                 <h3>Yetkazib berish</h3>
-                <Link to='https://www.instagram.com/itechcompany_uz/'>
+                {/* <Link to='https://www.instagram.com/itechcompany_uz/'> */}
+                <a href="https://play.google.com/store/apps/details?id=jp.konami.pesam">
                   <button>
                     <div>
                       <img src={PlayMarketImg} alt="" />
                       Google play
                     </div>
                   </button>
-                </Link>
+                </a>
+                {/* </Link> */}
               </div>
             </Grid>
           </Grid>
