@@ -142,6 +142,7 @@ const CardProducts = () => {
   let last = products?.last_added_products;
   let popular = products?.popular_products;
   let recommended = products?.recommended_products;
+
   console.log(recommended);
 
   let { darktheme } = useSelector((state: rootState) => state.productsReducer);
@@ -221,9 +222,9 @@ const CardProducts = () => {
                   <Box className={classes.bodyCard} key={item?.id}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`}>
-                        {
-
-                          item?.photos.map((photo: any) => (
+                       {
+                        
+                         item?.photos?.map((photo:any)=> (
                             <img
                               src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
                               alt="img"
