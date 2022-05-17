@@ -134,15 +134,15 @@ const CardProducts = () => {
   }
 
   const dispatch = useDispatch();
-  const products = useTypedSelector((state) => state.card.cards);
-  const error = useTypedSelector((state) => state.card.error);
-  const loading = useTypedSelector((state) => state.card.loading);
+  const products = useTypedSelector((state) => state?.card?.cards);
+  const error = useTypedSelector((state) => state?.card?.error);
+  const loading = useTypedSelector((state) => state?.card?.loading);
 
   let discount = products?.with_discount_products;
   let last = products?.last_added_products;
   let popular = products?.popular_products;
   let recommended = products?.recommended_products;
-  console.log(products);
+  console.log(recommended);
 
   let { darktheme } = useSelector((state: rootState) => state.productsReducer);
 
