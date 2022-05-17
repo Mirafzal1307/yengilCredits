@@ -10,7 +10,7 @@ import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Zoom from "@mui/material/Zoom";
 import { makeStyles } from "@material-ui/core/styles";
-import Ys from "../../../Images/Logo Ys.svg";
+import Ys from "../../../Images/Logo BT (1).svg";
 import Search from "../../../Images/one.svg";
 import Basket from "../../../Images/two.svg";
 import Lang from "../../../Images/three.svg";
