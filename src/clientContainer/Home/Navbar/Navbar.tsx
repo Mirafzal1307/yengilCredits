@@ -14,6 +14,7 @@ import Bt from "../../../Images/Logo1.svg";
 import Search from "../../../Images/one.svg";
 import Basket from "../../../Images/two.svg";
 import Lang from "../../../Images/three.svg";
+import ListIcon from "@mui/icons-material/List";
 // import Telegram from "../../../Images/four.svg";
 // import Menu from "@mui/material/Menu";
 // import MenuItem from "@mui/material/MenuItem";
@@ -33,6 +34,8 @@ import { rootState } from "../../../redux/reducers";
 import MainSearch from "../MainSearch";
 import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
+import catalogicon from "../../../Images/catalogicon.svg";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface Props {
   /**
@@ -176,6 +179,23 @@ const useStyles = makeStyles((theme) => ({
     left: "90%",
     backgroundColor: "black !important",
   },
+  navLink: {
+    color: "#000",
+  },
+  menuButton: {
+    background: "rgba(255, 255, 255, 0.34) !important",
+    borderRadius: "34px",
+    border: "none",
+    color: "#fff",
+    fontFamily: "Poppins",
+    fontSize: "18px",
+    display: "flex",
+    alignItems: "center",
+    transition: ".5s",
+    height: "35px",
+    paddingLeft: "15px",
+    paddingRight: "15px"
+  },
 }));
 
 function ScrollTop(props: Props) {
@@ -218,6 +238,7 @@ function ScrollTop(props: Props) {
 const BackToTop = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [category, setCategory] = React.useState<any>();
+  const [isOpen, setIsOpen] = React.useState<any>(false);
 
   let ddd: any = category;
 
@@ -230,9 +251,6 @@ const BackToTop = () => {
     (state: rootState) => state.cartreducer.cartProducts
   );
   let total = cartProducts.length;
-
-  // #005aff
-
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -243,23 +261,8 @@ const BackToTop = () => {
   }, []);
 
   const getCategoryForCleintPage = async () => {
-    // let categoryArray = []
     let response: any = await getCategoryForClient();
     let categories: any = response.data;
-    // let {menu} = categories
-    // .data?.menu || undefined
-    // categoryArray.push(categories)
-    // categoryArray.forEach((i:any) => {
-    //   console.log(`my array ${i}`);
-    // })
-    // console.log(typeof(categories));
-    // console.log();
-    // let categoryArray = Object.entries(menu)
-    // categoryArray.forEach((i:any) => {
-    //   console.log(i)
-    // })
-    // console.log(menu['Kichik texnika'])
-
     setCategory(response.data.menu);
   };
   const getCategoryProductById = async (id: any) => {
@@ -288,39 +291,65 @@ const BackToTop = () => {
         <Toolbar>
           <Container maxWidth="xl">
             <Grid spacing={1} container>
-              <Grid item xs={12} md={12} lg={2} className={classes.oneGrid}>
+              <Grid
+                item
+                xs={12}
+                md={12}
+                lg={2}
+                className={classes.oneGrid}
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <Link to="/">
                   <div>
                     <img src={Bt} alt="Logo" className={classes.Logo} />
                   </div>
                 </Link>
+                <Menu
+                  menuButton={
+                    <MenuButton
+                      className={classes.menuButton}
+                      // onClick={() => {
+                      //   if (isOpen) {
+                      //     setIsOpen(false);
+                      //   } else {
+                      //     setIsOpen(true);
+                      //   }
+                      // }}
+                      // onAuxClick={() => {
+                      //   if (!isOpen) {
+                      //     setIsOpen(true);
+                      //   }
+                      // }}
 
-                <Menu menuButton={<MenuButton>Katalog</MenuButton>}>
-                  <MenuItem>New File</MenuItem>
-                  {/* <SubMenu label="String"></SubMenu> */}
-                  {category?.string?.map((item: any, index: any) => {
-                    const getCategory = () => {
-                      getCategoryProductById(item.parent_id);
-                    };
-                    console.log(item.name);
-                    
-                    return (
-                      <>
-                        <SubMenu label="String">
+                    >
+                      {/* <img src={catalogicon} style={{width: "25px", height: "25px", background: "#fff", borderRadius: "50%", padding: "7px"}}/> */}
+                      <ListIcon />
+                      <span style={{ marginLeft: "5px" }}>Katalog</span>
+                    </MenuButton>
+                  }
+                >
+                  <SubMenu
+                    label="String"
+                  >
+                    {category?.string?.map((item: any, key: any) => {
+                      const getCategory = () => {
+                        getCategoryProductById(item.parent_id);
+                      };
+                      return (
+                        <>
                           <MenuItem>
                             <Link
                               to={`/product/product-by-category/${item.parent_id}`}
-                              key={item.parent_id}
+                              key={key}
+                              className={classes.navLink}
                             >
                               {item.name}
                             </Link>
-                            {/* Aliii */}
                           </MenuItem>
-                        </SubMenu>
-                      </>
-                    );
-                  })}
-                  <MenuItem>Save</MenuItem>
+                        </>
+                      );
+                    })}
+                  </SubMenu>
                 </Menu>
               </Grid>
               <Grid
