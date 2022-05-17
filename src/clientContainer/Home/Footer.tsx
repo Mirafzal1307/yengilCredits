@@ -12,8 +12,8 @@ import TelegramImg from '../../Images/telegram(1).png'
 import AppleImg from '../../Images/Group 240.png'
 import PlayMarketImg from '../../Images/Vector (4).png'
 import Photo from "../../Images/Group 56444.png"
-import Brand from '../../Images/Yengilsavdo.uz © 2022.png';
-import Ys from "../../Images/Logo Ys.svg";
+import Brand from '../../Images/Yengilcredit.uz © 2022.png';
+import Ys from "../../Images/Logo Yc.png";
 
 const useStyles = makeStyles(theme => {
   return {

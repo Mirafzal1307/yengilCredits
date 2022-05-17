@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import CarouselImg from "../../Images/Group 271.png";
+import CarouselImg from "../../Images/Group 271 (1).png";
 import Footer from "./Footer";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import BackToTop from "./Navbar/Navbar";
