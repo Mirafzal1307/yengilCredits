@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, CircularProgress, Container } from "@mui/material";
 import { getProductCards } from "../../Api/client/MainProductsApi";
-import cart1 from "../../Images/cart1.svg";
 import cart2 from "../../Images/cart2.svg";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
@@ -143,7 +142,7 @@ const CardProducts = () => {
   let last = products?.last_added_products;
   let popular = products?.popular_products;
   let recommended = products?.recommended_products;
-  console.log(recommended);
+  console.log(products);
 
   let { darktheme } = useSelector((state: rootState) => state.productsReducer);
 
@@ -217,11 +216,11 @@ const CardProducts = () => {
               />
             ) : (
               recommended &&
-              recommended.map((item: any) => (
+              recommended?.map((item: any) => (
                 <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
+                  <Box className={classes.bodyCard} key={item?.id}>
                     <Box>
-                      <Link to={`/product/client/details/${item.id}`}>
+                      <Link to={`/product/client/details/${item?.id}`}>
                         {
 
                           item?.photos.map((photo: any) => (
@@ -245,7 +244,7 @@ const CardProducts = () => {
                           fontWeight: "600",
                         }}
                       >
-                        {item.short_name}
+                        {item?.short_name}
                       </h6>
                       <p
                         className={classes.cardPrice}
@@ -269,7 +268,7 @@ const CardProducts = () => {
                         {item?.after_discount?.toLocaleString()} so'm
                       </p>
 
-                      {item.availability === true ? (
+                      {item?.availability === true ? (
                         <button
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
@@ -308,7 +307,7 @@ const CardProducts = () => {
                       {
 
 
-                        item.discount === 0 ?
+                        item?.discount === 0 ?
                           <span
                             className={classes.cardSpan}
                             style={{ fontWeight: "600", display: 'none !important' }}
@@ -320,7 +319,7 @@ const CardProducts = () => {
                             className={classes.cardSpan}
                             style={{ fontWeight: "600", display: 'block !important' }}
                           >
-                            {item.discount !== 0 ? item.discount : null}%
+                            {item?.discount !== 0 ? item?.discount : null}%
                           </span>
 
                       }
@@ -387,11 +386,11 @@ const CardProducts = () => {
               />
             ) : (
               popular &&
-              popular.map((item: any) => (
+              popular?.map((item: any) => (
                 <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
+                  <Box className={classes.bodyCard} key={item?.id}>
                     <Box>
-                      <Link to={`/product/client/details/${item.id}`}>
+                      <Link to={`/product/client/details/${item?.id}`}>
                         {
 
                           item?.photos.map((photo: any) => (
