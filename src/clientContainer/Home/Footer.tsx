@@ -11,6 +11,9 @@ import InstagramImg from '../../Images/Group 227.png'
 import TelegramImg from '../../Images/telegram(1).png'
 import AppleImg from '../../Images/Group 240.png'
 import PlayMarketImg from '../../Images/Vector (4).png'
+import Photo from "../../Images/Group 56444.png"
+import Brand from '../../Images/Yengilcredit.uz © 2022.png';
+import Ys from "../../Images/Logo Yc.png";
 
 const useStyles = makeStyles(theme => {
   return {
@@ -50,7 +53,13 @@ const useStyles = makeStyles(theme => {
           alignItems: 'center',
         }
       }
-    }
+    },
+    footer_text: {
+      fontFamily: "Poppins",
+      fontWeight: 400,
+      fontSize: "20px",
+      color: "white"
+    },
   }
 });
 
@@ -61,7 +70,7 @@ const Footer = () => {
   return (
     <>
       <Box style={{ background: '#065374', padding: '30px 0' }}>
-        <Container maxWidth='xl'>
+        {/* <Container maxWidth='xl'>
           <Grid container item spacing={1} xs={12} style={{ display: 'flex', alignItems: 'center' }}>
             <Grid className={classes.Item} item xs={12} md={4} order={{ sm: 4, md: 1 }}>
               <div className={classes.ItemButton}>
@@ -71,9 +80,9 @@ const Footer = () => {
             </Grid>
             <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
               <div className={classes.ItemButton}>
-                <h3>Bosh sahifa</h3>
-                {/* <Link to='https://www.instagram.com/itechcompany_uz/'> */}
-                <a href="https://www.instagram.com/itechcompany_uz/">
+                <h3>Bosh sahifa</h3> */}
+        {/* <Link to='https://www.instagram.com/itechcompany_uz/'> */}
+        {/* <a href="https://www.instagram.com/itechcompany_uz/">
                   <button>
                     <div>
                       <img src={InstagramImg} alt="" />
@@ -82,28 +91,28 @@ const Footer = () => {
                   </button>
                 </a>
                 {/* </Link> */}
-              </div>
-            </Grid>
-            <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
+        {/* </div>
+            </Grid> */}
+        {/* <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
               <div className={classes.ItemButton}>
                 <h3>Do’kon haqida</h3>
                 {/* <Link to='https://t.me/itechcompany_uz'> */}
-                <a href="https://t.me/itechcompany_uz">
+        {/* <a href="https://t.me/itechcompany_uz">
                   <button>
-                    <div>
-                      <img src={TelegramImg} alt="" />
+                    <div> */}
+        {/* <img src={TelegramImg} alt="" />
                       Telegram
                     </div>
                   </button>
                 </a>
                 {/* </Link> */}
-              </div>
-            </Grid>
-            <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
+        {/* </div> */}
+        {/* </Grid> */}
+        {/* <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
               <div className={classes.ItemButton}>
                 <h3>Katalog</h3>
                 {/* <Link to='https://www.instagram.com/itechcompany_uz/'> */}
-                <a href="https://play.google.com/store/apps/details?id=jp.konami.pesam">
+        {/* <a href="https://play.google.com/store/apps/details?id=jp.konami.pesam">
                   <button>
                     <div>
                       <img src={AppleImg} alt="" />
@@ -112,22 +121,38 @@ const Footer = () => {
                   </button>
                 </a>
                 {/* </Link> */}
-              </div>
-            </Grid>
-            <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
+        {/* </div>  */}
+        {/* </Grid> */}
+        {/* <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
               <div className={classes.ItemButton}>
                 <h3>Yetkazib berish</h3>
                 {/* <Link to='https://www.instagram.com/itechcompany_uz/'> */}
-                <a href="https://play.google.com/store/apps/details?id=jp.konami.pesam">
+        {/* <a href="https://play.google.com/store/apps/details?id=jp.konami.pesam">
                   <button>
                     <div>
                       <img src={PlayMarketImg} alt="" />
                       Google play
                     </div>
                   </button>
-                </a>
-                {/* </Link> */}
+                </a> */}
+        {/* </Link> */}
+        {/* </div> */}
+        {/* </Grid> */}
+        {/* </Grid>
+        </Container> */}
+        <Container maxWidth="xl">
+          <Grid style={{ display: 'flex', textAlign: "center", alignItems: "center" }}>
+            <Grid xs={4}>
+              <p className={classes.footer_text}>Barcha huquqlar himoyalangan</p>
+            </Grid>
+            <Grid xs={4}>
+              <div>
+                <img src={Ys} style={{ marginRight: "6px" }} alt="" />
+                <img src={Brand} alt="" />
               </div>
+            </Grid>
+            <Grid xs={4}>
+              <p className={classes.footer_text}>Designed by “iTech Company”</p>
             </Grid>
           </Grid>
         </Container>

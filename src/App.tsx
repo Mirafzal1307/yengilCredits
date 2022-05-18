@@ -31,6 +31,7 @@ function App() {
 
   return (
     <>
+  
       <Router>
         <Routes>
           <Route path="/dashboard" element={<Home />} />
@@ -65,7 +66,7 @@ function App() {
           <Route path="/all/card/:id" element={<AllCards />} />
           <Route path="/order-details/:buyer_id" element={<OrderDetails />} />
         </Routes>
-      </Router>
+      </Router> 
     </>
   );
 }
