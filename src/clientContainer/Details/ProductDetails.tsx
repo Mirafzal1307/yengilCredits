@@ -526,25 +526,57 @@ const ProductDetails = () => {
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: "10px",
-                          marginBottom: "10px",
+                          marginTop: '19px',
                           height: "30px",
-                          fontWeight: '600'
+                          fontSize: '14px',
+                          fontWeight: "600",
                         }}
                       >
                         {item.short_name}
                       </h6>
-                      <p
-                        className={classes.cardPrice}
+                      <h6
+                        className={classes.cardTitle}
                         style={{
-                          color: "#ff4802",
-                          fontSize: "14px",
-                          textDecoration: "line-through",
-                          fontWeight: '600'
+                          margin: 0,
+                          marginTop: "0px",
+                          marginBottom: "20px",
+                          height: "30px",
+                          fontWeight: "400",
+                          fontSize: '14px',
+                          fontFamily: 'Poppins'
                         }}
                       >
-                        {item?.price?.toLocaleString()} so'm
-                      </p>
+                        {item.name}
+                      </h6>
+                      {
+                        item.discount === 0 ? <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+                            
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: 'none !important',
+                            paddingBottom: '22px'
+                          }}
+                        >
+                        </p>
+                          :
+                          <p
+                            className={classes.cardPrice}
+                            style={{
+                              color: "#065374",
+                              fontSize: "14px",
+                              textDecoration: "line-through",
+                              fontWeight: "500",
+                              display: 'block !important'
+                            }}
+                          >
+                            {item?.price?.toLocaleString()} so'm
+                          </p>
+                      }
+                     
                       <p
                         className={classes.cardPrice}
                         style={{ marginBottom: "10px", height: "45px", fontWeight: '600' }}
@@ -670,28 +702,59 @@ const ProductDetails = () => {
                           }
                         </Link>
                         <h6
-                          className={classes.cardTitle}
-                          style={{
-                            margin: 0,
-                            marginTop: "10px",
-                            marginBottom: "10px",
-                            height: "30px",
-                            fontWeight: '600'
-                          }}
-                        >
-                          {item.short_name}
-                        </h6>
-                        <p
+                        className={classes.cardTitle}
+                        style={{
+                          margin: 0,
+                          marginTop: '19px',
+                          height: "30px",
+                          fontSize: '14px',
+                          fontWeight: "600",
+                        }}
+                      >
+                        {item.short_name}
+                      </h6>
+                      <h6
+                        className={classes.cardTitle}
+                        style={{
+                          margin: 0,
+                          marginTop: "0px",
+                          marginBottom: "20px",
+                          height: "30px",
+                          fontWeight: "400",
+                          fontSize: '14px',
+                          fontFamily: 'Poppins'
+                        }}
+                      >
+                        {item.name}
+                      </h6>
+                      {
+                        item.discount === 0 ? <p
                           className={classes.cardPrice}
                           style={{
-                            color: "#ff4802",
+                            color: "#065374",
                             fontSize: "14px",
+                            
                             textDecoration: "line-through",
-                            fontWeight: '600'
+                            fontWeight: "500",
+                            display: 'none !important',
+                            paddingBottom: '22px'
                           }}
                         >
-                          {item?.price?.toLocaleString()} so'm
                         </p>
+                          :
+                          <p
+                            className={classes.cardPrice}
+                            style={{
+                              color: "#065374",
+                              fontSize: "14px",
+                              textDecoration: "line-through",
+                              fontWeight: "500",
+                              display: 'block !important'
+                            }}
+                          >
+                            {item?.price?.toLocaleString()} so'm
+                          </p>
+                      }
                         <p
                           className={classes.cardPrice}
                           style={{ marginBottom: "10px", height: "45px", fontWeight: '600' }}
