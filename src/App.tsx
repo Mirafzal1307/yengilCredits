@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { fetchProducts } from "./redux/cart/action";
 import AllCards from "./clientContainer/Home/AllCards";
 import OrderDetails from "./adminContainer/Order/OrderDetails";
+import LoginPage from "./authorization/LoginPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function App() {
             path="/category/admin/edit-page/:id"
             element={<CategoryEdit />}
           />
-          {/* <Route path="/admin" element={</>}/> */}
+          <Route path="/admin" element={<LoginPage />}/>
           <Route path="/category/by-id/:id" element={<CategoryDetails />} />
           <Route path="/product" element={<Product />} />
           <Route path="/order" element={<Order />} />
