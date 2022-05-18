@@ -16,8 +16,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import BigPhoto from "../../Images/image 26.png";
-import { useTypedSelector } from "../../hook/useTypedSelector";
 import Shop from "../../Images/baskets.png"
+import CancelBtnImg from '../../Images/Group56524.png'
+import { useTypedSelector } from "../../hook/useTypedSelector";
 import { Link } from 'react-router-dom';
 import { refresh } from '../../adminContainer/Modal/refresh';
 
@@ -298,6 +299,14 @@ const useStyles = makeStyles(theme => ({
     padding: '5px',
     textAlign: 'right'
   },
+  Links: {
+    "& span": {
+      fontSize: '16px',
+      fontWeight: '300',
+      color: '#A3A3A3',
+      padding: '0 3px'
+    }
+  },
 }))
 
 const ProductDetails = () => {
@@ -314,6 +323,7 @@ const ProductDetails = () => {
   const classes = useStyles()
    
    const photo = pro?.map((i:any)=> i?.photos[0]) ;
+   const name23 = pro?.map((i:any)=> i?.name[0]) ;
 
   const [notify, setNotify] = useState<any>({
     isOpen: false,
@@ -343,7 +353,7 @@ const ProductDetails = () => {
     const res: any = await getProductItem(id);
     setProducts(res?.data);
   }
-
+console.log(name23);
   return (
     <>
       <BackToTop />
@@ -352,7 +362,6 @@ const ProductDetails = () => {
           <img src={BigPhoto} alt="" className={classes.BigPhoto} />
         </Container>
         <Container maxWidth="xl">
-
           {pro?.map((product: any) =>
             <div className={classes.BigPhotoBottom}>
               <h2 className={classes.productName}>{product?.name}</h2>
@@ -376,7 +385,19 @@ const ProductDetails = () => {
               </div>
             </div>
           )}
-
+        </Container>
+      </div>
+      <div style={{ background: '#fff', borderTop: '1px solid #000', padding: '40px 0'}}>
+        <Container maxWidth="xl" style={{display: 'flex'}}>
+          <div style={{marginRight: '20px'}}>
+            <img src={CancelBtnImg} alt="Cancel" />
+          </div>
+          <div className={classes.Links}>
+            <span><Link style={{fontWeight: '700'}} to="/">Bosh sahifa  ›</Link></span>
+            <span><Link to="/">Notebook  ›</Link></span>
+            <span><Link to="/">Notebook  ›</Link></span>
+            <span><Link style={{color: '#000'}} to="/">{name23}  ›</Link></span>
+          </div>
         </Container>
       </div>
       <div className={classes.DetailsBody}>
