@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import CarouselImg from "../../Images/bek.png";
+import CarouselImg from "../../Images/Group 271 (1).png";
 import Footer from "./Footer";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import BackToTop from "./Navbar/Navbar";
@@ -8,6 +8,7 @@ import CardProducts from "./CardProducts";
 import { Container } from "@mui/material";
 import { useState } from "react";
 import Navbarbottom from "./Navbar/Navbarbottom";
+import Partner from "./Navbar/ourClient";
 
 
 const useStyles = makeStyles((theme) => {
@@ -31,7 +32,6 @@ const useStyles = makeStyles((theme) => {
       height: "auto",
      
       borderRadius: "10px !important",
-      background: '#065374 !important',
     },
     searchInput: {
       marginBottom: "50px !important",
@@ -96,7 +96,9 @@ const Header = () => {
     
       <Navbarbottom />
       <CardProducts />
+      <Partner/>
       <BeforeFooter />
+
       <Footer />
     </>
   );

@@ -21,8 +21,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BorderAllIcon from '@mui/icons-material/BorderAll';
-import Brand from '../../Images/Bektexno.uz.png';
-import Icon from '../../Images/Group.png';
+import Brand from '../../Images/Yengilcredit.uz.svg';
+import Icon from '../../Images/Logo BT.svg';
 import AvatarImage from '../../Images/Rectangle 287.png';
 import { Avatar, Tooltip } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
@@ -124,10 +124,10 @@ const useStyles = makeStyles({
     maxHeight: '46px !important',
   },
   Header_Brand: {
-    maxWidth: '120px !important',
+    maxWidth: '189px !important',
     maxHeight: '16px !important',
     marginLeft: '10px !important',
-    marginTop: '7px'
+    marginTop: '10px',
   },
   appBar: {
     backgroundColor: '#fff !important',

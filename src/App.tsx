@@ -21,6 +21,7 @@ import { useDispatch } from "react-redux";
 import { fetchProducts } from "./redux/cart/action";
 import AllCards from "./clientContainer/Home/AllCards";
 import OrderDetails from "./adminContainer/Order/OrderDetails";
+import LoginPage from "./authorization/LoginPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
 
   return (
     <>
+  
       <Router>
         <Routes>
           <Route path="/dashboard" element={<Home />} />
@@ -38,6 +40,7 @@ function App() {
             path="/category/admin/edit-page/:id"
             element={<CategoryEdit />}
           />
+          <Route path="/admin" element={<LoginPage />}/>
           <Route path="/category/by-id/:id" element={<CategoryDetails />} />
           <Route path="/product" element={<Product />} />
           <Route path="/order" element={<Order />} />
@@ -48,7 +51,10 @@ function App() {
           />
           <Route path="/product/edit/:id" element={<EditProductList />} />
           <Route path="/product/details/:id" element={<ProductDetails />} />
-          <Route path="/product/client/details/:id" element={<ClientProductDetails />} />
+          <Route
+            path="/product/client/details/:id"
+            element={<ClientProductDetails />}
+          />
           <Route path="/product/create" element={<CreateProduct />} />
           <Route path="/product/by-brand/:id" element={<BrandPage />} />
           <Route
@@ -60,7 +66,7 @@ function App() {
           <Route path="/all/card/:id" element={<AllCards />} />
           <Route path="/order-details/:buyer_id" element={<OrderDetails />} />
         </Routes>
-      </Router>
+      </Router> 
     </>
   );
 }
