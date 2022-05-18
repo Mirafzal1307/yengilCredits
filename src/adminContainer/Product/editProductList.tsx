@@ -294,6 +294,7 @@ const EditProductList = () => {
   const [inputFields, setInputFields] = React.useState([
     { id: uuidv4(), character: '', property: '' },
   ]);
+  
   const handleChangeInput = (id: any, event: any) => {
     const newInputFields = inputFields.map((i: any) => {
       if (id === i.id) {
