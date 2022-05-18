@@ -367,7 +367,7 @@ const BackToTop = () => {
                 >
                   <div className={classes.NavbarRight}>
                     <Tooltip title="Telegram">
-                      <a href="https://t.me/itechcompany_uz">
+                      <a href="https://t.me/s/yengil_credit">
                         <img
                           src={Basket}
                           alt="Basket"
