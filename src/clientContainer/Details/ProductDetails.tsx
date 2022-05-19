@@ -733,7 +733,6 @@ const ProductDetails = () => {
                           style={{
                             color: "#065374",
                             fontSize: "14px",
-                            
                             textDecoration: "line-through",
                             fontWeight: "500",
                             display: 'none !important',
