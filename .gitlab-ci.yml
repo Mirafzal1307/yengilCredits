@@ -42,4 +42,4 @@ deploy:
     - chmod 400 $SSH_PRIVATE_KEY
     - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker login -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' $CI_REGISTRY"
     - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker pull '$CI_REGISTRY_IMAGE'"
-    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker service update --image ${CI_REGISTRY_IMAGE} --update-order start-first --update-failure-action=rollback --update-parallelism 1 bektexno_frontend"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker stop yengil_front_test && docker rm yengil_front_test && docker run -p 2929:2929 --name yengil_front_test -d ${CI_REGISTRY_IMAGE} "
