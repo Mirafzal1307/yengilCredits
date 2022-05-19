@@ -11,7 +11,7 @@ build_kaniko:
   variables:
     IMAGE_DESTINATION: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
   only:
-    - development
+    - test
   image:
       # We recommend using the CERN version of the Kaniko image: gitlab-registry.cern.ch/ci-tools/docker-image-builder
       name: gitlab-registry.cern.ch/ci-tools/docker-image-builder
@@ -36,10 +36,10 @@ deploy:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     # - echo "${SSH_PRIVATE_KEY}" | ssh-add -
   only:
-    - development
+    - test
   script:
     - apk add --update --no-cache openssh
     - chmod 400 $SSH_PRIVATE_KEY
     - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker login -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' $CI_REGISTRY"
-    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker pull registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:development"
-    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker stop yengil_front_test && docker rm yengil_front_test && docker run -e "REACT_APP_BASE_URL=https://api.yengilcredit.uz" -e "PORT=2929" -e "MINIO_ENDPOINT=https://minio.yengilcredit.uz" -e "BRAND_BACKET_NAME=/brand/" -p 2929:2929 --name yengil_front_test -d registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:development"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker pull registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:test"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker stop yengil_front_test && docker rm yengil_front_test && docker run -e "REACT_APP_BASE_URL=https://api.yengilcredit.uz" -e "PORT=2929" -e "MINIO_ENDPOINT=https://minio.yengilcredit.uz" -e "BRAND_BACKET_NAME=/brand/" -p 2929:2929 --name yengil_front_test -d registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:test"
