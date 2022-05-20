@@ -50,10 +50,11 @@ const useStyles = makeStyles((theme) => ({
     transition: ".5s",
     overflow: "hidden",
     borderBox: "box-sizing",
+    textAlign: 'left'
   },
   cardButton: {
     background: "transparent",
-    padding: "10px 22px  !important",
+    padding: "10px 45px  !important",
     cursor: "pointer",
     borderRadius: "20px",
     display: "flex",
@@ -62,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#065374",
     fontFamily: "Poppins",
     fontSize: "14px",
-
+    margin: 'auto !important'
   },
   cardSpan: {
     position: "absolute",
@@ -150,6 +151,9 @@ const useStyles = makeStyles((theme) => ({
     },
 
   },
+  BodyCardInside: {
+    textAlign: 'center'
+  }
 }));
 
 const CardProducts = () => {
@@ -260,16 +264,19 @@ const CardProducts = () => {
               recommended?.map((item: any) => (
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item?.id}>
-                    <Box>
+                    <Box >
                       <Link to={`/product/client/details/${item?.id}`}>
                         {
 
                           item?.photos?.map((photo: any) => (
-                            <img
-                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                              alt="img"
-                              style={{ width: "150px", height: "150px" }}
-                            />
+                            <div className={classes.BodyCardInside}  >
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                                alt="img"
+                                style={{ width: "150px", height: "150px" }}
+                              />
+                            </div>
+
                           ))
 
                         }
@@ -427,37 +434,37 @@ const CardProducts = () => {
         </div>
         <div className={classes.mainCard}>
           <Splide
-        options={{
+            options={{
 
-          width: "100%",
+              width: "100%",
 
-          perPage: 6,
-          pagination: false,
-          arrows: false,
-          type: 'loop',
-          drag: 'free',
-          gap: '0.7rem',
-          autoScroll: {
-            speed: 2
-          },
-          breakpoints: {
-            300: {
-              perPage: 1,
-            },
-            450: {
-              perPage: 1,
-            },
-            700: {
-              perPage: 2,
-            },
-            992: {
-              perPage: 3,
-            },
-            1300: {
-              perPage: 4,
-            },
-          },
-        }}
+              perPage: 6,
+              pagination: false,
+              arrows: false,
+              type: 'loop',
+              drag: 'free',
+              gap: '0.7rem',
+              autoScroll: {
+                speed: 2
+              },
+              breakpoints: {
+                300: {
+                  perPage: 1,
+                },
+                450: {
+                  perPage: 1,
+                },
+                700: {
+                  perPage: 2,
+                },
+                992: {
+                  perPage: 3,
+                },
+                1300: {
+                  perPage: 4,
+                },
+              },
+            }}
           >
             {loading ? (
               <CircularProgress
@@ -477,11 +484,13 @@ const CardProducts = () => {
                         {
 
                           item?.photos.map((photo: any) => (
-                            <img
-                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                              alt="img"
-                              style={{ width: "150px", height: "150px" }}
-                            />
+                            <div className={classes.BodyCardInside}  >
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                                alt="img"
+                                style={{ width: "150px", height: "150px" }}
+                              />
+                            </div>
                           ))
 
                         }
@@ -642,37 +651,37 @@ const CardProducts = () => {
         </div>
         <div className={classes.mainCard}>
           <Splide
-              options={{
+            options={{
 
-                width: "100%",
-  
-                perPage: 6,
-                pagination: false,
-                arrows: false,
-                type: 'loop',
-                drag: 'free',
-                gap: '0.7rem',
-                autoScroll: {
-                  speed: 2
+              width: "100%",
+
+              perPage: 6,
+              pagination: false,
+              arrows: false,
+              type: 'loop',
+              drag: 'free',
+              gap: '0.7rem',
+              autoScroll: {
+                speed: 2
+              },
+              breakpoints: {
+                300: {
+                  perPage: 1,
                 },
-                breakpoints: {
-                  300: {
-                    perPage: 1,
-                  },
-                  450: {
-                    perPage: 1,
-                  },
-                  700: {
-                    perPage: 2,
-                  },
-                  992: {
-                    perPage: 3,
-                  },
-                  1300: {
-                    perPage: 4,
-                  },
+                450: {
+                  perPage: 1,
                 },
-              }}
+                700: {
+                  perPage: 2,
+                },
+                992: {
+                  perPage: 3,
+                },
+                1300: {
+                  perPage: 4,
+                },
+              },
+            }}
           >
             {loading ? (
               <CircularProgress
@@ -692,11 +701,13 @@ const CardProducts = () => {
                         {
 
                           item?.photos.map((photo: any) => (
-                            <img
-                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                              alt="img"
-                              style={{ width: "150px", height: "150px" }}
-                            />
+                            <div className={classes.BodyCardInside}  >
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                                alt="img"
+                                style={{ width: "150px", height: "150px" }}
+                              />
+                            </div>
                           ))
 
                         }
@@ -856,7 +867,7 @@ const CardProducts = () => {
         </div>
         <div className={classes.mainCard}>
           <Splide
-             options={{
+            options={{
 
               width: "100%",
 
@@ -906,11 +917,13 @@ const CardProducts = () => {
                         {
 
                           item?.photos.map((photo: any) => (
-                            <img
-                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                              alt="img"
-                              style={{ width: "150px", height: "150px" }}
-                            />
+                            <div className={classes.BodyCardInside}  >
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                                alt="img"
+                                style={{ width: "150px", height: "150px" }}
+                              />
+                            </div>
                           ))
 
                         }

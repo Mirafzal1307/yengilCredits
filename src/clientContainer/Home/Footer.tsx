@@ -74,6 +74,15 @@ const useStyles = makeStyles(theme => {
       [theme.breakpoints.down(599)]: {
         display: 'none !important'
       }
+    },
+    Grid: {
+      display: 'flex',
+      justifyContent: 'space-between !important',
+      textAlign: "center",
+      alignItems: "center",
+      [theme.breakpoints.down(600)]: {
+        flexDirection: 'column !important',
+      }
     }
   }
 });
@@ -156,18 +165,18 @@ const Footer = () => {
         {/* </Grid>
         </Container> */}
         <Container maxWidth="xl">
-          <Grid style={{ display: 'flex', flexDirection: 'column', textAlign: "center", alignItems: "center" }}>
+          <Grid className={classes.Grid} >
             <Grid xs={12}>
-              <p className={classes.footer_text}>Barcha huquqlar himoyalangan</p>
+              <p className={classes.footer_text} style={{textAlign: 'left'}}>Barcha huquqlar himoyalangan</p>
             </Grid>
-            <Grid xs={12}>
+            <Grid xs={4}>
               <div>
                 <img src={Ys} style={{ marginRight: "6px" }} className={classes.Ys} alt="" />
                 <img src={Brand} alt="" className={classes.Brand} />
               </div>
             </Grid>
             <Grid xs={12}>
-              <p className={classes.footer_text}>Powered by “iTech Company”</p>
+              <p className={classes.footer_text} style={{textAlign: 'right'}} >Powered by “iTech Company”</p>
             </Grid>
           </Grid>
         </Container>
