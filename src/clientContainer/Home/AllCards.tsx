@@ -563,7 +563,16 @@ const AllCards = () => {
                         </span>
                       </div>
                       {item.availability === true ? (
-                        <button className={classes.sortCardButton}>
+                        <button className={classes.sortCardButton} 
+                        onClick={() => {
+                          dispatch(addToCart(item));
+                          setNotify({
+                            isOpen: true,
+                            message: "Savatchaga qo'shildi",
+                            type: "success",
+                          });
+                        }}
+                        >
                           <img
                             src={cart1}
                             alt="img"

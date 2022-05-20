@@ -21,7 +21,7 @@ import ListIcon from "@mui/icons-material/List";
 // import Button from "@mui/material/Button";
 // import Fade from "@mui/material/Fade";
 // import ClickAwayListener from "@mui/material/ClickAwayListener";
-import { SxProps } from "@mui/system";
+import { border, SxProps } from "@mui/system";
 import "./style.css";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { getCategoryForClient } from "../../../Api/client/ClientCategoryApi";
@@ -36,7 +36,11 @@ import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import catalogicon from "../../../Images/catalogicon.svg";
 import CloseIcon from "@mui/icons-material/Close";
-
+import AccountMenu from "./demo";
+import Baskets from "../../../Images/basket.svg";
+import Telegram from "../../../Images/telegram.svg";
+import LogoIcon from "../../../Images/LogoIcon.svg"
+import SearchDemo from "../SearchDemo";
 interface Props {
   window?: () => Window;
   children: React.ReactElement;
@@ -46,11 +50,25 @@ const useStyles = makeStyles((theme) => ({
     display: "flex !important",
     justifyContent: "space-between !important",
     position: "relative",
-    flexDirection: "column",
-
-    [theme.breakpoints.down(1030)]: {
+    [theme.breakpoints.up(899)]: {
+      display: "flex !important",
+ 
+    },
+    [theme.breakpoints.down(500)]: {
       // display: "flex !important",
-      flexDirection: "column ",
+      flexDirection: "column !important",
+    },
+  },
+  NavbarInsiteMax: {
+    display: "flex !important",
+    justifyContent: "center",
+    position: "relative",
+   
+
+    [theme.breakpoints.up(899)]: {
+      display: "flex !important",
+
+      justifyContent: "space-between !important",
     },
     [theme.breakpoints.down(500)]: {
       // display: "flex !important",
@@ -59,19 +77,11 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     background: "#065374 !important",
-  },
-  telNumber: {
-    margin: "0 !important",
-    paddingTop: "15px !important",
-    fontSize: "17px !important",
-    paddingRight: "8px",
 
-    [theme.breakpoints.down(900)]: {
-      display: "none",
-    },
   },
+
   NavbarRight: {
-    display: "inline",
+    display: "flex",
     justifyContent: "flex-start !important",
   },
   Icons: {
@@ -79,8 +89,9 @@ const useStyles = makeStyles((theme) => ({
     width: "43px !important",
   },
   Logo: {
-    paddingTop: "6px !important",
-    width: "43px !important",
+    paddingTop: "5px !important",
+    width: "41px !important",
+
   },
   fab: {
     background: "#fff  !important",
@@ -150,6 +161,19 @@ const useStyles = makeStyles((theme) => ({
       right: "44px",
     },
   },
+  BasketTotal: {
+    width: "15px",
+    height: "15px",
+    fontSize: "13px",
+    background: "#dd0820",
+    position: "absolute",
+    top: "26px",
+    right: "17px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "50%",
+  },
   oneGrid: {
     display: "flex",
     justifyContent: "space-between",
@@ -179,19 +203,81 @@ const useStyles = makeStyles((theme) => ({
     color: "#000",
   },
   menuButton: {
-    background: "rgba(255, 255, 255, 0.34) !important",
+    background: "rgba(255, 255, 255) !important",
     borderRadius: "34px",
     border: "none",
-    color: "#fff",
+    color: "rgba(124, 124, 124, 0.79)",
     fontFamily: "Poppins",
-    fontSize: "18px",
+    fontSize: "14px",
+    fontWeight: 400,
     display: "flex",
     alignItems: "center",
     transition: ".5s",
     height: "35px",
-    paddingLeft: "15px",
-    paddingRight: "15px"
+    paddingLeft: "7px",
+    paddingRight: "10px"
   },
+  menuButtonMax: {
+    marginTop: '10px',
+    paddingTop: '0px',
+    background: "rgba(255, 255, 255) !important",
+    borderRadius: "34px",
+    border: "none",
+    color: "rgba(124, 124, 124, 0.79)",
+    fontFamily: "Poppins",
+    fontSize: "14px",
+    fontWeight: 400,
+    display: "flex",
+    alignItems: "center",
+    transition: ".5s",
+    height: "35px",
+    paddingLeft: "7px",
+    paddingRight: "10px"
+  },
+  SubMenu: {
+    width: '260px',
+    [theme.breakpoints.down(400)]: {
+      width: '130px',
+    },
+    [theme.breakpoints.down(500)]: {
+      width: '220px',
+    },
+    [theme.breakpoints.down(600)]: {
+      width: '260px',
+    },
+  },
+  MenuItem: {
+    width: '255px',
+    marginLeft: '10px !important',
+
+    [theme.breakpoints.down(400)]: {
+      width: '130px',
+    },
+
+    [theme.breakpoints.down(500)]: {
+      width: '220px',
+    },
+    [theme.breakpoints.down(600)]: {
+      width: '255px',
+    },
+
+  },
+  Menu: {
+    border: 'solid 1px red !important'
+  },
+  NavbarContainer: {
+    [theme.breakpoints.up(600)]: {
+      display: 'none !important'
+    }
+  },
+  NavbarContainerMax: {
+    padding: '0 !important',
+    display:'flex',
+    minHeight: 'unset !important',
+    [theme.breakpoints.down(599)]: {
+      display: 'none !important'
+    }
+  }
 }));
 
 function ScrollTop(props: Props) {
@@ -284,48 +370,140 @@ const BackToTop = () => {
     <React.Fragment>
       <CssBaseline />
       <AppBar className={classes.appBar}>
-        <Toolbar>
-          <Container maxWidth="xl">
+        <Toolbar sx={{ display: 'flex', flexDirection: 'column', padding: 0, minHeight: 'unset !important' }}  >
+          <Container maxWidth="xl" className={classes.NavbarContainer} sx={{ padding: 0 }}>
             <Grid spacing={1} container>
               <Grid
                 item
                 xs={12}
-                md={12}
-                lg={2}
-                className={classes.oneGrid}
-                style={{ display: "flex", alignItems: "center" }}
+                style={{ background: 'white', }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px', marginLeft: '15px', marginRight: '15px', marginBottom: '10px' }} >
+                  <div>
+                    <Link to={"/"} >
+                      <img src={LogoIcon} alt="" />
+                    </Link>
+
+                  </div>
+
+                  <div>
+                    <img src={Telegram} alt="" style={{ paddingRight: "10px" }} />
+                    <Link to={"/cart"}>
+                      <img
+                        src={Baskets}
+                        alt="Baskets"
+                        className={classes.Icons}
+                        style={{
+                          position: "relative",
+                          marginTop: "10px !important",
+                        }}
+                      />
+                      <b className={classes.BasketTotal}>{total}</b>
+                    </Link>
+
+                  </div>
+                </div>
+              </Grid>
+            </Grid>
+          </Container>
+          <Container maxWidth="xl" className={classes.NavbarContainer} sx={{ padding: 0 }}>
+            <Grid spacing={1} container>
+              <Grid
+                item
+                xs={12}
+                style={{ background: '#065374', }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '10px' }} >
+                  <div style={{ marginLeft: '15px' }}  >
+                    <Menu
+                      menuButton={
+                        <MenuButton
+                          className={classes.menuButton}
+                        >
+                          <ListIcon style={{ fontSize: '24px' }} />
+                          <span style={{ marginLeft: "5px" }}>Katalog</span>
+                        </MenuButton>
+                      }
+
+                    >
+                      <SubMenu
+                        label="String"
+                        className={classes.SubMenu}
+
+
+                      >
+                        {category?.string?.map((item: any, key: any) => {
+                          const getCategory = () => {
+                            getCategoryProductById(item.parent_id);
+                          };
+                          return (
+                            <>
+                              <MenuItem className={classes.MenuItem}>
+                                <Link
+                                  to={`/product/product-by-category/${item.parent_id}`}
+                                  key={key}
+                                  className={classes.navLink}
+                                >
+                                  {item.name}
+                                </Link>
+                              </MenuItem>
+                            </>
+                          );
+                        })}
+                      </SubMenu>
+
+
+
+                    </Menu>
+                  </div>
+                  <div style={{ width: '100%', marginLeft: '5px' }} >
+                    <SearchDemo />
+                  </div>
+
+                  <div style={{ marginRight: '15px' }}>
+                    <AccountMenu />
+
+                  </div>
+                </div>
+              </Grid>
+            </Grid>
+          </Container>
+          <Container maxWidth="xl" className={classes.NavbarContainerMax} >
+            <Grid spacing={1} container  >
+
+              <Grid
+                item
+                xs={12}
+                md={1}
+                lg={1}
+                className={classes.NavbarInsiteMax}
               >
                 <Link to="/">
-                  <div>
+                  <div style={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }} >
                     <img src={Ys} alt="Logo" className={classes.Logo} />
                   </div>
                 </Link>
+              </Grid>
+              <Grid
+                item
+                xs={2}
+                md={2}
+                lg={1}
+              >
                 <Menu
                   menuButton={
                     <MenuButton
-                      className={classes.menuButton}
-                      // onClick={() => {
-                      //   if (isOpen) {
-                      //     setIsOpen(false);
-                      //   } else {
-                      //     setIsOpen(true);
-                      //   }
-                      // }}
-                      // onAuxClick={() => {
-                      //   if (!isOpen) {
-                      //     setIsOpen(true);
-                      //   }
-                      // }}
-
+                      className={classes.menuButtonMax}
                     >
-                      {/* <img src={catalogicon} style={{width: "25px", height: "25px", background: "#fff", borderRadius: "50%", padding: "7px"}}/> */}
                       <ListIcon />
                       <span style={{ marginLeft: "5px" }}>Katalog</span>
                     </MenuButton>
                   }
+
                 >
                   <SubMenu
                     label="String"
+                    className={classes.SubMenu}
                   >
                     {category?.string?.map((item: any, key: any) => {
                       const getCategory = () => {
@@ -333,7 +511,7 @@ const BackToTop = () => {
                       };
                       return (
                         <>
-                          <MenuItem>
+                          <MenuItem style={{ width: '400px', marginLeft: '10px !important' }} >
                             <Link
                               to={`/product/product-by-category/${item.parent_id}`}
                               key={key}
@@ -346,23 +524,48 @@ const BackToTop = () => {
                       );
                     })}
                   </SubMenu>
+                  <SubMenu
+                    label="String"
+                    className={classes.SubMenu}
+                  >
+                    {category?.string?.map((item: any, key: any) => {
+                      const getCategory = () => {
+                        getCategoryProductById(item.parent_id);
+                      };
+                      return (
+                        <>
+                          <MenuItem style={{ width: '400px', marginLeft: '10px !important' }} >
+                            <Link
+                              to={`/product/product-by-category/${item.parent_id}`}
+                              key={key}
+                              className={classes.navLink}
+                            >
+                              {item.name}
+                            </Link>
+                          </MenuItem>
+                        </>
+                      );
+                    })}
+                  </SubMenu>
+
                 </Menu>
               </Grid>
               <Grid
                 item
-                xs={12}
-                md={12}
+                xs={10}
+                md={8}
                 lg={10}
+
                 className={classes.NavbarInsite}
               >
-                <Grid item xs={12} md={10}>
+                <Grid item md={9} sx={{ marginLeft: '16px', width: '100%' }}>
                   <MainSearch />
                 </Grid>
                 <Grid
                   item
-                  xs={12}
-                  md={2}
-                  style={{}}
+
+                  md={3}
+
                   className={classes.twoGrid}
                 >
                   <div className={classes.NavbarRight}>
@@ -391,13 +594,9 @@ const BackToTop = () => {
                         </Link>
                       </>
                     </Tooltip>
-                    <Tooltip title="Tilni tanlang">
-                      <img
-                        src={Search}
-                        alt="Search"
-                        className={classes.Icons}
-                      />
-                    </Tooltip>
+
+                    <AccountMenu />
+
                   </div>
                 </Grid>
               </Grid>

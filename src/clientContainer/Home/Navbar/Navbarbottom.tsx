@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
     img: {
 
-        width: '90% !important',
+        width: '100% !important',
         height: '150px !important',
         borderRadius: '5px !important',
         cursor: 'pointer',
@@ -37,6 +37,8 @@ const Navbarbottom = () => {
                         perPage: 5,
                         arrows: false,
                         pagination: false,
+                        focus: 'center',
+                        gap: '0.5rem',
                         breakpoints: {
                             400: {
                                 perPage: 1,
@@ -55,7 +57,7 @@ const Navbarbottom = () => {
                         drag: 'free',
                         autoplay: true,
                         autoScroll: {
-                            speed: 1
+                            speed: 2
                         },
 
                     }}
@@ -107,8 +109,8 @@ const Navbarbottom = () => {
 
                 </Splide>
 
-  </Container>
-  </> 
-  );
+            </Container>
+        </>
+    );
 };
 export default Navbarbottom;

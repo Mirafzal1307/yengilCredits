@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontSize: "22px",
     color: "#000",
+    [theme.breakpoints.down(599)]: {
+      fontWeight: '500 !important',
+      fontSize: '18px !important'
+    }
   },
   mainCard: {
     height: "90%",
@@ -49,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardButton: {
     background: "transparent",
-    padding: "10px 22px",
+    padding: "10px 22px  !important",
     cursor: "pointer",
     borderRadius: "20px",
     display: "flex",
@@ -58,15 +62,37 @@ const useStyles = makeStyles((theme) => ({
     color: "#065374",
     fontFamily: "Poppins",
     fontSize: "14px",
-    margin: "auto !important",
+
   },
   cardSpan: {
     position: "absolute",
     top: 0,
     left: 0,
     background: "#dd0820",
-    paddingLeft: "4px",
-    paddingRight: "4px",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    color: "#fff",
+    fontFamily: "Poppins",
+    borderBottomRightRadius: "10px",
+  },
+  cardNew: {
+    position: "absolute",
+    top: 0,
+    left: 50,
+    background: "#dd0820",
+    paddingLeft: "15px",
+    paddingRight: "15px",
+    color: "#fff",
+    fontFamily: "Poppins",
+    borderBottomRightRadius: "10px",
+  },
+  cardNewSpan: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    background: "#dfec00",
+    paddingLeft: "11px",
+    paddingRight: "15px",
     color: "#fff",
     fontFamily: "Poppins",
     borderBottomRightRadius: "10px",
@@ -95,7 +121,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     borderRadius: "5px",
     backgroundImage: "#065374",
-
     [theme.breakpoints.down(700)]: {
       display: "none",
     },
@@ -115,10 +140,15 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "15px",
       color: "#065374",
       borderBottom: "1px solid #065374",
+      [theme.breakpoints.down(599)]: {
+        fontSize: "15px !important",
+        fontWeight: '400 !important'
+      },
     },
     [theme.breakpoints.down(700)]: {
       display: "block",
     },
+
   },
 }));
 
@@ -175,7 +205,7 @@ const CardProducts = () => {
           }}
         >
           <h2 className={classes.title} style={{ fontWeight: "600" }}>
-            Sizlar uchun maxsus mahsulotlar
+            Sizlar uchun tavsiyalar
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
@@ -186,13 +216,23 @@ const CardProducts = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-              rewind: true,
+
               width: "100%",
-              gap: "0.5rem",
+
               perPage: 6,
               pagination: false,
+              arrows: false,
+              type: 'loop',
+              drag: 'free',
+              gap: '0.7rem',
+              autoScroll: {
+                speed: 2
+              },
               breakpoints: {
-                400: {
+                300: {
+                  perPage: 1,
+                },
+                450: {
                   perPage: 1,
                 },
                 700: {
@@ -267,7 +307,7 @@ const CardProducts = () => {
                           style={{
                             color: "#065374",
                             fontSize: "14px",
-                            
+
                             textDecoration: "line-through",
                             fontWeight: "500",
                             display: 'none !important',
@@ -387,27 +427,37 @@ const CardProducts = () => {
         </div>
         <div className={classes.mainCard}>
           <Splide
-            options={{
-              rewind: true,
-              width: "100%",
-              gap: "0.5rem",
-              perPage: 6,
-              pagination: false,
-              breakpoints: {
-                400: {
-                  perPage: 1,
-                },
-                700: {
-                  perPage: 2,
-                },
-                992: {
-                  perPage: 3,
-                },
-                1300: {
-                  perPage: 4,
-                },
-              },
-            }}
+        options={{
+
+          width: "100%",
+
+          perPage: 6,
+          pagination: false,
+          arrows: false,
+          type: 'loop',
+          drag: 'free',
+          gap: '0.7rem',
+          autoScroll: {
+            speed: 2
+          },
+          breakpoints: {
+            300: {
+              perPage: 1,
+            },
+            450: {
+              perPage: 1,
+            },
+            700: {
+              perPage: 2,
+            },
+            992: {
+              perPage: 3,
+            },
+            1300: {
+              perPage: 4,
+            },
+          },
+        }}
           >
             {loading ? (
               <CircularProgress
@@ -468,7 +518,7 @@ const CardProducts = () => {
                           style={{
                             color: "#065374",
                             fontSize: "14px",
-                            
+
                             textDecoration: "line-through",
                             fontWeight: "500",
                             display: 'none !important',
@@ -500,7 +550,7 @@ const CardProducts = () => {
                         }}
                       >
                         {item?.after_discount?.toLocaleString()} so'm
-                        {/* {result} so'm */}
+
                       </p>
 
                       {item.availability === true ? (
@@ -592,27 +642,37 @@ const CardProducts = () => {
         </div>
         <div className={classes.mainCard}>
           <Splide
-            options={{
-              rewind: true,
-              width: "100%",
-              gap: "0.5rem",
-              perPage: 6,
-              pagination: false,
-              breakpoints: {
-                400: {
-                  perPage: 1,
+              options={{
+
+                width: "100%",
+  
+                perPage: 6,
+                pagination: false,
+                arrows: false,
+                type: 'loop',
+                drag: 'free',
+                gap: '0.7rem',
+                autoScroll: {
+                  speed: 2
                 },
-                700: {
-                  perPage: 2,
+                breakpoints: {
+                  300: {
+                    perPage: 1,
+                  },
+                  450: {
+                    perPage: 1,
+                  },
+                  700: {
+                    perPage: 2,
+                  },
+                  992: {
+                    perPage: 3,
+                  },
+                  1300: {
+                    perPage: 4,
+                  },
                 },
-                992: {
-                  perPage: 3,
-                },
-                1300: {
-                  perPage: 4,
-                },
-              },
-            }}
+              }}
           >
             {loading ? (
               <CircularProgress
@@ -673,7 +733,7 @@ const CardProducts = () => {
                           style={{
                             color: "#065374",
                             fontSize: "14px",
-                            
+
                             textDecoration: "line-through",
                             fontWeight: "500",
                             display: 'none !important',
@@ -796,14 +856,24 @@ const CardProducts = () => {
         </div>
         <div className={classes.mainCard}>
           <Splide
-            options={{
-              rewind: true,
+             options={{
+
               width: "100%",
-              gap: "0.5rem",
+
               perPage: 6,
               pagination: false,
+              arrows: false,
+              type: 'loop',
+              drag: 'free',
+              gap: '0.7rem',
+              autoScroll: {
+                speed: 2
+              },
               breakpoints: {
-                400: {
+                300: {
+                  perPage: 1,
+                },
+                450: {
                   perPage: 1,
                 },
                 700: {
@@ -877,7 +947,7 @@ const CardProducts = () => {
                           style={{
                             color: "#065374",
                             fontSize: "14px",
-                            
+
                             textDecoration: "line-through",
                             fontWeight: "500",
                             display: 'none !important',
@@ -947,19 +1017,26 @@ const CardProducts = () => {
                           Sotuvda yo'q
                         </button>
                       )}
+
+                      <span
+                        className={classes.cardNewSpan}
+                        style={{ fontWeight: "600", display: 'block !important' }}
+                      >
+                        new
+                      </span>
                       {
 
 
                         item.discount === 0 ?
                           <span
-                            className={classes.cardSpan}
+                            className={classes.cardNew}
                             style={{ fontWeight: "600", display: 'none !important' }}
                           >
 
                           </span>
                           :
                           <span
-                            className={classes.cardSpan}
+                            className={classes.cardNew}
                             style={{ fontWeight: "600", display: 'block !important' }}
                           >
                             {item.discount !== 0 ? item.discount : null}%

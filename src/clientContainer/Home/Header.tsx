@@ -15,23 +15,31 @@ const useStyles = makeStyles((theme) => {
   return {
     Carousel: {
       width: "100% !important",
+
+
      
-      marginTop: '30px !important',
-      [theme.breakpoints.down(1201)]: {
+      [theme.breakpoints.up(499)]: {
         marginTop: '60px !important'
       },
-      [theme.breakpoints.down(499)]: {
-        marginTop: '80px !important'
+      [theme.breakpoints.up(799)]: {
+        marginTop: '65px !important'
+      }, 
+      [theme.breakpoints.up(899)]: {
+        marginTop: '0px !important'
       },
-      [theme.breakpoints.down(499)]: {
-        marginTop: '120px !important'
+      [theme.breakpoints.down(599)]: {
+        marginTop: '85px !important'
       },
     },
     carouselImg: {
       width: "100%",
       height: "auto",
-     
-      borderRadius: "10px !important",
+      [theme.breakpoints.down(499)]: {
+      
+        width: "100%",
+        borderRadius: "5px !important",
+      },
+      borderRadius: "5px !important",
     },
     searchInput: {
       marginBottom: "50px !important",
@@ -51,6 +59,11 @@ const useStyles = makeStyles((theme) => {
       padding: "5px 0 5px 10px",
       borderRadius: "10px",
     },
+    SlideContainer: {
+      [theme.breakpoints.down(499)]: {
+ 
+      },
+    }
   };
 });
 
@@ -70,13 +83,13 @@ const Header = () => {
   return (
     <>
       <BackToTop />
-     
-      <Container maxWidth="xl" >
+
+      <Container maxWidth="xl" className={classes.SlideContainer} >
         <Splide
           className={classes.Carousel}
           options={{
             rewind: true,
-            arrows:false,
+            arrows: false,
             width: "100%",
             height: "100%",
             perPage: 1,
@@ -93,10 +106,10 @@ const Header = () => {
 
         </Splide>
       </Container>
-    
+
       <Navbarbottom />
       <CardProducts />
-      <Partner/>
+      <Partner />
       <BeforeFooter />
 
       <Footer />
