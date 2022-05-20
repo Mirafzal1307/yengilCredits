@@ -52,10 +52,12 @@ const useStyles = makeStyles({
   },
   mainCard: {
     display: "flex",
-    justifyContent: "space-evenly",
+    justifyContent: 'flex-start',
+
     flexWrap: "wrap",
   },
   bodyCard: {
+    width: "235px !important",
     backgroundColor: "white",
     "&:hover": {
       boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
@@ -229,7 +231,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
   sortBodyCard: {
-    width: "100% !important",
+    width: '100% !important',
     display: "flex",
     padding: "20px 40px",
     backgroundColor: "white",
@@ -394,9 +396,11 @@ const BrandPage = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "center",
+
+                  width: '200px !important ',
                   margin: "auto",
                   height: "300px",
+
                 }}
               >
                 <CircularProgress />
@@ -420,44 +424,79 @@ const BrandPage = () => {
                   !sort ? (
                     <Box className={classes.bodyCard} key={item.id}>
                       <Link to={`/product/client/details/${item.id}`}>
-                         <img
+                        <img
                           src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
                           alt="img"
                           style={{ width: "150px", height: "150px" }}
                         />
                       </Link>
 
-                       
-                        <div>
-                          <p
-                            className={classes.cardTitle}
-                            style={{
-                              margin: "10px 0",
-                            }}
-                          >
-                            {item.short_name}
-                          </p>
-                          <p className={classes.cardName}>{item.name}</p>
-                          <p
+
+                      <div>
+                        <h6
+                          className={classes.cardTitle}
+                          style={{
+                            margin: 0,
+                            marginTop: '19px',
+                            height: "30px",
+                            fontSize: '14px',
+                            fontWeight: "600",
+                          }}
+                        >
+                          {item.short_name}
+                        </h6>
+                        <h6
+                          className={classes.cardTitle}
+                          style={{
+                            margin: 0,
+                            marginTop: "0px",
+                            marginBottom: "20px",
+                            height: "30px",
+                            fontWeight: "400",
+                            fontSize: '14px',
+                            fontFamily: 'Poppins'
+                          }}
+                        >
+                          {item.name}
+                        </h6>
+                        {
+                          item.discount === 0 ? <p
                             className={classes.cardPrice}
                             style={{
                               color: "#065374",
                               fontSize: "14px",
+
                               textDecoration: "line-through",
+                              fontWeight: "500",
+                              display: 'none !important',
+                              paddingBottom: '22px'
                             }}
                           >
-                            {item?.price?.toLocaleString()} so'm
                           </p>
-                          <p
-                            className={classes.cardPrice}
-                            style={{ marginBottom: "10px", height: "45px" }}
-                          >
-                            {item?.after_discount?.toLocaleString()} so'm
-                          </p>
-                        </div>
-                        <div>
-                          {item.availability === true ? (
-                            <button className={classes.cardButton}
+                            :
+                            <p
+                              className={classes.cardPrice}
+                              style={{
+                                color: "#065374",
+                                fontSize: "14px",
+                                textDecoration: "line-through",
+                                fontWeight: "500",
+                                display: 'block !important'
+                              }}
+                            >
+                              {item?.price?.toLocaleString()} so'm
+                            </p>
+                        }
+                        <p
+                          className={classes.cardPrice}
+                          style={{ marginBottom: "10px", height: "45px" }}
+                        >
+                          {item?.after_discount?.toLocaleString()} so'm
+                        </p>
+                      </div>
+                      <div>
+                        {item.availability === true ? (
+                          <button className={classes.cardButton}
                             onClick={() => {
                               dispatch(addToCart(item));
                               setNotify({
@@ -466,30 +505,47 @@ const BrandPage = () => {
                                 type: "success",
                               });
                             }}
-                            >
-                              <img
-                                src={Shop}
-                                alt=""
-                                style={{ paddingRight: "10px" }}
-                              />
-                              Savatchaga
-                            </button>
-                          ) : (
-                            <button className={classes.cardButtonSecond}>
-                              <img
-                                src={cart2}
-                                alt="img"
-                                style={{
-                                  marginRight: "5px",
-                                }}
-                              />
-                              Sotuvda yo'q
-                            </button>
-                          )}
-                        </div>
+                          >
+                            <img
+                              src={Shop}
+                              alt=""
+                              style={{ paddingRight: "10px" }}
+                            />
+                            Savatchaga
+                          </button>
+                        ) : (
+                          <button className={classes.cardButtonSecond}>
+                            <img
+                              src={cart2}
+                              alt="img"
+                              style={{
+                                marginRight: "5px",
+                              }}
+                            />
+                            Sotuvda yo'q
+                          </button>
+                        )}
+                      </div>
 
-                        <span className={classes.cardSpan}>{item.discount}%</span>
-                    </Box>
+                      {
+
+
+                        item?.discount === 0 ?
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'none !important' }}
+                          >
+
+                          </span>
+                          :
+                          <span
+                            className={classes.cardSpan}
+                            style={{ fontWeight: "600", display: 'block !important' }}
+                          >
+                            {item?.discount !== 0 ? item?.discount : null}%
+                          </span>
+
+                      }                    </Box>
                   ) : (
                     <Box className={classes.sortBodyCard}>
                       <Link to={`/product/client/details/${item.id}`}>
@@ -533,14 +589,14 @@ const BrandPage = () => {
                         </div>
                         {item.availability === true ? (
                           <button className={classes.sortCardButton}
-                          onClick={() => {
-                            dispatch(addToCart(item));
-                            setNotify({
-                              isOpen: true,
-                              message: "Savatchaga qo'shildi",
-                              type: "success",
-                            });
-                          }}
+                            onClick={() => {
+                              dispatch(addToCart(item));
+                              setNotify({
+                                isOpen: true,
+                                message: "Savatchaga qo'shildi",
+                                type: "success",
+                              });
+                            }}
                           >
                             <img
                               src={cart1}
