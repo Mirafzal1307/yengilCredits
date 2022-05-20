@@ -23,7 +23,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const useStyles = makeStyles({
   searchInput: {
 
-    marginTop: "10px !important",
     background: "white",
     width: "100% !important",
     "&::before": {
@@ -160,8 +159,8 @@ const MainSearch = () => {
 
   const classes = useStyles();
   return (
-    <>
-      <div>
+    <div style={{width: '100%'}}>
+      <div style={{width: '100%'}} >
         <Input
           id="input-with-icon-adornment"
           className={classes.searchInput}
@@ -175,7 +174,7 @@ const MainSearch = () => {
         />
 
       </div>
-      <Paper sx={{ width: '73.7%', overflow: 'hidden', position: 'absolute', top: '55px', marginLeft: '1px !important', borderRadius: '5px 5px 5px 5px' }}>
+      <Paper sx={{ width: '94.7%', overflow: 'hidden', position: 'absolute', top: '127px', marginLeft: '-107px !important', borderRadius: '5px 5px 5px 5px' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableBody>
@@ -188,7 +187,7 @@ const MainSearch = () => {
                         <img
                           src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
                           alt="img"
-                          style={{ width: "75px", height: "70px", padding: '4px 0px 0px 20px' }}
+                          style={{ width: "75px", height: "70px", padding: '12px 8px 6px 9px' }}
                         />
                       </Link>
                     </TableCell>
@@ -202,8 +201,8 @@ const MainSearch = () => {
                             marginBottom: "10px",
                             height: "30px",
                             fontFamily: "Poppins",
-                            fontWeight: "500",
-                            fontSize: "16px",
+                            fontWeight: "400",
+                            fontSize: "14px",
                           }}
                         >
                           {item.short_name}
@@ -221,8 +220,8 @@ const MainSearch = () => {
                             marginBottom: "10px",
                             height: "30px",
                             fontFamily: "Poppins",
-                            fontWeight: "500",
-                            fontSize: "16px",
+                            fontWeight: "400",
+                            fontSize: "14px",
 
                           }}
                         >
@@ -233,7 +232,7 @@ const MainSearch = () => {
                     </TableCell>
                     <TableCell>
                       <Link to={`/product/client/details/${item.id}`}>
-                        <ChevronRightIcon style={{color:'#000'}} />
+                        <ChevronRightIcon style={{color:'#000', fontSize: '18px' , marginRight: '10px'}} />
                       </Link>
 
                     </TableCell>
@@ -316,7 +315,7 @@ const MainSearch = () => {
 
       <Notification notify={notify} setNotify={setNotify} />
 
-    </>
+    </div>
   );
 };
 

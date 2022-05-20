@@ -52,6 +52,11 @@ const useStyles = makeStyles({
     fontWeight: "600",
     fontSize: "14px",
     margin: "auto !important",
+    '&:hover': {
+      background: '#065374 !important',
+      color: 'white !important',
+      transitionDuration: '0.4s'
+    }
   },
   cardSpan: {
     position: "absolute",
