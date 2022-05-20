@@ -17,7 +17,10 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '5px !important',
         cursor: 'pointer',
         alignItems: 'center',
-
+        [theme.breakpoints.down(600)]:{
+            width: '250px !important',
+            height: '90px !important',
+        }
 
     },
     Partner: {

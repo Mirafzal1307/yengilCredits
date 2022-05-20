@@ -74,6 +74,12 @@ const style = {
 const useStyles = makeStyles(theme => ({
   MainPage: {
     marginTop: '20px',
+    [theme.breakpoints.down(700)]: {
+      marginTop: '60px',
+    },
+    [theme.breakpoints.down(600)]: {
+      marginTop: '90px',
+    },
     background: 'transparent',
     border: 'unset',
     display: 'flex',
@@ -98,8 +104,9 @@ const useStyles = makeStyles(theme => ({
     fontSize: '32px',
     fontWeight: 600,
 
-    [theme.breakpoints.down(500)]: {
-      textAlign: "center",
+    [theme.breakpoints.down(600)]: {
+      textAlign: "left",
+      fontSize: '22px !important',
     },
   },
   text1: {
@@ -176,12 +183,46 @@ const useStyles = makeStyles(theme => ({
       height: 'auto'
     }
   },
+  cartMin: {
+    display: 'flex',
+    borderBottom: '1px solid #CACDD8',
+    padding: '10px 0px 10px 0px !important',
+    background: '#F5F7FF',
+    border: 'solid 0.5px #A2A6B0',
+    borderRadius: '5px ',
+    [theme.breakpoints.down(600)]: {
+      "& td": {
+        textAlign: "center",
+        fontSize: '10px',
+        "& h5": {
+          fontSize: '10px'
+        }
+      },
+    },
+    '& img': {
+      width: '75%',
+      marginTop: '46px',
+      height: 'auto'
+    }
+  },
   name: {
     fontFamily: 'Poppins',
     fontStyle: 'normal',
     fontWeight: 600,
     fontSize: '16px',
-    color: 'black'
+    color: 'black',
+
+  },
+  nameRes: {
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: '16px',
+    color: 'black',
+    [theme.breakpoints.down(500)]: {
+      fontSize: '14px',
+      fontWeight: 400,
+    }
   },
   price: {
     fontFamily: 'Poppins',
@@ -201,6 +242,15 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down(500)]: {
       width: "30px",
       height: '35px',
+    },
+  },
+  dropDownMin: {
+    background: '#F5F7FF',
+
+    [theme.breakpoints.down(600)]: {
+      width: "55px",
+      height: '35px',
+      padding: '0px'
     },
   },
   totalPage: {
@@ -310,6 +360,16 @@ const useStyles = makeStyles(theme => ({
       }
     },
   },
+  MinGrid: {
+    [theme.breakpoints.up(600)]: {
+      display: 'none'
+    }
+  },
+  MaxGrid: {
+    [theme.breakpoints.down(600)]: {
+      display: 'none'
+    }
+  }
 }))
 
 const top100Films = [
@@ -527,66 +587,128 @@ export default function Cart() {
               </div>
             </Grid>
             :
-            <Grid item xs={12} md={8} >
-              {cartProducts.length > 0 &&
-                <Table>
-                  <thead>
-                    <tr className={classes.NameTop} >
-                      <th className={classes.image} >Rasm</th>
-                      <th className={classes.image} >Nomi</th>
-                      <th className={classes.image} >Son</th>
-                      <th className={classes.image} >Narx</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {cartProducts && cartProducts?.map((product: any) => (
-                      <tr key={product.id} className={classes.carts} >
-                        <td>
-                          {console.log(product)}
-                          <Link to={`/product/client/details/${product.id}`} >
-                           {
-                            product?.photos?.map((photo: any) => (
-                    
-                              <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo.name}`} />
-                            )
-                            )
-                          }
-                          </Link>
-                         
-                          {/* <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product.photo}`} alt=''></img> */}
-                        </td>
-                        <td>
-                          <h5 className={classes.name} >{product.short_name}</h5>
-                        </td>
-                        <td style={{ width: '25%' }}>
-                          <Select key={product.id} name="quantity" onChange={(event: any) => dispatch(updatePrice(product, event.target.value))} defaultValue={product.quantity} className={classes.dropDown}>
-                            <MenuItem value="1">1</MenuItem>
-                            <MenuItem value="2">2</MenuItem>
-                            <MenuItem value="3">3</MenuItem>
-                            <MenuItem value="4">4</MenuItem>
-                            <MenuItem value="5">5</MenuItem>
-                            <MenuItem value="6">6</MenuItem>
-                          </Select>
+            <>
+              <Grid item xs={12} md={8} className={classes.MinGrid}>
+                {cartProducts.length > 0 &&
+                  <Table>
 
-                        </td>
-                        <td>
-                          <h5 className={classes.price}>{product.price.toLocaleString()} so'm</h5>
-                        </td>
-                        <td>
-                          <Button onClick={() => dispatch(deleteFromCart(product))} value={product.short_name}  >
-                            <CloseIcon className={classes.close} />
-                          </Button>
-                        </td>
+                    <div>
+                      {cartProducts && cartProducts?.map((product: any) => (
+                        <div key={product.id} className={classes.cartMin}  style={{margin: '15px 0px '}}  >
+                          <div style={{ width: '25%' }}  >
+
+                            <Link to={`/product/client/details/${product.id}`} >
+                              {
+                                product?.photos?.map((photo: any) => (
+
+                                  <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo.name}`} />
+                                )
+                                )
+                              }
+                            </Link>
+                          </div>
+                          <div style={{ width: '50%' }} >
+                            <div style={{ display: 'flex' }} >
+                              <div>
+                                <h5 className={classes.nameRes} >{product.short_name}</h5>
+                              </div>
+                            </div>
+                            <div style={{ display: 'flex' }}>
+                              <h5 className={classes.nameRes}>{product.price.toLocaleString()} so'm</h5>
+                            </div>
+
+                          </div>
+
+                          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around', width: '25%' }}>
+                            <Button onClick={() => dispatch(deleteFromCart(product))} value={product.short_name}  >
+                              <CloseIcon className={classes.close} />
+                            </Button>
+                            <div style={{ width: '25%', marginLeft: '7px' }}>
+                              <Select key={product.id} name="quantity" onChange={(event: any) => dispatch(updatePrice(product, event.target.value))} defaultValue={product.quantity} className={classes.dropDownMin}>
+                                <MenuItem value="1">1</MenuItem>
+                                <MenuItem value="2">2</MenuItem>
+                                <MenuItem value="3">3</MenuItem>
+                                <MenuItem value="4">4</MenuItem>
+                                <MenuItem value="5">5</MenuItem>
+                                <MenuItem value="6">6</MenuItem>
+                              </Select>
+
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                      <div style={{ display: 'flex', justifyContent: 'space-around' }} >
+                        <div>
+                          <p style={{ fontWeight: 600, fontSize: '17px' }} > Umumiy narx</p>
+                        </div>
+                        <p style={{ fontWeight: 600, fontSize: '17px' }} >{total.toLocaleString()}  so'm</p>
+                      </div>
+                    </div>
+                  </Table>
+                }
+              </Grid>
+              <Grid item xs={12} md={8} className={classes.MaxGrid} >
+                {cartProducts.length > 0 &&
+                  <Table>
+                    <thead>
+                      <tr className={classes.NameTop} >
+                        <th className={classes.image} >Rasm</th>
+                        <th className={classes.image} >Nomi</th>
+                        <th className={classes.image} >Son</th>
+                        <th className={classes.image} >Narx</th>
                       </tr>
-                    ))}
-                    <tr style={{ width: '100%' }} key="total">
-                      <td><h4>Umumiy narx</h4></td>
-                      <td>{total.toLocaleString()}  so'm</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              }
-            </Grid>
+                    </thead>
+                    <tbody>
+                      {cartProducts && cartProducts?.map((product: any) => (
+                        <tr key={product.id} className={classes.carts} >
+                          <td>
+                            {console.log(product)}
+                            <Link to={`/product/client/details/${product.id}`} >
+                              {
+                                product?.photos?.map((photo: any) => (
+
+                                  <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo.name}`} />
+                                )
+                                )
+                              }
+                            </Link>
+
+                            {/* <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product.photo}`} alt=''></img> */}
+                          </td>
+                          <td>
+                            <h5 className={classes.name} >{product.short_name}</h5>
+                          </td>
+                          <td style={{ width: '25%' }}>
+                            <Select key={product.id} name="quantity" onChange={(event: any) => dispatch(updatePrice(product, event.target.value))} defaultValue={product.quantity} className={classes.dropDown}>
+                              <MenuItem value="1">1</MenuItem>
+                              <MenuItem value="2">2</MenuItem>
+                              <MenuItem value="3">3</MenuItem>
+                              <MenuItem value="4">4</MenuItem>
+                              <MenuItem value="5">5</MenuItem>
+                              <MenuItem value="6">6</MenuItem>
+                            </Select>
+
+                          </td>
+                          <td>
+                            <h5 className={classes.price}>{product.price.toLocaleString()} so'm</h5>
+                          </td>
+                          <td>
+                            <Button onClick={() => dispatch(deleteFromCart(product))} value={product.short_name}  >
+                              <CloseIcon className={classes.close} />
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
+                      <tr style={{ width: '100%' }} key="total">
+                        <td><h4>Umumiy narx</h4></td>
+                        <td>{total.toLocaleString()}  so'm</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                }
+              </Grid>
+            </>
+
           }
 
 

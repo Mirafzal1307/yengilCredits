@@ -15,7 +15,7 @@ import { addToCart } from "../../redux/cart/action";
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
-import BigPhoto from "../../Images/image 26.png";
+import BigPhoto from "../../Images/BigPhoto.svg";
 import Shop from "../../Images/baskets.png"
 import CancelBtnImg from '../../Images/Group56524.png'
 import { useTypedSelector } from "../../hook/useTypedSelector";
@@ -183,11 +183,16 @@ const useStyles = makeStyles(theme => ({
   BigPhoto: {
     width: "100% ",
     marginBottom: '50px',
-    borderRadius: '10px',
+    borderRadius: '5px',
 
     [theme.breakpoints.down(900)]: {
       marginTop: '40px',
+    },
+    [theme.breakpoints.down(600)]: {
+      marginBottom: '10px',
+      borderRadius: '3px',
     }
+
   },
   productName: {
     fontFamily: "Poppins",
@@ -196,6 +201,13 @@ const useStyles = makeStyles(theme => ({
 
     [theme.breakpoints.down(700)]: {
       display: "block",
+    },
+    [theme.breakpoints.down(600)]: {
+      display: "block",
+      fontWeight: 500,
+      fontSize: "18px",
+      margin: "0",
+  
     }
   },
   priceSale: {
@@ -321,9 +333,9 @@ const ProductDetails = () => {
 
   const { id } = useParams();
   const classes = useStyles()
-   
-   const photo = pro?.map((i:any)=> i?.photos[0]) ;
-   const name23 = pro?.map((i:any)=> i?.name[0]) ;
+
+  const photo = pro?.map((i: any) => i?.photos[0]);
+  const name23 = pro?.map((i: any) => i?.name[0]);
 
   const [notify, setNotify] = useState<any>({
     isOpen: false,
@@ -353,7 +365,7 @@ const ProductDetails = () => {
     const res: any = await getProductItem(id);
     setProducts(res?.data);
   }
-console.log(name23);
+  console.log(name23);
   return (
     <>
       <BackToTop />
@@ -361,10 +373,11 @@ console.log(name23);
         <Container maxWidth="xl">
           <img src={BigPhoto} alt="" className={classes.BigPhoto} />
         </Container>
+
         <Container maxWidth="xl">
           {pro?.map((product: any) =>
             <div className={classes.BigPhotoBottom}>
-              <h2 className={classes.productName}>{product?.name}</h2>
+              <h2 className={classes.productName} style={{padding: '15px'}} >{product?.name}</h2>
               <div className={classes.RightBtn}>
                 <p className={classes.priceSale}>Chegirma narxda: <span className={classes.productSaleSpan}>{product?.after_discount.toLocaleString()} so’m</span></p>
                 <div>
@@ -387,16 +400,16 @@ console.log(name23);
           )}
         </Container>
       </div>
-      <div style={{ background: '#fff', borderTop: '1px solid #000', padding: '40px 0'}}>
-        <Container maxWidth="xl" style={{display: 'flex'}}>
-          <div style={{marginRight: '20px'}}>
+      <div style={{ background: '#fff', borderTop: '1px solid #000', padding: '40px 0' }}>
+        <Container maxWidth="xl" style={{ display: 'flex' }}>
+          <div style={{ marginRight: '20px' }}>
             <img src={CancelBtnImg} alt="Cancel" />
           </div>
           <div className={classes.Links}>
-            <span><Link style={{fontWeight: '700'}} to="/">Bosh sahifa  ›</Link></span>
+            <span><Link style={{ fontWeight: '700' }} to="/">Bosh sahifa  ›</Link></span>
             <span><Link to="/">Notebook  ›</Link></span>
             <span><Link to="/">Notebook  ›</Link></span>
-            <span><Link style={{color: '#000'}} to="/">{name23}  ›</Link></span>
+            <span><Link style={{ color: '#000' }} to="/">{name23}  ›</Link></span>
           </div>
         </Container>
       </div>
@@ -575,7 +588,7 @@ console.log(name23);
                           style={{
                             color: "#065374",
                             fontSize: "14px",
-                            
+
                             textDecoration: "line-through",
                             fontWeight: "500",
                             display: 'none !important',
@@ -597,7 +610,7 @@ console.log(name23);
                             {item?.price?.toLocaleString()} so'm
                           </p>
                       }
-                     
+
                       <p
                         className={classes.cardPrice}
                         style={{ marginBottom: "10px", height: "45px", fontWeight: '600' }}
@@ -723,58 +736,59 @@ console.log(name23);
                           }
                         </Link>
                         <h6
-                        className={classes.cardTitle}
-                        style={{
-                          margin: 0,
-                          marginTop: '19px',
-                          height: "30px",
-                          fontSize: '14px',
-                          fontWeight: "600",
-                        }}
-                      >
-                        {item.short_name}
-                      </h6>
-                      <h6
-                        className={classes.cardTitle}
-                        style={{
-                          margin: 0,
-                          marginTop: "0px",
-                          marginBottom: "20px",
-                          height: "30px",
-                          fontWeight: "400",
-                          fontSize: '14px',
-                          fontFamily: 'Poppins'
-                        }}
-                      >
-                        {item.name}
-                      </h6>
-                      {
-                        item.discount === 0 ? <p
-                          className={classes.cardPrice}
+                          className={classes.cardTitle}
                           style={{
-                            color: "#065374",
-                            fontSize: "14px",
-                            textDecoration: "line-through",
-                            fontWeight: "500",
-                            display: 'none !important',
-                            paddingBottom: '22px'
+                            margin: 0,
+                            marginTop: '19px',
+                            height: "30px",
+                            fontSize: '14px',
+                            fontWeight: "600",
                           }}
                         >
-                        </p>
-                          :
-                          <p
+                          {item.short_name}
+                        </h6>
+                        <h6
+                          className={classes.cardTitle}
+                          style={{
+                            margin: 0,
+                            marginTop: "0px",
+                            marginBottom: "20px",
+                            height: "30px",
+                            fontWeight: "400",
+                            fontSize: '14px',
+                            fontFamily: 'Poppins'
+                          }}
+                        >
+                          {item.name}
+                        </h6>
+                        {
+                          item.discount === 0 ? <p
                             className={classes.cardPrice}
                             style={{
                               color: "#065374",
                               fontSize: "14px",
+
                               textDecoration: "line-through",
                               fontWeight: "500",
-                              display: 'block !important'
+                              display: 'none !important',
+                              paddingBottom: '22px'
                             }}
                           >
-                            {item?.price?.toLocaleString()} so'm
                           </p>
-                      }
+                            :
+                            <p
+                              className={classes.cardPrice}
+                              style={{
+                                color: "#065374",
+                                fontSize: "14px",
+                                textDecoration: "line-through",
+                                fontWeight: "500",
+                                display: 'block !important'
+                              }}
+                            >
+                              {item?.price?.toLocaleString()} so'm
+                            </p>
+                        }
                         <p
                           className={classes.cardPrice}
                           style={{ marginBottom: "10px", height: "45px", fontWeight: '600' }}
