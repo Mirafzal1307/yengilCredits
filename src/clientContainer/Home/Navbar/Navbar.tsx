@@ -36,7 +36,7 @@ import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import catalogicon from "../../../Images/catalogicon.svg";
 import CloseIcon from "@mui/icons-material/Close";
-import AccountMenu from "./demo";
+import AccountMenu from "./Language";
 import Baskets from "../../../Images/basket.svg";
 import Telegram from "../../../Images/telegram.svg";
 import LogoIcon from "../../../Images/LogoIcon.svg"
