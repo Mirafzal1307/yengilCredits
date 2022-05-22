@@ -25,7 +25,7 @@ import Typography from '@mui/material/Typography';
 // import { refresh } from '../../../adminContainer/Modal/refresh';
 // import { refresh } from '../../../adminContainer/Modal/refresh';
 import './style.css'
-
+import {  useNavigate } from "react-router-dom";
 import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';
 import { styled } from '@mui/material/styles';
 
@@ -436,7 +436,7 @@ export default function Cart() {
   const { cartProducts } = useSelector((state: rootState) => state.cartreducer);
   console.log(cartProducts);
 
-
+  const navigate = useNavigate();
 
   const refresh = (): void => {
     setTimeout(() => {
@@ -520,6 +520,9 @@ export default function Cart() {
               message: "Sizning ma'lumotlaringiz jo'natildi",
               type: "success",
             });
+            setTimeout(() => {
+              navigate("/product");
+            }, 1000)
           }
         }).catch((err) => {
           setNotify({
