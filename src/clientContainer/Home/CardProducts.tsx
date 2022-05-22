@@ -54,6 +54,12 @@ const useStyles = makeStyles((theme) => ({
   },
   cardButton: {
     background: "transparent",
+    [theme.breakpoints.up(600)]:{
+      padding: '10px 35px !important'
+    },
+    [theme.breakpoints.up(450)]:{
+      padding: '10px 18px !important'
+    },
     padding: "10px 45px  !important",
     cursor: "pointer",
     borderRadius: "20px",
@@ -150,7 +156,7 @@ const useStyles = makeStyles((theme) => ({
       display: "block",
     },
 
-  },
+  },  
   BodyCardInside: {
     textAlign: 'center'
   }
@@ -233,10 +239,8 @@ const CardProducts = () => {
                 speed: 2
               },
               breakpoints: {
-                300: {
-                  perPage: 1,
-                },
                 450: {
+                  type: 'loop',
                   perPage: 1,
                 },
                 700: {
@@ -447,11 +451,9 @@ const CardProducts = () => {
               autoScroll: {
                 speed: 2
               },
-              breakpoints: {
-                300: {
-                  perPage: 1,
-                },
+               breakpoints: {
                 450: {
+                  type: 'loop',
                   perPage: 1,
                 },
                 700: {
@@ -665,10 +667,8 @@ const CardProducts = () => {
                 speed: 2
               },
               breakpoints: {
-                300: {
-                  perPage: 1,
-                },
                 450: {
+                  type: 'loop',
                   perPage: 1,
                 },
                 700: {
@@ -881,10 +881,8 @@ const CardProducts = () => {
                 speed: 2
               },
               breakpoints: {
-                300: {
-                  perPage: 1,
-                },
                 450: {
+                  type: 'loop',
                   perPage: 1,
                 },
                 700: {
