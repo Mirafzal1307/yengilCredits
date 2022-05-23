@@ -1,6 +1,8 @@
-import React from "react";
+import React, {Fragment} from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import { Switch } from "react-router-dom-v5";
+// import { * } from "react-router-dom-v5" 
 import Category from "./adminContainer/Category/Category";
 import Home from "./adminContainer/Home/Home";
 import Order from "./adminContainer/Order/TableList";
@@ -21,7 +23,10 @@ import { useDispatch } from "react-redux";
 import { fetchProducts } from "./redux/cart/action";
 import AllCards from "./clientContainer/Home/AllCards";
 import OrderDetails from "./adminContainer/Order/OrderDetails";
-import LoginPage from "./authorization/LoginPage";
+import LoginPage from "./Auth/LoginPage";
+import PrivateRoute from "./Auth/PrivateRoute";
+import RestrictedRoute from "./Auth/RestrictedRoute";
+import TableOrder from "./adminContainer/Order/TableOrder";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,44 +34,86 @@ function App() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  const token = localStorage.getItem("auth");
+
   return (
     <>
-  
       <Router>
+      <Fragment>
         <Routes>
-          <Route path="/dashboard" element={<Home />} />
-          <Route path="/category" element={<Category />} />
+          {/* <PrivateRoute exact path="/dashboard" component={Home}/> */}
+          <Route path="/dashboard" element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Home />} />
+          </Route>
+          <Route path="/category" element={<PrivateRoute />}>
+            <Route path="/category" element={<Category />} />
+          </Route>
           <Route
             path="/category/admin/edit-page/:id"
-            element={<CategoryEdit />}
-          />
-          <Route path="/admin" element={<LoginPage />}/>
-          <Route path="/category/by-id/:id" element={<CategoryDetails />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/brand" element={<Brand />} />
+            element={<PrivateRoute />}
+          >
+            <Route
+              path="/category/admin/edit-page/:id"
+              element={<CategoryEdit />}
+            />
+          </Route>
+          <Route path="/category/by-id/:id" element={<PrivateRoute />}>
+            <Route path="/category/by-id/:id" element={<CategoryDetails />} />
+          </Route>
+          <Route path="/product" element={<PrivateRoute />}>
+            <Route path="/product" element={<Product />} />
+          </Route>
+          <Route path="/order" element={<PrivateRoute />}>
+            <Route path="/order" element={<TableOrder />} />
+          </Route>
+          <Route path="/brand" element={<PrivateRoute />}>
+            <Route path="/brand" element={<Brand />} />
+          </Route>
           <Route
             path="/brand/admin/edit-page/:id"
-            element={<BrandEditPage />}
-          />
-          <Route path="/product/edit/:id" element={<EditProductList />} />
-          <Route path="/product/details/:id" element={<ProductDetails />} />
-          <Route
-            path="/product/client/details/:id"
-            element={<ClientProductDetails />}
-          />
-          <Route path="/product/create" element={<CreateProduct />} />
+            element={<PrivateRoute />}
+          >
+            <Route
+              path="/brand/admin/edit-page/:id"
+              element={<BrandEditPage />}
+            />
+          </Route>
+          <Route path="/product/edit/:id" element={<PrivateRoute />}>
+            <Route path="/product/edit/:id" element={<EditProductList />} />
+          </Route>
+          <Route path="/product/details/:id" element={<PrivateRoute />}>
+            <Route path="/product/details/:id" element={<ProductDetails />} />
+          </Route>
+          <Route path="/product/create" element={<PrivateRoute />}>
+            <Route path="/product/create" element={<CreateProduct />} />
+          </Route>
+          <Route path="/order-details/:buyer_id" element={<PrivateRoute />}>
+            <Route path="/order-details/:buyer_id" element={<OrderDetails />} />
+          </Route>
+          <Route path="/product/client/details/:id" element={<PrivateRoute />}>
+            <Route
+              path="/product/client/details/:id"
+              element={<ClientProductDetails />}
+            />
+          </Route>
           <Route path="/product/by-brand/:id" element={<BrandPage />} />
           <Route
             path="/product/product-by-category/:id"
-            element={<CategoryProducts />}
-          />
+            element={<RestrictedRoute />}
+          >
+            <Route
+              path="/product/product-by-category/:id"
+              element={<CategoryProducts />}
+            />
+          </Route>
           <Route path="/" element={<Header />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/all/card/:id" element={<AllCards />} />
-          <Route path="/order-details/:buyer_id" element={<OrderDetails />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
-      </Router> 
+      </Fragment>
+        
+      </Router>
     </>
   );
 }

@@ -2,7 +2,7 @@
 import ApiClient from '../HttpClient'
 
 export function  getCategoryList(page: string, data: object = {}) {
-    return ApiClient().get(`/category/admin/list?parent=true&page=${page}`, data)
+    return ApiClient().get(`/category/list?parent=true&page=${page}`, data)
 }
 export function  getCategoryListCreate(data: object = {}) {
     return ApiClient().get(`/category/admin/create-page`, data)
@@ -12,7 +12,7 @@ export function getCategoryByParentCategory(id: any) {
     return ApiClient().get(`/category/by-id/${id}`)
 }
 export function getCategorySearch(name: string, data: object = {}) {
-    return ApiClient().get(`/category/admin/search/?name=${name}`, data)
+    return ApiClient().get(`/category/search/?name=${name}`, data)
 }
 
 export function getCategoryItem(id: string) {
