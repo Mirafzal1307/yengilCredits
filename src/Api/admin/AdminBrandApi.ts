@@ -5,7 +5,7 @@ export function createBrandData(data: Object) {
 }
 
 export function getAllBrandData(data: object = {}) {
-  return ApiClient().get(`/brand/admin/get`, data);
+  return ApiClient().get(`/brand/get`, data);
 }
 
 export function  getBrand(id: any) {
