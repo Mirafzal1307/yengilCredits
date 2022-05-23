@@ -28,7 +28,8 @@ import { Link as NavLink } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import { addToCart } from "../../redux/cart/action";
-
+import Footer from "./Footer";
+import './style.css'
 
 const useStyles = makeStyles({
   styledButton: {
@@ -39,7 +40,8 @@ const useStyles = makeStyles({
   },
   container: {
     textAlign: "center",
-    marginTop: "38px !important",
+    marginTop: "20px !important",
+    marginBottom: "20px !important",
   },
   cardButtonSecond: {
     background: "transparent",
@@ -69,13 +71,19 @@ const useStyles = makeStyles({
   },
   BigPhoto: {
     width: "100% ",
-    margin: "40px 0px 70px 0px",
+    margin: "60px 0px 0px 0px",
+    borderRadius: "3px",
   },
   title: {
     fontFamily: "Poppins",
     fontWeight: 600,
     fontSize: "22px",
     color: "#000",
+  },
+  mainCard: {
+    display: "flex",
+
+    flexWrap: "wrap",
   },
   cardButton: {
     background: "transparent",
@@ -112,21 +120,34 @@ const useStyles = makeStyles({
   cardPrice: {
     fontFamily: "Poppins",
     fontWeight: "600",
-    fontSize: "18px",
+    fontSize: "13px",
     color: "#000",
     margin: 0,
+  },
+  cardPriceDiscount: {
+    fontFamily: "Poppins",
+    fontSize: "18px",
+    fontWeight: "600",
+    marginTop: "0",
+    marginBottom: "10px",
   },
   splide: {
     marginTop: "10px !important",
     marginBottom: "10px !important",
   },
   cardBottom: {
-    background: "#065374",
-    paddingBottom: "15px",
-    paddingTop: "14px",
-    paddingRight: "20px",
+    background: "transparent",
+    padding: "10px 22px",
+    cursor: "pointer",
+    borderRadius: "20px",
     display: "flex",
-    justifyContent: "flex-end",
+    alignItems: "center",
+    border: "2px solid #065374",
+    color: "#065374",
+    fontFamily: "Poppins",
+    fontWeight: "600",
+    fontSize: "14px",
+    margin: "auto !important",
   },
   bottomText: {
     fontFamily: "Poppins",
@@ -170,13 +191,13 @@ const useStyles = makeStyles({
   },
   back: {
     minWidth: "100%",
-    height: "50px",
+    height: "40px",
     alignItems: "center",
     fontFamily: "Poppins",
     fontSize: "14px",
     fontWeight: "600",
     border: "2px solid #C9CDD8",
-    borderRadius: "2px",
+    borderRadius: "5px",
     display: "flex",
     cursor: "pointer",
   },
@@ -201,7 +222,7 @@ const useStyles = makeStyles({
   },
   locationOfCard: {
     minWidth: "100%",
-    height: "50px",
+    height: "40px",
     border: "2px solid #C9CDD8",
     borderRadius: "2px",
     boxSizing: "border-box",
@@ -234,9 +255,10 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
   sortBodyCard: {
-    width: "100% !important",
+    width: "100%",
     display: "flex",
-    padding: "20px 40px",
+
+    // padding: "20px 40px",
     backgroundColor: "white",
     "&:hover": {
       boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
@@ -251,6 +273,8 @@ const useStyles = makeStyles({
     fontWeight: 600,
     fontSize: "17px",
     color: "#000",
+    marginTop: '15px',
+    marginBottom: '0 !important'
   },
   sortCardPrice: {
     fontFamily: "Poppins",
@@ -262,7 +286,7 @@ const useStyles = makeStyles({
   },
   sortCardButton: {
     background: "transparent",
-    padding: "10px 22px",
+    padding: "7px 12px",
     cursor: "pointer",
     borderRadius: "20px",
     display: "flex",
@@ -272,8 +296,11 @@ const useStyles = makeStyles({
     fontFamily: "Poppins",
     fontWeight: "600",
     fontSize: "14px",
+    marginBottom: '18px',
+    marginRight: '10px'
   },
   sortCardDescription: {
+    margin: '0 !important',
     fontFamily: "Poppins",
     fontWeight: 400,
     fontSize: "13px",
@@ -281,16 +308,20 @@ const useStyles = makeStyles({
   },
   pagination: {
     width: "315px",
-    marginRight: "unset !important",
+    justifyContent: 'center',
+    margin: "10px !important",
     padding: "5px 5px 5px 5px !important",
   },
   paginationItem: {
     width: "100%",
-    border: " solid 1px #9F9F9F !important",
+    border: " solid 1px #065374 !important",
     margin: "0 !important",
+    display: 'flex',
+    justifyContent: 'center',
     borderRadius: "50px !important",
-    padding: "20px 14px 20px 14px !important",
+
   },
+
 });
 
 const AllCards = () => {
@@ -322,7 +353,7 @@ const AllCards = () => {
 
   useEffect(() => {
     getData(id);
-    if(pageQty < page){
+    if (pageQty < page) {
       setPage(1)
     }
   }, [query, page]);
@@ -344,7 +375,7 @@ const AllCards = () => {
       </Container>
       <Container maxWidth="xl">
         <Grid container spacing={3}>
-          <Grid item xs={6} md={2} sm={4} order={{ xs: 1, sm: 1, md: 1 }}>
+          <Grid item xs={6} md={1} sm={4} >
             <Link to="/">
               <button className={classes.back}>
                 {" "}
@@ -355,54 +386,16 @@ const AllCards = () => {
               </button>
             </Link>
           </Grid>
-          <Grid item xs={12} md={6} order={{ xs: 4, sm: 4, md: 2 }}>
-            <div className={classes.secondDiv}>
-              <p>Natija 1-35</p>
-            </div>
-          </Grid>
-          <Grid item xs={12} md={3} sm={4} order={{ xs: 3, sm: 3, md: 3 }}>
-            {/* <FormControl
-              sx={{ minWidth: 300 }}
-              style={{
-                minWidth: "100%",
-                padding: "0 !important",
-                margin: "0 !important",
-              }}
-            >
-              <Select
-                value={productPrice}
-                onChange={handleChangeCategory}
-                displayEmpty
-                className={classes.Select}
-              >
-                <MenuItem value="">
-                  <b className={classes.filterPrice}>
-                    {" "}
-                    Saralash:
-                    <span className={classes.lowPrice}> Narx(past)</span>{" "}
-                  </b>
-                </MenuItem>
-                {products.map((item: any, index: any) => (
-                  <MenuItem value={item?.price?.toLocaleString()} key={index}>
-                    {item?.price?.toLocaleString()}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl> */}
-            <input
-              type="text"
-              placeholder="Mahsulot nomini kiriting..."
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className={classes.secondDiv}
-              style={{
-                background: "transparent",
-                fontFamily: "Poppins",
-                paddingLeft: "15px",
-              }}
-            />
-            {console.log(searchTerm)}
-          </Grid>
-          <Grid item xs={6} md={1} sm={4} order={{ xs: 2, sm: 2, md: 4 }}>
+
+
+          <Grid
+            item
+            xs={6}
+            md={1}
+            sm={4}
+            style={{ display: "flex", justifyContent: "end" }}
+
+          >
             <div className={classes.locationOfCard}>
               <button
                 className={classes.sortButton}
@@ -423,58 +416,169 @@ const AllCards = () => {
             </div>
           </Grid>
         </Grid>
-        <div>
-          <Stack
-            direction={sort ? { xs: "column" } : { xs: "row" }}
-            spacing={2}
-            style={
-              sort
-                ? { flexWrap: "nowrap", flexDirection: "column" }
-                : {
-                    flexWrap: "wrap",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }
-            }
-          >
-            {products
-              .filter((val: any) => {
-                if (searchTerm == "") {
-                  return val;
-                } else if (
-                  val.short_name
-                    .toLowerCase()
-                    .includes(searchTerm.toLowerCase())
-                ) {
-                  return val;
-                } else if (val.price <= searchTerm) {
-                  return val;
-                }
-              })
-              .map((item: any, key: any) =>
-                !sort ? (
-                  <Box className={classes.bodyCard} key={key}>
-                    <Link to={`/product/client/details/${item.id}`}>
-                      <img
-                        src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
-                        alt="img"
-                        style={{ width: "150px", height: "150px" }}
-                      />
-                    </Link>
-                    <h6
-                      className={classes.cardTitle}
-                      style={{
-                        margin: 0,
-                        marginTop: "10px",
-                        marginBottom: "10px",
-                        height: "30px",
-                      }}
-                    >
-                      {item.short_name}
-                    </h6>
-                    <p
-                      className={classes.cardPrice}
+        <Container maxWidth="xl">
+          {
+            !sort ?
+              <div className={classes.mainCard} >
+                <Stack
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  spacing={2}
+                  flexWrap="wrap"
+
+
+                // flexDirection='column'
+                >
+                  {products
+                    .filter((val: any) => {
+                      if (searchTerm == "") {
+                        return val;
+                      } else if (
+                        val.short_name
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase())
+                      ) {
+                        return val;
+                      } else if (val.price <= searchTerm) {
+                        return val;
+                      }
+                    })
+                    .map((item: any, key: any) =>
+                    (
+                      <Box className={classes.bodyCard} key={key} sx={{ margin: '10px 10px !important' }}>
+                        <Box  >
+                          <Link to={`/product/client/details/${item.id}`}>
+                            <img
+                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
+                              alt="img"
+                              style={{ width: "150px", height: "150px" }}
+                            />
+                          </Link>
+                          <p
+                            className={classes.cardTitle}
+                            style={{
+                              margin: 0,
+                              marginTop: "10px",
+                              marginBottom: "10px",
+                              height: "30px",
+                            }}
+                          >
+                            {item.short_name}
+                          </p>
+                          <p
+                            className={classes.cardPrice}
+                            style={{
+                              color: "#065374",
+                              fontSize: "14px",
+                              textDecoration: "line-through",
+                            }}
+                          >
+                            {item?.price?.toLocaleString()} so'm
+                          </p>
+                          <p
+                            className={classes.cardPriceDiscount}
+                            style={{ marginBottom: "10px", height: "45px" }}
+                          >
+                            {item?.after_discount?.toLocaleString()} so'm
+                          </p>
+                          {item.availability === true ? (
+                            <button
+                              className={classes.cardButton}
+                              onClick={() => {
+                                dispatch(addToCart(item));
+                                setNotify({
+                                  isOpen: true,
+                                  message: "Savatchaga qo'shildi",
+                                  type: "success",
+                                });
+                              }}
+                            >
+                              <img
+                                src={cart1}
+                                alt="img"
+                                style={{ marginRight: "5px" }}
+                              />
+                              Savatchaga
+                            </button>
+                          ) : (
+                            <button className={classes.cardButtonSecond}>
+                              <img
+                                src={cart2}
+                                alt="img"
+                                style={{
+                                  marginRight: "5px",
+                                }}
+                              />
+                              Sotuvda yo'q
+                            </button>
+                          )}
+                          <span className={classes.cardSpan}>{item.discount}%</span>
+                        </Box>
+                      </Box>
+                    )
+                    )}
+                </Stack>
+
+              </div>
+              :
+              <div >
+                <Stack
+
+
+                  flexDirection='column'
+                >
+                  {products
+                    .filter((val: any) => {
+                      if (searchTerm == "") {
+                        return val;
+                      } else if (
+                        val.short_name
+                          .toLowerCase()
+                          .includes(searchTerm.toLowerCase())
+                      ) {
+                        return val;
+                      } else if (val.price <= searchTerm) {
+                        return val;
+                      }
+                    })
+                    .map((item: any, key: any) =>
+                    (
+                      <Grid>
+                        <Grid
+                          xs={12}
+                          sm={12}
+                          md={12}
+                          lg={12}
+                        >
+                          <Box className={classes.sortBodyCard} key={key}  >
+                            <Link to={`/product/client/details/${item.id}`} style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              width: '25%',
+
+                            }} >
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
+                                alt="img"
+                                style={{
+                                  width: "80%",
+                                  height: "70%",
+                                  // padding: "20px",
+                                  alignSelf: 'center !important',
+                                  justifySelf: 'center !important'
+                                }}
+                              />
+                            </Link>
+                            <div style={{ alignSelf: 'center' }}  >
+                              <h6 className={classes.sortCardTitle}>
+                                {item.short_name}
+                              </h6>
+                              <p className={classes.sortCardDescription}>{item.name}</p>
+                              <div style={{ display: "flex", alignItems: "center" }}>
+                                {/* <p
+                      className={classes.sortCardPrice}
                       style={{
                         color: "#065374",
                         fontSize: "14px",
@@ -482,143 +586,97 @@ const AllCards = () => {
                       }}
                     >
                       {item?.price?.toLocaleString()} so'm
-                    </p>
-                    <p
-                      className={classes.cardPrice}
-                      style={{ marginBottom: "10px", height: "45px" }}
-                    >
-                      {item?.after_discount?.toLocaleString()} so'm
-                    </p>
+                    </p> */}
+                                <span
+                                  className={classes.sortCardPrice}
+                                  style={{
+                                    marginTop: "10px",
+                                    fontSize: '16px',
+                                    textDecoration: "none",
+                                  }}
+                                >
+                                  {item?.after_discount?.toLocaleString()} so'm
+                                </span>
+                              </div>
+                              {item.availability === true ? (
+                                <button className={classes.sortCardButton}
+                                onClick={() => {
+                                  dispatch(addToCart(item));
+                                  setNotify({
+                                    isOpen: true,
+                                    message: "Savatchaga qo'shildi",
+                                    type: "success",
+                                  });
+                                }}
+                                >
+                                  <img
+                                    src={cart1}
+                                    alt="img"
+                                    style={{ marginRight: "5px" }}
+                                  />
+                                  Savatchaga
+                                </button>
+                              ) : (
+                                <button className={classes.sortCardButton}>
+                                  <img
+                                    src={cart2}
+                                    alt="img"
+                                    style={{
+                                      marginRight: "5px",
+                                      border: "2px solid #C33E4D",
+                                    }}
+                                  />
+                                  Sotuvda yo'q
+                                </button>
+                              )}
+                            </div>
+                          </Box>
+                        </Grid>
+                      </Grid>
 
-                    {item.availability === true ? (
-                      <button className={classes.cardButton}
-                      onClick={() => {
-                        dispatch(addToCart(item));
-                        setNotify({
-                          isOpen: true,
-                          message: "Savatchaga qo'shildi",
-                          type: "success",
-                        });
-                      }}
-                      >
-                        <img
-                          src={cart1}
-                          alt="img"
-                          style={{ marginRight: "5px" }}
-                        />
-                        Savatchaga
-                      </button>
-                    ) : (
-                      <button className={classes.cardButton}>
-                        <img
-                          src={cart2}
-                          alt="img"
-                          style={{
-                            marginRight: "5px",
-                            border: "2px solid #C33E4D",
-                          }}
-                        />
-                        Sotuvda yo'q
-                      </button>
+
+                    )
                     )}
-                    <span className={classes.cardSpan}>{item.discount}%</span>
-                  </Box>
-                ) : (
-                  <Box className={classes.sortBodyCard} key={key}>
-                    <Link to={`/product/client/details/${item.id}`}>
-                      <img
-                        src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
-                        alt="img"
-                        style={{
-                          width: "250px",
-                          height: "250px",
-                          marginRight: "60px",
-                        }}
-                      />
-                    </Link>
-                    <div>
-                      <h6 className={classes.sortCardTitle}>
-                        {item.short_name}
-                      </h6>
-                      <p className={classes.sortCardDescription}>{item.name}</p>
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <p
-                          className={classes.sortCardPrice}
-                          style={{
-                            color: "#065374",
-                            fontSize: "14px",
-                            textDecoration: "line-through",
-                          }}
-                        >
-                          {item?.price?.toLocaleString()} so'm
-                        </p>
-                        <span
-                          className={classes.sortCardPrice}
-                          style={{
-                            marginLeft: "10px",
-                            textDecoration: "none",
-                          }}
-                        >
-                          {item?.after_discount?.toLocaleString()} so'm
-                        </span>
-                      </div>
-                      {item.availability === true ? (
-                        <button className={classes.sortCardButton}>
-                          <img
-                            src={cart1}
-                            alt="img"
-                            style={{ marginRight: "5px" }}
-                          />
-                          Savatchaga
-                        </button>
-                      ) : (
-                        <button className={classes.sortCardButton}>
-                          <img
-                            src={cart2}
-                            alt="img"
-                            style={{
-                              marginRight: "5px",
-                              border: "2px solid #C33E4D",
-                            }}
-                          />
-                          Sotuvda yo'q
-                        </button>
-                      )}
-                    </div>
-                  </Box>
-                )
-              )}
-          </Stack>
-          <Notification notify={notify} setNotify={setNotify} />
-        </div>
-        <Grid
-          container
-          sx={{ mr: "50px", mb: "40px", mt: "40px" }}
-          xs={12}
-          direction="row"
-          justifyContent="flex-end"
-        >
-          {!!pageQty && (
-            <Pagination
-              className={classes.pagination}
-              count={pageQty}
-              page={page}
-              onChange={(_, num) => setPage(num)}
-              sx={{ marginY: 3, marginX: "auto" }}
-              renderItem={(item) => (
-                <PaginationItem
-                  className={classes.paginationItem}
-                  component={NavLink}
-                  to={`/all/card/${id}?page=${page}`}
-                  {...item}
-                  variant="text"
-                  shape={"rounded"}
-                />
-              )}
-            />
-          )}
-        </Grid>
+                </Stack>
+              </div>
+          }
+
+
+          <Grid
+            container
+            sx={{ mb: "20px", mt: "20px", justifyContent: 'center !important' }}
+            xs={12}
+            direction="row"
+
+          >
+            {!!pageQty && (
+              <Pagination
+                className={`${classes.pagination}` && `css-wjh20t-MuiPagination-ul`}
+                count={pageQty}
+                page={page}
+                onChange={(_, num) => setPage(num)}
+                sx={{ margin: '10px !important', justifyContent: 'center !important' }}
+                renderItem={(item) => (
+                  <PaginationItem
+                    className={classes.paginationItem}
+                    component={NavLink}
+                    to={`/product/product-by-category/${id}?page=${item.page}`}
+                    {...item}
+                    variant="text"
+                    shape={"rounded"}
+                    sx={{ justifyContent: 'center !important' }}
+                  />
+                )}
+              />
+            )}
+          </Grid>
+        </Container>
+
+        <Notification notify={notify} setNotify={setNotify} />
+
       </Container>
+      <Footer />
+
     </>
   );
 };

@@ -6,7 +6,7 @@ import Alif from "../../../Images/Group 56530.png";
 import Paymart from '../../../Images/image 58.png';
 import Iman from '../../../Images/image 59.png';
 
-import { makeStyles } from "@mui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
@@ -17,7 +17,10 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '5px !important',
         cursor: 'pointer',
         alignItems: 'center',
-
+        [theme.breakpoints.down(600)]:{
+            width: '250px !important',
+            height: '90px !important',
+        }
 
     },
     Partner: {
@@ -26,7 +29,10 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         fontWeight: 500,
         fontSize: "45px",
-        fontFamily: 'Poppins'
+        fontFamily: 'Poppins',
+        [theme.breakpoints.down(600)]:{
+            fontSize: "25px",
+        }
     },
     Slide: {
         textAlign: "center",
@@ -52,13 +58,13 @@ const Partner = () => {
                                 perPage: 1,
                             },
                             700: {
-                                perPage: 2,
+                                perPage: 1,
                             },
                             992: {
-                                perPage: 3,
+                                perPage: 2,
                             },
                             1300: {
-                                perPage: 4,
+                                perPage: 3,
                             }
                         },
                         type: 'loop',
