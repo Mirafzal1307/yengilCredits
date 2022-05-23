@@ -2,7 +2,7 @@
 import ApiClient from '../HttpClient'
 
 export function  getCategoryList(page: string, data: object = {}) {
-    return ApiClient().get(`/category/admin/list?parent=true&page=${page}`, data)
+    return ApiClient().get(`/category/list?parent=true&page=${page}`, data)
 }
 export function  getCategoryListCreate(data: object = {}) {
     return ApiClient().get(`/category/admin/create-page`, data)

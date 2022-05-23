@@ -320,6 +320,8 @@ export default function EnhancedTable() {
 
   const getCategory = async () => {
     let response: any = await getCategoryList(`${page - 1}`, {});
+    console.log(response);
+    
     setRows(response.data.content);
     setPageQty(response.data.totalPages);
   };
