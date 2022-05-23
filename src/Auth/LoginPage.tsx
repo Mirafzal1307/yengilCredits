@@ -107,7 +107,7 @@ const LoginPage = () => {
 
   const sendDataToApi = () => {
     axios
-      .post("http://139.162.11.245:1818/security/login", login)
+      .post("https://api.yengilcredit.uz/security/login", login)
       .then((res) => {
         let token = res.data.split(":")[1];
         localStorage.setItem("auth", token);
