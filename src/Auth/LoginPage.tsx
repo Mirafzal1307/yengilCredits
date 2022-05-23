@@ -102,7 +102,7 @@ const LoginPage = () => {
   const navigateTo = () => {
     setTimeout(() => {
       window.open("/dashboard");
-    }, 500);
+    }, 1000);
   };
 
   const sendDataToApi = () => {
