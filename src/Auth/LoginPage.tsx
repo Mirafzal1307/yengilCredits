@@ -162,4 +162,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-ya
