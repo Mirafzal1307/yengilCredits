@@ -105,7 +105,7 @@ const BrandCreate = () => {
     message: "",
     type: "",
   });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
 
   const inp = document.querySelector('input');
@@ -253,7 +253,7 @@ const BrandCreate = () => {
             className={classes.forButton}
             onClick={() => {
               onSubmit();
-              refresh();
+              // refresh();
             }}
             style={{ marginLeft: "auto", display: "flex" }}
           >
