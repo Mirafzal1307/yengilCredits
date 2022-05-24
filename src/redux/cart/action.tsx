@@ -40,18 +40,8 @@ export function getDemoProducts(products: Product[]): ProductActions {
 
 export function fetchProducts() {
     return (dispatch: Dispatch) => {
-        fetch("https://api.bektexno.uz/main/")
+        fetch("https://api.yengilcredit.uz/main/")
             .then((response) => response.json())
-            .then((data) => {
-                // let Idata = []
-  
-
-            })
-
-        // fetch("https://api.bektexno.global-s.uz/main/")
-        //     .then((response) => response.json())
-        //     .then((data) => dispatch(get(data.last_added_products)))
-
     };
 }
 
