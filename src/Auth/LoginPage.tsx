@@ -89,10 +89,10 @@ const LoginPage = () => {
   // console.log(userName, password);
 
   let navigate = useNavigate();
-  const routeChange = () => {
-    let path = "/dashboard";
-    navigate(path);
-  };
+  // const routeChange = () => {
+  //   let path = "/dashboard";
+    
+  // };
 
   const login = {
     username: userName,
@@ -101,7 +101,7 @@ const LoginPage = () => {
 
   const navigateTo = () => {
     setTimeout(() => {
-      window.open("/dashboard");
+      navigate("/dashboard");
     }, 1000);
   };
 
@@ -113,14 +113,8 @@ const LoginPage = () => {
         localStorage.setItem("auth", token);
         setAuth(token);
       });
-    // setTimeout(() => {
     navigateTo();
-    // }, 500);
   };
-
-  // useEffect(() => {
-  //   navigateTo();
-  // }, [auth]);
 
   return (
     <div className={classes.pageStyle}>
