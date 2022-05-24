@@ -31,13 +31,6 @@ export function getDemoProducts(products: Product[]): ProductActions {
     }
 }
 
-// export function get(products: Product[]): ProductActions {
-//     return {
-//         type: "GET_PRODUCTS",
-//         payload: { products }
-//     }
-// }
-
 export function fetchProducts() {
     return (dispatch: Dispatch) => {
         fetch("https://api.yengilcredit.uz/main/")

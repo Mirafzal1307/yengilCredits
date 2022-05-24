@@ -1,8 +1,8 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import { Switch } from "react-router-dom-v5";
-// import { * } from "react-router-dom-v5" 
+// import { * } from "react-router-dom-v5"
 import Category from "./adminContainer/Category/Category";
 import Home from "./adminContainer/Home/Home";
 import Order from "./adminContainer/Order/TableList";
@@ -39,80 +39,72 @@ function App() {
   return (
     <>
       <Router>
-      <Fragment>
-        <Routes>
-          {/* <PrivateRoute exact path="/dashboard" component={Home}/> */}
-          <Route path="/dashboard" element={<PrivateRoute />}>
-            <Route path="/dashboard" element={<Home />} />
-          </Route>
-          <Route path="/category" element={<PrivateRoute />}>
-            <Route path="/category" element={<Category />} />
-          </Route>
-          <Route
-            path="/category/admin/edit-page/:id"
-            element={<PrivateRoute />}
-          >
+        <Fragment>
+          <Routes>
+            {/* <PrivateRoute exact path="/dashboard" component={Home}/> */}
+            <Route path="/dashboard" element={<PrivateRoute />}>
+              <Route path="/dashboard" element={<Home />} />
+            </Route>
+            <Route path="/category" element={<PrivateRoute />}>
+              <Route path="/category" element={<Category />} />
+            </Route>
             <Route
               path="/category/admin/edit-page/:id"
-              element={<CategoryEdit />}
-            />
-          </Route>
-          <Route path="/category/by-id/:id" element={<PrivateRoute />}>
-            <Route path="/category/by-id/:id" element={<CategoryDetails />} />
-          </Route>
-          <Route path="/product" element={<PrivateRoute />}>
-            <Route path="/product" element={<Product />} />
-          </Route>
-          <Route path="/order" element={<PrivateRoute />}>
-            <Route path="/order" element={<TableOrder />} />
-          </Route>
-          <Route path="/brand" element={<PrivateRoute />}>
-            <Route path="/brand" element={<Brand />} />
-          </Route>
-          <Route
-            path="/brand/admin/edit-page/:id"
-            element={<PrivateRoute />}
-          >
-            <Route
-              path="/brand/admin/edit-page/:id"
-              element={<BrandEditPage />}
-            />
-          </Route>
-          <Route path="/product/edit/:id" element={<PrivateRoute />}>
-            <Route path="/product/edit/:id" element={<EditProductList />} />
-          </Route>
-          <Route path="/product/details/:id" element={<PrivateRoute />}>
-            <Route path="/product/details/:id" element={<ProductDetails />} />
-          </Route>
-          <Route path="/product/create" element={<PrivateRoute />}>
-            <Route path="/product/create" element={<CreateProduct />} />
-          </Route>
-          <Route path="/order-details/:buyer_id" element={<PrivateRoute />}>
-            <Route path="/order-details/:buyer_id" element={<OrderDetails />} />
-          </Route>
-          <Route path="/product/client/details/:id" element={<PrivateRoute />}>
+              element={<PrivateRoute />}
+            >
+              <Route
+                path="/category/admin/edit-page/:id"
+                element={<CategoryEdit />}
+              />
+            </Route>
+            <Route path="/category/by-id/:id" element={<PrivateRoute />}>
+              <Route path="/category/by-id/:id" element={<CategoryDetails />} />
+            </Route>
+            <Route path="/product" element={<PrivateRoute />}>
+              <Route path="/product" element={<Product />} />
+            </Route>
+            <Route path="/order" element={<PrivateRoute />}>
+              <Route path="/order" element={<TableOrder />} />
+            </Route>
+            <Route path="/brand" element={<PrivateRoute />}>
+              <Route path="/brand" element={<Brand />} />
+            </Route>
+            <Route path="/brand/admin/edit-page/:id" element={<PrivateRoute />}>
+              <Route
+                path="/brand/admin/edit-page/:id"
+                element={<BrandEditPage />}
+              />
+            </Route>
+            <Route path="/product/edit/:id" element={<PrivateRoute />}>
+              <Route path="/product/edit/:id" element={<EditProductList />} />
+            </Route>
+            <Route path="/product/details/:id" element={<PrivateRoute />}>
+              <Route path="/product/details/:id" element={<ProductDetails />} />
+            </Route>
+            <Route path="/product/create" element={<PrivateRoute />}>
+              <Route path="/product/create" element={<CreateProduct />} />
+            </Route>
+            <Route path="/order-details/:buyer_id" element={<PrivateRoute />}>
+              <Route
+                path="/order-details/:buyer_id"
+                element={<OrderDetails />}
+              />
+            </Route>
             <Route
               path="/product/client/details/:id"
               element={<ClientProductDetails />}
             />
-          </Route>
-          <Route path="/product/by-brand/:id" element={<BrandPage />} />
-          <Route
-            path="/product/product-by-category/:id"
-            element={<RestrictedRoute />}
-          >
+            <Route path="/product/by-brand/:id" element={<BrandPage />} />
             <Route
               path="/product/product-by-category/:id"
               element={<CategoryProducts />}
             />
-          </Route>
-          <Route path="/" element={<Header />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/all/card/:id" element={<AllCards />} />
-          <Route path="/login" element={<LoginPage />} />
-        </Routes>
-      </Fragment>
-        
+            <Route path="/" element={<Header />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/all/card/:id" element={<AllCards />} />
+            <Route path="/login" element={<LoginPage />} />
+          </Routes>
+        </Fragment>
       </Router>
     </>
   );
