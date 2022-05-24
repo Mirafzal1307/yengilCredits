@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "22px",
     color: "#000",
     [theme.breakpoints.down(599)]: {
-      fontWeight: '500 !important',
-      fontSize: '18px !important'
-    }
+      fontWeight: "500 !important",
+      fontSize: "18px !important",
+    },
   },
   mainCard: {
     height: "90%",
@@ -50,15 +50,15 @@ const useStyles = makeStyles((theme) => ({
     transition: ".5s",
     overflow: "hidden",
     borderBox: "box-sizing",
-    textAlign: 'left'
+    textAlign: "left",
   },
   cardButton: {
     background: "transparent",
-    [theme.breakpoints.up(600)]:{
-      padding: '10px 35px !important'
+    [theme.breakpoints.up(600)]: {
+      padding: "10px 35px !important",
     },
-    [theme.breakpoints.up(450)]:{
-      padding: '10px 18px !important'
+    [theme.breakpoints.up(450)]: {
+      padding: "10px 18px !important",
     },
     padding: "10px 45px  !important",
     cursor: "pointer",
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#065374",
     fontFamily: "Poppins",
     fontSize: "14px",
-    margin: 'auto !important'
+    margin: "auto !important",
   },
   cardSpan: {
     position: "absolute",
@@ -149,17 +149,16 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: "1px solid #065374",
       [theme.breakpoints.down(599)]: {
         fontSize: "15px !important",
-        fontWeight: '400 !important'
+        fontWeight: "400 !important",
       },
     },
     [theme.breakpoints.down(700)]: {
       display: "block",
     },
-
-  },  
+  },
   BodyCardInside: {
-    textAlign: 'center'
-  }
+    textAlign: "center",
+  },
 }));
 
 const CardProducts = () => {
@@ -226,21 +225,19 @@ const CardProducts = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-
               width: "100%",
-
               perPage: 6,
               pagination: false,
-              arrows: false,
-              type: 'loop',
-              drag: 'free',
-              gap: '0.7rem',
+              arrows: true,
+              // type: 'loop',
+              // drag: 'free',
+              // gap: '0.7rem',
               autoScroll: {
-                speed: 2
+                speed: 2,
               },
               breakpoints: {
                 450: {
-                  type: 'loop',
+                  type: "loop",
                   perPage: 1,
                 },
                 700: {
@@ -268,31 +265,24 @@ const CardProducts = () => {
               recommended?.map((item: any) => (
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item?.id}>
-                    <Box >
+                    <Box>
+                      {console.log(item)}
                       <Link to={`/product/client/details/${item?.id}`}>
-                        {
-
-                          item?.photos?.map((photo: any) => (
-                            <div className={classes.BodyCardInside}  >
-                              <img
-                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                                alt="img"
-                                style={{ width: "150px", height: "150px" }}
-                              />
-                            </div>
-
-                          ))
-
-                        }
-
+                        <div className={classes.BodyCardInside}>
+                          <img
+                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
+                            alt="img"
+                            style={{ width: "150px", height: "150px" }}
+                          />
+                        </div>
                       </Link>
                       <h6
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: '19px',
+                          marginTop: "19px",
                           height: "30px",
-                          fontSize: '14px',
+                          fontSize: "14px",
                           fontWeight: "600",
                         }}
                       >
@@ -306,14 +296,14 @@ const CardProducts = () => {
                           marginBottom: "20px",
                           height: "30px",
                           fontWeight: "400",
-                          fontSize: '14px',
-                          fontFamily: 'Poppins'
+                          fontSize: "14px",
+                          fontFamily: "Poppins",
                         }}
                       >
                         {item.name}
                       </h6>
-                      {
-                        item.discount === 0 ? <p
+                      {item.discount === 0 ? (
+                        <p
                           className={classes.cardPrice}
                           style={{
                             color: "#065374",
@@ -321,25 +311,24 @@ const CardProducts = () => {
 
                             textDecoration: "line-through",
                             fontWeight: "500",
-                            display: 'none !important',
-                            paddingBottom: '22px'
+                            display: "none !important",
+                            paddingBottom: "22px",
+                          }}
+                        ></p>
+                      ) : (
+                        <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: "block !important",
                           }}
                         >
+                          {item?.price?.toLocaleString()} so'm
                         </p>
-                          :
-                          <p
-                            className={classes.cardPrice}
-                            style={{
-                              color: "#065374",
-                              fontSize: "14px",
-                              textDecoration: "line-through",
-                              fontWeight: "500",
-                              display: 'block !important'
-                            }}
-                          >
-                            {item?.price?.toLocaleString()} so'm
-                          </p>
-                      }
+                      )}
 
                       <p
                         className={classes.cardPrice}
@@ -388,26 +377,25 @@ const CardProducts = () => {
                           Sotuvda yo'q
                         </button>
                       )}
-                      {
-
-
-                        item?.discount === 0 ?
-                          <span
-                            className={classes.cardSpan}
-                            style={{ fontWeight: "600", display: 'none !important' }}
-                          >
-
-                          </span>
-                          :
-                          <span
-                            className={classes.cardSpan}
-                            style={{ fontWeight: "600", display: 'block !important' }}
-                          >
-                            {item?.discount !== 0 ? item?.discount : null}%
-                          </span>
-
-                      }
-
+                      {item?.discount === 0 ? (
+                        <span
+                          className={classes.cardSpan}
+                          style={{
+                            fontWeight: "600",
+                            display: "none !important",
+                          }}
+                        ></span>
+                      ) : (
+                        <span
+                          className={classes.cardSpan}
+                          style={{
+                            fontWeight: "600",
+                            display: "block !important",
+                          }}
+                        >
+                          {item?.discount !== 0 ? item?.discount : null}%
+                        </span>
+                      )}
                     </Box>
                   </Box>
                 </SplideSlide>
@@ -439,21 +427,20 @@ const CardProducts = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-
               width: "100%",
 
               perPage: 6,
               pagination: false,
-              arrows: false,
-              type: 'loop',
-              drag: 'free',
-              gap: '0.7rem',
+              arrows: true,
+              // type: "loop",
+              // drag: "free",
+              gap: "0.7rem",
               autoScroll: {
-                speed: 2
+                speed: 2,
               },
-               breakpoints: {
+              breakpoints: {
                 450: {
-                  type: 'loop',
+                  type: "loop",
                   perPage: 1,
                 },
                 700: {
@@ -483,27 +470,21 @@ const CardProducts = () => {
                   <Box className={classes.bodyCard} key={item?.id}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`}>
-                        {
-
-                          item?.photos.map((photo: any) => (
-                            <div className={classes.BodyCardInside}  >
-                              <img
-                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                                alt="img"
-                                style={{ width: "150px", height: "150px" }}
-                              />
-                            </div>
-                          ))
-
-                        }
+                        <div className={classes.BodyCardInside}>
+                          <img
+                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
+                            alt="img"
+                            style={{ width: "150px", height: "150px" }}
+                          />
+                        </div>
                       </Link>
                       <h6
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: '19px',
+                          marginTop: "19px",
                           height: "30px",
-                          fontSize: '14px',
+                          fontSize: "14px",
                           fontWeight: "600",
                         }}
                       >
@@ -517,14 +498,14 @@ const CardProducts = () => {
                           marginBottom: "20px",
                           height: "30px",
                           fontWeight: "400",
-                          fontSize: '14px',
-                          fontFamily: 'Poppins'
+                          fontSize: "14px",
+                          fontFamily: "Poppins",
                         }}
                       >
                         {item.name}
                       </h6>
-                      {
-                        item.discount === 0 ? <p
+                      {item.discount === 0 ? (
+                        <p
                           className={classes.cardPrice}
                           style={{
                             color: "#065374",
@@ -532,25 +513,24 @@ const CardProducts = () => {
 
                             textDecoration: "line-through",
                             fontWeight: "500",
-                            display: 'none !important',
-                            paddingBottom: '22px'
+                            display: "none !important",
+                            paddingBottom: "22px",
+                          }}
+                        ></p>
+                      ) : (
+                        <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: "block !important",
                           }}
                         >
+                          {item?.price?.toLocaleString()} so'm
                         </p>
-                          :
-                          <p
-                            className={classes.cardPrice}
-                            style={{
-                              color: "#065374",
-                              fontSize: "14px",
-                              textDecoration: "line-through",
-                              fontWeight: "500",
-                              display: 'block !important'
-                            }}
-                          >
-                            {item?.price?.toLocaleString()} so'm
-                          </p>
-                      }
+                      )}
 
                       <p
                         className={classes.cardPrice}
@@ -561,7 +541,6 @@ const CardProducts = () => {
                         }}
                       >
                         {item?.after_discount?.toLocaleString()} so'm
-
                       </p>
 
                       {item.availability === true ? (
@@ -600,25 +579,25 @@ const CardProducts = () => {
                           Sotuvda yo'q
                         </button>
                       )}
-                      {
-
-
-                        item.discount === 0 ?
-                          <span
-                            className={classes.cardSpan}
-                            style={{ fontWeight: "600", display: 'none !important' }}
-                          >
-
-                          </span>
-                          :
-                          <span
-                            className={classes.cardSpan}
-                            style={{ fontWeight: "600", display: 'block !important' }}
-                          >
-                            {item.discount !== 0 ? item.discount : null}%
-                          </span>
-
-                      }
+                      {item.discount === 0 ? (
+                        <span
+                          className={classes.cardSpan}
+                          style={{
+                            fontWeight: "600",
+                            display: "none !important",
+                          }}
+                        ></span>
+                      ) : (
+                        <span
+                          className={classes.cardSpan}
+                          style={{
+                            fontWeight: "600",
+                            display: "block !important",
+                          }}
+                        >
+                          {item.discount !== 0 ? item.discount : null}%
+                        </span>
+                      )}
                     </Box>
                   </Box>
                 </SplideSlide>
@@ -654,21 +633,19 @@ const CardProducts = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-
               width: "100%",
-
               perPage: 6,
               pagination: false,
-              arrows: false,
-              type: 'loop',
-              drag: 'free',
-              gap: '0.7rem',
+              arrows: true,
+              // type: "loop",
+              // drag: "free",
+              gap: "0.7rem",
               autoScroll: {
-                speed: 2
+                speed: 2,
               },
               breakpoints: {
                 450: {
-                  type: 'loop',
+                  type: "loop",
                   perPage: 1,
                 },
                 700: {
@@ -697,28 +674,22 @@ const CardProducts = () => {
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
-                      <Link to={`/product/client/details/${item.id}`}>
-                        {
-
-                          item?.photos.map((photo: any) => (
-                            <div className={classes.BodyCardInside}  >
-                              <img
-                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                                alt="img"
-                                style={{ width: "150px", height: "150px" }}
-                              />
-                            </div>
-                          ))
-
-                        }
+                      <Link to={`/product/client/details/${item?.id}`}>
+                        <div className={classes.BodyCardInside}>
+                          <img
+                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
+                            alt="img"
+                            style={{ width: "150px", height: "150px" }}
+                          />
+                        </div>
                       </Link>
                       <h6
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: '19px',
+                          marginTop: "19px",
                           height: "30px",
-                          fontSize: '14px',
+                          fontSize: "14px",
                           fontWeight: "600",
                         }}
                       >
@@ -732,14 +703,14 @@ const CardProducts = () => {
                           marginBottom: "20px",
                           height: "30px",
                           fontWeight: "400",
-                          fontSize: '14px',
-                          fontFamily: 'Poppins'
+                          fontSize: "14px",
+                          fontFamily: "Poppins",
                         }}
                       >
                         {item.name}
                       </h6>
-                      {
-                        item.discount === 0 ? <p
+                      {item.discount === 0 ? (
+                        <p
                           className={classes.cardPrice}
                           style={{
                             color: "#065374",
@@ -747,25 +718,24 @@ const CardProducts = () => {
 
                             textDecoration: "line-through",
                             fontWeight: "500",
-                            display: 'none !important',
-                            paddingBottom: '22px'
+                            display: "none !important",
+                            paddingBottom: "22px",
+                          }}
+                        ></p>
+                      ) : (
+                        <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: "block !important",
                           }}
                         >
+                          {item?.price?.toLocaleString()} so'm
                         </p>
-                          :
-                          <p
-                            className={classes.cardPrice}
-                            style={{
-                              color: "#065374",
-                              fontSize: "14px",
-                              textDecoration: "line-through",
-                              fontWeight: "500",
-                              display: 'block !important'
-                            }}
-                          >
-                            {item?.price?.toLocaleString()} so'm
-                          </p>
-                      }
+                      )}
                       <p
                         className={classes.cardPrice}
                         style={{
@@ -813,25 +783,25 @@ const CardProducts = () => {
                           Sotuvda yo'q
                         </button>
                       )}
-                      {
-
-
-                        item.discount === 0 ?
-                          <span
-                            className={classes.cardSpan}
-                            style={{ fontWeight: "600", display: 'none !important' }}
-                          >
-
-                          </span>
-                          :
-                          <span
-                            className={classes.cardSpan}
-                            style={{ fontWeight: "600", display: 'block !important' }}
-                          >
-                            {item.discount !== 0 ? item.discount : null}%
-                          </span>
-
-                      }
+                      {item.discount === 0 ? (
+                        <span
+                          className={classes.cardSpan}
+                          style={{
+                            fontWeight: "600",
+                            display: "none !important",
+                          }}
+                        ></span>
+                      ) : (
+                        <span
+                          className={classes.cardSpan}
+                          style={{
+                            fontWeight: "600",
+                            display: "block !important",
+                          }}
+                        >
+                          {item.discount !== 0 ? item.discount : null}%
+                        </span>
+                      )}
                     </Box>
                   </Box>
                 </SplideSlide>
@@ -868,21 +838,20 @@ const CardProducts = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-
               width: "100%",
 
               perPage: 6,
               pagination: false,
-              arrows: false,
-              type: 'loop',
-              drag: 'free',
-              gap: '0.7rem',
+              arrows: true,
+              // type: "loop",
+              // drag: "free",
+              gap: "0.7rem",
               autoScroll: {
-                speed: 2
+                speed: 2,
               },
               breakpoints: {
                 450: {
-                  type: 'loop',
+                  type: "loop",
                   perPage: 1,
                 },
                 700: {
@@ -911,28 +880,22 @@ const CardProducts = () => {
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
-                      <Link to={`/product/client/details/${item.id}`}>
-                        {
-
-                          item?.photos.map((photo: any) => (
-                            <div className={classes.BodyCardInside}  >
-                              <img
-                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                                alt="img"
-                                style={{ width: "150px", height: "150px" }}
-                              />
-                            </div>
-                          ))
-
-                        }
+                      <Link to={`/product/client/details/${item?.id}`}>
+                        <div className={classes.BodyCardInside}>
+                          <img
+                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
+                            alt="img"
+                            style={{ width: "150px", height: "150px" }}
+                          />
+                        </div>
                       </Link>
                       <h6
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: '19px',
+                          marginTop: "19px",
                           height: "30px",
-                          fontSize: '14px',
+                          fontSize: "14px",
                           fontWeight: "600",
                         }}
                       >
@@ -946,14 +909,14 @@ const CardProducts = () => {
                           marginBottom: "20px",
                           height: "30px",
                           fontWeight: "400",
-                          fontSize: '14px',
-                          fontFamily: 'Poppins'
+                          fontSize: "14px",
+                          fontFamily: "Poppins",
                         }}
                       >
                         {item.name}
                       </h6>
-                      {
-                        item.discount === 0 ? <p
+                      {item.discount === 0 ? (
+                        <p
                           className={classes.cardPrice}
                           style={{
                             color: "#065374",
@@ -961,25 +924,24 @@ const CardProducts = () => {
 
                             textDecoration: "line-through",
                             fontWeight: "500",
-                            display: 'none !important',
-                            paddingBottom: '22px'
+                            display: "none !important",
+                            paddingBottom: "22px",
+                          }}
+                        ></p>
+                      ) : (
+                        <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: "block !important",
                           }}
                         >
+                          {item?.price?.toLocaleString()} so'm
                         </p>
-                          :
-                          <p
-                            className={classes.cardPrice}
-                            style={{
-                              color: "#065374",
-                              fontSize: "14px",
-                              textDecoration: "line-through",
-                              fontWeight: "500",
-                              display: 'block !important'
-                            }}
-                          >
-                            {item?.price?.toLocaleString()} so'm
-                          </p>
-                      }
+                      )}
 
                       <p
                         className={classes.cardPrice}
@@ -1031,29 +993,32 @@ const CardProducts = () => {
 
                       <span
                         className={classes.cardNewSpan}
-                        style={{ fontWeight: "600", display: 'block !important' }}
+                        style={{
+                          fontWeight: "600",
+                          display: "block !important",
+                        }}
                       >
                         new
                       </span>
-                      {
-
-
-                        item.discount === 0 ?
-                          <span
-                            className={classes.cardNew}
-                            style={{ fontWeight: "600", display: 'none !important' }}
-                          >
-
-                          </span>
-                          :
-                          <span
-                            className={classes.cardNew}
-                            style={{ fontWeight: "600", display: 'block !important' }}
-                          >
-                            {item.discount !== 0 ? item.discount : null}%
-                          </span>
-
-                      }
+                      {item.discount === 0 ? (
+                        <span
+                          className={classes.cardNew}
+                          style={{
+                            fontWeight: "600",
+                            display: "none !important",
+                          }}
+                        ></span>
+                      ) : (
+                        <span
+                          className={classes.cardNew}
+                          style={{
+                            fontWeight: "600",
+                            display: "block !important",
+                          }}
+                        >
+                          {item.discount !== 0 ? item.discount : null}%
+                        </span>
+                      )}
                     </Box>
                   </Box>
                 </SplideSlide>
