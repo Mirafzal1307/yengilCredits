@@ -58,8 +58,32 @@ const useStyles = makeStyles(theme => {
       fontFamily: "Poppins",
       fontWeight: 400,
       fontSize: "20px",
-      color: "white"
+      color: "white",
+      [theme.breakpoints.down(599)]: {
+        fontSize: "16px",
+        margin: 0,
+        marginBottom: '19px',
+      }
     },
+    Ys: {
+      [theme.breakpoints.down(599)]: {
+        display: 'none !important'
+      }
+    },
+    Brand: {
+      [theme.breakpoints.down(599)]: {
+        display: 'none !important'
+      }
+    },
+    Grid: {
+      display: 'flex',
+      justifyContent: 'space-between !important',
+      textAlign: "center",
+      alignItems: "center",
+      [theme.breakpoints.down(600)]: {
+        flexDirection: 'column !important',
+      }
+    }
   }
 });
 
@@ -141,18 +165,18 @@ const Footer = () => {
         {/* </Grid>
         </Container> */}
         <Container maxWidth="xl">
-          <Grid style={{ display: 'flex', textAlign: "center", alignItems: "center" }}>
-            <Grid xs={4}>
-              <p className={classes.footer_text}>Barcha huquqlar himoyalangan</p>
+          <Grid className={classes.Grid} >
+            <Grid xs={12}>
+              <p className={classes.footer_text} style={{textAlign: 'left'}}>Barcha huquqlar himoyalangan</p>
             </Grid>
             <Grid xs={4}>
               <div>
-                <img src={Ys} style={{ marginRight: "6px" }} alt="" />
-                <img src={Brand} alt="" />
+                <img src={Ys} style={{ marginRight: "6px" }} className={classes.Ys} alt="" />
+                <img src={Brand} alt="" className={classes.Brand} />
               </div>
             </Grid>
-            <Grid xs={4}>
-              <p className={classes.footer_text}>Designed by “iTech Company”</p>
+            <Grid xs={12}>
+              <p className={classes.footer_text} style={{textAlign: 'right'}} >Powered by “iTech Company”</p>
             </Grid>
           </Grid>
         </Container>

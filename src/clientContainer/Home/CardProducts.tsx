@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontSize: "22px",
     color: "#000",
+    [theme.breakpoints.down(599)]: {
+      fontWeight: '500 !important',
+      fontSize: '18px !important'
+    }
   },
   mainCard: {
     height: "90%",
@@ -46,10 +50,17 @@ const useStyles = makeStyles((theme) => ({
     transition: ".5s",
     overflow: "hidden",
     borderBox: "box-sizing",
+    textAlign: 'left'
   },
   cardButton: {
     background: "transparent",
-    padding: "10px 22px",
+    [theme.breakpoints.up(600)]:{
+      padding: '10px 35px !important'
+    },
+    [theme.breakpoints.up(450)]:{
+      padding: '10px 18px !important'
+    },
+    padding: "10px 45px  !important",
     cursor: "pointer",
     borderRadius: "20px",
     display: "flex",
@@ -58,15 +69,37 @@ const useStyles = makeStyles((theme) => ({
     color: "#065374",
     fontFamily: "Poppins",
     fontSize: "14px",
-    margin: "auto !important",
+    margin: 'auto !important'
   },
   cardSpan: {
     position: "absolute",
     top: 0,
     left: 0,
     background: "#dd0820",
-    paddingLeft: "4px",
-    paddingRight: "4px",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    color: "#fff",
+    fontFamily: "Poppins",
+    borderBottomRightRadius: "10px",
+  },
+  cardNew: {
+    position: "absolute",
+    top: 0,
+    left: 50,
+    background: "#dd0820",
+    paddingLeft: "15px",
+    paddingRight: "15px",
+    color: "#fff",
+    fontFamily: "Poppins",
+    borderBottomRightRadius: "10px",
+  },
+  cardNewSpan: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    background: "#dfec00",
+    paddingLeft: "11px",
+    paddingRight: "15px",
     color: "#fff",
     fontFamily: "Poppins",
     borderBottomRightRadius: "10px",
@@ -95,7 +128,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     borderRadius: "5px",
     backgroundImage: "#065374",
-
     [theme.breakpoints.down(700)]: {
       display: "none",
     },
@@ -115,11 +147,19 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "15px",
       color: "#065374",
       borderBottom: "1px solid #065374",
+      [theme.breakpoints.down(599)]: {
+        fontSize: "15px !important",
+        fontWeight: '400 !important'
+      },
     },
     [theme.breakpoints.down(700)]: {
       display: "block",
     },
-  },
+
+  },  
+  BodyCardInside: {
+    textAlign: 'center'
+  }
 }));
 
 const CardProducts = () => {
@@ -175,7 +215,7 @@ const CardProducts = () => {
           }}
         >
           <h2 className={classes.title} style={{ fontWeight: "600" }}>
-            Sizlar uchun maxsus mahsulotlar
+            Sizlar uchun tavsiyalar
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
@@ -186,13 +226,21 @@ const CardProducts = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-              rewind: true,
+
               width: "100%",
-              gap: "0.5rem",
+
               perPage: 6,
               pagination: false,
+              arrows: false,
+              type: 'loop',
+              drag: 'free',
+              gap: '0.7rem',
+              autoScroll: {
+                speed: 2
+              },
               breakpoints: {
-                400: {
+                450: {
+                  type: 'loop',
                   perPage: 1,
                 },
                 700: {
@@ -220,16 +268,19 @@ const CardProducts = () => {
               recommended?.map((item: any) => (
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item?.id}>
-                    <Box>
+                    <Box >
                       <Link to={`/product/client/details/${item?.id}`}>
-                       {
-                        
-                         item?.photos?.map((photo:any)=> (
-                            <img
-                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                              alt="img"
-                              style={{ width: "150px", height: "150px" }}
-                            />
+                        {
+
+                          item?.photos?.map((photo: any) => (
+                            <div className={classes.BodyCardInside}  >
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                                alt="img"
+                                style={{ width: "150px", height: "150px" }}
+                              />
+                            </div>
+
                           ))
 
                         }
@@ -239,25 +290,57 @@ const CardProducts = () => {
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: "10px",
-                          marginBottom: "10px",
+                          marginTop: '19px',
                           height: "30px",
+                          fontSize: '14px',
                           fontWeight: "600",
                         }}
                       >
-                        {item?.short_name}
+                        {item.short_name}
                       </h6>
-                      <p
-                        className={classes.cardPrice}
+                      <h6
+                        className={classes.cardTitle}
                         style={{
-                          color: "#ff4802",
-                          fontSize: "14px",
-                          textDecoration: "line-through",
-                          fontWeight: "600",
+                          margin: 0,
+                          marginTop: "0px",
+                          marginBottom: "20px",
+                          height: "30px",
+                          fontWeight: "400",
+                          fontSize: '14px',
+                          fontFamily: 'Poppins'
                         }}
                       >
-                        {item?.price?.toLocaleString()} so'm
-                      </p>
+                        {item.name}
+                      </h6>
+                      {
+                        item.discount === 0 ? <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: 'none !important',
+                            paddingBottom: '22px'
+                          }}
+                        >
+                        </p>
+                          :
+                          <p
+                            className={classes.cardPrice}
+                            style={{
+                              color: "#065374",
+                              fontSize: "14px",
+                              textDecoration: "line-through",
+                              fontWeight: "500",
+                              display: 'block !important'
+                            }}
+                          >
+                            {item?.price?.toLocaleString()} so'm
+                          </p>
+                      }
+
                       <p
                         className={classes.cardPrice}
                         style={{
@@ -356,13 +439,21 @@ const CardProducts = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-              rewind: true,
+
               width: "100%",
-              gap: "0.5rem",
+
               perPage: 6,
               pagination: false,
-              breakpoints: {
-                400: {
+              arrows: false,
+              type: 'loop',
+              drag: 'free',
+              gap: '0.7rem',
+              autoScroll: {
+                speed: 2
+              },
+               breakpoints: {
+                450: {
+                  type: 'loop',
                   perPage: 1,
                 },
                 700: {
@@ -395,11 +486,13 @@ const CardProducts = () => {
                         {
 
                           item?.photos.map((photo: any) => (
-                            <img
-                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                              alt="img"
-                              style={{ width: "150px", height: "150px" }}
-                            />
+                            <div className={classes.BodyCardInside}  >
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                                alt="img"
+                                style={{ width: "150px", height: "150px" }}
+                              />
+                            </div>
                           ))
 
                         }
@@ -408,25 +501,57 @@ const CardProducts = () => {
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: "10px",
-                          marginBottom: "10px",
+                          marginTop: '19px',
                           height: "30px",
+                          fontSize: '14px',
                           fontWeight: "600",
                         }}
                       >
                         {item.short_name}
                       </h6>
-                      <p
-                        className={classes.cardPrice}
+                      <h6
+                        className={classes.cardTitle}
                         style={{
-                          color: "#ff4802",
-                          fontSize: "14px",
-                          textDecoration: "line-through",
-                          fontWeight: "600",
+                          margin: 0,
+                          marginTop: "0px",
+                          marginBottom: "20px",
+                          height: "30px",
+                          fontWeight: "400",
+                          fontSize: '14px',
+                          fontFamily: 'Poppins'
                         }}
                       >
-                        {item?.price?.toLocaleString()} so'm
-                      </p>
+                        {item.name}
+                      </h6>
+                      {
+                        item.discount === 0 ? <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: 'none !important',
+                            paddingBottom: '22px'
+                          }}
+                        >
+                        </p>
+                          :
+                          <p
+                            className={classes.cardPrice}
+                            style={{
+                              color: "#065374",
+                              fontSize: "14px",
+                              textDecoration: "line-through",
+                              fontWeight: "500",
+                              display: 'block !important'
+                            }}
+                          >
+                            {item?.price?.toLocaleString()} so'm
+                          </p>
+                      }
+
                       <p
                         className={classes.cardPrice}
                         style={{
@@ -436,7 +561,7 @@ const CardProducts = () => {
                         }}
                       >
                         {item?.after_discount?.toLocaleString()} so'm
-                        {/* {result} so'm */}
+
                       </p>
 
                       {item.availability === true ? (
@@ -529,13 +654,21 @@ const CardProducts = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-              rewind: true,
+
               width: "100%",
-              gap: "0.5rem",
+
               perPage: 6,
               pagination: false,
+              arrows: false,
+              type: 'loop',
+              drag: 'free',
+              gap: '0.7rem',
+              autoScroll: {
+                speed: 2
+              },
               breakpoints: {
-                400: {
+                450: {
+                  type: 'loop',
                   perPage: 1,
                 },
                 700: {
@@ -568,11 +701,13 @@ const CardProducts = () => {
                         {
 
                           item?.photos.map((photo: any) => (
-                            <img
-                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                              alt="img"
-                              style={{ width: "150px", height: "150px" }}
-                            />
+                            <div className={classes.BodyCardInside}  >
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                                alt="img"
+                                style={{ width: "150px", height: "150px" }}
+                              />
+                            </div>
                           ))
 
                         }
@@ -581,25 +716,56 @@ const CardProducts = () => {
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: "10px",
-                          marginBottom: "10px",
+                          marginTop: '19px',
                           height: "30px",
+                          fontSize: '14px',
                           fontWeight: "600",
                         }}
                       >
                         {item.short_name}
                       </h6>
-                      <p
-                        className={classes.cardPrice}
+                      <h6
+                        className={classes.cardTitle}
                         style={{
-                          color: "#ff4802",
-                          fontSize: "14px",
-                          textDecoration: "line-through",
-                          fontWeight: "600",
+                          margin: 0,
+                          marginTop: "0px",
+                          marginBottom: "20px",
+                          height: "30px",
+                          fontWeight: "400",
+                          fontSize: '14px',
+                          fontFamily: 'Poppins'
                         }}
                       >
-                        {item?.price?.toLocaleString()} so'm
-                      </p>
+                        {item.name}
+                      </h6>
+                      {
+                        item.discount === 0 ? <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: 'none !important',
+                            paddingBottom: '22px'
+                          }}
+                        >
+                        </p>
+                          :
+                          <p
+                            className={classes.cardPrice}
+                            style={{
+                              color: "#065374",
+                              fontSize: "14px",
+                              textDecoration: "line-through",
+                              fontWeight: "500",
+                              display: 'block !important'
+                            }}
+                          >
+                            {item?.price?.toLocaleString()} so'm
+                          </p>
+                      }
                       <p
                         className={classes.cardPrice}
                         style={{
@@ -702,13 +868,21 @@ const CardProducts = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-              rewind: true,
+
               width: "100%",
-              gap: "0.5rem",
+
               perPage: 6,
               pagination: false,
+              arrows: false,
+              type: 'loop',
+              drag: 'free',
+              gap: '0.7rem',
+              autoScroll: {
+                speed: 2
+              },
               breakpoints: {
-                400: {
+                450: {
+                  type: 'loop',
                   perPage: 1,
                 },
                 700: {
@@ -741,11 +915,13 @@ const CardProducts = () => {
                         {
 
                           item?.photos.map((photo: any) => (
-                            <img
-                              src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
-                              alt="img"
-                              style={{ width: "150px", height: "150px" }}
-                            />
+                            <div className={classes.BodyCardInside}  >
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo?.name}`}
+                                alt="img"
+                                style={{ width: "150px", height: "150px" }}
+                              />
+                            </div>
                           ))
 
                         }
@@ -754,25 +930,57 @@ const CardProducts = () => {
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: "10px",
-                          marginBottom: "10px",
+                          marginTop: '19px',
                           height: "30px",
+                          fontSize: '14px',
                           fontWeight: "600",
                         }}
                       >
                         {item.short_name}
                       </h6>
-                      <p
-                        className={classes.cardPrice}
+                      <h6
+                        className={classes.cardTitle}
                         style={{
-                          color: "#ff4802",
-                          fontSize: "14px",
-                          textDecoration: "line-through",
-                          fontWeight: "600",
+                          margin: 0,
+                          marginTop: "0px",
+                          marginBottom: "20px",
+                          height: "30px",
+                          fontWeight: "400",
+                          fontSize: '14px',
+                          fontFamily: 'Poppins'
                         }}
                       >
-                        {item?.price?.toLocaleString()} so'm
-                      </p>
+                        {item.name}
+                      </h6>
+                      {
+                        item.discount === 0 ? <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: 'none !important',
+                            paddingBottom: '22px'
+                          }}
+                        >
+                        </p>
+                          :
+                          <p
+                            className={classes.cardPrice}
+                            style={{
+                              color: "#065374",
+                              fontSize: "14px",
+                              textDecoration: "line-through",
+                              fontWeight: "500",
+                              display: 'block !important'
+                            }}
+                          >
+                            {item?.price?.toLocaleString()} so'm
+                          </p>
+                      }
+
                       <p
                         className={classes.cardPrice}
                         style={{
@@ -820,19 +1028,26 @@ const CardProducts = () => {
                           Sotuvda yo'q
                         </button>
                       )}
+
+                      <span
+                        className={classes.cardNewSpan}
+                        style={{ fontWeight: "600", display: 'block !important' }}
+                      >
+                        new
+                      </span>
                       {
 
 
                         item.discount === 0 ?
                           <span
-                            className={classes.cardSpan}
+                            className={classes.cardNew}
                             style={{ fontWeight: "600", display: 'none !important' }}
                           >
 
                           </span>
                           :
                           <span
-                            className={classes.cardSpan}
+                            className={classes.cardNew}
                             style={{ fontWeight: "600", display: 'block !important' }}
                           >
                             {item.discount !== 0 ? item.discount : null}%
