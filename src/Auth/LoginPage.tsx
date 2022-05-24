@@ -89,10 +89,10 @@ const LoginPage = () => {
   // console.log(userName, password);
 
   let navigate = useNavigate();
-  const routeChange = () => {
-    let path = "/dashboard";
-    navigate(path);
-  };
+  // const routeChange = () => {
+  //   let path = "/dashboard";
+    
+  // };
 
   const login = {
     username: userName,
@@ -101,26 +101,20 @@ const LoginPage = () => {
 
   const navigateTo = () => {
     setTimeout(() => {
-      window.open("/dashboard");
+      navigate("/dashboard");
     }, 1000);
   };
 
   const sendDataToApi = () => {
     axios
-      .post("http://139.162.11.245:1818/security/login", login)
+      .post("https://api.yengilcredit.uz/security/login", login)
       .then((res) => {
         let token = res.data.split(":")[1];
         localStorage.setItem("auth", token);
         setAuth(token);
       });
-    // setTimeout(() => {
     navigateTo();
-    // }, 500);
   };
-
-  // useEffect(() => {
-  //   navigateTo();
-  // }, [auth]);
 
   return (
     <div className={classes.pageStyle}>

@@ -190,7 +190,7 @@ const CategoryCreate = () => {
             variant="contained"
             onClick={() => {
               onSubmit();
-              refresh()
+              // refresh()
             }}
             className={classes.button_root}
             style={{ textTransform: "capitalize" }}
