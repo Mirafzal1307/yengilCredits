@@ -394,7 +394,7 @@ const useStyles = makeStyles((theme) => ({
   imgInDetails: {
     width: "100%",
   },
-  priceDetails:{
+  priceDetails: {
     color: "#DC3C3C",
     fontSize: "36px",
     fontWeight: 600,
@@ -609,52 +609,52 @@ const ProductDetails = () => {
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl">
           <Grid style={{ display: "flex" }}>
-          <Grid container item md={6} xs={12} className={classes.right}>
-            <div>
-              {
-                photo?.map((item: any) => (
-                  <img style={{ width: 'auto', height: '500px', borderRadius: '10px', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
-                ))
-              }
-
-            </div>
-            <Grid item xs={12} md={3} className={classes.right2}>
-              <div className={classes.imgDiv}>
+            <Grid container item md={6} xs={12} className={classes.right}>
+              <div>
                 {
                   photo?.map((item: any) => (
-                    <img style={{ width: "auto", height: "100px", borderRadius: "10px" }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
+                    <img style={{ width: 'auto', height: '500px', borderRadius: '10px', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
                   ))
                 }
+
               </div>
+              <Grid item xs={12} md={3} className={classes.right2}>
+                <div className={classes.imgDiv}>
+                  {
+                    photo?.map((item: any) => (
+                      <img style={{ width: "auto", height: "100px", borderRadius: "10px" }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
+                    ))
+                  }
+                </div>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid item xs={7}
-            style={{  }}
-          >
-            <div
-              style={{
-                display: "block"
-              }}
+            <Grid item xs={7}
+              style={{}}
             >
-              <h1 className={classes.h1}>
-                Mahsulot haqida
-              </h1>
+              <div
+                style={{
+                  display: "block"
+                }}
+              >
+                <h1 className={classes.h1}>
+                  Mahsulot haqida
+                </h1>
                 <div>
                   <ul>
                     {pro?.map((product: any) => (
                       <>
-                      <div className={classes.parent_div}>
-                        <li className={classes.li}>Nomi</li>
-                        <p className={classes.li_span}>{product?.name}</p>
-                      </div>
-                      <div className={classes.parent_div}>
-                        <li className={classes.li}>Brend</li>
-                        <p className={classes.li_span}>{product?.brand?.name}</p>
-                      </div>
-                      <div className={classes.parent_div}>
-                        <li className={classes.li}>Kategoriya</li>
-                        <p className={classes.li_span}>{product?.category?.name}</p>
-                      </div>
+                        <div className={classes.parent_div}>
+                          <li className={classes.li}>Nomi</li>
+                          <p className={classes.li_span}>{product?.name}</p>
+                        </div>
+                        <div className={classes.parent_div}>
+                          <li className={classes.li}>Brend</li>
+                          <p className={classes.li_span}>{product?.brand?.name}</p>
+                        </div>
+                        <div className={classes.parent_div}>
+                          <li className={classes.li}>Kategoriya</li>
+                          <p className={classes.li_span}>{product?.category?.name}</p>
+                        </div>
                       </>
                     ))}
                   </ul>
@@ -671,17 +671,17 @@ const ProductDetails = () => {
                   <ul>
                     {pro?.map((product: any) => (
                       <>
-                      <div className={classes.parent_div}>
-                        <li className={classes.li}>Narxi</li>
-                        <p className={classes.li_span}>{product?.after_discount.toLocaleString()} so’m</p>
-                      </div>
+                        <div className={classes.parent_div}>
+                          <li className={classes.li}>Narxi</li>
+                          <p className={classes.li_span}>{product?.after_discount.toLocaleString()} so’m</p>
+                        </div>
                       </>
                     ))}
                   </ul>
                 </div>
-            </div>
+              </div>
 
-          </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12}>
             <div>
@@ -755,8 +755,8 @@ const ProductDetails = () => {
             {loading ? (
               <CircularProgress
                 style={{
-                  margin: "auto",
                   marginTop: "30px",
+                  margin: "auto",
                   marginBottom: "30px",
                 }}
               />
