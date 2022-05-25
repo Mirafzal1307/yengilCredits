@@ -333,7 +333,7 @@ const ProductList: React.FC = () => {
     const [query, setQuery] = useState('react')
     const [notify, setNotify] = React.useState<any>({ isOpen: false, message: '', type: '' });
     const [category, setCategory] = React.useState([])
-
+    console.log(products);
 
     const [param, setParam] = React.useState('');
     const [prod, setProducts] = React.useState<any>();

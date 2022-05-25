@@ -27,16 +27,17 @@ import notFount from "../../Images/NotFound.jpg";
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
     padding: "45px 0",
-    background: "rgba(6, 83, 116, 0.1)",
     [theme.breakpoints.down(600)]: {
       padding: "0 0 25px 0 !important",
     },
   },
   h1: {
-    fontSize: "40px",
-    fontWeight: 700,
+    fontSize: "27px",
+    fontWeight: 600,
     fontFamily: "Poppins",
-    padding: "0px 0px 20px 0px",
+    margin: 0,
+    paddingLeft: "50px",
+    paddingBottom: "20px",
     [theme.breakpoints.down(600)]: {
       fontSize: "22px",
       fontWeight: 600,
@@ -71,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   right: {
-    display: "block !important",
+    display: "flex !important",
     [theme.breakpoints.down(900)]: {
       display: "block",
     },
@@ -420,12 +421,19 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "50px",
     fontFamily: "Poppins",
     fontSize: "20px",
-    fontWeight: 400
+    fontWeight: 400,
+    color: "#676767",
   },
   li_span: {
     fontFamily: "Poppins",
     fontSize: "20px",
-    fontWeight: 300
+    fontWeight: 300,
+    margin: 0
+  },
+  parent_div: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "10px"
   }
 }));
 
@@ -439,6 +447,7 @@ const ProductDetails = () => {
   console.log(pro);
 
   let des: any = products?.Description[0];
+  console.log(des);
 
   const { id } = useParams();
   const classes = useStyles();
@@ -475,6 +484,7 @@ const ProductDetails = () => {
     console.log(res);
     setProducts(res?.data);
   };
+
 
   return (
     <>
@@ -600,62 +610,71 @@ const ProductDetails = () => {
         <Container maxWidth="xl">
           <Grid style={{ display: "flex" }}>
           <Grid container item md={6} xs={12} className={classes.right}>
-            <Grid item xs={12} md={9}>
+            <div>
               {
                 photo?.map((item: any) => (
-                  <img style={{ width: '100%', height: '500px', borderRadius: '10px', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
+                  <img style={{ width: 'auto', height: '500px', borderRadius: '10px', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
                 ))
               }
 
-            </Grid>
+            </div>
             <Grid item xs={12} md={3} className={classes.right2}>
               <div className={classes.imgDiv}>
                 {
                   photo?.map((item: any) => (
-                    <img style={{ width: "100px", height: "100px", marginTop: "25px", borderRadius: "10px" }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
+                    <img style={{ width: "auto", height: "100px", borderRadius: "10px" }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
                   ))
                 }
               </div>
             </Grid>
           </Grid>
           <Grid item xs={7}
-            style={{ backgroundColor: "white" }}
+            style={{  }}
           >
             <div
               style={{
-                display: "block",
-                padding: "30px 90px 0px 63px",
+                display: "block"
               }}
             >
               <h1 className={classes.h1}>
-                {pro?.map((product: any) => (
-                  <> {product?.short_name}</>
-                ))}
+                Mahsulot haqida
               </h1>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <div>
-                    {pro?.map((product: any) => (
-                      <>
-                        <p className={classes.priceDetails}>{product?.price?.toLocaleString()} so’m</p>
-                        <p className={classes.after_discount}>{product?.after_discount?.toLocaleString()} so’m</p>
-                      </>
-                    ))}
-                  </div>
-                  <div>
-                    {pro?.map((product: any) => (
-                      <>
-                        <p className={classes.discountDetails}>{product?.discount}% Skidka</p>
-                      </>
-                    ))}
-                  </div>
-                </div>
                 <div>
                   <ul>
                     {pro?.map((product: any) => (
                       <>
-                        <li className={classes.li}>Nomi: <span className={classes.li_span}>{product?.name}</span></li>
-                        <li className={classes.li}>Brand: <span className={classes.li_span}>{product?.brand.name}</span></li>
-                        <li className={classes.li}>Category: <span className={classes.li_span}>{product?.category.name}</span></li>
+                      <div className={classes.parent_div}>
+                        <li className={classes.li}>Nomi</li>
+                        <p className={classes.li_span}>{product?.name}</p>
+                      </div>
+                      <div className={classes.parent_div}>
+                        <li className={classes.li}>Brend</li>
+                        <p className={classes.li_span}>{product?.brand?.name}</p>
+                      </div>
+                      <div className={classes.parent_div}>
+                        <li className={classes.li}>Kategoriya</li>
+                        <p className={classes.li_span}>{product?.category?.name}</p>
+                      </div>
+                      </>
+                    ))}
+                  </ul>
+                  <ul>
+                    {des?.map((product: any) => (
+                      <>
+                        <div className={classes.parent_div}>
+                          <li className={classes.li}>{product?.character_name}</li>
+                          <p className={classes.li_span}>{product?.character_value}</p>
+                        </div>
+                      </>
+                    ))}
+                  </ul>
+                  <ul>
+                    {pro?.map((product: any) => (
+                      <>
+                      <div className={classes.parent_div}>
+                        <li className={classes.li}>Narxi</li>
+                        <p className={classes.li_span}>{product?.after_discount.toLocaleString()} so’m</p>
+                      </div>
                       </>
                     ))}
                   </ul>
