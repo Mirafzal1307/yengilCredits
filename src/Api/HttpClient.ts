@@ -7,14 +7,29 @@ import axios, {
 } from 'axios'
 
 
+
+
+// let accessToken = localStorage.getItem('auth')
+// console.log(user);
+
+
+
+// console.log(`------${accessToken}`)
 class ApiClient {
   instance: AxiosInstance;
+  user: any;
   constructor(baseURL: any) {
+    this.user = JSON.parse(JSON.stringify(localStorage.getItem('auth') || '{}'));
+    // const token = this.user;
+    console.log(this.user);
+    
     this.instance = axios.create({
       baseURL,
       headers: {
+        "Authorization": `Bearer ${this.user}`,
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+
       }
     })
   }
@@ -59,4 +74,4 @@ class ApiClient {
   }
 }
 export default () =>
-    new ApiClient(API_URL)
+  new ApiClient(API_URL)
