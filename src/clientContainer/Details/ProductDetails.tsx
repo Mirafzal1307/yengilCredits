@@ -1,6 +1,6 @@
 import { Box, Button, CircularProgress, Container, Grid } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductItem } from "../../Api/admin/AdminProductApi";
 import { useActions } from "../../hook/useActions";
@@ -470,12 +470,15 @@ const ProductDetails = () => {
     setRecommended(response?.data?.recommended_products);
   }
 
-  React.useEffect(() => {
-    fetchProductClientDetails(`${id}`);
+  useEffect(() => {
     getData();
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    fetchProductClientDetails(`${id}`);
+  }, []);
+
+  useEffect(() => {
     getProduct(id);
   }, []);
 
@@ -510,7 +513,7 @@ const ProductDetails = () => {
                 <p className={classes.priceSale}>
                   <span style={{ marginRight: "10px" }}>Chegirma narxda:</span>{" "}
                   <span className={classes.productSaleSpan}>
-                    {product?.after_discount.toLocaleString()} so’m
+                    {product?.after_discount?.toLocaleString()} so’m
                   </span>
                 </p>
                 <div>
@@ -673,7 +676,7 @@ const ProductDetails = () => {
                       <>
                         <div className={classes.parent_div}>
                           <li className={classes.li}>Narxi</li>
-                          <p className={classes.li_span}>{product?.after_discount.toLocaleString()} so’m</p>
+                          <p className={classes.li_span}>{product?.after_discount?.toLocaleString()} so’m</p>
                         </div>
                       </>
                     ))}
@@ -1044,7 +1047,7 @@ const ProductDetails = () => {
                           fontWeight: "600",
                         }}
                       >
-                        {item.after_discount.toLocaleString()} so'm
+                        {item.after_discount?.toLocaleString()} so'm
                       </p>
 
                       {item.availability === true ? (
