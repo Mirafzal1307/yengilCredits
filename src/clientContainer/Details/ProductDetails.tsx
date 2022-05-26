@@ -22,7 +22,6 @@ import { useTypedSelector } from "../../hook/useTypedSelector";
 import { Link } from "react-router-dom";
 import { refresh } from "../../adminContainer/Modal/refresh";
 import "@splidejs/splide/dist/css/splide.min.css";
-import notFount from "../../Images/NotFound.jpg";
 
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
@@ -205,6 +204,9 @@ const useStyles = makeStyles((theme) => ({
   splide: {
     marginTop: "10px !important",
     marginBottom: "10px !important",
+    width: "100% !important",
+    // display: "flex",
+    // justifyContent: "center"
   },
   cardBottom: {
     background: "#065374",
@@ -400,7 +402,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     fontFamily: "Poppins",
     textDecoration: "line-through",
-    margin: 0
+    margin: 0,
   },
   after_discount: {
     color: "#065374",
@@ -414,7 +416,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#2DA04E",
     fontFamily: "Poppins",
     fontSize: "30px",
-    fontWeight: 500
+    fontWeight: 500,
   },
   li: {
     listStyle: "disc",
@@ -428,13 +430,24 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontSize: "20px",
     fontWeight: 300,
-    margin: 0
+    margin: 0,
   },
   parent_div: {
     display: "flex",
     justifyContent: "space-between",
-    marginBottom: "10px"
-  }
+    marginBottom: "10px",
+  },
+  inSplideSlide: {
+    width: "auto",
+    height: "300px",
+    borderRadius: "10px",
+    display: "block",
+    margin: "auto"
+  },
+  bigBox: {
+    display: "flex",
+    alignItems: "center",
+  },
 }));
 
 const ProductDetails = () => {
@@ -444,15 +457,12 @@ const ProductDetails = () => {
   const [popular, setPopular] = React.useState([]);
 
   let pro: any = products?.Product;
-  console.log(pro);
-
   let des: any = products?.Description[0];
-  console.log(des);
 
   const { id } = useParams();
   const classes = useStyles();
 
-  const photo = pro?.map((i: any) => i?.photos[0]);
+  const photo = pro?.map((i: any) => i?.photos);
   const name23 = pro?.map((i: any) => i?.name);
 
   const [notify, setNotify] = useState<any>({
@@ -460,6 +470,8 @@ const ProductDetails = () => {
     message: "",
     type: "",
   });
+
+  console.log(photo);
 
   const dispatch = useDispatch();
   const loading = useTypedSelector((state) => state?.card?.loading);
@@ -484,10 +496,8 @@ const ProductDetails = () => {
 
   const getProduct = async (id: any) => {
     const res: any = await getProductItem(id);
-    console.log(res);
     setProducts(res?.data);
   };
-
 
   return (
     <>
@@ -496,6 +506,21 @@ const ProductDetails = () => {
         <Container maxWidth="xl">
           <img src={BigPhoto} alt="" className={classes.BigPhoto} />
         </Container>
+        {/* <div>
+          <CarouselProvider
+            naturalSlideWidth={100}
+            naturalSlideHeight={25}
+            totalSlides={3}
+          >
+            <Slider>
+              <Slide index={0}><Image src={}/></Slide>
+              <Slide index={1}>I am the second Slide.</Slide>
+              <Slide index={2}>I am the third Slide.</Slide>
+            </Slider>
+            <ButtonBack>Back</ButtonBack>
+            <ButtonNext>Next</ButtonNext>
+          </CarouselProvider>
+        </div> */}
         <Container maxWidth="xl">
           {pro?.map((product: any) => (
             <div className={classes.BigPhotoBottom}>
@@ -541,7 +566,6 @@ const ProductDetails = () => {
             style={{ display: "flex", flexDirection: "column" }}
           >
             <div style={{ display: "flex" }}>
-
               <div style={{ marginRight: "20px", marginTop: "8px" }}>
                 <Link to={"/"}>
                   <img src={CancelBtnImg} alt="Cancel" />
@@ -610,38 +634,73 @@ const ProductDetails = () => {
       </div>
 
       <div className={classes.DetailsBody}>
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" className={classes.bigBox}>
           <Grid style={{ display: "flex" }}>
             <Grid container item md={6} xs={12} className={classes.right}>
-              <div>
-                {
-                  photo?.map((item: any) => (
-                    <img style={{ width: 'auto', height: '500px', borderRadius: '10px', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
+              <Splide
+                className={classes.splide}
+                options={{
+                  perPage: 1,
+                  autoplay: true,
+                  arrows: false,
+                  pagination: false,
+                  focus: "center",
+                  width: "auto"
+                }}
+              >
+                {photo?.map((item: any) =>
+                  item?.map((value: any) => (
+                    <SplideSlide>
+                      {console.log(
+                        `${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`
+                      )}
+                      <img
+                        src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
+                        alt="Rasm bor edi"
+                        className={classes.inSplideSlide}
+                      />
+                    </SplideSlide>
                   ))
-                }
+                )}
+              </Splide>
+              {/* <div>
+                {photo?.map((item: any) => (
+                  <img
+                    style={{
+                      width: "auto",
+                      height: "500px",
+                      borderRadius: "10px",
+                      filter: "drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))",
+                    }}
+                    src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`}
+                    alt="Rasm bor edi"
+                  />
+                ))}
 
               </div>
               <Grid item xs={12} md={3} className={classes.right2}>
                 <div className={classes.imgDiv}>
-                  {
-                    photo?.map((item: any) => (
-                      <img style={{ width: "auto", height: "100px", borderRadius: "10px" }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
-                    ))
-                  }
+                  {photo?.map((item: any) => (
+                    <img
+                      style={{
+                        width: "auto",
+                        height: "100px",
+                        borderRadius: "10px",
+                      }}
+                      src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`}
+                      alt="Rasm bor edi"
+                    />
+                  ))}
                 </div>
-              </Grid>
+              </Grid> */}
             </Grid>
-            <Grid item xs={7}
-              style={{}}
-            >
+            <Grid item xs={7} style={{}}>
               <div
                 style={{
-                  display: "block"
+                  display: "block",
                 }}
               >
-                <h1 className={classes.h1}>
-                  Mahsulot haqida
-                </h1>
+                <h1 className={classes.h1}>Mahsulot haqida</h1>
                 <div>
                   <ul>
                     {pro?.map((product: any) => (
@@ -652,11 +711,15 @@ const ProductDetails = () => {
                         </div>
                         <div className={classes.parent_div}>
                           <li className={classes.li}>Brend</li>
-                          <p className={classes.li_span}>{product?.brand?.name}</p>
+                          <p className={classes.li_span}>
+                            {product?.brand?.name}
+                          </p>
                         </div>
                         <div className={classes.parent_div}>
                           <li className={classes.li}>Kategoriya</li>
-                          <p className={classes.li_span}>{product?.category?.name}</p>
+                          <p className={classes.li_span}>
+                            {product?.category?.name}
+                          </p>
                         </div>
                       </>
                     ))}
@@ -665,8 +728,12 @@ const ProductDetails = () => {
                     {des?.map((product: any) => (
                       <>
                         <div className={classes.parent_div}>
-                          <li className={classes.li}>{product?.character_name}</li>
-                          <p className={classes.li_span}>{product?.character_value}</p>
+                          <li className={classes.li}>
+                            {product?.character_name}
+                          </li>
+                          <p className={classes.li_span}>
+                            {product?.character_value}
+                          </p>
                         </div>
                       </>
                     ))}
@@ -676,14 +743,15 @@ const ProductDetails = () => {
                       <>
                         <div className={classes.parent_div}>
                           <li className={classes.li}>Narxi</li>
-                          <p className={classes.li_span}>{product?.after_discount?.toLocaleString()} so’m</p>
+                          <p className={classes.li_span}>
+                            {product?.after_discount?.toLocaleString()} so’m
+                          </p>
                         </div>
                       </>
                     ))}
                   </ul>
                 </div>
               </div>
-
             </Grid>
           </Grid>
           <Grid item xs={12}>
@@ -707,421 +775,6 @@ const ProductDetails = () => {
           </Grid>
         </Container>
       </div>
-      <Container maxWidth="xl" style={{ marginTop: "40px" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <h2 className={classes.title} style={{ fontWeight: "600" }}>
-            Sizlar uchun maxsus mahsulotlar
-          </h2>
-          <div className={classes.barchasi}>
-            <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
-            </Link>
-          </div>
-        </div>
-        <div className={classes.mainCard}>
-          <Splide
-            options={{
-              width: "100%",
-
-              perPage: 6,
-              pagination: false,
-              arrows: true,
-              //type: 'loop',
-              //drag: 'free',
-              gap: "0.7rem",
-              autoScroll: {
-                speed: 2,
-              },
-              breakpoints: {
-                450: {
-                  type: "loop",
-                  perPage: 1,
-                },
-                700: {
-                  perPage: 2,
-                },
-                992: {
-                  perPage: 3,
-                },
-                1300: {
-                  perPage: 4,
-                },
-              },
-            }}
-          >
-            {loading ? (
-              <CircularProgress
-                style={{
-                  marginTop: "30px",
-                  margin: "auto",
-                  marginBottom: "30px",
-                }}
-              />
-            ) : (
-              recommended &&
-              recommended.map((item: any) => (
-                <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
-                    <Box>
-                      <Link to={`/product/client/details/${item?.id}`}>
-                        <div className={classes.BodyCardInside}>
-                          <img
-                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
-                            alt="img"
-                            style={{ width: "150px", height: "150px" }}
-                          />
-                        </div>
-                      </Link>
-                      <h6
-                        className={classes.cardTitle}
-                        style={{
-                          margin: 0,
-                          marginTop: "19px",
-                          height: "30px",
-                          fontSize: "14px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        {item.short_name}
-                      </h6>
-                      <h6
-                        className={classes.cardTitle}
-                        style={{
-                          margin: 0,
-                          marginTop: "0px",
-                          marginBottom: "20px",
-                          height: "30px",
-                          fontWeight: "400",
-                          fontSize: "14px",
-                          fontFamily: "Poppins",
-                        }}
-                      >
-                        {item.name}
-                      </h6>
-                      {item.discount === 0 ? (
-                        <p
-                          className={classes.cardPrice}
-                          style={{
-                            color: "#065374",
-                            fontSize: "14px",
-
-                            textDecoration: "line-through",
-                            fontWeight: "500",
-                            display: "none !important",
-                            paddingBottom: "22px",
-                          }}
-                        ></p>
-                      ) : (
-                        <p
-                          className={classes.cardPrice}
-                          style={{
-                            color: "#065374",
-                            fontSize: "14px",
-                            textDecoration: "line-through",
-                            fontWeight: "500",
-                            display: "block !important",
-                          }}
-                        >
-                          {item?.price?.toLocaleString()} so'm
-                        </p>
-                      )}
-
-                      <p
-                        className={classes.cardPrice}
-                        style={{
-                          marginBottom: "10px",
-                          height: "45px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        {item?.after_discount?.toLocaleString()} so'm
-                      </p>
-
-                      {item.availability === true ? (
-                        <button
-                          className={classes.cardButton}
-                          style={{ fontWeight: "600" }}
-                          onClick={() => {
-                            dispatch(addToCart(item));
-                            setNotify({
-                              isOpen: true,
-                              message: "Savatchaga qo'shildi",
-                              type: "success",
-                            });
-                          }}
-                        >
-                          <img
-                            src={Shop}
-                            alt=""
-                            style={{ paddingRight: "10px" }}
-                          />
-                          Savatchaga
-                        </button>
-                      ) : (
-                        <button
-                          className={classes.cardButton}
-                          style={{ fontWeight: "600" }}
-                        >
-                          <img
-                            src={cart2}
-                            alt="img"
-                            style={{
-                              marginRight: "5px",
-                              border: "2px solid #C33E4D",
-                            }}
-                          />
-                          Sotuvda yo'q
-                        </button>
-                      )}
-                      {item.discount === 0 ? (
-                        <span
-                          className={classes.cardSpan}
-                          style={{
-                            fontWeight: "600",
-                            display: "none !important",
-                          }}
-                        ></span>
-                      ) : (
-                        <span
-                          className={classes.cardSpan}
-                          style={{
-                            fontWeight: "600",
-                            display: "block !important",
-                          }}
-                        >
-                          {item.discount !== 0 ? item.discount : null}%
-                        </span>
-                      )}
-                    </Box>
-                  </Box>
-                </SplideSlide>
-              ))
-            )}
-          </Splide>
-        </div>
-        <div className={classes.cardBottom}>
-          <Link
-            to="/all/card/1"
-            className={classes.bottomText}
-            style={{ fontWeight: "600" }}
-          >
-            Barcha mahsulotlar
-          </Link>
-        </div>
-      </Container>
-      <Container maxWidth="xl">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <h2 className={classes.title} style={{ fontWeight: "600" }}>
-            Ommabob maxsulotlar
-          </h2>
-          <div className={classes.barchasi}>
-            <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
-            </Link>
-          </div>
-        </div>
-        <div className={classes.mainCard}>
-          <Splide
-            options={{
-              width: "100%",
-
-              perPage: 6,
-              pagination: false,
-              arrows: true,
-              //type: 'loop',
-              //drag: 'free',
-              gap: "0.7rem",
-              autoScroll: {
-                speed: 2,
-              },
-              breakpoints: {
-                450: {
-                  type: "loop",
-                  perPage: 1,
-                },
-                700: {
-                  perPage: 2,
-                },
-                992: {
-                  perPage: 3,
-                },
-                1300: {
-                  perPage: 4,
-                },
-              },
-            }}
-          >
-            {loading ? (
-              <CircularProgress
-                style={{
-                  margin: "auto",
-                  marginTop: "30px",
-                  marginBottom: "30px",
-                }}
-              />
-            ) : (
-              popular &&
-              popular.map((item: any) => (
-                <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
-                    <Box>
-                      <Link to={`/product/client/details/${item?.id}`}>
-                        <div className={classes.BodyCardInside}>
-                          <img
-                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
-                            alt="img"
-                            style={{ width: "150px", height: "150px" }}
-                          />
-                        </div>
-                      </Link>
-                      <h6
-                        className={classes.cardTitle}
-                        style={{
-                          margin: 0,
-                          marginTop: "19px",
-                          height: "30px",
-                          fontSize: "14px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        {item.short_name}
-                      </h6>
-                      <h6
-                        className={classes.cardTitle}
-                        style={{
-                          margin: 0,
-                          marginTop: "0px",
-                          marginBottom: "20px",
-                          height: "30px",
-                          fontWeight: "400",
-                          fontSize: "14px",
-                          fontFamily: "Poppins",
-                        }}
-                      >
-                        {item.name}
-                      </h6>
-                      {item.discount === 0 ? (
-                        <p
-                          className={classes.cardPrice}
-                          style={{
-                            color: "#065374",
-                            fontSize: "14px",
-
-                            textDecoration: "line-through",
-                            fontWeight: "500",
-                            display: "none !important",
-                            paddingBottom: "22px",
-                          }}
-                        ></p>
-                      ) : (
-                        <p
-                          className={classes.cardPrice}
-                          style={{
-                            color: "#065374",
-                            fontSize: "14px",
-                            textDecoration: "line-through",
-                            fontWeight: "500",
-                            display: "block !important",
-                          }}
-                        >
-                          {item?.price?.toLocaleString()} so'm
-                        </p>
-                      )}
-                      <p
-                        className={classes.cardPrice}
-                        style={{
-                          marginBottom: "10px",
-                          height: "45px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        {item.after_discount?.toLocaleString()} so'm
-                      </p>
-
-                      {item.availability === true ? (
-                        <button
-                          className={classes.cardButton}
-                          style={{ fontWeight: "600" }}
-                          onClick={() => {
-                            dispatch(addToCart(item));
-                            setNotify({
-                              isOpen: true,
-                              message: "Savatchaga qo'shildi",
-                              type: "success",
-                            });
-                          }}
-                        >
-                          <img
-                            src={Shop}
-                            alt=""
-                            style={{ paddingRight: "10px" }}
-                          />
-                          Savatchaga
-                        </button>
-                      ) : (
-                        <button
-                          className={classes.cardButton}
-                          style={{ fontWeight: "600" }}
-                        >
-                          <img
-                            src={cart2}
-                            alt="img"
-                            style={{
-                              marginRight: "5px",
-                              border: "2px solid #C33E4D",
-                            }}
-                          />
-                          Sotuvda yo'q
-                        </button>
-                      )}
-                      {item.discount === 0 ? (
-                        <span
-                          className={classes.cardSpan}
-                          style={{
-                            fontWeight: "600",
-                            display: "none !important",
-                          }}
-                        ></span>
-                      ) : (
-                        <span
-                          className={classes.cardSpan}
-                          style={{
-                            fontWeight: "600",
-                            display: "block !important",
-                          }}
-                        >
-                          {item.discount !== 0 ? item.discount : null}%
-                        </span>
-                      )}
-                    </Box>
-                  </Box>
-                </SplideSlide>
-              ))
-            )}
-          </Splide>
-        </div>
-        <div className={classes.cardBottom} style={{ marginBottom: "30px" }}>
-          <Link
-            to="/all/card/3"
-            className={classes.bottomText}
-            style={{ fontWeight: "600" }}
-          >
-            Barcha mahsulotlar
-          </Link>
-        </div>
-      </Container>
       <Footer />
       <Notification notify={notify} setNotify={setNotify} />
     </>
