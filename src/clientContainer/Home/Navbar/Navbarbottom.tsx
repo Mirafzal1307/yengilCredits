@@ -55,53 +55,54 @@ const Navbarbottom = () => {
             gap: "15px",
             breakpoints: {
               400: {
-                perPage: 1,
+                perPage: 4,
+                arrows: false,
               },
               700: {
-                perPage: 2,
+                perPage: 4,
               },
               992: {
-                perPage: 3,
+                perPage: 5,
               },
               1300: {
-                perPage: 4,
+                perPage: 6,
               },
             },
          
           }}
         >
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1007"}>
               <img src={Aksesuar} alt="" className={classes.img} />
             </Link>
           </SplideSlide   >
            <SplideSlide className={classes.Slide}>
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1008"}>
               <img src={Desktop} alt="" className={classes.img} />
             </Link>
           </SplideSlide>
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1009"}>
               <img src={forKitchen} alt="" className={classes.img} />
             </Link>
           </SplideSlide>
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1011"}>
               <img src={refrigerators} alt="" className={classes.img} />
             </Link>
           </SplideSlide>
           <SplideSlide  className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1012"}>
               <img src={smartphones} alt="" className={classes.img} />
             </Link>
           </SplideSlide>
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1016"}>
               <img src={washingmashine} alt="" className={classes.img} />
             </Link>
           </SplideSlide> 
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1018"}>
               <img src={washing} alt="" className={classes.img} />
             </Link>
           </SplideSlide> 
@@ -111,17 +112,17 @@ const Navbarbottom = () => {
             </Link>
           </SplideSlide> 
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1014"}>
               <img src={eight} alt="" className={classes.img} />
             </Link>
           </SplideSlide> 
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1013"}>
               <img src={seven} alt="" className={classes.img} />
             </Link>
           </SplideSlide> 
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1017"}>
               <img src={wash} alt="" className={classes.img} />
             </Link>
           </SplideSlide> 
