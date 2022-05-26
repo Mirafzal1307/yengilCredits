@@ -73,7 +73,7 @@ const Navbarbottom = () => {
         >
           <SplideSlide className={classes.Slide} >
             <Link to={"/product/product-by-category/1007"}>
-              <img src={Aksesuar} alt="" className={classes.img} />
+              <img src={Aksesuar} alt="rasm" className={classes.img} />
             </Link>
           </SplideSlide   >
            <SplideSlide className={classes.Slide}>
