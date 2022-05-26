@@ -27,16 +27,17 @@ import notFount from "../../Images/NotFound.jpg";
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
     padding: "45px 0",
-    background: "rgba(6, 83, 116, 0.1)",
     [theme.breakpoints.down(600)]: {
       padding: "0 0 25px 0 !important",
     },
   },
   h1: {
-    fontSize: "25px",
-    fontWeight: 700,
-    position: "absolute",
-    top: "0",
+    fontSize: "27px",
+    fontWeight: 600,
+    fontFamily: "Poppins",
+    margin: 0,
+    paddingLeft: "50px",
+    paddingBottom: "20px",
     [theme.breakpoints.down(600)]: {
       fontSize: "22px",
       fontWeight: 600,
@@ -71,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   right: {
+    display: "flex !important",
     [theme.breakpoints.down(900)]: {
       display: "block",
     },
@@ -392,6 +394,47 @@ const useStyles = makeStyles((theme) => ({
   imgInDetails: {
     width: "100%",
   },
+  priceDetails: {
+    color: "#DC3C3C",
+    fontSize: "36px",
+    fontWeight: 600,
+    fontFamily: "Poppins",
+    textDecoration: "line-through",
+    margin: 0
+  },
+  after_discount: {
+    color: "#065374",
+    fontSize: "42px",
+    fontWeight: 500,
+    fontFamily: "Poppins",
+    textDecoration: "line-through",
+    margin: "0 0 100px 0",
+  },
+  discountDetails: {
+    color: "#2DA04E",
+    fontFamily: "Poppins",
+    fontSize: "30px",
+    fontWeight: 500
+  },
+  li: {
+    listStyle: "disc",
+    marginLeft: "50px",
+    fontFamily: "Poppins",
+    fontSize: "20px",
+    fontWeight: 400,
+    color: "#676767",
+  },
+  li_span: {
+    fontFamily: "Poppins",
+    fontSize: "20px",
+    fontWeight: 300,
+    margin: 0
+  },
+  parent_div: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "10px"
+  }
 }));
 
 const ProductDetails = () => {
@@ -404,6 +447,7 @@ const ProductDetails = () => {
   console.log(pro);
 
   let des: any = products?.Description[0];
+  console.log(des);
 
   const { id } = useParams();
   const classes = useStyles();
@@ -441,6 +485,7 @@ const ProductDetails = () => {
     setProducts(res?.data);
   };
 
+
   return (
     <>
       <BackToTop />
@@ -448,77 +493,6 @@ const ProductDetails = () => {
         <Container maxWidth="xl">
           <img src={BigPhoto} alt="" className={classes.BigPhoto} />
         </Container>
-        <div style={{ background: "#fff", padding: "10px 0" }}>
-          <Container
-            maxWidth="xl"
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            <div style={{ marginRight: "20px" }}>
-              <Link to={"/"}>
-                <img src={CancelBtnImg} alt="Cancel" />
-              </Link>
-            </div>
-            <div className={classes.Links}>
-              <span
-                style={{ fontWeight: "500", fontSize: "18px", color: "#000" }}
-              >
-                <Link to="/" style={{ color: "rgb(159 159 159)" }}>
-                  Bosh sahifa
-                  <span
-                    style={{
-                      color: "#065374",
-                      fontWeight: "500",
-                      fontSize: "16px",
-                      padding: "0px 5px",
-                    }}
-                  >
-                    /
-                  </span>
-                </Link>
-              </span>
-              <span
-                style={{ fontWeight: "600", fontSize: "18px", color: "#000" }}
-              >
-                {pro?.map((parCategory: any) => (
-                  <Link
-                    to={`/product/product-by-category/${parCategory?.category?.parent_category?.id}`}
-                    style={{
-                      color: "rgb(159 159 159)",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {parCategory?.category?.parent_category?.name}
-                    <span
-                      style={{
-                        color: "#065374",
-                        fontWeight: "500",
-                        fontSize: "16px",
-                        padding: "0px 5px",
-                      }}
-                    >
-                      /
-                    </span>
-                  </Link>
-                ))}
-              </span>
-              <span
-                style={{ fontWeight: "600", fontSize: "18px", color: "#000" }}
-              >
-                {pro?.map((SubCategory: any) => (
-                  <Link
-                    to={`/product/product-by-category/${SubCategory?.category?.id}`}
-                    style={{
-                      color: "rgb(159 159 159)",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {SubCategory?.category?.name}
-                  </Link>
-                ))}
-              </span>
-            </div>
-          </Container>
-        </div>
         <Container maxWidth="xl">
           {pro?.map((product: any) => (
             <div className={classes.BigPhotoBottom}>
@@ -534,7 +508,7 @@ const ProductDetails = () => {
               </h2>
               <div className={classes.RightBtn}>
                 <p className={classes.priceSale}>
-                  <span>Chegirma narxda:</span>{" "}
+                  <span style={{ marginRight: "10px" }}>Chegirma narxda:</span>{" "}
                   <span className={classes.productSaleSpan}>
                     {product?.after_discount.toLocaleString()} so’m
                   </span>
@@ -558,88 +532,155 @@ const ProductDetails = () => {
             </div>
           ))}
         </Container>
+        <div style={{ background: "#fff", padding: "10px 0" }}>
+          <Container
+            maxWidth="xl"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            <div style={{ display: "flex" }}>
+
+              <div style={{ marginRight: "20px", marginTop: "8px" }}>
+                <Link to={"/"}>
+                  <img src={CancelBtnImg} alt="Cancel" />
+                </Link>
+              </div>
+              <div className={classes.Links}>
+                <span
+                  style={{ fontWeight: "500", fontSize: "18px", color: "#000" }}
+                >
+                  <Link to="/" style={{ color: "rgb(159 159 159)" }}>
+                    Bosh sahifa
+                    <span
+                      style={{
+                        fontWeight: "500",
+                        fontSize: "16px",
+                        padding: "0px 5px",
+                      }}
+                    >
+                      ›
+                    </span>
+                  </Link>
+                </span>
+                <span
+                  style={{ fontWeight: "600", fontSize: "18px", color: "#000" }}
+                >
+                  {pro?.map((parCategory: any) => (
+                    <Link
+                      to={`/product/product-by-category/${parCategory?.category?.parent_category?.id}`}
+                      style={{
+                        color: "rgb(159 159 159)",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {parCategory?.category?.parent_category?.name}
+                      {/* <span
+                        style={{
+                          fontWeight: "500",
+                          fontSize: "16px",
+                          padding: "0px 5px",
+                        }}
+                      >
+                        ›
+                      </span> */}
+                    </Link>
+                  ))}
+                </span>
+                <span
+                  style={{ fontWeight: "600", fontSize: "18px", color: "#000" }}
+                >
+                  {pro?.map((SubCategory: any) => (
+                    <Link
+                      to={`/product/product-by-category/${SubCategory?.category?.id}`}
+                      style={{
+                        color: "rgb(159 159 159)",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      › {SubCategory?.category?.name}
+                    </Link>
+                  ))}
+                </span>
+              </div>
+            </div>
+          </Container>
+        </div>
       </div>
 
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl">
-          <Grid
-            container
-            style={{ display: "flex", justifyContent: "space-between" }}
-          >
-            <Grid
-              container
-              item
-              md={6}
-              xs={12}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                position: "relative",
-              }}
-            >
-              <h1 className={classes.h1}>
-                {pro?.map((product: any) => (
-                  <> {product?.short_name}</>
-                ))}
-              </h1>
-              <Grid item xs={12}>
-                <div className={classes.div}>
-                  <ul className={classes.ulLi}>
-                    <li className={classes.CharacterAndProperty}>
-                      {des?.map((item: any) => (
-                        <>{item?.character_name}</>
-                      ))}
-                    </li>
-                  </ul>
-                  <ul className={classes.ulLi2}>
-                    <li className={classes.CharacterAndProperty}>
-                      {des?.map((item: any) => (
-                        <>{item?.character_value}</>
-                      ))}
-                    </li>
-                  </ul>
+          <Grid style={{ display: "flex" }}>
+            <Grid container item md={6} xs={12} className={classes.right}>
+              <div>
+                {
+                  photo?.map((item: any) => (
+                    <img style={{ width: 'auto', height: '500px', borderRadius: '10px', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
+                  ))
+                }
+
+              </div>
+              <Grid item xs={12} md={3} className={classes.right2}>
+                <div className={classes.imgDiv}>
+                  {
+                    photo?.map((item: any) => (
+                      <img style={{ width: "auto", height: "100px", borderRadius: "10px" }} src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`} alt="Rasm bor edi" />
+                    ))
+                  }
                 </div>
               </Grid>
             </Grid>
-
-            <Grid
-              // style={{ display: 'flex', justifyContent: 'center !important' }}
-              sx={{
-                display: "flex !important",
-                justifyContent: "center !important",
-              }}
-              item
-              md={6}
-              sm={6}
-              xs={9}
+            <Grid item xs={7}
+              style={{}}
             >
-              <div className={classes.imgDiv} style={{ alignSelf: "center" }}>
-                {photo?.map((item: any) => (
-                  <Splide
-                    options={{
-                      perPage: 1,
-                      arrows: true,
-                      pagination: true,
-                      focus: "center",
-                      gap: "0.5rem",
-
-                      // type: "loop",
-                      // drag: "free",
-                      autoplay: true,
-                      autoScroll: {
-                        speed: 2,
-                      },
-                    }}
-                  >
-                    <SplideSlide>
-                      <img
-                        src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`}
-                        alt="Rasm bor edi"
-                      />
-                    </SplideSlide>
-                  </Splide>
-                ))}
+              <div
+                style={{
+                  display: "block"
+                }}
+              >
+                <h1 className={classes.h1}>
+                  Mahsulot haqida
+                </h1>
+                <div>
+                  <ul>
+                    {pro?.map((product: any) => (
+                      <>
+                        <div className={classes.parent_div}>
+                          <li className={classes.li}>Nomi</li>
+                          <p className={classes.li_span}>{product?.name}</p>
+                        </div>
+                        <div className={classes.parent_div}>
+                          <li className={classes.li}>Brend</li>
+                          <p className={classes.li_span}>{product?.brand?.name}</p>
+                        </div>
+                        <div className={classes.parent_div}>
+                          <li className={classes.li}>Kategoriya</li>
+                          <p className={classes.li_span}>{product?.category?.name}</p>
+                        </div>
+                      </>
+                    ))}
+                  </ul>
+                  <ul>
+                    {des?.map((product: any) => (
+                      <>
+                        <div className={classes.parent_div}>
+                          <li className={classes.li}>{product?.character_name}</li>
+                          <p className={classes.li_span}>{product?.character_value}</p>
+                        </div>
+                      </>
+                    ))}
+                  </ul>
+                  <ul>
+                    {pro?.map((product: any) => (
+                      <>
+                        <div className={classes.parent_div}>
+                          <li className={classes.li}>Narxi</li>
+                          <p className={classes.li_span}>{product?.after_discount.toLocaleString()} so’m</p>
+                        </div>
+                      </>
+                    ))}
+                  </ul>
+                </div>
               </div>
+
             </Grid>
           </Grid>
           <Grid item xs={12}>
@@ -714,8 +755,8 @@ const ProductDetails = () => {
             {loading ? (
               <CircularProgress
                 style={{
-                  margin: "auto",
                   marginTop: "30px",
+                  margin: "auto",
                   marginBottom: "30px",
                 }}
               />
@@ -725,7 +766,7 @@ const ProductDetails = () => {
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
-                    <Link to={`/product/client/details/${item?.id}`}>
+                      <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
@@ -933,7 +974,7 @@ const ProductDetails = () => {
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
-                    <Link to={`/product/client/details/${item?.id}`}>
+                      <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}

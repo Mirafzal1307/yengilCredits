@@ -24,7 +24,7 @@ import ListIcon from "@mui/icons-material/List";
 import { border, SxProps } from "@mui/system";
 import "./style.css";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { getCategoryForClient } from "../../../Api/client/ClientCategoryApi";
+import { getCategoryForClient, getParentCategories } from "../../../Api/client/ClientCategoryApi";
 import { getProductFromCategoryById } from "../../../Api/admin/AdminProductApi";
 import { Grid, Tooltip } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
@@ -39,8 +39,42 @@ import CloseIcon from "@mui/icons-material/Close";
 import AccountMenu from "./Language";
 import Baskets from "../../../Images/basket.svg";
 import Telegram from "../../../Images/telegram.svg";
-import LogoIcon from "../../../Images/LogoIcon.svg"
+import LogoIcon from "../../../Images/LogoIcon.svg";
 import SearchDemo from "../SearchDemo";
+
+
+
+
+
+
+
+
+
+
+// {categoryValues?.map((value: any, key: any) => {
+//   value?.map((inValue: any, index: any) => (
+//   <>
+//     {/* {console.log(inValue)} */}
+//       <MenuItem className={classes.MenuItem} key={index}>
+//         <Link
+//           to={`/product/product-by-category/${inValue.parent_id}`}
+//           key={key}
+//           className={classes.navLink}
+//         >
+//           {`${inValue.name}`}
+//         </Link>
+//       </MenuItem>
+//     </>
+//   ));
+// })}
+
+
+
+
+
+
+
+
 interface Props {
   window?: () => Window;
   children: React.ReactElement;
@@ -52,7 +86,6 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     [theme.breakpoints.up(899)]: {
       display: "flex !important",
- 
     },
     [theme.breakpoints.down(500)]: {
       // display: "flex !important",
@@ -63,7 +96,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex !important",
     justifyContent: "center",
     position: "relative",
-   
 
     [theme.breakpoints.up(899)]: {
       display: "flex !important",
@@ -77,7 +109,6 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     background: "#065374 !important",
-
   },
 
   NavbarRight: {
@@ -91,7 +122,6 @@ const useStyles = makeStyles((theme) => ({
   Logo: {
     paddingTop: "5px !important",
     width: "41px !important",
-
   },
   fab: {
     background: "#fff  !important",
@@ -215,11 +245,11 @@ const useStyles = makeStyles((theme) => ({
     transition: ".5s",
     height: "35px",
     paddingLeft: "7px",
-    paddingRight: "10px"
+    paddingRight: "10px",
   },
   menuButtonMax: {
-    marginTop: '10px',
-    paddingTop: '0px',
+    marginTop: "10px",
+    paddingTop: "0px",
     background: "rgba(255, 255, 255) !important",
     borderRadius: "34px",
     border: "none",
@@ -232,59 +262,55 @@ const useStyles = makeStyles((theme) => ({
     transition: ".5s",
     height: "35px",
     paddingLeft: "7px",
-    paddingRight: "10px"
+    paddingRight: "10px",
   },
   SubMenu: {
-    width: '260px',
+    width: "260px",
     [theme.breakpoints.down(400)]: {
-      width: '130px',
+      width: "130px",
     },
     [theme.breakpoints.down(500)]: {
-      width: '220px',
+      width: "220px",
     },
     [theme.breakpoints.down(600)]: {
-      width: '260px',
+      width: "260px",
     },
   },
   MenuItem: {
-    width: '255px',
-    marginLeft: '10px !important',
+    width: "255px",
+    marginLeft: "10px !important",
 
     [theme.breakpoints.down(400)]: {
-      width: '130px',
+      width: "130px",
     },
 
     [theme.breakpoints.down(500)]: {
-      width: '220px',
+      width: "220px",
     },
     [theme.breakpoints.down(600)]: {
-      width: '255px',
+      width: "255px",
     },
-
   },
   Menu: {
-    border: 'solid 1px red !important'
+    border: "solid 1px red !important",
   },
   NavbarContainer: {
     [theme.breakpoints.up(600)]: {
-      display: 'none !important'
-    }
+      display: "none !important",
+    },
   },
   NavbarContainerMax: {
-    padding: '0 !important',
-    display:'flex',
-    minHeight: 'unset !important',
+    padding: "0 !important",
+    display: "flex",
+    minHeight: "unset !important",
     [theme.breakpoints.down(599)]: {
-      display: 'none !important'
-    }
-  }
+      display: "none !important",
+    },
+  },
 }));
 
 function ScrollTop(props: Props) {
   const { children, window } = props;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
     disableHysteresis: true,
@@ -319,8 +345,13 @@ function ScrollTop(props: Props) {
 
 const BackToTop = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [category, setCategory] = React.useState<any>();
+  const [category, setCategory] = React.useState<any>({});
+  const [parentCategories, setParentCategories] = React.useState<any>([]);
   const [isOpen, setIsOpen] = React.useState<any>(false);
+  // console.log(Object.keys(category));
+  let categoryKeys = Object.keys(category);
+  let categoryValues = Object.values(category);
+  // console.log(categoryValues);
 
   let ddd: any = category;
 
@@ -346,7 +377,11 @@ const BackToTop = () => {
     let response: any = await getCategoryForClient();
     let categories: any = response.data;
     setCategory(response.data.menu);
+    let res: any = await getParentCategories();
+    setParentCategories(res.data.content);
+    // console.log(response.data.menu);
   };
+  console.log(parentCategories);
   const getCategoryProductById = async (id: any) => {
     const response = await getProductFromCategoryById(id, {});
   };
@@ -366,28 +401,54 @@ const BackToTop = () => {
   };
   const classes = useStyles();
 
+  let subCategoryArray: any = []
+  categoryValues.map(i => {
+    subCategoryArray.push(i)
+  })
+  // console.log(subCategoryArray)
+  // subCategoryArray.push(category.name)
+
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar className={classes.appBar}>
-        <Toolbar sx={{ display: 'flex', flexDirection: 'column', padding: 0, minHeight: 'unset !important' }}  >
-          <Container maxWidth="xl" className={classes.NavbarContainer} sx={{ padding: 0 }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            padding: 0,
+            minHeight: "unset !important",
+          }}
+        >
+          <Container
+            maxWidth="xl"
+            className={classes.NavbarContainer}
+            sx={{ padding: 0 }}
+          >
             <Grid spacing={1} container>
-              <Grid
-                item
-                xs={12}
-                style={{ background: 'white', }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px', marginLeft: '15px', marginRight: '15px', marginBottom: '10px' }} >
+              <Grid item xs={12} style={{ background: "white" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "20px",
+                    marginLeft: "15px",
+                    marginRight: "15px",
+                    marginBottom: "10px",
+                  }}
+                >
                   <div>
-                    <Link to={"/"} >
+                    <Link to={"/"}>
                       <img src={LogoIcon} alt="" />
                     </Link>
-
                   </div>
 
                   <div>
-                    <img src={Telegram} alt="" style={{ paddingRight: "10px" }} />
+                    <img
+                      src={Telegram}
+                      alt=""
+                      style={{ paddingRight: "10px" }}
+                    />
                     <Link to={"/cart"}>
                       <img
                         src={Baskets}
@@ -400,77 +461,57 @@ const BackToTop = () => {
                       />
                       <b className={classes.BasketTotal}>{total}</b>
                     </Link>
-
                   </div>
                 </div>
               </Grid>
             </Grid>
           </Container>
-          <Container maxWidth="xl" className={classes.NavbarContainer} sx={{ padding: 0 }}>
+          <Container
+            maxWidth="xl"
+            className={classes.NavbarContainer}
+            sx={{ padding: 0 }}
+          >
             <Grid spacing={1} container>
-              <Grid
-                item
-                xs={12}
-                style={{ background: '#065374', }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '10px' }} >
-                  <div style={{ marginLeft: '15px' }}  >
+              <Grid item xs={12} style={{ background: "#065374" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <div style={{ marginLeft: "15px" }}>
                     <Menu
                       menuButton={
-                        <MenuButton
-                          className={classes.menuButton}
-                        >
-                          <ListIcon style={{ fontSize: '24px' }} />
+                        <MenuButton className={classes.menuButton}>
+                          <ListIcon style={{ fontSize: "24px" }} />
                           <span style={{ marginLeft: "5px" }}>Katalog</span>
                         </MenuButton>
                       }
-
                     >
-                      <SubMenu
-                        label="String"
-                        className={classes.SubMenu}
+                      {parentCategories?.map((item: any, key: any) => (
+                        <>
+                          {/* {console.log(item)} */}
+                          <SubMenu label={item.parent_category.name} className={classes.SubMenu} key={key}>
 
-
-                      >
-                        {category?.string?.map((item: any, key: any) => {
-                          const getCategory = () => {
-                            getCategoryProductById(item.parent_id);
-                          };
-                          return (
-                            <>
-                              <MenuItem className={classes.MenuItem}>
-                                <Link
-                                  to={`/product/product-by-category/${item.parent_id}`}
-                                  key={key}
-                                  className={classes.navLink}
-                                >
-                                  {item.name}
-                                </Link>
-                              </MenuItem>
-                            </>
-                          );
-                        })}
-                      </SubMenu>
-
-
-
+                          </SubMenu>
+                        </>
+                      ))}
                     </Menu>
                   </div>
-                  <div style={{ width: '100%', marginLeft: '5px' }} >
+                  <div style={{ width: "100%", marginLeft: "5px" }}>
                     <SearchDemo />
                   </div>
 
-                  <div style={{ marginRight: '15px' }}>
+                  <div style={{ marginRight: "15px" }}>
                     <AccountMenu />
-
                   </div>
                 </div>
               </Grid>
             </Grid>
           </Container>
-          <Container maxWidth="xl" className={classes.NavbarContainerMax} >
-            <Grid spacing={1} container  >
-
+          <Container maxWidth="xl" className={classes.NavbarContainerMax}>
+            <Grid spacing={1} container>
               <Grid
                 item
                 xs={12}
@@ -479,39 +520,40 @@ const BackToTop = () => {
                 className={classes.NavbarInsiteMax}
               >
                 <Link to="/">
-                  <div style={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }} >
+                  <div
+                    style={{
+                      textAlign: "center",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
                     <img src={Ys} alt="Logo" className={classes.Logo} />
                   </div>
                 </Link>
               </Grid>
-              <Grid
-                item
-                xs={2}
-                md={2}
-                lg={1}
-              >
+              <Grid item xs={2} md={2} lg={1}>
                 <Menu
                   menuButton={
-                    <MenuButton
-                      className={classes.menuButtonMax}
-                    >
+                    <MenuButton className={classes.menuButtonMax}>
                       <ListIcon />
                       <span style={{ marginLeft: "5px" }}>Katalog</span>
                     </MenuButton>
                   }
-
                 >
-                  <SubMenu
-                    label="String"
-                    className={classes.SubMenu}
-                  >
-                    {category?.string?.map((item: any, key: any) => {
+                  <SubMenu label="String" className={classes.SubMenu}>
+                    {/* {console.log(category)} */}
+                    {/* {category?.["string"]?.map((item: any, key: any) => {
                       const getCategory = () => {
                         getCategoryProductById(item.parent_id);
                       };
                       return (
                         <>
-                          <MenuItem style={{ width: '400px', marginLeft: '10px !important' }} >
+                          <MenuItem
+                            style={{
+                              width: "400px",
+                              marginLeft: "10px !important",
+                            }}
+                          >
                             <Link
                               to={`/product/product-by-category/${item.parent_id}`}
                               key={key}
@@ -522,19 +564,21 @@ const BackToTop = () => {
                           </MenuItem>
                         </>
                       );
-                    })}
+                    })} */}
                   </SubMenu>
-                  <SubMenu
-                    label="String"
-                    className={classes.SubMenu}
-                  >
-                    {category?.string?.map((item: any, key: any) => {
+                  <SubMenu label="String" className={classes.SubMenu}>
+                    {/* {category?.map((item: any, key: any) => {
                       const getCategory = () => {
                         getCategoryProductById(item.parent_id);
                       };
                       return (
                         <>
-                          <MenuItem style={{ width: '400px', marginLeft: '10px !important' }} >
+                          <MenuItem
+                            style={{
+                              width: "400px",
+                              marginLeft: "10px !important",
+                            }}
+                          >
                             <Link
                               to={`/product/product-by-category/${item.parent_id}`}
                               key={key}
@@ -545,9 +589,8 @@ const BackToTop = () => {
                           </MenuItem>
                         </>
                       );
-                    })}
+                    })} */}
                   </SubMenu>
-
                 </Menu>
               </Grid>
               <Grid
@@ -555,19 +598,12 @@ const BackToTop = () => {
                 xs={10}
                 md={8}
                 lg={10}
-
                 className={classes.NavbarInsite}
               >
-                <Grid item md={9} sx={{ marginLeft: '16px', width: '100%' }}>
+                <Grid item md={9} sx={{ marginLeft: "16px", width: "100%" }}>
                   <MainSearch />
                 </Grid>
-                <Grid
-                  item
-
-                  md={3}
-
-                  className={classes.twoGrid}
-                >
+                <Grid item md={3} className={classes.twoGrid}>
                   <div className={classes.NavbarRight}>
                     <Tooltip title="Telegram">
                       <a href="https://t.me/s/yengil_credit">
@@ -596,7 +632,6 @@ const BackToTop = () => {
                     </Tooltip>
 
                     <AccountMenu />
-
                   </div>
                 </Grid>
               </Grid>

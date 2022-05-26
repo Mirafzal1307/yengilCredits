@@ -483,7 +483,7 @@ const CardProducts = () => {
                         style={{
                           margin: 0,
                           marginTop: "19px",
-                          height: "30px",
+                          height: "45px",
                           fontSize: "14px",
                           fontWeight: "600",
                         }}
@@ -688,7 +688,7 @@ const CardProducts = () => {
                         style={{
                           margin: 0,
                           marginTop: "19px",
-                          height: "30px",
+                          height: "45px",
                           fontSize: "14px",
                           fontWeight: "600",
                         }}
@@ -894,7 +894,7 @@ const CardProducts = () => {
                         style={{
                           margin: 0,
                           marginTop: "19px",
-                          height: "30px",
+                          height: "45px",
                           fontSize: "14px",
                           fontWeight: "600",
                         }}

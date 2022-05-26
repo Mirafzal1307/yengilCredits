@@ -66,7 +66,7 @@ deploy_test:
     - chmod 400 $SSH_PRIVATE_KEY
     - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker login -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' $CI_REGISTRY"
     - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker pull registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:test"
-    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker stop yengil_front_test && docker rm yengil_front_test && docker run -e "REACT_APP_BASE_URL=https://api.yengilcredit.uz" -e "PORT=2929" -e "MINIO_ENDPOINT=https://minio.yengilcredit.uz" -e "BRAND_BACKET_NAME=/brand/" -p 2929:2929 --name yengil_front_test -d registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:test"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker stop yengil_front_test && docker rm yengil_front_test && docker run -e "REACT_APP_BASE_URL=https://test.api.yengilcredit.uz" -e "PORT=2929" -e "MINIO_ENDPOINT=https://test.minio.yengilcredit.uz" -e "BRAND_BACKET_NAME=/brand/" -p 2929:2929 --name yengil_front_test -d registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:test"
 
 
 deploy_prod:

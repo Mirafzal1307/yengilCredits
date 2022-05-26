@@ -27,36 +27,31 @@ const accessToken = localStorage.getItem("auth");
 //   },
 // };
 
+
+
+// let accessToken = localStorage.getItem('auth')
+// console.log(user);
+
+
+
+// console.log(`------${accessToken}`)
 class ApiClient {
   instance: AxiosInstance;
+  user: any;
   constructor(baseURL: any) {
+    this.user = JSON.parse(JSON.stringify(localStorage.getItem('auth') || '{}'));
+    // const token = this.user;
+    console.log(this.user);
+    
     this.instance = axios.create({
       baseURL,
       headers: {
-        // Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
-    this.instance.interceptors.request.use(
-      function (config) {
-        console.info("AXIOS: request use success --", config);
-        config.headers = {
-          'Authorization': `Bearer ${accessToken}`
-        }
-        return config;
-      },
-      function (error: AxiosError) {
-        console.error(
-          "AXIOS: request use error --",
-          error.message,
-          error.response,
-          error.stack
-        );
-        // Do something with request error
-        return Promise.reject(error);
+        "Authorization": `Bearer ${this.user}`,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+
       }
-    );
+  });
   }
 
   fetch<T>(config: AxiosRequestConfig): AxiosPromise<T> {
@@ -83,4 +78,5 @@ class ApiClient {
     return this.fetch<T>({ method: "PUT", url, data });
   }
 }
-export default () => new ApiClient(API_URL);
+export default () =>
+  new ApiClient(API_URL)
