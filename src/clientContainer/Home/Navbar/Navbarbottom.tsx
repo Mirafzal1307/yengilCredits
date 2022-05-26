@@ -19,15 +19,9 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   img: {
     width: "100% !important",
-
-    // borderRadius: px !important",
     cursor: "pointer",
     "&:hover": {
-      opacity: "0.9 !important",
-      // transform: 'scale(1.05)',
-      
-     
-
+      opacity: "0.9 !important",  
     },
     
   },
