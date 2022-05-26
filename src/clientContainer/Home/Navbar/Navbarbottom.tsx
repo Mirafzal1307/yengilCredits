@@ -2,32 +2,26 @@ import { useEffect, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Container } from "@mui/material";
-import Aksesuar from "../../../Images/1.svg";
-import Desktop from "../../../Images/2.svg";
-import forKitchen from "../../../Images/3.svg";
-import refrigerators from "../../../Images/4.svg";
-import smartphones from "../../../Images/5.svg";
-import six from "../../../Images/6.svg";
-import seven from "../../../Images/7.svg";
-import eight from "../../../Images/8.svg";
-import wash from "../../../Images/9.svg";
-import washing from "../../../Images/10.svg";
-import washingmashine from "../../../Images/11.svg";
+import Aksesuar from "../../../Images/Group1.png";
+import Desktop from "../../../Images/Group2.png";
+import forKitchen from "../../../Images/Group3.png";
+import refrigerators from "../../../Images/Group4.png";
+import smartphones from "../../../Images/Group5.png";
+import six from "../../../Images/Group6.png";
+import seven from "../../../Images/Group7.png";
+import eight from "../../../Images/Group8.png";
+import wash from "../../../Images/Group9.png";
+import washing from "../../../Images/Group10.png";
+import washingmashine from "../../../Images/Group11.png";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   img: {
     width: "100% !important",
-
-    // borderRadius: px !important",
     cursor: "pointer",
     "&:hover": {
-      opacity: "0.9 !important",
-      // transform: 'scale(1.05)',
-      
-     
-
+      opacity: "0.9 !important",  
     },
     
   },
