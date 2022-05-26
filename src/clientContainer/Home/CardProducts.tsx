@@ -239,6 +239,8 @@ const CardProducts = () => {
                 450: {
                   type: "loop",
                   perPage: 1,
+                  arrows: false,
+                  pagination: true
                 },
                 700: {
                   perPage: 2,
@@ -442,6 +444,9 @@ const CardProducts = () => {
                 450: {
                   type: "loop",
                   perPage: 1,
+                  arrows: false,
+       
+                  pagination: true
                 },
                 700: {
                   perPage: 2,
@@ -647,6 +652,8 @@ const CardProducts = () => {
                 450: {
                   type: "loop",
                   perPage: 1,
+                  arrows: false,
+                  pagination: true
                 },
                 700: {
                   perPage: 2,
@@ -853,6 +860,8 @@ const CardProducts = () => {
                 450: {
                   type: "loop",
                   perPage: 1,
+                  arrows: false,
+                  pagination: true
                 },
                 700: {
                   perPage: 2,
