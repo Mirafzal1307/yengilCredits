@@ -7,6 +7,7 @@ const Order: React.FC = () => {
     <div>
       <MiniDrawer />
       <Container
+       maxWidth="lg"
         style={{ marginTop: "50px"}}
       >
         <Typography

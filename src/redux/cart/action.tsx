@@ -33,7 +33,7 @@ export function getDemoProducts(products: Product[]): ProductActions {
 
 export function fetchProducts() {
     return (dispatch: Dispatch) => {
-        fetch("https://api.yengilcredit.uz/main/")
+        fetch("https://test.api.yengilcredit.uz/main/")
             .then((response) => response.json())
     };
 }
