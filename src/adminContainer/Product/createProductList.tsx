@@ -397,6 +397,7 @@ const ProductsCreate = () => {
         });
     } catch (err) {
       setNotify({
+
         isOpen: true,
         message: `${err}`,
         type: "error",
