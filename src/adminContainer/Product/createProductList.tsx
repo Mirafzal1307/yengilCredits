@@ -375,27 +375,29 @@ const ProductsCreate = () => {
     try {
       postProductCreate(form)
         .then(async (res: any) => {
-          if (res.status === 200) {
+          if (res.status === 400) {
             setNotify({
               isOpen: true,
-              message: "Muvaffaqiyatli yaratildi.",
-              type: "success",
+              message: `Xatolik yuz berdi!`,
+              type: "error",
             });
-            setTimeout(() => {
-              navigate("/product");
-            }, 1000)
+        
 
           }
         })
         .catch((error) => {
           setNotify({
             isOpen: true,
-            message: `${error}`,
-            type: "error",
+            message: "Muafaqiyatli yaratildi",
+            type: "success",
           });
+          setTimeout(() => {
+            navigate("/product");
+          }, 1000)
         });
     } catch (err) {
       setNotify({
+
         isOpen: true,
         message: `${err}`,
         type: "error",

@@ -17,7 +17,7 @@ import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import BigPhoto from "../../Images/BigPhoto.svg";
 import Shop from "../../Images/baskets.png";
-import CancelBtnImg from "../../Images/Group56524.png";
+import CancelBtnImg from "../../Images/GroupsBack.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { Link } from "react-router-dom";
 import { refresh } from "../../adminContainer/Modal/refresh";
@@ -204,7 +204,7 @@ const useStyles = makeStyles((theme) => ({
   splide: {
     marginTop: "10px !important",
     marginBottom: "10px !important",
-    width: "100% !important",
+    // width: "100% !important",
     // display: "flex",
     // justifyContent: "center"
   },
@@ -382,6 +382,7 @@ const useStyles = makeStyles((theme) => ({
   },
   Links: {
     paddingTop: "10px",
+    display: 'flex'
   },
   linksInsideSpan: {},
   BodyCardInside: {
@@ -425,12 +426,18 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     fontWeight: 400,
     color: "#676767",
+    [theme.breakpoints.down(600)]: {
+      listStyle: 'none !important',
+      marginLeft: "10px",
+    }
+
   },
   li_span: {
     fontFamily: "Poppins",
     fontSize: "20px",
-    fontWeight: 300,
+    fontWeight: 400,
     margin: 0,
+    color: "#676767",
   },
   parent_div: {
     display: "flex",
@@ -448,6 +455,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
+  spane: {
+    [theme.breakpoints.down(600)]: {
+      display: 'none'
+    }
+  }
 }));
 
 const ProductDetails = () => {
@@ -458,6 +470,7 @@ const ProductDetails = () => {
 
   let pro: any = products?.Product;
   let des: any = products?.Description[0];
+  console.log(des);
 
   const { id } = useParams();
   const classes = useStyles();
@@ -558,7 +571,7 @@ const ProductDetails = () => {
               </div>
               <div className={classes.Links}>
                 <span
-                  style={{ fontWeight: "500", fontSize: "18px", color: "#000" }}
+                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                 >
                   <Link to="/" style={{ color: "rgb(159 159 159)" }}>
                     Bosh sahifa
@@ -574,7 +587,8 @@ const ProductDetails = () => {
                   </Link>
                 </span>
                 <span
-                  style={{ fontWeight: "600", fontSize: "18px", color: "#000" }}
+                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                  className={classes.spane}
                 >
                   {pro?.map((parCategory: any) => (
                     <Link
@@ -593,12 +607,12 @@ const ProductDetails = () => {
                         }}
                       >
                         ›
-                      </span> */}
+                      </span> */}  ›
                     </Link>
                   ))}
                 </span>
                 <span
-                  style={{ fontWeight: "600", fontSize: "18px", color: "#000" }}
+                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                 >
                   {pro?.map((SubCategory: any) => (
                     <Link
@@ -608,7 +622,7 @@ const ProductDetails = () => {
                         textTransform: "capitalize",
                       }}
                     >
-                      › {SubCategory?.category?.name}
+                     {SubCategory?.category?.name}
                     </Link>
                   ))}
                 </span>
@@ -620,8 +634,8 @@ const ProductDetails = () => {
 
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl" className={classes.bigBox}>
-          <Grid style={{ display: "flex" }}>
-            <Grid container item md={6} xs={12} className={classes.right}>
+          <Grid container style={{ display: "flex" }}>
+            <Grid item xs={12} md={6} className={classes.right}>
               <Splide
                 className={classes.splide}
                 options={{
@@ -679,7 +693,7 @@ const ProductDetails = () => {
                 </div>
               </Grid> */}
             </Grid>
-            <Grid item xs={7} style={{}}>
+            <Grid item xs={12} md={6} style={{}}>
               <div
                 style={{
                   display: "block",
@@ -692,7 +706,7 @@ const ProductDetails = () => {
                       <>
                         <div className={classes.parent_div}>
                           <li className={classes.li}>Nomi</li>
-                          <p className={classes.li_span}>{product?.name}</p>
+                          <p className={classes.li_span}>{product?.short_name}</p>
                         </div>
                         <div className={classes.parent_div}>
                           <li className={classes.li}>Brend</li>
@@ -760,6 +774,422 @@ const ProductDetails = () => {
           </Grid>
         </Container>
       </div>
+      <Container maxWidth="xl" style={{ marginTop: "40px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h2 className={classes.title} style={{ fontWeight: "600" }}>
+            Sizlar uchun maxsus mahsulotlar
+          </h2>
+          <div className={classes.barchasi}>
+            <Link to="/all/card/1" style={{ fontWeight: "600" }}>
+              <a href="#">Barchasi</a>
+            </Link>
+          </div>
+        </div>
+        <div className={classes.mainCard}>
+          <Splide
+            options={{
+
+
+              perPage: 6,
+              pagination: false,
+              arrows: true,
+              //type: 'loop',
+              //drag: 'free',
+              gap: "0.7rem",
+              autoScroll: {
+                speed: 2,
+              },
+              breakpoints: {
+                450: {
+                  type: "loop",
+                  perPage: 1,
+                },
+                700: {
+                  perPage: 2,
+                },
+                992: {
+                  perPage: 3,
+                },
+                1300: {
+                  perPage: 4,
+                },
+              },
+            }}
+          >
+            {loading ? (
+              <CircularProgress
+                style={{
+                  marginTop: "30px",
+                  margin: "auto",
+                  marginBottom: "30px",
+                }}
+              />
+            ) : (
+              recommended &&
+              recommended.map((item: any) => (
+                <SplideSlide className={classes.splide}>
+                  <Box className={classes.bodyCard} key={item.id}>
+                    <Box>
+                      <Link to={`/product/client/details/${item?.id}`}>
+                        <div className={classes.BodyCardInside}>
+                          <img
+                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
+                            alt="img"
+                            style={{ width: "150px", height: "150px" }}
+                          />
+                        </div>
+                      </Link>
+                      <h6
+                        className={classes.cardTitle}
+                        style={{
+                          margin: 0,
+                          marginTop: "19px",
+                          height: "30px",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        {item.short_name}
+                      </h6>
+                      <h6
+                        className={classes.cardTitle}
+                        style={{
+                          margin: 0,
+                          marginTop: "0px",
+                          marginBottom: "20px",
+                          height: "30px",
+                          fontWeight: "400",
+                          fontSize: "14px",
+                          fontFamily: "Poppins",
+                        }}
+                      >
+                        {item.name}
+                      </h6>
+                      {item.discount === 0 ? (
+                        <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: "none !important",
+                            paddingBottom: "22px",
+                          }}
+                        ></p>
+                      ) : (
+                        <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: "block !important",
+                          }}
+                        >
+                          {item?.price?.toLocaleString()} so'm
+                        </p>
+                      )}
+
+                      <p
+                        className={classes.cardPrice}
+                        style={{
+                          marginBottom: "10px",
+                          height: "45px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        {item?.after_discount?.toLocaleString()} so'm
+                      </p>
+
+                      {item.availability === true ? (
+                        <button
+                          className={classes.cardButton}
+                          style={{ fontWeight: "600" }}
+                          onClick={() => {
+                            dispatch(addToCart(item));
+                            setNotify({
+                              isOpen: true,
+                              message: "Savatchaga qo'shildi",
+                              type: "success",
+                            });
+                          }}
+                        >
+                          <img
+                            src={Shop}
+                            alt=""
+                            style={{ paddingRight: "10px" }}
+                          />
+                          Savatchaga
+                        </button>
+                      ) : (
+                        <button
+                          className={classes.cardButton}
+                          style={{ fontWeight: "600" }}
+                        >
+                          <img
+                            src={cart2}
+                            alt="img"
+                            style={{
+                              marginRight: "5px",
+                              border: "2px solid #C33E4D",
+                            }}
+                          />
+                          Sotuvda yo'q
+                        </button>
+                      )}
+                      {item.discount === 0 ? (
+                        <span
+                          className={classes.cardSpan}
+                          style={{
+                            fontWeight: "600",
+                            display: "none !important",
+                          }}
+                        ></span>
+                      ) : (
+                        <span
+                          className={classes.cardSpan}
+                          style={{
+                            fontWeight: "600",
+                            display: "block !important",
+                          }}
+                        >
+                          {item.discount !== 0 ? item.discount : null}%
+                        </span>
+                      )}
+                    </Box>
+                  </Box>
+                </SplideSlide>
+              ))
+            )}
+          </Splide>
+        </div>
+        <div className={classes.cardBottom}>
+          <Link
+            to="/all/card/1"
+            className={classes.bottomText}
+            style={{ fontWeight: "600" }}
+          >
+            Barcha mahsulotlar
+          </Link>
+        </div>
+      </Container>
+      <Container maxWidth="xl">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h2 className={classes.title} style={{ fontWeight: "600" }}>
+            Ommabob maxsulotlar
+          </h2>
+          <div className={classes.barchasi}>
+            <Link to="/all/card/1" style={{ fontWeight: "600" }}>
+              <a href="#">Barchasi</a>
+            </Link>
+          </div>
+        </div>
+        <div className={classes.mainCard}>
+          <Splide
+            options={{
+
+
+              perPage: 6,
+              pagination: false,
+              arrows: true,
+              //type: 'loop',
+              //drag: 'free',
+              gap: "0.7rem",
+              autoScroll: {
+                speed: 2,
+              },
+              breakpoints: {
+                450: {
+                  type: "loop",
+                  perPage: 1,
+                },
+                700: {
+                  perPage: 2,
+                },
+                992: {
+                  perPage: 3,
+                },
+                1300: {
+                  perPage: 4,
+                },
+              },
+            }}
+          >
+            {loading ? (
+              <CircularProgress
+                style={{
+                  margin: "auto",
+                  marginTop: "30px",
+                  marginBottom: "30px",
+                }}
+              />
+            ) : (
+              popular &&
+              popular.map((item: any) => (
+                <SplideSlide className={classes.splide}>
+                  <Box className={classes.bodyCard} key={item.id}>
+                    <Box>
+                      <Link to={`/product/client/details/${item?.id}`}>
+                        <div className={classes.BodyCardInside}>
+                          <img
+                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
+                            alt="img"
+                            style={{ width: "150px", height: "150px" }}
+                          />
+                        </div>
+                      </Link>
+                      <h6
+                        className={classes.cardTitle}
+                        style={{
+                          margin: 0,
+                          marginTop: "19px",
+                          height: "30px",
+                          fontSize: "14px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        {item.short_name}
+                      </h6>
+                      <h6
+                        className={classes.cardTitle}
+                        style={{
+                          margin: 0,
+                          marginTop: "0px",
+                          marginBottom: "20px",
+                          height: "30px",
+                          fontWeight: "400",
+                          fontSize: "14px",
+                          fontFamily: "Poppins",
+                        }}
+                      >
+                        {item.name}
+                      </h6>
+                      {item.discount === 0 ? (
+                        <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: "none !important",
+                            paddingBottom: "22px",
+                          }}
+                        ></p>
+                      ) : (
+                        <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+                            textDecoration: "line-through",
+                            fontWeight: "500",
+                            display: "block !important",
+                          }}
+                        >
+                          {item?.price?.toLocaleString()} so'm
+                        </p>
+                      )}
+                      <p
+                        className={classes.cardPrice}
+                        style={{
+                          marginBottom: "10px",
+                          height: "45px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        {item.after_discount?.toLocaleString()} so'm
+                      </p>
+
+                      {item.availability === true ? (
+                        <button
+                          className={classes.cardButton}
+                          style={{ fontWeight: "600" }}
+                          onClick={() => {
+                            dispatch(addToCart(item));
+                            setNotify({
+                              isOpen: true,
+                              message: "Savatchaga qo'shildi",
+                              type: "success",
+                            });
+                          }}
+                        >
+                          <img
+                            src={Shop}
+                            alt=""
+                            style={{ paddingRight: "10px" }}
+                          />
+                          Savatchaga
+                        </button>
+                      ) : (
+                        <button
+                          className={classes.cardButton}
+                          style={{ fontWeight: "600" }}
+                        >
+                          <img
+                            src={cart2}
+                            alt="img"
+                            style={{
+                              marginRight: "5px",
+                              border: "2px solid #C33E4D",
+                            }}
+                          />
+                          Sotuvda yo'q
+                        </button>
+                      )}
+                      {item.discount === 0 ? (
+                        <span
+                          className={classes.cardSpan}
+                          style={{
+                            fontWeight: "600",
+                            display: "none !important",
+                          }}
+                        ></span>
+                      ) : (
+                        <span
+                          className={classes.cardSpan}
+                          style={{
+                            fontWeight: "600",
+                            display: "block !important",
+                          }}
+                        >
+                          {item.discount !== 0 ? item.discount : null}%
+                        </span>
+                      )}
+                    </Box>
+                  </Box>
+                </SplideSlide>
+              ))
+            )}
+          </Splide>
+        </div>
+        <div className={classes.cardBottom} style={{ marginBottom: "30px" }}>
+          <Link
+            to="/all/card/3"
+            className={classes.bottomText}
+            style={{ fontWeight: "600" }}
+          >
+            Barcha mahsulotlar
+          </Link>
+        </div>
+      </Container>
+
       <Footer />
       <Notification notify={notify} setNotify={setNotify} />
     </>
