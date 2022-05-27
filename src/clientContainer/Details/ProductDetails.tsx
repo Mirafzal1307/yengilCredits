@@ -449,7 +449,7 @@ const useStyles = makeStyles((theme) => ({
     height: "300px",
     borderRadius: "10px",
     display: "block",
-    margin: "auto"
+    margin: "auto",
   },
   bigBox: {
     display: "flex",
@@ -659,7 +659,7 @@ const ProductDetails = () => {
                   arrows: false,
                   pagination: false,
                   focus: "center",
-                  width: "auto"
+                  width: "auto",
                 }}
               >
                 {photo?.map((item: any) =>
