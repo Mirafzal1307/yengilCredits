@@ -64,7 +64,7 @@ function App() {
               <Route path="/product" element={<Product />} />
             </Route>
             <Route path="/order" element={<PrivateRoute />}>
-              <Route path="/order" element={<TableOrder />} />
+              <Route path="/order" element={<Order />} />
             </Route>
             <Route path="/brand" element={<PrivateRoute />}>
               <Route path="/brand" element={<Brand />} />

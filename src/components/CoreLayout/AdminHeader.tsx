@@ -16,7 +16,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -150,9 +150,6 @@ const useStyles = makeStyles({
     display: 'flex unset !important',
 
   }
-
-
-
 })
 
 
@@ -167,6 +164,13 @@ export default function MiniDrawer(props: any) {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const navigate = useNavigate()
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  }
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -211,8 +215,8 @@ export default function MiniDrawer(props: any) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose} style={{fontFamily: "Poppins", fontSize: "16px"}}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}><a onClick={logout} style={{background: "transparent", border: "none", fontSize: "16px", fontFamily: "Poppins", color: "#000"}}>Logout</a></MenuItem>
     </Menu>
   );
   const mobileMenuId = 'primary-search-account-menu-mobile';
