@@ -20,7 +20,7 @@ const HomeHeader: FC = () => {
   return (
     <div className={classes.header}>
       <MiniDrawer />
-      <Container style={{ marginTop: "50px" }}>
+      <Container  maxWidth="lg"  style={{ marginTop: "50px" }}>
         <Grid container>
           <Grid item xs={12}>
             <HomePageTop />

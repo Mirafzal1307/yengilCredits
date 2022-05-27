@@ -2,32 +2,26 @@ import { useEffect, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Container } from "@mui/material";
-import Aksesuar from "../../../Images/1.svg";
-import Desktop from "../../../Images/2.svg";
-import forKitchen from "../../../Images/3.svg";
-import refrigerators from "../../../Images/4.svg";
-import smartphones from "../../../Images/5.svg";
-import six from "../../../Images/6.svg";
-import seven from "../../../Images/7.svg";
-import eight from "../../../Images/8.svg";
-import wash from "../../../Images/9.svg";
-import washing from "../../../Images/10.svg";
-import washingmashine from "../../../Images/11.svg";
+import Aksesuar from "../../../Images/Group1.png";
+import Desktop from "../../../Images/Group2.png";
+import forKitchen from "../../../Images/Group3.png";
+import refrigerators from "../../../Images/Group4.png";
+import smartphones from "../../../Images/Group5.png";
+import six from "../../../Images/Group6.png";
+import seven from "../../../Images/Group7.png";
+import eight from "../../../Images/Group8.png";
+import wash from "../../../Images/Group9.png";
+import washing from "../../../Images/Group10.png";
+import washingmashine from "../../../Images/Group11.png";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   img: {
     width: "100% !important",
-
-    // borderRadius: px !important",
     cursor: "pointer",
     "&:hover": {
-      opacity: "0.9 !important",
-      // transform: 'scale(1.05)',
-      
-     
-
+      opacity: "0.9 !important",  
     },
     
   },
@@ -61,53 +55,54 @@ const Navbarbottom = () => {
             gap: "15px",
             breakpoints: {
               400: {
-                perPage: 1,
+                perPage: 4,
+                arrows: false,
               },
               700: {
-                perPage: 2,
+                perPage: 4,
               },
               992: {
-                perPage: 3,
+                perPage: 5,
               },
               1300: {
-                perPage: 4,
+                perPage: 6,
               },
             },
          
           }}
         >
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
-              <img src={Aksesuar} alt="" className={classes.img} />
+            <Link to={"/product/product-by-category/1007"}>
+              <img src={Aksesuar} alt="rasm" className={classes.img} />
             </Link>
           </SplideSlide   >
            <SplideSlide className={classes.Slide}>
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1008"}>
               <img src={Desktop} alt="" className={classes.img} />
             </Link>
           </SplideSlide>
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1009"}>
               <img src={forKitchen} alt="" className={classes.img} />
             </Link>
           </SplideSlide>
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1011"}>
               <img src={refrigerators} alt="" className={classes.img} />
             </Link>
           </SplideSlide>
           <SplideSlide  className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1012"}>
               <img src={smartphones} alt="" className={classes.img} />
             </Link>
           </SplideSlide>
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1016"}>
               <img src={washingmashine} alt="" className={classes.img} />
             </Link>
           </SplideSlide> 
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1018"}>
               <img src={washing} alt="" className={classes.img} />
             </Link>
           </SplideSlide> 
@@ -117,17 +112,17 @@ const Navbarbottom = () => {
             </Link>
           </SplideSlide> 
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1014"}>
               <img src={eight} alt="" className={classes.img} />
             </Link>
           </SplideSlide> 
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1013"}>
               <img src={seven} alt="" className={classes.img} />
             </Link>
           </SplideSlide> 
           <SplideSlide className={classes.Slide} >
-            <Link to={"/product/product-by-category/1015"}>
+            <Link to={"/product/product-by-category/1017"}>
               <img src={wash} alt="" className={classes.img} />
             </Link>
           </SplideSlide> 
