@@ -677,7 +677,7 @@ const ProductDetails = () => {
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
-                style={ photo?.length <= 1 ? { display: "none" } : {display: "block"}}
+                style={ photo?.length < 1 ? { display: "none" } : {display: "block"}}
               >
                 {photo?.map((item: any) =>
                   item?.map((value: any) => (
