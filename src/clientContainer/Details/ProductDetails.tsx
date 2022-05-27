@@ -454,7 +454,6 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     borderRadius: "10px",
     display: "block",
-    // margin: "auto",
   },
   bigBox: {
     display: "flex",
@@ -469,8 +468,8 @@ const useStyles = makeStyles((theme) => ({
     width: "150px",
     height: "150px",
     marginTop: "20px",
-    borderRadius: "10px"
-  }
+    borderRadius: "10px",
+  },
 }));
 
 const ProductDetails = () => {
@@ -548,7 +547,7 @@ const ProductDetails = () => {
                 <p className={classes.priceSale}>
                   <span style={{ marginRight: "10px" }}>Chegirma narxda:</span>{" "}
                   <span className={classes.productSaleSpan}>
-                    {product?.after_discount?.toLocaleString()} so’m  
+                    {product?.after_discount?.toLocaleString()} so’m
                   </span>
                 </p>
                 <div>
@@ -677,7 +676,7 @@ const ProductDetails = () => {
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
-                style={ photo?.length < 1 ? { display: "none" } : {display: "block"}}
+                // style={ photo?.length > 2 ? { display: "block" } : {display: "none"}}
               >
                 {photo?.map((item: any) =>
                   item?.map((value: any) => (
@@ -686,6 +685,11 @@ const ProductDetails = () => {
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
                         className={classes.inSwiperSlide}
+                        style={
+                          item?.length > 2
+                            ? { display: "block" }
+                            : { display: "none" }
+                        }
                       />
                     </SwiperSlide>
                   ))
