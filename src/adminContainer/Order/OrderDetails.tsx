@@ -474,7 +474,7 @@ const OrderDetails = () => {
                     {item.quantity}
                   </TableCell>
                   <TableCell align="left" className={classes.productRows}>
-                    {(item?.price?.toLocaleString() * item.quantity)?.toLocaleString()}
+                    {(item?.price * item.quantity)?.toLocaleString()}
                   </TableCell>
                 </TableRow>
               </TableBody>
