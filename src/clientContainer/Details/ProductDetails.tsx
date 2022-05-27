@@ -442,7 +442,7 @@ const useStyles = makeStyles((theme) => ({
     height: "300px",
     borderRadius: "10px",
     display: "block",
-    margin: "auto",
+    margin: "auto"
   },
   bigBox: {
     display: "flex",
@@ -506,21 +506,6 @@ const ProductDetails = () => {
         <Container maxWidth="xl">
           <img src={BigPhoto} alt="" className={classes.BigPhoto} />
         </Container>
-        {/* <div>
-          <CarouselProvider
-            naturalSlideWidth={100}
-            naturalSlideHeight={25}
-            totalSlides={3}
-          >
-            <Slider>
-              <Slide index={0}><Image src={}/></Slide>
-              <Slide index={1}>I am the second Slide.</Slide>
-              <Slide index={2}>I am the third Slide.</Slide>
-            </Slider>
-            <ButtonBack>Back</ButtonBack>
-            <ButtonNext>Next</ButtonNext>
-          </CarouselProvider>
-        </div> */}
         <Container maxWidth="xl">
           {pro?.map((product: any) => (
             <div className={classes.BigPhotoBottom}>
@@ -645,7 +630,7 @@ const ProductDetails = () => {
                   arrows: false,
                   pagination: false,
                   focus: "center",
-                  width: "auto",
+                  width: "auto"
                 }}
               >
                 {photo?.map((item: any) =>
