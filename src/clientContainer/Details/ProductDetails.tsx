@@ -17,7 +17,7 @@ import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import BigPhoto from "../../Images/BigPhoto.svg";
 import Shop from "../../Images/baskets.png";
-import CancelBtnImg from "../../Images/Group56524.png";
+import CancelBtnImg from "../../Images/GroupsBack.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { Link } from "react-router-dom";
 import { refresh } from "../../adminContainer/Modal/refresh";
@@ -204,7 +204,7 @@ const useStyles = makeStyles((theme) => ({
   splide: {
     marginTop: "10px !important",
     marginBottom: "10px !important",
-    width: "100% !important",
+    // width: "100% !important",
     // display: "flex",
     // justifyContent: "center"
   },
@@ -382,6 +382,7 @@ const useStyles = makeStyles((theme) => ({
   },
   Links: {
     paddingTop: "10px",
+    display: 'flex'
   },
   linksInsideSpan: {},
   BodyCardInside: {
@@ -425,12 +426,18 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     fontWeight: 400,
     color: "#676767",
+    [theme.breakpoints.down(600)]: {
+      listStyle: 'none !important',
+      marginLeft: "10px",
+    }
+
   },
   li_span: {
     fontFamily: "Poppins",
     fontSize: "20px",
-    fontWeight: 300,
+    fontWeight: 400,
     margin: 0,
+    color: "#676767",
   },
   parent_div: {
     display: "flex",
@@ -448,6 +455,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
+  spane: {
+    [theme.breakpoints.down(600)]: {
+      display: 'none'
+    }
+  }
 }));
 
 const ProductDetails = () => {
@@ -458,6 +470,7 @@ const ProductDetails = () => {
 
   let pro: any = products?.Product;
   let des: any = products?.Description[0];
+  console.log(des);
 
   const { id } = useParams();
   const classes = useStyles();
@@ -573,7 +586,7 @@ const ProductDetails = () => {
               </div>
               <div className={classes.Links}>
                 <span
-                  style={{ fontWeight: "500", fontSize: "18px", color: "#000" }}
+                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                 >
                   <Link to="/" style={{ color: "rgb(159 159 159)" }}>
                     Bosh sahifa
@@ -589,7 +602,8 @@ const ProductDetails = () => {
                   </Link>
                 </span>
                 <span
-                  style={{ fontWeight: "600", fontSize: "18px", color: "#000" }}
+                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                  className={classes.spane}
                 >
                   {pro?.map((parCategory: any) => (
                     <Link
@@ -608,12 +622,12 @@ const ProductDetails = () => {
                         }}
                       >
                         ›
-                      </span> */}
+                      </span> */}  ›
                     </Link>
                   ))}
                 </span>
                 <span
-                  style={{ fontWeight: "600", fontSize: "18px", color: "#000" }}
+                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                 >
                   {pro?.map((SubCategory: any) => (
                     <Link
@@ -623,7 +637,7 @@ const ProductDetails = () => {
                         textTransform: "capitalize",
                       }}
                     >
-                      › {SubCategory?.category?.name}
+                     {SubCategory?.category?.name}
                     </Link>
                   ))}
                 </span>
@@ -635,8 +649,8 @@ const ProductDetails = () => {
 
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl" className={classes.bigBox}>
-          <Grid style={{ display: "flex" }}>
-            <Grid container item md={6} xs={12} className={classes.right}>
+          <Grid container style={{ display: "flex" }}>
+            <Grid item xs={12} md={6} className={classes.right}>
               <Splide
                 className={classes.splide}
                 options={{
@@ -694,7 +708,7 @@ const ProductDetails = () => {
                 </div>
               </Grid> */}
             </Grid>
-            <Grid item xs={7} style={{}}>
+            <Grid item xs={12} md={6} style={{}}>
               <div
                 style={{
                   display: "block",
@@ -707,7 +721,7 @@ const ProductDetails = () => {
                       <>
                         <div className={classes.parent_div}>
                           <li className={classes.li}>Nomi</li>
-                          <p className={classes.li_span}>{product?.name}</p>
+                          <p className={classes.li_span}>{product?.short_name}</p>
                         </div>
                         <div className={classes.parent_div}>
                           <li className={classes.li}>Brend</li>
@@ -795,7 +809,7 @@ const ProductDetails = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-              width: "100%",
+
 
               perPage: 6,
               pagination: false,
@@ -803,24 +817,24 @@ const ProductDetails = () => {
               //type: 'loop',
               //drag: 'free',
               gap: "0.7rem",
-              // autoScroll: {
-              //   speed: 2,
-              // },
-              // breakpoints: {
-              //   450: {
-              //     type: "loop",
-              //     perPage: 1,
-              //   },
-              //   700: {
-              //     perPage: 2,
-              //   },
-              //   992: {
-              //     perPage: 3,
-              //   },
-              //   1300: {
-              //     perPage: 4,
-              //   },
-              // },
+              autoScroll: {
+                speed: 2,
+              },
+              breakpoints: {
+                450: {
+                  type: "loop",
+                  perPage: 1,
+                },
+                700: {
+                  perPage: 2,
+                },
+                992: {
+                  perPage: 3,
+                },
+                1300: {
+                  perPage: 4,
+                },
+              },
             }}
           >
             {loading ? (
@@ -1003,7 +1017,7 @@ const ProductDetails = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-        
+
 
               perPage: 6,
               pagination: false,
