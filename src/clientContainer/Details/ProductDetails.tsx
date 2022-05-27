@@ -450,11 +450,11 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
   inSplideSlide: {
-    width: "auto",
-    height: "300px",
+    width: "88%",
+    height: "auto",
     borderRadius: "10px",
     display: "block",
-    margin: "auto",
+    // margin: "auto",
   },
   bigBox: {
     display: "flex",
