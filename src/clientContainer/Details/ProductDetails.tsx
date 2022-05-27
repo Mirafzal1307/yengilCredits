@@ -17,11 +17,18 @@ import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import BigPhoto from "../../Images/BigPhoto.svg";
 import Shop from "../../Images/baskets.png";
-import CancelBtnImg from "../../Images/Group56524.png";
+import CancelBtnImg from "../../Images/GroupsBack.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { Link } from "react-router-dom";
 import { refresh } from "../../adminContainer/Modal/refresh";
 import "@splidejs/splide/dist/css/splide.min.css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs } from "swiper";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import "./style.css";
 
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
@@ -204,7 +211,7 @@ const useStyles = makeStyles((theme) => ({
   splide: {
     marginTop: "10px !important",
     marginBottom: "10px !important",
-    width: "100% !important",
+    // width: "100% !important",
     // display: "flex",
     // justifyContent: "center"
   },
@@ -382,6 +389,7 @@ const useStyles = makeStyles((theme) => ({
   },
   Links: {
     paddingTop: "10px",
+    display: "flex",
   },
   linksInsideSpan: {},
   BodyCardInside: {
@@ -425,12 +433,17 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     fontWeight: 400,
     color: "#676767",
+    [theme.breakpoints.down(600)]: {
+      listStyle: "none !important",
+      marginLeft: "10px",
+    },
   },
   li_span: {
     fontFamily: "Poppins",
     fontSize: "20px",
-    fontWeight: 300,
+    fontWeight: 400,
     margin: 0,
+    color: "#676767",
   },
   parent_div: {
     display: "flex",
@@ -438,16 +451,27 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
   inSplideSlide: {
-    width: "auto",
-    height: "300px",
+    width: "88%",
+    height: "auto",
     borderRadius: "10px",
     display: "block",
-    margin: "auto"
+    // margin: "auto",
   },
   bigBox: {
     display: "flex",
     alignItems: "center",
   },
+  spane: {
+    [theme.breakpoints.down(600)]: {
+      display: "none",
+    },
+  },
+  inSwiperSlide: {
+    width: "150px",
+    height: "150px",
+    // marginTop: "20px",
+    borderRadius: "10px"
+  }
 }));
 
 const ProductDetails = () => {
@@ -458,6 +482,7 @@ const ProductDetails = () => {
 
   let pro: any = products?.Product;
   let des: any = products?.Description[0];
+  console.log(des);
 
   const { id } = useParams();
   const classes = useStyles();
@@ -498,6 +523,7 @@ const ProductDetails = () => {
     const res: any = await getProductItem(id);
     setProducts(res?.data);
   };
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
   return (
     <>
@@ -506,21 +532,6 @@ const ProductDetails = () => {
         <Container maxWidth="xl">
           <img src={BigPhoto} alt="" className={classes.BigPhoto} />
         </Container>
-        {/* <div>
-          <CarouselProvider
-            naturalSlideWidth={100}
-            naturalSlideHeight={25}
-            totalSlides={3}
-          >
-            <Slider>
-              <Slide index={0}><Image src={}/></Slide>
-              <Slide index={1}>I am the second Slide.</Slide>
-              <Slide index={2}>I am the third Slide.</Slide>
-            </Slider>
-            <ButtonBack>Back</ButtonBack>
-            <ButtonNext>Next</ButtonNext>
-          </CarouselProvider>
-        </div> */}
         <Container maxWidth="xl">
           {pro?.map((product: any) => (
             <div className={classes.BigPhotoBottom}>
@@ -538,7 +549,7 @@ const ProductDetails = () => {
                 <p className={classes.priceSale}>
                   <span style={{ marginRight: "10px" }}>Chegirma narxda:</span>{" "}
                   <span className={classes.productSaleSpan}>
-                    {product?.after_discount?.toLocaleString()} so’m
+                    {product?.after_discount?.toLocaleString()} so’m  
                   </span>
                 </p>
                 <div>
@@ -573,7 +584,7 @@ const ProductDetails = () => {
               </div>
               <div className={classes.Links}>
                 <span
-                  style={{ fontWeight: "500", fontSize: "18px", color: "#000" }}
+                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                 >
                   <Link to="/" style={{ color: "rgb(159 159 159)" }}>
                     Bosh sahifa
@@ -589,7 +600,8 @@ const ProductDetails = () => {
                   </Link>
                 </span>
                 <span
-                  style={{ fontWeight: "600", fontSize: "18px", color: "#000" }}
+                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                  className={classes.spane}
                 >
                   {pro?.map((parCategory: any) => (
                     <Link
@@ -608,12 +620,13 @@ const ProductDetails = () => {
                         }}
                       >
                         ›
-                      </span> */}
+                      </span> */}{" "}
+                      ›
                     </Link>
                   ))}
                 </span>
                 <span
-                  style={{ fontWeight: "600", fontSize: "18px", color: "#000" }}
+                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                 >
                   {pro?.map((SubCategory: any) => (
                     <Link
@@ -623,7 +636,7 @@ const ProductDetails = () => {
                         textTransform: "capitalize",
                       }}
                     >
-                      › {SubCategory?.category?.name}
+                      {SubCategory?.category?.name}
                     </Link>
                   ))}
                 </span>
@@ -635,66 +648,54 @@ const ProductDetails = () => {
 
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl" className={classes.bigBox}>
-          <Grid style={{ display: "flex" }}>
-            <Grid container item md={6} xs={12} className={classes.right}>
-              <Splide
-                className={classes.splide}
-                options={{
-                  perPage: 1,
-                  autoplay: true,
-                  arrows: false,
-                  pagination: false,
-                  focus: "center",
-                  width: "auto"
-                }}
+          <Grid container style={{ display: "flex" }}>
+            <Grid item xs={12} md={6}>
+              <Swiper
+                  
+                loop={true}
+                spaceBetween={10}
+                navigation={false}
+                thumbs={{ swiper: thumbsSwiper }}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiper2"
               >
                 {photo?.map((item: any) =>
                   item?.map((value: any) => (
-                    <SplideSlide>
-                      {console.log(
-                        `${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`
-                      )}
+                    <SwiperSlide>
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
                         className={classes.inSplideSlide}
                       />
-                    </SplideSlide>
+                    </SwiperSlide>
                   ))
                 )}
-              </Splide>
-              {/* <div>
-                {photo?.map((item: any) => (
-                  <img
-                    style={{
-                      width: "auto",
-                      height: "500px",
-                      borderRadius: "10px",
-                      filter: "drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))",
-                    }}
-                    src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`}
-                    alt="Rasm bor edi"
-                  />
-                ))}
-
-              </div>
-              <Grid item xs={12} md={3} className={classes.right2}>
-                <div className={classes.imgDiv}>
-                  {photo?.map((item: any) => (
-                    <img
-                      style={{
-                        width: "auto",
-                        height: "100px",
-                        borderRadius: "10px",
-                      }}
-                      src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.name}`}
-                      alt="Rasm bor edi"
-                    />
-                  ))}
-                </div>
-              </Grid> */}
+              </Swiper>
+              <Swiper
+                onClick={setThumbsSwiper}
+                loop={true}
+                spaceBetween={10}
+                slidesPerView={3}
+                freeMode={true}
+                watchSlidesProgress={true}
+                modules={[FreeMode, Navigation, Thumbs]}
+             
+                className="mySwiper"
+              >
+                {photo?.map((item: any) =>
+                  item?.map((value: any) => (
+                    <SwiperSlide>
+                      <img
+                        src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
+                        alt="Rasm bor edi"
+                        className={classes.inSwiperSlide}
+                      />
+                    </SwiperSlide>
+                  ))
+                )}
+              </Swiper>
             </Grid>
-            <Grid item xs={7} style={{}}>
+            <Grid item xs={12} md={6} style={{}}>
               <div
                 style={{
                   display: "block",
@@ -707,7 +708,9 @@ const ProductDetails = () => {
                       <>
                         <div className={classes.parent_div}>
                           <li className={classes.li}>Nomi</li>
-                          <p className={classes.li_span}>{product?.name}</p>
+                          <p className={classes.li_span}>
+                            {product?.short_name}
+                          </p>
                         </div>
                         <div className={classes.parent_div}>
                           <li className={classes.li}>Brend</li>
@@ -795,32 +798,30 @@ const ProductDetails = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-              width: "100%",
-
               perPage: 6,
               pagination: false,
               arrows: true,
               //type: 'loop',
               //drag: 'free',
               gap: "0.7rem",
-              // autoScroll: {
-              //   speed: 2,
-              // },
-              // breakpoints: {
-              //   450: {
-              //     type: "loop",
-              //     perPage: 1,
-              //   },
-              //   700: {
-              //     perPage: 2,
-              //   },
-              //   992: {
-              //     perPage: 3,
-              //   },
-              //   1300: {
-              //     perPage: 4,
-              //   },
-              // },
+              autoScroll: {
+                speed: 2,
+              },
+              breakpoints: {
+                450: {
+                  type: "loop",
+                  perPage: 1,
+                },
+                700: {
+                  perPage: 2,
+                },
+                992: {
+                  perPage: 3,
+                },
+                1300: {
+                  perPage: 4,
+                },
+              },
             }}
           >
             {loading ? (
@@ -1003,8 +1004,6 @@ const ProductDetails = () => {
         <div className={classes.mainCard}>
           <Splide
             options={{
-        
-
               perPage: 6,
               pagination: false,
               arrows: true,
