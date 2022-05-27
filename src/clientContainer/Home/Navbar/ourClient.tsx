@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     img: {
         width: "100% !important",
         cursor: "pointer",
-        height: "calc(((100% + 96px) / 3) - 15px)",
+        height: "calc(((100% + 110px) / 3) - 15px)",
         [theme.breakpoints.up(600)]: {
             width: "60% !important",
             height: "calc(((100% + 130px) / 3) - 15px)",
