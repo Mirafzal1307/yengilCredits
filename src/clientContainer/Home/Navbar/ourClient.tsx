@@ -11,17 +11,12 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     img: {
-
-        width: '300px !important',
-        height: '110px !important',
-        borderRadius: '5px !important',
-        cursor: 'pointer',
-        alignItems: 'center',
-        [theme.breakpoints.down(600)]:{
-            width: '250px !important',
-            height: '90px !important',
-        }
-
+        width: "100% !important",
+        cursor: "pointer",
+        height: "calc(((100% + 96px) / 3) - 15px)",
+        "&:hover": {
+            opacity: "0.9 !important",
+        },
     },
     Partner: {
 
@@ -30,13 +25,22 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 500,
         fontSize: "45px",
         fontFamily: 'Poppins',
-        [theme.breakpoints.down(600)]:{
+        [theme.breakpoints.down(600)]: {
             fontSize: "25px",
         }
     },
     Slide: {
         textAlign: "center",
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        "&:hover": {
+            opacity: "0.99 !important",
+            transform: 'scale(1.06)',
+            transition: '1ms',
+            borderRadius: "50px",
+            zIndex: '9999 !important'
+
+
+        },
     }
 
 }))
@@ -45,7 +49,6 @@ const Partner = () => {
     const classes = useStyles()
     return (
         <>
-
             <Container maxWidth="xl" style={{ marginTop: '20px', }}  >
                 <p className={classes.Partner} >Bizning hamkorlar</p>
                 <Splide
@@ -53,9 +56,10 @@ const Partner = () => {
                         perPage: 3,
                         arrows: false,
                         pagination: false,
+                        gap: "15px",
                         breakpoints: {
                             400: {
-                                perPage: 1,
+                                perPage: 3,
                             },
                             700: {
                                 perPage: 1,
@@ -68,37 +72,21 @@ const Partner = () => {
                             }
                         },
                         type: 'loop',
-                       
                         autoplay: true,
                         autoScroll: {
                             speed: 1
                         },
-
-                    }}
-
-                >
+                    }}>
                     <SplideSlide className={classes.Slide} >
                         <img src={Alif} alt='' className={classes.img} />
-
                     </SplideSlide>
                     <SplideSlide className={classes.Slide} >
                         <img src={Paymart} alt='' className={classes.img} />
-
-
                     </SplideSlide>
-
                     <SplideSlide className={classes.Slide} >
-
                         <img src={Iman} alt='' className={classes.img} />
-
-
                     </SplideSlide>
-
-
-
-
                 </Splide>
-
             </Container>
         </>
     );
