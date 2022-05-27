@@ -33,6 +33,7 @@ import "./style.css";
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
     padding: "45px 0",
+    background: 'white',
     [theme.breakpoints.down(600)]: {
       padding: "0 0 25px 0 !important",
     },
@@ -451,8 +452,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
   inSplideSlide: {
-    width: "88%",
-    height: "auto",
+    width: "auto !important",
+    height: "500px",
     borderRadius: "10px",
     display: "block",
   },
@@ -644,7 +645,6 @@ const ProductDetails = () => {
           </Container>
         </div>
       </div>
-
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl" className={classes.bigBox}>
           <Grid container style={{ display: "flex" }}>
@@ -680,6 +680,7 @@ const ProductDetails = () => {
                 modules={[FreeMode, Navigation, Thumbs]}
              
                 className="mySwiper"
+                // style={ photo?.length > 2 ? { display: "block" } : {display: "none"}}
               >
                 {photo?.map((item: any) =>
                   item?.map((value: any) => (
@@ -1193,7 +1194,6 @@ const ProductDetails = () => {
           </Link>
         </div>
       </Container>
-
       <Footer />
       <Notification notify={notify} setNotify={setNotify} />
     </>
