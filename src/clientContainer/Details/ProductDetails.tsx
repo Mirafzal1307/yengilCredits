@@ -28,6 +28,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import "./style.css";
 
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
@@ -467,9 +468,9 @@ const useStyles = makeStyles((theme) => ({
   inSwiperSlide: {
     width: "150px",
     height: "150px",
-    marginTop: "20px",
-    borderRadius: "10px",
-  },
+    // marginTop: "20px",
+    borderRadius: "10px"
+  }
 }));
 
 const ProductDetails = () => {
@@ -649,12 +650,13 @@ const ProductDetails = () => {
           <Grid container style={{ display: "flex" }}>
             <Grid item xs={12} md={6}>
               <Swiper
-                // className={classes.splide}
+                  
                 loop={true}
                 spaceBetween={10}
                 navigation={false}
                 thumbs={{ swiper: thumbsSwiper }}
                 modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiper2"
               >
                 {photo?.map((item: any) =>
                   item?.map((value: any) => (
@@ -676,7 +678,8 @@ const ProductDetails = () => {
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
-                // style={ photo?.length > 2 ? { display: "block" } : {display: "none"}}
+             
+                className="mySwiper"
               >
                 {photo?.map((item: any) =>
                   item?.map((value: any) => (
