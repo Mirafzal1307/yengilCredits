@@ -63,7 +63,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 450,
+
   bgcolor: 'background.paper',
   borderRadius: '10px',
   boxShadow: 24,
@@ -72,6 +72,13 @@ const style = {
 
 
 const useStyles = makeStyles(theme => ({
+  style:{
+    width: '450px',
+    [theme.breakpoints.down(600)]:{
+      width: '90%',
+    }
+   
+  },
   MainPage: {
     marginTop: '20px',
     [theme.breakpoints.down(700)]: {
@@ -841,7 +848,7 @@ export default function Cart() {
                     aria-labelledby="keep-mounted-modal-title"
                     aria-describedby="keep-mounted-modal-description"
                   >
-                    <Box sx={style}>
+                    <Box sx={style} className={classes.style} >
                       <h3>Xarid qilingan mahsulotlar</h3>
                       {cartProducts.map((p, i) =>
                         <>
