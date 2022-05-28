@@ -452,10 +452,14 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
   inSplideSlide: {
-    width: "auto !important",
+    width: "60% !important",
     height: "500px",
     borderRadius: "10px",
     display: "block",
+    [theme.breakpoints.down(600)]: {
+      // display: "none",
+    width: '100px'
+    },
   },
   bigBox: {
     display: "flex",
@@ -524,6 +528,11 @@ const ProductDetails = () => {
     setProducts(res?.data);
   };
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+  // const swiper = new Swiper('.swiper', {
+  //   grid: {
+  //     rows: 2,
+  //   },
+  // });
 
   return (
     <>
@@ -650,7 +659,7 @@ const ProductDetails = () => {
           <Grid container style={{ display: "flex" }}>
             <Grid item xs={12} md={6}>
               <Swiper
-                  
+                  // grid={module}
                 loop={true}
                 spaceBetween={10}
                 navigation={false}
