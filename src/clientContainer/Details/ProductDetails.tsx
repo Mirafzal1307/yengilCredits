@@ -452,13 +452,13 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
   inSplideSlide: {
-    width: "60% !important",
-    height: "500px",
-    borderRadius: "10px",
-    display: "block",
+
+    // height: "500px",
+    // borderRadius: "10px",
+    // display: "block",
     [theme.breakpoints.down(600)]: {
       // display: "none",
-    width: '100px'
+      width: '100px'
     },
   },
   bigBox: {
@@ -659,7 +659,7 @@ const ProductDetails = () => {
           <Grid container style={{ display: "flex" }}>
             <Grid item xs={12} md={6}>
               <Swiper
-                  // grid={module}
+                // grid={module}
                 loop={true}
                 spaceBetween={10}
                 navigation={false}
@@ -673,7 +673,12 @@ const ProductDetails = () => {
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
-                        className={classes.inSplideSlide}
+                        // className={classes.inSplideSlide}
+                        style={
+                          item?.length >= 2
+                            ? { width: "60%", }
+                            : { width: "auto", }
+                        }
                       />
                     </SwiperSlide>
                   ))
@@ -687,9 +692,9 @@ const ProductDetails = () => {
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
-             
+
                 className="mySwiper"
-                // style={ photo?.length > 2 ? { display: "block" } : {display: "none"}}
+              // style={ photo?.length > 2 ? { display: "block" } : {display: "none"}}
               >
                 {photo?.map((item: any) =>
                   item?.map((value: any) => (
