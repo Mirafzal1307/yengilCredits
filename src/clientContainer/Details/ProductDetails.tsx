@@ -28,10 +28,12 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import "./style.css";
 
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
     padding: "45px 0",
+    background: 'white',
     [theme.breakpoints.down(600)]: {
       padding: "0 0 25px 0 !important",
     },
@@ -450,10 +452,14 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
   inSplideSlide: {
-    width: "88%",
-    height: "auto",
-    borderRadius: "10px",
-    display: "block",
+
+    // height: "500px",
+    // borderRadius: "10px",
+    // display: "block",
+    [theme.breakpoints.down(600)]: {
+      // display: "none",
+      width: '100px'
+    },
   },
   bigBox: {
     display: "flex",
@@ -467,9 +473,9 @@ const useStyles = makeStyles((theme) => ({
   inSwiperSlide: {
     width: "150px",
     height: "150px",
-    marginTop: "20px",
-    borderRadius: "10px",
-  },
+    // marginTop: "20px",
+    borderRadius: "10px"
+  }
 }));
 
 const ProductDetails = () => {
@@ -522,6 +528,11 @@ const ProductDetails = () => {
     setProducts(res?.data);
   };
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+  // const swiper = new Swiper('.swiper', {
+  //   grid: {
+  //     rows: 2,
+  //   },
+  // });
 
   return (
     <>
@@ -643,18 +654,18 @@ const ProductDetails = () => {
           </Container>
         </div>
       </div>
-
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl" className={classes.bigBox}>
           <Grid container style={{ display: "flex" }}>
             <Grid item xs={12} md={6}>
               <Swiper
-                // className={classes.splide}
+                // grid={module}
                 loop={true}
                 spaceBetween={10}
                 navigation={false}
                 thumbs={{ swiper: thumbsSwiper }}
                 modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiper2"
               >
                 {photo?.map((item: any) =>
                   item?.map((value: any) => (
@@ -662,7 +673,12 @@ const ProductDetails = () => {
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
-                        className={classes.inSplideSlide}
+                        // className={classes.inSplideSlide}
+                        style={
+                          item?.length >= 2
+                            ? { width: "60%", }
+                            : { width: "auto", }
+                        }
                       />
                     </SwiperSlide>
                   ))
@@ -676,6 +692,9 @@ const ProductDetails = () => {
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
+
+                className="mySwiper"
+              // style={ photo?.length > 2 ? { display: "block" } : {display: "none"}}
               >
                 {photo?.map((item: any) =>
                   item?.map((value: any) => (
@@ -1189,7 +1208,6 @@ const ProductDetails = () => {
           </Link>
         </div>
       </Container>
-
       <Footer />
       <Notification notify={notify} setNotify={setNotify} />
     </>

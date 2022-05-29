@@ -521,7 +521,7 @@ const BrandPage = () => {
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
-                              width: '25%',
+                              width: '40%',
 
                             }} >
                               <img
