@@ -297,7 +297,7 @@ const BrandPage = () => {
   const [pageQty, setPageQty] = React.useState<number>(0);
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");
-  const [sort, setSort] = useState<boolean>(false);
+  const [sort, setSort] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [notify, setNotify] = useState<any>({
     isOpen: false,
