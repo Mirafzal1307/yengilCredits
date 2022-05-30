@@ -8,7 +8,6 @@ type InitialState = {
   keyword: any,
   darktheme: boolean
   productByCategory: Product[],
-  // recommended_products: Product[],
 };
 
 const initialState: InitialState = {
@@ -28,20 +27,16 @@ export default function productsReducer(state = initialState, action: ProductAct
       return {
         ...state,
         products: action.payload.products,
-        // filteredProducts: action.payload.products
-      };
+     };
     }
     
     case "GET_DEMO_PRODUCTS": {
-
       return {
         ...state,
         products: action.payload.products,
         filteredProducts: action.payload.products
       };
     }
-
-
     case "GET_FILTERED_PRODUCTS": {
       let products = state.products.filter((product: any) => {
         return (
@@ -49,8 +44,6 @@ export default function productsReducer(state = initialState, action: ProductAct
             .indexOf(action.payload.keyword.toLocaleLowerCase()) !== -1
         )
       });
-
-
       return {
         ...state,
         filteredProducts: products
@@ -76,7 +69,6 @@ export default function productsReducer(state = initialState, action: ProductAct
         filteredProducts: products
       }
     };
-
     case "THEME_CHANGE": {
       let theme = action.payload.darktheme;
       if (theme) {
@@ -91,7 +83,6 @@ export default function productsReducer(state = initialState, action: ProductAct
         darktheme: theme,
       };
     }
-
 
     default:
       return state;
