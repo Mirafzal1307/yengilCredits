@@ -229,9 +229,6 @@ const CardProducts = () => {
               perPage: 6,
               pagination: false,
               arrows: true,
-              // type: 'loop',
-              // drag: 'free',
-              // gap: '0.7rem',
               autoScroll: {
                 speed: 2,
               },
@@ -239,8 +236,6 @@ const CardProducts = () => {
                 450: {
                   type: "loop",
                   perPage: 1,
-                  arrows: false,
-                  pagination: true
                 },
                 700: {
                   perPage: 2,
@@ -430,12 +425,9 @@ const CardProducts = () => {
           <Splide
             options={{
               width: "100%",
-
               perPage: 6,
               pagination: false,
               arrows: true,
-              // type: "loop",
-              // drag: "free",
               gap: "0.7rem",
               autoScroll: {
                 speed: 2,
@@ -444,9 +436,6 @@ const CardProducts = () => {
                 450: {
                   type: "loop",
                   perPage: 1,
-                  arrows: false,
-       
-                  pagination: true
                 },
                 700: {
                   perPage: 2,
@@ -642,8 +631,6 @@ const CardProducts = () => {
               perPage: 6,
               pagination: false,
               arrows: true,
-              // type: "loop",
-              // drag: "free",
               gap: "0.7rem",
               autoScroll: {
                 speed: 2,
@@ -652,8 +639,6 @@ const CardProducts = () => {
                 450: {
                   type: "loop",
                   perPage: 1,
-                  arrows: false,
-                  pagination: true
                 },
                 700: {
                   perPage: 2,
@@ -846,12 +831,9 @@ const CardProducts = () => {
           <Splide
             options={{
               width: "100%",
-
               perPage: 6,
               pagination: false,
               arrows: true,
-              // type: "loop",
-              // drag: "free",
               gap: "0.7rem",
               autoScroll: {
                 speed: 2,
@@ -860,8 +842,6 @@ const CardProducts = () => {
                 450: {
                   type: "loop",
                   perPage: 1,
-                  arrows: false,
-                  pagination: true
                 },
                 700: {
                   perPage: 2,
