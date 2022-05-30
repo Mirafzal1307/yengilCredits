@@ -105,10 +105,9 @@ const LoginPage = () => {
     }, 1000);
   };
 
-  const sendDataToApi = () => {
-    axios
-      .post("http://139.162.11.245:2828/security/login", login)
-      .then((res) => {
+  const sendDataToApi = async () => {
+    await getToken(login)
+      .then((res: any) => {
         let token = res.data.split(":")[1];
         localStorage.setItem("auth", token);
         setAuth(token);
