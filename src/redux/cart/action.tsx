@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux'
+import { API_URL } from '../../constants/ApiConstants'
 import { Product } from './types'
 
 
@@ -33,7 +34,7 @@ export function getDemoProducts(products: Product[]): ProductActions {
 
 export function fetchProducts() {
     return (dispatch: Dispatch) => {
-        fetch("https://test.api.yengilcredit.uz/main/")
+        fetch(`${API_URL}/main/`)
             .then((response) => response.json())
     };
 }
