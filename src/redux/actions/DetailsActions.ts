@@ -8,14 +8,8 @@ export const fetchProductClientDetails = (id: any) => {
         try {
             dispatch({ type: ProductActionForDetailsTypes.FETCH_PRODUCTS_FOR_DETAILS })
             const response = await getProductItem(`${id}`);
-            console.log(response);
             const datax: any = response
-       
-           
-
-
-
-            dispatch({ type: ProductActionForDetailsTypes.FETCH_PRODUCTS_FOR_DETAILS_SUCCESS, payload: response.data })
+                   dispatch({ type: ProductActionForDetailsTypes.FETCH_PRODUCTS_FOR_DETAILS_SUCCESS, payload: response.data })
 
         } catch (e) {
             dispatch({

@@ -9,12 +9,7 @@ export const fetchProducts = (p: any) => {
             dispatch({ type: ProductActionTypes.FETCH_PRODUCTS })
             const response = await getProductList(`${p}`, {});
             const datax: any = response
-            //console.log(datax.data);
-           
-
-
-
-            dispatch({ type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS, payload: response.data })
+                   dispatch({ type: ProductActionTypes.FETCH_PRODUCTS_SUCCESS, payload: response.data })
 
         } catch (e) {
             dispatch({

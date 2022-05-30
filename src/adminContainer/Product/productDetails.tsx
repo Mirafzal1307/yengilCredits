@@ -317,7 +317,7 @@ const useStyles = makeStyles({
 });
 
 const ProductDetails = () => {
-  const { products, error, loading } = useTypedSelector((state) => state.byId);
+  const { products, error, loading } = useTypedSelector((state) => state?.byId);
   let pro: any = products?.Product;
   let des: any = products?.Description;
 
@@ -328,7 +328,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   // console.log(id);
   React.useEffect(() => {
-    fetchProductsById(id);
+   fetchProductsById(id);
   }, []);
 
   const { fetchProductsById } = useActions();
@@ -347,7 +347,7 @@ const ProductDetails = () => {
         style={{ marginTop: "50px" }}
         className={classes.CreateContainerTitle}>
         {
-          loading ? <CircularProgress disableShrink />
+          loading && products ? <CircularProgress disableShrink />
             :
             <>
               <Grid item xs={12}  >
