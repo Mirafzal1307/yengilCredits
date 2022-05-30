@@ -29,6 +29,7 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "./style.css";
+import ColorToggleButton from "./newFeature";
 
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
@@ -575,6 +576,9 @@ const ProductDetails = () => {
                   >
                     Savatchaga
                   </button>
+                  <div>
+                    <ColorToggleButton cost={ product?.after_discount} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -653,6 +657,7 @@ const ProductDetails = () => {
             </div>
           </Container>
         </div>
+
       </div>
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl" className={classes.bigBox}>
