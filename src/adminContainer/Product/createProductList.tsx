@@ -23,7 +23,7 @@ import { v4 as uuidv4 } from 'uuid';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from '@material-ui/core/IconButton';
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./create.css";
 const useStyles = makeStyles({
   bigFirstBox: {
@@ -282,7 +282,7 @@ const ProductsCreate = () => {
   const handleChangeCategory = (event: SelectChangeEvent) => {
     setCategoryName(event.target.value);
   };
- 
+
   const handleChangeStatus = (event: SelectChangeEvent) => {
     setProductStatus(event.target.value);
   };
@@ -297,8 +297,8 @@ const ProductsCreate = () => {
   ))
   const refresh = () => {
     setTimeout(() => window.location.reload(),
-    2000)
-}
+      2000)
+  }
   const handleChangeInput = (id: any, event: any) => {
     const newInputFields = inputFields.map((i: any) => {
       if (id === i.id) {
@@ -326,6 +326,10 @@ const ProductsCreate = () => {
       setImage(null);
     }
   };
+//   setTimeout(() => {
+// refresh()
+//   })
+// refresh();
   React.useEffect(() => {
     getAllData();
   }, []);
@@ -381,7 +385,7 @@ const ProductsCreate = () => {
               message: `Xatolik yuz berdi!`,
               type: "error",
             });
-        
+
 
           }
         })
@@ -406,32 +410,29 @@ const ProductsCreate = () => {
 
   }
   function length() {
-    const inp = document.querySelectorAll('input');
+    const inp = document.querySelectorAll('input') ;
 
-    inp.forEach(element => {
-      if (inp[4].value.length === 0) {
-        inp[4].style.borderColor = '#9F9F9F'
-      }
-      if (inp[4].value.length === 1) {
-        inp[4].style.borderColor = '#9F9F9F'
+    inp?.forEach((element:any) => {
+      if ((inp[4] as HTMLInputElement )?.value?.length === 0) {
+        (inp[4] as HTMLInputElement ).style.borderColor = '#9F9F9F'
+      };
+      if ((inp[4] as HTMLInputElement )?.value?.length === 1) {
+        (inp[4] as HTMLInputElement ).style.borderColor = '#9F9F9F'
         element.title = 'Xatolik yuz berdi 2 tadan ko`p ma`lumot kiriting'
-      }
-      else {
-        inp[4].style.borderColor = '#9F9F9F'
-      }
-      if (element.value.length === 0) {
+      } else {
+        (inp[4] as any ).style.borderColor = '#9F9F9F'
+      };
+      if (element?.value?.length === 0) {
         element.style.borderColor = '#9F9F9F'
-      }
-      else if (element.value.length <= 3) {
+      } else if (element?.value?.length <= 3) {
         element.style.borderColor = 'red'
         element.title = 'Xatolik yuz berdi 3 tadan ko`p ma`lumot kiriting'
-      }
-      else {
+      } else {
         element.style.borderColor = '#9F9F9F'
-      }
+      };
     });
   }
-  length()
+  length();
 
   return (
     <React.Fragment>
@@ -646,7 +647,7 @@ const ProductsCreate = () => {
                         ))}
                       </Select>
                     </FormControl>
-                    <IconButton disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
+                    <IconButton disabled={inputFields?.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
                       <RemoveIcon />
                     </IconButton>
                     <IconButton
@@ -688,7 +689,7 @@ const ProductsCreate = () => {
                 className={classes.forButton}
                 onClick={() => {
                   onSubmit();
-             
+
                 }}
                 style={{ marginLeft: "auto", display: "flex" }}
               >
