@@ -34,6 +34,8 @@ import { useActions } from "../../hook/useActions";
 import AppsIcon from "@mui/icons-material/Apps";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import './style.css'
+
+
 const useStyles = makeStyles((theme) => ({
   styledButton: {
     position: "absolute",
@@ -90,6 +92,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600",
     fontSize: "14px",
     margin: "auto !important",
+
   },
   cardButtonSecond: {
     background: "transparent",
@@ -264,6 +267,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#000",
     margin: 0,
     marginBottom: "20px",
+
   },
   sortCardButton: {
     background: "transparent",
@@ -287,7 +291,14 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "13px",
     color: "#000",
   },
-  
+  img: {
+    width: "80%",
+    height: "70%",
+    // padding: "20px",
+    alignSelf: 'center !important',
+    justifySelf: 'center !important',
+   
+  }
 
 }));
 
@@ -409,12 +420,12 @@ const CategoryProducts = () => {
           !sort ?
             <div className={classes.mainCard} >
               <Stack
-               direction="row"
-               justifyContent="center"
-               alignItems="center"
-               spacing={2}
-               flexWrap="wrap"
-   
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+                flexWrap="wrap"
+
 
               // flexDirection='column'
               >
@@ -441,6 +452,7 @@ const CategoryProducts = () => {
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
                             alt="img"
                             style={{ width: "150px", height: "150px" }}
+
                           />
                         </Link>
                         <p
@@ -507,14 +519,14 @@ const CategoryProducts = () => {
                   )
                   )}
               </Stack>
-             
-            </div> 
+
+            </div>
             :
             <div >
               <Stack
-            
 
-              flexDirection='column'
+
+                flexDirection='column'
               >
                 {product
                   .filter((val: any) => {
@@ -544,22 +556,17 @@ const CategoryProducts = () => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: '25%',
-                            
+                            width: '40%',
+
                           }} >
                             <img
                               src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
                               alt="img"
-                              style={{
-                                width: "80%",
-                                height: "70%",
-                                // padding: "20px",
-                                alignSelf: 'center !important',
-                                justifySelf: 'center !important'
-                              }}
+                            
+                              className={classes.img}
                             />
                           </Link>
-                          <div style={{alignSelf: 'center'}}  >
+                          <div style={{ alignSelf: 'center' }}  >
                             <h6 className={classes.sortCardTitle}>
                               {item.short_name}
                             </h6>
@@ -588,15 +595,15 @@ const CategoryProducts = () => {
                             </div>
                             {item.availability === true ? (
                               <button className={classes.sortCardButton}
-                            
-                              onClick={() => {
-                                dispatch(addToCart(item));
-                                setNotify({
-                                  isOpen: true,
-                                  message: "Savatchaga qo'shildi",
-                                  type: "success",
-                                });
-                              }}
+
+                                onClick={() => {
+                                  dispatch(addToCart(item));
+                                  setNotify({
+                                    isOpen: true,
+                                    message: "Savatchaga qo'shildi",
+                                    type: "success",
+                                  });
+                                }}
                               >
                                 <img
                                   src={cart1}
@@ -627,7 +634,7 @@ const CategoryProducts = () => {
                   )
                   )}
               </Stack>
-           
+
             </div>
         }
 
