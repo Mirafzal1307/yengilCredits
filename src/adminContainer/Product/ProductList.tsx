@@ -36,6 +36,7 @@ import notSale from "../../Images/notserved.svg";
 
 import { Link as NavLink } from 'react-router-dom';
 import SearchIcon from "@mui/icons-material/Search";
+// import { refresh } from '../Modal/refresh';
 
 
 const useStyles = makeStyles({
@@ -351,7 +352,10 @@ const ProductList: React.FC = () => {
     }, [param]);
    
     
-
+    const refresh = () => {
+        setTimeout(() => window.location.reload(),
+        1)
+    }
 
     const classes = useStyles()
     const product: any[] = products.content
@@ -447,8 +451,8 @@ console.log(product);
 
             <div className={classes.productsTitle}>
                 <h1 className={classes.product}>Mahsulotlar</h1>
-                <Button className={classes.createButton} component={RouterLink as any} to='/product/create' sx={{textTransform: 'capitalize'}}  >+ Qo'shish</Button>
-            </div>
+                <Button className={classes.createButton} component={RouterLink as any} to='/product/create' sx={{textTransform: 'capitalize'}} onClick={() => refresh()} >+ Qo'shish</Button>
+            </div> 
             <Box sx={{ maxWidth: '1200px', margin: 'auto' }} >
                 <Paper sx={{ width: '100%', mb: 2 }} className={classes.box}>
                     <TableContainer>
@@ -583,7 +587,10 @@ console.log(product);
 
                                                         <Button className={classes.button}
                                                             component={RouterLink as any} to={`/product/edit/${user.id}`}
-                                                            onClick={getProductToUpdate}
+                                                            // onClick={() => {
+                                                            //     getProductToUpdate();
+                                                            //     refresh();
+                                                            // }}
                                                         ><img src={EditImage}
                                                             alt="rasm bor edi" /></Button>
 
