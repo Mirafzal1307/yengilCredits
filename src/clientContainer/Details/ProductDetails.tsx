@@ -476,6 +476,17 @@ const useStyles = makeStyles((theme) => ({
     height: "150px",
     // marginTop: "20px",
     borderRadius: "10px"
+  },
+  NewFeatures:{
+    [theme.breakpoints.down(1000)]:{
+      flexDirection: 'column'
+    },
+    [theme.breakpoints.up(750)]:{
+      flexDirection: 'unset !important'
+    }
+  },
+  Container:{
+   
   }
 }));
 
@@ -576,9 +587,7 @@ const ProductDetails = () => {
                   >
                     Savatchaga
                   </button>
-                  <div>
-                    <ColorToggleButton cost={ product?.after_discount} />
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -588,44 +597,48 @@ const ProductDetails = () => {
           <Container
             maxWidth="xl"
             style={{ display: "flex", flexDirection: "column" }}
+            className={classes.Container}
           >
-            <div style={{ display: "flex" }}>
+            <div >
+
               <div style={{ marginRight: "20px", marginTop: "8px" }}>
                 <Link to={"/"}>
                   <img src={CancelBtnImg} alt="Cancel" />
                 </Link>
               </div>
-              <div className={classes.Links}>
-                <span
-                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
-                >
-                  <Link to="/" style={{ color: "rgb(159 159 159)" }}>
-                    Bosh sahifa
+              <div style={{ display: "flex", justifyContent: 'space-between' }} className={classes.NewFeatures} >
+                <Grid xs={12} md={6} >
+                  <div className={classes.Links}>
                     <span
-                      style={{
-                        fontWeight: "500",
-                        fontSize: "16px",
-                        padding: "0px 5px",
-                      }}
+                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                     >
-                      ›
+                      <Link to="/" style={{ color: "rgb(159 159 159)" }}>
+                        Bosh sahifa
+                        <span
+                          style={{
+                            fontWeight: "500",
+                            fontSize: "16px",
+                            padding: "0px 5px",
+                          }}
+                        >
+                          ›
+                        </span>
+                      </Link>
                     </span>
-                  </Link>
-                </span>
-                <span
-                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
-                  className={classes.spane}
-                >
-                  {pro?.map((parCategory: any) => (
-                    <Link
-                      to={`/product/product-by-category/${parCategory?.category?.parent_category?.id}`}
-                      style={{
-                        color: "rgb(159 159 159)",
-                        textTransform: "capitalize",
-                      }}
+                    <span
+                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                      className={classes.spane}
                     >
-                      {parCategory?.category?.parent_category?.name}
-                      {/* <span
+                      {pro?.map((parCategory: any) => (
+                        <Link
+                          to={`/product/product-by-category/${parCategory?.category?.parent_category?.id}`}
+                          style={{
+                            color: "rgb(159 159 159)",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {parCategory?.category?.parent_category?.name}
+                          {/* <span
                         style={{
                           fontWeight: "500",
                           fontSize: "16px",
@@ -634,27 +647,40 @@ const ProductDetails = () => {
                       >
                         ›
                       </span> */}{" "}
-                      ›
-                    </Link>
-                  ))}
-                </span>
-                <span
-                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
-                >
-                  {pro?.map((SubCategory: any) => (
-                    <Link
-                      to={`/product/product-by-category/${SubCategory?.category?.id}`}
-                      style={{
-                        color: "rgb(159 159 159)",
-                        textTransform: "capitalize",
-                      }}
+                          ›
+                        </Link>
+                      ))}
+                    </span>
+                    <span
+                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                     >
-                      {SubCategory?.category?.name}
-                    </Link>
+                      {pro?.map((SubCategory: any) => (
+                        <Link
+                          to={`/product/product-by-category/${SubCategory?.category?.id}`}
+                          style={{
+                            color: "rgb(159 159 159)",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {SubCategory?.category?.name}
+                        </Link>
+                      ))}
+                    </span>
+                  </div>
+                </Grid>
+                <Grid xs={12} sm={12} md={6} >
+                  {pro?.map((product: any) => (
+                    <div>
+                      <ColorToggleButton cost={product?.after_discount} />
+                    </div>
                   ))}
-                </span>
+                </Grid>
+
               </div>
+
+
             </div>
+
           </Container>
         </div>
 
