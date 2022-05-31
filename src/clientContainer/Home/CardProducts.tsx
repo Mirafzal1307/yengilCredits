@@ -278,7 +278,7 @@ const CardProducts = () => {
                         style={{
                           margin: 0,
                           marginTop: "19px",
-                          height: "30px",
+                          height: "45px",
                           fontSize: "14px",
                           fontWeight: "600",
                         }}
@@ -607,7 +607,7 @@ const CardProducts = () => {
           <div className={classes.cardBottom}>Barcha mahsulotlar</div>
         </Link>
       </Container>
-      <Container maxWidth="xl">
+      {/* <Container maxWidth="xl">
         <div
           style={{
             display: "flex",
@@ -808,7 +808,7 @@ const CardProducts = () => {
         >
           <div className={classes.cardBottom}>Barcha mahsulotlar</div>
         </Link>
-      </Container>
+      </Container> */}
       <Navbarbottom />
       <Container maxWidth="xl">
         <div

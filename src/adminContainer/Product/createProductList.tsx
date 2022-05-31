@@ -276,6 +276,8 @@ const ProductsCreate = () => {
     message: "",
     type: "",
   });
+  console.log(image);
+  
   const handleChangeBrand = (event: SelectChangeEvent) => {
     setBrandName(event.target.value);
   };
@@ -306,7 +308,6 @@ const ProductsCreate = () => {
       }
       return i;
     })
-
     setInputFields(newInputFields);
   }
   const handleAddFields = () => {
@@ -326,10 +327,10 @@ const ProductsCreate = () => {
       setImage(null);
     }
   };
-//   setTimeout(() => {
-// refresh()
-//   })
-// refresh();
+  //   setTimeout(() => {
+  // refresh()
+  //   })
+  // refresh();
   React.useEffect(() => {
     getAllData();
   }, []);
@@ -379,25 +380,24 @@ const ProductsCreate = () => {
     try {
       postProductCreate(form)
         .then(async (res: any) => {
-          if (res.status === 400) {
+          if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: `Xatolik yuz berdi!`,
-              type: "error",
+              message: `Muafaqiyatli yaratildi`,
+              type: "success",
             });
-
-
+            setTimeout(() => {
+              navigate("/product");
+            }, 1000)
           }
         })
         .catch((error) => {
           setNotify({
             isOpen: true,
-            message: "Muafaqiyatli yaratildi",
-            type: "success",
+            message: `${error}`,
+            type: "error",
           });
-          setTimeout(() => {
-            navigate("/product");
-          }, 1000)
+
         });
     } catch (err) {
       setNotify({
@@ -410,17 +410,17 @@ const ProductsCreate = () => {
 
   }
   function length() {
-    const inp = document.querySelectorAll('input') ;
+    const inp = document.querySelectorAll('input');
 
-    inp?.forEach((element:any) => {
-      if ((inp[4] as HTMLInputElement )?.value?.length === 0) {
-        (inp[4] as HTMLInputElement ).style.borderColor = '#9F9F9F'
+    inp?.forEach((element: any) => {
+      if ((inp[4] as HTMLInputElement)?.value?.length === 0) {
+        (inp[4] as HTMLInputElement).style.borderColor = '#9F9F9F'
       };
-      if ((inp[4] as HTMLInputElement )?.value?.length === 1) {
-        (inp[4] as HTMLInputElement ).style.borderColor = '#9F9F9F'
+      if ((inp[4] as HTMLInputElement)?.value?.length === 1) {
+        (inp[4] as HTMLInputElement).style.borderColor = '#9F9F9F'
         element.title = 'Xatolik yuz berdi 2 tadan ko`p ma`lumot kiriting'
       } else {
-        (inp[4] as any ).style.borderColor = '#9F9F9F'
+        (inp[4] as any).style.borderColor = '#9F9F9F'
       };
       if (element?.value?.length === 0) {
         element.style.borderColor = '#9F9F9F'

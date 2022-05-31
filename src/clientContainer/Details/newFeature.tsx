@@ -15,16 +15,6 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-
-
-
-
-
-
-
-
-
-
 export default function ColorToggleButton(props: any) {
   const [alignment, setAlignment] = React.useState('twelveMonth');
 

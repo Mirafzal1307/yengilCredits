@@ -15,7 +15,7 @@ import { addToCart } from "../../redux/cart/action";
 import { useDispatch, useSelector } from "react-redux";
 import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
-import BigPhoto from "../../Images/BigPhoto.svg";
+import BigPhoto from "../../Images/BigPhoto.png";
 import Shop from "../../Images/baskets.png";
 import CancelBtnImg from "../../Images/GroupsBack.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
