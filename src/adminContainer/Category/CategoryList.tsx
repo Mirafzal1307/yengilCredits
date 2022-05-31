@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -264,6 +264,7 @@ const useStyles = makeStyles({
 export default function EnhancedTable() {
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(1);
+  const [loading, setLoading] = React.useState(false);
   const [rows, setRows] = React.useState<createDatas[]>([]);
   const [pageQty, setPageQty] = React.useState<number>(0);
   const [query, setQuery] = React.useState("react");
@@ -275,56 +276,61 @@ export default function EnhancedTable() {
     message: "",
     type: "",
   });
-  const { category, error, loading } = useTypedSelector(
-    (state) => state.category
-  );
+  // const { category, error, loading } = useTypedSelector(
+  //   (state) => state?.category
+  // );
   const classes = useStyles();
 
-  const { fetchCategory } = useActions();
+  // const { fetchCategory } = useActions();
+ 
+  // useEffect(() => {
 
-  React.useEffect(() => {
+  //   fetchCategory("");
+
+  // }, []);
+
+  useEffect(() => {
     getCategory();
     if (pageQty < page) {
       setPage(1);
     }
   }, [query, page]);
 
-  React.useEffect(() => {
-    fetchCategory("");
-  }, []);
+  // const handleInputChange = (e: any) => {
+  //   setParam(e.target.value);
+  // };
 
-  const handleInputChange = (e: any) => {
-    setParam(e.target.value);
-  };
+  // const handleChange = (event: any) => {
+  //   setStatus(event.target.value);
+  // };
 
-  const handleChange = (event: any) => {
-    setStatus(event.target.value);
-  };
-
-  if (loading) {
-    return (
-      <div style={{ marginTop: "5%", marginLeft: "50%" }}>
-        <CircularProgress />
-      </div>
-    )
-  }
-  if (error) {
-    return (
-      <h1
-        style={{ textAlign: "center", margin: "200px", alignItems: "center" }}
-      >
-        {error}
-      </h1>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div style={{ marginTop: "5%", marginLeft: "50%" }}>
+  //       <CircularProgress />
+  //     </div>
+  //   )
+  // }
+  // if (error) {
+  //   return (
+  //     <h1
+  //       style={{ textAlign: "center", margin: "200px", alignItems: "center" }}
+  //     >
+  //       {error}
+  //     </h1>
+  //   );
+  // }
 
   const getCategory = async () => {
     let response: any = await getCategoryList(`${page - 1}`, {});
     // console.log(response);
-    
-    setRows(response.data.content);
-    setPageQty(response.data.totalPages);
+    setLoading(true);
+    setRows(response?.data?.content);
+    setPageQty(response?.data?.totalPages);
+    setLoading(false);
   };
+
+
 
   const getSubCategories = async (id: any) => {
     let res: any = await getCategoryByParentCategory(id);
@@ -332,7 +338,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = rows?.map((n) => n?.name);
       setSelected(newSelecteds);
       return;
     }
@@ -361,7 +367,7 @@ export default function EnhancedTable() {
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
   return (
-    <>
+    <div className={loading ? "loading" : ""} >
       <Box>
         <h1 className={classes.h1}>Turkum</h1>
         <Grid container spacing={2}>
@@ -394,14 +400,14 @@ export default function EnhancedTable() {
                       <EnhancedTableHead
                         numSelected={selected.length}
                         onSelectAllClick={handleSelectAllClick}
-                        rowCount={rows.length}
+                        rowCount={rows?.length}
                       />
                       <TableBody>
-                        {rows.map((row, index) => {
+                        {rows?.map((row, index) => {
                           const getCategoryToDetails = () => {
-                            getSubCategories(row.id);
+                            getSubCategories(row?.id);
                           };
-                          const isItemSelected = isSelected(row.name);
+                          const isItemSelected = isSelected(row?.name);
                           const labelId = `enhanced-table-checkbox-${index}`;
 
                           return (
@@ -409,12 +415,12 @@ export default function EnhancedTable() {
                               <TableRow
                                 hover
                                 onClick={(event) =>
-                                  handleClick(event, row.name)
+                                  handleClick(event, row?.name)
                                 }
                                 role="checkbox"
                                 aria-checked={isItemSelected}
                                 tabIndex={-1}
-                                key={row.name}
+                                key={row?.name}
                                 selected={isItemSelected}
                               >
                                 <TableCell
@@ -436,13 +442,13 @@ export default function EnhancedTable() {
                                   padding="none"
                                   className={classes.tableCell}
                                 >
-                                  {row.id}
+                                  {row?.id}
                                 </TableCell>
                                 <TableCell
                                   className={classes.tableCell}
                                   align="left"
                                 >
-                                  {row.name}
+                                  {row?.name}
                                 </TableCell>
 
                                 <TableCell
@@ -493,6 +499,6 @@ export default function EnhancedTable() {
           </Grid>
         </Grid>
       </Box>
-    </>
+    </div>
   );
 }

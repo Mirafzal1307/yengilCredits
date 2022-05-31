@@ -25,7 +25,7 @@ import Typography from '@mui/material/Typography';
 // import { refresh } from '../../../adminContainer/Modal/refresh';
 // import { refresh } from '../../../adminContainer/Modal/refresh';
 import './style.css'
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';
 import { styled } from '@mui/material/styles';
 
@@ -63,7 +63,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 450,
+
   bgcolor: 'background.paper',
   borderRadius: '10px',
   boxShadow: 24,
@@ -72,6 +72,13 @@ const style = {
 
 
 const useStyles = makeStyles(theme => ({
+  style:{
+    width: '450px',
+    [theme.breakpoints.down(600)]:{
+      width: '90%',
+    }
+   
+  },
   MainPage: {
     marginTop: '20px',
     [theme.breakpoints.down(700)]: {
@@ -201,7 +208,8 @@ const useStyles = makeStyles(theme => ({
     },
     '& img': {
       width: '75%',
-      marginTop: '46px',
+      marginTop: '30px',
+      marginLeft: "10px" ,
       height: 'auto'
     }
   },
@@ -301,7 +309,7 @@ const useStyles = makeStyles(theme => ({
     background: 'black !important',
     color: 'white !important',
     padding: '5px 20px !important',
-
+    marginBottom: '30px !important',
     [theme.breakpoints.down(900)]: {
       marginTop: '20px !important'
     },
@@ -514,15 +522,16 @@ export default function Cart() {
     try {
       postProductOrder(form)
         .then(async (res: any) => {
-          if (res.status !== 400) {
+          if (res.status === 200) {
             setNotify({
               isOpen: true,
               message: "Sizning ma'lumotlaringiz jo'natildi",
               type: "success",
             });
             setTimeout(() => {
-              navigate("/product");
-            }, 1000)
+              navigate("/");
+            }, 1000);
+            refresh();
           }
         }).catch((err) => {
           setNotify({
@@ -597,17 +606,12 @@ export default function Cart() {
 
                     <div>
                       {cartProducts && cartProducts?.map((product: any) => (
-                        <div key={product.id} className={classes.cartMin}  style={{margin: '15px 0px '}}  >
+                        <div key={product.id} className={classes.cartMin} style={{ margin: '15px 0px ' }}  >
                           <div style={{ width: '25%' }}  >
 
                             <Link to={`/product/client/details/${product.id}`} >
-                              {
-                                product?.photos?.map((photo: any) => (
+                              <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`} />
 
-                                  <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo.name}`} />
-                                )
-                                )
-                              }
                             </Link>
                           </div>
                           <div style={{ width: '50%' }} >
@@ -667,13 +671,9 @@ export default function Cart() {
                           <td>
                             {console.log(product)}
                             <Link to={`/product/client/details/${product.id}`} >
-                              {
-                                product?.photos?.map((photo: any) => (
 
-                                  <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${photo.name}`} />
-                                )
-                                )
-                              }
+                              <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`} />
+
                             </Link>
 
                             {/* <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product.photo}`} alt=''></img> */}
@@ -848,7 +848,7 @@ export default function Cart() {
                     aria-labelledby="keep-mounted-modal-title"
                     aria-describedby="keep-mounted-modal-description"
                   >
-                    <Box sx={style}>
+                    <Box sx={style} className={classes.style} >
                       <h3>Xarid qilingan mahsulotlar</h3>
                       {cartProducts.map((p, i) =>
                         <>
@@ -897,7 +897,7 @@ export default function Cart() {
                           onClick={() => {
                             Submit();
                             handleClose();
-                            refresh();
+                            // refresh();
                             dispatch(deleteAllFromCart())
                           }}
                         >Sotib olish</Button>
@@ -910,23 +910,6 @@ export default function Cart() {
           </Grid>
         </Grid>
         <Button onClick={() => dispatch(deleteAllFromCart())} className={classes.basketButton}>Savatni Tozalash</Button>
-        <div>
-          <h3 className={classes.textName} >
-            Savdo shartlari va Fors-major holatlari
-          </h3>
-          <p className={classes.text1} >
-            MSI Prestige Series biznes-klass va o'yin noutbuklarini taqdim etdi. Rang aniqligi uchun sozlangan Prestige Series, shuningdek, foydalanuvchilarga displey profilini hisoblash ehtiyojlariga mos ravishda sozlash imkonini beradigan True Color texnologiyasidan foydalanadi.
-          </p>
-          <br />
-          <p className={classes.text2} >
-            Olti xil ekranli profil mavjud bo'lib, ular o'yin uchun, charchoqni kamaytirish, sRGB rangining aniqligi, so'zlar va chiziqlar ravshanligini oshirish, zararli ko'k chiroqni kamaytirish va filmlarni tomosha qilish uchun kontrastni optimallashtirish uchun sozlangan.
-            Har xil displey rejimlari va diskret grafik chipini hisobga olgan holda, Prestige Series noutbuklari har xil dizayn ishlarida, shuningdek, ofis vazifalarida ekranning ravshanligi, ranglarning aniqligi yoki ko'zning zo'riqishini kamaytirish uchun sozlanishi mumkin. Video yoki 3D tasvir bilan ishlaydigan foydalanuvchilar kontrast kuchaytirilgan "kino rejimi" ni qadrlashadi.
-          </p>
-          <br />
-          <p className={classes.text3} >
-            Uy foydalanuvchilari yoki talabalar ko'zning zo'riqishini kamaytirish uchun mo'ljallangan "ko'kka qarshi" va "ofis rejimi" variantlaridan foydalanishlari mumkin. Bu kompyuterda uzoq vaqt ishlashda yordam beradi. Bundan tashqari, bo'sh vaqtlarida talabalar ekran yorqinligini oshirish uchun "geymer rejimi" dan foydalanishlari mumkin.
-          </p>
-        </div>
         <Notification notify={notify} setNotify={setNotify} />
       </Container>
       <Footer />

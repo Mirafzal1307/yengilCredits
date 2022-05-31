@@ -317,17 +317,18 @@ const useStyles = makeStyles({
 });
 
 const ProductDetails = () => {
-  const { products, error, loading } = useTypedSelector((state) => state.byId);
+  const { products, error, loading } = useTypedSelector((state) => state?.byId);
   let pro: any = products?.Product;
   let des: any = products?.Description;
 
 
 
+
   const classes = useStyles();
   const { id } = useParams();
-
+  // console.log(id);
   React.useEffect(() => {
-    fetchProductsById(id);
+   fetchProductsById(id);
   }, []);
 
   const { fetchProductsById } = useActions();
@@ -346,7 +347,7 @@ const ProductDetails = () => {
         style={{ marginTop: "50px" }}
         className={classes.CreateContainerTitle}>
         {
-          loading ? <CircularProgress disableShrink />
+          loading && products ? <CircularProgress disableShrink />
             :
             <>
               <Grid item xs={12}  >
@@ -355,7 +356,7 @@ const ProductDetails = () => {
                     {pro[0]?.name}
                   </h3>
                   <i className={classes.BrandName} >
-                    {pro[0]?.brand.name}
+                    {pro[0]?.brand?.name}
                   </i>
                 </div>
               </Grid>
@@ -416,15 +417,15 @@ const ProductDetails = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px' }} >
                   <div>
                     <h3 className={classes.ProductBottomName} >
-                      {pro?.[0].name}
+                      {pro?.[0]?.name}
                     </h3>
-                    <h4 className={classes.ShortName} >{pro?.[0].short_name}</h4>
+                    <h4 className={classes.ShortName} >{pro?.[0]?.short_name}</h4>
                   </div>
                   <div>
 
                     <div>
-                      <p className={classes.price} > {pro?.[0].price} so'm </p>
-                      <p className={classes.afterDiscount} > {pro?.[0].after_discount.toLocaleString()} so'm </p>
+                      <p className={classes.price} > {pro?.[0]?.price} so'm </p>
+                      <p className={classes.afterDiscount} > {pro?.[0]?.after_discount?.toLocaleString()} so'm </p>
                       <p className={classes.discount} > {pro?.[0].discount} %</p>
                     </div>
                     <div style={{ display: "flex" }}>
