@@ -82,28 +82,22 @@ const BeforeFooter = () => {
               </Grid>
               <Grid item xs={12} md={matches ? 6 : 12}>
                 <span className={classes.FooterTopTitle}>
-                  Qadrli hamshaharlar !!!
+                  Yengilcredit.uz online do'koni xaridlar uchun juda ham qulay
+                  do'kon
                 </span>
                 <p
                   // style={{ textIndent: "5%" }}
                   className={classes.footerTopText}
                 >
-                  bizning shahrimizda ilh bor online savdo sayti rasman ishga tushdi.
+                  Bizning maqsadimiz zamonaviy texnologiyalar orqali
+                  vatandoshlarimizni hayotlarini osonlashtirish! Bizdan arzonini
+                  topsangiz pulni qaytarib beramiz.
                 </p>
-                {/* <ul className="ul">
-                  <li className={classes.ul}>
-                    Shu nuqtai nazardan, maishiy texnika sotib olish uchun
-                    xavfsiz va qulay joy, online-do’kon bo'lishi foydalidir.
-                  </li>
-                  <li className={classes.ul}>
-                    Bundan tashqari, texnologiyalar rivojlanmoqda va shuning
-                    uchun jihozlar muntazam yangilanishlarni talab qiladi, men
-                    yangi modellarni sinab, tekshirib ko'rishni xohlayman lekin
-                    mavjud qurilmalar va texnikalarning kuchi yetarli emas.
-                  </li>
-                </ul> */}
-                <p style={{ marginTop: "50px" }} className={classes.footerTopText}>
-                  Biz uchun har biringiz muhimsiz azizlar.
+                <p
+                  style={{ marginTop: "50px" }}
+                  className={classes.footerTopText}
+                >
+                  Mijozlar biz uchun emas biz mijozlar uchun ishlaymiz!
                 </p>
               </Grid>
             </Grid>
