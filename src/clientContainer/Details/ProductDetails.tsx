@@ -15,12 +15,12 @@ import { addToCart } from "../../redux/cart/action";
 import { useDispatch, useSelector } from "react-redux";
 import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
-import BigPhoto from "../../Images/BigPhoto.svg";
+import BigPhoto from "../../Images/BigPhoto.png";
 import Shop from "../../Images/baskets.png";
 import CancelBtnImg from "../../Images/GroupsBack.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { Link } from "react-router-dom";
-import { refresh } from "../../adminContainer/Modal/refresh";
+// import { refresh } from "../../adminContainer/Modal/refresh";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
@@ -206,7 +206,7 @@ const useStyles = makeStyles((theme) => ({
   cardPrice: {
     fontFamily: "Poppins",
     // fontWeight: "600",
-    fontSize: "18px",
+    fontSize: "14px",
     color: "#000",
     margin: 0,
   },
@@ -511,6 +511,10 @@ const ProductDetails = () => {
     message: "",
     type: "",
   });
+  const refresh = () => {
+    setTimeout(() => window.location.reload(),
+    10)
+}
 
   console.log(photo);
 
@@ -888,7 +892,7 @@ const ProductDetails = () => {
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
-                      <Link to={`/product/client/details/${item?.id}`}>
+                      <Link to={`/product/client/details/${item?.id}`} onClick={refresh} >
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
@@ -901,8 +905,8 @@ const ProductDetails = () => {
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: "19px",
-                          height: "30px",
+                          marginTop: "20px",
+                          height: "45px",
                           fontSize: "14px",
                           fontWeight: "600",
                         }}
@@ -951,16 +955,42 @@ const ProductDetails = () => {
                         </p>
                       )}
 
+<p
+                        className={classes.cardPrice}
+                        style={{
+                          fontWeight: "600",
+                          fontFamily: "Poppins",
+                          fontSize: "18px",
+                          color: "#000",
+                          margin: 0,
+                        }}
+                      >
+                        {
+                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                        } so'm
+                        <span style={{
+                          background: 'red',
+                          color: 'white',
+                          fontSize: '10px',
+                          borderRadius: '10px',
+                          padding: '1px 6px',
+                          marginLeft: '10px',
+                          
+                        }} >
+                          x 12 oy
+                        </span>
+                      </p>
                       <p
                         className={classes.cardPrice}
                         style={{
                           marginBottom: "10px",
                           height: "45px",
-                          fontWeight: "600",
+                          fontWeight: "500",
                         }}
                       >
                         {item?.after_discount?.toLocaleString()} so'm
                       </p>
+
 
                       {item.availability === true ? (
                         <button
@@ -1094,7 +1124,7 @@ const ProductDetails = () => {
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
-                      <Link to={`/product/client/details/${item?.id}`}>
+                      <Link to={`/product/client/details/${item?.id}`} onClick={refresh} >
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
@@ -1107,8 +1137,8 @@ const ProductDetails = () => {
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: "19px",
-                          height: "30px",
+                          marginTop: "20px",
+                          height: "45px",
                           fontSize: "14px",
                           fontWeight: "600",
                         }}
@@ -1159,13 +1189,39 @@ const ProductDetails = () => {
                       <p
                         className={classes.cardPrice}
                         style={{
-                          marginBottom: "10px",
-                          height: "45px",
                           fontWeight: "600",
+                          fontFamily: "Poppins",
+                          fontSize: "18px",
+                          color: "#000",
+                          margin: 0,
                         }}
                       >
-                        {item.after_discount?.toLocaleString()} so'm
+                        {
+                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                        } so'm
+                        <span style={{
+                          background: 'red',
+                          color: 'white',
+                          fontSize: '10px',
+                          borderRadius: '10px',
+                          padding: '1px 6px',
+                          marginLeft: '10px',
+                          
+                        }} >
+                          x 12 oy
+                        </span>
                       </p>
+                      <p
+                        className={classes.cardPrice}
+                        style={{
+                          marginBottom: "10px",
+                          height: "45px",
+                          fontWeight: "500",
+                        }}
+                      >
+                        {item?.after_discount?.toLocaleString()} so'm
+                      </p>
+
 
                       {item.availability === true ? (
                         <button
