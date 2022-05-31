@@ -443,10 +443,40 @@ const BrandPage = () => {
                           </p>
                           <p
                             className={classes.cardPriceDiscount}
-                            style={{ marginBottom: "10px", height: "45px" }}
+                            style={{
+                              fontWeight: "600",
+                              fontFamily: "Poppins",
+                              fontSize: "18px",
+                              color: "#000",
+                              margin: 0,
+                            }}
+                          >
+                            {
+                              Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                            } so'm
+                            <span style={{
+                              background: 'red',
+                              color: 'white',
+                              fontSize: '10px',
+                              borderRadius: '10px',
+                              padding: '1px 6px',
+                              marginLeft: '10px',
+
+                            }} >
+                              x 12 oy
+                            </span>
+                          </p>
+                          <p
+                            className={classes.cardPriceDiscount}
+                            style={{
+                              marginBottom: "10px",
+                              height: "45px",
+                              fontWeight: "500",
+                            }}
                           >
                             {item?.after_discount?.toLocaleString()} so'm
                           </p>
+
                           {item.availability === true ? (
                             <button
                               className={classes.cardButton}
@@ -478,7 +508,7 @@ const BrandPage = () => {
                               Sotuvda yo'q
                             </button>
                           )}
-                          <span className={classes.cardSpan}>{item.discount}%</span>
+                          {/* <span className={classes.cardSpan}>{item.discount}%</span> */}
                         </Box>
                       </Box>
                     )
@@ -541,7 +571,7 @@ const BrandPage = () => {
                                 {item.short_name}
                               </h6>
                               <p className={classes.sortCardDescription}>{item.name}</p>
-                              <div style={{ display: "flex", alignItems: "center" }}>
+                              <div style={{ display: "flex" , flexDirection: 'column' }}>
                                 {/* <p
                       className={classes.sortCardPrice}
                       style={{
@@ -552,16 +582,42 @@ const BrandPage = () => {
                     >
                       {item?.price?.toLocaleString()} so'm
                     </p> */}
-                                <span
+                                <p
                                   className={classes.sortCardPrice}
                                   style={{
-                                    marginTop: "10px",
-                                    fontSize: '16px',
-                                    textDecoration: "none",
+                                    fontWeight: "600",
+                                    fontFamily: "Poppins",
+                                    fontSize: "18px",
+                                    color: "#000",
+                                    margin: 0,
+                                  }}
+                                >
+                                  {
+                                    Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                                  } so'm
+                                  <span style={{
+                                    background: 'red',
+                                    color: 'white',
+                                    fontSize: '10px',
+                                    borderRadius: '10px',
+                                    padding: '1px 6px',
+                                    marginLeft: '10px',
+
+                                  }} >
+                                    x 12 oy
+                                  </span>
+                                </p>
+                                <p
+                                  className={classes.sortCardPrice}
+                                  style={{
+                                    marginBottom: "10px",
+                                    height: "45px",
+                                    fontWeight: "500",
                                   }}
                                 >
                                   {item?.after_discount?.toLocaleString()} so'm
-                                </span>
+                                </p>
+
                               </div>
                               {item.availability === true ? (
                                 <button className={classes.sortCardButton}>
@@ -594,7 +650,7 @@ const BrandPage = () => {
                     )
                     )}
                 </Stack>
-     
+
               </div>
           }
 
