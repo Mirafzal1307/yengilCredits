@@ -343,7 +343,7 @@ const CardProducts = () => {
                           color: 'white',
                           fontSize: '10px',
                           borderRadius: '10px',
-                          padding: '1px 6px',
+                          padding: '1px 5px',
                           marginLeft: '10px',
 
                         }} >
@@ -567,7 +567,7 @@ const CardProducts = () => {
                           color: 'white',
                           fontSize: '10px',
                           borderRadius: '10px',
-                          padding: '1px 6px',
+                          padding: '1px 5px',
                           marginLeft: '10px',
 
                         }} >
@@ -797,7 +797,7 @@ const CardProducts = () => {
                           color: 'white',
                           fontSize: '10px',
                           borderRadius: '10px',
-                          padding: '1px 6px',
+                          padding: '1px 5px',
                           marginLeft: '10px',
 
                         }} >
