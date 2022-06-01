@@ -94,11 +94,12 @@ const BeforeFooter = () => {
                   topsangiz pulni qaytarib beramiz.
                 </p>
                 <p
-                  style={{ marginTop: "50px" }}
                   className={classes.footerTopText}
+                  style={{ marginTop: "50px" }}
+
                 >
                   Mijozlar biz uchun emas biz mijozlar uchun ishlaymiz!
-                  <br/>
+                  <br />
                   Murojat uchun +998 90-054-54-91
                 </p>
               </Grid>
