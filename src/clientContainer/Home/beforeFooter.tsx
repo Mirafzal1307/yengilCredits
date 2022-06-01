@@ -98,6 +98,8 @@ const BeforeFooter = () => {
                   className={classes.footerTopText}
                 >
                   Mijozlar biz uchun emas biz mijozlar uchun ishlaymiz!
+                  <br/>
+                  Murojat uchun +998 90-054-54-91
                 </p>
               </Grid>
             </Grid>

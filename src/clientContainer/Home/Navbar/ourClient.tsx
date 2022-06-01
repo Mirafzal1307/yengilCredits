@@ -12,7 +12,7 @@ import Operator from "../../../Images/Operator.png"
 
 const useStyles = makeStyles(theme => ({
     img: {
-        width: "300px !important",
+        width: "100% !important",
         cursor: "pointer",
         height: "calc(((100% + 110px) / 3) - 15px)",
         [theme.breakpoints.up(600)]: {
@@ -63,13 +63,19 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 700,
         fontSize: "18px",
         color: "#065374",
-        margin: "10px 0 0 0"
+        margin: "10px 0 0 0",
+        [theme.breakpoints.down(600)]:{
+            fontSize: '10px !important'
+        }
     },
     paragraph: {
         fontFamily: "Poppins",
         fontWeight: 400,
         fontSize: "13px",
         textAlign: "center",
+        [theme.breakpoints.down(600)]:{
+            fontSize: "10px !important"
+        }
     }
 }))
 
@@ -78,29 +84,29 @@ const Partner = () => {
     return (
         <>
             <Container maxWidth="xl" style={{ marginTop: "48px" }}>
-                <Grid className={classes.grid}>
-                    <Grid xs={2} item className={classes.div}>
+                <Grid container className={classes.grid}>
+                    <Grid item xs={6} md={2} lg={2} className={classes.div}>
                         <Grid>
                             <img src={Dostavka} alt="" />
                         </Grid>
                         <p className={classes.text}>Bepul yetkazib berish</p>
                         <p className={classes.paragraph}>Sizning xotirjamligingiz uchun 3 yilgacha sayt kafolati mavjud.</p>
                     </Grid>
-                    <Grid xs={2} item className={classes.div}>
+                    <Grid item xs={6} md={2} lg={2} className={classes.div}>
                         <Grid>
                             <img src={Galochka} alt="" />
                         </Grid>
                         <p className={classes.text}>Bo’lib to’lash </p>
                         <p className={classes.paragraph}>Katta chegirmalar, bepul yetkazib berish va maxsus yordam mutaxassisi bilan.</p>
                     </Grid>
-                    <Grid xs={2} item className={classes.div}>
+                    <Grid item xs={6} md={2} lg={2} className={classes.div}>
                         <Grid>
                             <img src={Image} alt="" />
                         </Grid>
                         <p className={classes.text}>1 yil garantiya</p>
                         <p className={classes.paragraph}>Yangi mahsulotlarga 70% gacha chegirma, siz eng yaxshi narxga amin bo'lishingiz mumkin.</p>
                     </Grid>
-                    <Grid xs={2} item className={classes.div}>
+                    <Grid item xs={6} md={2} lg={2} className={classes.div}>
                         <Grid>
                             <img src={Operator} alt="" />
                         </Grid>
@@ -111,54 +117,26 @@ const Partner = () => {
             </Container>
             <Container maxWidth="xl" style={{ marginTop: '20px', }}  >
                 <p className={classes.Partner} >Bizning hamkorlar</p>
-                {/* <Splide
-                    options={{
-                        perPage: 3,
-                        arrows: false,
-                        pagination: false,
-                        gap: "15px",
-                        breakpoints: {
-                            400: {
-                                perPage: 3,
-                            },
-                            700: {
-                                perPage: 1,
-                            },
-                            992: {
-                                perPage: 2,
-                            },
-                            1300: {
-                                perPage: 3,
-                            }
-                        },
-                        type: 'loop',
-                        autoplay: true,
-                        autoScroll: {
-                            speed: 1
-                        },
-                    }}>
-                    <SplideSlide className={classes.Slide} >
+           
+                <Grid container  className={classes.client} >
+
+
+                    <Grid item xs={4} md={4} lg={4} className={classes.div}>
+
                         <img src={Alif} alt='' className={classes.img} />
-                    </SplideSlide>
-                    <SplideSlide className={classes.Slide} >
+                    </Grid>
+                    <Grid item xs={4} md={4} lg={4} className={classes.div} >
                         <img src={Paymart} alt='' className={classes.img} />
-                    </SplideSlide>
-                    <SplideSlide className={classes.Slide} >
+
+                    </Grid >
+
+
+                    <Grid item xs={4} md={4} lg={4} className={classes.div} >
                         <img src={Iman} alt='' className={classes.img} />
-                    </SplideSlide>
-                </Splide> */}
-                <Grid>
-                    <div className={classes.client}>
-                        {/* <div> */}
-                        <img src={Alif} alt='' className={classes.img} />
-                        {/* </div> */}
-                        {/* <div> */}
-                        <img src={Paymart} alt='' className={classes.img} />
-                        {/* </div> */}
-                        {/* <div> */}
-                        <img src={Iman} alt='' className={classes.img} />
-                        {/* </div> */}
-                    </div>
+
+                    </Grid>
+
+
                 </Grid>
             </Container>
         </>
