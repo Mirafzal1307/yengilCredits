@@ -15,12 +15,12 @@ import { addToCart } from "../../redux/cart/action";
 import { useDispatch, useSelector } from "react-redux";
 import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
-import BigPhoto from "../../Images/BigPhoto.svg";
+import BigPhoto from "../../Images/BigPhoto.png";
 import Shop from "../../Images/baskets.png";
 import CancelBtnImg from "../../Images/GroupsBack.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { Link } from "react-router-dom";
-import { refresh } from "../../adminContainer/Modal/refresh";
+// import { refresh } from "../../adminContainer/Modal/refresh";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
@@ -29,6 +29,7 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "./style.css";
+import ColorToggleButton from "./newFeature";
 
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
@@ -205,7 +206,7 @@ const useStyles = makeStyles((theme) => ({
   cardPrice: {
     fontFamily: "Poppins",
     // fontWeight: "600",
-    fontSize: "18px",
+    fontSize: "14px",
     color: "#000",
     margin: 0,
   },
@@ -475,6 +476,17 @@ const useStyles = makeStyles((theme) => ({
     height: "150px",
     // marginTop: "20px",
     borderRadius: "10px"
+  },
+  NewFeatures:{
+    [theme.breakpoints.down(1000)]:{
+      flexDirection: 'column'
+    },
+    [theme.breakpoints.up(750)]:{
+      flexDirection: 'unset !important'
+    }
+  },
+  Container:{
+   
   }
 }));
 
@@ -499,6 +511,10 @@ const ProductDetails = () => {
     message: "",
     type: "",
   });
+  const refresh = () => {
+    setTimeout(() => window.location.reload(),
+    10)
+}
 
   console.log(photo);
 
@@ -575,6 +591,7 @@ const ProductDetails = () => {
                   >
                     Savatchaga
                   </button>
+
                 </div>
               </div>
             </div>
@@ -584,44 +601,48 @@ const ProductDetails = () => {
           <Container
             maxWidth="xl"
             style={{ display: "flex", flexDirection: "column" }}
+            className={classes.Container}
           >
-            <div style={{ display: "flex" }}>
+            <div >
+
               <div style={{ marginRight: "20px", marginTop: "8px" }}>
                 <Link to={"/"}>
                   <img src={CancelBtnImg} alt="Cancel" />
                 </Link>
               </div>
-              <div className={classes.Links}>
-                <span
-                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
-                >
-                  <Link to="/" style={{ color: "rgb(159 159 159)" }}>
-                    Bosh sahifa
+              <div style={{ display: "flex", justifyContent: 'space-between' }} className={classes.NewFeatures} >
+                <Grid xs={12} md={6} >
+                  <div className={classes.Links}>
                     <span
-                      style={{
-                        fontWeight: "500",
-                        fontSize: "16px",
-                        padding: "0px 5px",
-                      }}
+                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                     >
-                      ›
+                      <Link to="/" style={{ color: "rgb(159 159 159)" }}>
+                        Bosh sahifa
+                        <span
+                          style={{
+                            fontWeight: "500",
+                            fontSize: "16px",
+                            padding: "0px 5px",
+                          }}
+                        >
+                          ›
+                        </span>
+                      </Link>
                     </span>
-                  </Link>
-                </span>
-                <span
-                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
-                  className={classes.spane}
-                >
-                  {pro?.map((parCategory: any) => (
-                    <Link
-                      to={`/product/product-by-category/${parCategory?.category?.parent_category?.id}`}
-                      style={{
-                        color: "rgb(159 159 159)",
-                        textTransform: "capitalize",
-                      }}
+                    <span
+                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                      className={classes.spane}
                     >
-                      {parCategory?.category?.parent_category?.name}
-                      {/* <span
+                      {pro?.map((parCategory: any) => (
+                        <Link
+                          to={`/product/product-by-category/${parCategory?.category?.parent_category?.id}`}
+                          style={{
+                            color: "rgb(159 159 159)",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {parCategory?.category?.parent_category?.name}
+                          {/* <span
                         style={{
                           fontWeight: "500",
                           fontSize: "16px",
@@ -630,29 +651,43 @@ const ProductDetails = () => {
                       >
                         ›
                       </span> */}{" "}
-                      ›
-                    </Link>
-                  ))}
-                </span>
-                <span
-                  style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
-                >
-                  {pro?.map((SubCategory: any) => (
-                    <Link
-                      to={`/product/product-by-category/${SubCategory?.category?.id}`}
-                      style={{
-                        color: "rgb(159 159 159)",
-                        textTransform: "capitalize",
-                      }}
+                          ›
+                        </Link>
+                      ))}
+                    </span>
+                    <span
+                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                     >
-                      {SubCategory?.category?.name}
-                    </Link>
+                      {pro?.map((SubCategory: any) => (
+                        <Link
+                          to={`/product/product-by-category/${SubCategory?.category?.id}`}
+                          style={{
+                            color: "rgb(159 159 159)",
+                            textTransform: "capitalize",
+                          }}
+                        >
+                          {SubCategory?.category?.name}
+                        </Link>
+                      ))}
+                    </span>
+                  </div>
+                </Grid>
+                <Grid xs={12} sm={12} md={6} >
+                  {pro?.map((product: any) => (
+                    <div>
+                      <ColorToggleButton cost={product?.after_discount} />
+                    </div>
                   ))}
-                </span>
+                </Grid>
+
               </div>
+
+
             </div>
+
           </Container>
         </div>
+
       </div>
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl" className={classes.bigBox}>
@@ -857,7 +892,7 @@ const ProductDetails = () => {
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
-                      <Link to={`/product/client/details/${item?.id}`}>
+                      <Link to={`/product/client/details/${item?.id}`} onClick={refresh} >
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
@@ -870,8 +905,8 @@ const ProductDetails = () => {
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: "19px",
-                          height: "30px",
+                          marginTop: "20px",
+                          height: "45px",
                           fontSize: "14px",
                           fontWeight: "600",
                         }}
@@ -920,16 +955,42 @@ const ProductDetails = () => {
                         </p>
                       )}
 
+<p
+                        className={classes.cardPrice}
+                        style={{
+                          fontWeight: "600",
+                          fontFamily: "Poppins",
+                          fontSize: "18px",
+                          color: "#000",
+                          margin: 0,
+                        }}
+                      >
+                        {
+                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                        } so'm
+                        <span style={{
+                          background: 'red',
+                          color: 'white',
+                          fontSize: '10px',
+                          borderRadius: '10px',
+                          padding: '1px 6px',
+                          marginLeft: '10px',
+                          
+                        }} >
+                          x 12 oy
+                        </span>
+                      </p>
                       <p
                         className={classes.cardPrice}
                         style={{
                           marginBottom: "10px",
                           height: "45px",
-                          fontWeight: "600",
+                          fontWeight: "500",
                         }}
                       >
                         {item?.after_discount?.toLocaleString()} so'm
                       </p>
+
 
                       {item.availability === true ? (
                         <button
@@ -1063,7 +1124,7 @@ const ProductDetails = () => {
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
-                      <Link to={`/product/client/details/${item?.id}`}>
+                      <Link to={`/product/client/details/${item?.id}`} onClick={refresh} >
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
@@ -1076,8 +1137,8 @@ const ProductDetails = () => {
                         className={classes.cardTitle}
                         style={{
                           margin: 0,
-                          marginTop: "19px",
-                          height: "30px",
+                          marginTop: "20px",
+                          height: "45px",
                           fontSize: "14px",
                           fontWeight: "600",
                         }}
@@ -1128,13 +1189,39 @@ const ProductDetails = () => {
                       <p
                         className={classes.cardPrice}
                         style={{
-                          marginBottom: "10px",
-                          height: "45px",
                           fontWeight: "600",
+                          fontFamily: "Poppins",
+                          fontSize: "18px",
+                          color: "#000",
+                          margin: 0,
                         }}
                       >
-                        {item.after_discount?.toLocaleString()} so'm
+                        {
+                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                        } so'm
+                        <span style={{
+                          background: 'red',
+                          color: 'white',
+                          fontSize: '10px',
+                          borderRadius: '10px',
+                          padding: '1px 6px',
+                          marginLeft: '10px',
+                          
+                        }} >
+                          x 12 oy
+                        </span>
                       </p>
+                      <p
+                        className={classes.cardPrice}
+                        style={{
+                          marginBottom: "10px",
+                          height: "45px",
+                          fontWeight: "500",
+                        }}
+                      >
+                        {item?.after_discount?.toLocaleString()} so'm
+                      </p>
+
 
                       {item.availability === true ? (
                         <button

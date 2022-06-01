@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardPrice: {
     fontFamily: "Poppins",
-    fontSize: "18px",
+    fontSize: "14px",
     color: "#000",
     margin: 0,
   },
@@ -278,7 +278,7 @@ const CardProducts = () => {
                         style={{
                           margin: 0,
                           marginTop: "19px",
-                          height: "30px",
+                          height: "45px",
                           fontSize: "14px",
                           fontWeight: "600",
                         }}
@@ -305,7 +305,6 @@ const CardProducts = () => {
                           style={{
                             color: "#065374",
                             fontSize: "14px",
-
                             textDecoration: "line-through",
                             fontWeight: "500",
                             display: "none !important",
@@ -326,13 +325,37 @@ const CardProducts = () => {
                           {item?.price?.toLocaleString()} so'm
                         </p>
                       )}
+                      <p
+                        className={classes.cardPrice}
+                        style={{
+                          fontWeight: "600",
+                          fontFamily: "Poppins",
+                          fontSize: "18px",
+                          color: "#000",
+                          margin: 0,
+                        }}
+                      >
+                        {
+                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                        } so'm
+                        <span style={{
+                          background: 'red',
+                          color: 'white',
+                          fontSize: '10px',
+                          borderRadius: '10px',
+                          padding: '1px 6px',
+                          marginLeft: '10px',
 
+                        }} >
+                          x 12 oy
+                        </span>
+                      </p>
                       <p
                         className={classes.cardPrice}
                         style={{
                           marginBottom: "10px",
                           height: "45px",
-                          fontWeight: "600",
+                          fontWeight: "500",
                         }}
                       >
                         {item?.after_discount?.toLocaleString()} so'm
@@ -529,215 +552,39 @@ const CardProducts = () => {
                       <p
                         className={classes.cardPrice}
                         style={{
-                          marginBottom: "10px",
-                          height: "45px",
                           fontWeight: "600",
-                        }}
-                      >
-                        {item?.after_discount?.toLocaleString()} so'm
-                      </p>
-
-                      {item.availability === true ? (
-                        <button
-                          className={classes.cardButton}
-                          style={{ fontWeight: "600" }}
-                          onClick={() => {
-                            dispatch(addToCart(item));
-                            setNotify({
-                              isOpen: true,
-                              message: "Savatchaga qo'shildi",
-                              type: "success",
-                            });
-                          }}
-                        >
-                          <img
-                            src={Shop}
-                            alt=""
-                            style={{ paddingRight: "10px" }}
-                          />
-                          Savatchaga
-                        </button>
-                      ) : (
-                        <button
-                          className={classes.cardButton}
-                          style={{ fontWeight: "600" }}
-                        >
-                          <img
-                            src={cart2}
-                            alt="img"
-                            style={{
-                              marginRight: "5px",
-                              border: "2px solid #C33E4D",
-                            }}
-                          />
-                          Sotuvda yo'q
-                        </button>
-                      )}
-                      {item.discount === 0 ? (
-                        <span
-                          className={classes.cardSpan}
-                          style={{
-                            fontWeight: "600",
-                            display: "none !important",
-                          }}
-                        ></span>
-                      ) : (
-                        <span
-                          className={classes.cardSpan}
-                          style={{
-                            fontWeight: "600",
-                            display: "block !important",
-                          }}
-                        >
-                          {item.discount !== 0 ? item.discount : null}%
-                        </span>
-                      )}
-                    </Box>
-                  </Box>
-                </SplideSlide>
-              ))
-            )}
-          </Splide>
-        </div>
-        <Link
-          to="/all/card/3"
-          className={classes.bottomText}
-          style={{ fontWeight: "600" }}
-        >
-          <div className={classes.cardBottom}>Barcha mahsulotlar</div>
-        </Link>
-      </Container>
-      <Container maxWidth="xl">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <h2 className={classes.title} style={{ fontWeight: "600" }}>
-            Chegirmadagi mahsulotlar
-          </h2>
-          <div className={classes.barchasi}>
-            <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
-            </Link>
-          </div>
-        </div>
-        <div className={classes.mainCard}>
-          <Splide
-            options={{
-              width: "100%",
-              perPage: 6,
-              pagination: false,
-              arrows: true,
-              gap: "0.7rem",
-              autoScroll: {
-                speed: 2,
-              },
-              breakpoints: {
-                450: {
-                  type: "loop",
-                  perPage: 1,
-                },
-                700: {
-                  perPage: 2,
-                },
-                992: {
-                  perPage: 3,
-                },
-                1300: {
-                  perPage: 4,
-                },
-              },
-            }}
-          >
-            {loading ? (
-              <CircularProgress
-                style={{
-                  margin: "auto",
-                  marginTop: "30px",
-                  marginBottom: "30px",
-                }}
-              />
-            ) : (
-              discount &&
-              discount.map((item: any) => (
-                <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
-                    <Box>
-                      <Link to={`/product/client/details/${item?.id}`}>
-                        <div className={classes.BodyCardInside}>
-                          <img
-                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
-                            alt="img"
-                            style={{ width: "150px", height: "150px" }}
-                          />
-                        </div>
-                      </Link>
-                      <h6
-                        className={classes.cardTitle}
-                        style={{
-                          margin: 0,
-                          marginTop: "19px",
-                          height: "45px",
-                          fontSize: "14px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        {item.short_name}
-                      </h6>
-                      <h6
-                        className={classes.cardTitle}
-                        style={{
-                          margin: 0,
-                          marginTop: "0px",
-                          marginBottom: "20px",
-                          height: "30px",
-                          fontWeight: "400",
-                          fontSize: "14px",
                           fontFamily: "Poppins",
+                          fontSize: "18px",
+                          color: "#000",
+                          margin: 0,
                         }}
                       >
-                        {item.name}
-                      </h6>
-                      {item.discount === 0 ? (
-                        <p
-                          className={classes.cardPrice}
-                          style={{
-                            color: "#065374",
-                            fontSize: "14px",
+                        {
+                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                        } so'm
+                        <span style={{
+                          background: 'red',
+                          color: 'white',
+                          fontSize: '10px',
+                          borderRadius: '10px',
+                          padding: '1px 6px',
+                          marginLeft: '10px',
 
-                            textDecoration: "line-through",
-                            fontWeight: "500",
-                            display: "none !important",
-                            paddingBottom: "22px",
-                          }}
-                        ></p>
-                      ) : (
-                        <p
-                          className={classes.cardPrice}
-                          style={{
-                            color: "#065374",
-                            fontSize: "14px",
-                            textDecoration: "line-through",
-                            fontWeight: "500",
-                            display: "block !important",
-                          }}
-                        >
-                          {item?.price?.toLocaleString()} so'm
-                        </p>
-                      )}
+                        }} >
+                          x 12 oy
+                        </span>
+                      </p>
                       <p
                         className={classes.cardPrice}
                         style={{
                           marginBottom: "10px",
                           height: "45px",
-                          fontWeight: "600",
+                          fontWeight: "500",
                         }}
                       >
                         {item?.after_discount?.toLocaleString()} so'm
                       </p>
+
 
                       {item.availability === true ? (
                         <button
@@ -935,13 +782,39 @@ const CardProducts = () => {
                       <p
                         className={classes.cardPrice}
                         style={{
+                          fontWeight: "600",
+                          fontFamily: "Poppins",
+                          fontSize: "18px",
+                          color: "#000",
+                          margin: 0,
+                        }}
+                      >
+                        {
+                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                        } so'm
+                        <span style={{
+                          background: 'red',
+                          color: 'white',
+                          fontSize: '10px',
+                          borderRadius: '10px',
+                          padding: '1px 6px',
+                          marginLeft: '10px',
+
+                        }} >
+                          x 12 oy
+                        </span>
+                      </p>
+                      <p
+                        className={classes.cardPrice}
+                        style={{
                           marginBottom: "10px",
                           height: "45px",
-                          fontWeight: "600",
+                          fontWeight: "500",
                         }}
                       >
                         {item?.after_discount?.toLocaleString()} so'm
                       </p>
+
 
                       {item.availability === true ? (
                         <button
