@@ -37,6 +37,7 @@ import Baskets from "../../../Images/basket.svg";
 import Telegram from "../../../Images/telegram.svg";
 import LogoIcon from "../../../Images/LogoIcon.svg";
 import SearchDemo from "../SearchDemo";
+import TransitionsModal from "./NewKatalog";
 
 // {categoryValues?.map((value: any, key: any) => {
 //   value?.map((inValue: any, index: any) => (
@@ -226,6 +227,9 @@ const useStyles = makeStyles((theme) => ({
     height: "35px",
     paddingLeft: "7px",
     paddingRight: "0 !important",
+    [theme.breakpoints.down(600)]: {
+      display: 'none !important'
+    }
   },
   menuButtonMax: {
     marginTop: "10px",
@@ -290,7 +294,7 @@ const useStyles = makeStyles((theme) => ({
   },
   mainMenu: {
     padding: "0 !important",
-    
+
   }
 }));
 
@@ -397,6 +401,7 @@ const BackToTop = () => {
     <React.Fragment>
       <CssBaseline />
       <AppBar className={classes.appBar}>
+
         <Toolbar
           sx={{
             display: "flex",
@@ -466,6 +471,7 @@ const BackToTop = () => {
                   }}
                 >
                   <div style={{ marginLeft: "15px" }}>
+                    <TransitionsModal />
                     <Menu
                       menuButton={
                         <MenuButton className={classes.menuButton}>
@@ -1210,7 +1216,7 @@ const BackToTop = () => {
       </AppBar>
 
       <Toolbar id="back-to-top-anchor" />
-      <Container></Container>
+
       <ScrollTop>
         <Fab
           color="secondary"
