@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     borderBox: "box-sizing",
     textAlign: "left",
+
   },
   cardButton: {
     background: "transparent",
@@ -58,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
       padding: "10px 35px !important",
     },
     [theme.breakpoints.up(450)]: {
+      padding: "10px 18px !important",
+    },
+    [theme.breakpoints.up(375)]: {
       padding: "10px 18px !important",
     },
     padding: "10px 45px  !important",
@@ -233,11 +237,19 @@ const CardProducts = () => {
                 speed: 2,
               },
               breakpoints: {
-                450: {
-                  type: "loop",
+                375: {
                   perPage: 1,
                 },
-                700: {
+                510: {
+                  type: 'loop',
+                  drag: 'free',
+                  focus: 'center',
+                  perPage: 1.5,
+                  autoScroll: {
+                    speed: 2,
+                  },
+                },
+                750: {
                   perPage: 2,
                 },
                 992: {
@@ -262,7 +274,7 @@ const CardProducts = () => {
               recommended?.map((item: any) => (
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item?.id}>
-                    <Box>
+                    <Box style={{ margin: '0px 10px' }} >
                       {console.log(item)}
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
@@ -347,7 +359,7 @@ const CardProducts = () => {
                           marginLeft: '10px',
 
                         }} >
-                          x 12 oy
+                          12 oy
                         </span>
                       </p>
                       <p
@@ -456,11 +468,20 @@ const CardProducts = () => {
                 speed: 2,
               },
               breakpoints: {
-                450: {
-                  type: "loop",
+
+                375: {
                   perPage: 1,
                 },
-                700: {
+                510: {
+                  type: 'loop',
+                  drag: 'free',
+                  focus: 'center',
+                  perPage: 1.5,
+                  autoScroll: {
+                    speed: 2,
+                  },
+                },
+                750: {
                   perPage: 2,
                 },
                 992: {
@@ -571,7 +592,7 @@ const CardProducts = () => {
                           marginLeft: '10px',
 
                         }} >
-                          x 12 oy
+                          12 oy
                         </span>
                       </p>
                       <p
@@ -686,11 +707,19 @@ const CardProducts = () => {
                 speed: 2,
               },
               breakpoints: {
-                450: {
-                  type: "loop",
+                375: {
                   perPage: 1,
                 },
-                700: {
+                510: {
+                  type: 'loop',
+                  drag: 'free',
+                  focus: 'center',
+                  perPage: 1.5,
+                  autoScroll: {
+                    speed: 2,
+                  },
+                },
+                750: {
                   perPage: 2,
                 },
                 992: {
@@ -801,7 +830,7 @@ const CardProducts = () => {
                           marginLeft: '10px',
 
                         }} >
-                          x 12 oy
+                          12 oy
                         </span>
                       </p>
                       <p

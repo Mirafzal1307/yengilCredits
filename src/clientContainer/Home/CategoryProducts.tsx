@@ -498,7 +498,7 @@ const CategoryProducts = () => {
                             marginLeft: '10px',
 
                           }} >
-                            x 12 oy
+                            12 oy
                           </span>
                         </p>
                         <p
@@ -634,7 +634,7 @@ const CategoryProducts = () => {
                                     marginLeft: '10px',
 
                                   }} >
-                                    x 12 oy
+                                    12 oy
                                   </span>
                                 </p>
                                 <p
