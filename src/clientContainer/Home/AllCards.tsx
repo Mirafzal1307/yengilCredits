@@ -476,7 +476,7 @@ const AllCards = () => {
                             marginLeft: '10px',
 
                           }} >
-                            x 12 oy
+                            12 oy
                           </span>
                         </p>
                         <p
@@ -588,7 +588,7 @@ const AllCards = () => {
                                 marginLeft: '10px',
 
                               }} >
-                                x 12 oy
+                                12 oy
                               </span>
                             </p>
                             <p
