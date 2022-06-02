@@ -463,7 +463,7 @@ const BrandPage = () => {
                               marginLeft: '10px',
 
                             }} >
-                              x 12 oy
+                              12 oy
                             </span>
                           </p>
                           <p
@@ -604,7 +604,7 @@ const BrandPage = () => {
                                     marginLeft: '10px',
 
                                   }} >
-                                    x 12 oy
+                                    12 oy
                                   </span>
                                 </p>
                                 <p
