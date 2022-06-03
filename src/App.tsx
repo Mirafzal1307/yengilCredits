@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Category from "./adminContainer/Category/Category";
-import Homes from "./adminContainer/Home/Home";
+import Home from "./adminContainer/Home/Home";
 import Order from "./adminContainer/Order/TableList";
 import Product from "./adminContainer/Product/products";
 import Brand from "./adminContainer/Brand/Brand";
@@ -42,7 +42,7 @@ function App() {
           <Routes>
             {/* <PrivateRoute exact path="/dashboard" component={Home}/> */}
             <Route path="/dashboard" element={<PrivateRoute />}>
-              <Route path="/dashboard" element={<Homes />} />
+              <Route path="/dashboard" element={<Home />} />
             </Route>
             <Route path="/category" element={<PrivateRoute />}>
               <Route path="/category" element={<Category />} />
@@ -108,5 +108,5 @@ function App() {
     </>
   );
 }
-// salom hammaga 
+// salom hammaga
 export default App;
