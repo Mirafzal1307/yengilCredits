@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import { Switch } from "react-router-dom-v5";
-// import { * } from "react-router-dom-v5"
+
 import Category from "./adminContainer/Category/Category";
-import Home from "./adminContainer/Home/Home";
+import Homes from "./adminContainer/Home/Home";
 import Order from "./adminContainer/Order/TableList";
 import Product from "./adminContainer/Product/products";
 import Brand from "./adminContainer/Brand/Brand";
@@ -43,7 +42,7 @@ function App() {
           <Routes>
             {/* <PrivateRoute exact path="/dashboard" component={Home}/> */}
             <Route path="/dashboard" element={<PrivateRoute />}>
-              <Route path="/dashboard" element={<Home />} />
+              <Route path="/dashboard" element={<Homes />} />
             </Route>
             <Route path="/category" element={<PrivateRoute />}>
               <Route path="/category" element={<Category />} />
