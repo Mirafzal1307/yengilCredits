@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardPriceDiscount: {
     fontFamily: "Poppins",
-    fontSize: "18px",
+    fontSize: "14px",
     fontWeight: "600",
     marginTop: "0",
     marginBottom: "10px",
@@ -297,7 +297,7 @@ const useStyles = makeStyles((theme) => ({
     // padding: "20px",
     alignSelf: 'center !important',
     justifySelf: 'center !important',
-   
+
   }
 
 }));
@@ -478,10 +478,40 @@ const CategoryProducts = () => {
                         </p>
                         <p
                           className={classes.cardPriceDiscount}
-                          style={{ marginBottom: "10px", height: "45px" }}
+                          style={{
+                            fontWeight: "600",
+                            fontFamily: "Poppins",
+                            fontSize: "18px",
+                            color: "#000",
+                            margin: 0,
+                          }}
+                        >
+                          {
+                            Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                          } so'm
+                          <span style={{
+                            background: 'red',
+                            color: 'white',
+                            fontSize: '10px',
+                            borderRadius: '10px',
+                            padding: '1px 5px',
+                            marginLeft: '10px',
+
+                          }} >
+                            12 oy
+                          </span>
+                        </p>
+                        <p
+                          className={classes.cardPriceDiscount}
+                          style={{
+                            marginBottom: "10px",
+                            height: "45px",
+                            fontWeight: "500",
+                          }}
                         >
                           {item?.after_discount?.toLocaleString()} so'm
                         </p>
+
                         {item.availability === true ? (
                           <button
                             className={classes.cardButton}
@@ -513,7 +543,7 @@ const CategoryProducts = () => {
                             Sotuvda yo'q
                           </button>
                         )}
-                        <span className={classes.cardSpan}>{item.discount}%</span>
+                        {/* <span className={classes.cardSpan}>{item.discount}%</span> */}
                       </Box>
                     </Box>
                   )
@@ -562,7 +592,7 @@ const CategoryProducts = () => {
                             <img
                               src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
                               alt="img"
-                            
+
                               className={classes.img}
                             />
                           </Link>
@@ -571,8 +601,8 @@ const CategoryProducts = () => {
                               {item.short_name}
                             </h6>
                             <p className={classes.sortCardDescription}>{item.name}</p>
-                            <div style={{ display: "flex", alignItems: "center" }}>
-                              {/* <p
+                            <div style={{ display: "flex" , flexDirection: 'column' }}>
+                                {/* <p
                       className={classes.sortCardPrice}
                       style={{
                         color: "#065374",
@@ -582,17 +612,43 @@ const CategoryProducts = () => {
                     >
                       {item?.price?.toLocaleString()} so'm
                     </p> */}
-                              <span
-                                className={classes.sortCardPrice}
-                                style={{
-                                  marginTop: "10px",
-                                  fontSize: '16px',
-                                  textDecoration: "none",
-                                }}
-                              >
-                                {item?.after_discount?.toLocaleString()} so'm
-                              </span>
-                            </div>
+                                <p
+                                  className={classes.sortCardPrice}
+                                  style={{
+                                    fontWeight: "600",
+                                    fontFamily: "Poppins",
+                                    fontSize: "18px",
+                                    color: "#000",
+                                    margin: 0,
+                                  }}
+                                >
+                                  {
+                                    Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                                  } so'm
+                                  <span style={{
+                                    background: 'red',
+                                    color: 'white',
+                                    fontSize: '10px',
+                                    borderRadius: '10px',
+                                    padding: '1px 5 px',
+                                    marginLeft: '10px',
+
+                                  }} >
+                                    12 oy
+                                  </span>
+                                </p>
+                                <p
+                                  className={classes.sortCardPrice}
+                                  style={{
+                                    marginBottom: "10px",
+                                    height: "45px",
+                                    fontWeight: "500",
+                                  }}
+                                >
+                                  {item?.after_discount?.toLocaleString()} so'm
+                                </p>
+
+                              </div>
                             {item.availability === true ? (
                               <button className={classes.sortCardButton}
 

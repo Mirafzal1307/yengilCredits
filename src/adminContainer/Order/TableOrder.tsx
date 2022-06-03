@@ -31,6 +31,7 @@ import inprogress from "../../Images/inprogress.svg";
 import clientcancel from "../../Images/clientcancel.svg";
 import admincancel from "../../Images/admincancel.svg";
 import detailsicon from "../../Images/detailsicon.svg";
+import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 
 const useStyles = makeStyles({
   pagination: {
@@ -121,6 +122,7 @@ const TableOrder: React.FC = () => {
   const classes = useStyles();
 
   return (
+    <>
     <div>
       <Grid
         justifyContent="space-between"
@@ -460,6 +462,7 @@ const TableOrder: React.FC = () => {
         </Grid>
       </Grid>
     </div>
+    </>
   );
 };
 

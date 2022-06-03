@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100% !important",
     cursor: "pointer",
     "&:hover": {
-      opacity: "0.9 !important",  
+      opacity: "0.9 !important",
     },
-    
+
   },
   Slide: {
     // borderRadius: '10px !important',
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
       transition: '1ms',
       borderRadius: "50px",
       zIndex: '9999 !important'
-     
+
 
     },
   }
@@ -48,10 +48,10 @@ const Navbarbottom = () => {
       <Container maxWidth="xl" style={{ marginTop: "20px" }}>
         <Splide
           options={{
-            perPage: 6,
+            perPage: 9,
             arrows: true,
             pagination: false,
-          
+
             gap: "15px",
             breakpoints: {
               400: {
@@ -59,16 +59,16 @@ const Navbarbottom = () => {
                 arrows: false,
               },
               700: {
-                perPage: 4,
-              },
-              992: {
                 perPage: 5,
               },
-              1300: {
+              992: {
                 perPage: 6,
               },
+              1300: {
+                perPage: 7,
+              },
             },
-         
+
           }}
         >
           <SplideSlide className={classes.Slide} >
@@ -76,7 +76,7 @@ const Navbarbottom = () => {
               <img src={Aksesuar} alt="rasm" className={classes.img} />
             </Link>
           </SplideSlide   >
-           <SplideSlide className={classes.Slide}>
+          <SplideSlide className={classes.Slide}>
             <Link to={"/product/product-by-category/1008"}>
               <img src={Desktop} alt="" className={classes.img} />
             </Link>
@@ -91,7 +91,7 @@ const Navbarbottom = () => {
               <img src={refrigerators} alt="" className={classes.img} />
             </Link>
           </SplideSlide>
-          <SplideSlide  className={classes.Slide} >
+          <SplideSlide className={classes.Slide} >
             <Link to={"/product/product-by-category/1012"}>
               <img src={smartphones} alt="" className={classes.img} />
             </Link>
@@ -100,32 +100,32 @@ const Navbarbottom = () => {
             <Link to={"/product/product-by-category/1016"}>
               <img src={washingmashine} alt="" className={classes.img} />
             </Link>
-          </SplideSlide> 
+          </SplideSlide>
           <SplideSlide className={classes.Slide} >
             <Link to={"/product/product-by-category/1018"}>
               <img src={washing} alt="" className={classes.img} />
             </Link>
-          </SplideSlide> 
+          </SplideSlide>
           <SplideSlide className={classes.Slide} >
             <Link to={"/product/product-by-category/1015"}>
               <img src={six} alt="" className={classes.img} />
             </Link>
-          </SplideSlide> 
+          </SplideSlide>
           <SplideSlide className={classes.Slide} >
             <Link to={"/product/product-by-category/1014"}>
               <img src={eight} alt="" className={classes.img} />
             </Link>
-          </SplideSlide> 
+          </SplideSlide>
           <SplideSlide className={classes.Slide} >
             <Link to={"/product/product-by-category/1013"}>
               <img src={seven} alt="" className={classes.img} />
             </Link>
-          </SplideSlide> 
+          </SplideSlide>
           <SplideSlide className={classes.Slide} >
             <Link to={"/product/product-by-category/1017"}>
               <img src={wash} alt="" className={classes.img} />
             </Link>
-          </SplideSlide> 
+          </SplideSlide>
         </Splide>
       </Container>
     </>

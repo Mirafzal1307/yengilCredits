@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => {
       textAlign: "left",
       [theme.breakpoints.down("md")]: {
         fontSize: "16px",
-        textAlign: "center",
+       
       },
     },
     footerBottomText: {
@@ -94,10 +94,13 @@ const BeforeFooter = () => {
                   topsangiz pulni qaytarib beramiz.
                 </p>
                 <p
-                  style={{ marginTop: "50px" }}
                   className={classes.footerTopText}
+                  style={{ marginTop: "50px" }}
+
                 >
                   Mijozlar biz uchun emas biz mijozlar uchun ishlaymiz!
+                  <br />
+                  Murojat uchun +998 90-054-54-91
                 </p>
               </Grid>
             </Grid>

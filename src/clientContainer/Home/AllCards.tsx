@@ -416,7 +416,7 @@ const AllCards = () => {
                 spacing={2}
                 flexWrap="wrap"
 
-                // flexDirection='column'
+              // flexDirection='column'
               >
                 {products
                   .map((item: any, key: any) => (
@@ -444,7 +444,7 @@ const AllCards = () => {
                         >
                           {item.short_name}
                         </p>
-                        <p
+                        {/* <p
                           className={classes.cardPrice}
                           style={{
                             color: "#065374",
@@ -453,10 +453,39 @@ const AllCards = () => {
                           }}
                         >
                           {item?.price?.toLocaleString()} so'm
+                        </p> */}
+                        <p
+                          className={classes.cardPrice}
+                          style={{
+                            fontWeight: "600",
+                            fontFamily: "Poppins",
+                            fontSize: "18px",
+                            color: "#000",
+                            margin: 0,
+                          }}
+                        >
+                          {
+                            Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                          } so'm
+                          <span style={{
+                            background: 'red',
+                            color: 'white',
+                            fontSize: '10px',
+                            borderRadius: '10px',
+                            padding: '1px 5px',
+                            marginLeft: '10px',
+
+                          }} >
+                            12 oy
+                          </span>
                         </p>
                         <p
-                          className={classes.cardPriceDiscount}
-                          style={{ marginBottom: "10px", height: "45px" }}
+                          className={classes.cardPrice}
+                          style={{
+                            marginBottom: "10px",
+                            height: "45px",
+                            fontWeight: "500",
+                          }}
                         >
                           {item?.after_discount?.toLocaleString()} so'm
                         </p>
@@ -491,9 +520,9 @@ const AllCards = () => {
                             Sotuvda yo'q
                           </button>
                         )}
-                        <span className={classes.cardSpan}>
+                        {/* <span className={classes.cardSpan}>
                           {item.discount}%
-                        </span>
+                        </span> */}
                       </Box>
                     </Box>
                   ))}
@@ -535,18 +564,43 @@ const AllCards = () => {
                             {item.name}
                           </p>
                           <div
-                            style={{ display: "flex", alignItems: "center" }}
+                            style={{ display: "flex", flexDirection: 'column' }}
                           >
-                            <span
+                            <p
                               className={classes.sortCardPrice}
                               style={{
-                                marginTop: "10px",
-                                fontSize: "16px",
-                                textDecoration: "none",
+                                fontWeight: "600",
+                                fontFamily: "Poppins",
+                                fontSize: "18px",
+                                color: "#000",
+                                margin: 0,
+                              }}
+                            >
+                              {
+                                Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
+                              } so'm
+                              <span style={{
+                                background: 'red',
+                                color: 'white',
+                                fontSize: '10px',
+                                borderRadius: '10px',
+                                padding: '1px 5px',
+                                marginLeft: '10px',
+
+                              }} >
+                                12 oy
+                              </span>
+                            </p>
+                            <p
+                              className={classes.sortCardPrice}
+                              style={{
+                                marginBottom: "10px",
+                                height: "45px",
+                                fontWeight: "500",
                               }}
                             >
                               {item?.after_discount?.toLocaleString()} so'm
-                            </span>
+                            </p>
                           </div>
                           {item.availability === true ? (
                             <button
