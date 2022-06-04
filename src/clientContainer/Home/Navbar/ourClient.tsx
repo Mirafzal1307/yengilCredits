@@ -128,8 +128,8 @@ const Partner = () => {
                     <Grid item xs={4} md={4} lg={2.5} className={classes.div} >
                         <img src={Paymart} alt='' className={classes.img} />
 
-                    </Grid >
 
+                    </Grid >
 
                     <Grid item xs={4} md={4} lg={2.5} className={classes.div} >
                         <img src={Iman} alt='' className={classes.img} />
