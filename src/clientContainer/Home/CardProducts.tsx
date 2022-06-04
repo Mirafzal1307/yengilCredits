@@ -51,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     borderBox: "box-sizing",
     textAlign: "left",
-
   },
   cardButton: {
     background: "transparent",
@@ -241,9 +240,9 @@ const CardProducts = () => {
                   perPage: 1,
                 },
                 510: {
-                  type: 'loop',
-                  drag: 'free',
-                  focus: 'center',
+                  type: "loop",
+                  drag: "free",
+                  focus: "center",
                   perPage: 1.5,
                   autoScroll: {
                     speed: 2,
@@ -274,7 +273,7 @@ const CardProducts = () => {
               recommended?.map((item: any) => (
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item?.id}>
-                    <Box style={{ margin: '0px 10px' }} >
+                    <Box style={{ margin: "0px 10px" }}>
                       {console.log(item)}
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
@@ -347,18 +346,20 @@ const CardProducts = () => {
                           margin: 0,
                         }}
                       >
-                        {
-                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
-                        } so'm
-                        <span style={{
-                          background: 'red',
-                          color: 'white',
-                          fontSize: '10px',
-                          borderRadius: '10px',
-                          padding: '1px 5px',
-                          marginLeft: '10px',
-
-                        }} >
+                        {Math.floor(
+                          (item?.after_discount * 1.44) / 12
+                        ).toLocaleString()}{" "}
+                        so'm
+                        <span
+                          style={{
+                            background: "red",
+                            color: "white",
+                            fontSize: "10px",
+                            borderRadius: "10px",
+                            padding: "1px 5px",
+                            marginLeft: "10px",
+                          }}
+                        >
                           12 oy
                         </span>
                       </p>
@@ -468,14 +469,13 @@ const CardProducts = () => {
                 speed: 2,
               },
               breakpoints: {
-
                 375: {
                   perPage: 1,
                 },
                 510: {
-                  type: 'loop',
-                  drag: 'free',
-                  focus: 'center',
+                  type: "loop",
+                  drag: "free",
+                  focus: "center",
                   perPage: 1.5,
                   autoScroll: {
                     speed: 2,
@@ -580,18 +580,20 @@ const CardProducts = () => {
                           margin: 0,
                         }}
                       >
-                        {
-                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
-                        } so'm
-                        <span style={{
-                          background: 'red',
-                          color: 'white',
-                          fontSize: '10px',
-                          borderRadius: '10px',
-                          padding: '1px 5px',
-                          marginLeft: '10px',
-
-                        }} >
+                        {Math.floor(
+                          (item?.after_discount * 1.44) / 12
+                        ).toLocaleString()}{" "}
+                        so'm
+                        <span
+                          style={{
+                            background: "red",
+                            color: "white",
+                            fontSize: "10px",
+                            borderRadius: "10px",
+                            padding: "1px 5px",
+                            marginLeft: "10px",
+                          }}
+                        >
                           12 oy
                         </span>
                       </p>
@@ -605,7 +607,6 @@ const CardProducts = () => {
                       >
                         {item?.after_discount?.toLocaleString()} so'm
                       </p>
-
 
                       {item.availability === true ? (
                         <button
@@ -711,9 +712,9 @@ const CardProducts = () => {
                   perPage: 1,
                 },
                 510: {
-                  type: 'loop',
-                  drag: 'free',
-                  focus: 'center',
+                  type: "loop",
+                  drag: "free",
+                  focus: "center",
                   perPage: 1.5,
                   autoScroll: {
                     speed: 2,
@@ -818,18 +819,20 @@ const CardProducts = () => {
                           margin: 0,
                         }}
                       >
-                        {
-                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
-                        } so'm
-                        <span style={{
-                          background: 'red',
-                          color: 'white',
-                          fontSize: '10px',
-                          borderRadius: '10px',
-                          padding: '1px 5px',
-                          marginLeft: '10px',
-
-                        }} >
+                        {Math.floor(
+                          (item?.after_discount * 1.44) / 12
+                        ).toLocaleString()}{" "}
+                        so'm
+                        <span
+                          style={{
+                            background: "red",
+                            color: "white",
+                            fontSize: "10px",
+                            borderRadius: "10px",
+                            padding: "1px 5px",
+                            marginLeft: "10px",
+                          }}
+                        >
                           12 oy
                         </span>
                       </p>
@@ -843,7 +846,6 @@ const CardProducts = () => {
                       >
                         {item?.after_discount?.toLocaleString()} so'm
                       </p>
-
 
                       {item.availability === true ? (
                         <button
