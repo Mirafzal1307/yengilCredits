@@ -5,7 +5,7 @@ import Iman from "../../../Images/image 59 (1).png";
 import { makeStyles } from "@material-ui/core/styles";
 import Dostavka from "../../../Images/Dostavka.svg";
 import Galochka from "../../../Images/Galochka.svg";
-import Image from "../../../Images/image.svg";
+import Image from "../../../Images/Image.svg";
 import Operator from "../../../Images/Operator.svg";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
