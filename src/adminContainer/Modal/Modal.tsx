@@ -110,11 +110,6 @@ const Modal = (props: any) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const classes = useStyles();
-  // function refresh(): void {
-  //   setTimeout(() => window.location.reload()
-  //     , 2000)
-
-  // }
   const navigate = useNavigate();
 
   return (

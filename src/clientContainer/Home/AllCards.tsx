@@ -415,8 +415,6 @@ const AllCards = () => {
                 alignItems="center"
                 spacing={2}
                 flexWrap="wrap"
-
-              // flexDirection='column'
               >
                 {products
                   .map((item: any, key: any) => (
@@ -444,17 +442,7 @@ const AllCards = () => {
                         >
                           {item.short_name}
                         </p>
-                        {/* <p
-                          className={classes.cardPrice}
-                          style={{
-                            color: "#065374",
-                            fontSize: "14px",
-                            textDecoration: "line-through",
-                          }}
-                        >
-                          {item?.price?.toLocaleString()} so'm
-                        </p> */}
-                        <p
+                                              <p
                           className={classes.cardPrice}
                           style={{
                             fontWeight: "600",
@@ -520,10 +508,7 @@ const AllCards = () => {
                             Sotuvda yo'q
                           </button>
                         )}
-                        {/* <span className={classes.cardSpan}>
-                          {item.discount}%
-                        </span> */}
-                      </Box>
+                                           </Box>
                     </Box>
                   ))}
               </Stack>
@@ -550,8 +535,7 @@ const AllCards = () => {
                             style={{
                               width: "80%",
                               height: "70%",
-                              // padding: "20px",
-                              alignSelf: "center !important",
+                                                        alignSelf: "center !important",
                               justifySelf: "center !important",
                             }}
                           />

@@ -22,8 +22,6 @@ import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-// import { refresh } from '../../../adminContainer/Modal/refresh';
-// import { refresh } from '../../../adminContainer/Modal/refresh';
 import './style.css'
 import { useNavigate } from "react-router-dom";
 import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';
@@ -450,10 +448,7 @@ export default function Cart() {
     setTimeout(() => {
       window.location.reload();
     }, 2000);
-  } // refresh page after 2 seconds
-
-
-
+  } 
   const dispatch = useDispatch();
   let total = cartProducts.reduce((subtotal, product) => subtotal + (product.price * product.quantity), 0);
   const products = cartProducts.map(i => (
@@ -497,13 +492,6 @@ export default function Cart() {
   });
   let options: any = getInputProps();
   const address = options.value;
-
-
-
-
-
-
-
 
   function Submit() {
     const form = JSON.stringify({
@@ -675,9 +663,7 @@ export default function Cart() {
                               <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`} />
 
                             </Link>
-
-                            {/* <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product.photo}`} alt=''></img> */}
-                          </td>
+                                                    </td>
                           <td>
                             <h5 className={classes.name} >{product.short_name}</h5>
                           </td>
@@ -786,13 +772,7 @@ export default function Cart() {
                       <p className={classes.UniversalP} >
                         Shahar, tuman <span style={{ color: 'red' }} >*</span>
                       </p>
-                      {/* <input type="text" required
-                        onChange={(e: any) => setAddress(e.target.value)}
-                        className={classes.Input}
-                        id='city' onKeyUp={isEmpty}
-                      />
-                      /> */}
-                      <div>
+                                           <div>
                         <div {...getRootProps()}>
                           <Input {...getInputProps()} className={classes.Input} />
                         </div>
