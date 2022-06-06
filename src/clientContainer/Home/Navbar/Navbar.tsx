@@ -368,7 +368,6 @@ const BackToTop = () => {
     setCategory(response.data.menu);
     let res: any = await getParentCategories();
     setParentCategories(res.data.content);
-    // console.log(response.data.menu);
   };
   console.log(parentCategories);
   const getCategoryProductById = async (id: any) => {
