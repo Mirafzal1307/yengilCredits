@@ -161,7 +161,6 @@ export default function CategoryEdit() {
     const res: any = await getCategoryById(id);
     setCategory(res.data.sub_category_info[0].name);
     setRows(res.data.parent_categories_list[0]);
-    // console.log(res.data);
   };
 
   React.useEffect(() => {
@@ -175,7 +174,6 @@ export default function CategoryEdit() {
       putCategoryEdit(id, data)
         .then(async (res: any) => {
           if (res.status === 200) {
-            // console.log(res);
             setNotify({
               isOpen: true,
               message: "Muvaffaqiyatli o'zgardi!",
@@ -275,9 +273,6 @@ export default function CategoryEdit() {
                 <Button className={classes.deletes} style={{ textTransform: "capitalize" }} onClick={putCategory}>
                   Turkumni o'zgartirish
                 </Button>
-
-
-
               </Tooltip>
             </div>
           </Paper>

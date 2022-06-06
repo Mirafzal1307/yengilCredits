@@ -320,25 +320,12 @@ const ProductDetails = () => {
   const { products, error, loading } = useTypedSelector((state) => state?.byId);
   let pro: any = products?.Product;
   let des: any = products?.Description;
-
-
-
-
   const classes = useStyles();
   const { id } = useParams();
-  // console.log(id);
   React.useEffect(() => {
    fetchProductsById(id);
   }, []);
-
   const { fetchProductsById } = useActions();
-
-  // if(loading){
-  //   return <h1>loading</h1>
-  // }
-  // if(error){
-  //   return <h1>error</h1>
-  // }
 
   return (
     <React.Fragment>
@@ -361,7 +348,6 @@ const ProductDetails = () => {
                 </div>
               </Grid>
               <Box style={{ display: "flex", alignItems: "center" }}>
-
                 <Grid item xs={6} style={{ display: 'flex', flexDirection: 'column' }} >
 
                   <div style={{ textAlign: 'center', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }}  >
@@ -403,14 +389,7 @@ const ProductDetails = () => {
                       }
 
                     </li>
-
-
-
-
                   </div>
-
-
-
                 </Grid>
               </Box>
               <Grid item xs={12} >
@@ -422,7 +401,6 @@ const ProductDetails = () => {
                     <h4 className={classes.ShortName} >{pro?.[0]?.short_name}</h4>
                   </div>
                   <div>
-
                     <div>
                       <p className={classes.price} > {pro?.[0]?.price} so'm </p>
                       <p className={classes.afterDiscount} > {pro?.[0]?.after_discount?.toLocaleString()} so'm </p>
@@ -444,7 +422,6 @@ const ProductDetails = () => {
                 </div>
               </Grid>
             </>
-
         }
         {error ? <h1>error</h1> : null}
       </Container>

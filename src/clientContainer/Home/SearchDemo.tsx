@@ -236,15 +236,7 @@ const MainSearch = () => {
                       </Link>
 
                     </TableCell>
-
-
                   </TableRow>
-
-
-
-
-
-
 
                 ))
               ) : (
@@ -255,64 +247,8 @@ const MainSearch = () => {
             </TableBody>
           </Table>
         </TableContainer>
-
       </Paper>
-      {/* <div>
-        <Stack
-       sx={{position: 'absolute' , top: '50px'}}
-        >
-          {param && products ? (
-            products.map((item: any) => (
-              <Box className={classes.bodyCard}>
-                <Box sx={{ display: 'flex' }} >
-                  <Link to={`/product/client/details/${item.id}`}>
-                    <img
-                      src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
-                      alt="img"
-                      style={{ width: "50px", height: "50px" }}
-                    />
-                  </Link>
-                  <h6
-                    className={classes.cardTitle}
-                    style={{
-                      margin: 0,
-                      marginTop: "10px",
-                      marginBottom: "10px",
-                      height: "30px",
-                    }}
-                  >
-                    {item.short_name}
-                  </h6>
-                  <p
-                    className={classes.cardPrice}
-                    style={{
-                      color: "#065374",
-                      fontSize: "14px",
-                      textDecoration: "line-through",
-                    }}
-                  >
-                    {item?.price?.toLocaleString()} so'm
-                  </p>
-                  <p
-                    className={classes.cardPrice}
-                    style={{ marginBottom: "10px", height: "45px" }}
-                  >
-                    {item?.after_discount?.toLocaleString()} so'm
-                  </p>
-
-                  
-                  <span className={classes.cardSpan}>{item.discount}%</span>
-                </Box>
-              </Box>
-            ))
-          ) : (
-            <>
-
-            </>
-          )}
-        </Stack>
-      </div> */}
-
+  
       <Notification notify={notify} setNotify={setNotify} />
 
     </div>

@@ -339,9 +339,7 @@ const EditProductList = () => {
     getProduct(id);
   }, []);
   const getProduct = async (id: any) => {
-    const res: any = await getProductById(id);
-    // console.log(res.data);
-    
+    const res: any = await getProductById(id);  
     setCharacters(res?.data?.product_characters[0])
     setBrand(res?.data?.product[0]?.brand)
     setStatus(res?.data?.product[0]?.availability)

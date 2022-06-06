@@ -23,11 +23,8 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       opacity: "0.9 !important",
     },
-
   },
   Slide: {
-    // borderRadius: '10px !important',
-    // background: 'red',
     "&:hover": {
       opacity: "0.99 !important",
       transform: 'scale(1.06)',
