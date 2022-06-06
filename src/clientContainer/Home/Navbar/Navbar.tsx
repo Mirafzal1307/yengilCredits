@@ -394,8 +394,7 @@ const BackToTop = () => {
   categoryValues.map((i) => {
     subCategoryArray.push(i);
   });
-  // console.log(subCategoryArray)
-  // subCategoryArray.push(category.name)
+
 
   return (
     <React.Fragment>
