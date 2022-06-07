@@ -14,7 +14,7 @@ build_kaniko_test:
   variables:
     IMAGE_DESTINATION: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
   only:
-    - test
+    - staging
   image:
       # We recommend using the CERN version of the Kaniko image: gitlab-registry.cern.ch/ci-tools/docker-image-builder
       name: gitlab-registry.cern.ch/ci-tools/docker-image-builder
@@ -60,7 +60,7 @@ deploy_test:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     # - echo "${TEST_SSH_KEY}" | ssh-add -
   only:
-    - test
+    - staging
   script:
     - apk add --update --no-cache openssh
     - chmod 400 $TEST_SSH_KEY
