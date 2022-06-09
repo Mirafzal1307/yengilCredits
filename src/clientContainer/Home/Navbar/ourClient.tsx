@@ -1,13 +1,13 @@
-import { Container, Grid } from "@mui/material";
-import Alif from "../../../Images/Group 56530.png";
-import Paymart from "../../../Images/image 58.png";
-import Iman from "../../../Images/image 59 (1).png";
+// import { Container, Grid } from "@mui/material";
+// import Alif from "../../../Images/Group 56530.png";
+// import Paymart from "../../../Images/image 58.png";
+// import Iman from "../../../Images/image 59 (1).png";
 import { makeStyles } from "@material-ui/core/styles";
-import Dostavka from "../../../Images/Dostavka.svg";
-import Galochka from "../../../Images/Galochka.svg";
-import Image from "../../../Images/Image.svg";
-import Operator from "../../../Images/Operator.svg";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+// import Dostavka from "../../../Images/Dostavka.svg";
+// import Galochka from "../../../Images/Galochka.svg";
+// import Image from "../../../Images/Image.svg";
+// import Operator from "../../../Images/Operator.svg";
+// import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -96,7 +96,7 @@ const Partner = () => {
   const classes = useStyles();
   return (
     <>
-      <Container maxWidth="xl" style={{ marginTop: "48px" }}>
+      {/* <Container maxWidth="xl" style={{ marginTop: "48px" }}>
         <Grid container className={classes.grid}>
           <Grid item xs={12} md={2} lg={2} className={classes.div}>
             <Grid>
@@ -226,7 +226,7 @@ const Partner = () => {
             <img src={Iman} alt="rasm bor edi" className={classes.img} />
           </Grid>
         </Grid>
-      </Container>
+      </Container> */}
     </>
   );
 };
