@@ -99,7 +99,7 @@ const BeforeFooter = () => {
                 >
                   Mijozlar biz uchun emas biz mijozlar uchun ishlaymiz!
                   <br />
-                  Murojat uchun +998 33-182-77-77
+                  Murojat uchun <b>+998 33-182-77-77</b>
                 </p>
               </Grid>
             </Grid>

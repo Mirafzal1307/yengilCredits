@@ -12,11 +12,12 @@ import "@splidejs/splide/dist/css/splide.min.css";
 
 const useStyles = makeStyles((theme) => ({
   img: {
-    width: "100% !important",
+    width: "100%",
     cursor: "pointer",
-    height: "calc(((100% + 110px) / 3) - 15px)",
+    // height: "calc(((100% + 110px) / 3) - 15px)",
+    height: "auto !important",
     [theme.breakpoints.up(600)]: {
-          height: "calc(((100% + 130px) / 3) - 15px)",
+          height: "auto !important",
     },
     "&:hover": {
       opacity: "0.9 !important",
