@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#065374",
     margin: "10px 0 0 0",
     [theme.breakpoints.down(600)]: {
-      fontSize: "10px !important",
+      fontSize: "18px !important",
     },
   },
   paragraph: {
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "13px",
     textAlign: "center",
     [theme.breakpoints.down(600)]: {
-      fontSize: "10px !important",
+      fontSize: "16px !important",
     },
   },
 
