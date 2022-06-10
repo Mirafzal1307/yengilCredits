@@ -28,9 +28,6 @@ const HomeHeader: FC = () => {
         </Grid>
         <HomePageTopButtons />
         <Grid container spacing={3}>
-         {/* <Grid item xs={7}>
-            <HomeChartTable />
-          </Grid> */}
           <Grid item xs={12} sx={{marginBottom: '30px'}} >
             <HomeMarketPage />
           </Grid>

@@ -276,18 +276,7 @@ export default function EnhancedTable() {
     message: "",
     type: "",
   });
-  // const { category, error, loading } = useTypedSelector(
-  //   (state) => state?.category
-  // );
   const classes = useStyles();
-
-  // const { fetchCategory } = useActions();
- 
-  // useEffect(() => {
-
-  //   fetchCategory("");
-
-  // }, []);
 
   useEffect(() => {
     getCategory();
@@ -296,41 +285,13 @@ export default function EnhancedTable() {
     }
   }, [query, page]);
 
-  // const handleInputChange = (e: any) => {
-  //   setParam(e.target.value);
-  // };
-
-  // const handleChange = (event: any) => {
-  //   setStatus(event.target.value);
-  // };
-
-  // if (loading) {
-  //   return (
-  //     <div style={{ marginTop: "5%", marginLeft: "50%" }}>
-  //       <CircularProgress />
-  //     </div>
-  //   )
-  // }
-  // if (error) {
-  //   return (
-  //     <h1
-  //       style={{ textAlign: "center", margin: "200px", alignItems: "center" }}
-  //     >
-  //       {error}
-  //     </h1>
-  //   );
-  // }
-
   const getCategory = async () => {
     let response: any = await getCategoryList(`${page - 1}`, {});
-    // console.log(response);
     setLoading(true);
     setRows(response?.data?.content);
     setPageQty(response?.data?.totalPages);
     setLoading(false);
   };
-
-
 
   const getSubCategories = async (id: any) => {
     let res: any = await getCategoryByParentCategory(id);
@@ -363,7 +324,6 @@ export default function EnhancedTable() {
     }
     setSelected(newSelected);
   };
-
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
   return (
@@ -382,21 +342,7 @@ export default function EnhancedTable() {
                 <Paper className={classes.paper}>
                   <TableContainer>
                     <h4 className={classes.h4}>2.Turkumlar</h4>
-                    {/* <div>
-                      <div style={{ display: "flex" }}>
-                        <input
-                          type="text"
-                          placeholder="Izlash..."
-                          onChange={handleInputChange}
-                        />
-                        <button>
-                          <SearchIcon />
-                        </button>
-                      </div>
-                      <div>
-                      </div>
-                    </div> */}
-                    <Table sx={{ maxWidth: 750 }} aria-labelledby="tableTitle">
+                                      <Table sx={{ maxWidth: 750 }} aria-labelledby="tableTitle">
                       <EnhancedTableHead
                         numSelected={selected.length}
                         onSelectAllClick={handleSelectAllClick}

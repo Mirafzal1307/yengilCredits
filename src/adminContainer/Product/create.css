@@ -75,25 +75,4 @@
 .noactive{
   border-color: black;
 }
-/* 
-#inpChegirma{
-  padding: 9px 2px 8px 17px;
-  width: "10%";
-  margin-top: 5px;
-  margin-right: 10px;
-  border: 2px solid #9F9F9F;
-  border-radius: 5px;
-  font-family:Poppins;
-  font-weight: 500;
-  color: "black";
-}
-#inpChegirma::placeholder{
-  font-family: "Poppins";
-  font-weight: 400;
-  font-size: 17px;
-  color: "black";
-}
-#inpChegirma:focus {
-    outline: "none",
-} */
 
