@@ -365,8 +365,7 @@ console.log(product);
         fetchProducts(`${page - 1}`)
         if (pageQty < page) {
             setPage(3)
-            // props.history.replace("/");
-        }
+                }
     }, [query, page]);
 
     React.useEffect(() => {
@@ -488,8 +487,6 @@ console.log(product);
                                             }
                                             return selected;
                                         }}
-
-                                        // className={classes.select}
                                         className=".css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input "
                                     >
                                         <MenuItem value="">
@@ -514,10 +511,8 @@ console.log(product);
                             aria-labelledby="tableTitle"
                         >
                             <EnhancedTableHead
-                                // numSelected={selected.length}
-                                onSelectAllClick={handleSelectAllClick}
-                            // rowCount={users.length}
-                            />
+                                                   onSelectAllClick={handleSelectAllClick}
+                                                     />
 
                             <TableBody>
 
@@ -587,11 +582,7 @@ console.log(product);
 
                                                         <Button className={classes.button}
                                                             component={RouterLink as any} to={`/product/edit/${user.id}`}
-                                                            // onClick={() => {
-                                                            //     getProductToUpdate();
-                                                            //     refresh();
-                                                            // }}
-                                                        ><img src={EditImage}
+                                                                                                                  ><img src={EditImage}
                                                             alt="rasm bor edi" /></Button>
 
 
@@ -689,8 +680,6 @@ console.log(product);
                                                         <Button className={classes.button} >
                                                             <Modal data={delProduct} className={classes.imgDelete}  />
                                                         </Button>
-
-
                                                     </TableCell>
                                                 </TableRow>
                                             </>
@@ -700,12 +689,7 @@ console.log(product);
                                 
                                 }
 
-
-
-
-
                             </TableBody>
-
                         </Table>
                     </TableContainer>
 
@@ -728,9 +712,6 @@ console.log(product);
                             )
                         }
                     />
-
-
-
                 </Paper>
             </Box>
             <Notification notify={notify} setNotify={setNotify} />

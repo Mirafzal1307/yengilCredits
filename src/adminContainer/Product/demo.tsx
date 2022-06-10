@@ -3,12 +3,9 @@ import Container from '@material-ui/core/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-// import RemoveIcon from '@material-ui/icons/Remove';
-// import AddIcon from '@material-ui/icons/Add';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Icon from '@material-ui/core/Icon';
-// import { v4 as uuidv4 } from 'uuid';
 import { v4 as uuidv4 } from 'uuid';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
@@ -66,11 +63,7 @@ function DiynamicFeilds() {
             <form className={classes.root} onSubmit={handleSubmit} >
                 {inputFields.map(inputField => (
                     <div key={inputField.id}>
-                        {/* <input
-                            name="firstName"
-                            value={inputField.firstName}
-                            onChange={event => handleChangeInput(inputField.id, event)}
-                            required /> */}
+                    
                         <FormControl
                             sx={{ m: 1, minWidth: 120 }}
                             style={{ padding: "0 !important", margin: "0 !important" }}

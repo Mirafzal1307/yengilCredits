@@ -16,13 +16,8 @@ export default function ProductCard_() {
   };
 
   const {id} = useParams<ProductParams>(); 
-  
-  //let id:string = useParams() as unknown as string;
   const dispatch = useDispatch();
   const filteredProducts = useSelector((state: rootState) => state.productsReducer.filteredProducts);
- 
-  // @ts-ignore
-  // eslint-disable-next-line eqeqeq
   let product = filteredProducts.filter((product) => product.id == (id))[0];
   
   return (
@@ -34,9 +29,7 @@ export default function ProductCard_() {
           <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product.photo}`} height='200px' width='200px' alt={product.id} />
           <div>
             <title>{product.short_name}</title>
-            {/* <p className="title">{product.category}</p> */}
             <br></br>
-  
             <br></br>
             <p className="title">DKK {product.price}</p>
             

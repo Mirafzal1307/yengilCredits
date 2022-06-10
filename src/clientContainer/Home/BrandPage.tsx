@@ -351,8 +351,6 @@ const BrandPage = () => {
               </button>
             </Link>
           </Grid>
-
-
           <Grid
             item
             xs={6}
@@ -390,10 +388,7 @@ const BrandPage = () => {
                   justifyContent="center"
                   alignItems="center"
                   spacing={2}
-                  flexWrap="wrap"
-
-
-                // flexDirection='column'
+                  flexWrap="wrap"               
                 >
                   {product
                     .filter((val: any) => {
@@ -508,7 +503,7 @@ const BrandPage = () => {
                               Sotuvda yo'q
                             </button>
                           )}
-                          {/* <span className={classes.cardSpan}>{item.discount}%</span> */}
+                         
                         </Box>
                       </Box>
                     )
@@ -560,7 +555,7 @@ const BrandPage = () => {
                                 style={{
                                   width: "80%",
                                   height: "70%",
-                                  // padding: "20px",
+                
                                   alignSelf: 'center !important',
                                   justifySelf: 'center !important'
                                 }}
@@ -572,16 +567,7 @@ const BrandPage = () => {
                               </h6>
                               <p className={classes.sortCardDescription}>{item.name}</p>
                               <div style={{ display: "flex" , flexDirection: 'column' }}>
-                                {/* <p
-                      className={classes.sortCardPrice}
-                      style={{
-                        color: "#065374",
-                        fontSize: "14px",
-                        textDecoration: "line-through",
-                      }}
-                    >
-                      {item?.price?.toLocaleString()} so'm
-                    </p> */}
+                         
                                 <p
                                   className={classes.sortCardPrice}
                                   style={{

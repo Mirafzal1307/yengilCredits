@@ -86,7 +86,6 @@ const BeforeFooter = () => {
                   do'kon
                 </span>
                 <p
-                  // style={{ textIndent: "5%" }}
                   className={classes.footerTopText}
                 >
                   Bizning maqsadimiz zamonaviy texnologiyalar orqali

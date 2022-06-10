@@ -327,10 +327,6 @@ const ProductsCreate = () => {
       setImage(null);
     }
   };
-  //   setTimeout(() => {
-  // refresh()
-  //   })
-  // refresh();
   React.useEffect(() => {
     getAllData();
   }, []);

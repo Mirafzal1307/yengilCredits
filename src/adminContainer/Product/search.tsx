@@ -52,9 +52,6 @@ const Search = () => {
                     className={classes.SearchIcon} >
                     <SearchIcon />
                 </button>
-
-
-
                 {param && products?.map((i: any, index: any) => (
                     <p key={index}>{i.name}</p>
                 ))

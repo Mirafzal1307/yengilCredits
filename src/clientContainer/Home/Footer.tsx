@@ -94,77 +94,7 @@ const Footer = () => {
   return (
     <>
       <Box style={{ background: '#065374', padding: '30px 0' }}>
-        {/* <Container maxWidth='xl'>
-          <Grid container item spacing={1} xs={12} style={{ display: 'flex', alignItems: 'center' }}>
-            <Grid className={classes.Item} item xs={12} md={4} order={{ sm: 4, md: 1 }}>
-              <div className={classes.ItemButton}>
-                <img style={{ width: '80%' }} src={FootLogo} alt="" />
-                <p>Mijozlarni qo’llab-quvatlash <br />+998 94 412 70 70 </p>
-              </div>
-            </Grid>
-            <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
-              <div className={classes.ItemButton}>
-                <h3>Bosh sahifa</h3> */}
-        {/* <Link to='https://www.instagram.com/itechcompany_uz/'> */}
-        {/* <a href="https://www.instagram.com/itechcompany_uz/">
-                  <button>
-                    <div>
-                      <img src={InstagramImg} alt="" />
-                      Instagram
-                    </div>
-                  </button>
-                </a>
-                {/* </Link> */}
-        {/* </div>
-            </Grid> */}
-        {/* <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
-              <div className={classes.ItemButton}>
-                <h3>Do’kon haqida</h3>
-                {/* <Link to='https://t.me/itechcompany_uz'> */}
-        {/* <a href="https://t.me/itechcompany_uz">
-                  <button>
-                    <div> */}
-        {/* <img src={TelegramImg} alt="" />
-                      Telegram
-                    </div>
-                  </button>
-                </a>
-                {/* </Link> */}
-        {/* </div> */}
-        {/* </Grid> */}
-        {/* <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
-              <div className={classes.ItemButton}>
-                <h3>Katalog</h3>
-                {/* <Link to='https://www.instagram.com/itechcompany_uz/'> */}
-        {/* <a href="https://play.google.com/store/apps/details?id=jp.konami.pesam">
-                  <button>
-                    <div>
-                      <img src={AppleImg} alt="" />
-                      App store
-                    </div>
-                  </button>
-                </a>
-                {/* </Link> */}
-        {/* </div>  */}
-        {/* </Grid> */}
-        {/* <Grid className={classes.Item} item xs={6} md={2} sm={6} order={{ sm: 1, md: 1 }}>
-              <div className={classes.ItemButton}>
-                <h3>Yetkazib berish</h3>
-                {/* <Link to='https://www.instagram.com/itechcompany_uz/'> */}
-        {/* <a href="https://play.google.com/store/apps/details?id=jp.konami.pesam">
-                  <button>
-                    <div>
-                      <img src={PlayMarketImg} alt="" />
-                      Google play
-                    </div>
-                  </button>
-                </a> */}
-        {/* </Link> */}
-        {/* </div> */}
-        {/* </Grid> */}
-        {/* </Grid>
-        </Container> */}
-        <Container maxWidth="xl">
+             <Container maxWidth="xl">
           <Grid className={classes.Grid} >
             <Grid xs={12}>
               <p className={classes.footer_text} style={{textAlign: 'left'}}>Barcha huquqlar himoyalangan</p>
