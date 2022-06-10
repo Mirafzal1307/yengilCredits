@@ -10,6 +10,7 @@ import Operator from "../../../Images/Operator.svg";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 
+
 const useStyles = makeStyles((theme) => ({
   img: {
     width: "100%",
