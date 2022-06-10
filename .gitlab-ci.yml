@@ -3,14 +3,13 @@ image:
   entrypoint: [""]
 
 stages:
-  - build_kaniko_pre_prod
+  - build_kaniko_test
   - build_kaniko_prod
-  - deploy_pre_prod
-  - deploy_prod
-  
+  - deploy_test
+  - deploy_prod  
 
 build_kaniko_test:
-  stage: build_kaniko_pre_prod
+  stage: build_kaniko_test
   variables:
     IMAGE_DESTINATION: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
   only:
@@ -30,7 +29,7 @@ build_kaniko_test:
       - echo "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
 
 build_kaniko_prod:
-  stage: build_kaniko_test
+  stage: build_kaniko_prod
   variables:
     IMAGE_DESTINATION: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
   only:
@@ -50,7 +49,7 @@ build_kaniko_prod:
       - echo "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"      
 
 deploy_test:
-  stage: deploy_pre_prod
+  stage: deploy_test
   # image: kroniak/ssh-client
   image: docker
   services: 
