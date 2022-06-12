@@ -141,4 +141,4 @@ export function productByCategory(category: string): ProductByCategoryAction {
 
 
 export type ProductActions = GetProducts | GetDemoProducts|  FilteredProductsAction | DeleteAllFromCart | DeleteFromCartAction | AddToCartAction
-    | changeThemeAction | ProductByCategoryAction | UpdatePriceAction
+    | changeThemeAction | ProductByCategoryAction | UpdatePriceAction 

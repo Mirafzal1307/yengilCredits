@@ -39,6 +39,7 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { useAutocomplete } from "@mui/base/AutocompleteUnstyled";
 import { styled } from "@mui/material/styles";
+import { PostCode, postPhone } from "./VerificationsApi";
 
 const Input = styled("input")(({ theme }) => ({
   width: 200,
@@ -444,12 +445,27 @@ export default function Cart() {
   console.log(cartProducts);
   const [open, setOpen] = React.useState(false);
   const [validate, setValidate] = React.useState(true)
+  const [timer, setTimer] = React.useState('00:00');
+  const [count, setCount] = React.useState(60)
+  const [code, setCode] = React.useState()
+
+  const Ref = React.useRef(null);
   const handleOpen = () => {
+      if(phone.length == 13 && fullName){
       setOpen(true);
+        setValidate(false)
+        postPhone({phone, fullName})
+        // console.log(phone.length);
+        onClickReset()
+      }
     
   };
+console.log(code);
+  const mass  = [phone, code]
   const handleClose = () => {
-    setOpen(false);
+      PostCode(mass)
+      setOpen(false);
+    
   };
 
   const navigate = useNavigate();
@@ -513,7 +529,6 @@ export default function Cart() {
       },
       total_price: total,
     });
-
     try {
       postProductOrder(form)
         .then(async (res: any) => {
@@ -560,6 +575,61 @@ export default function Cart() {
       element.style.borderColor = "#9F9F9F";
     }
   });
+
+
+// Timer 
+const getTimeRemaining = (e:any) => {
+  const total = Date.parse(e) - Date.parse(new Date() as any);
+  const seconds = Math.floor((total / 1000) % 60);
+  const minutes = Math.floor((total / 1000 / 60) % 60);
+  // const hours = Math.floor((total / 1000 / 60 / 60) % 24);
+  return {
+      total, minutes, seconds
+  };
+}
+
+const startTimer = (e:any) => {
+  let { total, minutes, seconds } 
+              = getTimeRemaining(e);
+  if (total >= 0) {
+      setTimer(
+          (minutes > 9 ? minutes : '0' + minutes) + ':'
+          + (seconds > 9 ? seconds : '0' + seconds)
+      )
+  }
+}
+
+const clearTimer = (e:any) => {
+  setTimer('00:60');
+
+  if (Ref.current) clearInterval(Ref.current);
+  const id:any = setInterval(() => {
+      startTimer(e);
+  }, 1000)
+  Ref.current = id;
+}
+
+const getDeadTime = () => {
+  let deadline = new Date();
+  deadline.setSeconds(deadline.getSeconds() + count);
+  return deadline;
+}
+// mount only
+React.useEffect(() => {
+  clearTimer(getDeadTime());
+}, []);
+
+const onClickReset = () => {
+  clearTimer(getDeadTime());
+}
+// Timer ending
+const handleResetTimer  = () => {
+  if(timer === "00:00"){
+    postPhone({phone, fullName})
+    onClickReset()
+  }
+}
+
 
   return (
     <>
@@ -835,7 +905,6 @@ export default function Cart() {
                         onClick={handleOpen}
                         className={classes.sale}
                         type = "button"
-                        // disabled = {validate}
                       >
                         Tasdiqlash
                       </button>
@@ -849,13 +918,13 @@ export default function Cart() {
                         <Box sx={{ ...style, width: 500 }}>
                           <h2>Tasdiqlash talab qilinadi</h2>
                           <p>
-                          Quyidagi raqamga kod yubordik +999(90)974 75 75
+                          Quyidagi raqamga kod yubordik {phone}
                           </p>
-                          <input placeholder="Tasdiqlash kodini shu yerga kiriting..." className = {classes.Input} />
+                          <input onChange={(e:any) => setCode(e.target.value)} placeholder="Tasdiqlash kodini shu yerga kiriting..." className = {classes.Input} required />
                           <button  className={classes.sale} onClick={handleClose}>
                             Tasdiqlash
                           </button>
-                          <Typography sx = {{textAlign: "center", mt:"20px", color:"#FF4B4B"}} >Kodni qayta jo’natishni so’rash (00:00)</Typography>
+                          <Typography onClick = {handleResetTimer} sx = {{cursor:"pointer",textAlign: "center", mt:"20px", color: timer !== "00:00" ? "#FF4B4B":"green" }} >Kodni qayta jo’natishni so’rash {timer !== "00:00" && timer}</Typography>
                         </Box>
                       </Modal>
                     </Box>
