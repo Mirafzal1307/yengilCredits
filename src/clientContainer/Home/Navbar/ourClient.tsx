@@ -10,13 +10,15 @@ import { makeStyles } from "@material-ui/core/styles";
 // import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 
+
 const useStyles = makeStyles((theme) => ({
   img: {
-    width: "100% !important",
+    width: "100%",
     cursor: "pointer",
-    height: "calc(((100% + 110px) / 3) - 15px)",
+    // height: "calc(((100% + 110px) / 3) - 15px)",
+    height: "auto !important",
     [theme.breakpoints.up(600)]: {
-          height: "calc(((100% + 130px) / 3) - 15px)",
+          height: "auto !important",
     },
     "&:hover": {
       opacity: "0.9 !important",
@@ -66,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#065374",
     margin: "10px 0 0 0",
     [theme.breakpoints.down(600)]: {
-      fontSize: "10px !important",
+      fontSize: "18px !important",
     },
   },
   paragraph: {
@@ -75,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "13px",
     textAlign: "center",
     [theme.breakpoints.down(600)]: {
-      fontSize: "10px !important",
+      fontSize: "16px !important",
     },
   },
 

@@ -6,15 +6,14 @@ stages:
   - build_kaniko_test
   - build_kaniko_prod
   - deploy_test
-  - deploy_prod
-  
+  - deploy_prod  
 
 build_kaniko_test:
   stage: build_kaniko_test
   variables:
     IMAGE_DESTINATION: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
   only:
-    - staging
+    - pre-prod
   image:
       # We recommend using the CERN version of the Kaniko image: gitlab-registry.cern.ch/ci-tools/docker-image-builder
       name: gitlab-registry.cern.ch/ci-tools/docker-image-builder
@@ -30,7 +29,7 @@ build_kaniko_test:
       - echo "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
 
 build_kaniko_prod:
-  stage: build_kaniko_test
+  stage: build_kaniko_prod
   variables:
     IMAGE_DESTINATION: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
   only:
@@ -60,13 +59,13 @@ deploy_test:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
     # - echo "${TEST_SSH_KEY}" | ssh-add -
   only:
-    - staging
+    - pre-prod
   script:
     - apk add --update --no-cache openssh
     - chmod 400 $TEST_SSH_KEY
     - ssh -o StrictHostKeyChecking=no -i $TEST_SSH_KEY $TEST_USER@$TEST_SERVER_IP "docker login -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' $CI_REGISTRY"
-    - ssh -o StrictHostKeyChecking=no -i $TEST_SSH_KEY $TEST_USER@$TEST_SERVER_IP "docker pull registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:staging"
-    - ssh -o StrictHostKeyChecking=no -i $TEST_SSH_KEY $TEST_USER@$TEST_SERVER_IP "docker stop yengil_front_test && docker rm yengil_front_test && docker run -e "REACT_APP_BASE_URL=https://test.api.yengilcredit.uz" -e "PORT=2929" -e "REACT_APP_MINIO_ENPOINT=https://test.minio.yengilcredit.uz" -p 2929:2929 --name yengil_front_test -d registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:test"
+    - ssh -o StrictHostKeyChecking=no -i $TEST_SSH_KEY $TEST_USER@$TEST_SERVER_IP "docker pull registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:pre-prod"
+    - ssh -o StrictHostKeyChecking=no -i $TEST_SSH_KEY $TEST_USER@$TEST_SERVER_IP "docker stop yengil_front_test && docker rm yengil_front_test && docker run -e "REACT_APP_BASE_URL=https://test.api.yengilcredit.uz" -e "PORT=2929" -e "REACT_APP_MINIO_ENPOINT=https://test.minio.yengilcredit.uz" -p 2929:2929 --name yengil_front_test -d registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:pre-prod"
 
 
 deploy_prod:

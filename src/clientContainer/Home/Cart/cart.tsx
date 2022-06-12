@@ -699,7 +699,7 @@ export default function Cart() {
             </>
 
           }
-
+{/*      card */}
 
           <Grid item xs={12} md={4}>
             <div className={classes.totalPage} >
@@ -743,6 +743,8 @@ export default function Cart() {
                   </p>
                 </div>
                 <h3>Yetkazish ma'lumotlari</h3>
+
+
                 <Grid className={classes.Grid} container spacing={2}>
                   <Grid item xs={12} sm={6} md={12}>
                     <Box>
@@ -772,7 +774,7 @@ export default function Cart() {
                       <p className={classes.UniversalP} >
                         Shahar, tuman <span style={{ color: 'red' }} >*</span>
                       </p>
-                                           <div>
+                                <div>
                         <div {...getRootProps()}>
                           <Input {...getInputProps()} className={classes.Input} />
                         </div>
@@ -797,6 +799,8 @@ export default function Cart() {
                     </Box>
                   </Grid>
                 </Grid>
+
+                
                 <Box>
                   <ToggleButtonGroup
                     value={alignment}
@@ -888,6 +892,8 @@ export default function Cart() {
               </form>
             </div>
           </Grid>
+
+          
         </Grid>
         <Button onClick={() => dispatch(deleteAllFromCart())} className={classes.basketButton}>Savatni Tozalash</Button>
         <Notification notify={notify} setNotify={setNotify} />
