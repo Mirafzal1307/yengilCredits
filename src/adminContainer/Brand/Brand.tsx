@@ -85,7 +85,6 @@ const BrandList: React.FC = () => {
   return (
     <>
       <MiniDrawer />
-
       <Container style={{ marginTop: "50px" }}>
         <h1 className={classes.title}>Brand</h1>
         <Grid container spacing={2}>

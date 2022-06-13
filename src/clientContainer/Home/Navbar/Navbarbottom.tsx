@@ -31,15 +31,12 @@ const useStyles = makeStyles((theme) => ({
       transition: '1ms',
       borderRadius: "50px",
       zIndex: '9999 !important'
-
-
     },
   }
 }));
 
 const Navbarbottom = () => {
   const classes = useStyles();
-
   return (
     <>
       <Container maxWidth="xl" style={{ marginTop: "20px" }}>
@@ -48,7 +45,6 @@ const Navbarbottom = () => {
             perPage: 9,
             arrows: true,
             pagination: false,
-
             gap: "15px",
             breakpoints: {
               400: {

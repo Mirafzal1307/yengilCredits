@@ -1,7 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-// import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box from "@mui/material/Box";
@@ -38,24 +37,6 @@ import Telegram from "../../../Images/telegram.svg";
 import LogoIcon from "../../../Images/LogoIcon.svg";
 import SearchDemo from "../SearchDemo";
 import TransitionsModal from "./NewKatalog";
-
-// {categoryValues?.map((value: any, key: any) => {
-//   value?.map((inValue: any, index: any) => (
-//   <>
-//     {/* {console.log(inValue)} */}
-//       <MenuItem className={classes.MenuItem} key={index}>
-//         <Link
-//           to={`/product/product-by-category/${inValue.parent_id}`}
-//           key={key}
-//           className={classes.navLink}
-//         >
-//           {`${inValue.name}`}
-//         </Link>
-//       </MenuItem>
-//     </>
-//   ));
-// })}
-
 interface Props {
   window?: () => Window;
   children: React.ReactElement;
@@ -69,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
       display: "flex !important",
     },
     [theme.breakpoints.down(500)]: {
-      // display: "flex !important",
       flexDirection: "column !important",
     },
   },
@@ -77,14 +57,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex !important",
     justifyContent: "center",
     position: "relative",
-
     [theme.breakpoints.up(899)]: {
       display: "flex !important",
-
       justifyContent: "space-between !important",
     },
     [theme.breakpoints.down(500)]: {
-      // display: "flex !important",
       flexDirection: "column !important",
     },
   },
@@ -297,7 +274,6 @@ const useStyles = makeStyles((theme) => ({
 
   }
 }));
-
 function ScrollTop(props: Props) {
   const { children, window } = props;
   const trigger = useScrollTrigger({
@@ -305,12 +281,10 @@ function ScrollTop(props: Props) {
     disableHysteresis: true,
     threshold: 100,
   });
-
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const anchor = (
       (event.target as HTMLDivElement).ownerDocument || document
     ).querySelector("#back-to-top-anchor");
-
     if (anchor) {
       anchor.scrollIntoView({
         behavior: "smooth",
@@ -318,7 +292,6 @@ function ScrollTop(props: Props) {
       });
     }
   };
-
   return (
     <Zoom in={trigger}>
       <Box
@@ -336,56 +309,24 @@ const BackToTop = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [category, setCategory] = React.useState<any>({});
   const [parentCategories, setParentCategories] = React.useState<any>([]);
-  const [isOpen, setIsOpen] = React.useState<any>(false);
-  // console.log(Object.keys(category));
-  let categoryKeys = Object.keys(category);
   let categoryValues = Object.values(category);
-  // console.log(categoryValues);
-
-  let ddd: any = category;
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  let { keyword } = useSelector((state: rootState) => state.productsReducer);
-
   const cartProducts = useSelector(
     (state: rootState) => state.cartreducer.cartProducts
   );
   let total = cartProducts.length;
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   React.useEffect(() => {
     getCategoryForCleintPage();
   }, []);
 
   const getCategoryForCleintPage = async () => {
     let response: any = await getCategoryForClient();
-    let categories: any = response.data;
     setCategory(response.data.menu);
     let res: any = await getParentCategories();
     setParentCategories(res.data.content);
   };
-  // console.log(parentCategories);
   const getCategoryProductById = async (id: any) => {
     const response = await getProductFromCategoryById(id, {});
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const styles: SxProps = {
-    position: "absolute",
-    top: 28,
-    right: 0,
-    left: 0,
-    zIndex: 1,
-    border: "1px solid",
-    p: 1,
-    bgcolor: "background.paper",
   };
   const classes = useStyles();
 
@@ -393,13 +334,10 @@ const BackToTop = () => {
   categoryValues.map((i) => {
     subCategoryArray.push(i);
   });
-
-
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar className={classes.appBar}>
-
         <Toolbar
           sx={{
             display: "flex",
@@ -430,7 +368,6 @@ const BackToTop = () => {
                       <img src={LogoIcon} alt="" />
                     </Link>
                   </div>
-
                   <div>
                     <img
                       src={Telegram}

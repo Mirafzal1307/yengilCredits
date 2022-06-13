@@ -1,7 +1,5 @@
 import { ProductActions } from './action';
 import { Product } from './types';
-
-
 type InitialState = {
   products: any,
   filteredProducts: Product[],
@@ -9,7 +7,6 @@ type InitialState = {
   darktheme: boolean
   productByCategory: Product[],
 };
-
 const initialState: InitialState = {
   products: [],
   filteredProducts: [],
@@ -17,18 +14,14 @@ const initialState: InitialState = {
   darktheme: false,
   productByCategory: [],
 };
-
-
 export default function productsReducer(state = initialState, action: ProductActions): InitialState {
   switch (action.type) {
     case "GET_PRODUCTS": {
-
       return {
         ...state,
         products: action.payload.products,
      };
     }
-    
     case "GET_DEMO_PRODUCTS": {
       return {
         ...state,
@@ -50,9 +43,7 @@ export default function productsReducer(state = initialState, action: ProductAct
     }
 
     case "PRODUCT_BY_CATEGORY": {
-
       let products = state.products
-
       if (action.payload.category !== "All") {
         products = state.products.filter((product: any) => {
           return (
@@ -62,7 +53,6 @@ export default function productsReducer(state = initialState, action: ProductAct
           )
         });
       }
-
       return {
         ...state,
         filteredProducts: products
@@ -76,13 +66,11 @@ export default function productsReducer(state = initialState, action: ProductAct
       else {
         theme = true;
       }
-
       return {
         ...state,
         darktheme: theme,
       };
     }
-
     default:
       return state;
   }

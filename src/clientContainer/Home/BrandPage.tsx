@@ -235,8 +235,6 @@ const useStyles = makeStyles({
   sortBodyCard: {
     width: "100%",
     display: "flex",
-
-    // padding: "20px 40px",
     backgroundColor: "white",
     "&:hover": {
       boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
@@ -304,20 +302,12 @@ const BrandPage = () => {
     message: "",
     type: "",
   });
-
-  const handleChangeCategory = (event: SelectChangeEvent) => {
-    setProductPrice(event.target.value);
-  };
-
   const getProduct = async (id: any) => {
     let res: any = await getProductByBrand(`${page - 1}`, id);
     setProduct(res.data.content);
-    // console.log(res.data.content);
     setPageQty(res.data.totalPages);
   };
   const dispatch = useDispatch();
-
-
   useEffect(() => {
     getProduct(id);
     if (pageQty < page) {
@@ -331,7 +321,6 @@ const BrandPage = () => {
   if (error) {
     return <h1>{error}</h1>;
   }
-
   return (
     <>
       <BackToTop />
@@ -357,7 +346,6 @@ const BrandPage = () => {
             md={1}
             sm={4}
             style={{ display: "flex", justifyContent: "end" }}
-
           >
             <div className={classes.locationOfCard}>
               <button
@@ -388,7 +376,7 @@ const BrandPage = () => {
                   justifyContent="center"
                   alignItems="center"
                   spacing={2}
-                  flexWrap="wrap"               
+                  flexWrap="wrap"
                 >
                   {product
                     .filter((val: any) => {
@@ -503,7 +491,6 @@ const BrandPage = () => {
                               Sotuvda yo'q
                             </button>
                           )}
-                         
                         </Box>
                       </Box>
                     )
@@ -514,8 +501,6 @@ const BrandPage = () => {
               :
               <div >
                 <Stack
-
-
                   flexDirection='column'
                 >
                   {product
@@ -547,7 +532,6 @@ const BrandPage = () => {
                               alignItems: 'center',
                               justifyContent: 'center',
                               width: '40%',
-
                             }} >
                               <img
                                 src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
@@ -555,7 +539,6 @@ const BrandPage = () => {
                                 style={{
                                   width: "80%",
                                   height: "70%",
-                
                                   alignSelf: 'center !important',
                                   justifySelf: 'center !important'
                                 }}
@@ -566,8 +549,7 @@ const BrandPage = () => {
                                 {item.short_name}
                               </h6>
                               <p className={classes.sortCardDescription}>{item.name}</p>
-                              <div style={{ display: "flex" , flexDirection: 'column' }}>
-                         
+                              <div style={{ display: "flex", flexDirection: 'column' }}>
                                 <p
                                   className={classes.sortCardPrice}
                                   style={{
@@ -588,7 +570,6 @@ const BrandPage = () => {
                                     borderRadius: '10px',
                                     padding: '1px 5px',
                                     marginLeft: '10px',
-
                                   }} >
                                     12 oy
                                   </span>
@@ -603,7 +584,6 @@ const BrandPage = () => {
                                 >
                                   {item?.after_discount?.toLocaleString()} so'm
                                 </p>
-
                               </div>
                               {item.availability === true ? (
                                 <button className={classes.sortCardButton}>
@@ -631,16 +611,11 @@ const BrandPage = () => {
                           </Box>
                         </Grid>
                       </Grid>
-
-
                     )
                     )}
                 </Stack>
-
               </div>
           }
-
-
           <Grid
             container
             sx={{ mb: "20px", mt: "20px", justifyContent: 'center !important' }}
@@ -670,10 +645,8 @@ const BrandPage = () => {
             )}
           </Grid>
         </Container>
-
       </Container>
       <Notification notify={notify} setNotify={setNotify} />
-
       <Footer />
     </>
   );

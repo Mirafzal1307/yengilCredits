@@ -8,7 +8,6 @@ function saveToLocalStorage(state: rootState) {
         const localStorageState = JSON.stringify(state);
         localStorage.setItem("state", localStorageState);
     } catch (e) {
-        // console.log(e);
     }
 }
 

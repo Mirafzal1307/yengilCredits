@@ -2,7 +2,6 @@ import { Container, Grid, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
 import { makeStyles } from "@material-ui/core/styles";
 import FooterLeft from "../../Images/footer_left.svg";
-
 const useStyles = makeStyles((theme) => {
   return {
     ul: {
@@ -45,11 +44,9 @@ const useStyles = makeStyles((theme) => {
     },
   };
 });
-
 const BeforeFooter = () => {
   const classes = useStyles();
   const matches = useMediaQuery("(min-width:1100px)");
-
   return (
     <>
       <Box

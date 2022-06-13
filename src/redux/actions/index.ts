@@ -6,7 +6,6 @@ import * as TodoActionCreators from './basketAction'
 import * as FetchActionById from './detailsByIdAction'
 import * as productByCategoryAction from "./productByCategoryAction"
 import * as FetchProductClientDetails from './DetailsActions';
-
 export default {
     ...ProductActionCreators,
     ...BrandActionCreators,
@@ -18,7 +17,6 @@ export default {
     ...productByCategoryAction,
     ...FetchProductClientDetails
 }
-
 export const addItem = (id:any) => {
     return {
         type: 'ADD_ITEM',
@@ -27,7 +25,6 @@ export const addItem = (id:any) => {
         }
     }
 };
-
 export const changeQuantity = (id:any, quantity:any) => {
     return {
         type: 'CHANGE_ITEM',
@@ -37,7 +34,6 @@ export const changeQuantity = (id:any, quantity:any) => {
         }
     }
 };
-
 export const decrementItem = (id:any) => {
     return {
         type: 'DECREMENT_ITEM',
@@ -46,13 +42,11 @@ export const decrementItem = (id:any) => {
         }
     }
 };
-
 export const notify = () => {
     return {
         type: "SHOW_NOTIFICATION"
     }
 };
-
 export const disableNotify = () => {
     return {
         type: "REMOVE_NOTIFICATION"
