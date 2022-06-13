@@ -52,7 +52,6 @@ const useStyles = makeStyles({
     "&:focus": {
       outline: "none",
     },
-    // border: "2px solid #9F9F9F",
     borderRadius: "5px",
     fontFamily: "Poppins",
     fontWeight: 400,
@@ -105,12 +104,9 @@ const BrandCreate = () => {
     message: "",
     type: "",
   });
-  // const navigate = useNavigate();
-
 
   const inp = document.querySelector('input');
-  const bal = inp?.value
-
+  const bal = inp?.value;
   if (bal?.length === 1) {
     inp?.classList.add('active')
   }
@@ -124,11 +120,8 @@ const BrandCreate = () => {
     inp?.classList.remove('active')
     inp?.classList.add('noactive')
   }
-
   const fileInputRef = useRef<any>();
   const classes = useStyles();
-
-
   const handleInputChange = (e: any) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
@@ -137,7 +130,6 @@ const BrandCreate = () => {
       setImage(null);
     }
   };
-
   const getAllBrandDatas = async () => {
     let response: any = await getAllBrandData();
     setData(response.data);
@@ -145,7 +137,6 @@ const BrandCreate = () => {
 
   function onSubmit() {
     const form = new FormData();
-
     form.append("photo", image);
     form.append(
       "brand",
@@ -253,7 +244,6 @@ const BrandCreate = () => {
             className={classes.forButton}
             onClick={() => {
               onSubmit();
-              // refresh();
             }}
             style={{ marginLeft: "auto", display: "flex" }}
           >

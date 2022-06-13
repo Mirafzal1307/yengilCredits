@@ -98,7 +98,6 @@ const useStyles = makeStyles({
   forBoxInputDiscount: {
     padding: "8px 2px 9px 8px",
     width: "40px",
-
     marginTop: "5px",
     marginRight: "10px",
     "&::placeholder": {
@@ -147,7 +146,6 @@ const useStyles = makeStyles({
   },
   Select: {
     padding: "none !important",
-
     border: "2px solid #9F9F9F",
     borderRadius: "5px !important",
   },
@@ -176,7 +174,6 @@ const useStyles = makeStyles({
   characterValue: {
     padding: "8px 40px 9px 15px",
     margin: "10px 0px 20px 0px !important",
-
     marginTop: "5px",
     "&::placeholder": {
       fontFamily: "Poppins",
@@ -274,8 +271,6 @@ const useStyles = makeStyles({
     listStyle: 'none !important',
     fontSize: '17px !important',
     fontWeight: 300,
-  
-
   },
   ProductBottomName: {
     fontWeight: 600,
@@ -326,7 +321,6 @@ const ProductDetails = () => {
    fetchProductsById(id);
   }, []);
   const { fetchProductsById } = useActions();
-
   return (
     <React.Fragment>
       <MiniDrawer />
@@ -349,27 +343,20 @@ const ProductDetails = () => {
               </Grid>
               <Box style={{ display: "flex", alignItems: "center" }}>
                 <Grid item xs={6} style={{ display: 'flex', flexDirection: 'column' }} >
-
                   <div style={{ textAlign: 'center', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }}  >
                     <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${pro[0]?.photos[0].name}`} alt="Rasm bor edi" className={classes.img} />
                   </div>
-
                 </Grid>
                 <Grid item xs={6}>
-
                   <div className={classes.CharacterAndProperty} >
-
                     <li className={classes.Character} >
                       <h3>
                         Xarakteriska Nomi
                       </h3>
-
                       {
                         des[0]?.map((item: any) => (
                           <div style={{flexDirection: 'column'}}  >
-
                             {item?.character_name}
-
                           </div>
                         ))
                       }
@@ -381,13 +368,10 @@ const ProductDetails = () => {
                       {
                         des[0]?.map((item: any) => (
                           <div style={{flexDirection: 'column'}}  >
-
                             {item?.character_value}
-
                           </div>
                         ))
                       }
-
                     </li>
                   </div>
                 </Grid>

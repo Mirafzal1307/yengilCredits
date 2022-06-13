@@ -86,11 +86,8 @@ const useStyles = makeStyles(theme => {
     }
   }
 });
-
-
 const Footer = () => {
   const classes = useStyles();
-
   return (
     <>
       <Box style={{ background: '#065374', padding: '30px 0' }}>

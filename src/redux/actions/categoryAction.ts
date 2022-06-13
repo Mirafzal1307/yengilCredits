@@ -8,7 +8,6 @@ export const fetchCategory = (p: any) => {
             dispatch({ type: CategoryActionTypes.FETCH_CATEGORY })
             const response = await getCategoryList(`${p}`, {})
             const data: any = response;
-            //console.log(data.data);
             dispatch({ type: CategoryActionTypes.FETCH_CATEGORY_SUCCESS, payload: response.data })
         } catch (e) {
            dispatch({

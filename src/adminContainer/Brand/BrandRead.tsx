@@ -11,7 +11,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Checkbox from "@mui/material/Checkbox";
-import { API_URL, MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
+import {MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import { Link } from "react-router-dom";
 import edit from "./images/edit.svg";
 import Modal from "../Modal/Modal";
@@ -66,15 +66,11 @@ const BrandTable = () => {
     type: "",
   });
   const classes = useStyles();
-
   const { brands, error, loading } = useTypedSelector((state) => state.brand);
-
   const { fetchBrands } = useActions();
-
   React.useEffect(() => {
     fetchBrands();
   }, []);
-
   if (loading) {
     return (
       <Box sx={{ width: "100%" }}>

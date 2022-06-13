@@ -5,7 +5,6 @@ import LinearProgress, {
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import IosShareIcon from "@mui/icons-material/IosShare";
-
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
   borderRadius: 5,
@@ -18,7 +17,6 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "light" ? "#1a90ff" : "#308fe8",
   },
 }));
-
 const useStyles = makeStyles({
   Marketing: {
     boxShadow:
@@ -102,7 +100,6 @@ const HomeMarketPage = () => {
         </Box>
         <Box sx={{ flexGrow: 1 }}>
           <p className={classes.Home_Instagram}>Instagram page</p>
-
           <BorderLinearProgress
             variant="determinate"
             value={65}

@@ -7,11 +7,8 @@
     color: black !important;
     margin-top: 10px  !important;
     margin-bottom: 10px !important;
-
 }
-
 .css-ueukts-MuiButtonBase-root-MuiToggleButton-root.Mui-selected {
-
     color: white !important;
     border-radius: unset !important;
     background: #065374 !important;
@@ -19,9 +16,7 @@
     box-sizing: border-box !important;
     border-radius: 2px !important;
     transition: 0.5s;
-    
 }
-
 .PhoneInputInput{
     padding: 9px;
     border-radius: 4px;
@@ -29,7 +24,6 @@
     box-sizing: border-box;
     margin: 5px 0px 5px 0px  !important;
 }
-
 input{
     border: 2px solid red;
 }

@@ -20,7 +20,6 @@ import Shop from "../../Images/baskets.png";
 import CancelBtnImg from "../../Images/GroupsBack.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { Link } from "react-router-dom";
-// import { refresh } from "../../adminContainer/Modal/refresh";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
@@ -30,7 +29,6 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "./style.css";
 import ColorToggleButton from "./newFeature";
-
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
     padding: "45px 0",
@@ -107,7 +105,6 @@ const useStyles = makeStyles((theme) => ({
         width: "60%",
         justifyContent: "center",
       },
-
       borderRadius: "0px",
       filter: "drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))",
     },
@@ -115,7 +112,6 @@ const useStyles = makeStyles((theme) => ({
       width: "20%",
       display: "block",
       marginTop: "20px",
-
       "& img": {
         width: "100%",
       },
@@ -142,7 +138,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   mainCard: {
-    // display: "flex",
     height: "90%",
   },
   bodyCard: {
@@ -199,13 +194,11 @@ const useStyles = makeStyles((theme) => ({
   },
   cardTitle: {
     fontFamily: "Poppins",
-    // fontWeight: 600,
     fontSize: "13px",
     color: "#000",
   },
   cardPrice: {
     fontFamily: "Poppins",
-    // fontWeight: "600",
     fontSize: "14px",
     color: "#000",
     margin: 0,
@@ -213,9 +206,6 @@ const useStyles = makeStyles((theme) => ({
   splide: {
     marginTop: "10px !important",
     marginBottom: "10px !important",
-    // width: "100% !important",
-    // display: "flex",
-    // justifyContent: "center"
   },
   cardBottom: {
     background: "#065374",
@@ -232,7 +222,6 @@ const useStyles = makeStyles((theme) => ({
   },
   bottomText: {
     fontFamily: "Poppins",
-    // fontWeight: "600",
     fontSize: "22px",
     color: "#fff",
   },
@@ -240,7 +229,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100% ",
     marginBottom: "50px",
     borderRadius: "5px",
-
     [theme.breakpoints.down(900)]: {
       marginTop: "40px",
     },
@@ -253,7 +241,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontWeight: 600,
     fontSize: "27px",
-
     [theme.breakpoints.down(700)]: {
       display: "block",
     },
@@ -270,7 +257,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "22px",
     display: "flex",
     justifyContent: "space-between",
-
     [theme.breakpoints.down(600)]: {
       fontSize: "16px",
       fontWeight: 600,
@@ -280,7 +266,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontWeight: 600,
     fontSize: "22px",
-
     [theme.breakpoints.down(600)]: {
       fontSize: "14px",
     },
@@ -293,7 +278,6 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     borderRadius: "50px",
     marginLeft: "21px",
-
     [theme.breakpoints.down(600)]: {
       margin: "0",
       display: "none !important",
@@ -307,7 +291,6 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     borderRadius: "50px",
     marginLeft: "21px",
-
     [theme.breakpoints.up(600)]: {
       display: "none !important",
     },
@@ -321,7 +304,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     paddingBottom: "30px",
-
     [theme.breakpoints.down(700)]: {
       display: "block",
       textAlign: "center",
@@ -331,14 +313,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-
     [theme.breakpoints.down(450)]: {
       display: "block",
     },
   },
   barchasi: {
     display: "none",
-
     "& a": {
       fontSize: "15px",
       color: "#065374",
@@ -453,12 +433,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
   inSplideSlide: {
-
-    // height: "500px",
-    // borderRadius: "10px",
-    // display: "block",
     [theme.breakpoints.down(600)]: {
-      // display: "none",
       width: '100px'
     },
   },
@@ -474,19 +449,18 @@ const useStyles = makeStyles((theme) => ({
   inSwiperSlide: {
     width: "150px",
     height: "150px",
-    // marginTop: "20px",
     borderRadius: "10px"
   },
-  NewFeatures:{
-    [theme.breakpoints.down(1000)]:{
+  NewFeatures: {
+    [theme.breakpoints.down(1000)]: {
       flexDirection: 'column'
     },
-    [theme.breakpoints.up(750)]:{
+    [theme.breakpoints.up(750)]: {
       flexDirection: 'unset !important'
     }
   },
-  Container:{
-   
+  Container: {
+
   }
 }));
 
@@ -495,17 +469,11 @@ const ProductDetails = () => {
   const { fetchProductClientDetails } = useActions();
   const [recommended, setRecommended] = React.useState([]);
   const [popular, setPopular] = React.useState([]);
-
   let pro: any = products?.Product;
   let des: any = products?.Description[0];
-  // console.log(des);
-
   const { id } = useParams();
   const classes = useStyles();
-
   const photo = pro?.map((i: any) => i?.photos);
-  const name23 = pro?.map((i: any) => i?.name);
-
   const [notify, setNotify] = useState<any>({
     isOpen: false,
     message: "",
@@ -513,11 +481,8 @@ const ProductDetails = () => {
   });
   const refresh = () => {
     setTimeout(() => window.location.reload(),
-    10)
-}
-
-  // console.log(photo);
-
+      10)
+  }
   const dispatch = useDispatch();
   const loading = useTypedSelector((state) => state?.card?.loading);
 
@@ -526,7 +491,6 @@ const ProductDetails = () => {
     setPopular(response?.data?.popular_products);
     setRecommended(response?.data?.recommended_products);
   }
-
   useEffect(() => {
     getData();
   }, []);
@@ -544,12 +508,6 @@ const ProductDetails = () => {
     setProducts(res?.data);
   };
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-  // const swiper = new Swiper('.swiper', {
-  //   grid: {
-  //     rows: 2,
-  //   },
-  // });
-
   return (
     <>
       <BackToTop />
@@ -591,7 +549,6 @@ const ProductDetails = () => {
                   >
                     Savatchaga
                   </button>
-
                 </div>
               </div>
             </div>
@@ -604,7 +561,6 @@ const ProductDetails = () => {
             className={classes.Container}
           >
             <div >
-
               <div style={{ marginRight: "20px", marginTop: "8px" }}>
                 <Link to={"/"}>
                   <img src={CancelBtnImg} alt="Cancel" />
@@ -642,15 +598,7 @@ const ProductDetails = () => {
                           }}
                         >
                           {parCategory?.category?.parent_category?.name}
-                          {/* <span
-                        style={{
-                          fontWeight: "500",
-                          fontSize: "16px",
-                          padding: "0px 5px",
-                        }}
-                      >
-                        ›
-                      </span> */}{" "}
+                          {" "}
                           ›
                         </Link>
                       ))}
@@ -679,22 +627,16 @@ const ProductDetails = () => {
                     </div>
                   ))}
                 </Grid>
-
               </div>
-
-
             </div>
-
           </Container>
         </div>
-
       </div>
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl" className={classes.bigBox}>
           <Grid container style={{ display: "flex" }}>
             <Grid item xs={12} md={6}>
               <Swiper
-                // grid={module}
                 loop={true}
                 spaceBetween={10}
                 navigation={false}
@@ -708,7 +650,6 @@ const ProductDetails = () => {
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
-                        // className={classes.inSplideSlide}
                         style={
                           item?.length >= 2
                             ? { width: "60%", }
@@ -729,7 +670,6 @@ const ProductDetails = () => {
                 modules={[FreeMode, Navigation, Thumbs]}
 
                 className="mySwiper"
-              // style={ photo?.length > 2 ? { display: "block" } : {display: "none"}}
               >
                 {photo?.map((item: any) =>
                   item?.map((value: any) => (
@@ -855,8 +795,6 @@ const ProductDetails = () => {
               perPage: 6,
               pagination: false,
               arrows: true,
-              //type: 'loop',
-              //drag: 'free',
               gap: "0.7rem",
               autoScroll: {
                 speed: 2,
@@ -954,8 +892,7 @@ const ProductDetails = () => {
                           {item?.price?.toLocaleString()} so'm
                         </p>
                       )}
-
-<p
+                      <p
                         className={classes.cardPrice}
                         style={{
                           fontWeight: "600",
@@ -975,7 +912,6 @@ const ProductDetails = () => {
                           borderRadius: '10px',
                           padding: '1px 6px',
                           marginLeft: '10px',
-                          
                         }} >
                           12 oy
                         </span>
@@ -990,8 +926,6 @@ const ProductDetails = () => {
                       >
                         {item?.after_discount?.toLocaleString()} so'm
                       </p>
-
-
                       {item.availability === true ? (
                         <button
                           className={classes.cardButton}
@@ -1087,8 +1021,6 @@ const ProductDetails = () => {
               perPage: 6,
               pagination: false,
               arrows: true,
-              //type: 'loop',
-              //drag: 'free',
               gap: "0.7rem",
               autoScroll: {
                 speed: 2,
@@ -1206,9 +1138,9 @@ const ProductDetails = () => {
                           borderRadius: '10px',
                           padding: '1px 6px',
                           marginLeft: '10px',
-                          
+
                         }} >
-                           12 oy
+                          12 oy
                         </span>
                       </p>
                       <p
@@ -1221,8 +1153,6 @@ const ProductDetails = () => {
                       >
                         {item?.after_discount?.toLocaleString()} so'm
                       </p>
-
-
                       {item.availability === true ? (
                         <button
                           className={classes.cardButton}

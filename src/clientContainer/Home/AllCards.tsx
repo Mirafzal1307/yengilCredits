@@ -326,7 +326,6 @@ const AllCards = () => {
   const [pageQty, setPageQty] = useState<number>(0);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("react");
-  const [searchTerm, setSearchTerm] = useState("");
   const getData = async (id: any) => {
     const response: any = await getAllCards(id, `${page - 1}`);
     setProducts(response.data.content);
@@ -337,12 +336,7 @@ const AllCards = () => {
     message: "",
     type: "",
   });
-
-  const handleChangeCategory = (event: SelectChangeEvent) => {
-    setProductPrice(event.target.value);
-  };
   const dispatch = useDispatch();
-
   useEffect(() => {
     getData(id);
     if (pageQty < page) {
@@ -354,7 +348,6 @@ const AllCards = () => {
     let res: any = await getProductByBrand({}, id);
     setProducts(res.data.content);
   };
-
   useEffect(() => {
     getProduct(id);
   }, []);
@@ -378,7 +371,6 @@ const AllCards = () => {
               </button>
             </Link>
           </Grid>
-
           <Grid
             item
             xs={6}
@@ -442,7 +434,7 @@ const AllCards = () => {
                         >
                           {item.short_name}
                         </p>
-                                              <p
+                          <p
                           className={classes.cardPrice}
                           style={{
                             fontWeight: "600",
@@ -508,7 +500,7 @@ const AllCards = () => {
                             Sotuvda yo'q
                           </button>
                         )}
-                                           </Box>
+                         </Box>
                     </Box>
                   ))}
               </Stack>
@@ -626,7 +618,6 @@ const AllCards = () => {
               </Stack>
             </div>
           )}
-
           <Grid
             container
             sx={{ mb: "20px", mt: "20px", justifyContent: "center !important" }}
