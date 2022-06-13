@@ -21,7 +21,7 @@ import Footer from "../Footer";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@mui/icons-material/Close";
-import { MINIO_FULL_ENDPOINT_FOR } from "../../../constants/ApiConstants";
+import { API_URL, MINIO_FULL_ENDPOINT_FOR } from "../../../constants/ApiConstants";
 import React from "react";
 import { postProductOrder } from "../../../Api/client/CardOrderAPI";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -41,6 +41,8 @@ import { useAutocomplete } from "@mui/base/AutocompleteUnstyled";
 import { styled } from "@mui/material/styles";
 import { postPhone } from "./VerificationsApi";
 import axios from "axios";
+import { cities } from "./cities";
+
 
 const Input = styled("input")(({ theme }) => ({
   width: 200,
@@ -71,17 +73,17 @@ const Listbox = styled("ul")(({ theme }) => ({
   },
 }));
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+// const style = {
+//   position: "absolute" as "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
 
-  bgcolor: "background.paper",
-  borderRadius: "5px",
-  boxShadow: 24,
-  p: 3,
-};
+//   bgcolor: "background.paper",
+//   borderRadius: "5px",
+//   boxShadow: 24,
+//   p: 3,
+// };
 
 const useStyles = makeStyles((theme) => ({
   style: {
@@ -384,51 +386,25 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  smsVerification: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    borderRadius: "5px",
+    boxShadow: '3px 3px 3px black 3px 3px 3px ',
+    padding: '15px',
+    width: '500px',
+    background: 'white',
+    [theme.breakpoints.down(600)]: {
+
+      top: "50%",
+      width: '300px',
+    }
+  }
 }));
 
-const top100Films = [
-  { title: "Angren shahri" },
-  { title: "Bekobod shahri va tumani" },
-  { title: "Bo'ka shahri va tumani" },
-  { title: "Do'stobod shahri" },
-  { title: "Keles shahri" },
-  { title: "Olmaliq shahri" },
-  { title: "Oqqo'rg'on shahri va tumani" },
-  { title: "Ohangaron shahri va tumani" },
-  { title: "Parkent shahri va tumani" },
-  { title: "Piskent shahri va tumani" },
-  { title: "Toshkent shahri" },
-  { title: "To'ytepa shahri" },
-  { title: "Chinoz shahri va tumani" },
-  { title: "Chirchiq shahri" },
-  { title: "Yangiyo'l shahri" },
-  { title: "Yangiobod shahri" },
-  { title: "G'azalkent shahri" },
-  { title: "Alimkent shaharchasi" },
-  { title: "Bo'zsuv shaharchasi" },
-  { title: "Gulbahor shaharchasi" },
-  { title: "Zafar shaharchasi" },
-  { title: "Iskandar shaharchasi" },
-  { title: "Krasnogorsk shaharchasi" },
-  { title: "Nurobod shaharchasi" },
-  { title: "Olmazor shaharchasi" },
-  { title: "Salor shaharchasi" },
-  { title: "Tuyabo'g'iz shaharchasi" },
-  { title: "Chig'iriq shaharchasi" },
-  { title: "Chorvoq shaharchasi" },
-  { title: "Eshonguzar shaharchasi" },
-  { title: "Yangibozor shaharchasi" },
-  { title: "Yangi chinoz shaharchasi" },
-  { title: "Yangihayot shaharchasi" },
-  { title: "O'rtaovul shaharchasi" },
-  { title: "Qibray shaharchasi va tumani" },
-  { title: "Bo'stonliq tumani" },
-  { title: "Zangiota tumani" },
-  { title: "Yuqori Chirchiq tumani" },
-  { title: "Yangiyo'l tumani" },
-  { title: "O'rta Chirchiq tumani" },
-  { title: "Quyi Chirchiq tumani" },
-];
+
 
 export default function Cart() {
   const [alignment, setAlignment] = React.useState<string | null>("Naqd");
@@ -443,7 +419,7 @@ export default function Cart() {
   const [start, setStart] = React.useState(false);
   const [disabled, setDisabled] = React.useState(true);
   const { cartProducts } = useSelector((state: rootState) => state.cartreducer);
-  console.log(cartProducts);
+  // console.log(cartProducts);
   const [open, setOpen] = React.useState(false);
   const [timer, setTimer] = React.useState('00:00');
   const [count, setCount] = React.useState(60)
@@ -452,41 +428,42 @@ export default function Cart() {
 
   const Ref = React.useRef(null);
   const handleOpen = () => {
-      if(phone.length == 13 && fullName){
+    if (phone.length == 13 && fullName) {
       setOpen(true);
-        postPhone({phone, fullName})
-        onClickReset()
-      }
+      postPhone({ phone, fullName })
+      onClickReset()
+    }
   };
 
   //  This line is if for verification
-  const PostCode = async (mass:any) => {
+  const PostCode = async (mass: any) => {
     const phone = mass[0]
     const code = mass[1]
-    console.log(phone, code);
-    console.log(mass);
+    // console.log(phone, code);
+    // console.log(mass);
     axios({
-        url:`https://test.api.yengilcredit.uz/sms/validation/${code}`,
-        method:"GET",
-        headers:{
-            "number":`${phone}`
-        }
-    })
-    .then((res) =>{ 
-    setStatus(res.status)
-    ;})
-    .catch((err) => err)
-    
-  }
-  console.log(status);
-
-  const mass  = [phone, code]
-  const handleClose = () => {
-      PostCode(mass)
-      if(status == 200){
-      setOpen(false);
+      url: `${API_URL}/sms/validation/${code}`,
+      method: "GET",
+      headers: {
+        "number": `${phone}`
       }
-    
+    })
+      .then((res) => {
+        setStatus(res.status)
+          ;
+      })
+      .catch((err) => err)
+
+  }
+  // console.log(status);
+
+  const mass = [phone, code]
+  const handleClose = () => {
+    PostCode(mass)
+    if (status == 200) {
+      setOpen(false);
+    }
+
   };
 
   const navigate = useNavigate();
@@ -532,13 +509,14 @@ export default function Cart() {
     groupedOptions,
   } = useAutocomplete({
     id: "use-autocomplete-demo",
-    options: top100Films,
+    options: cities,
     getOptionLabel: (option) => option.title,
   });
   let options: any = getInputProps();
   const address = options.value;
 
-  function Submit() {
+  function Submit(e:any) {
+    e.preventDefault()
     const form = JSON.stringify({
       products: products,
       buyer: {
@@ -550,19 +528,23 @@ export default function Cart() {
       },
       total_price: total,
     });
+
+
     try {
       postProductOrder(form)
         .then(async (res: any) => {
-          if (res.status === 200) {
+                   if (res.status === 200) {
+            dispatch(deleteAllFromCart());
+            setTimeout(() => {
+              navigate("/");
+            }, 1000)
+            refresh();
             setNotify({
               isOpen: true,
               message: "Sizning ma'lumotlaringiz jo'natildi",
               type: "success",
             });
-            setTimeout(() => {
-              navigate("/");
-            }, 1000);
-            refresh();
+            
           }
         })
         .catch((err) => {
@@ -571,15 +553,13 @@ export default function Cart() {
             message: "Iltimos barchasini to'ldiring",
             type: "error",
           });
-          console.log(err);
-        });
+             });
     } catch (error) {
       setNotify({
         isOpen: true,
         message: "Xatolik yuz berdi...",
         type: "error",
       });
-      console.log(error);
     }
   }
   let { darktheme } = useSelector((state: rootState) => state.productsReducer);
@@ -598,58 +578,58 @@ export default function Cart() {
   });
 
 
-// Timer 
-const getTimeRemaining = (e:any) => {
-  const total = Date.parse(e) - Date.parse(new Date() as any);
-  const seconds = Math.floor((total / 1000) % 60);
-  const minutes = Math.floor((total / 1000 / 60) % 60);
-  // const hours = Math.floor((total / 1000 / 60 / 60) % 24);
-  return {
+  // Timer 
+  const getTimeRemaining = (e: any) => {
+    const total = Date.parse(e) - Date.parse(new Date() as any);
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    // const hours = Math.floor((total / 1000 / 60 / 60) % 24);
+    return {
       total, minutes, seconds
-  };
-}
+    };
+  }
 
-const startTimer = (e:any) => {
-  let { total, minutes, seconds } 
-              = getTimeRemaining(e);
-  if (total >= 0) {
+  const startTimer = (e: any) => {
+    let { total, minutes, seconds }
+      = getTimeRemaining(e);
+    if (total >= 0) {
       setTimer(
-          (minutes > 9 ? minutes : '0' + minutes) + ':'
-          + (seconds > 9 ? seconds : '0' + seconds)
+        (minutes > 9 ? minutes : '0' + minutes) + ':'
+        + (seconds > 9 ? seconds : '0' + seconds)
       )
+    }
   }
-}
 
-const clearTimer = (e:any) => {
-  setTimer('00:60');
+  const clearTimer = (e: any) => {
+    setTimer('00:60');
 
-  if (Ref.current) clearInterval(Ref.current);
-  const id:any = setInterval(() => {
+    if (Ref.current) clearInterval(Ref.current);
+    const id: any = setInterval(() => {
       startTimer(e);
-  }, 1000)
-  Ref.current = id;
-}
-
-const getDeadTime = () => {
-  let deadline = new Date();
-  deadline.setSeconds(deadline.getSeconds() + count);
-  return deadline;
-}
-// mount only
-React.useEffect(() => {
-  clearTimer(getDeadTime());
-}, []);
-
-const onClickReset = () => {
-  clearTimer(getDeadTime());
-}
-// Timer ending
-const handleResetTimer  = () => {
-  if(timer === "00:00"){
-    postPhone({phone, fullName})
-    onClickReset()
+    }, 1000)
+    Ref.current = id;
   }
-}
+
+  const getDeadTime = () => {
+    let deadline = new Date();
+    deadline.setSeconds(deadline.getSeconds() + count);
+    return deadline;
+  }
+  // mount only
+  React.useEffect(() => {
+    clearTimer(getDeadTime());
+  }, []);
+
+  const onClickReset = () => {
+    clearTimer(getDeadTime());
+  }
+  // Timer ending
+  const handleResetTimer = () => {
+    if (timer === "00:00") {
+      postPhone({ phone, fullName })
+      onClickReset()
+    }
+  }
 
 
 
@@ -793,7 +773,7 @@ const handleResetTimer  = () => {
                         cartProducts?.map((product: any) => (
                           <tr key={product.id} className={classes.carts}>
                             <td>
-                              {console.log(product)}
+                              {/* {console.log(product)} */}
                               <Link
                                 to={`/product/client/details/${product.id}`}
                               >
@@ -906,7 +886,7 @@ const handleResetTimer  = () => {
                         onKeyUp={isEmpty}
                         onChange={(e: any) => setFullName(e.target.value)}
                         className={classes.Input}
-                        disabled = {status == 200 ? true : false}
+                        disabled={status == 200 ? true : false}
                       />
                     </Box>
                     <Box>
@@ -921,38 +901,38 @@ const handleResetTimer  = () => {
                         limitMaxLength
                         id="phone"
                         onKeyUp={isEmpty}
-                        disabled = {status == 200 ? true : false}
+                        disabled={status == 200 ? true : false}
                       />
                     </Box>
                     <Box>
-                      {status !== 200 && 
+                      {status !== 200 &&
                         <button
-                        onClick={handleOpen}
-                        className={classes.sale}
-                        type = "button"
-                      >
-                        Tasdiqlash
-                      </button>
+                          onClick={handleOpen}
+                          className={classes.sale}
+                          type="button"
+                        >
+                          Tasdiqlash
+                        </button>
                       }
                       <Modal
-                        hideBackdrop
+                        // hideBackdrop
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="child-modal-title"
                         aria-describedby="child-modal-description"
                       >
-                        <Box sx={{ ...style, width: 500 }}>
+                        <Box className={classes.smsVerification} >
                           <h2>Tasdiqlash talab qilinadi</h2>
                           <p>
-                          Quyidagi raqamga kod yubordik {phone}
+                            Quyidagi raqamga kod yubordik {phone}
                           </p>
-                          <input onChange={(e:any) => setCode(e.target.value)} placeholder="Tasdiqlash kodini shu yerga kiriting..." className = {classes.Input} required />
-                          {status == 200 && <Typography sx = {{color:"green", fontSize:"14px"}}>Kod tasdiqlandi</Typography> }
-                          {status > 200 && <Typography sx = {{color:"#FF4B4B", fontSize:"14px"}}>Telifon raqam yoki kod xato kiritildi</Typography>}
-                          <button  className={classes.sale} onClick={handleClose}>
-                            {status == 200 && "Davom ettirish"} {status > 200 && "Davom ettirish"} {!status && "Tasdiqlash"}
+                          <input onChange={(e: any) => setCode(e.target.value)} placeholder="Tasdiqlash kodini shu yerga kiriting..." className={classes.Input} required />
+                          {status === 200 && <Typography sx={{ color: "green", fontSize: "14px" }}>Kod tasdiqlandi</Typography>}
+                          {status === 400 && <Typography sx={{ color: "#FF4B4B", fontSize: "14px" }}>Telifon raqam yoki kod xato kiritildi</Typography>}
+                          <button className={classes.sale} onClick={handleClose}>
+                            {status === 200 && "Davom ettirish"} {status > 200 && "Davom ettirish"} {!status && "Tasdiqlash"}
                           </button>
-                          <Typography onClick = {handleResetTimer} sx = {{cursor:"pointer",textAlign: "center", mt:"20px", color: timer !== "00:00" ? "#FF4B4B":"green" }} >Kodni qayta jo’natishni so’rash {timer !== "00:00" && timer}</Typography>
+                          <Typography onClick={handleResetTimer} sx={{ cursor: "pointer", textAlign: "center", mt: "20px", color: timer !== "00:00" ? "#FF4B4B" : "green" }} >Kodni qayta jo’natishni so’rash {timer !== "00:00" && timer}</Typography>
                         </Box>
                       </Modal>
                     </Box>
@@ -961,79 +941,85 @@ const handleResetTimer  = () => {
                 {
                   status == 200 &&
                   <>
-                      <Grid className={classes.Grid} container spacing={2}>
-                  <Grid item xs={12} sm={6} md={12}>
-                    <Box>
-                      <p className={classes.UniversalP}>
-                        Shahar, tuman <span style={{ color: "red" }}>*</span>
-                      </p>
-                      <div>
-                        <div {...getRootProps()}>
-                          <Input
-                            {...getInputProps()}
+                    <Grid className={classes.Grid} container spacing={2}>
+                      <Grid item xs={12} sm={6} md={12}>
+                        <Box>
+                          <p className={classes.UniversalP}>
+                            Shahar, tuman <span style={{ color: "red" }}>*</span>
+                          </p>
+                          <div>
+                            <div {...getRootProps()}>
+                              <Input
+                                {...getInputProps()}
+                                className={classes.Input}
+                              />
+                            </div>
+                            {groupedOptions.length > 0 ? (
+                              <Listbox {...getListboxProps()}>
+                                {(groupedOptions as typeof cities).map(
+                                  (option, index) => (
+                                    <li {...getOptionProps({ option, index })}>
+                                      {option.title}
+                                    </li>
+                                  )
+                                )}
+                              </Listbox>
+                            ) : null}
+                          </div>
+                        </Box>
+                        <Box>
+                          <p className={classes.UniversalP}>
+                            Yashash manzili <span style={{ color: "red" }}>*</span>
+                          </p>
+                          <input
+                            type="text"
+                            required
+                            onChange={(e: any) => setCity(e.target.value)}
                             className={classes.Input}
+                            id="address"
+                            onKeyUp={isEmpty}
                           />
-                        </div>
-                        {groupedOptions.length > 0 ? (
-                          <Listbox {...getListboxProps()}>
-                            {(groupedOptions as typeof top100Films).map(
-                              (option, index) => (
-                                <li {...getOptionProps({ option, index })}>
-                                  {option.title}
-                                </li>
-                              )
-                            )}
-                          </Listbox>
-                        ) : null}
+                        </Box>
+                      </Grid>
+                    </Grid>
+
+                    <Box>
+                      <ToggleButtonGroup
+                        value={alignment}
+                        exclusive
+                        onChange={handleAlignment}
+                      >
+                        <ToggleButton
+                          value="Naqd"
+                          className="css-ueukts-MuiButtonBase-root-MuiToggleButton-root.Mui-selected"
+                        >
+                          <MoneyIcon />
+                        </ToggleButton>
+                        <ToggleButton value="Card">
+                          <CreditCardIcon />
+                        </ToggleButton>
+                      </ToggleButtonGroup>
+                      <div style={{ display: "flex" }}>
+                        <p className={classes.UniversalP}>Naqd</p>
+                        <p className={classes.UniversalP}>Card</p>
                       </div>
                     </Box>
-                    <Box>
-                      <p className={classes.UniversalP}>
-                        Yashash manzili <span style={{ color: "red" }}>*</span>
-                      </p>
-                      <input
-                        type="text"
-                        required
-                        onChange={(e: any) => setCity(e.target.value)}
-                        className={classes.Input}
-                        id="address"
-                        onKeyUp={isEmpty}
-                      />
-                    </Box>
-                  </Grid>
-                </Grid>
 
-                <Box>
-                  <ToggleButtonGroup
-                    value={alignment}
-                    exclusive
-                    onChange={handleAlignment}
-                  >
-                    <ToggleButton
-                      value="Naqd"
-                      className="css-ueukts-MuiButtonBase-root-MuiToggleButton-root.Mui-selected"
-                    >
-                      <MoneyIcon />
-                    </ToggleButton>
-                    <ToggleButton value="Card">
-                      <CreditCardIcon />
-                    </ToggleButton>
-                  </ToggleButtonGroup>
-                  <div style={{ display: "flex" }}>
-                    <p className={classes.UniversalP}>Naqd</p>
-                    <p className={classes.UniversalP}>Card</p>
-                  </div>
-                </Box>
+                    <div>
+                      <button
+                        onClick={
+                          Submit
+                          // dispatch(deleteAllFromCart());
 
-                <div>
-                  <button
-                    disabled={disabled}
-                    // onClick={handleOpen}
-                    className={classes.sale}
-                  >
-                    Xarid qilish
-                  </button>
-                  {/* <Modal
+
+                        }
+                        disabled={disabled}
+                        // onClick={handleOpen}
+                        className={classes.sale}
+                      >
+                        Xarid qilish
+                      </button>
+                      {/* <Modal
                     keepMounted
                     open={open}
                     onClose={handleClose}
@@ -1114,11 +1100,11 @@ const handleResetTimer  = () => {
                       </div>
                     </Box>
                   </Modal> */}
-                </div>
+                    </div>
                   </>
-                  
+
                 }
-                
+
               </form>
             </div>
           </Grid>

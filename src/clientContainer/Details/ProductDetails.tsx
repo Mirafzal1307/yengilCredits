@@ -498,7 +498,7 @@ const ProductDetails = () => {
 
   let pro: any = products?.Product;
   let des: any = products?.Description[0];
-  console.log(des);
+  // console.log(des);
 
   const { id } = useParams();
   const classes = useStyles();
@@ -516,7 +516,7 @@ const ProductDetails = () => {
     10)
 }
 
-  console.log(photo);
+  // console.log(photo);
 
   const dispatch = useDispatch();
   const loading = useTypedSelector((state) => state?.card?.loading);

@@ -185,7 +185,7 @@ const CardProducts = () => {
   let popular = products?.popular_products;
   let recommended = products?.recommended_products;
 
-  console.log(recommended);
+  // console.log(recommended);
 
   let { darktheme } = useSelector((state: rootState) => state.productsReducer);
 
@@ -203,7 +203,7 @@ const CardProducts = () => {
   }
   var num: number = 1234567890,
     result = num.toLocaleString();
-  console.log(result);
+  // console.log(result);
   // result will equal to "1 234 567 890"
 
   return (
@@ -274,7 +274,7 @@ const CardProducts = () => {
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item?.id}>
                     <Box style={{ margin: "0px 10px" }}>
-                      {console.log(item)}
+                      {/* {console.log(item)} */}
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
                           <img

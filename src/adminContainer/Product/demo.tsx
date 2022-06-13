@@ -30,7 +30,7 @@ function DiynamicFeilds() {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        console.log(inputFields);
+        // console.log(inputFields);
     };
 
     const handleChangeInput = (id: any, event: any) => {

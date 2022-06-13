@@ -1,11 +1,12 @@
 import axios from "axios"
+import { API_URL } from "../../../constants/ApiConstants"
 
 export const postPhone = (phone:any) => {
     // console.log(phone)
     const phones = {number:phone.phone,
     name:phone.fullName}
-    console.log(phones)
-    const res = axios.post("https://test.api.yengilcredit.uz/sms/generate", phones )
+    // console.log(phones)
+    const res = axios.post(`${API_URL}/sms/generate`, phones )
     // console.log(res);
 }
 
