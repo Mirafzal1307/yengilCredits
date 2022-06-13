@@ -134,7 +134,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#dd0820",
     position: "absolute",
     top: "15px",
-    right: "42px",
+    right: "0px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -142,7 +142,7 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.down(900)]: {
       top: "16px",
-      right: "44px",
+      right: "0px",
     },
     [theme.breakpoints.down(500)]: {
       top: "57px",
@@ -745,13 +745,12 @@ const BackToTop = () => {
                       </SubMenu>
                     </Menu>
                   </div>
-                  <div style={{ width: "100%", marginLeft: "5px" }}>
+                  <div style={{ width: "100%", marginLeft: "5px" , marginRight: '15px'}}>
                     <SearchDemo />
                   </div>
-
-                  <div style={{ marginRight: "15px" }}>
+                  {/* <div style={{ marginRight: "15px" }}>
                     <AccountMenu />
-                  </div>
+                  </div> */}
                 </div>
               </Grid>
             </Grid>
@@ -1109,10 +1108,10 @@ const BackToTop = () => {
                 lg={10}
                 className={classes.NavbarInsite}
               >
-                <Grid item md={9} sx={{ marginLeft: "16px", width: "100%" }}>
+                <Grid item  md={10}  lg={11} sx={{ marginLeft: "16px", width: "100%" }}>
                   <MainSearch />
                 </Grid>
-                <Grid item md={3} className={classes.twoGrid}>
+                <Grid item md={2} lg={1} className={classes.twoGrid}>
                   <div className={classes.NavbarRight}>
                     <Tooltip title="Telegram">
                       <a href="https://t.me/s/yengil_credit">
@@ -1140,7 +1139,7 @@ const BackToTop = () => {
                       </>
                     </Tooltip>
 
-                    <AccountMenu />
+                    {/* <AccountMenu /> */}
                   </div>
                 </Grid>
               </Grid>
