@@ -15,8 +15,7 @@ const initialState: InitialState = {
   filteredProducts: [],
   keyword: undefined,
   darktheme: false,
-  productByCategory: []
-
+  productByCategory: [],
 };
 
 

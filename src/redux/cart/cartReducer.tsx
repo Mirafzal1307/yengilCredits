@@ -16,8 +16,8 @@ export default function cartreducer(state = initialState, action: ProductActions
 
   switch (action.type) {
     case "ADD_TO_CART": {
-      console.log('state.cartProducts ' + state.cartProducts)
-      console.log('action.payload.movie.title ' + action.payload.product.short_name)
+      // console.log('state.cartProducts ' + state.cartProducts)
+      // console.log('action.payload.movie.title ' + action.payload.product.short_name)
       let cartItems = state.cartProducts.map(product => product && product.short_name);
       action.payload.product.quantity = 1;
  

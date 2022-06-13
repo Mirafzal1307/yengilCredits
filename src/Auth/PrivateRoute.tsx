@@ -7,7 +7,7 @@ const PrivateRoute = (props:any) => {
 
   const token = localStorage.getItem("auth");
 
-  console.log("token", token);
+  // console.log("token", token);
   if (token) {
     return <Outlet/>
   } else {

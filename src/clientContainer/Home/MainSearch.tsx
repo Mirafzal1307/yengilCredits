@@ -141,7 +141,7 @@ const MainSearch = () => {
   };
   const dispatch = useDispatch();
   const getData = async () => {
-    console.log(param?.length);
+    // console.log(param?.length);
     if (param?.length > 2) {
       const response: any = await searchProduct(param);
       setProducts(response.data.content);

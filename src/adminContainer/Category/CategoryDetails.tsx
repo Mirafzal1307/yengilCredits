@@ -308,7 +308,7 @@ export default function EnhancedTable() {
   const [query, setQuery] = React.useState("react");
   const [category, setCategory] = React.useState<createDatas[]>([]);
 
-  console.log(category);
+  // console.log(category);
   
   const [categories, setCategories] = React.useState<any>()
   const [status, setStatus] = React.useState('');

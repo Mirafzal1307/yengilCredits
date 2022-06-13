@@ -369,7 +369,7 @@ const BackToTop = () => {
     let res: any = await getParentCategories();
     setParentCategories(res.data.content);
   };
-  console.log(parentCategories);
+  // console.log(parentCategories);
   const getCategoryProductById = async (id: any) => {
     const response = await getProductFromCategoryById(id, {});
   };

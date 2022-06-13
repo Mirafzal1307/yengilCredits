@@ -334,7 +334,7 @@ const ProductList: React.FC = () => {
     const [query, setQuery] = useState('react')
     const [notify, setNotify] = React.useState<any>({ isOpen: false, message: '', type: '' });
     const [category, setCategory] = React.useState([])
-    console.log(products);
+    // console.log(products);
 
     const [param, setParam] = React.useState('');
     const [prod, setProducts] = React.useState<any>();
@@ -359,7 +359,7 @@ const ProductList: React.FC = () => {
 
     const classes = useStyles()
     const product: any[] = products.content
-console.log(product);
+// console.log(product);
 
     React.useEffect(() => {
         fetchProducts(`${page - 1}`)
@@ -524,11 +524,11 @@ console.log(product);
                                         }
                                         const getProductToUpdate = () => {
                                             getProductByID(user.id)
-                                            console.log(user.id)
+                                            // console.log(user.id)
                                         }
                                         const getProductToDetails = () => {
                                             getProductByID(user.id)
-                                            console.log(user.id)
+                                            // console.log(user.id)
                                         }
 
                                         const isItemSelected = isSelected(user.id);
@@ -614,11 +614,11 @@ console.log(product);
                                         }
                                         const getProductToUpdate = () => {
                                             getProductByID(user.id)
-                                            console.log(user.id)
+                                            // console.log(user.id)
                                         }
                                         const getProductToDetails = () => {
                                             getProductByID(user.id)
-                                            console.log(user.id)
+                                            // console.log(user.id)
                                         }
 
                                         const isItemSelected = isSelected(user.id);

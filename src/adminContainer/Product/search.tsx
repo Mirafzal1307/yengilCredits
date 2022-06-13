@@ -26,7 +26,7 @@ const Search = () => {
     const [products, setProducts] = React.useState<any>();
     const classes = useStyles()
 
-    console.log(products);
+    // console.log(products);
 
     const handleInputChange = (e: any) => {
         setParam(e.target.value);
