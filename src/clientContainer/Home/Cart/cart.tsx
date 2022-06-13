@@ -9,7 +9,6 @@ import {
   Button,
   Container,
   Grid,
-  InputLabel,
   MenuItem,
   Select,
   Table,
@@ -29,7 +28,6 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import emptyCard from "../../../Images/ShoppingCart.png";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import Notification from "../../../adminContainer/Snackbar/Notification";
-import { SelectChangeEvent } from "@mui/material";
 import MoneyIcon from "@mui/icons-material/Money";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
@@ -42,14 +40,11 @@ import { styled } from "@mui/material/styles";
 import { postPhone } from "./VerificationsApi";
 import axios from "axios";
 import { cities } from "./cities";
-
-
 const Input = styled("input")(({ theme }) => ({
   width: 200,
   backgroundColor: theme.palette.background.paper,
   color: theme.palette.getContrastText(theme.palette.background.paper),
 }));
-
 const Listbox = styled("ul")(({ theme }) => ({
   width: 450,
   margin: 0,
@@ -72,19 +67,6 @@ const Listbox = styled("ul")(({ theme }) => ({
     color: "white",
   },
 }));
-
-// const style = {
-//   position: "absolute" as "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-
-//   bgcolor: "background.paper",
-//   borderRadius: "5px",
-//   boxShadow: 24,
-//   p: 3,
-// };
-
 const useStyles = makeStyles((theme) => ({
   style: {
     width: "450px",
@@ -403,9 +385,6 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
-
-
-
 export default function Cart() {
   const [alignment, setAlignment] = React.useState<string | null>("Naqd");
   const [fullName, setFullName] = React.useState(null);
@@ -419,7 +398,6 @@ export default function Cart() {
   const [start, setStart] = React.useState(false);
   const [disabled, setDisabled] = React.useState(true);
   const { cartProducts } = useSelector((state: rootState) => state.cartreducer);
-  // console.log(cartProducts);
   const [open, setOpen] = React.useState(false);
   const [timer, setTimer] = React.useState('00:00');
   const [count, setCount] = React.useState(60)
@@ -434,13 +412,9 @@ export default function Cart() {
       onClickReset()
     }
   };
-
-  //  This line is if for verification
   const PostCode = async (mass: any) => {
     const phone = mass[0]
     const code = mass[1]
-    // console.log(phone, code);
-    // console.log(mass);
     axios({
       url: `${API_URL}/sms/validation/${code}`,
       method: "GET",
@@ -449,13 +423,10 @@ export default function Cart() {
       }
     })
       .then((res) => {
-        setStatus(res.status)
-          ;
+        setStatus(res.status);
       })
       .catch((err) => err)
-
   }
-  // console.log(status);
 
   const mass = [phone, code]
   const handleClose = () => {
@@ -465,9 +436,7 @@ export default function Cart() {
     }
 
   };
-
   const navigate = useNavigate();
-
   const refresh = (): void => {
     setTimeout(() => {
       window.location.reload();
@@ -483,14 +452,12 @@ export default function Cart() {
     quantity: i.quantity,
     price: i.price,
   }));
-
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string | null
   ) => {
     setAlignment(newAlignment);
   };
-
   const isEmpty = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     let name = fullName;
@@ -514,8 +481,7 @@ export default function Cart() {
   });
   let options: any = getInputProps();
   const address = options.value;
-
-  function Submit(e:any) {
+  function Submit(e: any) {
     e.preventDefault()
     const form = JSON.stringify({
       products: products,
@@ -528,12 +494,10 @@ export default function Cart() {
       },
       total_price: total,
     });
-
-
     try {
       postProductOrder(form)
         .then(async (res: any) => {
-                   if (res.status === 200) {
+          if (res.status === 200) {
             dispatch(deleteAllFromCart());
             setTimeout(() => {
               navigate("/");
@@ -544,7 +508,6 @@ export default function Cart() {
               message: "Sizning ma'lumotlaringiz jo'natildi",
               type: "success",
             });
-            
           }
         })
         .catch((err) => {
@@ -553,7 +516,7 @@ export default function Cart() {
             message: "Iltimos barchasini to'ldiring",
             type: "error",
           });
-             });
+        });
     } catch (error) {
       setNotify({
         isOpen: true,
@@ -562,9 +525,7 @@ export default function Cart() {
       });
     }
   }
-  let { darktheme } = useSelector((state: rootState) => state.productsReducer);
   const classes = useStyles();
-
   const inp = document.querySelectorAll("input");
   inp.forEach((element) => {
     if (element.value.length === 0) {
@@ -576,19 +537,14 @@ export default function Cart() {
       element.style.borderColor = "#9F9F9F";
     }
   });
-
-
-  // Timer 
   const getTimeRemaining = (e: any) => {
     const total = Date.parse(e) - Date.parse(new Date() as any);
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);
-    // const hours = Math.floor((total / 1000 / 60 / 60) % 24);
     return {
       total, minutes, seconds
     };
   }
-
   const startTimer = (e: any) => {
     let { total, minutes, seconds }
       = getTimeRemaining(e);
@@ -599,40 +555,31 @@ export default function Cart() {
       )
     }
   }
-
   const clearTimer = (e: any) => {
     setTimer('00:60');
-
     if (Ref.current) clearInterval(Ref.current);
     const id: any = setInterval(() => {
       startTimer(e);
     }, 1000)
     Ref.current = id;
   }
-
   const getDeadTime = () => {
     let deadline = new Date();
     deadline.setSeconds(deadline.getSeconds() + count);
     return deadline;
   }
-  // mount only
   React.useEffect(() => {
     clearTimer(getDeadTime());
   }, []);
-
   const onClickReset = () => {
     clearTimer(getDeadTime());
   }
-  // Timer ending
   const handleResetTimer = () => {
     if (timer === "00:00") {
       postPhone({ phone, fullName })
       onClickReset()
     }
   }
-
-
-
   return (
     <>
       <BackToTop />
@@ -697,7 +644,6 @@ export default function Cart() {
                                 </h5>
                               </div>
                             </div>
-
                             <div
                               style={{
                                 display: "flex",
@@ -773,7 +719,6 @@ export default function Cart() {
                         cartProducts?.map((product: any) => (
                           <tr key={product.id} className={classes.carts}>
                             <td>
-                              {/* {console.log(product)} */}
                               <Link
                                 to={`/product/client/details/${product.id}`}
                               >
@@ -836,8 +781,6 @@ export default function Cart() {
               </Grid>
             </>
           )}
-          {/*      card */}
-
           <Grid item xs={12} md={4}>
             <div className={classes.totalPage}>
               <form>
@@ -915,7 +858,6 @@ export default function Cart() {
                         </button>
                       }
                       <Modal
-                        // hideBackdrop
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="child-modal-title"
@@ -1009,102 +951,15 @@ export default function Cart() {
                       <button
                         onClick={
                           Submit
-                          // dispatch(deleteAllFromCart());
-
-
                         }
                         disabled={disabled}
-                        // onClick={handleOpen}
                         className={classes.sale}
                       >
                         Xarid qilish
                       </button>
-                      {/* <Modal
-                    keepMounted
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="keep-mounted-modal-title"
-                    aria-describedby="keep-mounted-modal-description"
-                  >
-                    <Box sx={style} className={classes.style}>
-                      <h3>Xarid qilingan mahsulotlar</h3>
-                      {cartProducts.map((p, i) => (
-                        <>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                            }}
-                          >
-                            <p
-                              key={i}
-                              style={{ margin: 0, padding: "4px 0px 4px 0px" }}
-                            >
-                              {p.short_name}
-                            </p>
-                            <p key={i} style={{ margin: 0 }}>
-                              {p?.price.toLocaleString()}
-                            </p>
-                          </div>
-                        </>
-                      ))}
-
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <h4 style={{ margin: 0 }}>Umumiy narx</h4>
-                        <h4 style={{ margin: 0 }}>{total.toLocaleString()}</h4>
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Button
-                          onClick={handleClose}
-                          sx={{
-                            background: "#FF4B4B",
-                            color: "white",
-                            textTransform: "capitalize",
-                            "&:hover": {
-                              background: "#FF4B4B",
-                            },
-                            marginTop: "10px",
-                          }}
-                        >
-                          Bekor qilish
-                        </Button>
-                        <Button
-                          sx={{
-                            background: "#065374",
-                            color: "white",
-                            textTransform: "capitalize",
-                            "&:hover": {
-                              background: "#065374",
-                            },
-                            marginTop: "10px",
-                          }}
-                          onClick={() => {
-                            Submit();
-                            handleClose();
-                            // refresh();
-                            dispatch(deleteAllFromCart());
-                          }}
-                        >
-                          Sotib olish
-                        </Button>
-                      </div>
-                    </Box>
-                  </Modal> */}
                     </div>
                   </>
-
                 }
-
               </form>
             </div>
           </Grid>

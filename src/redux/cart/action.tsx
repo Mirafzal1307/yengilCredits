@@ -1,37 +1,30 @@
 import { Dispatch } from 'redux'
 import { API_URL } from '../../constants/ApiConstants'
 import { Product } from './types'
-
-
 type GetProducts = {
     type: "GET_PRODUCTS",
     payload: {
         products: any
     }
 }
-
 type GetDemoProducts = {
     type: "GET_DEMO_PRODUCTS",
     payload: {
         products: any
     }
 }
-
-
 export function getProducts(products: any): ProductActions {
     return {
         type: "GET_PRODUCTS",
         payload: { products }
     }
 }
-
 export function getDemoProducts(products: Product[]): ProductActions {
     return {
         type: "GET_DEMO_PRODUCTS",
         payload: { products }
     }
 }
-
 export function fetchProducts() {
     return (dispatch: Dispatch) => {
         fetch(`${API_URL}/main/`)
@@ -45,7 +38,6 @@ type FilteredProductsAction = {
         keyword: string
     }
 }
-
 export function getFilteredProducts(keyword: any): FilteredProductsAction {
 
     return {
@@ -132,13 +124,11 @@ type ProductByCategoryAction = {
 }
 
 export function productByCategory(category: string): ProductByCategoryAction {
-    // console.log('category ' + category);
     return {
         type: "PRODUCT_BY_CATEGORY",
         payload: { category }
     }
 }
-
 
 export type ProductActions = GetProducts | GetDemoProducts|  FilteredProductsAction | DeleteAllFromCart | DeleteFromCartAction | AddToCartAction
     | changeThemeAction | ProductByCategoryAction | UpdatePriceAction 

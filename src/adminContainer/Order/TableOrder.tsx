@@ -31,8 +31,6 @@ import inprogress from "../../Images/inprogress.svg";
 import clientcancel from "../../Images/clientcancel.svg";
 import admincancel from "../../Images/admincancel.svg";
 import detailsicon from "../../Images/detailsicon.svg";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
-
 const useStyles = makeStyles({
   pagination: {
     width: "360px",
@@ -92,22 +90,18 @@ const TableOrder: React.FC = () => {
     setOrders(res.data.content);
     setPageQty(res.data.totalPages);
   };
-
   const handleChangeStatus = (e: any) => {
     setSearchTerm(e.target.value);
   };
-
   const getUsers = async () => {
     let response: any = await searchUsers(searchUser);
     setUsers(response.data.content);
     let res: any = await getStatuses({});
     setStatus(res.data);
   };
-
   const handleChangeInput = (e: any) => {
     setSearchUser(e.target.value);
   };
-
   React.useEffect(() => {
     getData();
     if (pageQty < page) {
@@ -118,9 +112,7 @@ const TableOrder: React.FC = () => {
   React.useEffect(() => {
     getUsers();
   }, [searchUser]);
-
   const classes = useStyles();
-
   return (
     <>
     <div>
@@ -431,7 +423,6 @@ const TableOrder: React.FC = () => {
               </TableBody>
             </Table>
           </TableContainer>
-
           <Grid
             container
             sx={{ mr: "50px", mb: "40px", mt: "40px" }}

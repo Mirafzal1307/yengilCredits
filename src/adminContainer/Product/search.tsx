@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { getProductSearch } from "../../Api/admin/AdminProductApi";
-
 const useStyles = makeStyles({
     SearchInput: {
         height: '40px !important',
@@ -19,19 +18,13 @@ const useStyles = makeStyles({
     },
 
 })
-
 const Search = () => {
-
     const [param, setParam] = React.useState('');
     const [products, setProducts] = React.useState<any>();
     const classes = useStyles()
-
-    // console.log(products);
-
     const handleInputChange = (e: any) => {
         setParam(e.target.value);
     };
-
     const getData = async () => {
         const response: any = await getProductSearch(param);
         setProducts(response.data.content);
@@ -39,7 +32,6 @@ const Search = () => {
     React.useEffect(() => {
         getData();
     }, [param]);
-
     return (
         <>
             <div style={{ display: 'flex', }}>

@@ -4,11 +4,6 @@ import lockImg from ".././Images/lock.png";
 import { getToken } from "../Api/admin/AdminAuth";
 import axios from "axios";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-// import { RouteComponentProps } from "react-router";
-// const currency = React.useContext();
-
-// type SomeComponentProps = RouteComponentProps;
-
 const useStyles = makeStyles({
   pageStyle: {
     position: "relative",
@@ -78,22 +73,13 @@ const LoginPage = () => {
   const [userName, setUserName] = useState<any>("");
   const [password, setPassword] = useState<any>("");
   const [auth, setAuth] = useState<any>("");
-
   const handleChangeUsername = (e: any) => {
     setUserName(e.target.value);
   };
-
   const handleChangePassword = (e: any) => {
     setPassword(e.target.value);
   };
-  // console.log(userName, password);
-
   let navigate = useNavigate();
-  // const routeChange = () => {
-  //   let path = "/dashboard";
-    
-  // };
-
   const login = {
     username: userName,
     password: password,
@@ -104,7 +90,6 @@ const LoginPage = () => {
       navigate("/dashboard");
     }, 1000);
   };
-
   const sendDataToApi = async () => {
     await getToken(login)
       .then((res: any) => {
@@ -114,7 +99,6 @@ const LoginPage = () => {
       });
     navigateTo();
   };
-
   return (
     <div className={classes.pageStyle}>
       <div className={classes.loginBox}>

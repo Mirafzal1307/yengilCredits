@@ -7,14 +7,11 @@ import HomeMarketPage from "./HomeMarketPage";
 import HomeChartTableButton from "./HomeChartTableBottom";
 import { makeStyles } from "@mui/styles";
 import { FC } from "react";
-import HomeChartTable from "./HomeChartTable";
-
 const useStyles = makeStyles({
   header: {
     backgroundColor: "#f8f9fa !important",
   },
 });
-
 const HomeHeader: FC = () => {
   const classes = useStyles();
   return (

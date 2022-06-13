@@ -3,21 +3,15 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import "./style.css"
 import { makeStyles } from "@material-ui/core/styles";
-
-
 const useStyles = makeStyles((theme) => ({
   ToggleButton: {
     [theme.breakpoints.up(750)]: {
       justifyContent: 'flex-end !important'
     }
   }
-
 }))
-
-
 export default function ColorToggleButton(props: any) {
   const [alignment, setAlignment] = React.useState('twelveMonth');
-
   const classes = useStyles()
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -25,7 +19,6 @@ export default function ColorToggleButton(props: any) {
   ) => {
     setAlignment(newAlignment);
   };
-
   return (
     <ToggleButtonGroup
       color="primary"
@@ -43,9 +36,6 @@ export default function ColorToggleButton(props: any) {
       <ToggleButton value="sixMonth"  >6 oy</ToggleButton>
       <ToggleButton value="nineMonth">9 oy </ToggleButton>
       <ToggleButton value="twelveMonth" className="css-d9c359-MuiButtonBase-root-MuiToggleButton-root.Mui-selected">12 oy</ToggleButton>
-
-
-
     </ToggleButtonGroup>
   );
 }

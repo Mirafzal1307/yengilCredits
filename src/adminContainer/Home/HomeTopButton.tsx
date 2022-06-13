@@ -3,7 +3,6 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import Grid from "@mui/material/Grid";
-
 const useStyles = makeStyles({
   button: {
     display: "flex !important",
@@ -56,7 +55,6 @@ const useStyles = makeStyles({
     backgroundColor: " rgba(253, 138, 20, .2) !important",
   },
 });
-
 const HomePageTopButtons = () => {
   const classes = useStyles();
   return (

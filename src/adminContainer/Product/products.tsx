@@ -2,13 +2,11 @@ import { Container } from "@mui/material";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import { makeStyles } from "@mui/styles";
 import ProductList from "./ProductList";
-
 const useStyles = makeStyles({
   Container: {
     maxWidth: "1450px !important",
   },
 });
-
 const AllUsers = (props: any) => {
   const classes = useStyles();
 
@@ -23,5 +21,4 @@ const AllUsers = (props: any) => {
     </>
   );
 };
-
 export default AllUsers;

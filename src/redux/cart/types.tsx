@@ -11,12 +11,10 @@ export type Product = {
     recommended_products: any;
 
 }
-
 export type SearchProp = {
     value: string,
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-
 export type themeChange = {
     theme: any
 
