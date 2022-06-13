@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     },
     client: {
         display: "flex !important",
-        justifyContent: "space-between !important"
+        justifyContent: "space-around !important"
     },
     grid: {
         display: "flex !important",
@@ -78,29 +78,29 @@ const Partner = () => {
     return (
         <>
             <Container maxWidth="xl" style={{ marginTop: "48px" }}>
-                <Grid className={classes.grid}>
-                    <Grid xs={2} item className={classes.div}>
+                <Grid container className={classes.grid}>
+                    <Grid item xs={12} md={2} lg={2} className={classes.div}>
                         <Grid>
                             <img src={Dostavka} alt="" />
                         </Grid>
                         <p className={classes.text}>Bepul yetkazib berish</p>
                         <p className={classes.paragraph}>Sizning xotirjamligingiz uchun 3 yilgacha sayt kafolati mavjud.</p>
                     </Grid>
-                    <Grid xs={2} item className={classes.div}>
+                    <Grid item xs={12} md={2} lg={2} className={classes.div}>
                         <Grid>
                             <img src={Galochka} alt="" />
                         </Grid>
                         <p className={classes.text}>Bo’lib to’lash </p>
                         <p className={classes.paragraph}>Katta chegirmalar, bepul yetkazib berish va maxsus yordam mutaxassisi bilan.</p>
                     </Grid>
-                    <Grid xs={2} item className={classes.div}>
+                    <Grid item xs={12} md={2} lg={2} className={classes.div}>
                         <Grid>
                             <img src={Image} alt="" />
                         </Grid>
                         <p className={classes.text}>1 yil garantiya</p>
                         <p className={classes.paragraph}>Yangi mahsulotlarga 70% gacha chegirma, siz eng yaxshi narxga amin bo'lishingiz mumkin.</p>
                     </Grid>
-                    <Grid xs={2} item className={classes.div}>
+                    <Grid item xs={12} md={2} lg={2} className={classes.div}>
                         <Grid>
                             <img src={Operator} alt="" />
                         </Grid>
@@ -111,42 +111,26 @@ const Partner = () => {
             </Container>
             <Container maxWidth="xl" style={{ marginTop: '20px', }}  >
                 <p className={classes.Partner} >Bizning hamkorlar</p>
-                {/* <Splide
-                    options={{
-                        perPage: 3,
-                        arrows: false,
-                        pagination: false,
-                        gap: "15px",
-                        breakpoints: {
-                            400: {
-                                perPage: 3,
-                            },
-                            700: {
-                                perPage: 1,
-                            },
-                            992: {
-                                perPage: 2,
-                            },
-                            1300: {
-                                perPage: 3,
-                            }
-                        },
-                        type: 'loop',
-                        autoplay: true,
-                        autoScroll: {
-                            speed: 1
-                        },
-                    }}>
-                    <SplideSlide className={classes.Slide} >
+           
+                <Grid container  className={classes.client} >
+
+
+                    <Grid item xs={4} md={4} lg={2.5} className={classes.div}>
+
                         <img src={Alif} alt='' className={classes.img} />
-                    </SplideSlide>
-                    <SplideSlide className={classes.Slide} >
+                    </Grid>
+                    <Grid item xs={4} md={4} lg={2.5} className={classes.div} >
                         <img src={Paymart} alt='' className={classes.img} />
-                    </SplideSlide>
-                    <SplideSlide className={classes.Slide} >
+
+                    </Grid >
+
+
+                    <Grid item xs={4} md={4} lg={2.5} className={classes.div} >
                         <img src={Iman} alt='' className={classes.img} />
-                    </SplideSlide>
-                </Splide> */}
+                    </Grid>
+                    {/* </SplideSlide>
+                </Splide>  */}
+                </Grid>
                 <Grid>
                     <div className={classes.client}>
                         {/* <div> */}
@@ -155,7 +139,7 @@ const Partner = () => {
                         {/* <div> */}
                         <img src={Paymart} alt='' className={classes.img} />
                         {/* </div> */}
-                        {/* <div> */}
+                        {/* <div>  */}
                         <img src={Iman} alt='' className={classes.img} />
                         {/* </div> */}
                     </div>

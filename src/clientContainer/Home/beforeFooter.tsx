@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => {
       textAlign: "left",
       [theme.breakpoints.down("md")]: {
         fontSize: "16px",
-        textAlign: "center",
+       
       },
     },
     footerBottomText: {
