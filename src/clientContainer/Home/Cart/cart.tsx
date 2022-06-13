@@ -39,7 +39,8 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { useAutocomplete } from "@mui/base/AutocompleteUnstyled";
 import { styled } from "@mui/material/styles";
-import { PostCode, postPhone } from "./VerificationsApi";
+import { postPhone } from "./VerificationsApi";
+import axios from "axios";
 
 const Input = styled("input")(({ theme }) => ({
   width: 200,
@@ -444,27 +445,47 @@ export default function Cart() {
   const { cartProducts } = useSelector((state: rootState) => state.cartreducer);
   console.log(cartProducts);
   const [open, setOpen] = React.useState(false);
-  const [validate, setValidate] = React.useState(true)
   const [timer, setTimer] = React.useState('00:00');
   const [count, setCount] = React.useState(60)
-  const [code, setCode] = React.useState()
+  const [code, setCode] = React.useState(null)
+  const [status, setStatus] = React.useState<any>(null)
 
   const Ref = React.useRef(null);
   const handleOpen = () => {
       if(phone.length == 13 && fullName){
       setOpen(true);
-        setValidate(false)
         postPhone({phone, fullName})
-        // console.log(phone.length);
         onClickReset()
       }
-    
   };
-console.log(code);
+
+  //  This line is if for verification
+  const PostCode = async (mass:any) => {
+    const phone = mass[0]
+    const code = mass[1]
+    console.log(phone, code);
+    console.log(mass);
+    axios({
+        url:`https://test.api.yengilcredit.uz/sms/validation/${code}`,
+        method:"GET",
+        headers:{
+            "number":`${phone}`
+        }
+    })
+    .then((res) =>{ 
+    setStatus(res.status)
+    ;})
+    .catch((err) => err)
+    
+  }
+  console.log(status);
+
   const mass  = [phone, code]
   const handleClose = () => {
       PostCode(mass)
+      if(status == 200){
       setOpen(false);
+      }
     
   };
 
@@ -629,6 +650,7 @@ const handleResetTimer  = () => {
     onClickReset()
   }
 }
+
 
 
   return (
@@ -884,6 +906,7 @@ const handleResetTimer  = () => {
                         onKeyUp={isEmpty}
                         onChange={(e: any) => setFullName(e.target.value)}
                         className={classes.Input}
+                        disabled = {status == 200 ? true : false}
                       />
                     </Box>
                     <Box>
@@ -898,16 +921,19 @@ const handleResetTimer  = () => {
                         limitMaxLength
                         id="phone"
                         onKeyUp={isEmpty}
+                        disabled = {status == 200 ? true : false}
                       />
                     </Box>
                     <Box>
-                      <button
+                      {status !== 200 && 
+                        <button
                         onClick={handleOpen}
                         className={classes.sale}
                         type = "button"
                       >
                         Tasdiqlash
                       </button>
+                      }
                       <Modal
                         hideBackdrop
                         open={open}
@@ -921,8 +947,10 @@ const handleResetTimer  = () => {
                           Quyidagi raqamga kod yubordik {phone}
                           </p>
                           <input onChange={(e:any) => setCode(e.target.value)} placeholder="Tasdiqlash kodini shu yerga kiriting..." className = {classes.Input} required />
+                          {status == 200 && <Typography sx = {{color:"green", fontSize:"14px"}}>Kod tasdiqlandi</Typography> }
+                          {status > 200 && <Typography sx = {{color:"#FF4B4B", fontSize:"14px"}}>Telifon raqam yoki kod xato kiritildi</Typography>}
                           <button  className={classes.sale} onClick={handleClose}>
-                            Tasdiqlash
+                            {status == 200 && "Davom ettirish"} {status > 200 && "Davom ettirish"} {!status && "Tasdiqlash"}
                           </button>
                           <Typography onClick = {handleResetTimer} sx = {{cursor:"pointer",textAlign: "center", mt:"20px", color: timer !== "00:00" ? "#FF4B4B":"green" }} >Kodni qayta jo’natishni so’rash {timer !== "00:00" && timer}</Typography>
                         </Box>
@@ -930,38 +958,10 @@ const handleResetTimer  = () => {
                     </Box>
                   </Grid>
                 )}
-                {/* <h3>Yetkazish ma'lumotlari</h3>
-
-                <Grid className={classes.Grid} container spacing={2}>
-                  <Grid item xs={12} sm={6} md={12}>
-                    <Box>
-                      <p className={classes.UniversalP}>
-                        Ismingiz <span style={{ color: "red" }}>*</span>{" "}
-                      </p>
-                      <input
-                        type="text"
-                        required
-                        id="name"
-                        onKeyUp={isEmpty}
-                        onChange={(e: any) => setFullName(e.target.value)}
-                        className={classes.Input}
-                      />
-                    </Box>
-                    <Box>
-                      <p className={classes.UniversalP}>
-                        Telefon raqamingiz{" "}
-                        <span style={{ color: "red" }}>*</span>
-                      </p>
-                      <PhoneInput
-                        international
-                        defaultCountry="UZ"
-                        onChange={setPhone}
-                        limitMaxLength
-                        id="phone"
-                        onKeyUp={isEmpty}
-                      />
-                    </Box>
-                  </Grid>
+                {
+                  status == 200 &&
+                  <>
+                      <Grid className={classes.Grid} container spacing={2}>
                   <Grid item xs={12} sm={6} md={12}>
                     <Box>
                       <p className={classes.UniversalP}>
@@ -1028,12 +1028,12 @@ const handleResetTimer  = () => {
                 <div>
                   <button
                     disabled={disabled}
-                    onClick={handleOpen}
+                    // onClick={handleOpen}
                     className={classes.sale}
                   >
                     Xarid qilish
                   </button>
-                  <Modal
+                  {/* <Modal
                     keepMounted
                     open={open}
                     onClose={handleClose}
@@ -1113,8 +1113,12 @@ const handleResetTimer  = () => {
                         </Button>
                       </div>
                     </Box>
-                  </Modal>
-                </div> */}
+                  </Modal> */}
+                </div>
+                  </>
+                  
+                }
+                
               </form>
             </div>
           </Grid>

@@ -10,22 +10,22 @@ export const postPhone = (phone:any) => {
 }
 
 
-export const PostCode = async (mass:any) => {
-    const phone = mass[0]
-    const code = mass[1]
-    console.log(phone, code);
-    console.log(mass);
-    axios({
-        url:`https://test.api.yengilcredit.uz/sms/validation/${code}`,
-        method:"GET",
-        headers:{
-            "number":`${phone}`
-        }
-    })
-    .then((res) =>{ 
-        // dispatch({type:"VER_RESPONSE", payload:res})
-    console.log(res.status);})
-    .catch((err) => err)
+// export const PostCode = async (mass:any) => {
+//     const phone = mass[0]
+//     const code = mass[1]
+//     console.log(phone, code);
+//     console.log(mass);
+//     axios({
+//         url:`https://test.api.yengilcredit.uz/sms/validation/${code}`,
+//         method:"GET",
+//         headers:{
+//             "number":`${phone}`
+//         }
+//     })
+//     .then((res) =>{ 
+//         // dispatch({type:"VER_RESPONSE", payload:res})
+//     console.log(res.status);})
+//     .catch((err) => err)
     
     
-}
+// }
