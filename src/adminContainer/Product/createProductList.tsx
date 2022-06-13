@@ -276,7 +276,7 @@ const ProductsCreate = () => {
     message: "",
     type: "",
   });
-  console.log(image);
+  // console.log(image);
   
   const handleChangeBrand = (event: SelectChangeEvent) => {
     setBrandName(event.target.value);
@@ -327,10 +327,6 @@ const ProductsCreate = () => {
       setImage(null);
     }
   };
-  //   setTimeout(() => {
-  // refresh()
-  //   })
-  // refresh();
   React.useEffect(() => {
     getAllData();
   }, []);

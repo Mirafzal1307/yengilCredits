@@ -425,9 +425,6 @@ const CategoryProducts = () => {
                 alignItems="center"
                 spacing={2}
                 flexWrap="wrap"
-
-
-              // flexDirection='column'
               >
                 {product
                   .filter((val: any) => {
@@ -543,7 +540,7 @@ const CategoryProducts = () => {
                             Sotuvda yo'q
                           </button>
                         )}
-                        {/* <span className={classes.cardSpan}>{item.discount}%</span> */}
+                       
                       </Box>
                     </Box>
                   )
@@ -602,16 +599,7 @@ const CategoryProducts = () => {
                             </h6>
                             <p className={classes.sortCardDescription}>{item.name}</p>
                             <div style={{ display: "flex" , flexDirection: 'column' }}>
-                                {/* <p
-                      className={classes.sortCardPrice}
-                      style={{
-                        color: "#065374",
-                        fontSize: "14px",
-                        textDecoration: "line-through",
-                      }}
-                    >
-                      {item?.price?.toLocaleString()} so'm
-                    </p> */}
+              
                                 <p
                                   className={classes.sortCardPrice}
                                   style={{

@@ -109,7 +109,7 @@ const BrandClient = () => {
 
   const getProduct = async (id: any) => {
     const res: any = await getProductByBrand({}, id);
-    console.log(res.data);
+    // console.log(res.data);
   };
 
   return (

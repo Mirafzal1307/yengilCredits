@@ -26,7 +26,7 @@ const Search = () => {
     const [products, setProducts] = React.useState<any>();
     const classes = useStyles()
 
-    console.log(products);
+    // console.log(products);
 
     const handleInputChange = (e: any) => {
         setParam(e.target.value);
@@ -52,9 +52,6 @@ const Search = () => {
                     className={classes.SearchIcon} >
                     <SearchIcon />
                 </button>
-
-
-
                 {param && products?.map((i: any, index: any) => (
                     <p key={index}>{i.name}</p>
                 ))

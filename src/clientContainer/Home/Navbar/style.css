@@ -155,8 +155,6 @@ a {
   transition: all var(--speed) ease;
 }
 
-.menu-secondary-exit {}
-
 .menu-secondary-exit-active {
   transform: translateX(110%);
   transition: all var(--speed) ease;
@@ -210,8 +208,3 @@ a {
   padding: 0px 0px 0px 0px !important;
   border: red solid 1px !important;
 }
-
-/* .css-6hp17o-MuiList-root-MuiMenu-list{
-  padding-top: 1px;
-  padding-bottom: 1px;
-} */

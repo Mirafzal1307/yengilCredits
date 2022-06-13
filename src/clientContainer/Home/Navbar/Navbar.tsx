@@ -368,9 +368,8 @@ const BackToTop = () => {
     setCategory(response.data.menu);
     let res: any = await getParentCategories();
     setParentCategories(res.data.content);
-    // console.log(response.data.menu);
   };
-  console.log(parentCategories);
+  // console.log(parentCategories);
   const getCategoryProductById = async (id: any) => {
     const response = await getProductFromCategoryById(id, {});
   };
@@ -394,8 +393,7 @@ const BackToTop = () => {
   categoryValues.map((i) => {
     subCategoryArray.push(i);
   });
-  // console.log(subCategoryArray)
-  // subCategoryArray.push(category.name)
+
 
   return (
     <React.Fragment>
