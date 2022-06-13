@@ -8,7 +8,7 @@ class ApiClient {
   user: any;
   constructor(baseURL: any) {
     this.user = JSON.parse(JSON.stringify(localStorage.getItem('auth') || '{}'));
-    console.log(this.user);
+    // console.log(this.user);
     
     this.instance = axios.create({
       baseURL,

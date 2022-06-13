@@ -312,7 +312,7 @@ const BrandPage = () => {
   const getProduct = async (id: any) => {
     let res: any = await getProductByBrand(`${page - 1}`, id);
     setProduct(res.data.content);
-    console.log(res.data.content);
+    // console.log(res.data.content);
     setPageQty(res.data.totalPages);
   };
   const dispatch = useDispatch();

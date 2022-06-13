@@ -98,7 +98,7 @@ const BrandEditPage = () => {
     }
   };
   let img = `${MINIO_FULL_ENDPOINT_FOR}/brand/${photo}`;
-  console.log(`Image from Minio----${img}`)
+  // console.log(`Image from Minio----${img}`)
   const sendDataToAPI = async () => {
     let form = new FormData();
 

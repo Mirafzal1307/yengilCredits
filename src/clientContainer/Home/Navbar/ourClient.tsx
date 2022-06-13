@@ -1,13 +1,13 @@
-import { Container, Grid } from "@mui/material";
-import Alif from "../../../Images/Group 56530.png";
-import Paymart from "../../../Images/image 58.png";
-import Iman from "../../../Images/image 59 (1).png";
+// import { Container, Grid } from "@mui/material";
+// import Alif from "../../../Images/Group 56530.png";
+// import Paymart from "../../../Images/image 58.png";
+// import Iman from "../../../Images/image 59 (1).png";
 import { makeStyles } from "@material-ui/core/styles";
-import Dostavka from "../../../Images/Dostavka.svg";
-import Galochka from "../../../Images/Galochka.svg";
-import Image from "../../../Images/Image.svg";
-import Operator from "../../../Images/Operator.svg";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+// import Dostavka from "../../../Images/Dostavka.svg";
+// import Galochka from "../../../Images/Galochka.svg";
+// import Image from "../../../Images/Image.svg";
+// import Operator from "../../../Images/Operator.svg";
+// import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 
 
@@ -98,11 +98,11 @@ const Partner = () => {
   const classes = useStyles();
   return (
     <>
-      <Container maxWidth="xl" style={{ marginTop: "48px" }}>
+      {/* <Container maxWidth="xl" style={{ marginTop: "48px" }}>
         <Grid container className={classes.grid}>
           <Grid item xs={12} md={2} lg={2} className={classes.div}>
             <Grid>
-              <img src={Dostavka} alt="" />
+              <img src={Dostavka} alt="rasm bor edi" />
             </Grid>
             <p className={classes.text}>Bepul yetkazib berish</p>
             <p className={classes.paragraph}>
@@ -111,7 +111,7 @@ const Partner = () => {
           </Grid>
           <Grid item xs={12} md={2} lg={2} className={classes.div}>
             <Grid>
-              <img src={Galochka} alt="" />
+              <img src={Galochka} alt="rasm bor edi" />
             </Grid>
             <p className={classes.text}>Bo’lib to’lash </p>
             <p className={classes.paragraph}>
@@ -121,7 +121,7 @@ const Partner = () => {
           </Grid>
           <Grid item xs={12} md={2} lg={2} className={classes.div}>
             <Grid>
-              <img src={Image} alt="" />
+              <img src={Image} alt="rasm bor edi" />
             </Grid>
             <p className={classes.text}>1 yil garantiya</p>
             <p className={classes.paragraph}>
@@ -131,7 +131,7 @@ const Partner = () => {
           </Grid>
           <Grid item xs={12} md={2} lg={2} className={classes.div}>
             <Grid>
-              <img src={Operator} alt="" />
+              <img src={Operator} alt="rasm bor edi" />
             </Grid>
             <p className={classes.text}>Qo’llab quvatlash xizmati</p>
             <p className={classes.paragraph}>
@@ -167,7 +167,7 @@ const Partner = () => {
           <SplideSlide>
             <Grid item md={12} lg={12} className={classes.div}>
               <Grid className={classes.caruselImg}>
-                <img src={Dostavka} alt="" />
+                <img src={Dostavka} alt="rasm bor edi" />
               </Grid>
               <p className={classes.text}>Bepul yetkazib berish</p>
               <p className={classes.paragraph}>
@@ -178,7 +178,7 @@ const Partner = () => {
           <SplideSlide>
             <Grid item md={12} lg={12} className={classes.div}>
               <Grid className={classes.caruselImg}>
-                <img src={Galochka} alt="" />
+                <img src={Galochka} alt="rasm bor edi" />
               </Grid>
               <p className={classes.text}>Bo’lib to’lash </p>
               <p className={classes.paragraph}>
@@ -190,7 +190,7 @@ const Partner = () => {
           <SplideSlide>
             <Grid item md={12} lg={12} className={classes.div}>
               <Grid className={classes.caruselImg}>
-                <img src={Image} alt="" />
+                <img src={Image} alt="rasm bor edi" />
               </Grid>
               <p className={classes.text}>1 yil garantiya</p>
               <p className={classes.paragraph}>
@@ -202,7 +202,7 @@ const Partner = () => {
           <SplideSlide>
             <Grid item md={12} lg={12} className={classes.div}>
               <Grid className={classes.caruselImg}>
-                <img src={Operator} alt="" />
+                <img src={Operator} alt="rasm bor edi" />
               </Grid>
               <p className={classes.text}>Qo’llab quvatlash xizmati</p>
               <p className={classes.paragraph}>
@@ -218,17 +218,17 @@ const Partner = () => {
 
         <Grid container className={classes.client}>
           <Grid item xs={4} md={4} lg={2.5} className={classes.div}>
-            <img src={Alif} alt="" className={classes.img} />
+            <img src={Alif} alt="rasm bor edi" className={classes.img} />
           </Grid>
           <Grid item xs={4} md={4} lg={2.5} className={classes.div}>
-            <img src={Paymart} alt="" className={classes.img} />
+            <img src={Paymart} alt="rasm bor edi" className={classes.img} />
           </Grid>
 
           <Grid item xs={4} md={4} lg={2.5} className={classes.div}>
-            <img src={Iman} alt="" className={classes.img} />
+            <img src={Iman} alt="rasm bor edi" className={classes.img} />
           </Grid>
         </Grid>
-      </Container>
+      </Container> */}
     </>
   );
 };

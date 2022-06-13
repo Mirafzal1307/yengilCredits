@@ -109,7 +109,7 @@ const Header = () => {
 
       <Navbarbottom />
       <CardProducts />
-      <Partner />
+      {/* <Partner /> */}
       <BeforeFooter />
 
       <Footer />
