@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 
 import storeFactory from './store';
 
-
 const reduxStore = storeFactory();
 
 ReactDOM.render(
@@ -14,4 +13,6 @@ ReactDOM.render(
         <App />
     </Provider>
     , document.getElementById('root')
-);
+    );
+    
+    console.clear()

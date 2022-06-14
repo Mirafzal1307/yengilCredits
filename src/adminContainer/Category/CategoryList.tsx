@@ -367,12 +367,14 @@ export default function EnhancedTable() {
                                   scope="row"
                                   padding="none"
                                   className={classes.tableCell}
+                                  key={row.id}
                                 >
                                   {row?.id}
                                 </TableCell>
                                 <TableCell
                                   className={classes.tableCell}
                                   align="left"
+                                  key={row.id}
                                 >
                                   {row?.name}
                                 </TableCell>

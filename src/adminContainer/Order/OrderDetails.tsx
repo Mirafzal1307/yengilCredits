@@ -453,18 +453,18 @@ const OrderDetails = () => {
                     <div className={classes.productInfo}>
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photo}`}
-                        className={classes.productImg}
+                        className={classes.productImg} alt="rasm bor edi"
                       />
-                      <p className={classes.productName}>{item.product_name}</p>
+                      <p className={classes.productName} key={item.id}>{item.product_name}</p>
                     </div>
                   </TableCell>
-                  <TableCell align="left" className={classes.productRows}>
+                  <TableCell align="left" className={classes.productRows} key={item.id}> 
                     {item?.price?.toLocaleString()} so'm
                   </TableCell>
-                  <TableCell align="left" className={classes.productRows}>
+                  <TableCell align="left" className={classes.productRows} key={item.id}>
                     {item.quantity}
                   </TableCell>
-                  <TableCell align="left" className={classes.productRows}>
+                  <TableCell align="left" className={classes.productRows} key={item.id}>
                     {(item?.price * item.quantity)?.toLocaleString()}
                   </TableCell>
                 </TableRow>

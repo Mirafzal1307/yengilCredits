@@ -17,7 +17,6 @@ import cart2 from "../../Images/cart2.svg";
 import { Link } from "react-router-dom";
 import { getProductFromCategoryById } from "../../Api/admin/AdminProductApi";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { SelectChangeEvent } from "@mui/material";
 import BackToTop from "./Navbar/Navbar";
 import Footer from "./Footer";
 import {
@@ -300,8 +299,6 @@ const CategoryProducts = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [category, setCategory] = React.useState<any>();
-  const [productPrice, setProductPrice] = React.useState("");
-  const [value, setValue] = React.useState(0);
   const [pageQty, setPageQty] = React.useState<number>(0);
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");
@@ -434,6 +431,7 @@ const CategoryProducts = () => {
                             marginBottom: "10px",
                             height: "30px",
                           }}
+                          key={item.id}
                         >
                           {item.short_name}
                         </p>
@@ -444,6 +442,7 @@ const CategoryProducts = () => {
                             fontSize: "14px",
                             textDecoration: "line-through",
                           }}
+                          key={item.id}
                         >
                           {item?.price?.toLocaleString()} so'm
                         </p>
@@ -456,6 +455,7 @@ const CategoryProducts = () => {
                             color: "#000",
                             margin: 0,
                           }}
+                          key={item.id}
                         >
                           {
                             Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
@@ -479,6 +479,7 @@ const CategoryProducts = () => {
                             height: "45px",
                             fontWeight: "500",
                           }}
+                          key={item.id}
                         >
                           {item?.after_discount?.toLocaleString()} so'm
                         </p>
@@ -565,7 +566,7 @@ const CategoryProducts = () => {
                             />
                           </Link>
                           <div style={{ alignSelf: 'center' }}  >
-                            <h6 className={classes.sortCardTitle}>
+                            <h6 className={classes.sortCardTitle} key={item.id}>
                               {item.short_name}
                             </h6>
                             <p className={classes.sortCardDescription}>{item.name}</p>
@@ -579,6 +580,7 @@ const CategoryProducts = () => {
                                     color: "#000",
                                     margin: 0,
                                   }}
+                                  key={item.id}
                                 >
                                   {
                                     Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
@@ -602,6 +604,7 @@ const CategoryProducts = () => {
                                     height: "45px",
                                     fontWeight: "500",
                                   }}
+                                  key={item.id}
                                 >
                                   {item?.after_discount?.toLocaleString()} so'm
                                 </p>
