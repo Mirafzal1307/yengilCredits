@@ -375,7 +375,7 @@ const useStyles = makeStyles((theme) => ({
     transform: "translate(-50%, -50%)",
     borderRadius: "5px",
     boxShadow: '3px 3px 3px black 3px 3px 3px ',
-    padding: '15px',
+    padding: '20px 30px',
     width: '500px',
     background: 'white',
     [theme.breakpoints.down(600)]: {
@@ -434,8 +434,12 @@ export default function Cart() {
     if (status == 200) {
       setOpen(false);
     }
-
   };
+
+  const handleModalClose = () => {
+    setOpen(false)
+  }
+
   const navigate = useNavigate();
   const refresh = (): void => {
     setTimeout(() => {
@@ -875,6 +879,7 @@ export default function Cart() {
                             {status === 200 && "Davom ettirish"} {status > 200 && "Davom ettirish"} {!status && "Tasdiqlash"}
                           </button>
                           <Typography onClick={handleResetTimer} sx={{ cursor: "pointer", textAlign: "center", mt: "20px", color: timer !== "00:00" ? "#FF4B4B" : "green" }} >Kodni qayta jo’natishni so’rash {timer !== "00:00" && timer}</Typography>
+                          <CloseIcon onClick={handleModalClose} sx = {{cursor: "pointer", position:"absolute", top:"15px", right:"15px"}} className = {classes.close}/>
                         </Box>
                       </Modal>
                     </Box>
