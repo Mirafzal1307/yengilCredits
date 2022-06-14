@@ -83,7 +83,9 @@ const useStyles = makeStyles({
     padding: "9px 0px 8px 20px !important",
     '&:focus': {
       outline: 'none'
-    }
+    },
+    borderRadius: "5px",
+    border: "1px solid #9F9F9F !important"
   },
   h4_second: {
     fontSize: "17px !important",
@@ -199,6 +201,7 @@ export default function CategoryEdit() {
   const handleChangeCategory = (event: SelectChangeEvent) => {
     setSelect(event.target.value);
   };
+  console.clear()
   const inp = document.querySelector('input');
   if (inp?.value.length === 1) {
     inp?.classList.add('active')

@@ -264,6 +264,7 @@ export default function EnhancedTable() {
     type: "",
   });
   const classes = useStyles();
+  console.clear()
   useEffect(() => {
     getCategory();
     if (pageQty < page) {

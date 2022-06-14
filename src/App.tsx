@@ -23,17 +23,17 @@ import AllCards from "./clientContainer/Home/AllCards";
 import OrderDetails from "./adminContainer/Order/OrderDetails";
 import LoginPage from "./Auth/LoginPage";
 import PrivateRoute from "./Auth/PrivateRoute";
+import Payme from "./demoPayment";
 
 function App() {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-
-  console.clear();
+  window.console.clear();
   return (
     <>
-      <Router>
+     <Router>
         <Fragment>
           <Routes>
             <Route path="/dashboard" element={<PrivateRoute />}>
@@ -99,7 +99,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
           </Routes>
         </Fragment>
-      </Router>
+      </Router> 
     </>
   );
 

@@ -12,17 +12,12 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import {
   Button,
-  CircularProgress,
   Container,
-  Pagination,
-  PaginationItem,
   Tooltip,
 } from "@mui/material";
 import {
   deleteCategoryItem,
   getCategoryByParentCategory,
-  getCategoryList,
-  getCategorySearch,
 } from "../../Api/admin/AdminCategoryApi";
 import { makeStyles } from "@mui/styles";
 import "./style.css";
@@ -32,10 +27,7 @@ import Edit from "../../Images/edit.png";
 import Details from "../../Images/detailsicon.svg";
 import Notification from "../Snackbar/Notification";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
-import { useTypedSelector } from "../../hook/useTypedSelector";
-import { useActions } from "../../hook/useActions";
 import { Link as NavLink } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
 
 interface Data {
   id: number;
@@ -304,10 +296,6 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");
   const [category, setCategory] = React.useState<createDatas[]>([]);  
-  const [categories, setCategories] = React.useState<any>()
-  const [status, setStatus] = React.useState('');
-  const [param, setParam] = React.useState('');
-  const [search, setSearch] = React.useState([])
   const [notify, setNotify] = React.useState<any>({
     isOpen: false,
     message: "",
@@ -315,19 +303,9 @@ export default function EnhancedTable() {
   });
   const classes = useStyles();
   const { id } = useParams();
-  const handleInputChange = (e: any) => {
-    setParam(e.target.value);
-  };
    React.useEffect(() => {
     subCategory(id);
   }, []);
-  const searchCategory = async () => {
-    const res: any = await getCategorySearch(param)
-    setCategories(res?.data)
-  }
-  React.useEffect(() => {
-    searchCategory()
-  }, [param])
   React.useEffect(() => {
     fetchCategory(`${page - 1}`);
     if (pageQty < page) {
@@ -367,7 +345,7 @@ export default function EnhancedTable() {
   const deleteCategory = async (id: any) => {
     let data = await deleteCategoryItem(id)
       .then((res: any) => {
-        if (res.status == 200) {
+        if (res.status === 200) {
           setNotify({
             isOpen: true,
             message: "Muvaffaqiyatli o'chirildi.",
@@ -383,6 +361,7 @@ export default function EnhancedTable() {
         });
       });
   };
+  console.clear()
 
   return (
     <>
@@ -391,17 +370,6 @@ export default function EnhancedTable() {
         <h1 className={classes.h1}>Turkum</h1>
         <Box className={classes.input_two}>
           <Paper className={classes.paper}>
-            <div style={{ display: 'flex', }}>
-              <input
-                type="text"
-                placeholder="Izlash..."
-                onChange={handleInputChange}
-                className={classes.SearchInput} />
-              <button
-                className={classes.SearchIcon} >
-                <SearchIcon />
-              </button>
-            </div>
             <TableContainer>
               <h4 className={classes.h4}>2.Turkumlar</h4>
               <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
@@ -411,9 +379,7 @@ export default function EnhancedTable() {
                   rowCount={category.length}
                 />
                 <TableBody>
-                  {
-                    param && categories ?
-                    param && categories?.map((row: any, index: any) => {
+                  {category?.map((row: any, index: any) => {
                         const deleteData = () => {
                           deleteCategory(row?.id);
                         };
@@ -485,99 +451,12 @@ export default function EnhancedTable() {
                             </TableRow>
                           </>
                         );
-                      }) : category?.map((row: any, index: any) => {
-                        const deleteData = () => {
-                          deleteCategory(row.id);
-                        };
-                        const isItemSelected = isSelected(row?.name);
-                        const labelId = `enhanced-table-checkbox-${index}`;
-                        return (
-                          <>
-                            <TableRow
-                              hover
-                              onClick={(event) => handleClick(event, row.name)}
-                              role="checkbox"
-                              aria-checked={isItemSelected}
-                              tabIndex={-1}
-                              key={row?.name}
-                              selected={isItemSelected}
-                            >
-                              <TableCell
-                                padding="checkbox"
-                                className={classes.tableCell}
-                              >
-                                <Checkbox
-                                  color="primary"
-                                  checked={isItemSelected}
-                                  inputProps={{
-                                    "aria-labelledby": labelId,
-                                  }}
-                                />
-                              </TableCell>
-                              <TableCell
-                                component="th"
-                                id={labelId}
-                                scope="row"
-                                padding="none"
-                                className={classes.tableCell}
-                              >
-                                {row?.id}
-                              </TableCell>
-                              <TableCell className={classes.tableCell} align="left">
-                                {row?.name}
-                              </TableCell>
-                              <TableCell className={classes.tableCell} align="left">
-                                {row?.parent_category?.name}
-                              </TableCell>
-                              <TableCell className={classes.tableCell} align="left">
-                                <Link to={`/product`}>
-                                  <Tooltip title="Details">
-                                    <Button>
-                                      <img src={Details} alt="" />
-                                    </Button>
-                                  </Tooltip>
-                                </Link>
-                                <Link to={`/category/admin/edit-page/${row?.id}`}>
-                                  <Tooltip title="Edit">
-                                    <Button>
-                                      <img src={Edit} alt="ad" />
-                                    </Button>
-                                  </Tooltip>
-                                </Link>
-                                <Tooltip title="Delete">
-                                  <Button className={classes.button}>
-                                    <Modal data={deleteData} />
-                                  </Button>
-                                </Tooltip>
-                                <Notification
-                                  notify={notify}
-                                  setNotify={setNotify}
-                                />
-                              </TableCell>
-                            </TableRow>
-                          </>
-                        );
+                      
                       })}
                 </TableBody>
               </Table>
             </TableContainer>
-            <Pagination
-              className={classes.pagination}
-              count={2}
-              page={page}
-              onChange={(_, num) => setPage(num)}
-              sx={{ marginY: 3, marginX: "auto" }}
-              renderItem={(item) => (
-                <PaginationItem
-                  className={classes.paginationItem}
-                  component={NavLink}
-                  to={`/category/by-id/${id}/?page${page}`}
-                  {...item}
-                  variant="outlined"
-                  shape={"rounded"}
-                />
-              )}
-            />
+
           </Paper>
         </Box>
       </Container>

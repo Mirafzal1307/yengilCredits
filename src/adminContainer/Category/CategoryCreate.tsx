@@ -1,11 +1,9 @@
-import { red } from "@material-ui/core/colors";
 import {
   Button,
   FormControl,
   MenuItem,
   Select,
   SelectChangeEvent,
-  TextField,
   Tooltip,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -34,7 +32,9 @@ const useStyles = makeStyles({
     fontFamily: "Poppins !important",
     fontSize: "15px !important",
     fontWeight: "400",
-    padding: "9px 0px 8px 20px !important"
+    padding: "9px 0px 8px 20px !important",
+    borderRadius: "5px",
+    border: "1px solid #9F9F9F !important"
   },
   category_name: {
     color: "#464646 !important",
@@ -126,6 +126,7 @@ const CategoryCreate = () => {
         });
       });
   }
+  console.clear()
   const inpt = document.querySelector('input');
   if (inpt?.value.length === 1) {
     inpt?.classList.add('active')
