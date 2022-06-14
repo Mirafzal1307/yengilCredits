@@ -168,6 +168,8 @@ const useStyles = makeStyles({
     },
     pagination: {
         width: 'auto',
+        display: 'flex !important' ,
+        justifyContent: 'flex-end !important',
         marginRight: 'unset !important',
     },
     paginationItem: {
@@ -176,7 +178,8 @@ const useStyles = makeStyles({
         margin: '0 !important',
         borderRadius: '3px !important',
         height: '45px !important',
-        padding: '6px 14px 4px 14px !important'
+        padding: '6px 14px 4px 14px !important',
+
     },
     imgDelete: {
         cursor: 'pointer !important'
@@ -621,11 +624,12 @@ const ProductList: React.FC = () => {
                         count={products.totalPages}
                         page={page}
                         onChange={(_, num) => setPage(num)}
-                        sx={{ marginY: 3, marginX: 'auto' }}
+                        sx={{ marginY: 3, }}
                         renderItem={
                             (item) => (
                                 <PaginationItem
                                     className={classes.paginationItem}
+
                                     component={NavLink}
                                     to={`/product/?page${page}`}
                                     {...item}
