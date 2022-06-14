@@ -30,14 +30,13 @@ function App() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const token = localStorage.getItem("auth");
-
+  console.clear();
   return (
     <>
       <Router>
         <Fragment>
           <Routes>
-                  <Route path="/dashboard" element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Home />} />
             </Route>
             <Route path="/category" element={<PrivateRoute />}>
@@ -103,5 +102,6 @@ function App() {
       </Router>
     </>
   );
+
 }
 export default App;
