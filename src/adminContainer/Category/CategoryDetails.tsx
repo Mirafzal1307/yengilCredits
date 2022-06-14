@@ -417,10 +417,10 @@ export default function EnhancedTable() {
                               >
                                 {row?.id}
                               </TableCell>
-                              <TableCell className={classes.tableCell} align="left">
+                              <TableCell className={classes.tableCell} align="left" key={row.id}> 
                                 {row?.name}
                               </TableCell>
-                              <TableCell className={classes.tableCell} align="left">
+                              <TableCell className={classes.tableCell} align="left" key={row.id}>
                                 {row?.parent_category?.name}
                               </TableCell>
                               <TableCell className={classes.tableCell} align="left">

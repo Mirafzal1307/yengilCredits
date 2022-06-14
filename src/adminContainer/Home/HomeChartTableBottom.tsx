@@ -123,7 +123,7 @@ const HomeChartTableButton = () => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 className={classes.header_table_insides}
               >
-                <TableCell className={classes.header_table_inside}>
+                <TableCell className={classes.header_table_inside} key={row.id}>
                   {row.id}
                 </TableCell>
                 <TableCell
@@ -131,18 +131,21 @@ const HomeChartTableButton = () => {
                   scope="row"
                   className={`${classes.header_table_inside} 
                ${classes.header_table_inside_name}`}
+               key={row.id}
                 >
                   {row.name}
                 </TableCell>
                 <TableCell
                   align="right"
                   className={classes.header_table_inside}
+                  key={row.id}
                 >
                   {row.email}
                 </TableCell>
                 <TableCell
                   align="right"
                   className={classes.header_table_inside}
+                  key={row.id}
                 >
                   ${row.cost}
                 </TableCell>
