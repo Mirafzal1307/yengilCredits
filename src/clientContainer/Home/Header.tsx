@@ -8,16 +8,10 @@ import CardProducts from "./CardProducts";
 import { Container } from "@mui/material";
 import { useState } from "react";
 import Navbarbottom from "./Navbar/Navbarbottom";
-import Partner from "./Navbar/ourClient";
-
-
 const useStyles = makeStyles((theme) => {
   return {
     Carousel: {
       width: "100% !important",
-
-
-     
       [theme.breakpoints.up(499)]: {
         marginTop: '60px !important'
       },
@@ -109,7 +103,7 @@ const Header = () => {
 
       <Navbarbottom />
       <CardProducts />
-      <Partner />
+      {/* <Partner /> */}
       <BeforeFooter />
 
       <Footer />

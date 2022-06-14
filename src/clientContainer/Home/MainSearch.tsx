@@ -22,7 +22,6 @@ import TableRow from '@mui/material/TableRow';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const useStyles = makeStyles({
   searchInput: {
-
     marginTop: "10px !important",
     background: "white",
     width: "100% !important",
@@ -132,7 +131,6 @@ const useStyles = makeStyles({
     margin: "15px 0 !important",
   },
 });
-
 const MainSearch = () => {
   const [param, setParam] = useState<any>();
   const [products, setProducts] = useState<any>();
@@ -141,13 +139,10 @@ const MainSearch = () => {
   };
   const dispatch = useDispatch();
   const getData = async () => {
-    console.log(param?.length);
     if (param?.length > 2) {
       const response: any = await searchProduct(param);
       setProducts(response.data.content);
     }
-
-
   };
   const [notify, setNotify] = useState<any>({
     isOpen: false,
@@ -157,7 +152,6 @@ const MainSearch = () => {
   useEffect(() => {
     getData();
   }, [param]);
-
   const classes = useStyles();
   return (
     <>
@@ -173,7 +167,6 @@ const MainSearch = () => {
           }
           onChange={handleInputChange}
         />
-
       </div>
       <Paper sx={{ width: '73.7%', overflow: 'hidden', position: 'absolute', top: '55px', marginLeft: '1px !important', borderRadius: '5px 5px 5px 5px' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
@@ -181,7 +174,6 @@ const MainSearch = () => {
             <TableBody>
               {param && products ? (
                 products.map((item: any) => (
-
                   <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
                     <TableCell>
                       <Link to={`/product/client/details/${item.id}`}>
@@ -209,7 +201,6 @@ const MainSearch = () => {
                           {item.short_name}
                         </h6>
                       </Link>
-
                     </TableCell>
                     <TableCell>
                       <Link to={`/product/client/details/${item.id}`}>
@@ -223,99 +214,28 @@ const MainSearch = () => {
                             fontFamily: "Poppins",
                             fontWeight: "500",
                             fontSize: "16px",
-
                           }}
                         >
                           {item.price}
                         </h6>
                       </Link>
-
                     </TableCell>
                     <TableCell>
                       <Link to={`/product/client/details/${item.id}`}>
-                        <ChevronRightIcon style={{color:'#000'}} />
+                        <ChevronRightIcon style={{ color: '#000' }} />
                       </Link>
-
                     </TableCell>
-
-
                   </TableRow>
-
-
-
-
-
-
-
                 ))
               ) : (
                 <>
-
                 </>
               )}
             </TableBody>
           </Table>
         </TableContainer>
-
       </Paper>
-      {/* <div>
-        <Stack
-       sx={{position: 'absolute' , top: '50px'}}
-        >
-          {param && products ? (
-            products.map((item: any) => (
-              <Box className={classes.bodyCard}>
-                <Box sx={{ display: 'flex' }} >
-                  <Link to={`/product/client/details/${item.id}`}>
-                    <img
-                      src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
-                      alt="img"
-                      style={{ width: "50px", height: "50px" }}
-                    />
-                  </Link>
-                  <h6
-                    className={classes.cardTitle}
-                    style={{
-                      margin: 0,
-                      marginTop: "10px",
-                      marginBottom: "10px",
-                      height: "30px",
-                    }}
-                  >
-                    {item.short_name}
-                  </h6>
-                  <p
-                    className={classes.cardPrice}
-                    style={{
-                      color: "#065374",
-                      fontSize: "14px",
-                      textDecoration: "line-through",
-                    }}
-                  >
-                    {item?.price?.toLocaleString()} so'm
-                  </p>
-                  <p
-                    className={classes.cardPrice}
-                    style={{ marginBottom: "10px", height: "45px" }}
-                  >
-                    {item?.after_discount?.toLocaleString()} so'm
-                  </p>
-
-                  
-                  <span className={classes.cardSpan}>{item.discount}%</span>
-                </Box>
-              </Box>
-            ))
-          ) : (
-            <>
-
-            </>
-          )}
-        </Stack>
-      </div> */}
-
       <Notification notify={notify} setNotify={setNotify} />
-
     </>
   );
 };

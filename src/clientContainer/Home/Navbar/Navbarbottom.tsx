@@ -23,26 +23,20 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       opacity: "0.9 !important",
     },
-
   },
   Slide: {
-    // borderRadius: '10px !important',
-    // background: 'red',
     "&:hover": {
       opacity: "0.99 !important",
       transform: 'scale(1.06)',
       transition: '1ms',
       borderRadius: "50px",
       zIndex: '9999 !important'
-
-
     },
   }
 }));
 
 const Navbarbottom = () => {
   const classes = useStyles();
-
   return (
     <>
       <Container maxWidth="xl" style={{ marginTop: "20px" }}>
@@ -51,7 +45,6 @@ const Navbarbottom = () => {
             perPage: 9,
             arrows: true,
             pagination: false,
-
             gap: "15px",
             breakpoints: {
               400: {

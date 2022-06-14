@@ -31,8 +31,6 @@ import { makeStyles } from '@mui/styles';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TableViewIcon from '@mui/icons-material/TableView';
 import { Link } from 'react-router-dom';
-
-
 const drawerWidth = 240;
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -42,7 +40,6 @@ const openedMixin = (theme: Theme): CSSObject => ({
   }),
   overflowX: 'hidden',
 });
-
 const closedMixin = (theme: Theme): CSSObject => ({
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
@@ -54,7 +51,6 @@ const closedMixin = (theme: Theme): CSSObject => ({
     width: `calc(${theme.spacing(9)} + 1px)`,
   },
 });
-
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -62,11 +58,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
 }));
-
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
@@ -151,27 +145,16 @@ const useStyles = makeStyles({
 
   }
 })
-
-
-
-
-
-
 export default function MiniDrawer(props: any) {
-
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
   const navigate = useNavigate()
-
   const logout = () => {
     localStorage.clear();
     navigate("/");
   }
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -249,8 +232,6 @@ export default function MiniDrawer(props: any) {
       </MenuItem>
     </Menu>
   );
-
-
   const classes = useStyles()
   const [activeItem, setActiveitem] = React.useState(null);
 
@@ -259,7 +240,6 @@ export default function MiniDrawer(props: any) {
     setActiveitem(activeItem);
 
   }
-
   return (
     <Box sx={{ display: 'flex' }} className={classes.Layout_All}>
       <CssBaseline />
@@ -289,7 +269,6 @@ export default function MiniDrawer(props: any) {
                   inputProps={{
                     id: 'uncontrolled-native',
                   }}
-
                 >
                   <option value={10}>Russian</option>
                   <option value={20}>English</option>
@@ -331,18 +310,13 @@ export default function MiniDrawer(props: any) {
       {renderMenu}
       <Drawer variant="permanent" open={open} >
         <DrawerHeader>
-
-          
           <img className={classes.Header_Icon} src={Icon} alt='rasm' />
          <Link to={'/'}  > <img className={classes.Header_Brand} src={Brand} alt='rasm' />
-       
            </Link>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton> 
-           
         </DrawerHeader>
-
         <List  >
           <Tooltip title="Home Page"  >
             <ListItem button component={RouterLink as any} to='/dashboard' className={classes.Header_layout_page} >
@@ -385,7 +359,6 @@ export default function MiniDrawer(props: any) {
             </ListItem>
           </Tooltip>
         </List>
-
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       </Box>

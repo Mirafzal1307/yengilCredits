@@ -20,7 +20,6 @@ function createData(
 ) {
   return { id, name, email, cost, date };
 }
-
 const rows = [
   createData(
     11,
@@ -58,7 +57,6 @@ const rows = [
     "11.05.2022"
   ),
 ];
-
 const useStyles = makeStyles({
   header_table: {
     padding: "30px 15px 30px 15px !important",
@@ -132,7 +130,7 @@ const HomeChartTableButton = () => {
                   component="th"
                   scope="row"
                   className={`${classes.header_table_inside} 
-                                           ${classes.header_table_inside_name}`}
+               ${classes.header_table_inside_name}`}
                 >
                   {row.name}
                 </TableCell>

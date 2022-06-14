@@ -2,7 +2,6 @@ import { Container, Grid, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
 import { makeStyles } from "@material-ui/core/styles";
 import FooterLeft from "../../Images/footer_left.svg";
-
 const useStyles = makeStyles((theme) => {
   return {
     ul: {
@@ -45,11 +44,9 @@ const useStyles = makeStyles((theme) => {
     },
   };
 });
-
 const BeforeFooter = () => {
   const classes = useStyles();
   const matches = useMediaQuery("(min-width:1100px)");
-
   return (
     <>
       <Box
@@ -86,7 +83,6 @@ const BeforeFooter = () => {
                   do'kon
                 </span>
                 <p
-                  // style={{ textIndent: "5%" }}
                   className={classes.footerTopText}
                 >
                   Bizning maqsadimiz zamonaviy texnologiyalar orqali
@@ -100,7 +96,7 @@ const BeforeFooter = () => {
                 >
                   Mijozlar biz uchun emas biz mijozlar uchun ishlaymiz!
                   <br />
-                  Murojat uchun +998 90-054-54-91
+                  Murojat uchun <b>+998 33-182-77-77</b>
                 </p>
               </Grid>
             </Grid>

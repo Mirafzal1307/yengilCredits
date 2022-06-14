@@ -256,17 +256,14 @@ interface characterProperties {
 const EditProductList = () => {
   const [productName, setProductName] = React.useState<any>({});
   const [productShortName, setProductShortName] = React.useState<any>({});
-  const [productCharacterName, setProductCharacterName] = React.useState("");
   const [productPrice, setProductPrice] = React.useState<any>({});
   const [productDiscount, setProductDiscount] = React.useState<any>({});
   const [brands, setBrands] = React.useState<Brands[]>([]);
   const [characterProperties, setCharacterProperties] = React.useState<characterProperties[]>([]);
-  const [productValueProperty, setproductValueProperty] = React.useState("");
   const [characterNames, setCharacterNames] = React.useState<characterNames[]>([]);
   const [categories, setCategories] = React.useState<Categories[]>([]);
   const [photo, setPhoto] = React.useState<any>();
   const [brand, setBrand] = React.useState<any>({ id: '' })
-  const [characters, setCharacters] = React.useState<any>([])
   const [brandName, setBrandName] = React.useState('');
   const [categoryName, setCategoryName] = React.useState("");
   const [productStatus, setProductStatus] = React.useState("");
@@ -326,12 +323,6 @@ const EditProductList = () => {
   const handleChangeCategory = (event: SelectChangeEvent) => {
     setCategoryName(event.target.value);
   };
-  const handleChangeCharacterName = (event: SelectChangeEvent) => {
-    setProductCharacterName(event.target.value);
-  };
-  const handleChangeValueProperty = (event: SelectChangeEvent) => {
-    setproductValueProperty(event.target.value);
-  };
   const handleChangeStatus = (event: SelectChangeEvent) => {
     setProductStatus(event.target.value);
   };
@@ -339,10 +330,7 @@ const EditProductList = () => {
     getProduct(id);
   }, []);
   const getProduct = async (id: any) => {
-    const res: any = await getProductById(id);
-    // console.log(res.data);
-    
-    setCharacters(res?.data?.product_characters[0])
+    const res: any = await getProductById(id);  
     setBrand(res?.data?.product[0]?.brand)
     setStatus(res?.data?.product[0]?.availability)
     setCategory(res?.data?.product[0]?.category)
@@ -384,7 +372,6 @@ const EditProductList = () => {
   const navigate = useNavigate();
   const sendDataToAPI = () => {
     const form = new FormData();
-
     form.append(
       "product_param",
       new Blob(
@@ -437,8 +424,6 @@ const EditProductList = () => {
       });
     }
   };
-
-
   function length() {
     const inp = document.querySelectorAll('input');
 
@@ -466,14 +451,10 @@ const EditProductList = () => {
     });
   }
 
-  length()
-
-
-
+  length();
   return (
     <React.Fragment>
       <MiniDrawer />
-
       <Container
         style={{ marginTop: "50px" }}
         className={classes.CreateContainerTitle}
@@ -514,12 +495,10 @@ const EditProductList = () => {
                     onChange={handleChangeBrand}
                     displayEmpty
                     className={classes.Select}
-
                   >
                     <MenuItem value="">
                       <span className="notranslate">Brendni tanlang</span>
                     </MenuItem>
-
                     {brands.map((brand, index) => (
                       <MenuItem value={brand.id} key={index}>
                         {brand.name}
@@ -573,7 +552,6 @@ const EditProductList = () => {
                   <MenuItem value="">
                     <span>Turkumni tanlang</span>
                   </MenuItem>
-
                   {categories.map((category, index) => (
                     <MenuItem value={category.id} key={index}>
                       {category.name}
@@ -590,7 +568,6 @@ const EditProductList = () => {
               className={classes.ProducutPhoto}
             >
               <h2 className={classes.boxSecondTitle}>Mahsulot rasmi<span style={{ color: 'red' }} > *</span></h2>
-
               <form style={{ display: "flex", alignItems: "center" }}>
                 <img
                   src={preview ? preview : img}
@@ -615,7 +592,6 @@ const EditProductList = () => {
                   onChange={handleInputChange}
                 />
               </form>
-
             </Box>
           </Box>
           <Box className={classes.itemBox}>
@@ -680,7 +656,6 @@ const EditProductList = () => {
             </div>
             <BasicModal />
           </Box>
-
           <Box className={classes.itemBox}>
             <h2 className={classes.boxFirstTitle}>8.Mahsulot holati</h2>
             <Box className={classes.statusBox}>
@@ -694,7 +669,6 @@ const EditProductList = () => {
                   value={productStatus || status}
                   onChange={handleChangeStatus}
                   displayEmpty
-
                 >
                   <MenuItem value="">
                     <span>Holatni tanlang</span>
@@ -713,7 +687,6 @@ const EditProductList = () => {
               className={classes.forButton}
               onClick={() => {
                 sendDataToAPI();
-
               }}
               style={{ marginLeft: "auto", display: "flex", cursor: "pointer" }}
             >
@@ -724,7 +697,6 @@ const EditProductList = () => {
                 Bekor qilish
               </Button>
             </Link>
-
           </div>
         </Box>
         <Notification notify={notify} setNotify={setNotify} />

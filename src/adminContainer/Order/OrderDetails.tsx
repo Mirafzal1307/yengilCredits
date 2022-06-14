@@ -33,9 +33,7 @@ import served from "../../Images/served.svg";
 import inprogress from "../../Images/inprogress.svg";
 import clientcancel from "../../Images/clientcancel.svg";
 import admincancel from "../../Images/admincancel.svg";
-import detailsicon from "../../Images/detailsIcon.svg";
 import Notification from "../Snackbar/Notification";
-
 const useStyles = makeStyles({
   title: {
     fontFamily: "Poppins",
@@ -165,7 +163,6 @@ const useStyles = makeStyles({
     paddingRight: "5px",
   },
 });
-
 const OrderDetails = () => {
   const classes = useStyles();
   const { buyer_id } = useParams();
@@ -181,7 +178,6 @@ const OrderDetails = () => {
     message: "",
     type: "",
   });
-
   const handleChange = (e: any) => {
     setStatus(e.target.value);
   };
@@ -189,7 +185,6 @@ const OrderDetails = () => {
     let res: any = await getStatuses({});
     setStatuses(res?.data);
   };
-
   const getData = async () => {
     let res: any = await getBuyerData(buyer_id);
     setBuyer(res?.data?.buyer);
@@ -197,9 +192,7 @@ const OrderDetails = () => {
     setPrice(res?.data?.total_price_all);
     setDefaultStatus(res?.data?.status);
   };
-
   const navigate = useNavigate();
-
   const sendDataToAPI = async () => {
     const data = { buyer_id: buyer_id, status_id: status };
     await editOrderStatus(data)
@@ -223,14 +216,12 @@ const OrderDetails = () => {
         });
       });
   };
-
   React.useEffect(() => {
     getStatus();
   }, []);
   React.useEffect(() => {
     getData();
   }, []);
-
   return (
     <>
       <MiniDrawer />

@@ -8,11 +8,7 @@ import { updateBrandData, getBrand } from "../../Api/admin/AdminBrandApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import Notification from "../Snackbar/Notification";
-import { Navigate } from "react-router-dom";
-// import { Redirect } from "react-router-dom";
 import './brand.css';
-
-
 
 const useStyles = makeStyles({
   bigFirstBox: {
@@ -60,7 +56,6 @@ const useStyles = makeStyles({
     "&:focus": {
       outline: "none",
     },
-    // border: "2px solid #9F9F9F",
     borderRadius: "5px",
     fontFamily: "Poppins",
     fontWeight: 400,
@@ -88,7 +83,6 @@ const BrandEditPage = () => {
   });
   const classes = useStyles();
   const navigate = useNavigate();
-
   const handleInputChange = (e: any) => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
@@ -98,10 +92,8 @@ const BrandEditPage = () => {
     }
   };
   let img = `${MINIO_FULL_ENDPOINT_FOR}/brand/${photo}`;
-  console.log(`Image from Minio----${img}`)
   const sendDataToAPI = async () => {
     let form = new FormData();
-
     form.append(
       "brand",
       new Blob(
@@ -116,7 +108,6 @@ const BrandEditPage = () => {
       )
     );
     form.append("photo", image);
-
     await updateBrandData(id, form)
       .then(function (res: any) {
         if (res.status === 200) {
@@ -125,7 +116,6 @@ const BrandEditPage = () => {
             message: "Muvaffaqiyatli tahrirlandi.",
             type: "success",
           });
-          // return <Navigate to="/brand"/>
           setTimeout(() => {
             navigate("/brand");
           }, 500);
@@ -139,7 +129,6 @@ const BrandEditPage = () => {
         });
       });
   };
-
   useEffect(() => {
     if (image) {
       let reader = new FileReader();
@@ -163,12 +152,9 @@ const BrandEditPage = () => {
       setImage(file);
     });
   };
-
   useEffect(() => {
     getImage(id);
   }, []);
-
-
     const inpt = document.querySelector('input');
     const bal = inpt?.value
     if (bal?.length === 1) {

@@ -98,7 +98,6 @@ const useStyles = makeStyles({
   forBoxInputDiscount: {
     padding: "8px 2px 9px 8px",
     width: "40px",
-
     marginTop: "5px",
     marginRight: "10px",
     "&::placeholder": {
@@ -147,7 +146,6 @@ const useStyles = makeStyles({
   },
   Select: {
     padding: "none !important",
-
     border: "2px solid #9F9F9F",
     borderRadius: "5px !important",
   },
@@ -176,7 +174,6 @@ const useStyles = makeStyles({
   characterValue: {
     padding: "8px 40px 9px 15px",
     margin: "10px 0px 20px 0px !important",
-
     marginTop: "5px",
     "&::placeholder": {
       fontFamily: "Poppins",
@@ -274,8 +271,6 @@ const useStyles = makeStyles({
     listStyle: 'none !important',
     fontSize: '17px !important',
     fontWeight: 300,
-  
-
   },
   ProductBottomName: {
     fontWeight: 600,
@@ -320,26 +315,12 @@ const ProductDetails = () => {
   const { products, error, loading } = useTypedSelector((state) => state?.byId);
   let pro: any = products?.Product;
   let des: any = products?.Description;
-
-
-
-
   const classes = useStyles();
   const { id } = useParams();
-  // console.log(id);
   React.useEffect(() => {
    fetchProductsById(id);
   }, []);
-
   const { fetchProductsById } = useActions();
-
-  // if(loading){
-  //   return <h1>loading</h1>
-  // }
-  // if(error){
-  //   return <h1>error</h1>
-  // }
-
   return (
     <React.Fragment>
       <MiniDrawer />
@@ -361,29 +342,21 @@ const ProductDetails = () => {
                 </div>
               </Grid>
               <Box style={{ display: "flex", alignItems: "center" }}>
-
                 <Grid item xs={6} style={{ display: 'flex', flexDirection: 'column' }} >
-
                   <div style={{ textAlign: 'center', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }}  >
                     <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${pro[0]?.photos[0].name}`} alt="Rasm bor edi" className={classes.img} />
                   </div>
-
                 </Grid>
                 <Grid item xs={6}>
-
                   <div className={classes.CharacterAndProperty} >
-
                     <li className={classes.Character} >
                       <h3>
                         Xarakteriska Nomi
                       </h3>
-
                       {
                         des[0]?.map((item: any) => (
                           <div style={{flexDirection: 'column'}}  >
-
                             {item?.character_name}
-
                           </div>
                         ))
                       }
@@ -395,22 +368,12 @@ const ProductDetails = () => {
                       {
                         des[0]?.map((item: any) => (
                           <div style={{flexDirection: 'column'}}  >
-
                             {item?.character_value}
-
                           </div>
                         ))
                       }
-
                     </li>
-
-
-
-
                   </div>
-
-
-
                 </Grid>
               </Box>
               <Grid item xs={12} >
@@ -422,7 +385,6 @@ const ProductDetails = () => {
                     <h4 className={classes.ShortName} >{pro?.[0]?.short_name}</h4>
                   </div>
                   <div>
-
                     <div>
                       <p className={classes.price} > {pro?.[0]?.price} so'm </p>
                       <p className={classes.afterDiscount} > {pro?.[0]?.after_discount?.toLocaleString()} so'm </p>
@@ -444,7 +406,6 @@ const ProductDetails = () => {
                 </div>
               </Grid>
             </>
-
         }
         {error ? <h1>error</h1> : null}
       </Container>

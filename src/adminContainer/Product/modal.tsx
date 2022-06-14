@@ -50,7 +50,6 @@ function BasicModal() {
   });
   function onSubmit() {
     const data = [{ name: characterName, value: propertyName }];
-
     try {
       postProductCharacterCreate(data)
         .then(async (res: any) => {
@@ -135,7 +134,6 @@ function BasicModal() {
                 background: "#065374",
               }
             }}
-
             type="submit"
             >Saqlash</Button>
           </div>

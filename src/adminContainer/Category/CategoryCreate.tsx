@@ -1,11 +1,9 @@
-import { red } from "@material-ui/core/colors";
 import {
   Button,
   FormControl,
   MenuItem,
   Select,
   SelectChangeEvent,
-  TextField,
   Tooltip,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -18,7 +16,6 @@ import {
 import { refresh } from "../Modal/refresh";
 import Notification from "../Snackbar/Notification";
 import './style.css'
-
 const useStyles = makeStyles({
   input_one: {
     width: "100% !important",
@@ -35,7 +32,9 @@ const useStyles = makeStyles({
     fontFamily: "Poppins !important",
     fontSize: "15px !important",
     fontWeight: "400",
-    padding: "9px 0px 8px 20px !important"
+    padding: "9px 0px 8px 20px !important",
+    borderRadius: "5px",
+    border: "1px solid #9F9F9F !important"
   },
   category_name: {
     color: "#464646 !important",
@@ -79,7 +78,6 @@ const useStyles = makeStyles({
     fontFamily: "Poppins !important"
   },
 });
-
 interface createDatas {
   category: any;
   name: string;
@@ -87,7 +85,6 @@ interface createDatas {
   date: number;
   parent_category: any;
 }
-
 const CategoryCreate = () => {
   const [category, setCategory] = React.useState<any>([]);
   const [select, setSelect] = React.useState("");
@@ -98,23 +95,18 @@ const CategoryCreate = () => {
     type: "",
   });
   const classes = useStyles();
-
   useEffect(() => {
     getCategory();
   }, []);
-
   const getCategory = async () => {
     let response: any = await getCategoryListCreate();
     setRows(response.data.parent_categories[0]);
   };
-
   const handleChangeCategory = (event: SelectChangeEvent) => {
     setSelect(event.target.value);
   };
-
   function onSubmit() {
     const data = { name: category, parent_id: select };
-
     postCategoryCreate(data)
       .then(async (res: any) => {
         if (res.status === 200) {
@@ -134,8 +126,8 @@ const CategoryCreate = () => {
         });
       });
   }
+  console.clear()
   const inpt = document.querySelector('input');
-
   if (inpt?.value.length === 1) {
     inpt?.classList.add('active')
   }
@@ -148,7 +140,6 @@ const CategoryCreate = () => {
   else {
     inpt?.classList.remove('active')
   }
-
   return (
     <>
       <Box className={classes.input_one}>

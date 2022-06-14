@@ -8,7 +8,6 @@ import { useActions } from "../../hook/useActions";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { getProductByBrand } from "../../Api/client/ClientBrandApi";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
-
 const useStyles = makeStyles({
   title: {
     fontFamily: "Poppins",
@@ -109,7 +108,6 @@ const BrandClient = () => {
 
   const getProduct = async (id: any) => {
     const res: any = await getProductByBrand({}, id);
-    console.log(res.data);
   };
 
   return (

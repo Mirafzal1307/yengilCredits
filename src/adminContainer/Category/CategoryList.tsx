@@ -11,14 +11,9 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import {
   Button,
-  CircularProgress,
-  Container,
-  FormControl,
   Grid,
-  MenuItem,
   Pagination,
   PaginationItem,
-  Select,
   Tooltip,
 } from "@mui/material";
 import {
@@ -32,10 +27,6 @@ import CategoryCreate from "./CategoryCreate";
 import { Link } from "react-router-dom";
 import Details from "../../Images/detailsicon.svg";
 import Notification from "../Snackbar/Notification";
-import { useTypedSelector } from "../../hook/useTypedSelector";
-import { useActions } from "../../hook/useActions";
-import SearchIcon from "@mui/icons-material/Search";
-
 interface Data {
   id: number;
   name: string;
@@ -75,7 +66,6 @@ interface EnhancedTableProps {
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   rowCount: number;
 }
-
 function EnhancedTableHead(props: EnhancedTableProps) {
   const { onSelectAllClick } = props;
   const classes = useStyles();
@@ -268,74 +258,29 @@ export default function EnhancedTable() {
   const [rows, setRows] = React.useState<createDatas[]>([]);
   const [pageQty, setPageQty] = React.useState<number>(0);
   const [query, setQuery] = React.useState("react");
-  const [status, setStatus] = React.useState('');
-  const [param, setParam] = React.useState('');
-  const [search, setSearch] = React.useState([])
   const [notify, setNotify] = React.useState<any>({
     isOpen: false,
     message: "",
     type: "",
   });
-  // const { category, error, loading } = useTypedSelector(
-  //   (state) => state?.category
-  // );
   const classes = useStyles();
-
-  // const { fetchCategory } = useActions();
- 
-  // useEffect(() => {
-
-  //   fetchCategory("");
-
-  // }, []);
-
+  console.clear()
   useEffect(() => {
     getCategory();
     if (pageQty < page) {
       setPage(1);
     }
   }, [query, page]);
-
-  // const handleInputChange = (e: any) => {
-  //   setParam(e.target.value);
-  // };
-
-  // const handleChange = (event: any) => {
-  //   setStatus(event.target.value);
-  // };
-
-  // if (loading) {
-  //   return (
-  //     <div style={{ marginTop: "5%", marginLeft: "50%" }}>
-  //       <CircularProgress />
-  //     </div>
-  //   )
-  // }
-  // if (error) {
-  //   return (
-  //     <h1
-  //       style={{ textAlign: "center", margin: "200px", alignItems: "center" }}
-  //     >
-  //       {error}
-  //     </h1>
-  //   );
-  // }
-
   const getCategory = async () => {
     let response: any = await getCategoryList(`${page - 1}`, {});
-    // console.log(response);
     setLoading(true);
     setRows(response?.data?.content);
     setPageQty(response?.data?.totalPages);
     setLoading(false);
   };
-
-
-
   const getSubCategories = async (id: any) => {
     let res: any = await getCategoryByParentCategory(id);
   };
-
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelecteds = rows?.map((n) => n?.name);
@@ -344,11 +289,9 @@ export default function EnhancedTable() {
     }
     setSelected([]);
   };
-
   const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected: readonly string[] = [];
-
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name);
     } else if (selectedIndex === 0) {
@@ -363,9 +306,7 @@ export default function EnhancedTable() {
     }
     setSelected(newSelected);
   };
-
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
-
   return (
     <div className={loading ? "loading" : ""} >
       <Box>
@@ -382,21 +323,7 @@ export default function EnhancedTable() {
                 <Paper className={classes.paper}>
                   <TableContainer>
                     <h4 className={classes.h4}>2.Turkumlar</h4>
-                    {/* <div>
-                      <div style={{ display: "flex" }}>
-                        <input
-                          type="text"
-                          placeholder="Izlash..."
-                          onChange={handleInputChange}
-                        />
-                        <button>
-                          <SearchIcon />
-                        </button>
-                      </div>
-                      <div>
-                      </div>
-                    </div> */}
-                    <Table sx={{ maxWidth: 750 }} aria-labelledby="tableTitle">
+                      <Table sx={{ maxWidth: 750 }} aria-labelledby="tableTitle">
                       <EnhancedTableHead
                         numSelected={selected.length}
                         onSelectAllClick={handleSelectAllClick}
@@ -409,7 +336,6 @@ export default function EnhancedTable() {
                           };
                           const isItemSelected = isSelected(row?.name);
                           const labelId = `enhanced-table-checkbox-${index}`;
-
                           return (
                             <>
                               <TableRow

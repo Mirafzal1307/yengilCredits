@@ -1,8 +1,6 @@
 import React, { Fragment } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import { Switch } from "react-router-dom-v5";
-// import { * } from "react-router-dom-v5"
 import Category from "./adminContainer/Category/Category";
 import Home from "./adminContainer/Home/Home";
 import Order from "./adminContainer/Order/TableList";
@@ -25,8 +23,6 @@ import AllCards from "./clientContainer/Home/AllCards";
 import OrderDetails from "./adminContainer/Order/OrderDetails";
 import LoginPage from "./Auth/LoginPage";
 import PrivateRoute from "./Auth/PrivateRoute";
-import RestrictedRoute from "./Auth/RestrictedRoute";
-import TableOrder from "./adminContainer/Order/TableOrder";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,8 +37,7 @@ function App() {
       <Router>
         <Fragment>
           <Routes>
-            {/* <PrivateRoute exact path="/dashboard" component={Home}/> */}
-            <Route path="/dashboard" element={<PrivateRoute />}>
+                  <Route path="/dashboard" element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Home />} />
             </Route>
             <Route path="/category" element={<PrivateRoute />}>
@@ -109,5 +104,4 @@ function App() {
     </>
   );
 }
-
 export default App;

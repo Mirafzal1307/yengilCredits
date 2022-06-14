@@ -6,7 +6,6 @@ import { makeStyles } from "@mui/styles";
 import del from "../.././Images/delete.png";
 import { refresh } from "./refresh";
 import { useNavigate } from "react-router-dom";
-
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
@@ -18,7 +17,6 @@ const StyledModal = styled(ModalUnstyled)`
   align-items: center;
   justify-content: center;
 `;
-
 const Backdrop = styled("div")`
   z-index: -1;
   position: fixed;
@@ -28,7 +26,6 @@ const Backdrop = styled("div")`
   left: 0;
   background-color: rgba(6, 83, 116, 0.3);
 `;
-
 const style = {
   width: 600,
   bgcolor: "#ffffff !important",
@@ -37,7 +34,6 @@ const style = {
   px: 4,
   pb: 3,
 };
-
 const useStyles = makeStyles({
   editButton: {
     background: "transparent",
@@ -110,13 +106,7 @@ const Modal = (props: any) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const classes = useStyles();
-  // function refresh(): void {
-  //   setTimeout(() => window.location.reload()
-  //     , 2000)
-
-  // }
   const navigate = useNavigate();
-
   return (
     <React.Fragment>
       <Tooltip title="Delete">
@@ -128,7 +118,6 @@ const Modal = (props: any) => {
           <img src={del} alt="rasm bor edi" />
         </button>
       </Tooltip>
-
       <StyledModal
         aria-labelledby="unstyled-modal-title"
         aria-describedby="unstyled-modal-description"
@@ -145,7 +134,6 @@ const Modal = (props: any) => {
             <Button onClick={handleClose} className={classes.cancel}>
               Bekor qilish
             </Button>
-
             <Button
               onClick={() => {
                 handleClose();

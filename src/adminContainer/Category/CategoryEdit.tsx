@@ -21,13 +21,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import Notification from "../Snackbar/Notification";
 import { Link } from "react-router-dom";
-
 interface createDatas {
   name: string;
   id: number;
   date: number;
 }
-
 const useStyles = makeStyles({
   box: {
     position: "absolute",
@@ -85,7 +83,9 @@ const useStyles = makeStyles({
     padding: "9px 0px 8px 20px !important",
     '&:focus': {
       outline: 'none'
-    }
+    },
+    borderRadius: "5px",
+    border: "1px solid #9F9F9F !important"
   },
   h4_second: {
     fontSize: "17px !important",
@@ -151,31 +151,24 @@ export default function CategoryEdit() {
   const { id } = useParams();
   const classes = useStyles();
   const navigate = useNavigate();
-
   const getCategory = async () => {
     let response: any = await getCategoryList("", {});
     setRows(response.data.parent_categories[0]);
   };
-
   const getCategoryByIds = async (id: any) => {
     const res: any = await getCategoryById(id);
     setCategory(res.data.sub_category_info[0].name);
     setRows(res.data.parent_categories_list[0]);
-    // console.log(res.data);
   };
-
   React.useEffect(() => {
     getCategory();
   }, []);
-
   const putCategory = () => {
     const data = { name: category, parent_id: select };
-
     try {
       putCategoryEdit(id, data)
         .then(async (res: any) => {
           if (res.status === 200) {
-            // console.log(res);
             setNotify({
               isOpen: true,
               message: "Muvaffaqiyatli o'zgardi!",
@@ -201,8 +194,6 @@ export default function CategoryEdit() {
     }
 
   }
-
-
   React.useEffect(() => {
     setCategory(getCategoryByIds(id));
   }, []);
@@ -210,9 +201,8 @@ export default function CategoryEdit() {
   const handleChangeCategory = (event: SelectChangeEvent) => {
     setSelect(event.target.value);
   };
-
+  console.clear()
   const inp = document.querySelector('input');
-
   if (inp?.value.length === 1) {
     inp?.classList.add('active')
   }
@@ -225,8 +215,6 @@ export default function CategoryEdit() {
   else {
     inp?.classList.remove('active')
   }
-
-
   return (
     <>
       <MiniDrawer />
@@ -275,9 +263,6 @@ export default function CategoryEdit() {
                 <Button className={classes.deletes} style={{ textTransform: "capitalize" }} onClick={putCategory}>
                   Turkumni o'zgartirish
                 </Button>
-
-
-
               </Tooltip>
             </div>
           </Paper>
