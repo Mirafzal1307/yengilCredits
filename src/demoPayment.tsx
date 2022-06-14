@@ -6,13 +6,13 @@ import React from "react";
             <form method="POST" action="https://test.paycom.uz">
 
                 {/* <!-- Идентификатор WEB Кассы --> */}
-                <input type="text" name="merchant" value="{Merchant ID}" />
+                <input type="text" name="merchant" value="62a7601817d208a46387c0bf" />
 
                 {/* <!-- Сумма платежа в тийинах --> */}
-                <input type="text" name="amount" value="{сумма чека в ТИИНАХ}" />
+                <input type="text" name="amount" value="10000000" />
 
                 {/* <!-- Поля Объекта Account --> */}
-                <input type="text" name="account[{field_name}]" value="{field_value}" />
+                <input type="text" name="account[{buyer}]" value='{"id": "1032"}' />
 
                 {/* <!-- ==================== НЕОБЯЗАТЕЛЬНЫЕ ПОЛЯ ====================== --> */}
                 {/* <!-- Язык. Доступные значения: ru|uz|en
@@ -27,26 +27,26 @@ import React from "react";
                 :transaction - id транзакции или "null" если транзакцию не удалось создать
                 :account.{field} - поля объекта Account
                 Пример: https://your-service.uz/paycom/:transaction --> */}
-                <input type="text" name="callback" value="{url возврата после платежа}" />
+                {/* <input type="text" name="callback" value="{url возврата после платежа}" /> */}
 
                 {/* <!-- Таймаут после успешного платежа в миллисекундах.
                 Значение по умолчанию 15
                 После успешной оплаты, по истечении времени callback_timeout
                 производится перенаправление пользователя по url возврата после платежа --> */}
-                <input type="text" name="callback_timeout" value="{miliseconds}" />
+                {/* <input type="text" name="callback_timeout" value="{miliseconds}" /> */}
 
                 {/* <!-- Описание платежа
                 Для описания платежа доступны 3 языка: узбекский, русский, английский.
                 Для описания платежа на нескольких языках следует использовать
                 несколько полей с атрибутом  name="description[{lang}]"
                 lang может принимать значения ru|en|uz --> */}
-                <input type="text" name="description" value="{Описание платежа}" />
+                {/* <input type="text" name="description" value="{Описание платежа}" /> */}
 
                 {/* <!-- Объект детализации платежа
                 Поле для детального описания платежа, например, перечисления
                 купленных товаров, стоимости доставки, скидки. 
                 Значение поля (value) — JSON-строка закодированная в BASE64 --> */}
-                <input type="text" name="detail" value="{JSON объект детализации в BASE64}" />
+                {/* <input type="text" name="detail" value="{JSON объект детализации в BASE64}" /> */}
                 {/* <!-- ================================================================== --> */}
 
                 <button type="submit">Оплатить с помощью <b>Payme</b></button>

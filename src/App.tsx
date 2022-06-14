@@ -33,6 +33,7 @@ function App() {
   window.console.clear();
   return (
     <>
+    {/* <Payme/> */}
      <Router>
         <Fragment>
           <Routes>
