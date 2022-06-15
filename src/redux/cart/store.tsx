@@ -18,8 +18,6 @@ function loadFromLocalStorage(){
   return JSON.parse(localStorageState)
 }
 
-
-
 const storeFactory = () => {
   const middleware = [thunk] 
   const reduxStore = createStore(

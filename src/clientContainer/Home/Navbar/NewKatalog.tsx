@@ -23,7 +23,6 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import ListIcon from "@mui/icons-material/List";
 import { makeStyles } from "@material-ui/core/styles";
-
 const useStyles = makeStyles((theme) => ({
     menuButton: {
         background: "rgba(255, 255, 255) !important",
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
         height: "35px !important",
         paddingLeft: "7px !important",
         paddingRight: "4px !important",
-
     },
 }))
 
@@ -51,7 +49,6 @@ const style = {
     width: '100%',
     overflow: 'scroll',
     bgcolor: '#065374',
-
     boxShadow: 24,
     p: 2,
     height: '100%',
@@ -92,8 +89,6 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
     padding: theme.spacing(2),
     borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
-
-
 export default function TransitionsModal() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -110,29 +105,23 @@ export default function TransitionsModal() {
         setTimeout(() => window.location.reload(),
             100)
     }
-
     const getCategoryForCleintPage = async () => {
         let response: any = await getCategoryForClient();
         let categories: any = response.data;
         setCategory(response.data.menu);
     };
-
     const [expanded, setExpanded] = React.useState<string | false>(' ');
 
     const handleChange =
         (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
             setExpanded(newExpanded ? panel : false);
         };
-
     return (
         <div>
             <Button onClick={handleOpen} className={classes.menuButton} sx={{ textTransform: 'capitalize' }} >
                 <ListIcon />
                 <span style={{ marginLeft: "5px" }}>Katalog</span>
-
             </Button>
-
-
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -144,7 +133,6 @@ export default function TransitionsModal() {
                     timeout: 500,
                 }}
             >
-
                 <Fade in={open}>
                     <Box sx={style}>
                         <Typography id="transition-modal-title" variant="h6" component="h2" sx={{ color: 'white', display: 'flex', justifyContent: 'space-between' }}>
@@ -152,7 +140,6 @@ export default function TransitionsModal() {
                             <span style={{ marginTop: '10px' }} >
                                 <CloseRoundedIcon onClick={handleClose} />
                             </span>
-
                         </Typography>
                         <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
                             <AccordionSummary
@@ -173,12 +160,9 @@ export default function TransitionsModal() {
                                         </Link>
                                     )
                                 })}
-
-
                             </AccordionDetails>
                         </Accordion>
                         <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
-
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
@@ -197,12 +181,9 @@ export default function TransitionsModal() {
                                         </Link>
                                     )
                                 })}
-
-
                             </AccordionDetails>
                         </Accordion>
                         <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
-
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
@@ -221,12 +202,9 @@ export default function TransitionsModal() {
                                         </Link>
                                     )
                                 })}
-
-
                             </AccordionDetails>
                         </Accordion>
                         <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
-
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
@@ -250,7 +228,6 @@ export default function TransitionsModal() {
                             </AccordionDetails>
                         </Accordion>
                         <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
-
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
@@ -269,12 +246,9 @@ export default function TransitionsModal() {
                                         </Link>
                                     )
                                 })}
-
-
                             </AccordionDetails>
                         </Accordion>
                         <Accordion expanded={expanded === 'panel6'} onChange={handleChange('panel6')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
-
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
@@ -293,12 +267,9 @@ export default function TransitionsModal() {
                                         </Link>
                                     )
                                 })}
-
-
                             </AccordionDetails>
                         </Accordion>
                         <Accordion expanded={expanded === 'panel7'} onChange={handleChange('panel7')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
-
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
@@ -317,12 +288,9 @@ export default function TransitionsModal() {
                                         </Link>
                                     )
                                 })}
-
-
                             </AccordionDetails>
                         </Accordion>
                         <Accordion expanded={expanded === 'panel8'} onChange={handleChange('panel8')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
-
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
@@ -346,7 +314,6 @@ export default function TransitionsModal() {
                             </AccordionDetails>
                         </Accordion>
                         <Accordion expanded={expanded === 'panel9'} onChange={handleChange('panel9')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
-
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
@@ -365,12 +332,9 @@ export default function TransitionsModal() {
                                         </Link>
                                     )
                                 })}
-
-
                             </AccordionDetails>
                         </Accordion>
                         <Accordion expanded={expanded === 'panel10'} onChange={handleChange('panel10')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
-
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
@@ -389,12 +353,9 @@ export default function TransitionsModal() {
                                         </Link>
                                     )
                                 })}
-
-
                             </AccordionDetails>
                         </Accordion>
                         <Accordion expanded={expanded === 'panel11'} onChange={handleChange('panel11')} sx={{ border: 'solid 1px #065374', borderRadius: '4px !important' }} >
-
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
@@ -413,11 +374,8 @@ export default function TransitionsModal() {
                                         </Link>
                                     )
                                 })}
-
-
                             </AccordionDetails>
                         </Accordion>
-
                     </Box>
                 </Fade>
             </Modal>

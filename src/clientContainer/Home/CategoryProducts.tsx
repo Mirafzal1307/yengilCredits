@@ -7,7 +7,6 @@ import {
   PaginationItem,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-// import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from "react";
 import BigPhoto from "../../Images/image 26.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
@@ -34,8 +33,6 @@ import { useActions } from "../../hook/useActions";
 import AppsIcon from "@mui/icons-material/Apps";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import './style.css'
-
-
 const useStyles = makeStyles((theme) => ({
   styledButton: {
     position: "absolute",
@@ -241,8 +238,6 @@ const useStyles = makeStyles((theme) => ({
   sortBodyCard: {
     width: "100%",
     display: "flex",
-
-    // padding: "20px 40px",
     backgroundColor: "white",
     "&:hover": {
       boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
@@ -267,7 +262,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#000",
     margin: 0,
     marginBottom: "20px",
-
   },
   sortCardButton: {
     background: "transparent",
@@ -294,14 +288,10 @@ const useStyles = makeStyles((theme) => ({
   img: {
     width: "80%",
     height: "70%",
-    // padding: "20px",
     alignSelf: 'center !important',
     justifySelf: 'center !important',
-
   }
-
 }));
-
 const CategoryProducts = () => {
   const { products, error, loading } = useTypedSelector(
     (state) => state.productByCategoryReducer
@@ -323,17 +313,11 @@ const CategoryProducts = () => {
     type: "",
   });
   const dispatch = useDispatch();
-
-  const handleChangeCategory = (event: SelectChangeEvent) => {
-    setProductPrice(event.target.value);
-  };
-
   const getProduct = async (id: any) => {
     let res: any = await getProductFromCategoryById(id, `${page - 1}`, {});
     setProduct(res.data.content);
     setPageQty(res.data.totalPages);
   };
-
   React.useEffect(() => {
     getCategoryForCleintPage();
   }, []);
@@ -342,29 +326,22 @@ const CategoryProducts = () => {
     let response: any = await getCategoryForClient();
     setCategory(response.data.menu);
   };
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
   const { fetchCards } = useActions();
   useEffect(() => {
     fetchCards();
   }, []);
-
   useEffect(() => {
     getProduct(id);
     if (pageQty < page) {
       setPage(1);
     }
   }, [query, page]);
-
   if (loading) {
     return <CircularProgress />;
   }
   if (error) {
     return <h1>{error}</h1>;
   }
-
   return (
     <>
       <BackToTop />
@@ -384,15 +361,12 @@ const CategoryProducts = () => {
               </button>
             </Link>
           </Grid>
-
-
           <Grid
             item
             xs={6}
             md={1}
             sm={4}
             style={{ display: "flex", justifyContent: "end" }}
-
           >
             <div className={classes.locationOfCard}>
               <button
@@ -546,13 +520,10 @@ const CategoryProducts = () => {
                   )
                   )}
               </Stack>
-
             </div>
             :
             <div >
               <Stack
-
-
                 flexDirection='column'
               >
                 {product
@@ -599,7 +570,6 @@ const CategoryProducts = () => {
                             </h6>
                             <p className={classes.sortCardDescription}>{item.name}</p>
                             <div style={{ display: "flex" , flexDirection: 'column' }}>
-              
                                 <p
                                   className={classes.sortCardPrice}
                                   style={{
@@ -673,22 +643,16 @@ const CategoryProducts = () => {
                         </Box>
                       </Grid>
                     </Grid>
-
-
                   )
                   )}
               </Stack>
-
             </div>
         }
-
-
         <Grid
           container
           sx={{ mb: "20px", mt: "20px", justifyContent: 'center !important' }}
           xs={12}
           direction="row"
-
         >
           {!!pageQty && (
             <Pagination

@@ -1,28 +1,21 @@
-import { Box, Container, Input, InputAdornment, Stack } from "@mui/material";
+import {Input, InputAdornment } from "@mui/material";
 import { useEffect, useState } from "react";
 import { searchProduct } from "../../Api/client/MainPageApi";
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
-import cart1 from "../../Images/cart1.svg";
-import cart2 from "../../Images/cart2.svg";
 import Notification from "../../adminContainer/Snackbar/Notification";
-import { addToCart } from "../../redux/cart/action";
 import { useDispatch } from "react-redux";
-import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const useStyles = makeStyles({
   searchInput: {
-
     background: "white",
     width: "100% !important",
     "&::before": {
@@ -140,13 +133,10 @@ const MainSearch = () => {
   };
   const dispatch = useDispatch();
   const getData = async () => {
-    // console.log(param?.length);
     if (param?.length > 2) {
       const response: any = await searchProduct(param);
       setProducts(response.data.content);
     }
-
-
   };
   const [notify, setNotify] = useState<any>({
     isOpen: false,
@@ -156,7 +146,6 @@ const MainSearch = () => {
   useEffect(() => {
     getData();
   }, [param]);
-
   const classes = useStyles();
   return (
     <div style={{width: '100%'}}>
@@ -172,7 +161,6 @@ const MainSearch = () => {
           }
           onChange={handleInputChange}
         />
-
       </div>
       <Paper sx={{ width: '94.7%', overflow: 'hidden', position: 'absolute', top: '127px', marginLeft: '-107px !important', borderRadius: '5px 5px 5px 5px' }}>
         <TableContainer sx={{ maxHeight: 440 }}>
@@ -180,7 +168,6 @@ const MainSearch = () => {
             <TableBody>
               {param && products ? (
                 products.map((item: any) => (
-
                   <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
                     <TableCell>
                       <Link to={`/product/client/details/${item.id}`}>
@@ -241,16 +228,13 @@ const MainSearch = () => {
                 ))
               ) : (
                 <>
-
                 </>
               )}
             </TableBody>
           </Table>
         </TableContainer>
       </Paper>
-  
       <Notification notify={notify} setNotify={setNotify} />
-
     </div>
   );
 };

@@ -134,7 +134,6 @@ const useStyles = makeStyles({
   },
   Select: {
     padding: "none !important",
-
     border: "2px solid #9F9F9F",
     borderRadius: "5px !important",
   },
@@ -276,15 +275,12 @@ const ProductsCreate = () => {
     message: "",
     type: "",
   });
-  // console.log(image);
-  
   const handleChangeBrand = (event: SelectChangeEvent) => {
     setBrandName(event.target.value);
   };
   const handleChangeCategory = (event: SelectChangeEvent) => {
     setCategoryName(event.target.value);
   };
-
   const handleChangeStatus = (event: SelectChangeEvent) => {
     setProductStatus(event.target.value);
   };
@@ -297,10 +293,6 @@ const ProductsCreate = () => {
       propertyId: character.property
     }
   ))
-  const refresh = () => {
-    setTimeout(() => window.location.reload(),
-      2000)
-  }
   const handleChangeInput = (id: any, event: any) => {
     const newInputFields = inputFields.map((i: any) => {
       if (id === i.id) {
@@ -447,7 +439,6 @@ const ProductsCreate = () => {
                   <h2 className={classes.boxSecondTitle}
                   ><span className="let">Mahsulotning to'liq nomi</span> <span
                     style={{ color: 'red' }} > *</span></h2>
-
                   <input
                     type="text"
                     placeholder="Nomi"

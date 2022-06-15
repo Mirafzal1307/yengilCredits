@@ -18,7 +18,7 @@ import {
     getProductItem,
     getProductSearch,
 } from "../../Api/admin/AdminProductApi";
-import { Button, CircularProgress, InputLabel, Tooltip } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import EditImage from "../../Images/edit.png";
 import DetailsImage from "../../Images/detailsicon.svg";
 import { makeStyles } from "@mui/styles";
@@ -26,21 +26,15 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Link as RouterLink } from "react-router-dom";
-
 import { useState } from "react";
 import { Pagination, PaginationItem } from "@mui/material";
 import Modal from "../Modal/Modal";
 import Notification from "../Snackbar/Notification";
 import onSale from "../../Images/served.svg";
 import notSale from "../../Images/notserved.svg";
-
 import { Link as NavLink } from 'react-router-dom';
 import SearchIcon from "@mui/icons-material/Search";
-// import { refresh } from '../Modal/refresh';
-
-
 const useStyles = makeStyles({
-
     tableCell: {
         padding: '0 !important',
         fontStyle: 'normal !important',
@@ -49,17 +43,14 @@ const useStyles = makeStyles({
         color: '#000000 !important',
         borderBottom: 'solid 1px #000000 !important',
         paddingLeft: '10px !important'
-
     },
     tableSortLabel: {
-
         fontStyle: 'normal',
         fontWeight: '600',
         fontSize: '17px',
         color: '#065374 !important',
         padding: '0 !important',
         textAlign: 'left'
-
     },
     button: {
         padding: '0 !important',
@@ -72,7 +63,6 @@ const useStyles = makeStyles({
     },
     select: {
         padding: '0px !important',
-        // lineHeight:"10px"
         'css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
             padding: '0px !important'
         }
@@ -85,17 +75,14 @@ const useStyles = makeStyles({
         textAlign: 'center',
     },
     h1: {
-
         fontStyle: 'normal',
         fontWeight: '600',
         fontSize: '22px',
         color: '#065374'
-
     },
     deleteButton: {
         border: 'none !important',
         background: 'transparent !important',
-
     },
     cancel: {
         background: '#065374 !important',
@@ -104,7 +91,6 @@ const useStyles = makeStyles({
         textTransform: 'lowercase',
         marginRight: '20px',
         padding: '9px 20px 8px 20px !important',
-
     },
     deletes: {
         background: '#FF4B4B !important',
@@ -142,7 +128,6 @@ const useStyles = makeStyles({
         margin: ' 0 !important',
         fontSize: '28px !important',
         fontWeight: '600',
-
     },
     notFound: {
         width: '100% !important',
@@ -182,16 +167,19 @@ const useStyles = makeStyles({
         borderRadius: '5px !important'
     },
     pagination: {
-        width: '315px',
+        width: 'auto',
+        display: 'flex !important' ,
+        justifyContent: 'flex-end !important',
         marginRight: 'unset !important',
-        padding: '5px 5px 5px 5px !important'
     },
     paginationItem: {
         width: '100%',
         border: ' solid 1px #9F9F9F !important',
         margin: '0 !important',
         borderRadius: '3px !important',
-        padding: '20px 14px 20px 14px !important'
+        height: '45px !important',
+        padding: '6px 14px 4px 14px !important',
+
     },
     imgDelete: {
         cursor: 'pointer !important'
@@ -221,7 +209,6 @@ interface Data {
     name: string;
     protein: number;
 }
-
 interface Product {
     name: string,
     short_name: string,
@@ -236,14 +223,12 @@ interface Product {
     photo: string
 
 }
-
 interface HeadCell {
     disablePadding: boolean;
     id: keyof Data;
     label: string;
     numeric: boolean;
 }
-
 const headCells: readonly HeadCell[] = [
     {
         id: 'name',
@@ -282,13 +267,11 @@ const headCells: readonly HeadCell[] = [
         label: 'Amallar',
     },
 ];
-
 interface EnhancedTableProps {
     numSelected?: number;
     onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
     rowCount?: number;
 }
-
 function EnhancedTableHead(props: EnhancedTableProps) {
     const { onSelectAllClick } = props;
     const classes = useStyles()
@@ -320,29 +303,20 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     );
 }
 
-
-
-
 const ProductList: React.FC = () => {
-
     const { products, error, loading } = useTypedSelector(state => state.product)
     let p: number = products.totalPages
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [page, setPage] = React.useState(1);
-    const [text, setText] = React.useState<string>('')
     const [pageQty, setPageQty] = useState(products.totalPages)
     const [query, setQuery] = useState('react')
     const [notify, setNotify] = React.useState<any>({ isOpen: false, message: '', type: '' });
     const [category, setCategory] = React.useState([])
-    // console.log(products);
-
     const [param, setParam] = React.useState('');
     const [prod, setProducts] = React.useState<any>();
-
     const handleInputChange = (e: any) => {
         setParam(e.target.value);
     };
-
     const getData = async () => {
         const response: any = await getProductSearch(param);
         setProducts(response.data.content);
@@ -350,28 +324,21 @@ const ProductList: React.FC = () => {
     React.useEffect(() => {
         getData();
     }, [param]);
-   
-    
     const refresh = () => {
         setTimeout(() => window.location.reload(),
-        1)
+            1)
     }
-
     const classes = useStyles()
     const product: any[] = products.content
-// console.log(product);
-
     React.useEffect(() => {
         fetchProducts(`${page - 1}`)
         if (pageQty < page) {
             setPage(3)
-                }
+        }
     }, [query, page]);
-
     React.useEffect(() => {
         getCategory()
     }, [])
-
     const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
             const newSelecteds = product.map((pro) => pro.name);
@@ -383,7 +350,6 @@ const ProductList: React.FC = () => {
     const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
         const selectedIndex = selected.indexOf(name);
         let newSelected: readonly string[] = [];
-
         if (selectedIndex === -1) {
             newSelected = newSelected.concat(selected, name);
         } else if (selectedIndex === 0) {
@@ -396,18 +362,13 @@ const ProductList: React.FC = () => {
                 selected.slice(selectedIndex + 1),
             );
         }
-
         setSelected(newSelected);
     };
-
     const isSelected = (name: string) => selected.indexOf(name) !== -1;
     const [status, setStatus] = React.useState('');
     const [categoryName, setCategoryName] = React.useState('');
     const handleChange = (event: any) => {
         setStatus(event.target.value);
-    };
-    const handleChangeCategory = (event: SelectChangeEvent) => {
-        setCategoryName(event.target.value);
     };
     const deleteUserData = async (id: any) => {
         let product = await deleteProductItem(id)
@@ -428,9 +389,6 @@ const ProductList: React.FC = () => {
             })
 
     }
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     const getProductByID = async (id: any) => {
         const response = await getProductItem(id)
     }
@@ -450,12 +408,11 @@ const ProductList: React.FC = () => {
 
             <div className={classes.productsTitle}>
                 <h1 className={classes.product}>Mahsulotlar</h1>
-                <Button className={classes.createButton} component={RouterLink as any} to='/product/create' sx={{textTransform: 'capitalize'}} onClick={() => refresh()} >+ Qo'shish</Button>
-            </div> 
+                <Button className={classes.createButton} component={RouterLink as any} to='/product/create' sx={{ textTransform: 'capitalize' }} onClick={() => refresh()} >+ Qo'shish</Button>
+            </div>
             <Box sx={{ maxWidth: '1200px', margin: 'auto' }} >
                 <Paper sx={{ width: '100%', mb: 2 }} className={classes.box}>
                     <TableContainer>
-
                         <div className={classes.searchInput}>
                             <div style={{ display: 'flex', }}>
                                 <input
@@ -468,15 +425,9 @@ const ProductList: React.FC = () => {
                                     <SearchIcon />
                                 </button>
                             </div>
-
-
                             <div>
                                 <FormControl sx={{ m: 1, minWidth: 120, }}>
-
-
-
                                     <Select
-
                                         displayEmpty
                                         value={status}
                                         onChange={handleChange}
@@ -499,210 +450,186 @@ const ProductList: React.FC = () => {
 
                                             </MenuItem>
                                         ))}
-
                                     </Select>
                                 </FormControl>
-
                             </div>
                         </div>
-
                         <Table
                             sx={{ minWidth: '100%' }}
                             aria-labelledby="tableTitle"
                         >
-                            <EnhancedTableHead
-                                                   onSelectAllClick={handleSelectAllClick}
-                                                     />
-
+                            <EnhancedTableHead onSelectAllClick={handleSelectAllClick} />
                             <TableBody>
-
                                 {
                                     param && prod ?
-                                    param && prod?.map((user: any, index: any) =>  {
-                                        const delProduct = () => {
-                                            deleteUserData(user.id)
-                                        }
-                                        const getProductToUpdate = () => {
-                                            getProductByID(user.id)
-                                            // console.log(user.id)
-                                        }
-                                        const getProductToDetails = () => {
-                                            getProductByID(user.id)
-                                            // console.log(user.id)
-                                        }
+                                        param && prod?.map((user: any, index: any) => {
+                                            const delProduct = () => {
+                                                deleteUserData(user.id)
+                                            }
+                                            const getProductToUpdate = () => {
+                                                getProductByID(user.id)
+                                            }
+                                            const getProductToDetails = () => {
+                                                getProductByID(user.id)
+                                            }
 
-                                        const isItemSelected = isSelected(user.id);
-                                        const labelId = `enhanced-table-checkbox-${index}`;
+                                            const isItemSelected = isSelected(user.id);
+                                            const labelId = `enhanced-table-checkbox-${index}`;
 
-                                        return (
-                                            <>
-                                                <TableRow
-                                                    hover
-                                                    onClick={(event) => handleClick(event, user.id)}
-                                                    role="checkbox"
-                                                    aria-checked={isItemSelected}
-                                                    tabIndex={-1}
-                                                    key={user.id}
-                                                    selected={isItemSelected}
-                                                >
-                                                    <TableCell padding="checkbox" className={classes.tableCell}>
-                                                        <Checkbox
-                                                            color="primary"
-                                                            checked={isItemSelected}
-                                                            inputProps={{
-                                                                'aria-labelledby': labelId,
-                                                            }}
-                                                        />
-                                                    </TableCell>
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        align="left"
-                                                        scope="row"
-                                                        padding="none"
-                                                        className={classes.tableCell}
+                                            return (
+                                                <>
+                                                    <TableRow
+                                                        hover
+                                                        onClick={(event) => handleClick(event, user.id)}
+                                                        role="checkbox"
+                                                        aria-checked={isItemSelected}
+                                                        tabIndex={-1}
+                                                        key={user.id}
+                                                        selected={isItemSelected}
                                                     >
-                                                        {user?.id}
-                                                    </TableCell>
-                                                    <TableCell align="left" className={classes.tableCell}>{user?.short_name}</TableCell>
-                                                    <TableCell align="left" className={classes.tableCell}>{user?.category?.name}</TableCell>
-                                                    <TableCell align="left" className={classes.tableCell}>
-                                                        {user?.availability === true
-                                                            ? <p className={classes.onSale} >
-                                                                <img src={onSale} alt="rasm" className={classes.icon} />sotuvda</p>
-                                                            : <p className={classes.notSale}>
-                                                                <img src={notSale} alt="rasm" className={classes.icon} />
-                                                                Sotuvda yo'q</p>}</TableCell>
-                                                    <TableCell align="left" className={classes.tableCell}>{user?.brand?.name}</TableCell>
-                                                    <TableCell align="left" className={classes.tableCell}>
-                                                        <Button className={classes.button}
-                                                            component={RouterLink as any} to={`/product/details/${user.id}`}
-                                                            onClick={getProductToDetails}
-                                                        ><img src={DetailsImage} alt="rasm bor edi" /></Button>
+                                                        <TableCell padding="checkbox" className={classes.tableCell}>
+                                                            <Checkbox
+                                                                color="primary"
+                                                                checked={isItemSelected}
+                                                                inputProps={{
+                                                                    'aria-labelledby': labelId,
+                                                                }}
+                                                            />
+                                                        </TableCell>
+                                                        <TableCell
+                                                            component="th"
+                                                            id={labelId}
+                                                            align="left"
+                                                            scope="row"
+                                                            padding="none"
+                                                            className={classes.tableCell}
+                                                        >
+                                                            {user?.id}
+                                                        </TableCell>
+                                                        <TableCell align="left" className={classes.tableCell}>{user?.short_name}</TableCell>
+                                                        <TableCell align="left" className={classes.tableCell}>{user?.category?.name}</TableCell>
+                                                        <TableCell align="left" className={classes.tableCell}>
+                                                            {user?.availability === true
+                                                                ? <p className={classes.onSale} >
+                                                                    <img src={onSale} alt="rasm" className={classes.icon} />sotuvda</p>
+                                                                : <p className={classes.notSale}>
+                                                                    <img src={notSale} alt="rasm" className={classes.icon} />
+                                                                    Sotuvda yo'q</p>}</TableCell>
+                                                        <TableCell align="left" className={classes.tableCell}>{user?.brand?.name}</TableCell>
+                                                        <TableCell align="left" className={classes.tableCell}>
+                                                            <Button className={classes.button}
+                                                                component={RouterLink as any} to={`/product/details/${user.id}`}
+                                                                onClick={getProductToDetails}
+                                                            ><img src={DetailsImage} alt="rasm bor edi" /></Button>
 
-                                                        <Button className={classes.button}
-                                                            component={RouterLink as any} to={`/product/edit/${user.id}`}
-                                                                                                                  ><img src={EditImage}
-                                                            alt="rasm bor edi" /></Button>
+                                                            <Button className={classes.button}
+                                                                component={RouterLink as any} to={`/product/edit/${user.id}`}
+                                                            ><img src={EditImage}
+                                                                alt="rasm bor edi" /></Button>
+                                                            <Button className={classes.button} >
+                                                                <Modal data={delProduct} className={classes.imgDelete} />
+                                                            </Button>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                </>
 
-
-                                                        <Button className={classes.button} >
-                                                            <Modal data={delProduct} className={classes.imgDelete} />
-                                                        </Button>
-
-
-                                                    </TableCell>
-                                                </TableRow>
-                                            </>
-
-                                        );
-                                     }
-                                    )
-                               
-                                  :   product?.filter((val: any) => {
-                                        if (!status) {
-                                            return val;
-
-                                        } else if (val?.category?.name == status) {
-                                            return val;
+                                            );
                                         }
+                                        )
+                                        : product?.filter((val: any) => {
+                                            if (!status) {
+                                                return val;
 
-                                    }).map((user, index) => {
+                                            } else if (val?.category?.name == status) {
+                                                return val;
+                                            }
+                                        }).map((user, index) => {
 
-                                        const delProduct = () => {
-                                            deleteUserData(user.id)
-                                        }
-                                        const getProductToUpdate = () => {
-                                            getProductByID(user.id)
-                                            // console.log(user.id)
-                                        }
-                                        const getProductToDetails = () => {
-                                            getProductByID(user.id)
-                                            // console.log(user.id)
-                                        }
-
-                                        const isItemSelected = isSelected(user.id);
-                                        const labelId = `enhanced-table-checkbox-${index}`;
-
-                                        return (
-                                            <>
-                                                <TableRow
-                                                    hover
-                                                    onClick={(event) => handleClick(event, user.id)}
-                                                    role="checkbox"
-                                                    aria-checked={isItemSelected}
-                                                    tabIndex={-1}
-                                                    key={user.id}
-                                                    selected={isItemSelected}
-                                                >
-                                                    <TableCell padding="checkbox" className={classes.tableCell}>
-                                                        <Checkbox
-                                                            color="primary"
-                                                            checked={isItemSelected}
-                                                            inputProps={{
-                                                                'aria-labelledby': labelId,
-                                                            }}
-                                                        />
-                                                    </TableCell>
-                                                    <TableCell
-                                                        component="th"
-                                                        id={labelId}
-                                                        align="left"
-                                                        scope="row"
-                                                        padding="none"
-                                                        className={classes.tableCell}
+                                            const delProduct = () => {
+                                                deleteUserData(user.id)
+                                            }
+                                            const getProductToUpdate = () => {
+                                                getProductByID(user.id)
+                                            }
+                                            const getProductToDetails = () => {
+                                                getProductByID(user.id)
+                                            }
+                                            const isItemSelected = isSelected(user.id);
+                                            const labelId = `enhanced-table-checkbox-${index}`;
+                                            return (
+                                                <>
+                                                    <TableRow
+                                                        hover
+                                                        onClick={(event) => handleClick(event, user.id)}
+                                                        role="checkbox"
+                                                        aria-checked={isItemSelected}
+                                                        tabIndex={-1}
+                                                        key={user.id}
+                                                        selected={isItemSelected}
                                                     >
-                                                        {user?.id}
-                                                    </TableCell>
-                                                    <TableCell align="left" className={classes.tableCell}>{user?.short_name}</TableCell>
-                                                    <TableCell align="left" className={classes.tableCell}>{user?.category?.name}</TableCell>
-                                                    <TableCell align="left" className={classes.tableCell}>
-                                                        {user?.availability === true
-                                                            ? <p className={classes.onSale} >
-                                                                <img src={onSale} alt="rasm" className={classes.icon} />sotuvda</p>
-                                                            : <p className={classes.notSale}>
-                                                                <img src={notSale} alt="rasm" className={classes.icon} />
-                                                                Sotuvda yo'q</p>}</TableCell>
-                                                    <TableCell align="left" className={classes.tableCell}>{user?.brand?.name}</TableCell>
-                                                    <TableCell align="left" className={classes.tableCell}>
-                                                        <Button className={classes.button}
-                                                            component={RouterLink as any} to={`/product/details/${user.id}`}
-                                                            onClick={getProductToDetails}
-                                                        ><img src={DetailsImage} alt="rasm bor edi" /></Button>
+                                                        <TableCell padding="checkbox" className={classes.tableCell}>
+                                                            <Checkbox
+                                                                color="primary"
+                                                                checked={isItemSelected}
+                                                                inputProps={{
+                                                                    'aria-labelledby': labelId,
+                                                                }}
+                                                            />
+                                                        </TableCell>
+                                                        <TableCell
+                                                            component="th"
+                                                            id={labelId}
+                                                            align="left"
+                                                            scope="row"
+                                                            padding="none"
+                                                            className={classes.tableCell}
+                                                        >
+                                                            {user?.id}
+                                                        </TableCell>
+                                                        <TableCell align="left" className={classes.tableCell}>{user?.short_name}</TableCell>
+                                                        <TableCell align="left" className={classes.tableCell}>{user?.category?.name}</TableCell>
+                                                        <TableCell align="left" className={classes.tableCell}>
+                                                            {user?.availability === true
+                                                                ? <p className={classes.onSale} >
+                                                                    <img src={onSale} alt="rasm" className={classes.icon} />sotuvda</p>
+                                                                : <p className={classes.notSale}>
+                                                                    <img src={notSale} alt="rasm" className={classes.icon} />
+                                                                    Sotuvda yo'q</p>}</TableCell>
+                                                        <TableCell align="left" className={classes.tableCell}>{user?.brand?.name}</TableCell>
+                                                        <TableCell align="left" className={classes.tableCell}>
+                                                            <Button className={classes.button}
+                                                                component={RouterLink as any} to={`/product/details/${user.id}`}
+                                                                onClick={getProductToDetails}
+                                                            ><img src={DetailsImage} alt="rasm bor edi" /></Button>
 
-                                                        <Button className={classes.button}
-                                                            component={RouterLink as any} to={`/product/edit/${user.id}`}
-                                                            onClick={getProductToUpdate}
-                                                        ><img src={EditImage}
-                                                            alt="rasm bor edi" /></Button>
-
-
-                                                        <Button className={classes.button} >
-                                                            <Modal data={delProduct} className={classes.imgDelete}  />
-                                                        </Button>
-                                                    </TableCell>
-                                                </TableRow>
-                                            </>
-
-                                        );
-                                    })
-                                
+                                                            <Button className={classes.button}
+                                                                component={RouterLink as any} to={`/product/edit/${user.id}`}
+                                                                onClick={getProductToUpdate}
+                                                            ><img src={EditImage}
+                                                                alt="rasm bor edi" /></Button>
+                                                            <Button className={classes.button} >
+                                                                <Modal data={delProduct} className={classes.imgDelete} />
+                                                            </Button>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                </>
+                                            );
+                                        })
                                 }
-
                             </TableBody>
                         </Table>
                     </TableContainer>
-
                     <Pagination
                         className={classes.pagination}
                         count={products.totalPages}
                         page={page}
                         onChange={(_, num) => setPage(num)}
-                        sx={{ marginY: 3, marginX: 'auto' }}
+                        sx={{ marginY: 3, }}
                         renderItem={
                             (item) => (
                                 <PaginationItem
                                     className={classes.paginationItem}
+
                                     component={NavLink}
                                     to={`/product/?page${page}`}
                                     {...item}

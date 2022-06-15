@@ -18,7 +18,6 @@ import {
 import { refresh } from "../Modal/refresh";
 import Notification from "../Snackbar/Notification";
 import './style.css'
-
 const useStyles = makeStyles({
   input_one: {
     width: "100% !important",
@@ -79,7 +78,6 @@ const useStyles = makeStyles({
     fontFamily: "Poppins !important"
   },
 });
-
 interface createDatas {
   category: any;
   name: string;
@@ -87,7 +85,6 @@ interface createDatas {
   date: number;
   parent_category: any;
 }
-
 const CategoryCreate = () => {
   const [category, setCategory] = React.useState<any>([]);
   const [select, setSelect] = React.useState("");
@@ -98,23 +95,18 @@ const CategoryCreate = () => {
     type: "",
   });
   const classes = useStyles();
-
   useEffect(() => {
     getCategory();
   }, []);
-
   const getCategory = async () => {
     let response: any = await getCategoryListCreate();
     setRows(response.data.parent_categories[0]);
   };
-
   const handleChangeCategory = (event: SelectChangeEvent) => {
     setSelect(event.target.value);
   };
-
   function onSubmit() {
     const data = { name: category, parent_id: select };
-
     postCategoryCreate(data)
       .then(async (res: any) => {
         if (res.status === 200) {
@@ -135,7 +127,6 @@ const CategoryCreate = () => {
       });
   }
   const inpt = document.querySelector('input');
-
   if (inpt?.value.length === 1) {
     inpt?.classList.add('active')
   }
@@ -148,7 +139,6 @@ const CategoryCreate = () => {
   else {
     inpt?.classList.remove('active')
   }
-
   return (
     <>
       <Box className={classes.input_one}>

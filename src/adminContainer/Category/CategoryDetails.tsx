@@ -299,17 +299,11 @@ const useStyles = makeStyles({
 });
 
 export default function EnhancedTable() {
-  
-  
   const [selected, setSelected] = React.useState<readonly string[]>([]);
-
   const [pageQty, setPageQty] = React.useState(2);
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");
-  const [category, setCategory] = React.useState<createDatas[]>([]);
-
-  // console.log(category);
-  
+  const [category, setCategory] = React.useState<createDatas[]>([]);  
   const [categories, setCategories] = React.useState<any>()
   const [status, setStatus] = React.useState('');
   const [param, setParam] = React.useState('');
@@ -319,44 +313,31 @@ export default function EnhancedTable() {
     message: "",
     type: "",
   });
-
-
   const classes = useStyles();
   const { id } = useParams();
-
   const handleInputChange = (e: any) => {
     setParam(e.target.value);
   };
-
-  const handleChange = (event: any) => {
-    setStatus(event.target.value);
-  };
-
-  React.useEffect(() => {
+   React.useEffect(() => {
     subCategory(id);
   }, []);
-
   const searchCategory = async () => {
     const res: any = await getCategorySearch(param)
     setCategories(res?.data)
   }
-
   React.useEffect(() => {
     searchCategory()
   }, [param])
-
   React.useEffect(() => {
     fetchCategory(`${page - 1}`);
     if (pageQty < page) {
       setPage(3);
     }
   }, [query, page]);
-
   const subCategory = async (id: any) => {
     let res: any = await getCategoryByParentCategory(id);
     setCategory(res?.data?.sub_categories);
   };
-
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelecteds = category?.map((n) => n.name);
@@ -365,11 +346,9 @@ export default function EnhancedTable() {
     }
     setSelected([]);
   };
-
   const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected: readonly string[] = [];
-
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name);
     } else if (selectedIndex === 0) {
@@ -440,7 +419,6 @@ export default function EnhancedTable() {
                         };
                         const isItemSelected = isSelected(row?.name);
                         const labelId = `enhanced-table-checkbox-${index}`;
-
                         return (
                           <>
                             <TableRow
@@ -513,7 +491,6 @@ export default function EnhancedTable() {
                         };
                         const isItemSelected = isSelected(row?.name);
                         const labelId = `enhanced-table-checkbox-${index}`;
-
                         return (
                           <>
                             <TableRow
