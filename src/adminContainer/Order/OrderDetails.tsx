@@ -171,7 +171,6 @@ const OrderDetails = () => {
   const [price, setPrice] = React.useState<any>();
   const [statuses, setStatuses] = React.useState<any>();
   const [status, setStatus] = React.useState();
-  const [date, setDate] = React.useState<any>();
   const [defaultStatus, setDefaultStatus] = React.useState<any>();
   const [notify, setNotify] = React.useState<any>({
     isOpen: false,
@@ -205,7 +204,7 @@ const OrderDetails = () => {
           });
           setTimeout(() => {
             navigate("/order");
-          }, 500)
+          }, 500);
         }
       })
       .catch((error) => {
@@ -238,7 +237,6 @@ const OrderDetails = () => {
         >
           <Box className={classes.insideBoxItem}>
             <img src={buyericon} alt="icon" />
-            <p className={classes.insideText}>{date}</p>
             <p className={classes.insideText}>ID {buyer?.id}</p>
           </Box>
           <Tooltip title="Holati">
@@ -246,7 +244,7 @@ const OrderDetails = () => {
               <InputLabel id="demo-simple-select-label">
                 {defaultStatus === "NOT_SERVED" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={notserved} />
+                    <img src={notserved} alt="img" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -260,7 +258,7 @@ const OrderDetails = () => {
                   </div>
                 ) : defaultStatus === "SERVED" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={served} />
+                    <img src={served} alt="img" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -274,7 +272,7 @@ const OrderDetails = () => {
                   </div>
                 ) : defaultStatus === "ADMIN_CANCEL" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={admincancel} />
+                    <img src={admincancel} alt="img" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -288,7 +286,7 @@ const OrderDetails = () => {
                   </div>
                 ) : defaultStatus === "CLIENT_CANCEL" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={clientcancel} />
+                    <img src={clientcancel} alt="img" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -302,7 +300,7 @@ const OrderDetails = () => {
                   </div>
                 ) : defaultStatus === "IN_PROGRESS" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={inprogress} />
+                    <img src={inprogress} alt="img" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -328,7 +326,7 @@ const OrderDetails = () => {
                   <MenuItem value={item?.id} key={key}>
                     {item?.statusType === "NOT_SERVED" ? (
                       <div className={classes.statusBox}>
-                        <img src={notserved} />
+                        <img src={notserved} alt="img" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -342,7 +340,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "SERVED" ? (
                       <div className={classes.statusBox}>
-                        <img src={served} />
+                        <img src={served} alt="img" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -356,7 +354,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "ADMIN_CANCEL" ? (
                       <div className={classes.statusBox}>
-                        <img src={admincancel} />
+                        <img src={admincancel} alt="img" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -370,7 +368,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "CLIENT_CANCEL" ? (
                       <div className={classes.statusBox}>
-                        <img src={clientcancel} />
+                        <img src={clientcancel} alt="img"/>
                         <p
                           className={classes.statusText}
                           style={{
@@ -384,7 +382,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "IN_PROGRESS" ? (
                       <div className={classes.statusBox}>
-                        <img src={inprogress} />
+                        <img src={inprogress} alt="img"/>
                         <p
                           className={classes.statusText}
                           style={{
@@ -446,14 +444,15 @@ const OrderDetails = () => {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {journal?.map((item: any) => (
-              <TableBody>
+            {journal?.map((item: any, key: any) => (
+              <TableBody key={key}>
                 <TableRow>
                   <TableCell align="left" className={classes.productRows}>
                     <div className={classes.productInfo}>
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photo}`}
                         className={classes.productImg}
+                        alt="img"
                       />
                       <p className={classes.productName}>{item.product_name}</p>
                     </div>
@@ -481,7 +480,8 @@ const OrderDetails = () => {
         >
           <Box className={classes.priceBox}>
             <p className={classes.priceText}>
-              Umumiy hisob: <span style={{ fontWeight: 500 }}>{price?.toLocaleString()}</span>
+              Umumiy hisob:{" "}
+              <span style={{ fontWeight: 500 }}>{price?.toLocaleString()}</span>
             </p>
             <button className={classes.saveButton} onClick={sendDataToAPI}>
               Saqlash
