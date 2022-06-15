@@ -70,8 +70,7 @@ const useStyles = makeStyles({
 
 const BrandEditPage = () => {
   const [brand, setBrand] = React.useState<any>("");
-  const [name, setName] = React.useState<any>("");
-  const [image, setImage] = React.useState<any>();
+  const [image, setImage] = React.useState<any>();  
   const [photo, setPhoto] = React.useState<any>();
   const [preview, setPreview] = React.useState<any>();
   const { id } = useParams();
@@ -144,7 +143,7 @@ const BrandEditPage = () => {
   const getImage = async (id: any) => {
     const res: any = await getBrand(id);
     let img = `${MINIO_FULL_ENDPOINT_FOR}/brand/${res.data.photo_name}`;
-    setName(res.data.name);
+    setBrand(res.data.name);
     setPhoto(res.data.photo_name);
     await fetch(img).then(async (response) => {
       const blob: any = await response.blob();
@@ -182,7 +181,7 @@ const BrandEditPage = () => {
               <h2 className={classes.boxSecondTitle}>Brand name</h2>
               <input
                 type="text"
-                placeholder={name}
+                value={brand}
                 className={classes.forBoxInput}
                 onChange={(e) => setBrand(e?.target?.value)}
               />

@@ -1,4 +1,4 @@
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, AlertColor, Snackbar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material";
 const theme = createTheme();
@@ -8,8 +8,19 @@ const useStyles = makeStyles({
   },
 });
 
-const Notification = (props: any) => {
-  const { notify, setNotify } = props;
+interface notifyType {
+  isOpen: boolean;
+  message: string;
+  type: AlertColor | undefined | any;
+}
+
+const Notification = ({
+  notify,
+  setNotify,
+}: {
+  notify: notifyType;
+  setNotify: any;
+}) => {
   const classes = useStyles();
 
   const handleClose = (event?: any, reason?: any): any => {
@@ -43,3 +54,4 @@ const Notification = (props: any) => {
 };
 
 export default Notification;
+console.clear();
