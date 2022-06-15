@@ -646,7 +646,7 @@ const BrandPage = () => {
           </Grid>
         </Container>
       </Container>
-      <Notification notify={notify} setNotify={setNotify} />
+      <Notification notify={notify} severity="info" setNotify={setNotify} />
       <Footer />
     </>
   );

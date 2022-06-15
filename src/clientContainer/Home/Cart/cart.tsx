@@ -406,7 +406,7 @@ export default function Cart() {
 
   const Ref = React.useRef(null);
   const handleOpen = () => {
-    if (phone.length == 13 && fullName) {
+    if (phone.length === 13 && fullName) {
       setOpen(true);
       postPhone({ phone, fullName })
       onClickReset()
@@ -430,8 +430,8 @@ export default function Cart() {
 
   const mass = [phone, code]
   const handleClose = () => {
-    PostCode(mass)
-    if (status == 200) {
+    PostCode(mass);
+    if (status === 200) {
       setOpen(false);
     }
 
@@ -461,7 +461,7 @@ export default function Cart() {
   const isEmpty = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     let name = fullName;
-    let ownAddress = address;
+    // let ownAddress = address;
     let telPhone = phone;
     let ownCity = city;
     if (name !== null && telPhone !== null && ownCity !== null) {
@@ -615,9 +615,9 @@ export default function Cart() {
                   <Table>
                     <div>
                       {cartProducts &&
-                        cartProducts?.map((product: any) => (
+                        cartProducts?.map((product: any, key: any) => (
                           <div
-                            key={product.id}
+                            key={key}
                             className={classes.cartMin}
                             style={{ margin: "15px 0px " }}
                           >
@@ -627,7 +627,7 @@ export default function Cart() {
                               >
                                 <img
                                   src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`}
-                                />
+                              alt=""  />
                               </Link>
                             </div>
                             <div style={{ width: "50%" }}>
@@ -662,7 +662,7 @@ export default function Cart() {
                               </Button>
                               <div style={{ width: "25%", marginLeft: "7px" }}>
                                 <Select
-                                  key={product.id}
+                                  key={product?.id}
                                   name="quantity"
                                   onChange={(event: any) =>
                                     dispatch(
@@ -717,14 +717,14 @@ export default function Cart() {
                     <tbody>
                       {cartProducts &&
                         cartProducts?.map((product: any) => (
-                          <tr key={product.id} className={classes.carts}>
+                          <tr key={product?.id} className={classes.carts}>
                             <td>
                               <Link
                                 to={`/product/client/details/${product.id}`}
                               >
                                 <img
                                   src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`}
-                                />
+                              alt=""  />
                               </Link>
                             </td>
                             <td>
@@ -829,7 +829,7 @@ export default function Cart() {
                         onKeyUp={isEmpty}
                         onChange={(e: any) => setFullName(e.target.value)}
                         className={classes.Input}
-                        disabled={status == 200 ? true : false}
+                        disabled={status === 200 ? true : false}
                       />
                     </Box>
                     <Box>
@@ -844,7 +844,7 @@ export default function Cart() {
                         limitMaxLength
                         id="phone"
                         onKeyUp={isEmpty}
-                        disabled={status == 200 ? true : false}
+                        disabled={status === 200 ? true : false}
                       />
                     </Box>
                     <Box>
@@ -869,8 +869,8 @@ export default function Cart() {
                             Quyidagi raqamga kod yubordik {phone}
                           </p>
                           <input onChange={(e: any) => setCode(e.target.value)} placeholder="Tasdiqlash kodini shu yerga kiriting..." className={classes.Input} required />
-                          {status === 200 && <Typography sx={{ color: "green", fontSize: "14px" }}>Kod tasdiqlandi</Typography>}
-                          {status === 400 && <Typography sx={{ color: "#FF4B4B", fontSize: "14px" }}>Telifon raqam yoki kod xato kiritildi</Typography>}
+                          {status === 200 && <Typography sx={{ color: "green", fontSize: "14px" }} >Kod tasdiqlandi</Typography>}
+                          {status === 400 && <Typography sx={{ color: "#FF4B4B", fontSize: "14px" }} >Telifon raqam yoki kod xato kiritildi</Typography>}
                           <button className={classes.sale} onClick={handleClose}>
                             {status === 200 && "Davom ettirish"} {status > 200 && "Davom ettirish"} {!status && "Tasdiqlash"}
                           </button>
@@ -881,7 +881,7 @@ export default function Cart() {
                   </Grid>
                 )}
                 {
-                  status == 200 &&
+                  status === 200 &&
                   <>
                     <Grid className={classes.Grid} container spacing={2}>
                       <Grid item xs={12} sm={6} md={12}>
@@ -970,7 +970,7 @@ export default function Cart() {
         >
           Savatni Tozalash
         </Button>
-        <Notification notify={notify} setNotify={setNotify} />
+        <Notification notify={notify} severity="info" setNotify={setNotify} />
       </Container>
       <Footer />
     </>

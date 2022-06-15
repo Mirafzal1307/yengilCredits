@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  getAllBrandData,
   deleteBrandData,
   getBrand,
 } from "../../Api/admin/AdminBrandApi";
@@ -20,7 +19,7 @@ import { useActions } from "../../hook/useActions";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { Box, LinearProgress, Tooltip } from "@mui/material";
 
-interface Data {
+interface Data  {
   brand?: any;
   photo_name: string;
   products_count: number;
@@ -107,7 +106,7 @@ const BrandTable = () => {
   };
 
   const getBrandByID = async (id: number) => {
-    const brandData = await getBrand(id);
+   await getBrand(id);
   };
 
   return (
@@ -137,7 +136,7 @@ const BrandTable = () => {
             </TableCell>
           </TableRow>
         </TableHead>
-        {brands.map((item) => {
+        {brands.map((item, index) => {
           const delData = () => {
             deleteData(item.id);
           };
@@ -145,7 +144,7 @@ const BrandTable = () => {
             getBrandByID(item.id);
           };
           return (
-            <TableBody>
+            <TableBody key={index}>
               <TableRow style={{ alignItems: "center" }}>
                 <TableCell padding="checkbox">
                   <Checkbox
@@ -191,7 +190,7 @@ const BrandTable = () => {
                     </Tooltip>
                   </Link>
                   <Modal data={delData} to="brand"/>
-                  <Notification notify={notify} setNotify={setNotify} />
+                  <Notification notify={notify}  setNotify={setNotify} />
                 </TableCell>
               </TableRow>
             </TableBody>

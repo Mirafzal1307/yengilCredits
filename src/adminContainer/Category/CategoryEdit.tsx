@@ -180,18 +180,18 @@ export default function CategoryEdit() {
           setNotify({
             isOpen: true,
             message: 'Xatolik yuz berdi...',
-            type: 'error'
+            type: "error"
           })
         })
     } catch (error) {
       setNotify({
         isOpen: true,
         message: 'Xatolik yuz berdi...',
-        type: 'error'
+        type: "error"
       })
     }
 
-  }
+  };
   React.useEffect(() => {
     setCategory(getCategoryByIds(id));
   }, []);
@@ -264,7 +264,7 @@ export default function CategoryEdit() {
             </div>
           </Paper>
         </Box>
-        <Notification notify={notify} setNotify={setNotify} />
+        <Notification notify={notify} severity="info" setNotify={setNotify} />
       </Container>
     </>
   );

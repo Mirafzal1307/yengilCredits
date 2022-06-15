@@ -17,7 +17,7 @@ import cart2 from "../../Images/cart2.svg";
 import { Link } from "react-router-dom";
 import { getProductFromCategoryById } from "../../Api/admin/AdminProductApi";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { SelectChangeEvent } from "@mui/material";
+// import { SelectChangeEvent } from "@mui/material";
 import BackToTop from "./Navbar/Navbar";
 import Footer from "./Footer";
 import {
@@ -293,15 +293,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 const CategoryProducts = () => {
-  const { products, error, loading } = useTypedSelector(
+  const { error, loading } = useTypedSelector(
     (state) => state.productByCategoryReducer
   );
   const classes = useStyles();
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [category, setCategory] = React.useState<any>();
-  const [productPrice, setProductPrice] = React.useState("");
-  const [value, setValue] = React.useState(0);
+  // const [productPrice, setProductPrice] = React.useState("");
+  // const [value, setValue] = React.useState(0);
   const [pageQty, setPageQty] = React.useState<number>(0);
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");
@@ -402,7 +402,7 @@ const CategoryProducts = () => {
               >
                 {product
                   .filter((val: any) => {
-                    if (searchTerm == "") {
+                    if (searchTerm === "") {
                       return val;
                     } else if (
                       val.short_name
@@ -528,7 +528,7 @@ const CategoryProducts = () => {
               >
                 {product
                   .filter((val: any) => {
-                    if (searchTerm == "") {
+                    if (searchTerm === "") {
                       return val;
                     } else if (
                       val.short_name
@@ -676,7 +676,7 @@ const CategoryProducts = () => {
           )}
         </Grid>
       </Container>
-      <Notification notify={notify} setNotify={setNotify} />
+      <Notification notify={notify} severity="info" setNotify={setNotify} />
       <Footer />
     </>
   );

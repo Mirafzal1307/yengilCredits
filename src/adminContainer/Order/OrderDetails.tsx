@@ -16,7 +16,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import {
   editOrderStatus,
   getBuyerData,
@@ -230,6 +230,7 @@ const OrderDetails = () => {
       </Container>
       <Container className={classes.bigBox}>
         <Grid
+        direction="row"
           display="flex"
           justifyContent="space-between"
           alignItems="center !important"
@@ -246,7 +247,7 @@ const OrderDetails = () => {
               <InputLabel id="demo-simple-select-label">
                 {defaultStatus === "NOT_SERVED" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={notserved} />
+                    <img src={notserved} alt="" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -260,7 +261,7 @@ const OrderDetails = () => {
                   </div>
                 ) : defaultStatus === "SERVED" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={served} />
+                    <img src={served} alt="" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -274,7 +275,7 @@ const OrderDetails = () => {
                   </div>
                 ) : defaultStatus === "ADMIN_CANCEL" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={admincancel} />
+                    <img src={admincancel} alt="" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -288,7 +289,7 @@ const OrderDetails = () => {
                   </div>
                 ) : defaultStatus === "CLIENT_CANCEL" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={clientcancel} />
+                    <img src={clientcancel} alt="" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -302,7 +303,7 @@ const OrderDetails = () => {
                   </div>
                 ) : defaultStatus === "IN_PROGRESS" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={inprogress} />
+                    <img src={inprogress} alt="" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -328,7 +329,7 @@ const OrderDetails = () => {
                   <MenuItem value={item?.id} key={key}>
                     {item?.statusType === "NOT_SERVED" ? (
                       <div className={classes.statusBox}>
-                        <img src={notserved} />
+                        <img src={notserved} alt=""/>
                         <p
                           className={classes.statusText}
                           style={{
@@ -342,7 +343,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "SERVED" ? (
                       <div className={classes.statusBox}>
-                        <img src={served} />
+                        <img src={served} alt=""/>
                         <p
                           className={classes.statusText}
                           style={{
@@ -356,7 +357,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "ADMIN_CANCEL" ? (
                       <div className={classes.statusBox}>
-                        <img src={admincancel} />
+                        <img src={admincancel} alt="" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -370,7 +371,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "CLIENT_CANCEL" ? (
                       <div className={classes.statusBox}>
-                        <img src={clientcancel} />
+                        <img src={clientcancel} alt="" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -384,7 +385,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "IN_PROGRESS" ? (
                       <div className={classes.statusBox}>
-                        <img src={inprogress} />
+                        <img src={inprogress}  alt=""/>
                         <p
                           className={classes.statusText}
                           style={{
@@ -446,15 +447,15 @@ const OrderDetails = () => {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {journal?.map((item: any) => (
-              <TableBody>
+            {journal?.map((item: any, key: any) => (
+              <TableBody key={key}>
                 <TableRow>
                   <TableCell align="left" className={classes.productRows}>
                     <div className={classes.productInfo}>
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photo}`}
                         className={classes.productImg}
-                      />
+                        alt=""/>
                       <p className={classes.productName}>{item.product_name}</p>
                     </div>
                   </TableCell>
@@ -489,7 +490,7 @@ const OrderDetails = () => {
           </Box>
         </Box>
       </Container>
-      <Notification notify={notify} setNotify={setNotify} />
+      <Notification notify={notify} severity="info" setNotify={setNotify} />
     </>
   );
 };

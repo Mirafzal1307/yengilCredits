@@ -8,12 +8,12 @@ import BackToTop from "../Home/Navbar/Navbar";
 import Footer from "../Home/Footer";
 import { getProductCards } from "../../Api/client/MainProductsApi";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import cart1 from "../../Images/cart1.svg";
+// import cart1 from "../../Images/cart1.svg";
 import cart2 from "../../Images/cart2.svg";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import { addToCart } from "../../redux/cart/action";
-import { useDispatch, useSelector } from "react-redux";
-import { rootState } from "../../redux/reducers/index";
+import { AnyIfEmpty, useDispatch, useSelector } from "react-redux";
+// import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import BigPhoto from "../../Images/BigPhoto.png";
 import Shop from "../../Images/baskets.png";
@@ -516,8 +516,8 @@ const ProductDetails = () => {
           <img src={BigPhoto} alt="" className={classes.BigPhoto} />
         </Container>
         <Container maxWidth="xl">
-          {pro?.map((product: any) => (
-            <div className={classes.BigPhotoBottom}>
+          {pro?.map((product: any, key : any) => (
+            <div className={classes.BigPhotoBottom} key={key}>
               <h2
                 className={classes.productName}
                 style={{
@@ -567,7 +567,7 @@ const ProductDetails = () => {
                 </Link>
               </div>
               <div style={{ display: "flex", justifyContent: 'space-between' }} className={classes.NewFeatures} >
-                <Grid xs={12} md={6} >
+                <Grid item xs={12} md={6} >
                   <div className={classes.Links}>
                     <span
                       style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
@@ -589,13 +589,14 @@ const ProductDetails = () => {
                       style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                       className={classes.spane}
                     >
-                      {pro?.map((parCategory: any) => (
+                      {pro?.map((parCategory: any, key: any) => (
                         <Link
                           to={`/product/product-by-category/${parCategory?.category?.parent_category?.id}`}
                           style={{
                             color: "rgb(159 159 159)",
                             textTransform: "capitalize",
                           }}
+                          key={key}
                         >
                           {parCategory?.category?.parent_category?.name}
                           {" "}
@@ -606,13 +607,14 @@ const ProductDetails = () => {
                     <span
                       style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
                     >
-                      {pro?.map((SubCategory: any) => (
+                      {pro?.map((SubCategory: any, key: any) => (
                         <Link
                           to={`/product/product-by-category/${SubCategory?.category?.id}`}
                           style={{
                             color: "rgb(159 159 159)",
                             textTransform: "capitalize",
                           }}
+                          key={key}
                         >
                           {SubCategory?.category?.name}
                         </Link>
@@ -620,9 +622,9 @@ const ProductDetails = () => {
                     </span>
                   </div>
                 </Grid>
-                <Grid xs={12} sm={12} md={6} >
-                  {pro?.map((product: any) => (
-                    <div>
+                <Grid item xs={12} sm={12} md={6} >
+                  {pro?.map((product: any, key: any) => (
+                    <div key={key}>
                       <ColorToggleButton cost={product?.after_discount} />
                     </div>
                   ))}
@@ -644,9 +646,9 @@ const ProductDetails = () => {
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper2"
               >
-                {photo?.map((item: any) =>
+                {photo?.map((item: any, key: any) =>
                   item?.map((value: any) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={key}>
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
@@ -671,10 +673,11 @@ const ProductDetails = () => {
 
                 className="mySwiper"
               >
-                {photo?.map((item: any) =>
-                  item?.map((value: any) => (
-                    <SwiperSlide>
+                {photo?.map((item: any, index: any) =>
+                  item?.map((value: any, key: any) => (
+                    <SwiperSlide key={key}>
                       <img
+                        key={index}
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
                         className={classes.inSwiperSlide}
@@ -698,9 +701,9 @@ const ProductDetails = () => {
                 <h1 className={classes.h1}>Mahsulot haqida</h1>
                 <div>
                   <ul>
-                    {pro?.map((product: any) => (
+                    {pro?.map((product: any, key: any) => (
                       <>
-                        <div className={classes.parent_div}>
+                        <div className={classes.parent_div} key={key}>
                           <li className={classes.li}>Nomi</li>
                           <p className={classes.li_span}>
                             {product?.short_name}
@@ -722,9 +725,9 @@ const ProductDetails = () => {
                     ))}
                   </ul>
                   <ul>
-                    {des?.map((product: any) => (
+                    {des?.map((product: any, key: any) => (
                       <>
-                        <div className={classes.parent_div}>
+                        <div className={classes.parent_div} key={key}>
                           <li className={classes.li}>
                             {product?.character_name}
                           </li>
@@ -736,9 +739,9 @@ const ProductDetails = () => {
                     ))}
                   </ul>
                   <ul>
-                    {pro?.map((product: any) => (
+                    {pro?.map((product: any, key: any) => (
                       <>
-                        <div className={classes.parent_div}>
+                        <div className={classes.parent_div} key={key}>
                           <li className={classes.li}>Narxi</li>
                           <p className={classes.li_span}>
                             {product?.after_discount?.toLocaleString()} so’m
@@ -753,8 +756,9 @@ const ProductDetails = () => {
           </Grid>
           <Grid item xs={12}>
             <div>
-              {pro?.map((product: any) => (
+              {pro?.map((product: any, key: any) => (
                 <button
+                key={key}
                   className={classes.cardButtonBasketMin}
                   onClick={() => {
                     setNotify({
@@ -764,7 +768,7 @@ const ProductDetails = () => {
                     });
                     dispatch(addToCart(product));
                   }}
-                >
+                  >
                   Savatchaga
                 </button>
               ))}
@@ -785,7 +789,7 @@ const ProductDetails = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              <a href="!#">Barchasi</a>
             </Link>
           </div>
         </div>
@@ -826,9 +830,9 @@ const ProductDetails = () => {
               />
             ) : (
               recommended &&
-              recommended.map((item: any) => (
+              recommended.map((item: any, key: any) => (
                 <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
+                  <Box className={classes.bodyCard} key={key}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`} onClick={refresh} >
                         <div className={classes.BodyCardInside}>
@@ -1011,7 +1015,7 @@ const ProductDetails = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              <a href="!#">Barchasi</a>
             </Link>
           </div>
         </div>
@@ -1052,9 +1056,9 @@ const ProductDetails = () => {
               />
             ) : (
               popular &&
-              popular.map((item: any) => (
+              popular.map((item: any, key: any) => (
                 <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
+                  <Box className={classes.bodyCard} key={key}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`} onClick={refresh} >
                         <div className={classes.BodyCardInside}>
@@ -1226,7 +1230,7 @@ const ProductDetails = () => {
         </div>
       </Container>
       <Footer />
-      <Notification notify={notify} setNotify={setNotify} />
+      <Notification notify={notify} severity="info" setNotify={setNotify} />
     </>
   );
 };

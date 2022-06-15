@@ -153,7 +153,7 @@ const BrandEditPage = () => {
     });
   };
   useEffect(() => {
-    getImage(id);
+      getImage(id);
   }, []);
     const inpt = document.querySelector('input');
     const bal = inpt?.value

@@ -18,18 +18,18 @@ const HomeHeader: FC = () => {
     <div className={classes.header}>
       <MiniDrawer />
       <Container  maxWidth="lg"  style={{ marginTop: "50px" }}>
-        <Grid container>
+        <Grid container direction="row">
           <Grid item xs={12}>
             <HomePageTop />
           </Grid>
         </Grid>
         <HomePageTopButtons />
-        <Grid container spacing={3}>
+        <Grid container direction="row" spacing={3}>
           <Grid item xs={12} sx={{marginBottom: '30px'}} >
             <HomeMarketPage />
           </Grid>
         </Grid>
-        <Grid container  sx={{marginBottom: '30px'}} >
+        <Grid container direction="row"  sx={{marginBottom: '30px'}} >
           <Grid item xs={12}>
             <HomeChartTableButton />
           </Grid>

@@ -139,7 +139,7 @@ function BasicModal() {
           </div>
         </Box>
       </Modal>
-      <Notification notify={notify} setNotify={setNotify} />
+      <Notification notify={notify} severity="info" setNotify={setNotify} />
 
     </div>
   );

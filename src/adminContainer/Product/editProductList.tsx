@@ -573,7 +573,7 @@ const EditProductList = () => {
                   src={preview ? preview : img}
                   style={{ display: preview ? "block" : "none" }}
                   className={classes.forImagePreview}
-                />
+                  alt="" />
                 <FormLabel
                   htmlFor="file-input"
                   onClick={(event) => {
@@ -597,8 +597,8 @@ const EditProductList = () => {
           <Box className={classes.itemBox}>
             <h2 className={classes.boxFirstTitle}>5.Mahsulot xususiyatlari</h2>
             <div className={classes.DynamicFeilds} >
-              {inputFields.map(inputField => (
-                <div key={inputField.id}>
+              {inputFields.map((inputField, index) => (
+                <div key={index}>
                   <FormControl
                     sx={{ m: 1, minWidth: 120 }}
                     style={{ padding: "0 !important", margin: "0 !important" }}
@@ -699,7 +699,7 @@ const EditProductList = () => {
             </Link>
           </div>
         </Box>
-        <Notification notify={notify} setNotify={setNotify} />
+        <Notification notify={notify} severity="info" setNotify={setNotify} />
       </Container>
     </React.Fragment>
   );

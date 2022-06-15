@@ -1,11 +1,9 @@
-import { red } from "@material-ui/core/colors";
 import {
   Button,
   FormControl,
   MenuItem,
   Select,
   SelectChangeEvent,
-  TextField,
   Tooltip,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -113,7 +111,7 @@ const CategoryCreate = () => {
           setNotify({
             isOpen: true,
             message: "Muvaffaqiyatli yaratildi.",
-            type: "success",
+            type:"success",
           });
         }
         return await getCategory();
@@ -188,7 +186,7 @@ const CategoryCreate = () => {
             Turkumni yarating
           </Button>
         </Tooltip>
-        <Notification notify={notify} setNotify={setNotify} />
+        <Notification notify={notify}  setNotify={setNotify} />
       </Box>
     </>
   );

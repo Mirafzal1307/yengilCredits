@@ -10,28 +10,22 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Zoom from "@mui/material/Zoom";
 import { makeStyles } from "@material-ui/core/styles";
 import Ys from "../../../Images/Logo BT (1).svg";
-import Search from "../../../Images/one.svg";
 import Basket from "../../../Images/two.svg";
 import Lang from "../../../Images/three.svg";
 import ListIcon from "@mui/icons-material/List";
-import { border, SxProps } from "@mui/system";
 import "./style.css";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import {
   getCategoryForClient,
   getParentCategories,
 } from "../../../Api/client/ClientCategoryApi";
 import { getProductFromCategoryById } from "../../../Api/admin/AdminProductApi";
 import { Grid, Tooltip } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { rootState } from "../../../redux/reducers";
 import MainSearch from "../MainSearch";
 import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
-import catalogicon from "../../../Images/catalogicon.svg";
-import CloseIcon from "@mui/icons-material/Close";
-import AccountMenu from "./Language";
 import Baskets from "../../../Images/basket.svg";
 import Telegram from "../../../Images/telegram.svg";
 import LogoIcon from "../../../Images/LogoIcon.svg";
@@ -326,7 +320,7 @@ const BackToTop = () => {
     setParentCategories(res.data.content);
   };
   const getCategoryProductById = async (id: any) => {
-    const response = await getProductFromCategoryById(id, {});
+    await getProductFromCategoryById(id, {});
   };
   const classes = useStyles();
 
@@ -432,10 +426,10 @@ const BackToTop = () => {
                                     width: "400px",
                                     marginLeft: "10px !important",
                                   }}
+                                  key={key}
                                 >
                                   <Link
                                     to={`/product/product-by-category/${item.sub_id}`}
-                                    key={key}
                                     className={classes.navLink}
                                   >
                                     {item.name}
@@ -1081,6 +1075,7 @@ const BackToTop = () => {
                         return (
                           <>
                             <MenuItem
+                            key={key}
                               style={{
                                 width: "400px",
                                 marginLeft: "10px !important",

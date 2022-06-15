@@ -146,11 +146,11 @@ const TableOrder: React.FC = () => {
               <MenuItem value="">
                 <em>Hammasi</em>
               </MenuItem>
-              {status?.map((item: any) => (
-                <MenuItem value={item.statusType}>
+              {status?.map((item: any, key: any) => (
+                <MenuItem key={key} value={item.statusType}>
                   {item.statusType === "NOT_SERVED" ? (
                     <div className={classes.statusBox}>
-                      <img src={notserved} />
+                      <img src={notserved} alt=""/>
                       <p
                         className={classes.statusText}
                         style={{
@@ -178,7 +178,7 @@ const TableOrder: React.FC = () => {
                     </div>
                   ) : item.statusType === "ADMIN_CANCEL" ? (
                     <div className={classes.statusBox}>
-                      <img src={admincancel} />
+                      <img src={admincancel} alt="" />
                       <p
                         className={classes.statusText}
                         style={{
@@ -192,7 +192,7 @@ const TableOrder: React.FC = () => {
                     </div>
                   ) : item.statusType === "CLIENT_CANCEL" ? (
                     <div className={classes.statusBox}>
-                      <img src={clientcancel} />
+                      <img src={clientcancel} alt="" />
                       <p
                         className={classes.statusText}
                         style={{
@@ -368,7 +368,7 @@ const TableOrder: React.FC = () => {
                           </div>
                         ) : list.status === "ADMIN_CANCEL" ? (
                           <div className={classes.statusBox}>
-                            <img src={admincancel} />
+                            <img src={admincancel} alt="" />
                             <p
                               className={classes.statusText}
                               style={{ color: "#065374" }}
@@ -378,7 +378,7 @@ const TableOrder: React.FC = () => {
                           </div>
                         ) : list.status === "CLIENT_CANCEL" ? (
                           <div className={classes.statusBox}>
-                            <img src={clientcancel} />
+                            <img src={clientcancel} alt="" />
                             <p
                               className={classes.statusText}
                               style={{ color: "#27A8D1" }}

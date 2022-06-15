@@ -692,7 +692,7 @@ const ProductsCreate = () => {
               </Button>
             </div>
           </Box>
-          <Notification notify={notify} setNotify={setNotify} />
+          <Notification notify={notify} severity="info" setNotify={setNotify} />
         </form>
       </Container>
     </React.Fragment>

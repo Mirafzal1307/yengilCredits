@@ -310,13 +310,13 @@ export default function EnhancedTable() {
     <div className={loading ? "loading" : ""} >
       <Box>
         <h1 className={classes.h1}>Turkum</h1>
-        <Grid container spacing={2}>
+        <Grid container direction="row" spacing={2}>
           <Grid container item xs={5}>
             <Grid item xs={12}>
               <CategoryCreate />
             </Grid>
           </Grid>
-          <Grid container item xs={7}>
+          <Grid container direction="row" item xs={7}>
             <Grid item xs={12}>
               <Box className={classes.input_two}>
                 <Paper className={classes.paper}>
@@ -345,7 +345,7 @@ export default function EnhancedTable() {
                                 role="checkbox"
                                 aria-checked={isItemSelected}
                                 tabIndex={-1}
-                                key={row?.name}
+                                key={index}
                                 selected={isItemSelected}
                               >
                                 <TableCell
@@ -389,6 +389,7 @@ export default function EnhancedTable() {
                                   </Link>
                                   <Notification
                                     notify={notify}
+                                    severity="info"
                                     setNotify={setNotify}
                                   />
                                 </TableCell>

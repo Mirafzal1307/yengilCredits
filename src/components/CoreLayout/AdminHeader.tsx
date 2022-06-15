@@ -20,7 +20,6 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import BorderAllIcon from '@mui/icons-material/BorderAll';
 import Brand from '../../Images/Yengilcredit.uz.svg';
 import Icon from '../../Images/Logo BT.svg';
 import AvatarImage from '../../Images/Rectangle 287.png';
@@ -199,7 +198,7 @@ export default function MiniDrawer(props: any) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose} style={{fontFamily: "Poppins", fontSize: "16px"}}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}><a onClick={logout} style={{background: "transparent", border: "none", fontSize: "16px", fontFamily: "Poppins", color: "#000"}}>Logout</a></MenuItem>
+      <MenuItem onClick={handleMenuClose}><div onClick={logout} style={{background: "transparent", border: "none", fontSize: "16px", fontFamily: "Poppins", color: "#000"}}>Logout</div></MenuItem>
     </Menu>
   );
   const mobileMenuId = 'primary-search-account-menu-mobile';

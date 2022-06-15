@@ -6,7 +6,6 @@ import {
   Box,
   Stack,
   Grid,
-  SelectChangeEvent,
   PaginationItem,
   Pagination,
 } from "@mui/material";
@@ -27,6 +26,7 @@ import Notification from "../../adminContainer/Snackbar/Notification";
 import { addToCart } from "../../redux/cart/action";
 import Footer from "./Footer";
 import "./style.css";
+
 
 const useStyles = makeStyles({
   styledButton: {
@@ -321,11 +321,13 @@ const AllCards = () => {
   const { id } = useParams();
   const classes = useStyles();
   const [products, setProducts] = useState([]);
-  const [productPrice, setProductPrice] = useState("");
+  // const [productPrice, setProductPrice] = useState("");
   const [sort, setSort] = useState(true);
   const [pageQty, setPageQty] = useState<number>(0);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("react");
+
+
   const getData = async (id: any) => {
     const response: any = await getAllCards(id, `${page - 1}`);
     setProducts(response.data.content);
@@ -342,7 +344,7 @@ const AllCards = () => {
     if (pageQty < page) {
       setPage(1);
     }
-  }, [query, page]);
+  }, [query , page]);
 
   const getProduct = async (id: any) => {
     let res: any = await getProductByBrand({}, id);
@@ -359,7 +361,7 @@ const AllCards = () => {
         <img src={BigPhoto} alt="" className={classes.BigPhoto} />
       </Container>
       <Container maxWidth="xl">
-        <Grid container spacing={3}>
+        <Grid container direction="row" spacing={3}>
           <Grid item xs={6} md={1} sm={4}>
             <Link to="/">
               <button className={classes.back}>
@@ -510,7 +512,7 @@ const AllCards = () => {
               <Stack flexDirection="column">
                 {products.map((item: any, key: any) => (
                   <Grid>
-                    <Grid xs={12} sm={12} md={12} lg={12}>
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
                       <Box className={classes.sortBodyCard} key={key}>
                         <Link
                           to={`/product/client/details/${item.id}`}
@@ -651,7 +653,7 @@ const AllCards = () => {
             )}
           </Grid>
         </Container>
-        <Notification notify={notify} setNotify={setNotify} />
+        <Notification notify={notify} severity="info" setNotify={setNotify} />
       </Container>
       <Footer />
     </>

@@ -8,10 +8,8 @@ import "@splidejs/splide/dist/css/splide.min.css";
 import { useActions } from "../../hook/useActions";
 import BrandClient from "./brandClient";
 import { Link } from "react-router-dom";
-import { rootState } from "../../redux/reducers/index";
-import { addToCart, productByCategory } from "../../redux/cart/action";
+import { addToCart} from "../../redux/cart/action";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import Shop from "../../Images/baskets.png";
@@ -163,15 +161,16 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
 }));
+
 const CardProducts = () => {
   const classes = useStyles();
-  const [notify, setNotify] = useState<any>({
-    isOpen: false,
-    message: "",
-    type: "",
+    const [notify, setNotify] = useState<any>({
+      isOpen: false,
+      message: "",
+      type: "",
   });
   async function getData() {
-    const response: any = await getProductCards();
+     await getProductCards();
   }
   const dispatch = useDispatch();
   const products = useTypedSelector((state) => state?.card?.cards);
@@ -203,7 +202,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              <a href="!#" >Barchasi</a>
             </Link>
           </div>
         </div>
@@ -252,9 +251,9 @@ const CardProducts = () => {
               />
             ) : (
               recommended &&
-              recommended?.map((item: any) => (
+              recommended?.map((item: any, key: any) => (
                 <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item?.id}>
+                  <Box className={classes.bodyCard} key={key}>
                     <Box style={{ margin: "0px 10px" }}>
                                   <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
@@ -434,7 +433,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              <a href="!#">Barchasi</a>
             </Link>
           </div>
         </div>
@@ -484,9 +483,9 @@ const CardProducts = () => {
               />
             ) : (
               popular &&
-              popular?.map((item: any) => (
+              popular?.map((item: any, key: any) => (
                 <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item?.id}>
+                  <Box className={classes.bodyCard} key={key}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
@@ -673,7 +672,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              <a href="!#">Barchasi</a>
             </Link>
           </div>
         </div>
@@ -723,9 +722,10 @@ const CardProducts = () => {
               />
             ) : (
               last &&
-              last.map((item: any) => (
+              
+              last.map((item: any, key: any) => (
                 <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
+                  <Box className={classes.bodyCard} key={key}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
@@ -908,9 +908,10 @@ const CardProducts = () => {
           <BrandClient />
         </div>
       </Container>
-      <Notification notify={notify} setNotify={setNotify} />
+      <Notification notify={notify} severity="info" setNotify={setNotify} />
     </>
   );
 };
+
 
 export default CardProducts;

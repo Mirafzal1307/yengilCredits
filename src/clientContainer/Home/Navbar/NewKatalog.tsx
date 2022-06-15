@@ -5,14 +5,14 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import TreeView from '@mui/lab/TreeView';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import TreeItem from '@mui/lab/TreeItem';
+// import TreeView from '@mui/lab/TreeView';
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+// import TreeItem from '@mui/lab/TreeItem';
 import { getCategoryForClient } from '../../../Api/client/ClientCategoryApi';
 import { getProductFromCategoryById } from '../../../Api/admin/AdminProductApi';
 import { Link } from 'react-router-dom';
-import GlobalStyles from '@mui/material/GlobalStyles';
+// import GlobalStyles from '@mui/material/GlobalStyles';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: "4px !important",
     },
 }))
+
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -99,7 +100,7 @@ export default function TransitionsModal() {
         getCategoryForCleintPage();
     }, []);
     const getCategoryProductById = async (id: any) => {
-        const response = await getProductFromCategoryById(id, {});
+         await getProductFromCategoryById(id, {});
     };
     const refresh = () => {
         setTimeout(() => window.location.reload(),
@@ -145,11 +146,11 @@ export default function TransitionsModal() {
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
-                                <Typography>Telefonlar va smartfonlar</Typography>
+                                <Typography >Telefonlar va smartfonlar</Typography>
                             </AccordionSummary>
                             <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', borderTop: 'solid 1px #065374' }} >
                                 {category?.["Telefonlar va smartfonlar"]?.map((item: any, key: any) => {
-                                    const getCategory = () => {
+                                    const getCategory  = () => {
                                         getCategoryProductById(item.parent_id);
                                     };
                                     return (
@@ -187,7 +188,7 @@ export default function TransitionsModal() {
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
-                                <Typography>Televizorlar va videotexnikalar</Typography>
+                                <Typography >Televizorlar va videotexnikalar</Typography>
                             </AccordionSummary>
                             <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', borderTop: 'solid 1px #065374' }} >
                                 {category?.["Televizorlar va videotexnikalar"]?.map((item: any, key: any) => {
@@ -231,7 +232,7 @@ export default function TransitionsModal() {
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
-                                <Typography>Sog'lik va go'zallik</Typography>
+                                <Typography >Sog'lik va go'zallik</Typography>
                             </AccordionSummary>
                             <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', borderTop: 'solid 1px #065374' }} >
                                 {category?.["Sog'lik va go'zallik mahsulotlari"]?.map((item: any, key: any) => {
@@ -273,7 +274,7 @@ export default function TransitionsModal() {
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
-                                <Typography>Maishiy texnika</Typography>
+                                <Typography >Maishiy texnika</Typography>
                             </AccordionSummary>
                             <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', borderTop: 'solid 1px #065374' }} >
                                 {category?.["Maishiy texnika"]?.map((item: any, key: any) => {
@@ -294,7 +295,7 @@ export default function TransitionsModal() {
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
-                                <Typography>Kompyuterlar va orgtexnika</Typography>
+                                <Typography >Kompyuterlar va orgtexnika</Typography>
                             </AccordionSummary>
                             <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', borderTop: 'solid 1px #065374' }} >
                                 {category?.["Kompyuterlar va orgtexnika"]?.map((item: any, key: any) => {
@@ -338,7 +339,7 @@ export default function TransitionsModal() {
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
-                                <Typography>Avto jihozlar</Typography>
+                                <Typography >Avto jihozlar</Typography>
                             </AccordionSummary>
                             <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', borderTop: 'solid 1px #065374' }} >
                                 {category?.["Avto jihozlar"]?.map((item: any, key: any) => {
@@ -346,7 +347,7 @@ export default function TransitionsModal() {
                                         getCategoryProductById(item.parent_id);
                                     };
                                     return (
-                                        <Link to={`/product/product-by-category/${item.sub_id}`} onClick={refresh} >
+                                        <Link to={`/product/product-by-category/${item.sub_id}`} key={key} onClick={refresh} >
                                             <Button sx={{ color: 'black', width: '100%', textAlign: 'left !important', justifyContent: 'left !important', alignItem: 'left !important', textTransform: 'capitalize' }}>
                                                 {item.name}
                                             </Button>
@@ -359,7 +360,7 @@ export default function TransitionsModal() {
                             <AccordionSummary
                                 aria-controls="panel1d-content" id="panel1d-header"
                             >
-                                <Typography>Audio tizimlar</Typography>
+                                <Typography >Audio tizimlar</Typography>
                             </AccordionSummary>
                             <AccordionDetails sx={{ display: 'flex', flexDirection: 'column', borderTop: 'solid 1px #065374' }} >
                                 {category?.["Audio tizimlar"]?.map((item: any, key: any) => {

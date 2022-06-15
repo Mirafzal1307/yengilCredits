@@ -9,7 +9,7 @@ import {
 import BackUp from "./images/Group 429.svg";
 import { createTheme } from "@mui/material/styles";
 import Notification from "../Snackbar/Notification";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { refresh } from "../Modal/refresh";
 import './brand.css'
 const theme = createTheme();
@@ -219,6 +219,7 @@ const BrandCreate = () => {
                 src={preview}
                 style={{ display: preview ? "block" : "none" }}
                 className={classes.forImagePreview}
+                alt=""
               />
               <FormLabel
                 htmlFor="file-input"
@@ -251,7 +252,7 @@ const BrandCreate = () => {
           </button>
         </Tooltip>
       </Box>
-      <Notification notify={notify} setNotify={setNotify} />
+      <Notification notify={notify}  setNotify={setNotify} />
     </React.Fragment>
   );
 };

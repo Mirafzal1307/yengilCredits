@@ -6,8 +6,10 @@ import BackToTop from "./Navbar/Navbar";
 import BeforeFooter from "./beforeFooter";
 import CardProducts from "./CardProducts";
 import { Container } from "@mui/material";
-import { useState } from "react";
+// import { useState } from "react";
 import Navbarbottom from "./Navbar/Navbarbottom";
+
+
 const useStyles = makeStyles((theme) => {
   return {
     Carousel: {
@@ -60,7 +62,7 @@ const useStyles = makeStyles((theme) => {
     }
   };
 });
-
+  
 export type CartItemType = {
   id: number;
   short_name: string;
@@ -72,7 +74,7 @@ export type CartItemType = {
 
 const Header = () => {
   const classes = useStyles();
-  const [searchTerm, setSearchTerm] = useState();
+  // const [searchTerm, setSearchTerm] = useState();
 
   return (
     <>
@@ -92,18 +94,19 @@ const Header = () => {
           }}
         >
           <SplideSlide>
-            <img src={CarouselImg} className={classes.carouselImg} />
+            <img src={CarouselImg} className={classes.carouselImg} alt="" />
           </SplideSlide>
           <SplideSlide>
-            <img src={CarouselImg} className={classes.carouselImg} />
+            <img src={CarouselImg} className={classes.carouselImg}  alt=""/>
           </SplideSlide>
 
         </Splide>
       </Container>
 
       <Navbarbottom />
+      
       <CardProducts />
-      {/* <Partner /> */}
+
       <BeforeFooter />
 
       <Footer />

@@ -17,6 +17,7 @@ const Order: React.FC = () => {
             fontWeight: "600",
             fontSize: "28px",
           }}
+          variant={"h1"}
         >
           Buyurtma
         </Typography>

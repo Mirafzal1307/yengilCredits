@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React  from 'react';
 import { useTypedSelector } from "../../hook/useTypedSelector";
-import { fetchProducts } from "../../redux/actions/productAction";
+// import { fetchProducts } from "../../redux/actions/productAction";
 import { useActions } from "../../hook/useActions";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
@@ -24,7 +24,7 @@ import DetailsImage from "../../Images/detailsicon.svg";
 import { makeStyles } from "@mui/styles";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { Link as RouterLink } from "react-router-dom";
 import { useState } from "react";
 import { Pagination, PaginationItem } from "@mui/material";
@@ -209,20 +209,20 @@ interface Data {
     name: string;
     protein: number;
 }
-interface Product {
-    name: string,
-    short_name: string,
-    price: number,
-    register_date: any,
-    after_discount: number,
-    availability: boolean,
-    id: number,
-    brand_id: number,
-    category_id: number,
-    discount: number,
-    photo: string
+// interface Product {
+//     name: string,
+//     short_name: string,
+//     price: number,
+//     register_date: any,
+//     after_discount: number,
+//     availability: boolean,
+//     id: number,
+//     brand_id: number,
+//     category_id: number,
+//     discount: number,
+//     photo: string
 
-}
+// }
 interface HeadCell {
     disablePadding: boolean;
     id: keyof Data;
@@ -285,9 +285,9 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                         onChange={onSelectAllClick}
                     />
                 </TableCell>
-                {headCells.map((headCell) => (
+                {headCells.map((headCell, index) => (
                     <TableCell
-                        key={headCell.id}
+                        key={index}
                         align='left'
                         className={classes.tableCell}
 
@@ -305,7 +305,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 
 const ProductList: React.FC = () => {
     const { products, error, loading } = useTypedSelector(state => state.product)
-    let p: number = products.totalPages
+    // let p: number = products.totalPages
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [page, setPage] = React.useState(1);
     const [pageQty, setPageQty] = useState(products.totalPages)
@@ -366,31 +366,31 @@ const ProductList: React.FC = () => {
     };
     const isSelected = (name: string) => selected.indexOf(name) !== -1;
     const [status, setStatus] = React.useState('');
-    const [categoryName, setCategoryName] = React.useState('');
+    // const [categoryName, setCategoryName] = React.useState('');
     const handleChange = (event: any) => {
         setStatus(event.target.value);
     };
     const deleteUserData = async (id: any) => {
-        let product = await deleteProductItem(id)
+        await deleteProductItem(id)
             .then(res => {
                 if (res.status === 200) {
                     setNotify({
                         isOpen: true,
                         message: 'Muvaffaqiyatli o\'chirildi...',
-                        type: 'error'
+                        type: "error"
                     })
                 } else if (res.status === 400) {
                     setNotify({
                         isOpen: true,
                         message: 'Xatolik yuz berdi...',
-                        type: 'error'
+                        type: "error"
                     })
                 }
             })
 
     }
     const getProductByID = async (id: any) => {
-        const response = await getProductItem(id)
+         await getProductItem(id)
     }
     const getCategory = async () => {
         const res: any = await getProductCreate()
@@ -540,7 +540,7 @@ const ProductList: React.FC = () => {
                                             if (!status) {
                                                 return val;
 
-                                            } else if (val?.category?.name == status) {
+                                            } else if (val?.category?.name === status) {
                                                 return val;
                                             }
                                         }).map((user, index) => {
@@ -641,7 +641,7 @@ const ProductList: React.FC = () => {
                     />
                 </Paper>
             </Box>
-            <Notification notify={notify} setNotify={setNotify} />
+            <Notification notify={notify} severity="info" setNotify={setNotify} />
         </>
     );
 };
