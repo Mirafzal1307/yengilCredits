@@ -277,8 +277,6 @@ const useStyles = makeStyles({
   },
 });
 
-console.clear()
-
 const BrandPage = () => {
   const { products, error, loading } = useTypedSelector(
     (state) => state.productByCategoryReducer

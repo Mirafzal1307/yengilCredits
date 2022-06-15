@@ -126,7 +126,6 @@ const CategoryCreate = () => {
         });
       });
   }
-  console.clear()
   const inpt = document.querySelector('input');
   if (inpt?.value.length === 1) {
     inpt?.classList.add('active')

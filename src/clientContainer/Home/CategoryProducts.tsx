@@ -310,6 +310,7 @@ const CategoryProducts = () => {
     type: "",
   });
   const dispatch = useDispatch();
+  console.clear()
   const getProduct = async (id: any) => {
     let res: any = await getProductFromCategoryById(id, `${page - 1}`, {});
     setProduct(res.data.content);
@@ -399,7 +400,7 @@ const CategoryProducts = () => {
               >
                 {product
                   .filter((val: any) => {
-                    if (searchTerm == "") {
+                    if (searchTerm === "") {
                       return val;
                     } else if (
                       val.short_name
@@ -411,7 +412,7 @@ const CategoryProducts = () => {
                       return val;
                     }
                   })
-                  .map((item: any, key: any) =>
+                  .map((item: any, key: any, index: any) =>
                   (
                     <Box className={classes.bodyCard} key={key} sx={{ margin: '10px 10px !important' }}>
                       <Box  >
@@ -431,7 +432,7 @@ const CategoryProducts = () => {
                             marginBottom: "10px",
                             height: "30px",
                           }}
-                          key={item.id}
+                          key={index}
                         >
                           {item.short_name}
                         </p>
@@ -442,7 +443,7 @@ const CategoryProducts = () => {
                             fontSize: "14px",
                             textDecoration: "line-through",
                           }}
-                          key={item.id}
+                          key={index}
                         >
                           {item?.price?.toLocaleString()} so'm
                         </p>
@@ -455,7 +456,7 @@ const CategoryProducts = () => {
                             color: "#000",
                             margin: 0,
                           }}
-                          key={item.id}
+                          key={index}
                         >
                           {
                             Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
@@ -479,7 +480,7 @@ const CategoryProducts = () => {
                             height: "45px",
                             fontWeight: "500",
                           }}
-                          key={item.id}
+                          key={index}
                         >
                           {item?.after_discount?.toLocaleString()} so'm
                         </p>
@@ -529,7 +530,7 @@ const CategoryProducts = () => {
               >
                 {product
                   .filter((val: any) => {
-                    if (searchTerm == "") {
+                    if (searchTerm === "") {
                       return val;
                     } else if (
                       val.short_name
@@ -541,10 +542,11 @@ const CategoryProducts = () => {
                       return val;
                     }
                   })
-                  .map((item: any, key: any) =>
+                  .map((item: any, key: any, index: any) =>
                   (
                     <Grid>
                       <Grid
+                        item
                         xs={12}
                         sm={12}
                         md={12}
@@ -565,12 +567,12 @@ const CategoryProducts = () => {
                               className={classes.img}
                             />
                           </Link>
-                          <div style={{ alignSelf: 'center' }}  >
+                          <div style={{ alignSelf: 'center' }} key={index} >
                             <h6 className={classes.sortCardTitle} key={item.id}>
                               {item.short_name}
                             </h6>
                             <p className={classes.sortCardDescription}>{item.name}</p>
-                            <div style={{ display: "flex" , flexDirection: 'column' }}>
+                            <div style={{ display: "flex" , flexDirection: 'column' }} key={index}>
                                 <p
                                   className={classes.sortCardPrice}
                                   style={{
@@ -580,7 +582,7 @@ const CategoryProducts = () => {
                                     color: "#000",
                                     margin: 0,
                                   }}
-                                  key={item.id}
+                                  key={index}
                                 >
                                   {
                                     Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
@@ -604,7 +606,7 @@ const CategoryProducts = () => {
                                     height: "45px",
                                     fontWeight: "500",
                                   }}
-                                  key={item.id}
+                                  key={index}
                                 >
                                   {item?.after_discount?.toLocaleString()} so'm
                                 </p>
@@ -653,6 +655,7 @@ const CategoryProducts = () => {
         }
         <Grid
           container
+          item
           sx={{ mb: "20px", mt: "20px", justifyContent: 'center !important' }}
           xs={12}
           direction="row"

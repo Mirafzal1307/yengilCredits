@@ -13,6 +13,4 @@ ReactDOM.render(
         <App />
     </Provider>
     , document.getElementById('root')
-    );
-    
-    console.clear()
+);

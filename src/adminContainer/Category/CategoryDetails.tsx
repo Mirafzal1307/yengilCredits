@@ -361,7 +361,6 @@ export default function EnhancedTable() {
         });
       });
   };
-  console.clear()
 
   return (
     <>

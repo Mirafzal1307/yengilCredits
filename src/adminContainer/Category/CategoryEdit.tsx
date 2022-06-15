@@ -139,8 +139,6 @@ const style = {
   pb: 3,
 };
 
-console.clear()
-
 export default function CategoryEdit() {
   const [rows, setRows] = React.useState<createDatas[]>([]);
   const [select, setSelect] = React.useState("");
