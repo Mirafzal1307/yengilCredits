@@ -6,7 +6,6 @@ import {
   Box,
   Stack,
   Grid,
-  SelectChangeEvent,
   PaginationItem,
   Pagination,
 } from "@mui/material";
@@ -321,11 +320,12 @@ const AllCards = () => {
   const { id } = useParams();
   const classes = useStyles();
   const [products, setProducts] = useState([]);
-  const [productPrice, setProductPrice] = useState("");
+  // const [productPrice, setProductPrice] = useState("");
   const [sort, setSort] = useState(true);
   const [pageQty, setPageQty] = useState<number>(0);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("react");
+
   const getData = async (id: any) => {
     const response: any = await getAllCards(id, `${page - 1}`);
     setProducts(response.data.content);
@@ -359,7 +359,7 @@ const AllCards = () => {
         <img src={BigPhoto} alt="" className={classes.BigPhoto} />
       </Container>
       <Container maxWidth="xl">
-        <Grid container spacing={3}>
+        <Grid container direction="row" spacing={3}>
           <Grid item xs={6} md={1} sm={4}>
             <Link to="/">
               <button className={classes.back}>
@@ -408,101 +408,102 @@ const AllCards = () => {
                 spacing={2}
                 flexWrap="wrap"
               >
-                {products
-                  .map((item: any, key: any) => (
-                    <Box
-                      className={classes.bodyCard}
-                      key={key}
-                      sx={{ margin: "10px 10px !important" }}
-                    >
-                      <Box>
-                        <Link to={`/product/client/details/${item.id}`}>
+                {products.map((item: any, key: any) => (
+                  <Box
+                    className={classes.bodyCard}
+                    key={key}
+                    sx={{ margin: "10px 10px !important" }}
+                  >
+                    <Box>
+                      <Link to={`/product/client/details/${item.id}`}>
+                        <img
+                          src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
+                          alt="img"
+                          style={{ width: "150px", height: "150px" }}
+                        />
+                      </Link>
+                      <p
+                        className={classes.cardTitle}
+                        style={{
+                          margin: 0,
+                          marginTop: "10px",
+                          marginBottom: "10px",
+                          height: "30px",
+                        }}
+                      >
+                        {item.short_name}
+                      </p>
+                      <p
+                        className={classes.cardPrice}
+                        style={{
+                          fontWeight: "600",
+                          fontFamily: "Poppins",
+                          fontSize: "18px",
+                          color: "#000",
+                          margin: 0,
+                        }}
+                      >
+                        {Math.floor(
+                          (item?.after_discount * 1.44) / 12
+                        ).toLocaleString()}{" "}
+                        so'm
+                        <span
+                          style={{
+                            background: "red",
+                            color: "white",
+                            fontSize: "10px",
+                            borderRadius: "10px",
+                            padding: "1px 5px",
+                            marginLeft: "10px",
+                          }}
+                        >
+                          12 oy
+                        </span>
+                      </p>
+                      <p
+                        className={classes.cardPrice}
+                        style={{
+                          marginBottom: "10px",
+                          height: "45px",
+                          fontWeight: "500",
+                        }}
+                      >
+                        {item?.after_discount?.toLocaleString()} so'm
+                      </p>
+                      {item.availability === true ? (
+                        <button
+                          className={classes.cardButton}
+                          onClick={() => {
+                            dispatch(addToCart(item));
+                            setNotify({
+                              isOpen: true,
+                              message: "Savatchaga qo'shildi",
+                              type: "success",
+                            });
+                          }}
+                        >
                           <img
-                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
+                            src={cart1}
                             alt="img"
-                            style={{ width: "150px", height: "150px" }}
+                            style={{ marginRight: "5px" }}
                           />
-                        </Link>
-                        <p
-                          className={classes.cardTitle}
-                          style={{
-                            margin: 0,
-                            marginTop: "10px",
-                            marginBottom: "10px",
-                            height: "30px",
-                          }}
-                        >
-                          {item.short_name}
-                        </p>
-                          <p
-                          className={classes.cardPrice}
-                          style={{
-                            fontWeight: "600",
-                            fontFamily: "Poppins",
-                            fontSize: "18px",
-                            color: "#000",
-                            margin: 0,
-                          }}
-                        >
-                          {
-                            Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
-                          } so'm
-                          <span style={{
-                            background: 'red',
-                            color: 'white',
-                            fontSize: '10px',
-                            borderRadius: '10px',
-                            padding: '1px 5px',
-                            marginLeft: '10px',
-
-                          }} >
-                            12 oy
-                          </span>
-                        </p>
-                        <p
-                          className={classes.cardPrice}
-                          style={{
-                            marginBottom: "10px",
-                            height: "45px",
-                            fontWeight: "500",
-                          }}
-                        >
-                          {item?.after_discount?.toLocaleString()} so'm
-                        </p>
-                        {item.availability === true ? (
-                          <button
-                            className={classes.cardButton}
-                            onClick={() => {
-                              dispatch(addToCart(item));
-                              setNotify({
-                                isOpen: true,
-                                message: "Savatchaga qo'shildi",
-                                type: "success",
-                              });
+                          Savatchaga
+                        </button>
+                      ) : (
+                        <button className={classes.cardButtonSecond}>
+                          <img
+                            src={cart2}
+                            alt="img"
+                            style={{
+                              marginRight: "5px",
                             }}
-                          >
-                            <img
-                              src={cart1}
-                              alt="img"
-                              style={{ marginRight: "5px" }}
-                            />
-                            Savatchaga
-                          </button>
-                        ) : (
-                          <button className={classes.cardButtonSecond}>
-                            <img
-                              src={cart2}
-                              alt="img"
-                              style={{
-                                marginRight: "5px",
-                              }}
-                            />
-                            Sotuvda yo'q
-                          </button>
-                        )}
-                         </Box>
+                          />
+                          Sotuvda yo'q
+                        </button>
+                      )}
                     </Box>
-                  ))}
+                  </Box>
+                ))}
               </Stack>
             </div>
           ) : (
@@ -510,7 +511,7 @@ const AllCards = () => {
               <Stack flexDirection="column">
                 {products.map((item: any, key: any) => (
                   <Grid>
-                    <Grid xs={12} sm={12} md={12} lg={12}>
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
                       <Box className={classes.sortBodyCard} key={key}>
                         <Link
                           to={`/product/client/details/${item.id}`}
@@ -527,7 +528,7 @@ const AllCards = () => {
                             style={{
                               width: "80%",
                               height: "70%",
-                                                        alignSelf: "center !important",
+                              alignSelf: "center !important",
                               justifySelf: "center !important",
                             }}
                           />
@@ -540,7 +541,7 @@ const AllCards = () => {
                             {item.name}
                           </p>
                           <div
-                            style={{ display: "flex", flexDirection: 'column' }}
+                            style={{ display: "flex", flexDirection: "column" }}
                           >
                             <p
                               className={classes.sortCardPrice}
@@ -552,18 +553,20 @@ const AllCards = () => {
                                 margin: 0,
                               }}
                             >
-                              {
-                                Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
-                              } so'm
-                              <span style={{
-                                background: 'red',
-                                color: 'white',
-                                fontSize: '10px',
-                                borderRadius: '10px',
-                                padding: '1px 5px',
-                                marginLeft: '10px',
-
-                              }} >
+                              {Math.floor(
+                                (item?.after_discount * 1.44) / 12
+                              ).toLocaleString()}{" "}
+                              so'm
+                              <span
+                                style={{
+                                  background: "red",
+                                  color: "white",
+                                  fontSize: "10px",
+                                  borderRadius: "10px",
+                                  padding: "1px 5px",
+                                  marginLeft: "10px",
+                                }}
+                              >
                                 12 oy
                               </span>
                             </p>

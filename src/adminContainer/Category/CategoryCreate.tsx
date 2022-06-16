@@ -113,7 +113,7 @@ const CategoryCreate = () => {
           setNotify({
             isOpen: true,
             message: "Muvaffaqiyatli yaratildi.",
-            type: "success",
+            type:"success",
           });
         }
         return await getCategory();
@@ -188,7 +188,7 @@ const CategoryCreate = () => {
             Turkumni yarating
           </Button>
         </Tooltip>
-        <Notification notify={notify} setNotify={setNotify} />
+        <Notification notify={notify}  setNotify={setNotify} />
       </Box>
     </>
   );

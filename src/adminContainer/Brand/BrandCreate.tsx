@@ -251,7 +251,7 @@ const BrandCreate = () => {
           </button>
         </Tooltip>
       </Box>
-      <Notification notify={notify} setNotify={setNotify} />
+      <Notification notify={notify}  setNotify={setNotify} />
     </React.Fragment>
   );
 };

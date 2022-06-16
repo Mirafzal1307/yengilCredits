@@ -16,7 +16,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import {
   editOrderStatus,
   getBuyerData,
@@ -229,6 +229,7 @@ const OrderDetails = () => {
       </Container>
       <Container className={classes.bigBox}>
         <Grid
+        direction="row"
           display="flex"
           justifyContent="space-between"
           alignItems="center !important"
@@ -488,7 +489,7 @@ const OrderDetails = () => {
           </Box>
         </Box>
       </Container>
-      <Notification notify={notify} setNotify={setNotify} />
+      <Notification notify={notify}  setNotify={setNotify} />
     </>
   );
 };

@@ -106,7 +106,7 @@ const useStyles = makeStyles({
   h1: {
     fontSize: "28px !important",
     margin: "32px 0 20px 0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   input_name: {
     width: "500px !important",
@@ -118,20 +118,20 @@ const useStyles = makeStyles({
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "20px 0 10px 0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   category_category: {
     color: "#464646 !important",
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "10px 0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   datagrid: {
     border: "none !important",
   },
   button_root: {
-    backgroundColor: '#065374',
+    backgroundColor: "#065374",
     padding: "9px 20px 8px 20px !important",
     marginTop: "20px !important",
     marginLeft: "58% !important",
@@ -144,13 +144,13 @@ const useStyles = makeStyles({
     font: "inherit !important",
     paddingLeft: "12px !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   menuItem_gutters: {
     color: "#9F9F9F !important",
     font: "inherit !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   update_buttons: {
     width: "400px !important",
@@ -163,14 +163,14 @@ const useStyles = makeStyles({
     paddingBottom: "10px !important",
     paddingLeft: "12px !important",
     fontStyle: "normal !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   h4_second: {
     fontSize: "17px !important",
     fontWeight: "600 !important",
     margin: "0px !important",
     fontStyle: "normal !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   button_one: {
     minWidth: "140px !important",
@@ -198,7 +198,7 @@ const useStyles = makeStyles({
   tableCell: {
     borderBottom: "1px solid black !important",
     padding: "0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   box: {
     textAlign: "center",
@@ -206,9 +206,9 @@ const useStyles = makeStyles({
   h1_second: {
     fontStyle: "normal",
     fontWeight: "600",
-    fontSize: '18px',
+    fontSize: "18px",
     color: "#065374",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   deleteButton: {
     border: "none !important",
@@ -235,7 +235,7 @@ const useStyles = makeStyles({
     fontWeight: "normal",
     fontStyle: "normal",
     color: "#000000",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   pagination: {
     width: "315px",
@@ -307,22 +307,22 @@ export default function EnhancedTable() {
   };
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
   return (
-    <div className={loading ? "loading" : ""} >
+    <div className={loading ? "loading" : ""}>
       <Box>
         <h1 className={classes.h1}>Turkum</h1>
-        <Grid container spacing={2}>
+        <Grid container direction="row" spacing={2}>
           <Grid container item xs={5}>
             <Grid item xs={12}>
               <CategoryCreate />
             </Grid>
           </Grid>
-          <Grid container item xs={7}>
+          <Grid container direction="row" item xs={7}>
             <Grid item xs={12}>
               <Box className={classes.input_two}>
                 <Paper className={classes.paper}>
                   <TableContainer>
                     <h4 className={classes.h4}>2.Turkumlar</h4>
-                      <Table sx={{ maxWidth: 750 }} aria-labelledby="tableTitle">
+                    <Table sx={{ maxWidth: 750 }} aria-labelledby="tableTitle">
                       <EnhancedTableHead
                         numSelected={selected.length}
                         onSelectAllClick={handleSelectAllClick}
@@ -345,7 +345,7 @@ export default function EnhancedTable() {
                                 role="checkbox"
                                 aria-checked={isItemSelected}
                                 tabIndex={-1}
-                                key={row?.name}
+                                key={index}
                                 selected={isItemSelected}
                               >
                                 <TableCell

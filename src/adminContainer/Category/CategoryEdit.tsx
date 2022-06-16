@@ -50,7 +50,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     color: "#000000",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   cancel: {
     background: "#FF4B4B !important",
@@ -73,7 +73,7 @@ const useStyles = makeStyles({
     fontWeight: "normal",
     fontStyle: "normal",
     color: "#000000",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   input_name: {
     width: "33.2% !important",
@@ -81,45 +81,45 @@ const useStyles = makeStyles({
     fontSize: "15px !important",
     fontWeight: "400",
     padding: "9px 0px 8px 20px !important",
-    '&:focus': {
-      outline: 'none'
+    "&:focus": {
+      outline: "none",
     },
     borderRadius: "5px",
-    border: "1px solid #9F9F9F !important"
+    border: "1px solid #9F9F9F !important",
   },
   h4_second: {
     fontSize: "17px !important",
     fontWeight: "600 !important",
     margin: "0px !important",
     fontStyle: "normal !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   category_name: {
     color: "#464646 !important",
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "20px 0 10px 0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   category_category: {
     color: "#464646 !important",
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "10px 0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   em: {
     color: "#9F9F9F !important",
     font: "inherit !important",
     paddingLeft: "12px !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   menuItem_gutters: {
     color: "#9F9F9F !important",
     font: "inherit !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   parent_buttons: {
     minWidth: "220px !important",
@@ -178,22 +178,22 @@ export default function CategoryEdit() {
               navigate("/category");
             }, 500);
           }
-        }).catch(err => {
+        })
+        .catch((err) => {
           setNotify({
             isOpen: true,
-            message: 'Xatolik yuz berdi...',
-            type: 'error'
-          })
-        })
+            message: "Xatolik yuz berdi...",
+            type: "error",
+          });
+        });
     } catch (error) {
       setNotify({
         isOpen: true,
-        message: 'Xatolik yuz berdi...',
-        type: 'error'
-      })
+        message: "Xatolik yuz berdi...",
+        type: "error",
+      });
     }
-
-  }
+  };
   React.useEffect(() => {
     setCategory(getCategoryByIds(id));
   }, []);
@@ -201,30 +201,27 @@ export default function CategoryEdit() {
   const handleChangeCategory = (event: SelectChangeEvent) => {
     setSelect(event.target.value);
   };
-  const inp = document.querySelector('input');
+  const inp = document.querySelector("input");
   if (inp?.value.length === 1) {
-    inp?.classList.add('active')
-  }
-  else if (inp?.value.length === 2) {
-    inp?.classList.add('active')
-  }
-  else if (inp?.value.length === 3) {
-    inp?.classList.add('active')
-  }
-  else {
-    inp?.classList.remove('active')
+    inp?.classList.add("active");
+  } else if (inp?.value.length === 2) {
+    inp?.classList.add("active");
+  } else if (inp?.value.length === 3) {
+    inp?.classList.add("active");
+  } else {
+    inp?.classList.remove("active");
   }
   return (
     <>
       <MiniDrawer />
-      <Container >
+      <Container>
         <h1 className={classes.h1}>Turkum</h1>
         <Box sx={style} className={classes.box}>
           <Paper style={{ boxShadow: "none" }}>
             <h4 className={classes.h4_second}>Turkumni o'zgartirish</h4>
             <h5 className={classes.category_name}>Nomi</h5>
             <input
-              style={{ borderColor: '#9F9F9F' }}
+              style={{ borderColor: "#9F9F9F" }}
               className={classes.input_name}
               id="outlined-basic"
               placeholder="Turkumni nomi"
@@ -258,8 +255,11 @@ export default function CategoryEdit() {
             </FormControl>
             <div className={classes.parent_buttons}>
               <Tooltip title="Turkumni o'zgartirish">
-
-                <Button className={classes.deletes} style={{ textTransform: "capitalize" }} onClick={putCategory}>
+                <Button
+                  className={classes.deletes}
+                  style={{ textTransform: "capitalize" }}
+                  onClick={putCategory}
+                >
                   Turkumni o'zgartirish
                 </Button>
               </Tooltip>

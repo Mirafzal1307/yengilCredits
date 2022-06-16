@@ -2,7 +2,9 @@ import { makeStyles } from "@mui/styles";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import Grid from "@mui/material/Grid";
+// import Grid from "@mui/material/Grid";
+import { Grid } from "@mui/material";
+
 const useStyles = makeStyles({
   button: {
     display: "flex !important",
@@ -60,7 +62,7 @@ const HomePageTopButtons = () => {
   return (
     <>
       <div>
-        <Grid container spacing={3}>
+        <Grid container direction="row" spacing={3}>
           <Grid item xs={4}>
             <div className={classes.button}>
               <AttachMoneyIcon className={classes.icon} />

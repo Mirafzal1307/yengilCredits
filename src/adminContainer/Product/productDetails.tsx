@@ -354,7 +354,7 @@ const ProductDetails = () => {
                         Xarakteriska Nomi
                       </h3>
                       {
-                        des[0]?.map((item: any) => (
+                        des[0]?.map((item: any, key: any) => (
                           <div style={{flexDirection: 'column'}}  >
                             {item?.character_name}
                           </div>
@@ -366,7 +366,7 @@ const ProductDetails = () => {
                         Xarakteriska Qiymati
                       </h3>
                       {
-                        des[0]?.map((item: any) => (
+                        des[0]?.map((item: any, key: any) => (
                           <div style={{flexDirection: 'column'}}  >
                             {item?.character_value}
                           </div>

@@ -24,14 +24,17 @@ import OrderDetails from "./adminContainer/Order/OrderDetails";
 import LoginPage from "./Auth/LoginPage";
 import PrivateRoute from "./Auth/PrivateRoute";
 
+
+// let win = window
+
+
 function App() {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const token = localStorage.getItem("auth");
-
+  // const token = localStorage.getItem("auth");
   return (
     <>
       <Router>

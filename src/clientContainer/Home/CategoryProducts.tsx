@@ -17,6 +17,7 @@ import cart2 from "../../Images/cart2.svg";
 import { Link } from "react-router-dom";
 import { getProductFromCategoryById } from "../../Api/admin/AdminProductApi";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+// import { SelectChangeEvent } from "@mui/material";
 import BackToTop from "./Navbar/Navbar";
 import Footer from "./Footer";
 import { getCategoryForClient } from "../../Api/client/ClientCategoryApi";
@@ -287,13 +288,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const CategoryProducts = () => {
-  const { products, error, loading } = useTypedSelector(
+  const { error, loading } = useTypedSelector(
     (state) => state.productByCategoryReducer
   );
   const classes = useStyles();
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [category, setCategory] = React.useState<any>();
+  // const [productPrice, setProductPrice] = React.useState("");
+  // const [value, setValue] = React.useState(0);
   const [pageQty, setPageQty] = React.useState<number>(0);
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");
@@ -383,79 +386,52 @@ const CategoryProducts = () => {
         </Grid>
       </Container>
       <Container maxWidth="xl">
-        {!sort ? (
-          <div className={classes.mainCard}>
-            <Stack
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              spacing={2}
-              flexWrap="wrap"
-            >
-              {product
-                .filter((val: any) => {
-                  if (searchTerm === "") {
-                    return val;
-                  } else if (
-                    val.short_name
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase())
-                  ) {
-                    return val;
-                  } else if (val.price <= searchTerm) {
-                    return val;
-                  }
-                })
-                .map((item: any, key: any) => (
-                  <Box
-                    className={classes.bodyCard}
-                    key={key}
-                    sx={{ margin: "10px 10px !important" }}
-                  >
-                    <Box>
-                      <Link to={`/product/client/details/${item.id}`}>
-                        <img
-                          src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
-                          alt="img"
-                          style={{ width: "150px", height: "150px" }}
-                        />
-                      </Link>
-                      <p
-                        className={classes.cardTitle}
-                        style={{
-                          margin: 0,
-                          marginTop: "10px",
-                          marginBottom: "10px",
-                          height: "30px",
-                        }}
-                      >
-                        {item.short_name}
-                      </p>
-                      <p
-                        className={classes.cardPrice}
-                        style={{
-                          color: "#065374",
-                          fontSize: "14px",
-                          textDecoration: "line-through",
-                        }}
-                      >
-                        {item?.price?.toLocaleString()} so'm
-                      </p>
-                      <p
-                        className={classes.cardPriceDiscount}
-                        style={{
-                          fontWeight: "600",
-                          fontFamily: "Poppins",
-                          fontSize: "18px",
-                          color: "#000",
-                          margin: 0,
-                        }}
-                      >
-                        {Math.floor(
-                          (item?.after_discount * 1.44) / 12
-                        ).toLocaleString()}{" "}
-                        so'm
-                        <span
+        {  !sort ?
+        (
+            <div className={classes.mainCard} >
+              <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+                flexWrap="wrap"
+              >
+                {product
+                  .map((item: any, key: any) =>
+                  (
+                    <Box className={classes.bodyCard} key={key} sx={{ margin: '10px 10px !important' }}>
+                      <Box  >
+                        <Link to={`/product/client/details/${item.id}`}>
+                          <img
+                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
+                            alt="img"
+                            style={{ width: "150px", height: "150px" }}
+
+                          />
+                        </Link>
+                        <p
+                          className={classes.cardTitle}
+                          style={{
+                            margin: 0,
+                            marginTop: "10px",
+                            marginBottom: "10px",
+                            height: "30px",
+                          }}
+                        >
+                          {item.short_name}
+                        </p>
+                        <p
+                          className={classes.cardPrice}
+                          style={{
+                            color: "#065374",
+                            fontSize: "14px",
+                            textDecoration: "line-through",
+                          }}
+                        >
+                          {item?.price?.toLocaleString()} so'm
+                        </p>
+                        <p
+                          className={classes.cardPriceDiscount}
                           style={{
                             background: "red",
                             color: "white",
@@ -466,19 +442,17 @@ const CategoryProducts = () => {
                           }}
                         >
                           12 oy
-                        </span>
-                      </p>
-                      <p
-                        className={classes.cardPriceDiscount}
-                        style={{
-                          marginBottom: "10px",
-                          height: "45px",
-                          fontWeight: "500",
-                        }}
-                      >
-                        {item?.after_discount?.toLocaleString()} so'm
-                      </p>
-
+                        </p>
+                        <p
+                          className={classes.cardPriceDiscount}
+                          style={{
+                            marginBottom: "10px",
+                            height: "45px",
+                            fontWeight: "500",
+                          }}
+                        >
+                          {item?.after_discount?.toLocaleString()} so'm
+                        </p>
                       {item.availability === true ? (
                         <button
                           className={classes.cardButton}
@@ -513,25 +487,12 @@ const CategoryProducts = () => {
                     </Box>
                   </Box>
                 ))}
-            </Stack>
-          </div>
+              </Stack>
+            </div>
         ) : (
           <div>
             <Stack flexDirection="column">
               {product
-                .filter((val: any) => {
-                  if (searchTerm === "") {
-                    return val;
-                  } else if (
-                    val.short_name
-                      .toLowerCase()
-                      .includes(searchTerm.toLowerCase())
-                  ) {
-                    return val;
-                  } else if (val.price <= searchTerm) {
-                    return val;
-                  }
-                })
                 .map((item: any, key: any) => (
                   <Grid item xs={12} sm={12} md={12} lg={12} key={key}>
                     <Box className={classes.sortBodyCard}>
@@ -632,8 +593,8 @@ const CategoryProducts = () => {
                         )}
                       </div>
                     </Box>
-                  </Grid>
-                ))}
+                    </Grid>
+                  ))}
             </Stack>
           </div>
         )}
