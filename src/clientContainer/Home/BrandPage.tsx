@@ -1,12 +1,9 @@
 import {
   CircularProgress,
   Container,
-  FormControl,
   Grid,
-  MenuItem,
   Pagination,
   PaginationItem,
-  Select,
   Stack,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -17,15 +14,11 @@ import { useParams } from "react-router-dom";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
 import { getProductByBrand } from "../../Api/client/ClientBrandApi";
-import { SelectChangeEvent } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import CardDrop from "../../Images/Group 201.svg";
-import CardFlex from "../../Images/Group 202.svg";
 import BackToTop from "./Navbar/Navbar";
 import Footer from "./Footer";
 import { Link as NavLink } from "react-router-dom";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
-import Shop from "../../Images/baskets.png";
 import cart2 from "../../Images/cart2.svg";
 import AppsIcon from "@mui/icons-material/Apps";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
@@ -291,7 +284,6 @@ const BrandPage = () => {
   const classes = useStyles();
   const { id } = useParams();
   const [product, setProduct] = useState([]);
-  const [productPrice, setProductPrice] = React.useState("");
   const [pageQty, setPageQty] = React.useState<number>(0);
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");

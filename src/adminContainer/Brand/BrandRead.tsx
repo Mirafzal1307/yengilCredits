@@ -157,6 +157,7 @@ const BrandTable = () => {
                 <TableCell
                   className={classes.forValueCols}
                   style={{ textAlign: "center" }}
+                  key={item.id}
                 >
                   {" "}
                   {item.name}
@@ -164,6 +165,7 @@ const BrandTable = () => {
                 <TableCell
                   className={classes.forValueCols}
                   style={{ textAlign: "center" }}
+                  key={item.id}
                 >
                   {" "}
                   {item.products_count}

@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 
 import storeFactory from './store';
 
-
 const reduxStore = storeFactory();
 
 ReactDOM.render(
