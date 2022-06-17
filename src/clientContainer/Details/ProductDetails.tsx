@@ -798,7 +798,7 @@ const ProductDetails = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="!#">Barchasi</a>
+              Barchasi
             </Link>
           </div>
         </div>
@@ -1030,7 +1030,7 @@ const ProductDetails = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="!#">Barchasi</a>
+              Barchasi
             </Link>
           </div>
         </div>

@@ -235,6 +235,7 @@ const useStyles = makeStyles({
     borderRadius: "5px",
     marginTop: "10px",
     marginBottom: "10px",
+    paddingLeft: "10px"
   },
   sortCardTitle: {
     fontFamily: "Poppins",
@@ -319,7 +320,7 @@ const BrandPage = () => {
         <img src={BigPhoto} alt="" className={classes.BigPhoto} />
       </Container>
       <Container maxWidth="xl">
-        <Grid container spacing={3}>
+        <Grid item container spacing={3}>
           <Grid item xs={6} md={1} sm={4}>
             <Link to="/">
               <button className={classes.back}>
@@ -509,8 +510,8 @@ const BrandPage = () => {
                     }
                   })
                   .map((item: any, key: any) => (
-                    <Grid>
-                      <Grid xs={12} sm={12} md={12} lg={12}>
+                    <Grid item key={key}>
+                      <Grid xs={12} sm={12} md={12} lg={12} item>
                         <Box className={classes.sortBodyCard} key={key}>
                           <Link
                             to={`/product/client/details/${item.id}`}
@@ -518,14 +519,13 @@ const BrandPage = () => {
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
-                              width: "40%",
                             }}
                           >
                             <img
                               src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
                               alt="img"
                               style={{
-                                width: "80%",
+                                width: "auto",
                                 height: "70%",
                                 alignSelf: "center !important",
                                 justifySelf: "center !important",
@@ -614,6 +614,7 @@ const BrandPage = () => {
             </div>
           )}
           <Grid
+            item
             container
             sx={{ mb: "20px", mt: "20px", justifyContent: "center !important" }}
             xs={12}

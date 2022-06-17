@@ -129,16 +129,16 @@ const BrandTable = () => {
             </TableCell>
           </TableRow>
         </TableHead>
-        {brands.map((item: any, key: any) => {
-          const delData = () => {
-            deleteData(item.id);
-          };
-          const getBrandToUpdate = () => {
-            getBrandByID(item.id);
-          };
-          return (
-            <TableBody key={key}>
-              <TableRow style={{ alignItems: "center" }}>
+        <TableBody>
+          {brands.map((item: any, key: any) => {
+            const delData = () => {
+              deleteData(item.id);
+            };
+            const getBrandToUpdate = () => {
+              getBrandByID(item.id);
+            };
+            return (
+              <TableRow style={{ alignItems: "center" }} key={key}>
                 <TableCell padding="checkbox">
                   <Checkbox
                     color="primary"
@@ -157,7 +157,6 @@ const BrandTable = () => {
                 <TableCell
                   className={classes.forValueCols}
                   style={{ textAlign: "center" }}
-                  key={item.id}
                 >
                   {" "}
                   {item.name}
@@ -165,7 +164,6 @@ const BrandTable = () => {
                 <TableCell
                   className={classes.forValueCols}
                   style={{ textAlign: "center" }}
-                  key={item.id}
                 >
                   {" "}
                   {item.products_count}
@@ -184,9 +182,9 @@ const BrandTable = () => {
                   <Modal data={delData} to="brand" />
                 </TableCell>
               </TableRow>
-            </TableBody>
-          );
-        })}
+            );
+          })}
+        </TableBody>
       </Table>
       <Notification notify={notify} setNotify={setNotify} />
     </React.Fragment>

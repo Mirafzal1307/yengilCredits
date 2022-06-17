@@ -202,7 +202,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="!#" >Barchasi</a>
+              Barchasi
             </Link>
           </div>
         </div>
@@ -252,8 +252,8 @@ const CardProducts = () => {
             ) : (
               recommended &&
               recommended?.map((item: any, key: any) => (
-                <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={key}>
+                <SplideSlide className={classes.splide} key={key}>
+                  <Box className={classes.bodyCard}>
                     <Box style={{ margin: "0px 10px" }}>
                                   <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
@@ -433,7 +433,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="!#">Barchasi</a>
+            Barchasi
             </Link>
           </div>
         </div>
@@ -484,8 +484,8 @@ const CardProducts = () => {
             ) : (
               popular &&
               popular?.map((item: any, key: any) => (
-                <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={key}>
+                <SplideSlide className={classes.splide} key={key}>
+                  <Box className={classes.bodyCard} >
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
@@ -672,7 +672,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="!#">Barchasi</a>
+            Barchasi
             </Link>
           </div>
         </div>
@@ -724,8 +724,8 @@ const CardProducts = () => {
               last &&
               
               last.map((item: any, key: any) => (
-                <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={key}>
+                <SplideSlide className={classes.splide} key={key}>
+                  <Box className={classes.bodyCard}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>

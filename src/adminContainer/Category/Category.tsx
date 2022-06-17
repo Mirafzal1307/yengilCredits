@@ -14,5 +14,3 @@ const Category = () => {
 };
 
 export default Category;
-
-console.clear()

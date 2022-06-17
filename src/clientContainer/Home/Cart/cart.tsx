@@ -20,7 +20,10 @@ import Footer from "../Footer";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@mui/icons-material/Close";
-import { API_URL, MINIO_FULL_ENDPOINT_FOR } from "../../../constants/ApiConstants";
+import {
+  API_URL,
+  MINIO_FULL_ENDPOINT_FOR,
+} from "../../../constants/ApiConstants";
 import React from "react";
 import { postProductOrder } from "../../../Api/client/CardOrderAPI";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -374,16 +377,15 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     transform: "translate(-50%, -50%)",
     borderRadius: "5px",
-    boxShadow: '3px 3px 3px black 3px 3px 3px ',
-    padding: '15px',
-    width: '500px',
-    background: 'white',
+    boxShadow: "3px 3px 3px black 3px 3px 3px ",
+    padding: "15px",
+    width: "500px",
+    background: "white",
     [theme.breakpoints.down(600)]: {
-
       top: "50%",
-      width: '300px',
-    }
-  }
+      width: "300px",
+    },
+  },
 }));
 export default function Cart() {
   const [alignment, setAlignment] = React.useState<string | null>("Naqd");
@@ -399,42 +401,41 @@ export default function Cart() {
   const [disabled, setDisabled] = React.useState(true);
   const { cartProducts } = useSelector((state: rootState) => state.cartreducer);
   const [open, setOpen] = React.useState(false);
-  const [timer, setTimer] = React.useState('00:00');
-  const [count, setCount] = React.useState(60)
-  const [code, setCode] = React.useState(null)
-  const [status, setStatus] = React.useState<any>(null)
+  const [timer, setTimer] = React.useState("00:00");
+  const [count, setCount] = React.useState(60);
+  const [code, setCode] = React.useState(null);
+  const [status, setStatus] = React.useState<any>(null);
 
   const Ref = React.useRef(null);
   const handleOpen = () => {
     if (phone.length === 13 && fullName) {
       setOpen(true);
-      postPhone({ phone, fullName })
-      onClickReset()
+      postPhone({ phone, fullName });
+      onClickReset();
     }
   };
   const PostCode = async (mass: any) => {
-    const phone = mass[0]
-    const code = mass[1]
+    const phone = mass[0];
+    const code = mass[1];
     axios({
       url: `${API_URL}/sms/validation/${code}`,
       method: "GET",
       headers: {
-        "number": `${phone}`
-      }
+        number: `${phone}`,
+      },
     })
       .then((res) => {
         setStatus(res.status);
       })
-      .catch((err) => err)
-  }
+      .catch((err) => err);
+  };
 
-  const mass = [phone, code]
+  const mass = [phone, code];
   const handleClose = () => {
     PostCode(mass);
     if (status === 200) {
       setOpen(false);
     }
-
   };
   const navigate = useNavigate();
   const refresh = (): void => {
@@ -482,7 +483,7 @@ export default function Cart() {
   let options: any = getInputProps();
   const address = options.value;
   function Submit(e: any) {
-    e.preventDefault()
+    e.preventDefault();
     const form = JSON.stringify({
       products: products,
       buyer: {
@@ -501,7 +502,7 @@ export default function Cart() {
             dispatch(deleteAllFromCart());
             setTimeout(() => {
               navigate("/");
-            }, 1000)
+            }, 1000);
             refresh();
             setNotify({
               isOpen: true,
@@ -542,44 +543,46 @@ export default function Cart() {
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);
     return {
-      total, minutes, seconds
+      total,
+      minutes,
+      seconds,
     };
-  }
+  };
   const startTimer = (e: any) => {
-    let { total, minutes, seconds }
-      = getTimeRemaining(e);
+    let { total, minutes, seconds } = getTimeRemaining(e);
     if (total >= 0) {
       setTimer(
-        (minutes > 9 ? minutes : '0' + minutes) + ':'
-        + (seconds > 9 ? seconds : '0' + seconds)
-      )
+        (minutes > 9 ? minutes : "0" + minutes) +
+          ":" +
+          (seconds > 9 ? seconds : "0" + seconds)
+      );
     }
-  }
+  };
   const clearTimer = (e: any) => {
-    setTimer('00:60');
+    setTimer("00:60");
     if (Ref.current) clearInterval(Ref.current);
     const id: any = setInterval(() => {
       startTimer(e);
-    }, 1000)
+    }, 1000);
     Ref.current = id;
-  }
+  };
   const getDeadTime = () => {
     let deadline = new Date();
     deadline.setSeconds(deadline.getSeconds() + count);
     return deadline;
-  }
+  };
   React.useEffect(() => {
     clearTimer(getDeadTime());
   }, []);
   const onClickReset = () => {
     clearTimer(getDeadTime());
-  }
+  };
   const handleResetTimer = () => {
     if (timer === "00:00") {
-      postPhone({ phone, fullName })
-      onClickReset()
+      postPhone({ phone, fullName });
+      onClickReset();
     }
-  }
+  };
   return (
     <>
       <BackToTop />
@@ -612,95 +615,92 @@ export default function Cart() {
             <>
               <Grid item xs={12} md={8} className={classes.MinGrid}>
                 {cartProducts.length > 0 && (
-                  <Table>
-                    <div>
-                      {cartProducts &&
-                        cartProducts?.map((product: any, key: any) => (
-                          <div
-                            key={key}
-                            className={classes.cartMin}
-                            style={{ margin: "15px 0px " }}
-                          >
-                            <div style={{ width: "25%" }}>
-                              <Link
-                                to={`/product/client/details/${product.id}`}
-                              >
-                                <img
-                                  src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`}
-                              alt=""  />
-                              </Link>
-                            </div>
-                            <div style={{ width: "50%" }}>
-                              <div style={{ display: "flex" }}>
-                                <div>
-                                  <h5 className={classes.nameRes}>
-                                    {product.short_name}
-                                  </h5>
-                                </div>
-                              </div>
-                              <div style={{ display: "flex" }}>
+                  // <Table>
+                  <div>
+                    {cartProducts &&
+                      cartProducts?.map((product: any, key: any) => (
+                        <div
+                          key={key}
+                          className={classes.cartMin}
+                          style={{ margin: "15px 0px " }}
+                        >
+                          <div style={{ width: "25%" }}>
+                            <Link to={`/product/client/details/${product.id}`}>
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`}
+                                alt=""
+                              />
+                            </Link>
+                          </div>
+                          <div style={{ width: "50%" }}>
+                            <div style={{ display: "flex" }}>
+                              <div>
                                 <h5 className={classes.nameRes}>
-                                  {product.price.toLocaleString()} so'm
+                                  {product.short_name}
                                 </h5>
                               </div>
                             </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "space-around",
-                                width: "25%",
-                              }}
-                            >
-                              <Button
-                                onClick={() =>
-                                  dispatch(deleteFromCart(product))
-                                }
-                                value={product.short_name}
-                              >
-                                <CloseIcon className={classes.close} />
-                              </Button>
-                              <div style={{ width: "25%", marginLeft: "7px" }}>
-                                <Select
-                                  key={product?.id}
-                                  name="quantity"
-                                  onChange={(event: any) =>
-                                    dispatch(
-                                      updatePrice(product, event.target.value)
-                                    )
-                                  }
-                                  defaultValue={product.quantity}
-                                  className={classes.dropDownMin}
-                                >
-                                  <MenuItem value="1">1</MenuItem>
-                                  <MenuItem value="2">2</MenuItem>
-                                  <MenuItem value="3">3</MenuItem>
-                                  <MenuItem value="4">4</MenuItem>
-                                  <MenuItem value="5">5</MenuItem>
-                                  <MenuItem value="6">6</MenuItem>
-                                </Select>
-                              </div>
+                            <div style={{ display: "flex" }}>
+                              <h5 className={classes.nameRes}>
+                                {product.price.toLocaleString()} so'm
+                              </h5>
                             </div>
                           </div>
-                        ))}
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-around",
-                        }}
-                      >
-                        <div>
-                          <p style={{ fontWeight: 600, fontSize: "17px" }}>
-                            {" "}
-                            Umumiy narx
-                          </p>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-around",
+                              width: "25%",
+                            }}
+                          >
+                            <Button
+                              onClick={() => dispatch(deleteFromCart(product))}
+                              value={product.short_name}
+                            >
+                              <CloseIcon className={classes.close} />
+                            </Button>
+                            <div style={{ width: "25%", marginLeft: "7px" }}>
+                              <Select
+                                key={product?.id}
+                                name="quantity"
+                                onChange={(event: any) =>
+                                  dispatch(
+                                    updatePrice(product, event.target.value)
+                                  )
+                                }
+                                defaultValue={product.quantity}
+                                className={classes.dropDownMin}
+                              >
+                                <MenuItem value="1">1</MenuItem>
+                                <MenuItem value="2">2</MenuItem>
+                                <MenuItem value="3">3</MenuItem>
+                                <MenuItem value="4">4</MenuItem>
+                                <MenuItem value="5">5</MenuItem>
+                                <MenuItem value="6">6</MenuItem>
+                              </Select>
+                            </div>
+                          </div>
                         </div>
+                      ))}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                      }}
+                    >
+                      <div>
                         <p style={{ fontWeight: 600, fontSize: "17px" }}>
-                          {total.toLocaleString()} so'm
+                          {" "}
+                          Umumiy narx
                         </p>
                       </div>
+                      <p style={{ fontWeight: 600, fontSize: "17px" }}>
+                        {total.toLocaleString()} so'm
+                      </p>
                     </div>
-                  </Table>
+                  </div>
+                  // </Table>
                 )}
               </Grid>
               <Grid item xs={12} md={8} className={classes.MaxGrid}>
@@ -716,15 +716,19 @@ export default function Cart() {
                     </thead>
                     <tbody>
                       {cartProducts &&
-                        cartProducts?.map((product: any) => (
-                          <tr key={product?.id} className={classes.carts}>
+                        cartProducts?.map((product: any, key: any) => (
+                          <tr
+                            className={classes.carts}
+                            key={key}
+                          >
                             <td>
                               <Link
                                 to={`/product/client/details/${product.id}`}
                               >
                                 <img
                                   src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`}
-                              alt=""  />
+                                  alt=""
+                                />
                               </Link>
                             </td>
                             <td>
@@ -848,7 +852,7 @@ export default function Cart() {
                       />
                     </Box>
                     <Box>
-                      {status !== 200 &&
+                      {status !== 200 && (
                         <button
                           onClick={handleOpen}
                           className={classes.sale}
@@ -856,38 +860,69 @@ export default function Cart() {
                         >
                           Tasdiqlash
                         </button>
-                      }
+                      )}
                       <Modal
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="child-modal-title"
                         aria-describedby="child-modal-description"
                       >
-                        <Box className={classes.smsVerification} >
+                        <Box className={classes.smsVerification}>
                           <h2>Tasdiqlash talab qilinadi</h2>
-                          <p>
-                            Quyidagi raqamga kod yubordik {phone}
-                          </p>
-                          <input onChange={(e: any) => setCode(e.target.value)} placeholder="Tasdiqlash kodini shu yerga kiriting..." className={classes.Input} required />
-                          {status === 200 && <Typography sx={{ color: "green", fontSize: "14px" }} >Kod tasdiqlandi</Typography>}
-                          {status === 400 && <Typography sx={{ color: "#FF4B4B", fontSize: "14px" }} >Telifon raqam yoki kod xato kiritildi</Typography>}
-                          <button className={classes.sale} onClick={handleClose}>
-                            {status === 200 && "Davom ettirish"} {status > 200 && "Davom ettirish"} {!status && "Tasdiqlash"}
+                          <p>Quyidagi raqamga kod yubordik {phone}</p>
+                          <input
+                            onChange={(e: any) => setCode(e.target.value)}
+                            placeholder="Tasdiqlash kodini shu yerga kiriting..."
+                            className={classes.Input}
+                            required
+                          />
+                          {status === 200 && (
+                            <Typography
+                              sx={{ color: "green", fontSize: "14px" }}
+                            >
+                              Kod tasdiqlandi
+                            </Typography>
+                          )}
+                          {status === 400 && (
+                            <Typography
+                              sx={{ color: "#FF4B4B", fontSize: "14px" }}
+                            >
+                              Telifon raqam yoki kod xato kiritildi
+                            </Typography>
+                          )}
+                          <button
+                            className={classes.sale}
+                            onClick={handleClose}
+                          >
+                            {status === 200 && "Davom ettirish"}{" "}
+                            {status > 200 && "Davom ettirish"}{" "}
+                            {!status && "Tasdiqlash"}
                           </button>
-                          <Typography onClick={handleResetTimer} sx={{ cursor: "pointer", textAlign: "center", mt: "20px", color: timer !== "00:00" ? "#FF4B4B" : "green" }} >Kodni qayta jo’natishni so’rash {timer !== "00:00" && timer}</Typography>
+                          <Typography
+                            onClick={handleResetTimer}
+                            sx={{
+                              cursor: "pointer",
+                              textAlign: "center",
+                              mt: "20px",
+                              color: timer !== "00:00" ? "#FF4B4B" : "green",
+                            }}
+                          >
+                            Kodni qayta jo’natishni so’rash{" "}
+                            {timer !== "00:00" && timer}
+                          </Typography>
                         </Box>
                       </Modal>
                     </Box>
                   </Grid>
                 )}
-                {
-                  status === 200 &&
+                {status === 200 && (
                   <>
                     <Grid className={classes.Grid} container spacing={2}>
                       <Grid item xs={12} sm={6} md={12}>
                         <Box>
                           <p className={classes.UniversalP}>
-                            Shahar, tuman <span style={{ color: "red" }}>*</span>
+                            Shahar, tuman{" "}
+                            <span style={{ color: "red" }}>*</span>
                           </p>
                           <div>
                             <div {...getRootProps()}>
@@ -900,7 +935,7 @@ export default function Cart() {
                               <Listbox {...getListboxProps()}>
                                 {(groupedOptions as typeof cities).map(
                                   (option, index) => (
-                                    <li {...getOptionProps({ option, index })}>
+                                    <li {...getOptionProps({ option, index })} key={index}>
                                       {option.title}
                                     </li>
                                   )
@@ -911,7 +946,8 @@ export default function Cart() {
                         </Box>
                         <Box>
                           <p className={classes.UniversalP}>
-                            Yashash manzili <span style={{ color: "red" }}>*</span>
+                            Yashash manzili{" "}
+                            <span style={{ color: "red" }}>*</span>
                           </p>
                           <input
                             type="text"
@@ -949,9 +985,7 @@ export default function Cart() {
 
                     <div>
                       <button
-                        onClick={
-                          Submit
-                        }
+                        onClick={Submit}
                         disabled={disabled}
                         className={classes.sale}
                       >
@@ -959,7 +993,7 @@ export default function Cart() {
                       </button>
                     </div>
                   </>
-                }
+                )}
               </form>
             </div>
           </Grid>

@@ -156,8 +156,8 @@ const BrandClient = () => {
                   getProduct(item.id);
                 };
                 return (
-                  <SplideSlide className={classes.splide}>
-                    <Box className={classes.bodyCard} key={key}>
+                  <SplideSlide className={classes.splide} key={key}>
+                    <Box className={classes.bodyCard}>
                       <Box>
                         <img
                           src={`${MINIO_FULL_ENDPOINT_FOR}/brand/${item.photo_name}`}

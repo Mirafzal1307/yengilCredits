@@ -10,9 +10,9 @@ const useStyles = makeStyles({
 });
 
 interface notifyType {
-  isOpen: boolean;
-  message: string;
-  type: AlertColor | undefined | any;
+  isOpen?: boolean;
+  message?: string;
+  type?: AlertColor | undefined | any;
 }
 
 const Notification = ({
@@ -55,4 +55,3 @@ const Notification = ({
 };
 
 export default Notification;
-console.clear();

@@ -13,9 +13,7 @@ const useStyles = makeStyles({
   },
 });
 const HomeHeader: FC = () => {
-  React.useEffect(() => {
-    console.clear();
-  }, [])
+
   const classes = useStyles();
   return (
     <div className={classes.header}>

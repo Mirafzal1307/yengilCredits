@@ -75,8 +75,8 @@ function EnhancedTableHead(props: EnhancedTableProps) {
         <TableCell padding="checkbox" className={classes.tableCell}>
           <Checkbox color="primary" onChange={onSelectAllClick} />
         </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell key={headCell.id} className={classes.tableCell}>
+        {headCells.map((headCell, key) => (
+          <TableCell key={key} className={classes.tableCell}>
             <TableSortLabel>{headCell.label}</TableSortLabel>
           </TableCell>
         ))}
@@ -336,7 +336,6 @@ export default function EnhancedTable() {
                           const isItemSelected = isSelected(row?.name);
                           const labelId = `enhanced-table-checkbox-${index}`;
                           return (
-                            <>
                               <TableRow
                                 hover
                                 onClick={(event) =>
@@ -393,7 +392,6 @@ export default function EnhancedTable() {
                                   />
                                 </TableCell>
                               </TableRow>
-                            </>
                           );
                         })}
                       </TableBody>

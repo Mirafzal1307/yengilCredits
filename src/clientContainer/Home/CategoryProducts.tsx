@@ -281,7 +281,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#000",
   },
   img: {
-    width: "80%",
+    width: "auto",
     height: "70%",
     alignSelf: "center !important",
     justifySelf: "center !important",
@@ -308,7 +308,6 @@ const CategoryProducts = () => {
     type: "",
   });
   const dispatch = useDispatch();
-  // console.clear()
   const getProduct = async (id: any) => {
     let res: any = await getProductFromCategoryById(id, `${page - 1}`, {});
     setProduct(res.data.content);

@@ -359,7 +359,7 @@ const AllCards = () => {
         <img src={BigPhoto} alt="" className={classes.BigPhoto} />
       </Container>
       <Container maxWidth="xl">
-        <Grid container direction="row" spacing={3}>
+        <Grid container direction="row" spacing={3} item>
           <Grid item xs={6} md={1} sm={4}>
             <Link to="/">
               <button className={classes.back}>
@@ -510,9 +510,9 @@ const AllCards = () => {
             <div>
               <Stack flexDirection="column">
                 {products.map((item: any, key: any) => (
-                  <Grid>
+                  <Grid item key={key}>
                     <Grid item xs={12} sm={12} md={12} lg={12}>
-                      <Box className={classes.sortBodyCard} key={key}>
+                      <Box className={classes.sortBodyCard} >
                         <Link
                           to={`/product/client/details/${item.id}`}
                           style={{
@@ -526,7 +526,7 @@ const AllCards = () => {
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
                             alt="img"
                             style={{
-                              width: "80%",
+                              width: "auto",
                               height: "70%",
                               alignSelf: "center !important",
                               justifySelf: "center !important",
@@ -626,6 +626,7 @@ const AllCards = () => {
             sx={{ mb: "20px", mt: "20px", justifyContent: "center !important" }}
             xs={12}
             direction="row"
+            item
           >
             {!!pageQty && (
               <Pagination
