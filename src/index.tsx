@@ -8,10 +8,10 @@ import storeFactory from './store';
 
 const reduxStore = storeFactory();
 ReactDOM.render(
+    
     <Provider store={reduxStore}>
         <App />
     </Provider>
     , document.getElementById('root')
     );
     
-    console.clear()

@@ -113,7 +113,7 @@ const CategoryCreate = () => {
           setNotify({
             isOpen: true,
             message: "Muvaffaqiyatli yaratildi.",
-            type: "success",
+            type:"success",
           });
         }
         return await getCategory();
@@ -126,7 +126,6 @@ const CategoryCreate = () => {
         });
       });
   }
-  console.clear()
   const inpt = document.querySelector('input');
   if (inpt?.value.length === 1) {
     inpt?.classList.add('active')
@@ -189,7 +188,7 @@ const CategoryCreate = () => {
             Turkumni yarating
           </Button>
         </Tooltip>
-        <Notification notify={notify} setNotify={setNotify} />
+        <Notification notify={notify}  setNotify={setNotify} />
       </Box>
     </>
   );

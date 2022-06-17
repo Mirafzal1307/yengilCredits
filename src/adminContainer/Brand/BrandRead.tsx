@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  getAllBrandData,
-  deleteBrandData,
-  getBrand,
-} from "../../Api/admin/AdminBrandApi";
+import { deleteBrandData, getBrand } from "../../Api/admin/AdminBrandApi";
 import { makeStyles } from "@mui/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,7 +7,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Checkbox from "@mui/material/Checkbox";
-import {MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
+import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import { Link } from "react-router-dom";
 import edit from "./images/edit.svg";
 import Modal from "../Modal/Modal";
@@ -20,11 +16,7 @@ import { useActions } from "../../hook/useActions";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { Box, LinearProgress, Tooltip } from "@mui/material";
 
-interface Data {
-  brand?: any;
-  photo_name: string;
-  products_count: number;
-}
+console.warn = () => {};
 
 const useStyles = makeStyles({
   editButton: {
@@ -55,8 +47,8 @@ const useStyles = makeStyles({
   },
   forCell: {
     display: "block !important",
-    margin: "auto !important"
-  }
+    margin: "auto !important",
+  },
 });
 
 const BrandTable = () => {
@@ -107,7 +99,7 @@ const BrandTable = () => {
   };
 
   const getBrandByID = async (id: number) => {
-    const brandData = await getBrand(id);
+    await getBrand(id);
   };
 
   return (
@@ -137,16 +129,16 @@ const BrandTable = () => {
             </TableCell>
           </TableRow>
         </TableHead>
-        {brands.map((item) => {
-          const delData = () => {
-            deleteData(item.id);
-          };
-          const getBrandToUpdate = () => {
-            getBrandByID(item.id);
-          };
-          return (
-            <TableBody>
-              <TableRow style={{ alignItems: "center" }}>
+        <TableBody>
+          {brands.map((item: any, key: any) => {
+            const delData = () => {
+              deleteData(item.id);
+            };
+            const getBrandToUpdate = () => {
+              getBrandByID(item.id);
+            };
+            return (
+              <TableRow style={{ alignItems: "center" }} key={key}>
                 <TableCell padding="checkbox">
                   <Checkbox
                     color="primary"
@@ -165,7 +157,6 @@ const BrandTable = () => {
                 <TableCell
                   className={classes.forValueCols}
                   style={{ textAlign: "center" }}
-                  key={item.id}
                 >
                   {" "}
                   {item.name}
@@ -173,7 +164,6 @@ const BrandTable = () => {
                 <TableCell
                   className={classes.forValueCols}
                   style={{ textAlign: "center" }}
-                  key={item.id}
                 >
                   {" "}
                   {item.products_count}
@@ -185,21 +175,18 @@ const BrandTable = () => {
                         className={classes.editButton}
                         onClick={getBrandToUpdate}
                       >
-                        <img
-                          src={edit}
-                          alt="rasm bor edi"
-                        />
+                        <img src={edit} alt="rasm bor edi" />
                       </button>
                     </Tooltip>
                   </Link>
-                  <Modal data={delData} to="brand"/>
-                  <Notification notify={notify} setNotify={setNotify} />
+                  <Modal data={delData} to="brand" />
                 </TableCell>
               </TableRow>
-            </TableBody>
-          );
-        })}
+            );
+          })}
+        </TableBody>
       </Table>
+      <Notification notify={notify} setNotify={setNotify} />
     </React.Fragment>
   );
 };

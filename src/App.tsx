@@ -25,12 +25,17 @@ import LoginPage from "./Auth/LoginPage";
 import PrivateRoute from "./Auth/PrivateRoute";
 import Payme from "./demoPayment";
 
+
+// let win = window
+
+
 function App() {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-  window.console.clear();
+
+
   return (
     <>
     {/* <Payme/> */}

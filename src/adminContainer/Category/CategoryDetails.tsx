@@ -18,6 +18,7 @@ import {
 import {
   deleteCategoryItem,
   getCategoryByParentCategory,
+  getCategorySearch,
 } from "../../Api/admin/AdminCategoryApi";
 import { makeStyles } from "@mui/styles";
 import "./style.css";
@@ -296,6 +297,8 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");
   const [category, setCategory] = React.useState<createDatas[]>([]);  
+  const [categories, setCategories] = React.useState<any>();
+  const [param, setParam] = React.useState('');
   const [notify, setNotify] = React.useState<any>({
     isOpen: false,
     message: "",
@@ -343,7 +346,7 @@ export default function EnhancedTable() {
   }
   const isSelected = (name: string) => selected.indexOf(name) !== -1;
   const deleteCategory = async (id: any) => {
-    let data = await deleteCategoryItem(id)
+     await deleteCategoryItem(id)
       .then((res: any) => {
         if (res.status === 200) {
           setNotify({
@@ -361,7 +364,6 @@ export default function EnhancedTable() {
         });
       });
   };
-  console.clear()
 
   return (
     <>
@@ -393,7 +395,7 @@ export default function EnhancedTable() {
                               role="checkbox"
                               aria-checked={isItemSelected}
                               tabIndex={-1}
-                              key={row?.name}
+                              key={index}
                               selected={isItemSelected}
                             >
                               <TableCell
@@ -446,6 +448,7 @@ export default function EnhancedTable() {
                                 <Notification
                                   notify={notify}
                                   setNotify={setNotify}
+                                  
                                 />
                               </TableCell>
                             </TableRow>
