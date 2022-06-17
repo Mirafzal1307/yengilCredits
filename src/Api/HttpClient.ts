@@ -2,7 +2,6 @@ import { API_URL } from "../constants/ApiConstants";
 
 import axios, { AxiosError, AxiosInstance, AxiosPromise, AxiosRequestConfig } from "axios";
 
-const accessToken = localStorage.getItem("auth");
 class ApiClient {
   instance: AxiosInstance;
   user: any;
@@ -15,8 +14,22 @@ class ApiClient {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
 
-      }
-  });
+      }});
+      this.instance.interceptors.response.use(
+        (config) => {
+          console.log( "--- Axios: request use success ---" , config);
+          
+          return config;
+        },
+        (error) => {
+          console.log( "--- Axios: request use error ---" , error);
+          return Promise.reject(error);
+        }
+      );
+      this.instance.interceptors.request.use(
+        (response) => {}
+      );
+
   }
   fetch<T>(config: AxiosRequestConfig): AxiosPromise<T> {
     return this.instance({

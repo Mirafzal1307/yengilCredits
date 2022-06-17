@@ -90,12 +90,18 @@ const LoginPage = () => {
       navigate("/dashboard");
     }, 1000);
   };
+  const updateToken = () => {
+   
+  };
   const sendDataToApi = async () => {
     await getToken(login)
       .then((res: any) => {
-        let token = res.data.split(":")[1];
-        localStorage.setItem("auth", token);
-        setAuth(token);
+        let accessToken = res.data.accessToken;
+        console.log(accessToken);
+        let refresh_Token = res.data.refreshToken
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refresh_Token);
+        setAuth(accessToken);
       });
     navigateTo();
   };
