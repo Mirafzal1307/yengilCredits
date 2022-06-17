@@ -10,28 +10,22 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Zoom from "@mui/material/Zoom";
 import { makeStyles } from "@material-ui/core/styles";
 import Ys from "../../../Images/Logo BT (1).svg";
-import Search from "../../../Images/one.svg";
 import Basket from "../../../Images/two.svg";
 import Lang from "../../../Images/three.svg";
 import ListIcon from "@mui/icons-material/List";
-import { border, SxProps } from "@mui/system";
 import "./style.css";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import {
   getCategoryForClient,
   getParentCategories,
 } from "../../../Api/client/ClientCategoryApi";
 import { getProductFromCategoryById } from "../../../Api/admin/AdminProductApi";
 import { Grid, Tooltip } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { rootState } from "../../../redux/reducers";
 import MainSearch from "../MainSearch";
 import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
-import catalogicon from "../../../Images/catalogicon.svg";
-import CloseIcon from "@mui/icons-material/Close";
-import AccountMenu from "./Language";
 import Baskets from "../../../Images/basket.svg";
 import Telegram from "../../../Images/telegram.svg";
 import LogoIcon from "../../../Images/LogoIcon.svg";
@@ -205,8 +199,8 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "7px",
     paddingRight: "0 !important",
     [theme.breakpoints.down(600)]: {
-      display: 'none !important'
-    }
+      display: "none !important",
+    },
   },
   menuButtonMax: {
     marginTop: "10px",
@@ -271,8 +265,7 @@ const useStyles = makeStyles((theme) => ({
   },
   mainMenu: {
     padding: "0 !important",
-
-  }
+  },
 }));
 function ScrollTop(props: Props) {
   const { children, window } = props;
@@ -306,15 +299,11 @@ function ScrollTop(props: Props) {
 }
 
 const BackToTop = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [category, setCategory] = React.useState<any>({});
-  const [parentCategories, setParentCategories] = React.useState<any>([]);
-  let categoryValues = Object.values(category);
   const cartProducts = useSelector(
     (state: rootState) => state.cartreducer.cartProducts
   );
   let total = cartProducts.length;
-  const open = Boolean(anchorEl);
   React.useEffect(() => {
     getCategoryForCleintPage();
   }, []);
@@ -323,17 +312,8 @@ const BackToTop = () => {
     let response: any = await getCategoryForClient();
     setCategory(response.data.menu);
     let res: any = await getParentCategories();
-    setParentCategories(res.data.content);
-  };
-  const getCategoryProductById = async (id: any) => {
-    const response = await getProductFromCategoryById(id, {});
   };
   const classes = useStyles();
-
-  let subCategoryArray: any = [];
-  categoryValues.map((i) => {
-    subCategoryArray.push(i);
-  });
   return (
     <React.Fragment>
       <CssBaseline />
@@ -421,56 +401,42 @@ const BackToTop = () => {
                         className={classes.SubMenu}
                       >
                         {category?.["Telefonlar va smartfonlar"]?.map(
-                          (item: any, key: any) => {
-                            const getCategory = () => {
-                              getCategoryProductById(item.parent_id);
-                            };
-                            return (
-                              <>
-                                <MenuItem
-                                  style={{
-                                    width: "400px",
-                                    marginLeft: "10px !important",
-                                  }}
-                                >
-                                  <Link
-                                    to={`/product/product-by-category/${item.sub_id}`}
-                                    key={key}
-                                    className={classes.navLink}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </MenuItem>
-                              </>
-                            );
-                          }
+                          (item: any, key: any) => (
+                            <MenuItem
+                              style={{
+                                width: "400px",
+                                marginLeft: "10px !important",
+                              }}
+                              key={key}
+                            >
+                              <Link
+                                to={`/product/product-by-category/${item.sub_id}`}
+                                className={classes.navLink}
+                              >
+                                {item.name}
+                              </Link>
+                            </MenuItem>
+                          )
                         )}
                       </SubMenu>
                       <SubMenu label="Uy jihozlari" className={classes.SubMenu}>
                         {category?.["Uy jihozlari"]?.map(
-                          (item: any, key: any) => {
-                            const getCategory = () => {
-                              getCategoryProductById(item.parent_id);
-                            };
-                            return (
-                              <>
-                                <MenuItem
-                                  style={{
-                                    width: "400px",
-                                    marginLeft: "10px !important",
-                                  }}
-                                >
-                                  <Link
-                                    to={`/product/product-by-category/${item.sub_id}`}
-                                    key={key}
-                                    className={classes.navLink}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </MenuItem>
-                              </>
-                            );
-                          }
+                          (item: any, key: any) => (
+                            <MenuItem
+                              style={{
+                                width: "400px",
+                                marginLeft: "10px !important",
+                              }}
+                              key={key}
+                            >
+                              <Link
+                                to={`/product/product-by-category/${item.sub_id}`}
+                                className={classes.navLink}
+                              >
+                                {item.name}
+                              </Link>
+                            </MenuItem>
+                          )
                         )}
                       </SubMenu>
                       <SubMenu
@@ -478,29 +444,22 @@ const BackToTop = () => {
                         className={classes.SubMenu}
                       >
                         {category?.["Televizorlar va videotexnikalar"]?.map(
-                          (item: any, key: any) => {
-                            const getCategory = () => {
-                              getCategoryProductById(item.parent_id);
-                            };
-                            return (
-                              <>
-                                <MenuItem
-                                  style={{
-                                    width: "400px",
-                                    marginLeft: "10px !important",
-                                  }}
-                                >
-                                  <Link
-                                    to={`/product/product-by-category/${item.sub_id}`}
-                                    key={key}
-                                    className={classes.navLink}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </MenuItem>
-                              </>
-                            );
-                          }
+                          (item: any, key: any) => (
+                            <MenuItem
+                              style={{
+                                width: "400px",
+                                marginLeft: "10px !important",
+                              }}
+                              key={key}
+                            >
+                              <Link
+                                to={`/product/product-by-category/${item.sub_id}`}
+                                className={classes.navLink}
+                              >
+                                {item.name}
+                              </Link>
+                            </MenuItem>
+                          )
                         )}
                       </SubMenu>
                       <SubMenu
@@ -509,58 +468,44 @@ const BackToTop = () => {
                       >
                         {category?.[
                           "Sport va dam olish uchun mahsulotlar"
-                        ]?.map((item: any, key: any) => {
-                          const getCategory = () => {
-                            getCategoryProductById(item.parent_id);
-                          };
-                          return (
-                            <>
-                              <MenuItem
-                                style={{
-                                  width: "400px",
-                                  marginLeft: "10px !important",
-                                }}
-                              >
-                                <Link
-                                  to={`/product/product-by-category/${item.sub_id}`}
-                                  key={key}
-                                  className={classes.navLink}
-                                >
-                                  {item.name}
-                                </Link>
-                              </MenuItem>
-                            </>
-                          );
-                        })}
+                        ]?.map((item: any, key: any) => (
+                          <MenuItem
+                            style={{
+                              width: "400px",
+                              marginLeft: "10px !important",
+                            }}
+                            key={key}
+                          >
+                            <Link
+                              to={`/product/product-by-category/${item.sub_id}`}
+                              className={classes.navLink}
+                            >
+                              {item.name}
+                            </Link>
+                          </MenuItem>
+                        ))}
                       </SubMenu>
                       <SubMenu
                         label="Sog'lik va go'zallik mahsulotlari"
                         className={classes.SubMenu}
                       >
                         {category?.["Sog'lik va go'zallik mahsulotlari"]?.map(
-                          (item: any, key: any) => {
-                            const getCategory = () => {
-                              getCategoryProductById(item.parent_id);
-                            };
-                            return (
-                              <>
-                                <MenuItem
-                                  style={{
-                                    width: "400px",
-                                    marginLeft: "10px !important",
-                                  }}
-                                >
-                                  <Link
-                                    to={`/product/product-by-category/${item.sub_id}`}
-                                    key={key}
-                                    className={classes.navLink}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </MenuItem>
-                              </>
-                            );
-                          }
+                          (item: any, key: any) => (
+                            <MenuItem
+                              style={{
+                                width: "400px",
+                                marginLeft: "10px !important",
+                              }}
+                              key={key}
+                            >
+                              <Link
+                                to={`/product/product-by-category/${item.sub_id}`}
+                                className={classes.navLink}
+                              >
+                                {item.name}
+                              </Link>
+                            </MenuItem>
+                          )
                         )}
                       </SubMenu>
                       <SubMenu
@@ -569,58 +514,44 @@ const BackToTop = () => {
                       >
                         {category?.[
                           "Qurilish va ta'mirlash uchun mahsulotlar"
-                        ]?.map((item: any, key: any) => {
-                          const getCategory = () => {
-                            getCategoryProductById(item.parent_id);
-                          };
-                          return (
-                            <>
-                              <MenuItem
-                                style={{
-                                  width: "400px",
-                                  marginLeft: "10px !important",
-                                }}
-                              >
-                                <Link
-                                  to={`/product/product-by-category/${item.sub_id}`}
-                                  key={key}
-                                  className={classes.navLink}
-                                >
-                                  {item.name}
-                                </Link>
-                              </MenuItem>
-                            </>
-                          );
-                        })}
+                        ]?.map((item: any, key: any) => (
+                          <MenuItem
+                            style={{
+                              width: "400px",
+                              marginLeft: "10px !important",
+                            }}
+                            key={key}
+                          >
+                            <Link
+                              to={`/product/product-by-category/${item.sub_id}`}
+                              className={classes.navLink}
+                            >
+                              {item.name}
+                            </Link>
+                          </MenuItem>
+                        ))}
                       </SubMenu>
                       <SubMenu
                         label="Maishiy texnika"
                         className={classes.SubMenu}
                       >
                         {category?.["Maishiy texnika"]?.map(
-                          (item: any, key: any) => {
-                            const getCategory = () => {
-                              getCategoryProductById(item.parent_id);
-                            };
-                            return (
-                              <>
-                                <MenuItem
-                                  style={{
-                                    width: "400px",
-                                    marginLeft: "10px !important",
-                                  }}
-                                >
-                                  <Link
-                                    to={`/product/product-by-category/${item.sub_id}`}
-                                    key={key}
-                                    className={classes.navLink}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </MenuItem>
-                              </>
-                            );
-                          }
+                          (item: any, key: any) => (
+                            <MenuItem
+                              style={{
+                                width: "400px",
+                                marginLeft: "10px !important",
+                              }}
+                              key={key}
+                            >
+                              <Link
+                                to={`/product/product-by-category/${item.sub_id}`}
+                                className={classes.navLink}
+                              >
+                                {item.name}
+                              </Link>
+                            </MenuItem>
+                          )
                         )}
                       </SubMenu>
                       <SubMenu
@@ -628,29 +559,22 @@ const BackToTop = () => {
                         className={classes.SubMenu}
                       >
                         {category?.["Kompyuterlar va orgtexnika"]?.map(
-                          (item: any, key: any) => {
-                            const getCategory = () => {
-                              getCategoryProductById(item.parent_id);
-                            };
-                            return (
-                              <>
-                                <MenuItem
-                                  style={{
-                                    width: "400px",
-                                    marginLeft: "10px !important",
-                                  }}
-                                >
-                                  <Link
-                                    to={`/product/product-by-category/${item.sub_id}`}
-                                    key={key}
-                                    className={classes.navLink}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </MenuItem>
-                              </>
-                            );
-                          }
+                          (item: any, key: any) => (
+                            <MenuItem
+                              style={{
+                                width: "400px",
+                                marginLeft: "10px !important",
+                              }}
+                              key={key}
+                            >
+                              <Link
+                                to={`/product/product-by-category/${item.sub_id}`}
+                                className={classes.navLink}
+                              >
+                                {item.name}
+                              </Link>
+                            </MenuItem>
+                          )
                         )}
                       </SubMenu>
                       <SubMenu
@@ -658,29 +582,22 @@ const BackToTop = () => {
                         className={classes.SubMenu}
                       >
                         {category?.["Bolalar mahsulotlari"]?.map(
-                          (item: any, key: any) => {
-                            const getCategory = () => {
-                              getCategoryProductById(item.parent_id);
-                            };
-                            return (
-                              <>
-                                <MenuItem
-                                  style={{
-                                    width: "400px",
-                                    marginLeft: "10px !important",
-                                  }}
-                                >
-                                  <Link
-                                    to={`/product/product-by-category/${item.sub_id}`}
-                                    key={key}
-                                    className={classes.navLink}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </MenuItem>
-                              </>
-                            );
-                          }
+                          (item: any, key: any) => (
+                            <MenuItem
+                              style={{
+                                width: "400px",
+                                marginLeft: "10px !important",
+                              }}
+                              key={key}
+                            >
+                              <Link
+                                to={`/product/product-by-category/${item.sub_id}`}
+                                className={classes.navLink}
+                              >
+                                {item.name}
+                              </Link>
+                            </MenuItem>
+                          )
                         )}
                       </SubMenu>
                       <SubMenu
@@ -688,29 +605,22 @@ const BackToTop = () => {
                         className={classes.SubMenu}
                       >
                         {category?.["Avto jihozlar"]?.map(
-                          (item: any, key: any) => {
-                            const getCategory = () => {
-                              getCategoryProductById(item.parent_id);
-                            };
-                            return (
-                              <>
-                                <MenuItem
-                                  style={{
-                                    width: "400px",
-                                    marginLeft: "10px !important",
-                                  }}
-                                >
-                                  <Link
-                                    to={`/product/product-by-category/${item.sub_id}`}
-                                    key={key}
-                                    className={classes.navLink}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </MenuItem>
-                              </>
-                            );
-                          }
+                          (item: any, key: any) => (
+                            <MenuItem
+                              style={{
+                                width: "400px",
+                                marginLeft: "10px !important",
+                              }}
+                              key={key}
+                            >
+                              <Link
+                                to={`/product/product-by-category/${item.sub_id}`}
+                                className={classes.navLink}
+                              >
+                                {item.name}
+                              </Link>
+                            </MenuItem>
+                          )
                         )}
                       </SubMenu>
                       <SubMenu
@@ -718,34 +628,33 @@ const BackToTop = () => {
                         className={classes.SubMenu}
                       >
                         {category?.["Audio tizimlar"]?.map(
-                          (item: any, key: any) => {
-                            const getCategory = () => {
-                              getCategoryProductById(item.parent_id);
-                            };
-                            return (
-                              <>
-                                <MenuItem
-                                  style={{
-                                    width: "400px",
-                                    marginLeft: "10px !important",
-                                  }}
-                                >
-                                  <Link
-                                    to={`/product/product-by-category/${item.sub_id}`}
-                                    key={key}
-                                    className={classes.navLink}
-                                  >
-                                    {item.name}
-                                  </Link>
-                                </MenuItem>
-                              </>
-                            );
-                          }
+                          (item: any, key: any) => (
+                            <MenuItem
+                              style={{
+                                width: "400px",
+                                marginLeft: "10px !important",
+                              }}
+                              key={key}
+                            >
+                              <Link
+                                to={`/product/product-by-category/${item.sub_id}`}
+                                className={classes.navLink}
+                              >
+                                {item.name}
+                              </Link>
+                            </MenuItem>
+                          )
                         )}
                       </SubMenu>
                     </Menu>
                   </div>
-                  <div style={{ width: "100%", marginLeft: "5px" , marginRight: '15px'}}>
+                  <div
+                    style={{
+                      width: "100%",
+                      marginLeft: "5px",
+                      marginRight: "15px",
+                    }}
+                  >
                     <SearchDemo />
                   </div>
                   {/* <div style={{ marginRight: "15px" }}>
@@ -790,84 +699,63 @@ const BackToTop = () => {
                     className={classes.SubMenu}
                   >
                     {category?.["Telefonlar va smartfonlar"]?.map(
-                      (item: any, key: any) => {
-                        const getCategory = () => {
-                          getCategoryProductById(item.parent_id);
-                        };
-                        return (
-                          <>
-                            <MenuItem
-                              style={{
-                                width: "400px",
-                                marginLeft: "10px !important",
-                              }}
-                            >
-                              <Link
-                                to={`/product/product-by-category/${item.sub_id}`}
-                                key={key}
-                                className={classes.navLink}
-                              >
-                                {item.name}
-                              </Link>
-                            </MenuItem>
-                          </>
-                        );
-                      }
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
                     )}
                   </SubMenu>
                   <SubMenu label="Uy jihozlari" className={classes.SubMenu}>
-                    {category?.["Uy jihozlari"]?.map((item: any, key: any) => {
-                      const getCategory = () => {
-                        getCategoryProductById(item.parent_id);
-                      };
-                      return (
-                        <>
-                          <MenuItem
-                            style={{
-                              width: "400px",
-                              marginLeft: "10px !important",
-                            }}
-                          >
-                            <Link
-                              to={`/product/product-by-category/${item.sub_id}`}
-                              key={key}
-                              className={classes.navLink}
-                            >
-                              {item.name}
-                            </Link>
-                          </MenuItem>
-                        </>
-                      );
-                    })}
+                    {category?.["Uy jihozlari"]?.map((item: any, key: any) => (
+                      <MenuItem
+                        style={{
+                          width: "400px",
+                          marginLeft: "10px !important",
+                        }}
+                        key={key}
+                      >
+                        <Link
+                          to={`/product/product-by-category/${item.sub_id}`}
+                          className={classes.navLink}
+                        >
+                          {item.name}
+                        </Link>
+                      </MenuItem>
+                    ))}
                   </SubMenu>
                   <SubMenu
                     label="Televizorlar va videotexnikalar"
                     className={classes.SubMenu}
                   >
                     {category?.["Televizorlar va videotexnikalar"]?.map(
-                      (item: any, key: any) => {
-                        const getCategory = () => {
-                          getCategoryProductById(item.parent_id);
-                        };
-                        return (
-                          <>
-                            <MenuItem
-                              style={{
-                                width: "400px",
-                                marginLeft: "10px !important",
-                              }}
-                            >
-                              <Link
-                                to={`/product/product-by-category/${item.sub_id}`}
-                                key={key}
-                                className={classes.navLink}
-                              >
-                                {item.name}
-                              </Link>
-                            </MenuItem>
-                          </>
-                        );
-                      }
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
                     )}
                   </SubMenu>
                   <SubMenu
@@ -875,29 +763,22 @@ const BackToTop = () => {
                     className={classes.SubMenu}
                   >
                     {category?.["Sport va dam olish uchun mahsulotlar"]?.map(
-                      (item: any, key: any) => {
-                        const getCategory = () => {
-                          getCategoryProductById(item.parent_id);
-                        };
-                        return (
-                          <>
-                            <MenuItem
-                              style={{
-                                width: "400px",
-                                marginLeft: "10px !important",
-                              }}
-                            >
-                              <Link
-                                to={`/product/product-by-category/${item.sub_id}`}
-                                key={key}
-                                className={classes.navLink}
-                              >
-                                {item.name}
-                              </Link>
-                            </MenuItem>
-                          </>
-                        );
-                      }
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
                     )}
                   </SubMenu>
                   <SubMenu
@@ -905,29 +786,22 @@ const BackToTop = () => {
                     className={classes.SubMenu}
                   >
                     {category?.["Sog'lik va go'zallik mahsulotlari"]?.map(
-                      (item: any, key: any) => {
-                        const getCategory = () => {
-                          getCategoryProductById(item.parent_id);
-                        };
-                        return (
-                          <>
-                            <MenuItem
-                              style={{
-                                width: "400px",
-                                marginLeft: "10px !important",
-                              }}
-                            >
-                              <Link
-                                to={`/product/product-by-category/${item.sub_id}`}
-                                key={key}
-                                className={classes.navLink}
-                              >
-                                {item.name}
-                              </Link>
-                            </MenuItem>
-                          </>
-                        );
-                      }
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
                     )}
                   </SubMenu>
                   <SubMenu
@@ -936,55 +810,41 @@ const BackToTop = () => {
                   >
                     {category?.[
                       "Qurilish va ta'mirlash uchun mahsulotlar"
-                    ]?.map((item: any, key: any) => {
-                      const getCategory = () => {
-                        getCategoryProductById(item.parent_id);
-                      };
-                      return (
-                        <>
-                          <MenuItem
-                            style={{
-                              width: "400px",
-                              marginLeft: "10px !important",
-                            }}
-                          >
-                            <Link
-                              to={`/product/product-by-category/${item.sub_id}`}
-                              key={key}
-                              className={classes.navLink}
-                            >
-                              {item.name}
-                            </Link>
-                          </MenuItem>
-                        </>
-                      );
-                    })}
+                    ]?.map((item: any, key: any) => (
+                      <MenuItem
+                        style={{
+                          width: "400px",
+                          marginLeft: "10px !important",
+                        }}
+                        key={key}
+                      >
+                        <Link
+                          to={`/product/product-by-category/${item.sub_id}`}
+                          className={classes.navLink}
+                        >
+                          {item.name}
+                        </Link>
+                      </MenuItem>
+                    ))}
                   </SubMenu>
                   <SubMenu label="Maishiy texnika" className={classes.SubMenu}>
                     {category?.["Maishiy texnika"]?.map(
-                      (item: any, key: any) => {
-                        const getCategory = () => {
-                          getCategoryProductById(item.parent_id);
-                        };
-                        return (
-                          <>
-                            <MenuItem
-                              style={{
-                                width: "400px",
-                                marginLeft: "10px !important",
-                              }}
-                            >
-                              <Link
-                                to={`/product/product-by-category/${item.sub_id}`}
-                                key={key}
-                                className={classes.navLink}
-                              >
-                                {item.name}
-                              </Link>
-                            </MenuItem>
-                          </>
-                        );
-                      }
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
                     )}
                   </SubMenu>
                   <SubMenu
@@ -992,29 +852,22 @@ const BackToTop = () => {
                     className={classes.SubMenu}
                   >
                     {category?.["Kompyuterlar va orgtexnika"]?.map(
-                      (item: any, key: any) => {
-                        const getCategory = () => {
-                          getCategoryProductById(item.parent_id);
-                        };
-                        return (
-                          <>
-                            <MenuItem
-                              style={{
-                                width: "400px",
-                                marginLeft: "10px !important",
-                              }}
-                            >
-                              <Link
-                                to={`/product/product-by-category/${item.sub_id}`}
-                                key={key}
-                                className={classes.navLink}
-                              >
-                                {item.name}
-                              </Link>
-                            </MenuItem>
-                          </>
-                        );
-                      }
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
                     )}
                   </SubMenu>
                   <SubMenu
@@ -1022,81 +875,60 @@ const BackToTop = () => {
                     className={classes.SubMenu}
                   >
                     {category?.["Bolalar mahsulotlari"]?.map(
-                      (item: any, key: any) => {
-                        const getCategory = () => {
-                          getCategoryProductById(item.parent_id);
-                        };
-                        return (
-                          <>
-                            <MenuItem
-                              style={{
-                                width: "400px",
-                                marginLeft: "10px !important",
-                              }}
-                            >
-                              <Link
-                                to={`/product/product-by-category/${item.sub_id}`}
-                                key={key}
-                                className={classes.navLink}
-                              >
-                                {item.name}
-                              </Link>
-                            </MenuItem>
-                          </>
-                        );
-                      }
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
                     )}
                   </SubMenu>
                   <SubMenu label="Avto jihozlar" className={classes.SubMenu}>
-                    {category?.["Avto jihozlar"]?.map((item: any, key: any) => {
-                      const getCategory = () => {
-                        getCategoryProductById(item.parent_id);
-                      };
-                      return (
-                        <>
-                          <MenuItem
-                            style={{
-                              width: "400px",
-                              marginLeft: "10px !important",
-                            }}
-                          >
-                            <Link
-                              to={`/product/product-by-category/${item.sub_id}`}
-                              key={key}
-                              className={classes.navLink}
-                            >
-                              {item.name}
-                            </Link>
-                          </MenuItem>
-                        </>
-                      );
-                    })}
+                    {category?.["Avto jihozlar"]?.map((item: any, key: any) => (
+                      <MenuItem
+                        style={{
+                          width: "400px",
+                          marginLeft: "10px !important",
+                        }}
+                        key={key}
+                      >
+                        <Link
+                          to={`/product/product-by-category/${item.sub_id}`}
+                          className={classes.navLink}
+                        >
+                          {item.name}
+                        </Link>
+                      </MenuItem>
+                    ))}
                   </SubMenu>
                   <SubMenu label="Audio tizimlar" className={classes.SubMenu}>
                     {category?.["Audio tizimlar"]?.map(
-                      (item: any, key: any) => {
-                        const getCategory = () => {
-                          getCategoryProductById(item.parent_id);
-                        };
-                        return (
-                          <>
-                            <MenuItem
-                              style={{
-                                width: "400px",
-                                marginLeft: "10px !important",
-                              }}
-                            >
-                              <Link
-                                to={`/product/product-by-category/${item.sub_id}`}
-                                key={key}
-                                className={classes.navLink}
-                              >
-                                {item.name}
-                              </Link>
-                            </MenuItem>
-                          </>
-                        );
-                      }
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
                     )}
                   </SubMenu>
                 </Menu>
@@ -1108,7 +940,12 @@ const BackToTop = () => {
                 lg={10}
                 className={classes.NavbarInsite}
               >
-                <Grid item  md={10}  lg={11} sx={{ marginLeft: "16px", width: "100%" }}>
+                <Grid
+                  item
+                  md={10}
+                  lg={11}
+                  sx={{ marginLeft: "16px", width: "100%" }}
+                >
                   <MainSearch />
                 </Grid>
                 <Grid item md={2} lg={1} className={classes.twoGrid}>

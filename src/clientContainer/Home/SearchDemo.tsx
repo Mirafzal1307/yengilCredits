@@ -167,8 +167,8 @@ const MainSearch = () => {
           <Table stickyHeader aria-label="sticky table">
             <TableBody>
               {param && products ? (
-                products.map((item: any) => (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
+                products.map((item: any, key: any) => (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={key}>
                     <TableCell>
                       <Link to={`/product/client/details/${item.id}`}>
                         <img

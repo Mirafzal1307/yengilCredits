@@ -109,21 +109,23 @@ const HomeChartTableButton = () => {
 
   return (
     <div>
-      <TableContainer component={Paper} className={classes.header_table}>
+      {/* <TableContainer component={Paper} className={classes.header_table}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-          <TableHead>
-            <Typography className={classes.header_name}>
-              Letest orders
-            </Typography>
+          <TableHead >
+              <TableRow>
+                <TableCell className={classes.header_name}>
+                Letest orders
+                </TableCell>
+              </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.map((row: any, key: any) => (
               <TableRow
-                key={row.name}
+                key={key}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 className={classes.header_table_insides}
               >
-                <TableCell className={classes.header_table_inside}>
+                <TableCell className={classes.header_table_inside} key={row.id}>
                   {row.id}
                 </TableCell>
                 <TableCell
@@ -131,18 +133,21 @@ const HomeChartTableButton = () => {
                   scope="row"
                   className={`${classes.header_table_inside} 
                ${classes.header_table_inside_name}`}
+               key={row.id}
                 >
                   {row.name}
                 </TableCell>
                 <TableCell
                   align="right"
                   className={classes.header_table_inside}
+                  key={row.id}
                 >
                   {row.email}
                 </TableCell>
                 <TableCell
                   align="right"
                   className={classes.header_table_inside}
+                  key={row.id}
                 >
                   ${row.cost}
                 </TableCell>
@@ -180,7 +185,7 @@ const HomeChartTableButton = () => {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer> */}
     </div>
   );
 };

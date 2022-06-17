@@ -13,11 +13,12 @@ const useStyles = makeStyles({
   },
 });
 const HomeHeader: FC = () => {
+
   const classes = useStyles();
   return (
     <div className={classes.header}>
       <MiniDrawer />
-      <Container  maxWidth="lg"  style={{ marginTop: "50px" }}>
+      <Container maxWidth="lg" style={{ marginTop: "50px" }}>
         <Grid container>
           <Grid item xs={12}>
             <HomePageTop />
@@ -25,11 +26,11 @@ const HomeHeader: FC = () => {
         </Grid>
         <HomePageTopButtons />
         <Grid container spacing={3}>
-          <Grid item xs={12} sx={{marginBottom: '30px'}} >
+          <Grid item xs={12} sx={{ marginBottom: "30px" }}>
             <HomeMarketPage />
           </Grid>
         </Grid>
-        <Grid container  sx={{marginBottom: '30px'}} >
+        <Grid container sx={{ marginBottom: "30px" }}>
           <Grid item xs={12}>
             <HomeChartTableButton />
           </Grid>

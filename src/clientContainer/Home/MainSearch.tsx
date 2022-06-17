@@ -1,23 +1,23 @@
-import { Box, Container, Input, InputAdornment, Stack } from "@mui/material";
+import {  Input, InputAdornment, } from "@mui/material";
 import { useEffect, useState } from "react";
 import { searchProduct } from "../../Api/client/MainPageApi";
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
-import cart1 from "../../Images/cart1.svg";
-import cart2 from "../../Images/cart2.svg";
+// import cart1 from "../../Images/cart1.svg";
+// import cart2 from "../../Images/cart2.svg";
 import Notification from "../../adminContainer/Snackbar/Notification";
-import { addToCart } from "../../redux/cart/action";
-import { useDispatch } from "react-redux";
+// import { addToCart } from "../../redux/cart/action";
+// import { useDispatch } from "react-redux";
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
+// import TableHead from '@mui/material/TableHead';
+// import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const useStyles = makeStyles({
@@ -137,7 +137,7 @@ const MainSearch = () => {
   const handleInputChange = (e: any) => {
     setParam(e.target.value);
   };
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const getData = async () => {
     if (param?.length > 2) {
       const response: any = await searchProduct(param);
@@ -173,8 +173,8 @@ const MainSearch = () => {
           <Table stickyHeader aria-label="sticky table">
             <TableBody>
               {param && products ? (
-                products.map((item: any) => (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
+                products.map((item: any, key: any) => (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={key}>
                     <TableCell>
                       <Link to={`/product/client/details/${item.id}`}>
                         <img

@@ -12,13 +12,13 @@ export default function ProductCard_() {
   const {id} = useParams<ProductParams>(); 
   const dispatch = useDispatch();
   const filteredProducts = useSelector((state: rootState) => state.productsReducer.filteredProducts);
-  let product = filteredProducts.filter((product) => product.id == (id))[0];
+  let product = filteredProducts.filter((product) => product.id === (id))[0];
   return (
     <>     
       <Link to={'/productlist'} className="btn btn-primary">Continue Shopping!</Link>
       <div className='my-form'>
       
-        <div key={product.id} style={{ width: '18rem' }}>
+        <div key={product?.id} style={{ width: '18rem' }}>
           <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product.photo}`} height='200px' width='200px' alt={product.id} />
           <div>
             <title>{product.short_name}</title>
