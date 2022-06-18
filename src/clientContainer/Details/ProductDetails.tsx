@@ -8,12 +8,12 @@ import BackToTop from "../Home/Navbar/Navbar";
 import Footer from "../Home/Footer";
 import { getProductCards } from "../../Api/client/MainProductsApi";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import cart1 from "../../Images/cart1.svg";
+// import cart1 from "../../Images/cart1.svg";
 import cart2 from "../../Images/cart2.svg";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import { addToCart } from "../../redux/cart/action";
-import { useDispatch, useSelector } from "react-redux";
-import { rootState } from "../../redux/reducers/index";
+import { AnyIfEmpty, useDispatch, useSelector } from "react-redux";
+// import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import BigPhoto from "../../Images/BigPhoto.png";
 import Shop from "../../Images/baskets.png";
@@ -32,7 +32,7 @@ import ColorToggleButton from "./newFeature";
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
     padding: "45px 0",
-    background: 'white',
+    background: "white",
     [theme.breakpoints.down(600)]: {
       padding: "0 0 25px 0 !important",
     },
@@ -434,7 +434,7 @@ const useStyles = makeStyles((theme) => ({
   },
   inSplideSlide: {
     [theme.breakpoints.down(600)]: {
-      width: '100px'
+      width: "100px",
     },
   },
   bigBox: {
@@ -449,19 +449,17 @@ const useStyles = makeStyles((theme) => ({
   inSwiperSlide: {
     width: "150px",
     height: "150px",
-    borderRadius: "10px"
+    borderRadius: "10px",
   },
   NewFeatures: {
     [theme.breakpoints.down(1000)]: {
-      flexDirection: 'column'
+      flexDirection: "column",
     },
     [theme.breakpoints.up(750)]: {
-      flexDirection: 'unset !important'
-    }
+      flexDirection: "unset !important",
+    },
   },
-  Container: {
-
-  }
+  Container: {},
 }));
 
 const ProductDetails = () => {
@@ -480,9 +478,8 @@ const ProductDetails = () => {
     type: "",
   });
   const refresh = () => {
-    setTimeout(() => window.location.reload(),
-      10)
-  }
+    setTimeout(() => window.location.reload(), 10);
+  };
   const dispatch = useDispatch();
   const loading = useTypedSelector((state) => state?.card?.loading);
 
@@ -516,8 +513,8 @@ const ProductDetails = () => {
           <img src={BigPhoto} alt="" className={classes.BigPhoto} />
         </Container>
         <Container maxWidth="xl">
-          {pro?.map((product: any) => (
-            <div className={classes.BigPhotoBottom}>
+          {pro?.map((product: any, key: any) => (
+            <div className={classes.BigPhotoBottom} key={key}>
               <h2
                 className={classes.productName}
                 style={{
@@ -560,17 +557,24 @@ const ProductDetails = () => {
             style={{ display: "flex", flexDirection: "column" }}
             className={classes.Container}
           >
-            <div >
+            <div>
               <div style={{ marginRight: "20px", marginTop: "8px" }}>
                 <Link to={"/"}>
                   <img src={CancelBtnImg} alt="Cancel" />
                 </Link>
               </div>
-              <div style={{ display: "flex", justifyContent: 'space-between' }} className={classes.NewFeatures} >
-                <Grid xs={12} md={6} >
+              <div
+                style={{ display: "flex", justifyContent: "space-between" }}
+                className={classes.NewFeatures}
+              >
+                <Grid item xs={12} md={6}>
                   <div className={classes.Links}>
                     <span
-                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "16px",
+                        color: "#000",
+                      }}
                     >
                       <Link to="/" style={{ color: "rgb(159 159 159)" }}>
                         Bosh sahifa
@@ -586,33 +590,41 @@ const ProductDetails = () => {
                       </Link>
                     </span>
                     <span
-                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "16px",
+                        color: "#000",
+                      }}
                       className={classes.spane}
                     >
-                      {pro?.map((parCategory: any) => (
+                      {pro?.map((parCategory: any, key: any) => (
                         <Link
                           to={`/product/product-by-category/${parCategory?.category?.parent_category?.id}`}
                           style={{
                             color: "rgb(159 159 159)",
                             textTransform: "capitalize",
                           }}
+                          key={key}
                         >
-                          {parCategory?.category?.parent_category?.name}
-                          {" "}
-                          ›
+                          {parCategory?.category?.parent_category?.name} ›
                         </Link>
                       ))}
                     </span>
                     <span
-                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "16px",
+                        color: "#000",
+                      }}
                     >
-                      {pro?.map((SubCategory: any) => (
+                      {pro?.map((SubCategory: any, key: any) => (
                         <Link
                           to={`/product/product-by-category/${SubCategory?.category?.id}`}
                           style={{
                             color: "rgb(159 159 159)",
                             textTransform: "capitalize",
                           }}
+                          key={key}
                         >
                           {SubCategory?.category?.name}
                         </Link>
@@ -620,9 +632,9 @@ const ProductDetails = () => {
                     </span>
                   </div>
                 </Grid>
-                <Grid xs={12} sm={12} md={6} >
-                  {pro?.map((product: any) => (
-                    <div>
+                <Grid item xs={12} sm={12} md={6}>
+                  {pro?.map((product: any, key: any) => (
+                    <div key={key}>
                       <ColorToggleButton cost={product?.after_discount} />
                     </div>
                   ))}
@@ -644,16 +656,16 @@ const ProductDetails = () => {
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper2"
               >
-                {photo?.map((item: any) =>
+                {photo?.map((item: any, key: any) =>
                   item?.map((value: any) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={key}>
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
                         style={
                           item?.length >= 2
-                            ? { width: "60%", }
-                            : { width: "auto", }
+                            ? { width: "60%" }
+                            : { width: "auto" }
                         }
                       />
                     </SwiperSlide>
@@ -668,13 +680,13 @@ const ProductDetails = () => {
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
-
                 className="mySwiper"
               >
-                {photo?.map((item: any) =>
-                  item?.map((value: any) => (
-                    <SwiperSlide>
+                {photo?.map((item: any, index: any) =>
+                  item?.map((value: any, key: any) => (
+                    <SwiperSlide key={key}>
                       <img
+                        key={index}
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
                         className={classes.inSwiperSlide}
@@ -698,9 +710,9 @@ const ProductDetails = () => {
                 <h1 className={classes.h1}>Mahsulot haqida</h1>
                 <div>
                   <ul>
-                    {pro?.map((product: any) => (
+                    {pro?.map((product: any, key: any) => (
                       <>
-                        <div className={classes.parent_div}>
+                        <div className={classes.parent_div} key={key}>
                           <li className={classes.li}>Nomi</li>
                           <p className={classes.li_span}>
                             {product?.short_name}
@@ -722,9 +734,9 @@ const ProductDetails = () => {
                     ))}
                   </ul>
                   <ul>
-                    {des?.map((product: any) => (
+                    {des?.map((product: any, key: any) => (
                       <>
-                        <div className={classes.parent_div}>
+                        <div className={classes.parent_div} key={key}>
                           <li className={classes.li}>
                             {product?.character_name}
                           </li>
@@ -736,9 +748,9 @@ const ProductDetails = () => {
                     ))}
                   </ul>
                   <ul>
-                    {pro?.map((product: any) => (
+                    {pro?.map((product: any, key: any) => (
                       <>
-                        <div className={classes.parent_div}>
+                        <div className={classes.parent_div} key={key}>
                           <li className={classes.li}>Narxi</li>
                           <p className={classes.li_span}>
                             {product?.after_discount?.toLocaleString()} so’m
@@ -753,8 +765,9 @@ const ProductDetails = () => {
           </Grid>
           <Grid item xs={12}>
             <div>
-              {pro?.map((product: any) => (
+              {pro?.map((product: any, key: any) => (
                 <button
+                  key={key}
                   className={classes.cardButtonBasketMin}
                   onClick={() => {
                     setNotify({
@@ -785,7 +798,7 @@ const ProductDetails = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              Barchasi
             </Link>
           </div>
         </div>
@@ -826,11 +839,14 @@ const ProductDetails = () => {
               />
             ) : (
               recommended &&
-              recommended.map((item: any) => (
+              recommended.map((item: any, key: any) => (
                 <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
+                  <Box className={classes.bodyCard} key={key}>
                     <Box>
-                      <Link to={`/product/client/details/${item?.id}`} onClick={refresh} >
+                      <Link
+                        to={`/product/client/details/${item?.id}`}
+                        onClick={refresh}
+                      >
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
@@ -902,17 +918,20 @@ const ProductDetails = () => {
                           margin: 0,
                         }}
                       >
-                        {
-                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
-                        } so'm
-                        <span style={{
-                          background: 'red',
-                          color: 'white',
-                          fontSize: '10px',
-                          borderRadius: '10px',
-                          padding: '1px 6px',
-                          marginLeft: '10px',
-                        }} >
+                        {Math.floor(
+                          (item?.after_discount * 1.44) / 12
+                        ).toLocaleString()}{" "}
+                        so'm
+                        <span
+                          style={{
+                            background: "red",
+                            color: "white",
+                            fontSize: "10px",
+                            borderRadius: "10px",
+                            padding: "1px 6px",
+                            marginLeft: "10px",
+                          }}
+                        >
                           12 oy
                         </span>
                       </p>
@@ -1011,7 +1030,7 @@ const ProductDetails = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              Barchasi
             </Link>
           </div>
         </div>
@@ -1052,11 +1071,14 @@ const ProductDetails = () => {
               />
             ) : (
               popular &&
-              popular.map((item: any) => (
+              popular.map((item: any, key: any) => (
                 <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
+                  <Box className={classes.bodyCard} key={key}>
                     <Box>
-                      <Link to={`/product/client/details/${item?.id}`} onClick={refresh} >
+                      <Link
+                        to={`/product/client/details/${item?.id}`}
+                        onClick={refresh}
+                      >
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
@@ -1128,18 +1150,20 @@ const ProductDetails = () => {
                           margin: 0,
                         }}
                       >
-                        {
-                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
-                        } so'm
-                        <span style={{
-                          background: 'red',
-                          color: 'white',
-                          fontSize: '10px',
-                          borderRadius: '10px',
-                          padding: '1px 6px',
-                          marginLeft: '10px',
-
-                        }} >
+                        {Math.floor(
+                          (item?.after_discount * 1.44) / 12
+                        ).toLocaleString()}{" "}
+                        so'm
+                        <span
+                          style={{
+                            background: "red",
+                            color: "white",
+                            fontSize: "10px",
+                            borderRadius: "10px",
+                            padding: "1px 6px",
+                            marginLeft: "10px",
+                          }}
+                        >
                           12 oy
                         </span>
                       </p>

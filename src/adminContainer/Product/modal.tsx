@@ -7,7 +7,7 @@ import { FormControl, OutlinedInput } from "@mui/material";
 import { postProductCharacterCreate } from "../../Api/admin/AdminProductApi";
 import Notification from "../Snackbar/Notification";
 import { refresh } from "../Modal/refresh";
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -80,7 +80,7 @@ function BasicModal() {
   return (
     <div>
       <Button onClick={handleOpen} style={button}>
-        <CreateNewFolderIcon style={{ color: 'green' }} />
+        <CreateNewFolderIcon style={{ color: "green" }} />
       </Button>
       <Modal
         open={open}
@@ -90,8 +90,7 @@ function BasicModal() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Siz bu yerda yangi xossa nomi va qiymati
-            qo'shishingiz mumkin!
+            Siz bu yerda yangi xossa nomi va qiymati qo'shishingiz mumkin!
           </Typography>
           <div style={divStyle}>
             <FormControl sx={{ width: "25ch" }}>
@@ -112,35 +111,41 @@ function BasicModal() {
             </FormControl>
           </div>
           <div style={divStyle}>
-            <Button onClick={() => setOpen(false)} 
-            sx={{
-              textTransform: 'capitalize',
-              background: "#FF4B4B",
-              color: 'white',
-              '&:hover':{
+            <Button
+              onClick={() => setOpen(false)}
+              sx={{
+                textTransform: "capitalize",
                 background: "#FF4B4B",
-              }
-            }} >Bekor qilish</Button>
-            <Button onClick={() => {
-              onSubmit();
-              handleClose();
-              refresh();
-            }}
-            sx={{
-              textTransform: 'capitalize',
-              background: "#065374",
-              color: 'white',
-              '&:hover':{
+                color: "white",
+                "&:hover": {
+                  background: "#FF4B4B",
+                },
+              }}
+            >
+              Bekor qilish
+            </Button>
+            <Button
+              onClick={() => {
+                onSubmit();
+                handleClose();
+                refresh();
+              }}
+              sx={{
+                textTransform: "capitalize",
                 background: "#065374",
-              }
-            }}
-            type="submit"
-            >Saqlash</Button>
+                color: "white",
+                "&:hover": {
+                  background: "#065374",
+                },
+              }}
+              type="submit"
+            >
+              Saqlash
+            </Button>
           </div>
         </Box>
       </Modal>
       <Notification notify={notify} setNotify={setNotify} />
-
     </div>
   );
 }

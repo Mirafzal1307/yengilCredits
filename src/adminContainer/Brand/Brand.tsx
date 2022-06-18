@@ -1,8 +1,4 @@
-import React, { useEffect } from "react";
-import { useTypedSelector } from "../../hook/useTypedSelector";
-import { fetchProducts } from "../../redux/actions/productAction";
-import { fetchBrands } from "../../redux/actions/brandAction";
-import { useActions } from "../../hook/useActions";
+import React from "react";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import { Box, Container, Grid } from "@mui/material";
 import BrandCreate from "./BrandCreate";
@@ -87,7 +83,7 @@ const BrandList: React.FC = () => {
       <MiniDrawer />
       <Container style={{ marginTop: "50px" }}>
         <h1 className={classes.title}>Brand</h1>
-        <Grid container spacing={2}>
+        <Grid container direction="row" spacing={2}>
           <Grid item xs={5}>
             <BrandCreate />
           </Grid>
