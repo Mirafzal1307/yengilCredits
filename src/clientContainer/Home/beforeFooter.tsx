@@ -54,7 +54,7 @@ const BeforeFooter = () => {
         style={{ paddingTop: "39px", paddingBottom: "20px" }}
       >
         <Container maxWidth="xl">
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <h2
               style={{
                 fontFamily: "Poppins",

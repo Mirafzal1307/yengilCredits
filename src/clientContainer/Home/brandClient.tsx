@@ -107,7 +107,7 @@ const BrandClient = () => {
   }, []);
 
   const getProduct = async (id: any) => {
-    const res: any = await getProductByBrand({}, id);
+    await getProductByBrand({}, id);
   };
 
   return (
@@ -151,13 +151,13 @@ const BrandClient = () => {
                 <CircularProgress />
               </Box>
             ) : brands ? (
-              discount.map((item: any) => {
+              discount.map((item: any, key: any) => {
                 const productByBrand = () => {
                   getProduct(item.id);
                 };
                 return (
-                  <SplideSlide className={classes.splide}>
-                    <Box className={classes.bodyCard} key={item.id}>
+                  <SplideSlide className={classes.splide} key={key}>
+                    <Box className={classes.bodyCard}>
                       <Box>
                         <img
                           src={`${MINIO_FULL_ENDPOINT_FOR}/brand/${item.photo_name}`}
@@ -190,5 +190,6 @@ const BrandClient = () => {
     </>
   );
 };
+
 
 export default BrandClient;
