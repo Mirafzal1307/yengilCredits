@@ -3,32 +3,27 @@ import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import { fetchCategory } from "../../redux/actions/categoryAction";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
-import {
-  Button,
-  Container,
-  Tooltip,
-} from "@mui/material";
+import { Button, Container, Tooltip } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { Link, useParams, Link as NavLink } from "react-router-dom";
 import {
   deleteCategoryItem,
   getCategoryByParentCategory,
-  getCategorySearch,
 } from "../../Api/admin/AdminCategoryApi";
-import { makeStyles } from "@mui/styles";
 import "./style.css";
 import Modal from "../Modal/Modal";
-import { Link, useParams } from "react-router-dom";
 import Edit from "../../Images/edit.png";
 import Details from "../../Images/detailsicon.svg";
 import Notification from "../Snackbar/Notification";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
-import { Link as NavLink } from "react-router-dom";
+
+import { fetchCategory } from "../../redux/actions/categoryAction";
 
 interface Data {
   id: number;
@@ -41,7 +36,7 @@ function createData(
   id: number,
   name: string,
   date: number,
-  action: number
+  action: number,
 ): Data {
   return {
     id,
@@ -91,32 +86,6 @@ interface EnhancedTableProps {
   rowCount: number;
 }
 
-function EnhancedTableHead(props: EnhancedTableProps) {
-  const { onSelectAllClick } = props;
-  const classes = useStyles();
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox" className={classes.tableCell}>
-          <Checkbox color="primary" onChange={onSelectAllClick} />
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell key={headCell.id} className={classes.tableCell}>
-            <TableSortLabel>{headCell.label}</TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-}
-
-interface createDatas {
-  name: string;
-  id: number;
-  date: number;
-  parent_category: any
-}
-
 const useStyles = makeStyles({
   paper: {
     boxShadow: "none !important",
@@ -132,7 +101,7 @@ const useStyles = makeStyles({
   h1: {
     fontSize: "28px !important",
     margin: "32px 0 20px 0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   input_name: {
     width: "500px !important",
@@ -144,14 +113,14 @@ const useStyles = makeStyles({
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "20px 0 10px 0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   category_category: {
     color: "#464646 !important",
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "10px 0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   datagrid: {
     border: "none !important",
@@ -170,13 +139,13 @@ const useStyles = makeStyles({
     font: "inherit !important",
     paddingLeft: "12px !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   menuItem_gutters: {
     color: "#9F9F9F !important",
     font: "inherit !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   update_buttons: {
     width: "400px !important",
@@ -190,14 +159,14 @@ const useStyles = makeStyles({
     paddingLeft: "12px !important",
     fontStyle: "normal !important",
     fontFamily: "Poppins !important",
-    marginTop: "20px !important"
+    marginTop: "20px !important",
   },
   h4_second: {
     fontSize: "17px !important",
     fontWeight: "600 !important",
     margin: "0px !important",
     fontStyle: "normal !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   button_one: {
     minWidth: "140px !important",
@@ -225,7 +194,7 @@ const useStyles = makeStyles({
   tableCell: {
     borderBottom: "1px solid black !important",
     padding: "0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   box: {
     textAlign: "center",
@@ -235,7 +204,7 @@ const useStyles = makeStyles({
     fontWeight: "600",
     fontSize: "22px",
     color: "#065374",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   deleteButton: {
     border: "none !important",
@@ -262,7 +231,7 @@ const useStyles = makeStyles({
     fontWeight: "normal",
     fontStyle: "normal",
     color: "#000000",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   pagination: {
     width: "315px",
@@ -277,28 +246,53 @@ const useStyles = makeStyles({
     padding: "20px 14px 20px 14px !important",
   },
   SearchInput: {
-    height: '40px !important',
-    borderRadius: '5px !important',
-    padding: '12px 150px 12px 20px',
-    border: "2px solid #9F9F9F !important"
+    height: "40px !important",
+    borderRadius: "5px !important",
+    padding: "12px 150px 12px 20px",
+    border: "2px solid #9F9F9F !important",
   },
   SearchIcon: {
-    height: '40px !important',
-    marginLeft: '5px !important',
-    background: '#065374 !important',
-    color: '#ffffff',
-    borderRadius: '5px !important'
+    height: "40px !important",
+    marginLeft: "5px !important",
+    background: "#065374 !important",
+    color: "#ffffff",
+    borderRadius: "5px !important",
   },
 });
 
-export default function EnhancedTable() {
+const EnhancedTableHead = (props: EnhancedTableProps): JSX.Element => {
+  const { onSelectAllClick } = props;
+  const classes = useStyles();
+  return (
+    <TableHead>
+      <TableRow>
+        <TableCell padding="checkbox" className={classes.tableCell}>
+          <Checkbox color="primary" onChange={onSelectAllClick} />
+        </TableCell>
+        {headCells.map((headCell) => (
+          <TableCell key={headCell.id} className={classes.tableCell}>
+            <TableSortLabel>{headCell.label}</TableSortLabel>
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+};
+
+interface createDatas {
+  name: string;
+  id: number;
+  date: number;
+  parent_category: any;
+}
+
+export default function EnhancedTable(): JSX.Element {
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [pageQty, setPageQty] = React.useState(2);
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");
-  const [category, setCategory] = React.useState<createDatas[]>([]);  
-  const [categories, setCategories] = React.useState<any>();
-  const [param, setParam] = React.useState('');
+  const [category, setCategory] = React.useState<createDatas[]>([]);
+  const [param, setParam] = React.useState("");
   const [notify, setNotify] = React.useState<any>({
     isOpen: false,
     message: "",
@@ -306,20 +300,23 @@ export default function EnhancedTable() {
   });
   const classes = useStyles();
   const { id } = useParams();
-   React.useEffect(() => {
-    subCategory(id);
-  }, []);
+
   React.useEffect(() => {
     fetchCategory(`${page - 1}`);
     if (pageQty < page) {
       setPage(3);
     }
   }, [query, page]);
-  const subCategory = async (id: any) => {
-    let res: any = await getCategoryByParentCategory(id);
+  const subCategory = async (id: any): Promise<void> => {
+    const res: any = await getCategoryByParentCategory(id);
     setCategory(res?.data?.sub_categories);
   };
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  React.useEffect(() => {
+    subCategory(id);
+  }, []);
+  const handleSelectAllClick = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): any => {
     if (event.target.checked) {
       const newSelecteds = category?.map((n) => n.name);
       setSelected(newSelecteds);
@@ -327,7 +324,7 @@ export default function EnhancedTable() {
     }
     setSelected([]);
   };
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
+  const handleClick = (event: React.MouseEvent<unknown>, name: string): any => {
     const selectedIndex = selected.indexOf(name);
     let newSelected: readonly string[] = [];
     if (selectedIndex === -1) {
@@ -339,14 +336,14 @@ export default function EnhancedTable() {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+        selected.slice(selectedIndex + 1),
       );
       setSelected(newSelected);
-    };
-  }
-  const isSelected = (name: string) => selected.indexOf(name) !== -1;
-  const deleteCategory = async (id: any) => {
-     await deleteCategoryItem(id)
+    }
+  };
+  const isSelected = (name: string): any => selected.indexOf(name) !== -1;
+  const deleteCategory = async (id: any): Promise<any> => {
+    await deleteCategoryItem(id)
       .then((res: any) => {
         if (res.status === 200) {
           setNotify({
@@ -356,7 +353,7 @@ export default function EnhancedTable() {
           });
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setNotify({
           isOpen: true,
           message: "Xatolik yuz berdi.",
@@ -368,7 +365,10 @@ export default function EnhancedTable() {
   return (
     <>
       <MiniDrawer />
-      <Container style={{ paddingBottom: "50px !important", marginRight: 0 }} maxWidth="xl">
+      <Container
+        style={{ paddingBottom: "50px !important", marginRight: 0 }}
+        maxWidth="xl"
+      >
         <h1 className={classes.h1}>Turkum</h1>
         <Box className={classes.input_two}>
           <Paper className={classes.paper}>
@@ -382,84 +382,84 @@ export default function EnhancedTable() {
                 />
                 <TableBody>
                   {category?.map((row: any, index: any) => {
-                        const deleteData = () => {
-                          deleteCategory(row?.id);
-                        };
-                        const isItemSelected = isSelected(row?.name);
-                        const labelId = `enhanced-table-checkbox-${index}`;
-                        return (
-                          <>
-                            <TableRow
-                              hover
-                              onClick={(event) => handleClick(event, row?.name)}
-                              role="checkbox"
-                              aria-checked={isItemSelected}
-                              tabIndex={-1}
-                              key={index}
-                              selected={isItemSelected}
-                            >
-                              <TableCell
-                                padding="checkbox"
-                                className={classes.tableCell}
-                              >
-                                <Checkbox
-                                  color="primary"
-                                  checked={isItemSelected}
-                                  inputProps={{
-                                    "aria-labelledby": labelId,
-                                  }}
-                                />
-                              </TableCell>
-                              <TableCell
-                                component="th"
-                                id={labelId}
-                                scope="row"
-                                padding="none"
-                                className={classes.tableCell}
-                              >
-                                {row?.id}
-                              </TableCell>
-                              <TableCell className={classes.tableCell} align="left" key={row.id}> 
-                                {row?.name}
-                              </TableCell>
-                              <TableCell className={classes.tableCell} align="left" key={row.id}>
-                                {row?.parent_category?.name}
-                              </TableCell>
-                              <TableCell className={classes.tableCell} align="left">
-                                <Link to={`/product`}>
-                                  <Tooltip title="Details">
-                                    <Button>
-                                      <img src={Details} alt="" />
-                                    </Button>
-                                  </Tooltip>
-                                </Link>
-                                <Link to={`/category/admin/edit-page/${row.id}`}>
-                                  <Tooltip title="Edit">
-                                    <Button>
-                                      <img src={Edit} alt="ad" />
-                                    </Button>
-                                  </Tooltip>
-                                </Link>
-                                <Tooltip title="Delete">
-                                  <Button className={classes.button}>
-                                    <Modal data={deleteData} />
-                                  </Button>
-                                </Tooltip>
-                                <Notification
-                                  notify={notify}
-                                  setNotify={setNotify}
-                                  
-                                />
-                              </TableCell>
-                            </TableRow>
-                          </>
-                        );
-                      
-                      })}
+                    const deleteData = (): void => {
+                      deleteCategory(row?.id);
+                    };
+                    const isItemSelected = isSelected(row?.name);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row?.name)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.id}
+                        selected={isItemSelected}
+                      >
+                        <TableCell
+                          padding="checkbox"
+                          className={classes.tableCell}
+                        >
+                          <Checkbox
+                            color="primary"
+                            checked={isItemSelected}
+                            inputProps={{
+                              "aria-labelledby": labelId,
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                          className={classes.tableCell}
+                        >
+                          {row?.id}
+                        </TableCell>
+                        <TableCell
+                          className={classes.tableCell}
+                          align="left"
+                          key={row.id}
+                        >
+                          {row?.name}
+                        </TableCell>
+                        <TableCell
+                          className={classes.tableCell}
+                          align="left"
+                          key={row.id}
+                        >
+                          {row?.parent_category?.name}
+                        </TableCell>
+                        <TableCell className={classes.tableCell} align="left">
+                          <Link to="/product">
+                            <Tooltip title="Details">
+                              <Button>
+                                <img src={Details} alt="" />
+                              </Button>
+                            </Tooltip>
+                          </Link>
+                          <Link to={`/category/admin/edit-page/${row.id}`}>
+                            <Tooltip title="Edit">
+                              <Button>
+                                <img src={Edit} alt="ad" />
+                              </Button>
+                            </Tooltip>
+                          </Link>
+                          <Tooltip title="Delete">
+                            <Button className={classes.button}>
+                              <Modal data={deleteData} />
+                            </Button>
+                          </Tooltip>
+                          <Notification notify={notify} setNotify={setNotify} />
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
                 </TableBody>
               </Table>
             </TableContainer>
-
           </Paper>
         </Box>
       </Container>

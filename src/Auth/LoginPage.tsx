@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
-import lockImg from ".././Images/lock.png";
+import { useNavigate } from "react-router-dom";
+import lockImg from "../Images/lock.png";
 import { getToken } from "../Api/admin/AdminAuth";
-import axios from "axios";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+
 const useStyles = makeStyles({
   pageStyle: {
     position: "relative",
@@ -68,35 +68,34 @@ const useStyles = makeStyles({
   },
 });
 
-const LoginPage = () => {
+function LoginPage(): JSX.Element {
   const classes = useStyles();
   const [userName, setUserName] = useState<any>("");
   const [password, setPassword] = useState<any>("");
   const [auth, setAuth] = useState<any>("");
-  const handleChangeUsername = (e: any) => {
+  const handleChangeUsername = (e: any): void => {
     setUserName(e.target.value);
   };
-  const handleChangePassword = (e: any) => {
+  const handleChangePassword = (e: any): void => {
     setPassword(e.target.value);
   };
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const login = {
     username: userName,
-    password: password,
+    password,
   };
 
-  const navigateTo = () => {
+  const navigateTo = (): void => {
     setTimeout(() => {
       navigate("/dashboard");
     }, 1000);
   };
-  const sendDataToApi = async () => {
-    await getToken(login)
-      .then((res: any) => {
-        let token = res.data.split(":")[1];
-        localStorage.setItem("auth", token);
-        setAuth(token);
-      });
+  const sendDataToApi = async (): Promise<any> => {
+    await getToken(login).then((res: any) => {
+      const token = res.data.split(":")[1];
+      localStorage.setItem("auth", token);
+      setAuth(token);
+    });
     navigateTo();
   };
   return (
@@ -129,13 +128,17 @@ const LoginPage = () => {
               onChange={handleChangePassword}
             />
           </div>
-          <button className={classes.loginButton} onClick={sendDataToApi}>
+          <button
+            type="button"
+            className={classes.loginButton}
+            onClick={sendDataToApi}
+          >
             Sign in
           </button>
         </form>
       </div>
     </div>
   );
-};
+}
 
 export default LoginPage;

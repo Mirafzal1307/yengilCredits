@@ -2,14 +2,11 @@ import { Container, Paper, Typography } from "@mui/material";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import TableOrder from "./TableOrder";
 
-const Order: React.FC = () => {
+function Order(): JSX.Element {
   return (
     <div>
       <MiniDrawer />
-      <Container
-       maxWidth="lg"
-        style={{ marginTop: "50px"}}
-      >
+      <Container maxWidth="lg" style={{ marginTop: "50px" }}>
         <Typography
           sx={{
             fontFamily: "Poppins",
@@ -17,7 +14,7 @@ const Order: React.FC = () => {
             fontWeight: "600",
             fontSize: "28px",
           }}
-          variant={"h1"}
+          variant="h1"
         >
           Buyurtma
         </Typography>
@@ -28,6 +25,6 @@ const Order: React.FC = () => {
       </Container>
     </div>
   );
-};
+}
 
 export default Order;

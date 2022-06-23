@@ -1,7 +1,5 @@
-import React from "react";
-import { useTypedSelector } from "../../hook/useTypedSelector";
+import React, { useState } from "react";
 // import { fetchProducts } from "../../redux/actions/productAction";
-import { useActions } from "../../hook/useActions";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,27 +11,34 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import {
+  Button,
+  CircularProgress,
+  Pagination,
+  PaginationItem,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { Link as RouterLink, Link as NavLink } from "react-router-dom";
+
+import SearchIcon from "@mui/icons-material/Search";
+import onSale from "../../Images/served.svg";
+import notSale from "../../Images/notserved.svg";
+
+import DetailsImage from "../../Images/detailsicon.svg";
+import EditImage from "../../Images/edit.png";
+import Notification from "../Snackbar/Notification";
+import {
   deleteProductItem,
   getProductCreate,
   getProductItem,
   getProductSearch,
 } from "../../Api/admin/AdminProductApi";
-import { Button, CircularProgress } from "@mui/material";
-import EditImage from "../../Images/edit.png";
-import DetailsImage from "../../Images/detailsicon.svg";
-import { makeStyles } from "@mui/styles";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { Link as RouterLink } from "react-router-dom";
-import { useState } from "react";
-import { Pagination, PaginationItem } from "@mui/material";
+import { useActions } from "../../hook/useActions";
+import { useTypedSelector } from "../../hook/useTypedSelector";
 import Modal from "../Modal/Modal";
-import Notification from "../Snackbar/Notification";
-import onSale from "../../Images/served.svg";
-import notSale from "../../Images/notserved.svg";
-import { Link as NavLink } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
+
 const useStyles = makeStyles({
   tableCell: {
     padding: "0 !important",
@@ -269,7 +274,7 @@ interface EnhancedTableProps {
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   rowCount?: number;
 }
-function EnhancedTableHead(props: EnhancedTableProps) {
+function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   const { onSelectAllClick } = props;
   const classes = useStyles();
 
@@ -279,8 +284,12 @@ function EnhancedTableHead(props: EnhancedTableProps) {
         <TableCell padding="checkbox" className={classes.tableCell}>
           <Checkbox color="primary" onChange={onSelectAllClick} />
         </TableCell>
-        {headCells.map((headCell, index) => (
-          <TableCell key={index} align="left" className={classes.tableCell}>
+        {headCells.map((headCell) => (
+          <TableCell
+            key={Math.random()}
+            align="left"
+            className={classes.tableCell}
+          >
             <TableSortLabel className={classes.tableSortLabel}>
               {headCell.label}
             </TableSortLabel>
@@ -291,9 +300,9 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-const ProductList: React.FC = () => {
+function ProductList(): JSX.Element {
   const { products, error, loading } = useTypedSelector(
-    (state) => state.product
+    (state) => state.product,
   );
   // let p: number = products.totalPages
   const [selected, setSelected] = React.useState<readonly string[]>([]);
@@ -308,31 +317,25 @@ const ProductList: React.FC = () => {
   const [category, setCategory] = React.useState([]);
   const [param, setParam] = React.useState("");
   const [prod, setProducts] = React.useState<any>();
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: any): void => {
     setParam(e.target.value);
   };
-  const getData = async () => {
+  const getData = async (): Promise<void> => {
     const response: any = await getProductSearch(param);
     setProducts(response.data.content);
   };
   React.useEffect(() => {
     getData();
   }, [param]);
-  const refresh = () => {
+  const refresh = (): void => {
     setTimeout(() => window.location.reload(), 1);
   };
   const classes = useStyles();
   const product: any[] = products.content;
-  React.useEffect(() => {
-    fetchProducts(`${page - 1}`);
-    if (pageQty < page) {
-      setPage(3);
-    }
-  }, [query, page]);
-  React.useEffect(() => {
-    getCategory();
-  }, []);
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleSelectAllClick = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): any => {
     if (event.target.checked) {
       const newSelecteds = product.map((pro: any, key: any) => pro.name);
       setSelected(newSelecteds);
@@ -340,7 +343,7 @@ const ProductList: React.FC = () => {
     }
     setSelected([]);
   };
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
+  const handleClick = (event: React.MouseEvent<unknown>, name: string): any => {
     const selectedIndex = selected.indexOf(name);
     let newSelected: readonly string[] = [];
     if (selectedIndex === -1) {
@@ -352,19 +355,19 @@ const ProductList: React.FC = () => {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+        selected.slice(selectedIndex + 1),
       );
     }
     setSelected(newSelected);
   };
-  const isSelected = (name: string) => selected.indexOf(name) !== -1;
+  const isSelected = (name: string): any => selected.indexOf(name) !== -1;
   const [status, setStatus] = React.useState("");
   // const [categoryName, setCategoryName] = React.useState('');
-  const handleChange = (event: any) => {
+  const handleChange = (event: any): void => {
     setStatus(event.target.value);
   };
-  const deleteUserData = async (id: any) => {
-    await deleteProductItem(id).then((res) => {
+  const deleteUserData = async (id: any): Promise<any> => {
+    await deleteProductItem(id).then((res: any) => {
       if (res.status === 200) {
         setNotify({
           isOpen: true,
@@ -380,10 +383,10 @@ const ProductList: React.FC = () => {
       }
     });
   };
-  const getProductByID = async (id: any) => {
+  const getProductByID = async (id: any): Promise<void> => {
     await getProductItem(id);
   };
-  const getCategory = async () => {
+  const getCategory = async (): Promise<void> => {
     const res: any = await getProductCreate();
     setCategory(res?.data?.all_categories[0]);
   };
@@ -394,6 +397,15 @@ const ProductList: React.FC = () => {
   if (error) {
     return <h1>{error}</h1>;
   }
+  React.useEffect(() => {
+    fetchProducts(`${page - 1}`);
+    if (pageQty < page) {
+      setPage(3);
+    }
+  }, [query, page]);
+  React.useEffect(() => {
+    getCategory();
+  }, []);
   return (
     <>
       <div className={classes.productsTitle}>
@@ -405,7 +417,7 @@ const ProductList: React.FC = () => {
           sx={{ textTransform: "capitalize" }}
           onClick={() => refresh()}
         >
-          + Qo'shish
+          + Qo`shish
         </Button>
       </div>
       <Box sx={{ maxWidth: "1200px", margin: "auto" }}>
@@ -419,7 +431,7 @@ const ProductList: React.FC = () => {
                   onChange={handleInputChange}
                   className={classes.SearchInput}
                 />
-                <button className={classes.SearchIcon}>
+                <button type="button" className={classes.SearchIcon}>
                   <SearchIcon />
                 </button>
               </div>
@@ -446,8 +458,8 @@ const ProductList: React.FC = () => {
                   >
                     <MenuItem value="">Barchasi</MenuItem>
 
-                    {category.map((cat: any, index: any) => (
-                      <MenuItem value={cat.name} key={index}>
+                    {category.map((cat: any) => (
+                      <MenuItem value={cat.name} key={Math.random()}>
                         {cat.name}
                       </MenuItem>
                     ))}
@@ -461,13 +473,13 @@ const ProductList: React.FC = () => {
                 {param && prod
                   ? param &&
                     prod?.map((user: any, index: any) => {
-                      const delProduct = () => {
+                      const delProduct = (): void => {
                         deleteUserData(user.id);
                       };
-                      const getProductToUpdate = () => {
-                        getProductByID(user.id);
-                      };
-                      const getProductToDetails = () => {
+                      // const getProductToUpdate = () => {
+                      //   getProductByID(user.id);
+                      // };
+                      const getProductToDetails = (): void => {
                         getProductByID(user.id);
                       };
 
@@ -481,7 +493,7 @@ const ProductList: React.FC = () => {
                           role="checkbox"
                           aria-checked={isItemSelected}
                           tabIndex={-1}
-                          key={index}
+                          key={user.id}
                           selected={isItemSelected}
                         >
                           <TableCell
@@ -529,7 +541,7 @@ const ProductList: React.FC = () => {
                                   alt="rasm"
                                   className={classes.icon}
                                 />
-                                Sotuvda yo'q
+                                Sotuvda yo`q
                               </p>
                             )}
                           </TableCell>
@@ -567,18 +579,19 @@ const ProductList: React.FC = () => {
                       ?.filter((val: any) => {
                         if (!status) {
                           return val;
-                        } else if (val?.category?.name === status) {
+                        }
+                        if (val?.category?.name === status) {
                           return val;
                         }
                       })
                       .map((user, index) => {
-                        const delProduct = () => {
+                        const delProduct = (): void => {
                           deleteUserData(user.id);
                         };
-                        const getProductToUpdate = () => {
+                        const getProductToUpdate = (): void => {
                           getProductByID(user.id);
                         };
-                        const getProductToDetails = () => {
+                        const getProductToDetails = (): void => {
                           getProductByID(user.id);
                         };
                         const isItemSelected = isSelected(user.id);
@@ -590,7 +603,7 @@ const ProductList: React.FC = () => {
                             role="checkbox"
                             aria-checked={isItemSelected}
                             tabIndex={-1}
-                            key={index}
+                            key={user.id}
                             selected={isItemSelected}
                           >
                             <TableCell
@@ -647,7 +660,7 @@ const ProductList: React.FC = () => {
                                     alt="rasm"
                                     className={classes.icon}
                                   />
-                                  Sotuvda yo'q
+                                  Sotuvda yo`q
                                 </p>
                               )}
                             </TableCell>
@@ -660,7 +673,7 @@ const ProductList: React.FC = () => {
                             <TableCell
                               align="left"
                               className={classes.tableCell}
-                              style={{display: "flex"}}
+                              style={{ display: "flex" }}
                             >
                               <Button
                                 className={classes.button}
@@ -680,10 +693,10 @@ const ProductList: React.FC = () => {
                                 <img src={EditImage} alt="rasm bor edi" />
                               </Button>
                               {/* <Button className={classes.button}> */}
-                                <Modal
-                                  data={delProduct}
-                                  className={classes.imgDelete}
-                                />
+                              <Modal
+                                data={delProduct}
+                                className={classes.imgDelete}
+                              />
                               {/* </Button> */}
                             </TableCell>
                           </TableRow>
@@ -705,7 +718,7 @@ const ProductList: React.FC = () => {
                 to={`/product/?page${page}`}
                 {...item}
                 variant="outlined"
-                shape={"rounded"}
+                shape="rounded"
               />
             )}
           />
@@ -714,6 +727,6 @@ const ProductList: React.FC = () => {
       <Notification notify={notify} setNotify={setNotify} />
     </>
   );
-};
+}
 
 export default ProductList;

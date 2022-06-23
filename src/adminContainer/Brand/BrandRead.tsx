@@ -1,5 +1,4 @@
 import React from "react";
-import { deleteBrandData, getBrand } from "../../Api/admin/AdminBrandApi";
 import { makeStyles } from "@mui/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,16 +6,17 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Checkbox from "@mui/material/Checkbox";
-import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import { Link } from "react-router-dom";
+import { Box, LinearProgress, Tooltip } from "@mui/material";
+import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import edit from "./images/edit.svg";
 import Modal from "../Modal/Modal";
 import Notification from "../Snackbar/Notification";
 import { useActions } from "../../hook/useActions";
 import { useTypedSelector } from "../../hook/useTypedSelector";
-import { Box, LinearProgress, Tooltip } from "@mui/material";
+import { deleteBrandData, getBrand } from "../../Api/admin/AdminBrandApi";
 
-console.warn = () => {};
+// console.warn = () => {};
 
 const useStyles = makeStyles({
   editButton: {
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BrandTable = () => {
+function BrandTable(): JSX.Element {
   const [notify, setNotify] = React.useState<any>({
     isOpen: false,
     message: "",
@@ -71,16 +71,12 @@ const BrandTable = () => {
     );
   }
   if (error) {
-    return (
-      <>
-        <p>{error}</p>
-      </>
-    );
+    return <p>{error}</p>;
   }
 
-  const deleteData = async (id: number) => {
+  const deleteData = async (id: number): Promise<any> => {
     await deleteBrandData(id)
-      .then((res) => {
+      .then((res: any) => {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
@@ -89,7 +85,7 @@ const BrandTable = () => {
           });
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setNotify({
           isOpen: true,
           message: "Xatolik yuz berdi...",
@@ -98,12 +94,12 @@ const BrandTable = () => {
       });
   };
 
-  const getBrandByID = async (id: number) => {
+  const getBrandByID = async (id: number): Promise<void> => {
     await getBrand(id);
   };
 
   return (
-    <React.Fragment>
+    <>
       <Table>
         <TableHead>
           <TableRow>
@@ -131,14 +127,14 @@ const BrandTable = () => {
         </TableHead>
         <TableBody>
           {brands.map((item: any, key: any) => {
-            const delData = () => {
+            const delData = (): void => {
               deleteData(item.id);
             };
-            const getBrandToUpdate = () => {
+            const getBrandToUpdate = (): void => {
               getBrandByID(item.id);
             };
             return (
-              <TableRow style={{ alignItems: "center" }} key={key}>
+              <TableRow style={{ alignItems: "center" }} key={item.id}>
                 <TableCell padding="checkbox">
                   <Checkbox
                     color="primary"
@@ -172,6 +168,7 @@ const BrandTable = () => {
                   <Link to={`/brand/admin/edit-page/${item.id}`}>
                     <Tooltip title="Edit">
                       <button
+                        type="button"
                         className={classes.editButton}
                         onClick={getBrandToUpdate}
                       >
@@ -187,8 +184,8 @@ const BrandTable = () => {
         </TableBody>
       </Table>
       <Notification notify={notify} setNotify={setNotify} />
-    </React.Fragment>
+    </>
   );
-};
+}
 
 export default BrandTable;

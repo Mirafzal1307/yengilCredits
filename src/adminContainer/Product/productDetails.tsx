@@ -1,17 +1,16 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import { useParams } from "react-router-dom";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
-import { CircularProgress, Container, Grid } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { useParams, Link as RouterLink } from "react-router-dom";
+import { CircularProgress, Container, Grid, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/material";
+import { fontSize } from "@mui/system";
+import MiniDrawer from "../../components/CoreLayout/AdminHeader";
+
 import { getProductCreate } from "../../Api/admin/AdminProductApi";
 import { API_URL, MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { useActions } from "../../hook/useActions";
-import { fetchProductsById } from "../../redux/actions/detailsByIdAction"
-import { fontSize } from "@mui/system";
+import { fetchProductsById } from "../../redux/actions/detailsByIdAction";
 
 const useStyles = makeStyles({
   bigFirstBox: {
@@ -130,10 +129,10 @@ const useStyles = makeStyles({
   },
   CreateContainerTitle: {
     maxWidth: "1200px !important",
-    background: 'white',
-    boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.2) !important',
-    borderRadius: '5px',
-    padding: '40px 50px  !important'
+    background: "white",
+    boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.2) !important",
+    borderRadius: "5px",
+    padding: "40px 50px  !important",
   },
   CreateProductTitle: {
     fontStyle: "normal",
@@ -229,7 +228,6 @@ const useStyles = makeStyles({
   img: {
     width: "50%",
     borderRadius: "10px",
-
   },
   forPrice: {
     fontFamily: "Poppins",
@@ -247,170 +245,182 @@ const useStyles = makeStyles({
     textTransform: "capitalize",
   },
   ProductName: {
-    margin: 'unset',
-    marginBottom: '37px',
-    fontFamily: 'Poppins',
+    margin: "unset",
+    marginBottom: "37px",
+    fontFamily: "Poppins",
     fontWeight: 600,
-    fontSize: '22px',
-    color: '#065374'
+    fontSize: "22px",
+    color: "#065374",
   },
   BrandName: {
-    fontFamily: 'Poppins',
+    fontFamily: "Poppins",
     fontWeight: 800,
-    fontSize: '22px',
-    color: '#065374'
+    fontSize: "22px",
+    color: "#065374",
   },
   CharacterAndProperty: {
-    background: ' rgba(6, 83, 116, 0.1)',
-    padding: '30px 60px',
-    borderRadius: '10px',
-    display: 'flex',
-    justifyContent: 'space-between'
+    background: " rgba(6, 83, 116, 0.1)",
+    padding: "30px 60px",
+    borderRadius: "10px",
+    display: "flex",
+    justifyContent: "space-between",
   },
   Character: {
-    listStyle: 'none !important',
-    fontSize: '17px !important',
+    listStyle: "none !important",
+    fontSize: "17px !important",
     fontWeight: 300,
   },
   ProductBottomName: {
     fontWeight: 600,
-    fontSize: '22px',
-    color: 'black',
-    margin: 'unset'
+    fontSize: "22px",
+    color: "black",
+    margin: "unset",
   },
   ShortName: {
     fontWeight: 500,
-    fontSize: '18px',
-    color: 'rgba(6, 83, 116, 1)',
-    margin: 'unset'
+    fontSize: "18px",
+    color: "rgba(6, 83, 116, 1)",
+    margin: "unset",
   },
   price: {
-    textDecoration: 'line-through',
+    textDecoration: "line-through",
     fontWeight: 500,
-    fontSize: '18px',
-    color: '#065374',
-    margin: 'unset',
-    padding: '5px',
-    textAlign:'right'
+    fontSize: "18px",
+    color: "#065374",
+    margin: "unset",
+    padding: "5px",
+    textAlign: "right",
   },
   afterDiscount: {
     fontWeight: 600,
-    fontSize: '22px',
-    color: '#000',
-    margin: 'unset',
-    padding: '5px',
-    textAlign: 'right'
+    fontSize: "22px",
+    color: "#000",
+    margin: "unset",
+    padding: "5px",
+    textAlign: "right",
   },
-  discount:{
+  discount: {
     fontWeight: 600,
-    fontSize: '22px',
-    color: '#000',
-    margin: 'unset',
-    padding: '5px',
-    textAlign: 'right'
-  }
+    fontSize: "22px",
+    color: "#000",
+    margin: "unset",
+    padding: "5px",
+    textAlign: "right",
+  },
 });
 
-const ProductDetails = () => {
+function ProductDetails(): JSX.Element {
   const { products, error, loading } = useTypedSelector((state) => state?.byId);
-  let pro: any = products?.Product;
-  let des: any = products?.Description;
+  const pro: any = products?.Product;
+  const des: any = products?.Description;
   const classes = useStyles();
   const { id } = useParams();
-  React.useEffect(() => {
-   fetchProductsById(id);
-  }, []);
   const { fetchProductsById } = useActions();
+  React.useEffect(() => {
+    fetchProductsById(id);
+  }, []);
   return (
-    <React.Fragment>
+    <>
       <MiniDrawer />
       <Container
         style={{ marginTop: "50px" }}
-        className={classes.CreateContainerTitle}>
-        {
-          loading && products ? <CircularProgress disableShrink />
-            :
-            <>
-              <Grid item xs={12}  >
-                <div style={{ display: 'flex', justifyContent: 'space-between' }} >
-                  <h3 className={classes.ProductName} >
-                    {pro[0]?.name}
+        className={classes.CreateContainerTitle}
+      >
+        {loading && products ? (
+          <CircularProgress disableShrink />
+        ) : (
+          <>
+            <Grid item xs={12}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <h3 className={classes.ProductName}>{pro[0]?.name}</h3>
+                <i className={classes.BrandName}>{pro[0]?.brand?.name}</i>
+              </div>
+            </Grid>
+            <Box style={{ display: "flex", alignItems: "center" }}>
+              <Grid
+                item
+                xs={6}
+                style={{ display: "flex", flexDirection: "column" }}
+              >
+                <div
+                  style={{
+                    textAlign: "center",
+                    filter: "drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))",
+                  }}
+                >
+                  <img
+                    src={`${MINIO_FULL_ENDPOINT_FOR}/product/${pro[0]?.photos[0].name}`}
+                    alt="Rasm bor edi"
+                    className={classes.img}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6}>
+                <div className={classes.CharacterAndProperty}>
+                  <li className={classes.Character}>
+                    <h3>Xarakteriska Nomi</h3>
+                    {des[0]?.map((item: any, key: any) => (
+                      <div style={{ flexDirection: "column" }}>
+                        {item?.character_name}
+                      </div>
+                    ))}
+                  </li>
+                  <li
+                    className={classes.Character}
+                    style={{ textAlign: "right" }}
+                  >
+                    <h3>Xarakteriska Qiymati</h3>
+                    {des[0]?.map((item: any, key: any) => (
+                      <div style={{ flexDirection: "column" }}>
+                        {item?.character_value}
+                      </div>
+                    ))}
+                  </li>
+                </div>
+              </Grid>
+            </Box>
+            <Grid item xs={12}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginTop: "30px",
+                }}
+              >
+                <div>
+                  <h3 className={classes.ProductBottomName}>
+                    {pro?.[0]?.name}
                   </h3>
-                  <i className={classes.BrandName} >
-                    {pro[0]?.brand?.name}
-                  </i>
+                  <h4 className={classes.ShortName}>{pro?.[0]?.short_name}</h4>
                 </div>
-              </Grid>
-              <Box style={{ display: "flex", alignItems: "center" }}>
-                <Grid item xs={6} style={{ display: 'flex', flexDirection: 'column' }} >
-                  <div style={{ textAlign: 'center', filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))' }}  >
-                    <img src={`${MINIO_FULL_ENDPOINT_FOR}/product/${pro[0]?.photos[0].name}`} alt="Rasm bor edi" className={classes.img} />
-                  </div>
-                </Grid>
-                <Grid item xs={6}>
-                  <div className={classes.CharacterAndProperty} >
-                    <li className={classes.Character} >
-                      <h3>
-                        Xarakteriska Nomi
-                      </h3>
-                      {
-                        des[0]?.map((item: any, key: any) => (
-                          <div style={{flexDirection: 'column'}}  >
-                            {item?.character_name}
-                          </div>
-                        ))
-                      }
-                    </li>
-                    <li className={classes.Character} style={{ textAlign: 'right' }} >
-                      <h3>
-                        Xarakteriska Qiymati
-                      </h3>
-                      {
-                        des[0]?.map((item: any, key: any) => (
-                          <div style={{flexDirection: 'column'}}  >
-                            {item?.character_value}
-                          </div>
-                        ))
-                      }
-                    </li>
-                  </div>
-                </Grid>
-              </Box>
-              <Grid item xs={12} >
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '30px' }} >
+                <div>
                   <div>
-                    <h3 className={classes.ProductBottomName} >
-                      {pro?.[0]?.name}
-                    </h3>
-                    <h4 className={classes.ShortName} >{pro?.[0]?.short_name}</h4>
+                    <p className={classes.price}> {pro?.[0]?.price} so`m </p>
+                    <p className={classes.afterDiscount}>
+                      {" "}
+                      {pro?.[0]?.after_discount?.toLocaleString()} so`m{" "}
+                    </p>
+                    <p className={classes.discount}> {pro?.[0].discount} %</p>
                   </div>
-                  <div>
-                    <div>
-                      <p className={classes.price} > {pro?.[0]?.price} so'm </p>
-                      <p className={classes.afterDiscount} > {pro?.[0]?.after_discount?.toLocaleString()} so'm </p>
-                      <p className={classes.discount} > {pro?.[0].discount} %</p>
-                    </div>
-                    <div style={{ display: "flex" }}>
-                      <Button className={classes.save} >
-                        Bekor qilish
-                      </Button>
-                      <Button
-                        component={RouterLink as any}
-                        to="/product"
-                        className={classes.cancel}
-                      >
-                        Saqlash
-                      </Button>
-                    </div>
+                  <div style={{ display: "flex" }}>
+                    <Button className={classes.save}>Bekor qilish</Button>
+                    <Button
+                      component={RouterLink as any}
+                      to="/product"
+                      className={classes.cancel}
+                    >
+                      Saqlash
+                    </Button>
                   </div>
                 </div>
-              </Grid>
-            </>
-        }
+              </div>
+            </Grid>
+          </>
+        )}
         {error ? <h1>error</h1> : null}
       </Container>
-    </React.Fragment>
+    </>
   );
-};
+}
 
 export default ProductDetails;
