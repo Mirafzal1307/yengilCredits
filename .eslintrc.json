@@ -89,7 +89,7 @@
     "radix": ["off"],
     "@typescript-eslint/no-var-requires": ["off"],
     "react/prefer-stateless-function": ["off"],
-    "@typescript-eslint/no-use-before-define": ["off"]
-    // "camelcase": ["off"]
+    "@typescript-eslint/no-use-before-define": ["off"],
+    "@typescript-eslint/camelcase": "off"
   }
 }
