@@ -80,7 +80,7 @@
     "no-underscore-dangle": "off",
     "import/no-unresolved": "off",
     "react/destructuring-assignment": ["off"],
-    "camelcase": ["error", { "allow": ["aa_bb"] }],
+    // "camelcase": ["error", { "allow": ["aa_bb"] }],
     "no-nested-ternary": ["off"],
     "array-callback-return": ["off"],
     "react/require-default-props": ["off"],
@@ -90,6 +90,6 @@
     "@typescript-eslint/no-var-requires": ["off"],
     "react/prefer-stateless-function": ["off"],
     "@typescript-eslint/no-use-before-define": ["off"],
-    "@typescript-eslint/camelcase": "off"
+    "camelcase": 0
   }
 }
