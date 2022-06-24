@@ -260,7 +260,7 @@ const useStyles = makeStyles({
   },
 });
 
-const EnhancedTableHead = (props: EnhancedTableProps): JSX.Element => {
+function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   const { onSelectAllClick } = props;
   const classes = useStyles();
   return (
@@ -277,7 +277,7 @@ const EnhancedTableHead = (props: EnhancedTableProps): JSX.Element => {
       </TableRow>
     </TableHead>
   );
-};
+}
 
 interface createDatas {
   name: string;
