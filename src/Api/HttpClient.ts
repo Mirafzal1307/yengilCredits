@@ -14,23 +14,10 @@ class ApiClient {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
 
-      }});
-      this.instance.interceptors.response.use(
-        (config) => {
-          console.log( "--- Axios: request use success ---" , config);
-          
-          return config;
-        },
-        (error) => {
-          console.log( "--- Axios: request use error ---" , error);
-          return Promise.reject(error);
-        }
-      );
-      this.instance.interceptors.request.use(
-        (response) => {}
-      );
-
+      }
+  });
   }
+
   fetch<T>(config: AxiosRequestConfig): AxiosPromise<T> {
     return this.instance({
       ...config,

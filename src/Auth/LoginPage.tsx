@@ -90,26 +90,21 @@ const LoginPage = () => {
       navigate("/dashboard");
     }, 1000);
   };
-  const updateToken = () => {
-   
-  };
   const sendDataToApi = async () => {
     await getToken(login)
-      .then((res: any) => {
-        let accessToken = res.data.accessToken;
-        console.log(accessToken);
-        let refresh_Token = res.data.refreshToken
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refresh_Token);
-        setAuth(accessToken);
-      });
+    .then((res: any) => {
+      let token = res.data.split(":")[1];
+      localStorage.setItem("auth", token);
+      setAuth(token);
+    });
+
     navigateTo();
   };
   return (
     <div className={classes.pageStyle}>
       <div className={classes.loginBox}>
         <div className={classes.lockImg}>
-          <img src={lockImg} alt="" />
+          <img loading="lazy"  src={lockImg} alt="sss" />
         </div>
         <form
           style={{ marginTop: "50px" }}
