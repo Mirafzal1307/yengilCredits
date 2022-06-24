@@ -8,6 +8,7 @@ import { useActions } from "../../hook/useActions";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { getProductByBrand } from "../../Api/client/ClientBrandApi";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
+
 const useStyles = makeStyles({
   title: {
     fontFamily: "Poppins",
@@ -51,11 +52,11 @@ const useStyles = makeStyles({
     fontWeight: "600",
     fontSize: "14px",
     margin: "auto !important",
-    '&:hover': {
-      background: '#065374 !important',
-      color: 'white !important',
-      transitionDuration: '0.4s'
-    }
+    "&:hover": {
+      background: "#065374 !important",
+      color: "white !important",
+      transitionDuration: "0.4s",
+    },
   },
   cardSpan: {
     position: "absolute",
@@ -88,16 +89,16 @@ const useStyles = makeStyles({
   },
 });
 
-const BrandClient = () => {
+function BrandClient(): JSX.Element {
   const [discount, setDiscount] = useState([]);
   const classes = useStyles();
-  async function getData() {
+  async function getData(): Promise<any> {
     const response: any = await getProductCards();
     setDiscount(response.data.all_brands);
   }
 
   const { brands, error, loading } = useTypedSelector(
-    (state) => state.brandClient
+    (state) => state.brandClient,
   );
 
   const { fetchBrands } = useActions();
@@ -106,7 +107,7 @@ const BrandClient = () => {
     fetchBrands();
   }, []);
 
-  const getProduct = async (id: any) => {
+  const getProduct = async (id: any): Promise<any> => {
     await getProductByBrand({}, id);
   };
 
@@ -152,11 +153,11 @@ const BrandClient = () => {
               </Box>
             ) : brands ? (
               discount.map((item: any, key: any) => {
-                const productByBrand = () => {
+                const productByBrand = (): void => {
                   getProduct(item.id);
                 };
                 return (
-                  <SplideSlide className={classes.splide} key={key}>
+                  <SplideSlide className={classes.splide} key={item.id}>
                     <Box className={classes.bodyCard}>
                       <Box>
                         <img
@@ -172,6 +173,7 @@ const BrandClient = () => {
                           <button
                             onClick={productByBrand}
                             className={classes.cardButton}
+                            type="button"
                           >
                             Barchasi
                           </button>
@@ -189,7 +191,6 @@ const BrandClient = () => {
       </Container>
     </>
   );
-};
-
+}
 
 export default BrandClient;

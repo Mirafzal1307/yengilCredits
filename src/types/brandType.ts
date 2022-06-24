@@ -11,17 +11,20 @@ export enum BrandActionTypes {
 }
 
 interface FetchBrandsAction {
-    type: BrandActionTypes.FETCH_BRANDS;
+  type: BrandActionTypes.FETCH_BRANDS;
 }
 
 interface FetchBrandsSuccessAction {
-    type: BrandActionTypes.FETCH_BRANDS_SUCCESS;
-    payload: any[]
+  type: BrandActionTypes.FETCH_BRANDS_SUCCESS;
+  payload: any[];
 }
 
 interface FetchBrandsErrorAction {
-    type: BrandActionTypes.FETCH_BRANDS_ERROR;
-    payload: string;
+  type: BrandActionTypes.FETCH_BRANDS_ERROR;
+  payload: string;
 }
 
-export type BrandAction = FetchBrandsAction | FetchBrandsErrorAction | FetchBrandsSuccessAction 
+export type BrandAction =
+  | FetchBrandsAction
+  | FetchBrandsErrorAction
+  | FetchBrandsSuccessAction;

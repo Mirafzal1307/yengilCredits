@@ -16,9 +16,15 @@ function createData(
   name: string,
   email: string,
   cost: number,
-  date: string
-) {
-  return { id, name, email, cost, date };
+  date: string,
+): any {
+  return {
+    id,
+    name,
+    email,
+    cost,
+    date,
+  };
 }
 const rows = [
   createData(
@@ -26,35 +32,35 @@ const rows = [
     "Jonh lghghue",
     "useggggggggggggggggg@email.com",
     623,
-    "11.05.2022"
+    "11.05.2022",
   ),
   createData(
     12,
     "Issachgh  Nueton",
     "useggggggggggggggg@email.com",
     9233,
-    "11.05.2022"
+    "11.05.2022",
   ),
   createData(
     13,
     "Eclahfghdir ",
     "usedddddddddddd@email.com",
     24235,
-    "11.05.2022"
+    "11.05.2022",
   ),
   createData(
     14,
     "Mirafhfdfhzal",
     "usedfgsdfgdgfd@email.com",
     8000,
-    "11.05.2022"
+    "11.05.2022",
   ),
   createData(
     15,
     "Gabrdfhfheal",
     "usegdsgsdgsgsgfsg@email.com",
     16400,
-    "11.05.2022"
+    "11.05.2022",
   ),
 ];
 const useStyles = makeStyles({
@@ -104,7 +110,7 @@ const useStyles = makeStyles({
   },
 });
 
-const HomeChartTableButton = () => {
+function HomeChartTableButton(): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -131,7 +137,7 @@ const HomeChartTableButton = () => {
                 <TableCell
                   component="th"
                   scope="row"
-                  className={`${classes.header_table_inside} 
+                  className={`${classes.header_table_inside}
                ${classes.header_table_inside_name}`}
                key={row.id}
                 >
@@ -188,6 +194,6 @@ const HomeChartTableButton = () => {
       </TableContainer> */}
     </div>
   );
-};
+}
 
 export default HomeChartTableButton;

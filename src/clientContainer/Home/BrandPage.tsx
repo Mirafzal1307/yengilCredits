@@ -8,25 +8,26 @@ import {
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
-import BigPhoto from "../../Images/image 26.png";
-import { useTypedSelector } from "../../hook/useTypedSelector";
-import { useParams } from "react-router-dom";
+import { useParams, Link, Link as NavLink } from "react-router-dom";
 import { Box } from "@mui/system";
-import { Link } from "react-router-dom";
-import { getProductByBrand } from "../../Api/client/ClientBrandApi";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import BackToTop from "./Navbar/Navbar";
-import Footer from "./Footer";
-import { Link as NavLink } from "react-router-dom";
-import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
-import cart2 from "../../Images/cart2.svg";
 import AppsIcon from "@mui/icons-material/Apps";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import cart1 from "../../Images/cart1.svg";
 import { useDispatch } from "react-redux";
+import BigPhoto from "../../Images/image 26.png";
+import { useTypedSelector } from "../../hook/useTypedSelector";
+
+import { getProductByBrand } from "../../Api/client/ClientBrandApi";
+import BackToTop from "./Navbar/Navbar";
+import Footer from "./Footer";
+
+import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
+import cart2 from "../../Images/cart2.svg";
+import cart1 from "../../Images/cart1.svg";
 import { addToCart } from "../../redux/cart/action";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import "./style.css";
+
 const useStyles = makeStyles({
   styledButton: {
     position: "absolute",
@@ -235,7 +236,7 @@ const useStyles = makeStyles({
     borderRadius: "5px",
     marginTop: "10px",
     marginBottom: "10px",
-    paddingLeft: "10px"
+    paddingLeft: "10px",
   },
   sortCardTitle: {
     fontFamily: "Poppins",
@@ -277,9 +278,9 @@ const useStyles = makeStyles({
   },
 });
 
-const BrandPage = () => {
+function BrandPage(): JSX.Element {
   const { products, error, loading } = useTypedSelector(
-    (state) => state.productByCategoryReducer
+    (state) => state.productByCategoryReducer,
   );
   const classes = useStyles();
   const { id } = useParams();
@@ -294,8 +295,8 @@ const BrandPage = () => {
     message: "",
     type: "",
   });
-  const getProduct = async (id: any) => {
-    let res: any = await getProductByBrand(`${page - 1}`, id);
+  const getProduct = async (id: any): Promise<any> => {
+    const res: any = await getProductByBrand(`${page - 1}`, id);
     setProduct(res.data.content);
     setPageQty(res.data.totalPages);
   };
@@ -323,7 +324,7 @@ const BrandPage = () => {
         <Grid item container spacing={3}>
           <Grid item xs={6} md={1} sm={4}>
             <Link to="/">
-              <button className={classes.back}>
+              <button type="button" className={classes.back}>
                 {" "}
                 <ArrowBackIosNewIcon
                   className={classes.ArrowBackIosNewIcon}
@@ -341,6 +342,7 @@ const BrandPage = () => {
           >
             <div className={classes.locationOfCard}>
               <button
+                type="button"
                 className={classes.sortButton}
                 onClick={() => setSort(false)}
                 style={sort ? { opacity: "40%" } : { color: "#000 !important" }}
@@ -348,6 +350,7 @@ const BrandPage = () => {
                 <AppsIcon />
               </button>
               <button
+                type="button"
                 className={classes.sortButton}
                 onClick={() => setSort(true)}
                 style={
@@ -371,22 +374,24 @@ const BrandPage = () => {
               >
                 {product
                   .filter((val: any) => {
-                    if (searchTerm == "") {
+                    if (searchTerm === "") {
                       return val;
-                    } else if (
+                    }
+                    if (
                       val.short_name
                         .toLowerCase()
                         .includes(searchTerm.toLowerCase())
                     ) {
                       return val;
-                    } else if (val.price <= searchTerm) {
+                    }
+                    if (val.price <= searchTerm) {
                       return val;
                     }
                   })
-                  .map((item: any, key: any) => (
+                  .map((item: any) => (
                     <Box
                       className={classes.bodyCard}
-                      key={key}
+                      key={item.id}
                       sx={{ margin: "10px 10px !important" }}
                     >
                       <Box>
@@ -416,7 +421,7 @@ const BrandPage = () => {
                             textDecoration: "line-through",
                           }}
                         >
-                          {item?.price?.toLocaleString()} so'm
+                          {item?.price?.toLocaleString()} so`m
                         </p>
                         <p
                           className={classes.cardPriceDiscount}
@@ -429,9 +434,9 @@ const BrandPage = () => {
                           }}
                         >
                           {Math.floor(
-                            (item?.after_discount * 1.44) / 12
+                            (item.after_discount * 1.44) / 12,
                           ).toLocaleString()}{" "}
-                          so'm
+                          so`m
                           <span
                             style={{
                               background: "red",
@@ -453,11 +458,12 @@ const BrandPage = () => {
                             fontWeight: "500",
                           }}
                         >
-                          {item?.after_discount?.toLocaleString()} so'm
+                          {item?.after_discount?.toLocaleString()} so`m
                         </p>
 
                         {item.availability === true ? (
                           <button
+                            type="button"
                             className={classes.cardButton}
                             onClick={() => {
                               dispatch(addToCart(item));
@@ -476,7 +482,10 @@ const BrandPage = () => {
                             Savatchaga
                           </button>
                         ) : (
-                          <button className={classes.cardButtonSecond}>
+                          <button
+                            type="button"
+                            className={classes.cardButtonSecond}
+                          >
                             <img
                               src={cart2}
                               alt="img"
@@ -484,7 +493,7 @@ const BrandPage = () => {
                                 marginRight: "5px",
                               }}
                             />
-                            Sotuvda yo'q
+                            Sotuvda yo`q
                           </button>
                         )}
                       </Box>
@@ -497,22 +506,24 @@ const BrandPage = () => {
               <Stack flexDirection="column">
                 {product
                   .filter((val: any) => {
-                    if (searchTerm == "") {
+                    if (searchTerm === "") {
                       return val;
-                    } else if (
+                    }
+                    if (
                       val.short_name
                         .toLowerCase()
                         .includes(searchTerm.toLowerCase())
                     ) {
                       return val;
-                    } else if (val.price <= searchTerm) {
+                    }
+                    if (val.price <= searchTerm) {
                       return val;
                     }
                   })
-                  .map((item: any, key: any) => (
-                    <Grid item key={key}>
+                  .map((item: any) => (
+                    <Grid item key={item.id}>
                       <Grid xs={12} sm={12} md={12} lg={12} item>
-                        <Box className={classes.sortBodyCard} key={key}>
+                        <Box className={classes.sortBodyCard} key={item.id}>
                           <Link
                             to={`/product/client/details/${item.id}`}
                             style={{
@@ -556,9 +567,9 @@ const BrandPage = () => {
                                 }}
                               >
                                 {Math.floor(
-                                  (item?.after_discount * 1.44) / 12
+                                  (item.after_discount * 1.44) / 12,
                                 ).toLocaleString()}{" "}
-                                so'm
+                                so`m
                                 <span
                                   style={{
                                     background: "red",
@@ -580,11 +591,14 @@ const BrandPage = () => {
                                   fontWeight: "500",
                                 }}
                               >
-                                {item?.after_discount?.toLocaleString()} so'm
+                                {item?.after_discount?.toLocaleString()} so`m
                               </p>
                             </div>
                             {item.availability === true ? (
-                              <button className={classes.sortCardButton}>
+                              <button
+                                type="button"
+                                className={classes.sortCardButton}
+                              >
                                 <img
                                   src={cart1}
                                   alt="img"
@@ -593,7 +607,10 @@ const BrandPage = () => {
                                 Savatchaga
                               </button>
                             ) : (
-                              <button className={classes.sortCardButton}>
+                              <button
+                                type="button"
+                                className={classes.sortCardButton}
+                              >
                                 <img
                                   src={cart2}
                                   alt="img"
@@ -602,7 +619,7 @@ const BrandPage = () => {
                                     border: "2px solid #C33E4D",
                                   }}
                                 />
-                                Sotuvda yo'q
+                                Sotuvda yo`q
                               </button>
                             )}
                           </div>
@@ -623,7 +640,7 @@ const BrandPage = () => {
             {!!pageQty && (
               <Pagination
                 className={
-                  `${classes.pagination}` && `css-wjh20t-MuiPagination-ul`
+                  `${classes.pagination}` && "css-wjh20t-MuiPagination-ul"
                 }
                 count={pageQty}
                 page={page}
@@ -639,7 +656,7 @@ const BrandPage = () => {
                     to={`/product/product-by-category/${id}?page=${item.page}`}
                     {...item}
                     variant="text"
-                    shape={"rounded"}
+                    shape="rounded"
                     sx={{ justifyContent: "center !important" }}
                   />
                 )}
@@ -652,6 +669,6 @@ const BrandPage = () => {
       <Footer />
     </>
   );
-};
+}
 
 export default BrandPage;
