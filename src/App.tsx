@@ -33,7 +33,6 @@ function App(): JSX.Element {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-
   return (
     <Router>
       <Routes>
@@ -95,6 +94,5 @@ function App(): JSX.Element {
       </Routes>
     </Router>
   );
-
 }
 export default App;

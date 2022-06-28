@@ -19,7 +19,8 @@ import Basket from "../../../Images/two.svg";
 import Lang from "../../../Images/three.svg";
 import "./style.css";
 import {
-  getCategoryForClient, getParentCategories,
+  getCategoryForClient,
+  getParentCategories,
 } from "../../../Api/client/ClientCategoryApi";
 import { getProductFromCategoryById } from "../../../Api/admin/AdminProductApi";
 import { rootState } from "../../../redux/reducers";

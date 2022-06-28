@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import lockImg from "../Images/lock.png";
-import { getToken } from "../Api/admin/AdminAuth";
+import AuthService from "../Api/authService";
 
 const useStyles = makeStyles({
   pageStyle: {
@@ -70,71 +70,85 @@ const useStyles = makeStyles({
 
 function LoginPage(): JSX.Element {
   const classes = useStyles();
-  const [userName, setUserName] = useState<any>("");
-  const [password, setPassword] = useState<any>("");
-  const [auth, setAuth] = useState<any>("");
-  const handleChangeUsername = (e: any): void => {
-    setUserName(e.target.value);
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const onChangeUsername = (e: any): any => {
+    setUsername(e.target.value);
   };
-  const handleChangePassword = (e: any): void => {
+
+  const onChangePassword = (e: any): any => {
     setPassword(e.target.value);
   };
   const navigate = useNavigate();
-  const login = {
-    username: userName,
-    password,
-  };
+  const handleLogin = (e: any): any => {
+    e.preventDefault();
+    setMessage("");
+    setLoading(true);
 
-  const navigateTo = (): void => {
-    setTimeout(() => {
-      navigate("/dashboard");
-    }, 1000);
-  };
-  const sendDataToApi = async (): Promise<any> => {
-    await getToken(login).then((res: any) => {
-      const token = res.data.split(":")[1];
-      localStorage.setItem("auth", token);
-      setAuth(token);
-    });
-    navigateTo();
+    if (username.length === 0 || password.length === 0) {
+      setMessage("Please enter username and password");
+      setLoading(false);
+    } else {
+      // debugger;
+      console.log(username, password);
+      AuthService.login(username, password)
+        .then((res: any) => {
+          if (res.status === 200) {
+            // debugger;
+            // window.location.href = "/dashboard";
+            navigate("/dashboard");
+            // <Navigate to="/dashboard" />;
+          }
+          // window.location.reload();
+        })
+        .catch((error: any) => {
+          const resMessage: any =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            setMessage(() => resMessage);
+          setLoading(false);
+        });
+    }
   };
   return (
     <div className={classes.pageStyle}>
       <div className={classes.loginBox}>
         <div className={classes.lockImg}>
-          <img loading="lazy"  src={lockImg} alt="sss" />
+          <img loading="lazy" src={lockImg} alt="sss" />
         </div>
-        <form
-          style={{ marginTop: "50px" }}
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
+        <form onSubmit={handleLogin} style={{ marginTop: "50px" }}>
           <div>
             <input
               type="text"
-              name=""
+              name="username"
               className={classes.loginInput}
               placeholder="Username"
-              onChange={handleChangeUsername}
+              value={username}
+              onChange={onChangeUsername}
             />
           </div>
           <div>
             <input
               type="Password"
-              name=""
+              name="password"
+              value={password}
               className={classes.loginInput}
               placeholder="Parol"
-              onChange={handleChangePassword}
+              onChange={onChangePassword}
             />
           </div>
           <button
-            type="button"
+            type="submit"
             className={classes.loginButton}
-            onClick={sendDataToApi}
+            disabled={loading}
           >
-            Sign in
+            {loading ? "Loading..." : "Login"}
           </button>
+          {message && <div style={{ color: "red" }}>{message}</div>}
         </form>
       </div>
     </div>

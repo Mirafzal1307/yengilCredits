@@ -304,6 +304,7 @@ function ProductList(): JSX.Element {
   const { products, error, loading } = useTypedSelector(
     (state) => state.product,
   );
+  // console.log(products);
   // let p: number = products.totalPages
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(1);
@@ -325,8 +326,15 @@ function ProductList(): JSX.Element {
     setProducts(response.data.content);
   };
   React.useEffect(() => {
+    getCategory();
     getData();
-  }, [param]);
+  }, [param, page, query]);
+  React.useEffect(() => {
+    fetchProducts(`${page - 1}`);
+    if (pageQty < page) {
+      setPage(3);
+    }
+  }, [page, query]);
   const refresh = (): void => {
     setTimeout(() => window.location.reload(), 1);
   };
@@ -397,15 +405,7 @@ function ProductList(): JSX.Element {
   if (error) {
     return <h1>{error}</h1>;
   }
-  React.useEffect(() => {
-    fetchProducts(`${page - 1}`);
-    if (pageQty < page) {
-      setPage(3);
-    }
-  }, [query, page]);
-  React.useEffect(() => {
-    getCategory();
-  }, []);
+
   return (
     <>
       <div className={classes.productsTitle}>
