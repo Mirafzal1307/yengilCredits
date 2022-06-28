@@ -10,21 +10,22 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import React from "react";
-import BackUp from "../../Images/UploadPhoto.png";
-import {
-  getProductCreate,
-  postProductCreate,
-} from "../../Api/admin/AdminProductApi";
-import { Link as RouterLink } from "react-router-dom";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
-import Notification from "../Snackbar/Notification";
-import BasicModal from "./modal";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import IconButton from "@material-ui/core/IconButton";
-import { useNavigate } from "react-router-dom";
+import BasicModal from "./modal";
+import Notification from "../Snackbar/Notification";
+import MiniDrawer from "../../components/CoreLayout/AdminHeader";
+
+import {
+  getProductCreate,
+  postProductCreate,
+} from "../../Api/admin/AdminProductApi";
+import BackUp from "../../Images/UploadPhoto.png";
 import "./create.css";
+
 const useStyles = makeStyles({
   bigFirstBox: {
     background: "#FFFFFF",
@@ -254,11 +255,11 @@ interface characterProperties {
   value: string;
   id: number;
 }
-const ProductsCreate = () => {
+function ProductsCreate(): JSX.Element {
   const [productName, setProductName] = React.useState<any>({});
   const [productShortName, setProductShortName] = React.useState<any>({});
   const [characterNames, setCharacterNames] = React.useState<characterNames[]>(
-    []
+    [],
   );
   const [characterProperties, setCharacterProperties] = React.useState<
     characterProperties[]
@@ -278,13 +279,13 @@ const ProductsCreate = () => {
     message: "",
     type: "",
   });
-  const handleChangeBrand = (event: SelectChangeEvent) => {
+  const handleChangeBrand = (event: SelectChangeEvent): void => {
     setBrandName(event.target.value);
   };
-  const handleChangeCategory = (event: SelectChangeEvent) => {
+  const handleChangeCategory = (event: SelectChangeEvent): void => {
     setCategoryName(event.target.value);
   };
-  const handleChangeStatus = (event: SelectChangeEvent) => {
+  const handleChangeStatus = (event: SelectChangeEvent): void => {
     setProductStatus(event.target.value);
   };
   const [inputFields, setInputFields] = React.useState([
@@ -294,7 +295,7 @@ const ProductsCreate = () => {
     characterId: character.character,
     propertyId: character.property,
   }));
-  const handleChangeInput = (id: any, event: any) => {
+  const handleChangeInput = (id: any, event: any): any => {
     const newInputFields = inputFields.map((i: any) => {
       if (id === i.id) {
         i[event.target.name] = event.target.value;
@@ -303,22 +304,22 @@ const ProductsCreate = () => {
     });
     setInputFields(newInputFields);
   };
-  const handleAddFields = () => {
+  const handleAddFields = (): void => {
     setInputFields([
       ...inputFields,
       { id: uuidv4(), character: "", property: "" },
     ]);
   };
-  const handleRemoveFields = (id: any) => {
+  const handleRemoveFields = (id: any): void => {
     const values = [...inputFields];
     values.splice(
       values.findIndex((value) => value.id === id),
-      1
+      1,
     );
     setInputFields(values);
   };
   const fileInputRef = React.useRef<any>();
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: any): void => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
       setImage(file);
@@ -326,9 +327,7 @@ const ProductsCreate = () => {
       setImage(null);
     }
   };
-  React.useEffect(() => {
-    getAllData();
-  }, []);
+
   React.useEffect(() => {
     if (image) {
       const reader = new FileReader();
@@ -340,15 +339,19 @@ const ProductsCreate = () => {
       setPreview(null);
     }
   }, [image]);
-  const getAllData = async () => {
-    let response: any = await getProductCreate();
+  const getAllData = async (): Promise<any> => {
+    const response: any = await getProductCreate();
     setCategories(response.data.all_categories[0]);
     setBrands(response.data.all_brands[0]);
     setCharacterNames(response.data.all_characters[0]);
     setCharacterProperties(response.data.all_properties[0]);
   };
+
+  React.useEffect(() => {
+    getAllData();
+  }, []);
   const navigate = useNavigate();
-  function onSubmit() {
+  function onSubmit(): any {
     const form = new FormData();
     form.append(
       "product",
@@ -366,13 +369,13 @@ const ProductsCreate = () => {
         ],
         {
           type: "application/json",
-        }
-      )
+        },
+      ),
     );
     form.append("files", image);
     form.append(
       "characters",
-      new Blob([JSON.stringify(characters)], { type: "application/json" })
+      new Blob([JSON.stringify(characters)], { type: "application/json" }),
     );
     try {
       postProductCreate(form)
@@ -380,7 +383,7 @@ const ProductsCreate = () => {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: `Muafaqiyatli yaratildi`,
+              message: "Muafaqiyatli yaratildi",
               type: "success",
             });
             setTimeout(() => {
@@ -388,7 +391,7 @@ const ProductsCreate = () => {
             }, 1000);
           }
         })
-        .catch((error) => {
+        .catch((error: any) => {
           setNotify({
             isOpen: true,
             message: `${error}`,
@@ -403,7 +406,7 @@ const ProductsCreate = () => {
       });
     }
   }
-  function length() {
+  function length(): any {
     const inp = document.querySelectorAll("input");
 
     inp?.forEach((element: any) => {
@@ -429,7 +432,7 @@ const ProductsCreate = () => {
   length();
 
   return (
-    <React.Fragment>
+    <>
       <MiniDrawer />
       <Container
         style={{ marginTop: "50px" }}
@@ -437,15 +440,15 @@ const ProductsCreate = () => {
       >
         <form action="">
           <h1 className={classes.CreateProductTitle}>
-            <span className="maxLength">Mahsulot Qo'shish</span>{" "}
+            <span className="maxLength">Mahsulot Qo`shish</span>{" "}
           </h1>
           <Box className={classes.bigFirstBox}>
             <Box className={classes.itemBox}>
-              <h2 className={classes.boxFirstTitle}>1.Umumiy ma'lumot</h2>
+              <h2 className={classes.boxFirstTitle}>1.Umumiy ma`lumot</h2>
               <div className={classes.GeneralInfoInside}>
                 <Box>
                   <h2 className={classes.boxSecondTitle}>
-                    <span className="let">Mahsulotning to'liq nomi</span>{" "}
+                    <span className="let">Mahsulotning to`liq nomi</span>{" "}
                     <span style={{ color: "red" }}> *</span>
                   </h2>
                   <input
@@ -471,7 +474,8 @@ const ProductsCreate = () => {
                 </Box>
                 <Box>
                   <h2 className={classes.boxSecondTitle}>
-                    Brend nomi<span style={{ color: "red" }}> *</span>
+                    Brend nomi
+                    <span style={{ color: "red" }}> *</span>
                   </h2>
                   <FormControl
                     sx={{ minWidth: 120 }}
@@ -487,8 +491,8 @@ const ProductsCreate = () => {
                         <span className="notranslate">Brendni tanlang</span>
                       </MenuItem>
 
-                      {brands.map((brand, index) => (
-                        <MenuItem value={brand.id} key={index}>
+                      {brands.map((brand) => (
+                        <MenuItem value={brand.id} key={brand.id}>
                           {brand.name}
                         </MenuItem>
                       ))}
@@ -502,7 +506,8 @@ const ProductsCreate = () => {
               <div className={classes.Pricebox}>
                 <Box>
                   <h2 className={classes.boxSecondTitle}>
-                    Mahsulot narxi<span style={{ color: "red" }}> *</span>
+                    Mahsulot narxi
+                    <span style={{ color: "red" }}> *</span>
                   </h2>
                   <input
                     type="number"
@@ -514,7 +519,8 @@ const ProductsCreate = () => {
                 </Box>
                 <Box>
                   <h2 className={classes.boxSecondTitle}>
-                    Chegirma<span style={{ color: "red" }}> *</span>{" "}
+                    Chegirma
+                    <span style={{ color: "red" }}> *</span>{" "}
                   </h2>
                   <input
                     maxLength={2}
@@ -543,7 +549,8 @@ const ProductsCreate = () => {
               <h2 className={classes.boxFirstTitle}>3.Kategoriyalar</h2>
               <Box className={classes.CategoryBox}>
                 <h2 className={classes.boxCategoryTitle}>
-                  Kategoriya nomi<span style={{ color: "red" }}> *</span>
+                  Kategoriya nomi
+                  <span style={{ color: "red" }}> *</span>
                 </h2>
                 <FormControl
                   sx={{ m: 1, minWidth: 120 }}
@@ -559,8 +566,8 @@ const ProductsCreate = () => {
                       <b>Turkumni tanlang</b>
                     </MenuItem>
 
-                    {categories.map((category, index) => (
-                      <MenuItem value={category.id} key={index}>
+                    {categories.map((category) => (
+                      <MenuItem value={category.id} key={category.id}>
                         {category.name}
                       </MenuItem>
                     ))}
@@ -575,11 +582,13 @@ const ProductsCreate = () => {
                 className={classes.ProducutPhoto}
               >
                 <h2 className={classes.boxSecondTitle}>
-                  Mahsulot rasmi<span style={{ color: "red" }}> *</span>
+                  Mahsulot rasmi
+                  <span style={{ color: "red" }}> *</span>
                 </h2>
                 <div className={classes.Photosettings}>
                   <form style={{ display: "flex", alignItems: "center" }}>
                     <img
+                      alt="img"
                       src={preview}
                       style={{ display: preview ? "block" : "none" }}
                       className={classes.forImagePreview}
@@ -603,7 +612,7 @@ const ProductsCreate = () => {
                       minLength={3}
                     />
                   </form>
-                  <div></div>
+                  <div />
                 </div>
               </Box>
             </Box>
@@ -634,8 +643,11 @@ const ProductsCreate = () => {
                         <MenuItem value="">
                           <span>Xossa nomi </span>
                         </MenuItem>
-                        {characterNames.map((characterName, index) => (
-                          <MenuItem value={characterName.id} key={index}>
+                        {characterNames.map((characterName) => (
+                          <MenuItem
+                            value={characterName.id}
+                            key={characterName.id}
+                          >
                             {characterName.name}
                           </MenuItem>
                         ))}
@@ -661,8 +673,11 @@ const ProductsCreate = () => {
                         <MenuItem value="">
                           <span>Xossa qiymati </span>
                         </MenuItem>
-                        {characterProperties.map((characterProperty, index) => (
-                          <MenuItem value={characterProperty.id} key={index}>
+                        {characterProperties.map((characterProperty) => (
+                          <MenuItem
+                            value={characterProperty.id}
+                            key={characterProperty.id}
+                          >
                             {characterProperty.value}
                           </MenuItem>
                         ))}
@@ -729,8 +744,8 @@ const ProductsCreate = () => {
           <Notification notify={notify} setNotify={setNotify} />
         </form>
       </Container>
-    </React.Fragment>
+    </>
   );
-};
+}
 
 export default ProductsCreate;

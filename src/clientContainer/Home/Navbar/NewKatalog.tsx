@@ -9,8 +9,6 @@ import Typography from "@mui/material/Typography";
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 // import TreeItem from '@mui/lab/TreeItem';
-import { getCategoryForClient } from "../../../Api/client/ClientCategoryApi";
-import { getProductFromCategoryById } from "../../../Api/admin/AdminProductApi";
 import { Link } from "react-router-dom";
 // import GlobalStyles from '@mui/material/GlobalStyles';
 import { styled } from "@mui/material/styles";
@@ -23,7 +21,10 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ListIcon from "@mui/icons-material/List";
 import { makeStyles } from "@material-ui/core/styles";
-const useStyles = makeStyles((theme) => ({
+// import { getProductFromCategoryById } from "../../../Api/admin/AdminProductApi";
+import { getCategoryForClient } from "../../../Api/client/ClientCategoryApi";
+
+const useStyles = makeStyles(() => ({
   menuButton: {
     background: "rgba(255, 255, 255) !important",
     borderRadius: "34px !important",
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute" as const,
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -89,26 +90,28 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
-export default function TransitionsModal() {
+export default function TransitionsModal(): JSX.Element {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = (): void => setOpen(true);
+  const handleClose = (): void => setOpen(false);
   const [category, setCategory] = React.useState<any>({});
+  // console.log(category);
+
   const classes = useStyles();
+  // const getCategoryProductById = async (id: any): Promise<any> => {
+  //   await getProductFromCategoryById(id, {});
+  // };
+  const refresh = (): void => {
+    setTimeout(() => window.location.reload(), 100);
+  };
+  const getCategoryForCleintPage = async (): Promise<any> => {
+    const response: any = await getCategoryForClient();
+    // const categories: any = response.data;
+    setCategory(response.data.menu);
+  };
   React.useEffect(() => {
     getCategoryForCleintPage();
   }, []);
-  const getCategoryProductById = async (id: any) => {
-    await getProductFromCategoryById(id, {});
-  };
-  const refresh = () => {
-    setTimeout(() => window.location.reload(), 100);
-  };
-  const getCategoryForCleintPage = async () => {
-    let response: any = await getCategoryForClient();
-    let categories: any = response.data;
-    setCategory(response.data.menu);
-  };
   const [expanded, setExpanded] = React.useState<string | false>(" ");
 
   const handleChange =
@@ -185,28 +188,26 @@ export default function TransitionsModal() {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Telefonlar va smartfonlar"]?.map(
-                  (item: any, key: any) => (
-                    <Link
-                      to={`/product/product-by-category/${item.sub_id}`}
-                      onClick={refresh}
-                      key={key}
+                {category?.["Telefonlar va smartfonlar"]?.map((item: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.parent_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "capitalize",
+                      }}
                     >
-                      <Button
-                        sx={{
-                          color: "black",
-                          width: "100%",
-                          textAlign: "left !important",
-                          justifyContent: "left !important",
-                          alignItem: "left !important",
-                          textTransform: "capitalize",
-                        }}
-                      >
-                        {item.name}
-                      </Button>
-                    </Link>
-                  )
-                )}
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -230,11 +231,11 @@ export default function TransitionsModal() {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Uy jihozlari"]?.map((item: any, key: any) => (
+                {category?.["Uy jihozlari"]?.map((item: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
-                    key={key}
+                    key={item.parent_id}
                   >
                     <Button
                       sx={{
@@ -274,11 +275,11 @@ export default function TransitionsModal() {
                 }}
               >
                 {category?.["Televizorlar va videotexnikalar"]?.map(
-                  (item: any, key: any) => (
+                  (item: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={key}
+                      key={item.parent_id}
                     >
                       <Button
                         sx={{
@@ -293,7 +294,7 @@ export default function TransitionsModal() {
                         {item.name}
                       </Button>
                     </Link>
-                  )
+                  ),
                 )}
               </AccordionDetails>
             </Accordion>
@@ -319,11 +320,11 @@ export default function TransitionsModal() {
                 }}
               >
                 {category?.["Sport va dam olish uchun mahsulotlar"]?.map(
-                  (item: any, key: any) => (
+                  (item: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={key}
+                      key={item.parent_id}
                     >
                       <Button
                         sx={{
@@ -338,7 +339,7 @@ export default function TransitionsModal() {
                         {item.name}
                       </Button>
                     </Link>
-                  )
+                  ),
                 )}
               </AccordionDetails>
             </Accordion>
@@ -354,7 +355,7 @@ export default function TransitionsModal() {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Sog'lik va go'zallik</Typography>
+                <Typography>Sog`lik va go`zallik</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -364,11 +365,11 @@ export default function TransitionsModal() {
                 }}
               >
                 {category?.["Sog'lik va go'zallik mahsulotlari"]?.map(
-                  (item: any, key: any) => (
+                  (item: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={key}
+                      key={item.parent_id}
                     >
                       <Button
                         sx={{
@@ -383,7 +384,7 @@ export default function TransitionsModal() {
                         {item.name}
                       </Button>
                     </Link>
-                  )
+                  ),
                 )}
               </AccordionDetails>
             </Accordion>
@@ -399,7 +400,7 @@ export default function TransitionsModal() {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Qurilish va ta'mirlash </Typography>
+                <Typography>Qurilish va ta`mirlash </Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -409,11 +410,11 @@ export default function TransitionsModal() {
                 }}
               >
                 {category?.["Qurilish va ta'mirlash uchun mahsulotlar"]?.map(
-                  (item: any, key: any) => (
+                  (item: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={key}
+                      key={item.parent_id}
                     >
                       <Button
                         sx={{
@@ -428,7 +429,7 @@ export default function TransitionsModal() {
                         {item.name}
                       </Button>
                     </Link>
-                  )
+                  ),
                 )}
               </AccordionDetails>
             </Accordion>
@@ -453,11 +454,11 @@ export default function TransitionsModal() {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Maishiy texnika"]?.map((item: any, key: any) => (
+                {category?.["Maishiy texnika"]?.map((item: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
-                    key={key}
+                    key={item.parent_id}
                   >
                     <Button
                       sx={{
@@ -496,28 +497,26 @@ export default function TransitionsModal() {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Kompyuterlar va orgtexnika"]?.map(
-                  (item: any, key: any) => (
-                    <Link
-                      to={`/product/product-by-category/${item.sub_id}`}
-                      onClick={refresh}
-                      key={key}
+                {category?.["Kompyuterlar va orgtexnika"]?.map((item: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.parent_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "capitalize",
+                      }}
                     >
-                      <Button
-                        sx={{
-                          color: "black",
-                          width: "100%",
-                          textAlign: "left !important",
-                          justifyContent: "left !important",
-                          alignItem: "left !important",
-                          textTransform: "capitalize",
-                        }}
-                      >
-                        {item.name}
-                      </Button>
-                    </Link>
-                  )
-                )}
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -541,28 +540,26 @@ export default function TransitionsModal() {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Bolalar mahsulotlari"]?.map(
-                  (item: any, key: any) => (
-                    <Link
-                      to={`/product/product-by-category/${item.sub_id}`}
-                      onClick={refresh}
-                      key={key}
+                {category?.["Bolalar mahsulotlari"]?.map((item: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.parent_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "capitalize",
+                      }}
                     >
-                      <Button
-                        sx={{
-                          color: "black",
-                          width: "100%",
-                          textAlign: "left !important",
-                          justifyContent: "left !important",
-                          alignItem: "left !important",
-                          textTransform: "capitalize",
-                        }}
-                      >
-                        {item.name}
-                      </Button>
-                    </Link>
-                  )
-                )}
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -586,10 +583,10 @@ export default function TransitionsModal() {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Avto jihozlar"]?.map((item: any, key: any) => (
+                {category?.["Avto jihozlar"]?.map((item: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
-                    key={key}
+                    key={item.parent_id}
                     onClick={refresh}
                   >
                     <Button
@@ -629,11 +626,11 @@ export default function TransitionsModal() {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Audio tizimlar"]?.map((item: any, key: any) => (
+                {category?.["Audio tizimlar"]?.map((item: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
-                    key={key}
+                    key={item.parent_id}
                   >
                     <Button
                       sx={{

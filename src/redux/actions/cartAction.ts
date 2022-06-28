@@ -6,7 +6,7 @@ export const addToCart = (product: any) => (dispatch: any, getState: any) => {
   cartItems.forEach((x: any) => {
     if (x._id === product._id) {
       alreadyExists = true;
-      x.count++;
+      x.count += 1;
     }
   });
   if (!alreadyExists) {
@@ -19,10 +19,11 @@ export const addToCart = (product: any) => (dispatch: any, getState: any) => {
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 };
 
-export const removeFromCart = (product: any) => (dispatch: any, getState: any) => {
-  const cartItems = getState()
-    .cart.cartItems.slice()
-    .filter((x: any) => x._id !== product._id);
-  dispatch({ type: REMOVE_FROM_CART, payload: { cartItems } });
-  localStorage.setItem("cartItems", JSON.stringify(cartItems));
-};
+export const removeFromCart =
+  (product: any) => (dispatch: any, getState: any) => {
+    const cartItems = getState()
+      .cart.cartItems.slice()
+      .filter((x: any) => x._id !== product._id);
+    dispatch({ type: REMOVE_FROM_CART, payload: { cartItems } });
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };

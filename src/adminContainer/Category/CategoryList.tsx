@@ -16,17 +16,19 @@ import {
   PaginationItem,
   Tooltip,
 } from "@mui/material";
+
+import { makeStyles } from "@mui/styles";
+import "./style.css";
+import { Link as NavLink, Link } from "react-router-dom";
 import {
   getCategoryByParentCategory,
   getCategoryList,
 } from "../../Api/admin/AdminCategoryApi";
-import { makeStyles } from "@mui/styles";
-import "./style.css";
-import { Link as NavLink } from "react-router-dom";
 import CategoryCreate from "./CategoryCreate";
-import { Link } from "react-router-dom";
+
 import Details from "../../Images/detailsicon.svg";
 import Notification from "../Snackbar/Notification";
+
 interface Data {
   id: number;
   name: string;
@@ -66,8 +68,9 @@ interface EnhancedTableProps {
   onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
   rowCount: number;
 }
-function EnhancedTableHead(props: EnhancedTableProps) {
-  const { onSelectAllClick } = props;
+function EnhancedTableHead({
+  onSelectAllClick,
+}: EnhancedTableProps): JSX.Element {
   const classes = useStyles();
   return (
     <TableHead>
@@ -75,8 +78,8 @@ function EnhancedTableHead(props: EnhancedTableProps) {
         <TableCell padding="checkbox" className={classes.tableCell}>
           <Checkbox color="primary" onChange={onSelectAllClick} />
         </TableCell>
-        {headCells.map((headCell, key) => (
-          <TableCell key={key} className={classes.tableCell}>
+        {headCells.map((headCell) => (
+          <TableCell key={Math.random()} className={classes.tableCell}>
             <TableSortLabel>{headCell.label}</TableSortLabel>
           </TableCell>
         ))}
@@ -251,7 +254,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function EnhancedTable() {
+export default function EnhancedTable(): JSX.Element {
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(1);
   const [loading, setLoading] = React.useState(false);
@@ -264,23 +267,26 @@ export default function EnhancedTable() {
     type: "",
   });
   const classes = useStyles();
+
+  const getCategory = async (): Promise<any> => {
+    const response: any = await getCategoryList(`${page - 1}`, {});
+    setLoading(true);
+    setRows(response?.data?.content);
+    setPageQty(response?.data?.totalPages);
+    setLoading(false);
+  };
   useEffect(() => {
     getCategory();
     if (pageQty < page) {
       setPage(1);
     }
   }, [query, page]);
-  const getCategory = async () => {
-    let response: any = await getCategoryList(`${page - 1}`, {});
-    setLoading(true);
-    setRows(response?.data?.content);
-    setPageQty(response?.data?.totalPages);
-    setLoading(false);
+  const getSubCategories = async (id: any): Promise<any> => {
+    const res: any = await getCategoryByParentCategory(id);
   };
-  const getSubCategories = async (id: any) => {
-    let res: any = await getCategoryByParentCategory(id);
-  };
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSelectAllClick = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): any => {
     if (event.target.checked) {
       const newSelecteds = rows?.map((n) => n?.name);
       setSelected(newSelecteds);
@@ -288,7 +294,7 @@ export default function EnhancedTable() {
     }
     setSelected([]);
   };
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
+  const handleClick = (event: React.MouseEvent<unknown>, name: string): any => {
     const selectedIndex = selected.indexOf(name);
     let newSelected: readonly string[] = [];
     if (selectedIndex === -1) {
@@ -300,12 +306,12 @@ export default function EnhancedTable() {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+        selected.slice(selectedIndex + 1),
       );
     }
     setSelected(newSelected);
   };
-  const isSelected = (name: string) => selected.indexOf(name) !== -1;
+  const isSelected = (name: string): any => selected.indexOf(name) !== -1;
   return (
     <div className={loading ? "loading" : ""}>
       <Box>
@@ -330,68 +336,66 @@ export default function EnhancedTable() {
                       />
                       <TableBody>
                         {rows?.map((row, index) => {
-                          const getCategoryToDetails = () => {
+                          const getCategoryToDetails = (): void => {
                             getSubCategories(row?.id);
                           };
                           const isItemSelected = isSelected(row?.name);
                           const labelId = `enhanced-table-checkbox-${index}`;
                           return (
-                              <TableRow
-                                hover
-                                onClick={(event) =>
-                                  handleClick(event, row?.name)
-                                }
-                                role="checkbox"
-                                aria-checked={isItemSelected}
-                                tabIndex={-1}
-                                key={index}
-                                selected={isItemSelected}
+                            <TableRow
+                              hover
+                              onClick={(event) => handleClick(event, row?.name)}
+                              role="checkbox"
+                              aria-checked={isItemSelected}
+                              tabIndex={-1}
+                              key={row.id}
+                              selected={isItemSelected}
+                            >
+                              <TableCell
+                                padding="checkbox"
+                                className={classes.tableCell}
                               >
-                                <TableCell
-                                  padding="checkbox"
-                                  className={classes.tableCell}
-                                >
-                                  <Checkbox
-                                    color="primary"
-                                    checked={isItemSelected}
-                                    inputProps={{
-                                      "aria-labelledby": labelId,
-                                    }}
-                                  />
-                                </TableCell>
-                                <TableCell
-                                  component="th"
-                                  id={labelId}
-                                  scope="row"
-                                  padding="none"
-                                  className={classes.tableCell}
-                                >
-                                  {row?.id}
-                                </TableCell>
-                                <TableCell
-                                  className={classes.tableCell}
-                                  align="left"
-                                >
-                                  {row?.name}
-                                </TableCell>
+                                <Checkbox
+                                  color="primary"
+                                  checked={isItemSelected}
+                                  inputProps={{
+                                    "aria-labelledby": labelId,
+                                  }}
+                                />
+                              </TableCell>
+                              <TableCell
+                                component="th"
+                                id={labelId}
+                                scope="row"
+                                padding="none"
+                                className={classes.tableCell}
+                              >
+                                {row?.id}
+                              </TableCell>
+                              <TableCell
+                                className={classes.tableCell}
+                                align="left"
+                              >
+                                {row?.name}
+                              </TableCell>
 
-                                <TableCell
-                                  className={classes.tableCell}
-                                  align="left"
-                                >
-                                  <Link to={`/category/by-id/${row.id}`}>
-                                    <Tooltip title="Details">
-                                      <Button onClick={getCategoryToDetails}>
-                                        <img src={Details} alt="" />
-                                      </Button>
-                                    </Tooltip>
-                                  </Link>
-                                  <Notification
-                                    notify={notify}
-                                    setNotify={setNotify}
-                                  />
-                                </TableCell>
-                              </TableRow>
+                              <TableCell
+                                className={classes.tableCell}
+                                align="left"
+                              >
+                                <Link to={`/category/by-id/${row.id}`}>
+                                  <Tooltip title="Details">
+                                    <Button onClick={getCategoryToDetails}>
+                                      <img src={Details} alt="" />
+                                    </Button>
+                                  </Tooltip>
+                                </Link>
+                                <Notification
+                                  notify={notify}
+                                  setNotify={setNotify}
+                                />
+                              </TableCell>
+                            </TableRow>
                           );
                         })}
                       </TableBody>
@@ -411,7 +415,7 @@ export default function EnhancedTable() {
                           to={`/category/?page${item.page}`}
                           {...item}
                           variant="outlined"
-                          shape={"rounded"}
+                          shape="rounded"
                         />
                       )}
                     />

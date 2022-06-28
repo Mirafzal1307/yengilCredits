@@ -1,6 +1,6 @@
 import { CREATE_ORDER, CLEAR_ORDER, FETCH_ORDERS } from "../../types/cartType";
 
-const orderReducer = (state = {}, action: any) => {
+const orderReducer = (state = {}, action: any): any => {
   switch (action.type) {
     case CREATE_ORDER:
       return { order: action.payload };

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, CircularProgress, Container } from "@mui/material";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { getProductCards } from "../../Api/client/MainProductsApi";
 import cart2 from "../../Images/cart2.svg";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { useActions } from "../../hook/useActions";
 import BrandClient from "./brandClient";
-import { Link } from "react-router-dom";
-import { addToCart} from "../../redux/cart/action";
-import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cart/action";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import Shop from "../../Images/baskets.png";
@@ -162,23 +162,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CardProducts = () => {
+function CardProducts(): JSX.Element {
   const classes = useStyles();
-    const [notify, setNotify] = useState<any>({
-      isOpen: false,
-      message: "",
-      type: "",
+  const [notify, setNotify] = useState<any>({
+    isOpen: false,
+    message: "",
+    type: "",
   });
-  async function getData() {
-     await getProductCards();
+  async function getData(): Promise<any> {
+    await getProductCards();
   }
   const dispatch = useDispatch();
   const products = useTypedSelector((state) => state?.card?.cards);
   const error = useTypedSelector((state) => state?.card?.error);
   const loading = useTypedSelector((state) => state?.card?.loading);
-  let last = products?.last_added_products;
-  let popular = products?.popular_products;
-  let recommended = products?.recommended_products;
+  const last = products?.last_added_products;
+  const popular = products?.popular_products;
+  const recommended = products?.recommended_products;
   const { fetchCards } = useActions();
   useEffect(() => {
     getData();
@@ -251,11 +251,11 @@ const CardProducts = () => {
               />
             ) : (
               recommended &&
-              recommended?.map((item: any, key: any) => (
-                <SplideSlide className={classes.splide} key={key}>
+              recommended?.map((item: any) => (
+                <SplideSlide className={classes.splide} key={item.id}>
                   <Box className={classes.bodyCard}>
                     <Box style={{ margin: "0px 10px" }}>
-                                  <Link to={`/product/client/details/${item?.id}`}>
+                      <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
@@ -301,7 +301,7 @@ const CardProducts = () => {
                             display: "none !important",
                             paddingBottom: "22px",
                           }}
-                        ></p>
+                        />
                       ) : (
                         <p
                           className={classes.cardPrice}
@@ -313,7 +313,7 @@ const CardProducts = () => {
                             display: "block !important",
                           }}
                         >
-                          {item?.price?.toLocaleString()} so'm
+                          {item?.price?.toLocaleString()} so`m
                         </p>
                       )}
                       <p
@@ -327,9 +327,9 @@ const CardProducts = () => {
                         }}
                       >
                         {Math.floor(
-                          (item?.after_discount * 1.44) / 12
+                          (item.after_discount * 1.44) / 12,
                         ).toLocaleString()}{" "}
-                        so'm
+                        so`m
                         <span
                           style={{
                             background: "red",
@@ -351,11 +351,12 @@ const CardProducts = () => {
                           fontWeight: "500",
                         }}
                       >
-                        {item?.after_discount?.toLocaleString()} so'm
+                        {item?.after_discount?.toLocaleString()} so`m
                       </p>
 
                       {item?.availability === true ? (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
                           onClick={() => {
@@ -378,6 +379,7 @@ const CardProducts = () => {
                         <button
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
+                          type="button"
                         >
                           <img
                             src={cart2}
@@ -387,7 +389,7 @@ const CardProducts = () => {
                               border: "2px solid #C33E4D",
                             }}
                           />
-                          Sotuvda yo'q
+                          Sotuvda yo`q
                         </button>
                       )}
                       {item?.discount === 0 ? (
@@ -397,7 +399,7 @@ const CardProducts = () => {
                             fontWeight: "600",
                             display: "none !important",
                           }}
-                        ></span>
+                        />
                       ) : (
                         <span
                           className={classes.cardSpan}
@@ -433,7 +435,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-            Barchasi
+              Barchasi
             </Link>
           </div>
         </div>
@@ -483,9 +485,9 @@ const CardProducts = () => {
               />
             ) : (
               popular &&
-              popular?.map((item: any, key: any) => (
-                <SplideSlide className={classes.splide} key={key}>
-                  <Box className={classes.bodyCard} >
+              popular?.map((item: any) => (
+                <SplideSlide className={classes.splide} key={item.id}>
+                  <Box className={classes.bodyCard}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
@@ -534,7 +536,7 @@ const CardProducts = () => {
                             display: "none !important",
                             paddingBottom: "22px",
                           }}
-                        ></p>
+                        />
                       ) : (
                         <p
                           className={classes.cardPrice}
@@ -546,7 +548,7 @@ const CardProducts = () => {
                             display: "block !important",
                           }}
                         >
-                          {item?.price?.toLocaleString()} so'm
+                          {item?.price?.toLocaleString()} so`m
                         </p>
                       )}
 
@@ -561,9 +563,9 @@ const CardProducts = () => {
                         }}
                       >
                         {Math.floor(
-                          (item?.after_discount * 1.44) / 12
+                          (item.after_discount * 1.44) / 12,
                         ).toLocaleString()}{" "}
-                        so'm
+                        so`m
                         <span
                           style={{
                             background: "red",
@@ -585,13 +587,14 @@ const CardProducts = () => {
                           fontWeight: "500",
                         }}
                       >
-                        {item?.after_discount?.toLocaleString()} so'm
+                        {item?.after_discount?.toLocaleString()} so`m
                       </p>
 
                       {item.availability === true ? (
                         <button
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
+                          type="button"
                           onClick={() => {
                             dispatch(addToCart(item));
                             setNotify({
@@ -612,6 +615,7 @@ const CardProducts = () => {
                         <button
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
+                          type="button"
                         >
                           <img
                             src={cart2}
@@ -621,7 +625,7 @@ const CardProducts = () => {
                               border: "2px solid #C33E4D",
                             }}
                           />
-                          Sotuvda yo'q
+                          Sotuvda yo`q
                         </button>
                       )}
                       {item.discount === 0 ? (
@@ -631,7 +635,7 @@ const CardProducts = () => {
                             fontWeight: "600",
                             display: "none !important",
                           }}
-                        ></span>
+                        />
                       ) : (
                         <span
                           className={classes.cardSpan}
@@ -672,7 +676,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-            Barchasi
+              Barchasi
             </Link>
           </div>
         </div>
@@ -722,9 +726,8 @@ const CardProducts = () => {
               />
             ) : (
               last &&
-              
-              last.map((item: any, key: any) => (
-                <SplideSlide className={classes.splide} key={key}>
+              last.map((item: any) => (
+                <SplideSlide className={classes.splide} key={item.id}>
                   <Box className={classes.bodyCard}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`}>
@@ -773,7 +776,7 @@ const CardProducts = () => {
                             display: "none !important",
                             paddingBottom: "22px",
                           }}
-                        ></p>
+                        />
                       ) : (
                         <p
                           className={classes.cardPrice}
@@ -785,7 +788,7 @@ const CardProducts = () => {
                             display: "block !important",
                           }}
                         >
-                          {item?.price?.toLocaleString()} so'm
+                          {item?.price?.toLocaleString()} so`m
                         </p>
                       )}
 
@@ -800,9 +803,9 @@ const CardProducts = () => {
                         }}
                       >
                         {Math.floor(
-                          (item?.after_discount * 1.44) / 12
+                          (item.after_discount * 1.44) / 12,
                         ).toLocaleString()}{" "}
-                        so'm
+                        so`m
                         <span
                           style={{
                             background: "red",
@@ -824,10 +827,11 @@ const CardProducts = () => {
                           fontWeight: "500",
                         }}
                       >
-                        {item?.after_discount?.toLocaleString()} so'm
+                        {item?.after_discount?.toLocaleString()} so`m
                       </p>
                       {item.availability === true ? (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
                           onClick={() => {
@@ -848,6 +852,7 @@ const CardProducts = () => {
                         </button>
                       ) : (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
                         >
@@ -859,7 +864,7 @@ const CardProducts = () => {
                               border: "2px solid #C33E4D",
                             }}
                           />
-                          Sotuvda yo'q
+                          Sotuvda yo`q
                         </button>
                       )}
                       <span
@@ -878,7 +883,7 @@ const CardProducts = () => {
                             fontWeight: "600",
                             display: "none !important",
                           }}
-                        ></span>
+                        />
                       ) : (
                         <span
                           className={classes.cardNew}
@@ -908,10 +913,9 @@ const CardProducts = () => {
           <BrandClient />
         </div>
       </Container>
-      <Notification notify={notify}  setNotify={setNotify} />
+      <Notification notify={notify} setNotify={setNotify} />
     </>
   );
-};
-
+}
 
 export default CardProducts;
