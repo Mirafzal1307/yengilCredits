@@ -1,9 +1,5 @@
-import {
-  deleteAllFromCart,
-  deleteFromCart,
-  updatePrice,
-} from "../../../redux/cart/action";
-import { rootState } from "../../../redux/reducers/index";
+import React from "react";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -14,35 +10,40 @@ import {
   Table,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import BackToTop from "../Navbar/Navbar";
-import Footer from "../Footer";
+import { Link, useNavigate } from "react-router-dom";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { makeStyles } from "@material-ui/core/styles";
 import CloseIcon from "@mui/icons-material/Close";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import MoneyIcon from "@mui/icons-material/Money";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import { useAutocomplete } from "@mui/base/AutocompleteUnstyled";
+import { styled } from "@mui/material/styles";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import "./style.css";
+import emptyCard from "../../../Images/ShoppingCart.png";
+import Notification from "../../../adminContainer/Snackbar/Notification";
+import {
+  deleteAllFromCart,
+  deleteFromCart,
+  updatePrice,
+} from "../../../redux/cart/action";
+import { rootState } from "../../../redux/reducers/index";
+
+import { postProductOrder } from "../../../Api/client/CardOrderAPI";
 import {
   API_URL,
   MINIO_FULL_ENDPOINT_FOR,
 } from "../../../constants/ApiConstants";
-import React from "react";
-import { postProductOrder } from "../../../Api/client/CardOrderAPI";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import emptyCard from "../../../Images/ShoppingCart.png";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import Notification from "../../../adminContainer/Snackbar/Notification";
-import MoneyIcon from "@mui/icons-material/Money";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
-import "./style.css";
-import { useNavigate } from "react-router-dom";
-import { useAutocomplete } from "@mui/base/AutocompleteUnstyled";
-import { styled } from "@mui/material/styles";
+import Footer from "../Footer";
+import BackToTop from "../Navbar/Navbar";
 import { postPhone } from "./VerificationsApi";
-import axios from "axios";
 import { cities } from "./cities";
+
 const Input = styled("input")(({ theme }) => ({
   width: 200,
   backgroundColor: theme.palette.background.paper,
@@ -378,7 +379,7 @@ const useStyles = makeStyles((theme) => ({
     transform: "translate(-50%, -50%)",
     borderRadius: "5px",
     boxShadow: "3px 3px 3px black 3px 3px 3px ",
-    padding: "15px",
+    padding: "20px 30px",
     width: "500px",
     background: "white",
     [theme.breakpoints.down(600)]: {
@@ -387,7 +388,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-export default function Cart() {
+export default function Cart(): JSX.Element {
   const [alignment, setAlignment] = React.useState<string | null>("Naqd");
   const [fullName, setFullName] = React.useState(null);
   const [phone, setPhone] = React.useState<any>(null);
@@ -407,14 +408,8 @@ export default function Cart() {
   const [status, setStatus] = React.useState<any>(null);
 
   const Ref = React.useRef(null);
-  const handleOpen = () => {
-    if (phone.length === 13 && fullName) {
-      setOpen(true);
-      postPhone({ phone, fullName });
-      onClickReset();
-    }
-  };
-  const PostCode = async (mass: any) => {
+
+  const PostCode = async (mass: any): Promise<any> => {
     const phone = mass[0];
     const code = mass[1];
     axios({
@@ -431,12 +426,17 @@ export default function Cart() {
   };
 
   const mass = [phone, code];
-  const handleClose = () => {
+  const handleClose = (): void => {
     PostCode(mass);
     if (status === 200) {
       setOpen(false);
     }
   };
+
+  const handleModalClose = (): void => {
+    setOpen(false);
+  };
+
   const navigate = useNavigate();
   const refresh = (): void => {
     setTimeout(() => {
@@ -444,9 +444,9 @@ export default function Cart() {
     }, 2000);
   };
   const dispatch = useDispatch();
-  let total = cartProducts.reduce(
+  const total = cartProducts.reduce(
     (subtotal, product) => subtotal + product.price * product.quantity,
-    0
+    0,
   );
   const products = cartProducts.map((i) => ({
     product_id: i.id,
@@ -455,16 +455,16 @@ export default function Cart() {
   }));
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
-    newAlignment: string | null
-  ) => {
+    newAlignment: string | null,
+  ): void => {
     setAlignment(newAlignment);
   };
-  const isEmpty = (e: React.FormEvent<HTMLInputElement>) => {
+  const isEmpty = (e: React.FormEvent<HTMLInputElement>): void => {
     e.preventDefault();
-    let name = fullName;
+    const name = fullName;
     // let ownAddress = address;
-    let telPhone = phone;
-    let ownCity = city;
+    const telPhone = phone;
+    const ownCity = city;
     if (name !== null && telPhone !== null && ownCity !== null) {
       setDisabled(false);
     }
@@ -480,16 +480,16 @@ export default function Cart() {
     options: cities,
     getOptionLabel: (option) => option.title,
   });
-  let options: any = getInputProps();
+  const options: any = getInputProps();
   const address = options.value;
-  function Submit(e: any) {
+  function Submit(e: any): any {
     e.preventDefault();
     const form = JSON.stringify({
-      products: products,
+      products,
       buyer: {
         full_name: fullName,
         address: city,
-        phone: phone,
+        phone,
         city: address,
         pay_type: alignment,
       },
@@ -511,7 +511,7 @@ export default function Cart() {
             });
           }
         })
-        .catch((err) => {
+        .catch(() => {
           setNotify({
             isOpen: true,
             message: "Iltimos barchasini to'ldiring",
@@ -538,7 +538,7 @@ export default function Cart() {
       element.style.borderColor = "#9F9F9F";
     }
   });
-  const getTimeRemaining = (e: any) => {
+  const getTimeRemaining = (e: any): any => {
     const total = Date.parse(e) - Date.parse(new Date() as any);
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);
@@ -548,17 +548,17 @@ export default function Cart() {
       seconds,
     };
   };
-  const startTimer = (e: any) => {
-    let { total, minutes, seconds } = getTimeRemaining(e);
+  const startTimer = (e: any): any => {
+    const { total, minutes, seconds } = getTimeRemaining(e);
     if (total >= 0) {
       setTimer(
-        (minutes > 9 ? minutes : "0" + minutes) +
-          ":" +
-          (seconds > 9 ? seconds : "0" + seconds)
+        `${minutes > 9 ? minutes : `0${minutes}`}:${
+          seconds > 9 ? seconds : `0${seconds}`
+        }`,
       );
     }
   };
-  const clearTimer = (e: any) => {
+  const clearTimer = (e: any): any => {
     setTimer("00:60");
     if (Ref.current) clearInterval(Ref.current);
     const id: any = setInterval(() => {
@@ -566,18 +566,27 @@ export default function Cart() {
     }, 1000);
     Ref.current = id;
   };
-  const getDeadTime = () => {
-    let deadline = new Date();
+  const getDeadTime = (): any => {
+    const deadline = new Date();
     deadline.setSeconds(deadline.getSeconds() + count);
     return deadline;
   };
+  const onClickReset = (): void => {
+    clearTimer(getDeadTime());
+  };
+  const handleOpen = (): any => {
+    if (phone.length === 13 && fullName) {
+      setOpen(true);
+      postPhone({ phone, fullName });
+      onClickReset();
+    }
+  };
+
   React.useEffect(() => {
     clearTimer(getDeadTime());
   }, []);
-  const onClickReset = () => {
-    clearTimer(getDeadTime());
-  };
-  const handleResetTimer = () => {
+
+  const handleResetTimer = (): void => {
     if (timer === "00:00") {
       postPhone({ phone, fullName });
       onClickReset();
@@ -588,8 +597,8 @@ export default function Cart() {
       <BackToTop />
       <Container maxWidth="xl">
         <div>
-          <Link to={"/"}>
-            <button className={classes.MainPage}>
+          <Link to="/">
+            <button className={classes.MainPage} type="button">
               <div className={classes.Inside}> Bosh sahifa</div>
               <KeyboardArrowRightIcon className={classes.ArrowIcon} />
               <div className={classes.Inside}> Savatcha </div>
@@ -618,9 +627,9 @@ export default function Cart() {
                   // <Table>
                   <div>
                     {cartProducts &&
-                      cartProducts?.map((product: any, key: any) => (
+                      cartProducts?.map((product: any) => (
                         <div
-                          key={key}
+                          key={product.id}
                           className={classes.cartMin}
                           style={{ margin: "15px 0px " }}
                         >
@@ -642,7 +651,7 @@ export default function Cart() {
                             </div>
                             <div style={{ display: "flex" }}>
                               <h5 className={classes.nameRes}>
-                                {product.price.toLocaleString()} so'm
+                                {product.price.toLocaleString()} so`m
                               </h5>
                             </div>
                           </div>
@@ -666,7 +675,7 @@ export default function Cart() {
                                 name="quantity"
                                 onChange={(event: any) =>
                                   dispatch(
-                                    updatePrice(product, event.target.value)
+                                    updatePrice(product, event.target.value),
                                   )
                                 }
                                 defaultValue={product.quantity}
@@ -696,7 +705,7 @@ export default function Cart() {
                         </p>
                       </div>
                       <p style={{ fontWeight: 600, fontSize: "17px" }}>
-                        {total.toLocaleString()} so'm
+                        {total.toLocaleString()} so`m
                       </p>
                     </div>
                   </div>
@@ -716,11 +725,8 @@ export default function Cart() {
                     </thead>
                     <tbody>
                       {cartProducts &&
-                        cartProducts?.map((product: any, key: any) => (
-                          <tr
-                            className={classes.carts}
-                            key={key}
-                          >
+                        cartProducts?.map((product: any) => (
+                          <tr className={classes.carts} key={product.id}>
                             <td>
                               <Link
                                 to={`/product/client/details/${product.id}`}
@@ -742,7 +748,7 @@ export default function Cart() {
                                 name="quantity"
                                 onChange={(event: any) =>
                                   dispatch(
-                                    updatePrice(product, event.target.value)
+                                    updatePrice(product, event.target.value),
                                   )
                                 }
                                 defaultValue={product.quantity}
@@ -758,7 +764,7 @@ export default function Cart() {
                             </td>
                             <td>
                               <h5 className={classes.price}>
-                                {product.price.toLocaleString()} so'm
+                                {product.price.toLocaleString()} so`m
                               </h5>
                             </td>
                             <td>
@@ -777,7 +783,7 @@ export default function Cart() {
                         <td>
                           <h4>Umumiy narx</h4>
                         </td>
-                        <td>{total.toLocaleString()} so'm</td>
+                        <td>{total.toLocaleString()} so`m</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -791,7 +797,7 @@ export default function Cart() {
                 <p className={classes.TotalAmount}>Qiymat</p>
                 <div className={classes.TotalPageTop}>
                   <p className={classes.pPage}>Narx</p>
-                  <p className={classes.pPage}>{total.toLocaleString()} so'm</p>
+                  <p className={classes.pPage}>{total.toLocaleString()} so`m</p>
                 </div>
                 <div className={classes.TotalPageTop}>
                   <p className={classes.pPage}>Yetkazish Xaqqi</p>
@@ -799,7 +805,7 @@ export default function Cart() {
                 </div>
                 <p className={classes.insideOfPage}>
                   (Standart tarif - Narx mahsulot/maqsadga qarab farq qilishi
-                  mumkin. TECS xodimlari siz bilan bog'lanadi.)
+                  mumkin. TECS xodimlari siz bilan bog`lanadi.)
                 </p>
                 <div className={classes.TotalPageTop}>
                   <p className={classes.pPage}>Taxi</p>
@@ -809,19 +815,20 @@ export default function Cart() {
                   <p className={classes.pPage}>Umumiy qiymat</p>
                   <p className={classes.pPage}>
                     {total.toLocaleString()}
-                    so'm
+                    so`m
                   </p>
                 </div>
                 <button
                   className={classes.sale}
                   onClick={() => setStart(true)}
                   style={start ? { display: "none" } : { display: "block" }}
+                  type="button"
                 >
                   Xaridni boshlash
                 </button>
                 {start && (
                   <Grid item xs={12} sm={6} md={12}>
-                    <h3>Yetkazish ma'lumotlari</h3>
+                    <h3>Yetkazish ma`lumotlari</h3>
                     <Box>
                       <p className={classes.UniversalP}>
                         Ismingiz <span style={{ color: "red" }}>*</span>{" "}
@@ -833,7 +840,7 @@ export default function Cart() {
                         onKeyUp={isEmpty}
                         onChange={(e: any) => setFullName(e.target.value)}
                         className={classes.Input}
-                        disabled={status === 200 ? true : false}
+                        disabled={status === 200}
                       />
                     </Box>
                     <Box>
@@ -848,7 +855,7 @@ export default function Cart() {
                         limitMaxLength
                         id="phone"
                         onKeyUp={isEmpty}
-                        disabled={status === 200 ? true : false}
+                        disabled={status === 200}
                       />
                     </Box>
                     <Box>
@@ -869,7 +876,10 @@ export default function Cart() {
                       >
                         <Box className={classes.smsVerification}>
                           <h2>Tasdiqlash talab qilinadi</h2>
-                          <p>Quyidagi raqamga kod yubordik {phone}</p>
+                          <p>
+                            Quyidagi raqamga kod yubordik
+                            {phone}
+                          </p>
                           <input
                             onChange={(e: any) => setCode(e.target.value)}
                             placeholder="Tasdiqlash kodini shu yerga kiriting..."
@@ -893,6 +903,7 @@ export default function Cart() {
                           <button
                             className={classes.sale}
                             onClick={handleClose}
+                            type="button"
                           >
                             {status === 200 && "Davom ettirish"}{" "}
                             {status > 200 && "Davom ettirish"}{" "}
@@ -907,9 +918,19 @@ export default function Cart() {
                               color: timer !== "00:00" ? "#FF4B4B" : "green",
                             }}
                           >
-                            Kodni qayta jo’natishni so’rash{" "}
+                            Kodni qayta jo’natishni so’rash
                             {timer !== "00:00" && timer}
                           </Typography>
+                          <CloseIcon
+                            onClick={handleModalClose}
+                            sx={{
+                              cursor: "pointer",
+                              position: "absolute",
+                              top: "15px",
+                              right: "15px",
+                            }}
+                            className={classes.close}
+                          />
                         </Box>
                       </Modal>
                     </Box>
@@ -935,10 +956,13 @@ export default function Cart() {
                               <Listbox {...getListboxProps()}>
                                 {(groupedOptions as typeof cities).map(
                                   (option, index) => (
-                                    <li {...getOptionProps({ option, index })} key={index}>
+                                    <li
+                                      {...getOptionProps({ option, index })}
+                                      key={Math.random()}
+                                    >
                                       {option.title}
                                     </li>
-                                  )
+                                  ),
                                 )}
                               </Listbox>
                             ) : null}
@@ -988,6 +1012,7 @@ export default function Cart() {
                         onClick={Submit}
                         disabled={disabled}
                         className={classes.sale}
+                        type="button"
                       >
                         Xarid qilish
                       </button>

@@ -1,25 +1,34 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
-import { useParams } from "react-router-dom";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
-import { Container, FormLabel, FormControl } from "@mui/material";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import {
-  getProductById,
-  putProductEdit,
-} from "../../Api/admin/AdminProductApi";
+  Container,
+  FormLabel,
+  FormControl,
+  Box,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Box, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import BackUp from "../../Images/UploadPhoto.png";
-import { getProductCreate } from "../../Api/admin/AdminProductApi";
-import Notification from "../Snackbar/Notification";
-import BasicModal from "./modal";
+
 import { v4 as uuidv4 } from "uuid";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import IconButton from "@material-ui/core/IconButton";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import BasicModal from "./modal";
+import Notification from "../Snackbar/Notification";
+import {
+  getProductCreate,
+  getProductById,
+  putProductEdit,
+} from "../../Api/admin/AdminProductApi";
+
+import BackUp from "../../Images/UploadPhoto.png";
+import MiniDrawer from "../../components/CoreLayout/AdminHeader";
+
+import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
+
 const useStyles = makeStyles({
   bigFirstBox: {
     background: "#FFFFFF",
@@ -255,7 +264,7 @@ interface characterProperties {
   id: number;
 }
 
-const EditProductList = () => {
+function EditProductList(): JSX.Element {
   const [productName, setProductName] = React.useState<any>({});
   const [productShortName, setProductShortName] = React.useState<any>({});
   const [productPrice, setProductPrice] = React.useState<any>({});
@@ -265,7 +274,7 @@ const EditProductList = () => {
     characterProperties[]
   >([]);
   const [characterNames, setCharacterNames] = React.useState<characterNames[]>(
-    []
+    [],
   );
   const [categories, setCategories] = React.useState<Categories[]>([]);
   const [photo, setPhoto] = React.useState<any>();
@@ -286,7 +295,7 @@ const EditProductList = () => {
 
   const { id } = useParams();
   const fileInputRef = React.useRef<any>();
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: any): any => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
       setImage(file);
@@ -298,7 +307,7 @@ const EditProductList = () => {
     { id: uuidv4(), character: "", property: "" },
   ]);
 
-  const handleChangeInput = (id: any, event: any) => {
+  const handleChangeInput = (id: any, event: any): any => {
     const newInputFields = inputFields.map((i: any) => {
       if (id === i.id) {
         i[event.target.name] = event.target.value;
@@ -308,17 +317,17 @@ const EditProductList = () => {
 
     setInputFields(newInputFields);
   };
-  const handleAddFields = () => {
+  const handleAddFields = (): any => {
     setInputFields([
       ...inputFields,
       { id: uuidv4(), character: "", property: "" },
     ]);
   };
-  const handleRemoveFields = (id: any) => {
+  const handleRemoveFields = (id: any): any => {
     const values = [...inputFields];
     values.splice(
       values.findIndex((value) => value.id === id),
-      1
+      1,
     );
     setInputFields(values);
   };
@@ -326,20 +335,18 @@ const EditProductList = () => {
     characterId: character.character,
     propertyId: character.property,
   }));
-  let img = `${MINIO_FULL_ENDPOINT_FOR}/product/${photo}`;
-  const handleChangeBrand = (event: SelectChangeEvent) => {
+  const img = `${MINIO_FULL_ENDPOINT_FOR}/product/${photo}`;
+  const handleChangeBrand = (event: SelectChangeEvent): void => {
     setBrandName(event.target.value);
   };
-  const handleChangeCategory = (event: SelectChangeEvent) => {
+  const handleChangeCategory = (event: SelectChangeEvent): void => {
     setCategoryName(event.target.value);
   };
-  const handleChangeStatus = (event: SelectChangeEvent) => {
+  const handleChangeStatus = (event: SelectChangeEvent): void => {
     setProductStatus(event.target.value);
   };
-  React.useEffect(() => {
-    getProduct(id);
-  }, []);
-  const getProduct = async (id: any) => {
+
+  const getProduct = async (id: any): Promise<any> => {
     const res: any = await getProductById(id);
     setBrand(res?.data?.product[0]?.brand);
     setStatus(res?.data?.product[0]?.availability);
@@ -349,13 +356,16 @@ const EditProductList = () => {
     setProductPrice(res.data.product[0].price);
     setProductDiscount(res.data.product[0].discount);
     setPhoto(res.data.product[0].photos[0].name);
-    let img = `${MINIO_FULL_ENDPOINT_FOR}/product/${res.data.product[0].photos[0].name}`;
+    const img = `${MINIO_FULL_ENDPOINT_FOR}/product/${res.data.product[0].photos[0].name}`;
     await fetch(img).then(async (response) => {
       const blob: any = await response.blob();
       const file = new File([blob], photo, { type: blob.type });
       setImage(file);
     });
   };
+  React.useEffect(() => {
+    getProduct(id);
+  }, []);
 
   React.useEffect(() => {
     if (image) {
@@ -369,18 +379,20 @@ const EditProductList = () => {
     }
   }, [image]);
 
-  React.useEffect(() => {
-    getAllData();
-  }, []);
-  const getAllData = async () => {
-    let response: any = await getProductCreate();
+  const getAllData = async (): Promise<any> => {
+    const response: any = await getProductCreate();
     setCategories(response.data.all_categories[0]);
     setBrands(response.data.all_brands[0]);
     setCharacterNames(response.data.all_characters[0]);
     setCharacterProperties(response.data.all_properties[0]);
   };
+
+  React.useEffect(() => {
+    getAllData();
+  }, []);
+
   const navigate = useNavigate();
-  const sendDataToAPI = () => {
+  const sendDataToAPI = (): any => {
     const form = new FormData();
     form.append(
       "product_param",
@@ -391,15 +403,15 @@ const EditProductList = () => {
             short_name: productShortName,
             price: productPrice,
             discount: productDiscount,
-            category_id: categoryName ? categoryName : category.id,
-            availability: productStatus ? productStatus : status,
-            brand_id: brandName ? brandName : brand.id,
+            category_id: categoryName || category.id,
+            availability: productStatus || status,
+            brand_id: brandName || brand.id,
           }),
         ],
         {
           type: "application/json",
-        }
-      )
+        },
+      ),
     );
 
     form.append("files", image);
@@ -407,11 +419,11 @@ const EditProductList = () => {
       "characters",
       new Blob([JSON.stringify(productcharacters)], {
         type: "application/json",
-      })
+      }),
     );
     try {
       putProductEdit(id, form)
-        .then(function (res: any) {
+        .then((res: any) => {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
@@ -423,7 +435,7 @@ const EditProductList = () => {
             }, 1000);
           }
         })
-        .catch((error) => {
+        .catch(() => {
           setNotify({
             isOpen: true,
             message: "Xatolik yuz berdi...",
@@ -438,7 +450,7 @@ const EditProductList = () => {
       });
     }
   };
-  function length() {
+  function length(): any {
     const inp = document.querySelectorAll("input");
 
     inp.forEach((element) => {
@@ -464,20 +476,20 @@ const EditProductList = () => {
 
   length();
   return (
-    <React.Fragment>
+    <>
       <MiniDrawer />
       <Container
         style={{ marginTop: "50px" }}
         className={classes.CreateContainerTitle}
       >
-        <h1 className={classes.CreateProductTitle}>Mahsulotni O'zgartirish </h1>
+        <h1 className={classes.CreateProductTitle}>Mahsulotni O`zgartirish </h1>
         <Box className={classes.bigFirstBox}>
           <Box className={classes.itemBox}>
-            <h2 className={classes.boxFirstTitle}>1.Umumiy ma'lumot</h2>
+            <h2 className={classes.boxFirstTitle}>1.Umumiy ma`lumot</h2>
             <div className={classes.GeneralInfoInside}>
               <Box>
                 <h2 className={classes.boxSecondTitle}>
-                  Mahsulotning to'liq nomi{" "}
+                  Mahsulotning to`liq nomi{" "}
                   <span style={{ color: "red" }}> *</span>{" "}
                 </h2>
                 <input
@@ -490,7 +502,8 @@ const EditProductList = () => {
               </Box>
               <Box>
                 <h2 className={classes.boxSecondTitle}>
-                  Qisqa nomi<span style={{ color: "red" }}> *</span>
+                  Qisqa nomi
+                  <span style={{ color: "red" }}> *</span>
                 </h2>
                 <input
                   type="text"
@@ -502,7 +515,8 @@ const EditProductList = () => {
               </Box>
               <Box>
                 <h2 className={classes.boxSecondTitle}>
-                  Brend nomi<span style={{ color: "red" }}> *</span>
+                  Brend nomi
+                  <span style={{ color: "red" }}> *</span>
                 </h2>
                 <FormControl
                   sx={{ minWidth: 120 }}
@@ -517,8 +531,8 @@ const EditProductList = () => {
                     <MenuItem value="">
                       <span className="notranslate">Brendni tanlang</span>
                     </MenuItem>
-                    {brands.map((brand, index) => (
-                      <MenuItem value={brand.id} key={index}>
+                    {brands.map((brand) => (
+                      <MenuItem value={brand.id} key={brand.id}>
                         {brand.name}
                       </MenuItem>
                     ))}
@@ -532,7 +546,8 @@ const EditProductList = () => {
             <div className={classes.Pricebox}>
               <Box>
                 <h2 className={classes.boxSecondTitle}>
-                  Mahsulot narxi<span style={{ color: "red" }}> *</span>
+                  Mahsulot narxi
+                  <span style={{ color: "red" }}> *</span>
                 </h2>
                 <input
                   type="number"
@@ -544,7 +559,8 @@ const EditProductList = () => {
               </Box>
               <Box>
                 <h2 className={classes.boxSecondTitle}>
-                  Chegirma<span style={{ color: "red" }}> *</span>{" "}
+                  Chegirma
+                  <span style={{ color: "red" }}> *</span>{" "}
                 </h2>
                 <input
                   type="text"
@@ -561,7 +577,8 @@ const EditProductList = () => {
             <h2 className={classes.boxFirstTitle}>3.Kategoriyalar</h2>
             <Box className={classes.CategoryBox}>
               <h2 className={classes.boxCategoryTitle}>
-                Kategoriya nomi<span style={{ color: "red" }}> *</span>
+                Kategoriya nomi
+                <span style={{ color: "red" }}> *</span>
               </h2>
               <FormControl
                 sx={{ m: 1, minWidth: 120 }}
@@ -576,8 +593,8 @@ const EditProductList = () => {
                   <MenuItem value="">
                     <span>Turkumni tanlang</span>
                   </MenuItem>
-                  {categories.map((category, index) => (
-                    <MenuItem value={category.id} key={index}>
+                  {categories.map((category) => (
+                    <MenuItem value={category.id} key={category.id}>
                       {category.name}
                     </MenuItem>
                   ))}
@@ -592,11 +609,12 @@ const EditProductList = () => {
               className={classes.ProducutPhoto}
             >
               <h2 className={classes.boxSecondTitle}>
-                Mahsulot rasmi<span style={{ color: "red" }}> *</span>
+                Mahsulot rasmi
+                <span style={{ color: "red" }}> *</span>
               </h2>
               <form style={{ display: "flex", alignItems: "center" }}>
                 <img
-                  src={preview ? preview : img}
+                  src={preview || img}
                   style={{ display: preview ? "block" : "none" }}
                   className={classes.forImagePreview}
                   alt=""
@@ -624,8 +642,8 @@ const EditProductList = () => {
           <Box className={classes.itemBox}>
             <h2 className={classes.boxFirstTitle}>5.Mahsulot xususiyatlari</h2>
             <div className={classes.DynamicFeilds}>
-              {inputFields.map((inputField, index) => (
-                <div key={index}>
+              {inputFields.map((inputField) => (
+                <div key={inputField.id}>
                   <FormControl
                     sx={{ m: 1, minWidth: 120 }}
                     style={{ padding: "0 !important", margin: "0 !important" }}
@@ -643,8 +661,11 @@ const EditProductList = () => {
                       <MenuItem value="">
                         <span>Xossa nomi </span>
                       </MenuItem>
-                      {characterNames.map((characterName, index) => (
-                        <MenuItem value={characterName.id} key={index}>
+                      {characterNames.map((characterName) => (
+                        <MenuItem
+                          value={characterName.id}
+                          key={characterName.id}
+                        >
                           {characterName.name}
                         </MenuItem>
                       ))}
@@ -667,8 +688,11 @@ const EditProductList = () => {
                       <MenuItem value="">
                         <span>Xossa qiymati </span>
                       </MenuItem>
-                      {characterProperties.map((characterProperty, index) => (
-                        <MenuItem value={characterProperty.id} key={index}>
+                      {characterProperties.map((characterProperty) => (
+                        <MenuItem
+                          value={characterProperty.id}
+                          key={characterProperty.id}
+                        >
                           {characterProperty.value}
                         </MenuItem>
                       ))}
@@ -692,7 +716,8 @@ const EditProductList = () => {
             <h2 className={classes.boxFirstTitle}>8.Mahsulot holati</h2>
             <Box className={classes.statusBox}>
               <h2 className={classes.boxSecondTitle}>
-                Holat<span style={{ color: "red" }}> *</span>
+                Holat
+                <span style={{ color: "red" }}> *</span>
               </h2>
               <FormControl
                 sx={{ m: 1, minWidth: 120 }}
@@ -737,8 +762,8 @@ const EditProductList = () => {
         </Box>
         <Notification notify={notify} setNotify={setNotify} />
       </Container>
-    </React.Fragment>
+    </>
   );
-};
+}
 
 export default EditProductList;

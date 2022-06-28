@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getAllCards } from "../../Api/client/MainProductsApi";
+import { useParams, Link, Link as NavLink } from "react-router-dom";
 import {
   Container,
   Box,
@@ -9,19 +8,20 @@ import {
   PaginationItem,
   Pagination,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { makeStyles } from "@mui/styles";
+import AppsIcon from "@mui/icons-material/Apps";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import { useDispatch } from "react-redux";
+import { getAllCards } from "../../Api/client/MainProductsApi";
+
 import BackToTop from "./Navbar/Navbar";
 import BigPhoto from "../../Images/image 26.png";
 import cart1 from "../../Images/cart1.svg";
 import cart2 from "../../Images/cart2.svg";
 import { getProductByBrand } from "../../Api/client/ClientBrandApi";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
-import AppsIcon from "@mui/icons-material/Apps";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import { Link as NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+
 import Notification from "../../adminContainer/Snackbar/Notification";
 import { addToCart } from "../../redux/cart/action";
 import Footer from "./Footer";
@@ -316,7 +316,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AllCards = () => {
+function AllCards(): JSX.Element {
   const { id } = useParams();
   const classes = useStyles();
   const [products, setProducts] = useState([]);
@@ -326,7 +326,7 @@ const AllCards = () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("react");
 
-  const getData = async (id: any) => {
+  const getData = async (id: any): Promise<any> => {
     const response: any = await getAllCards(id, `${page - 1}`);
     setProducts(response.data.content);
     setPageQty(response.data.totalPages);
@@ -344,8 +344,8 @@ const AllCards = () => {
     }
   }, [query, page]);
 
-  const getProduct = async (id: any) => {
-    let res: any = await getProductByBrand({}, id);
+  const getProduct = async (id: any): Promise<any> => {
+    const res: any = await getProductByBrand({}, id);
     setProducts(res.data.content);
   };
   useEffect(() => {
@@ -362,7 +362,7 @@ const AllCards = () => {
         <Grid container direction="row" spacing={3} item>
           <Grid item xs={6} md={1} sm={4}>
             <Link to="/">
-              <button className={classes.back}>
+              <button type="button" className={classes.back}>
                 {" "}
                 <ArrowBackIosNewIcon
                   className={classes.ArrowBackIosNewIcon}
@@ -380,6 +380,7 @@ const AllCards = () => {
           >
             <div className={classes.locationOfCard}>
               <button
+                type="button"
                 className={classes.sortButton}
                 onClick={() => setSort(false)}
                 style={sort ? { opacity: "40%" } : { color: "#000 !important" }}
@@ -387,6 +388,7 @@ const AllCards = () => {
                 <AppsIcon />
               </button>
               <button
+                type="button"
                 className={classes.sortButton}
                 onClick={() => setSort(true)}
                 style={
@@ -408,10 +410,10 @@ const AllCards = () => {
                 spacing={2}
                 flexWrap="wrap"
               >
-                {products.map((item: any, key: any) => (
+                {products.map((item: any) => (
                   <Box
                     className={classes.bodyCard}
-                    key={key}
+                    key={item.id}
                     sx={{ margin: "10px 10px !important" }}
                   >
                     <Box>
@@ -444,9 +446,9 @@ const AllCards = () => {
                         }}
                       >
                         {Math.floor(
-                          (item?.after_discount * 1.44) / 12
+                          (item.after_discount * 1.44) / 12,
                         ).toLocaleString()}{" "}
-                        so'm
+                        so`m
                         <span
                           style={{
                             background: "red",
@@ -468,10 +470,11 @@ const AllCards = () => {
                           fontWeight: "500",
                         }}
                       >
-                        {item?.after_discount?.toLocaleString()} so'm
+                        {item?.after_discount?.toLocaleString()} so`m
                       </p>
                       {item.availability === true ? (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           onClick={() => {
                             dispatch(addToCart(item));
@@ -490,7 +493,10 @@ const AllCards = () => {
                           Savatchaga
                         </button>
                       ) : (
-                        <button className={classes.cardButtonSecond}>
+                        <button
+                          type="button"
+                          className={classes.cardButtonSecond}
+                        >
                           <img
                             src={cart2}
                             alt="img"
@@ -498,7 +504,7 @@ const AllCards = () => {
                               marginRight: "5px",
                             }}
                           />
-                          Sotuvda yo'q
+                          Sotuvda yo`q
                         </button>
                       )}
                     </Box>
@@ -510,9 +516,9 @@ const AllCards = () => {
             <div>
               <Stack flexDirection="column">
                 {products.map((item: any, key: any) => (
-                  <Grid item key={key}>
+                  <Grid item key={item.id}>
                     <Grid item xs={12} sm={12} md={12} lg={12}>
-                      <Box className={classes.sortBodyCard} >
+                      <Box className={classes.sortBodyCard}>
                         <Link
                           to={`/product/client/details/${item.id}`}
                           style={{
@@ -554,9 +560,9 @@ const AllCards = () => {
                               }}
                             >
                               {Math.floor(
-                                (item?.after_discount * 1.44) / 12
+                                (item.after_discount * 1.44) / 12,
                               ).toLocaleString()}{" "}
-                              so'm
+                              so`m
                               <span
                                 style={{
                                   background: "red",
@@ -578,11 +584,12 @@ const AllCards = () => {
                                 fontWeight: "500",
                               }}
                             >
-                              {item?.after_discount?.toLocaleString()} so'm
+                              {item?.after_discount?.toLocaleString()} so`m
                             </p>
                           </div>
                           {item.availability === true ? (
                             <button
+                              type="button"
                               className={classes.sortCardButton}
                               onClick={() => {
                                 dispatch(addToCart(item));
@@ -601,7 +608,10 @@ const AllCards = () => {
                               Savatchaga
                             </button>
                           ) : (
-                            <button className={classes.sortCardButton}>
+                            <button
+                              type="button"
+                              className={classes.sortCardButton}
+                            >
                               <img
                                 src={cart2}
                                 alt="img"
@@ -610,7 +620,7 @@ const AllCards = () => {
                                   border: "2px solid #C33E4D",
                                 }}
                               />
-                              Sotuvda yo'q
+                              Sotuvda yo`q
                             </button>
                           )}
                         </div>
@@ -631,7 +641,7 @@ const AllCards = () => {
             {!!pageQty && (
               <Pagination
                 className={
-                  `${classes.pagination}` && `css-wjh20t-MuiPagination-ul`
+                  `${classes.pagination}` && "css-wjh20t-MuiPagination-ul"
                 }
                 count={pageQty}
                 page={page}
@@ -647,7 +657,7 @@ const AllCards = () => {
                     to={`/product/product-by-category/${id}?page=${item.page}`}
                     {...item}
                     variant="text"
-                    shape={"rounded"}
+                    shape="rounded"
                     sx={{ justifyContent: "center !important" }}
                   />
                 )}
@@ -660,6 +670,6 @@ const AllCards = () => {
       <Footer />
     </>
   );
-};
+}
 
 export default AllCards;

@@ -8,7 +8,7 @@ const initialState: CardsState = {
 
 export const cardReducer = (
   state = initialState,
-  action: CardAction
+  action: CardAction,
 ): CardsState => {
   switch (action.type) {
     case CardActionTypes.FETCH_CARDS:

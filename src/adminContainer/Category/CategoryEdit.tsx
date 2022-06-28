@@ -12,15 +12,15 @@ import {
   Tooltip,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import {
   getCategoryList,
   getCategoryById,
   putCategoryEdit,
 } from "../../Api/admin/AdminCategoryApi";
-import { useNavigate, useParams } from "react-router-dom";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import Notification from "../Snackbar/Notification";
-import { Link } from "react-router-dom";
+
 interface createDatas {
   name: string;
   id: number;
@@ -139,7 +139,7 @@ const style = {
   pb: 3,
 };
 
-export default function CategoryEdit() {
+export default function CategoryEdit(): JSX.Element {
   const [rows, setRows] = React.useState<createDatas[]>([]);
   const [select, setSelect] = React.useState("");
   const [category, setCategory] = React.useState<any>("");
@@ -151,11 +151,11 @@ export default function CategoryEdit() {
   const { id } = useParams();
   const classes = useStyles();
   const navigate = useNavigate();
-  const getCategory = async () => {
-    let response: any = await getCategoryList("", {});
+  const getCategory = async (): Promise<any> => {
+    const response: any = await getCategoryList("", {});
     setRows(response.data.parent_categories[0]);
   };
-  const getCategoryByIds = async (id: any) => {
+  const getCategoryByIds = async (id: any): Promise<void> => {
     const res: any = await getCategoryById(id);
     setCategory(res.data.sub_category_info[0].name);
     setRows(res.data.parent_categories_list[0]);
@@ -163,7 +163,7 @@ export default function CategoryEdit() {
   React.useEffect(() => {
     getCategory();
   }, []);
-  const putCategory = () => {
+  const putCategory = (): any => {
     const data = { name: category, parent_id: select };
     try {
       putCategoryEdit(id, data)
@@ -179,7 +179,7 @@ export default function CategoryEdit() {
             }, 500);
           }
         })
-        .catch((err) => {
+        .catch(() => {
           setNotify({
             isOpen: true,
             message: "Xatolik yuz berdi...",
@@ -198,7 +198,7 @@ export default function CategoryEdit() {
     setCategory(getCategoryByIds(id));
   }, []);
 
-  const handleChangeCategory = (event: SelectChangeEvent) => {
+  const handleChangeCategory = (event: SelectChangeEvent): void => {
     setSelect(event.target.value);
   };
   const inp = document.querySelector("input");
@@ -218,7 +218,7 @@ export default function CategoryEdit() {
         <h1 className={classes.h1}>Turkum</h1>
         <Box sx={style} className={classes.box}>
           <Paper style={{ boxShadow: "none" }}>
-            <h4 className={classes.h4_second}>Turkumni o'zgartirish</h4>
+            <h4 className={classes.h4_second}>Turkumni o`zgartirish</h4>
             <h5 className={classes.category_name}>Nomi</h5>
             <input
               style={{ borderColor: "#9F9F9F" }}
@@ -245,7 +245,7 @@ export default function CategoryEdit() {
                 {rows.map((row, index) => (
                   <MenuItem
                     value={row.id}
-                    key={index}
+                    key={row.id}
                     className={classes.menuItem_gutters}
                   >
                     {row.name}
@@ -260,7 +260,7 @@ export default function CategoryEdit() {
                   style={{ textTransform: "capitalize" }}
                   onClick={putCategory}
                 >
-                  Turkumni o'zgartirish
+                  Turkumni o`zgartirish
                 </Button>
               </Tooltip>
             </div>
