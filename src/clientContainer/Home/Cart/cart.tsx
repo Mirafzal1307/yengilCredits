@@ -43,6 +43,7 @@ import Footer from "../Footer";
 import BackToTop from "../Navbar/Navbar";
 import { postPhone } from "./VerificationsApi";
 import { cities } from "./cities";
+import TransitionsModal from "./CardModal";
 
 const Input = styled("input")(({ theme }) => ({
   width: 200,
@@ -404,6 +405,7 @@ export default function Cart(): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [timer, setTimer] = React.useState("00:00");
   const [count, setCount] = React.useState(60);
+  const [secStatus, setSecStatus] = React.useState(null);
   const [code, setCode] = React.useState(null);
   const [status, setStatus] = React.useState<any>(null);
 
@@ -498,17 +500,19 @@ export default function Cart(): JSX.Element {
     try {
       postProductOrder(form)
         .then(async (res: any) => {
+          setSecStatus(res.status);
           if (res.status === 200) {
-            dispatch(deleteAllFromCart());
-            setTimeout(() => {
-              navigate("/");
-            }, 1000);
-            refresh();
-            setNotify({
-              isOpen: true,
-              message: "Sizning ma'lumotlaringiz jo'natildi",
-              type: "success",
-            });
+            // dispatch(deleteAllFromCart());
+            // setTimeout(() => {
+            //   navigate("/");
+            // }, 1000);
+            // refresh();
+            // setNotify({
+            //   isOpen: true,
+            //   message: "Sizning ma'lumotlaringiz jo'natildi",
+            //   type: "success",
+            // });
+            return <TransitionsModal />;
           }
         })
         .catch(() => {
@@ -1015,6 +1019,7 @@ export default function Cart(): JSX.Element {
                         type="button"
                       >
                         Xarid qilish
+                        {secStatus === 200 && <TransitionsModal />}
                       </button>
                     </div>
                   </>

@@ -5,7 +5,7 @@ import axios, {
   AxiosRequestConfig,
 } from "axios";
 import { API_URL } from "../constants/ApiConstants";
-import { checkErrorOne } from "./checkErrors";
+import { checkErrorOne, checkErrorThree, checkErrorTwo } from "./checkErrors";
 import TokenService from "./tokenService";
 
 class ApiClient {
@@ -19,30 +19,38 @@ class ApiClient {
       },
       timeout: 5000,
     });
-    this.instance.interceptors.response.use(
-      (config) => {
-        const token: any = TokenService.getLocalAccessToken();
-        // console.log(token, "token");
+    console.log(baseURL, "baseURL");
+    this.instance.interceptors.request.use(
+      (config: any) => {
+        // console.log(config?.headers?.access_token);
+        const token = localStorage.getItem("accessToken");
+        console.log(token, "token");
         if (token) {
           config.headers["access_token"] = token; // for Node.js Express back-end
         }
         return config;
       },
-      (error: AxiosError) => {
+      (error) => {
+        console.log(error);
         return Promise.reject(error);
       },
     );
-    this.instance.interceptors.request.use(
+    this.instance.interceptors.response.use(
       (response) => {
+        // debugger;
         return response;
       },
-      (error: AxiosError) => {
-        debugger;
+      (error) => {
+        // debugger;
         console.log(error);
-        const data = error?.response?.data;
-        const status = error?.response?.status;
-        console.log(data.slice(63, 69), "data");
-        checkErrorOne(data.slice(63, 69), status);
+        const { data } = error?.response;
+        console.log(data, "data");
+        const { status } = error?.response;
+        console.log(status, "status");
+        // console.log(data.slice(63, 69), "data");
+        checkErrorOne(data.slice(30, 36), status);
+        checkErrorTwo(data.slice(32, 38), status);
+        checkErrorThree(data.slice(63, 69), status);
         return Promise.reject(error);
       },
     );
