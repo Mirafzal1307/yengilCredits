@@ -25,6 +25,7 @@ export default function TransitionsModal({ buyer_id, amount }: any): any {
   const [open, setOpen] = React.useState(true);
   // const handleOpen = (): any => setOpen(true);
   const handleClose = (): any => setOpen(false);
+  console.log(buyer_id, amount);
   const allAmount = amount * 100;
   // const getBuyerId = (): any => {
   //   const res = postProductOrder();
@@ -75,16 +76,16 @@ export default function TransitionsModal({ buyer_id, amount }: any): any {
               >
                 <Link to="/">Tugatish</Link>
               </button>
-              <form method="POST" action="https://test.paycom.uz">
+              <form method="POST" action="https://checkout.paycom.uz/">
                 <input
                   type="hidden"
                   name="merchant"
-                  value="62bddb5bf10971cd09f13323"
+                  value="62a7601817d208a46387c0bf"
                 />
                 <input type="hidden" name="amount" value={allAmount} />
                 <input
                   type="hidden"
-                  name="account[{buyer_id}]"
+                  name="account[buyer_id]"
                   value={buyer_id}
                 />
                 <button
