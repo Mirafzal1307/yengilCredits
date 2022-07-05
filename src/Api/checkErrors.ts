@@ -15,9 +15,39 @@ export const checkErrorOne = (message: any, status: any): any => {
           TokenService.setAdmin(res.data);
         });
         break;
+      default:
+        return message;
+    }
+  }
+};
+export const checkErrorTwo = (message: any, status: any): any => {
+  // const mess = JSON.stringify(message);
+  // const messageTwo = JSON.parse(mess);
+
+  // console.log( typeof messageTwo);
+  console.log(status, "status");
+
+  console.log(message);
+  if (status === 403) {
+    switch (message) {
       case "code=2":
         window.location.href = "/login";
         break;
+      default:
+        return message;
+    }
+  }
+};
+export const checkErrorThree = (message: any, status: any): any => {
+  // const mess = JSON.stringify(message);
+  // const messageTwo = JSON.parse(mess);
+
+  // console.log( typeof messageTwo);
+  console.log(status, "status");
+
+  console.log(message);
+  if (status === 403) {
+    switch (message) {
       case "code=3":
         window.location.href = "/login";
         break;

@@ -43,6 +43,7 @@ import Footer from "../Footer";
 import BackToTop from "../Navbar/Navbar";
 import { postPhone } from "./VerificationsApi";
 import { cities } from "./cities";
+import TransitionsModal from "./CardModal";
 
 const Input = styled("input")(({ theme }) => ({
   width: 200,
@@ -404,9 +405,11 @@ export default function Cart(): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [timer, setTimer] = React.useState("00:00");
   const [count, setCount] = React.useState(60);
+  const [secStatus, setSecStatus] = React.useState(null);
   const [code, setCode] = React.useState(null);
   const [status, setStatus] = React.useState<any>(null);
-
+  const [buyer_id, setBuyer_id] = React.useState("");
+  const [amount, setAmount] = React.useState("");
   const Ref = React.useRef(null);
 
   const PostCode = async (mass: any): Promise<any> => {
@@ -482,8 +485,8 @@ export default function Cart(): JSX.Element {
   });
   const options: any = getInputProps();
   const address = options.value;
-  function Submit(e: any): any {
-    e.preventDefault();
+  function Submit(): any {
+    // e.preventDefault();
     const form = JSON.stringify({
       products,
       buyer: {
@@ -498,17 +501,23 @@ export default function Cart(): JSX.Element {
     try {
       postProductOrder(form)
         .then(async (res: any) => {
+          console.log(res);
+          setAmount(res.data.amount);
+          setBuyer_id(res.data.buyer_id);
+          setSecStatus(res.status);
           if (res.status === 200) {
-            dispatch(deleteAllFromCart());
             setTimeout(() => {
-              navigate("/");
-            }, 1000);
-            refresh();
-            setNotify({
-              isOpen: true,
-              message: "Sizning ma'lumotlaringiz jo'natildi",
-              type: "success",
-            });
+              dispatch(deleteAllFromCart());
+            }, 2000);
+            // refresh();
+            setTimeout(() => {
+              setNotify({
+                isOpen: true,
+                message: "Sizning ma'lumotlaringiz jo'natildi",
+                type: "success",
+              });
+            }, 2000);
+            return <TransitionsModal />;
           }
         })
         .catch(() => {
@@ -583,6 +592,7 @@ export default function Cart(): JSX.Element {
   };
 
   React.useEffect(() => {
+    Submit();
     clearTimer(getDeadTime());
   }, []);
 
@@ -1015,6 +1025,12 @@ export default function Cart(): JSX.Element {
                         type="button"
                       >
                         Xarid qilish
+                        {secStatus === 200 && (
+                          <TransitionsModal
+                            buyer_id={buyer_id}
+                            amount={amount}
+                          />
+                        )}
                       </button>
                     </div>
                   </>
