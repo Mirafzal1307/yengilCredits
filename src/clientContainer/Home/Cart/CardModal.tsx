@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 // import { postProductOrder } from "../../../Api/client/CardOrderAPI";
 // import { postProductOrder } from "../../../../api/client/postProductOrder";
+import { MERCHANT_ID, PAYME_URL } from "../../../constants/ApiConstants";
 
 const style = {
   position: "absolute" as const,
@@ -63,12 +64,8 @@ export default function TransitionsModal({ buyer_id, amount }: any): any {
               >
                 <Link to="/">Tugatish</Link>
               </button>
-              <form method="POST" action="https://checkout.paycom.uz/">
-                <input
-                  type="hidden"
-                  name="merchant"
-                  value="62a7601817d208a46387c0bf"
-                />
+              <form method="POST" action={PAYME_URL}>
+                <input type="hidden" name="merchant" value={MERCHANT_ID} />
                 <input type="hidden" name="amount" value={allAmount} />
                 <input
                   type="hidden"
