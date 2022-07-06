@@ -23,21 +23,8 @@ const style = {
 
 export default function TransitionsModal({ buyer_id, amount }: any): any {
   const [open, setOpen] = React.useState(true);
-  // const handleOpen = (): any => setOpen(true);
   const handleClose = (): any => setOpen(false);
-  console.log(buyer_id, amount);
-  const allAmount = amount * 100;
-  // const getBuyerId = (): any => {
-  //   const res = postProductOrder();
-  //   console.log(res);
-  // };
-
-  // React.useEffect(() => {
-  //   getBuyerId();
-  // }, []);
-  // if (isOpen === 200) {
-  //   return setOpen(true);
-  // }
+  const allAmount = amount;
   return (
     <div>
       <Modal
