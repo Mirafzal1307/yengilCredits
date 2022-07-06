@@ -25,15 +25,13 @@ const useStyles = makeStyles({
   },
 });
 
-const HomePageTop = () => {
+function HomePageTop(): JSX.Element {
   const classes = useStyles();
   return (
-    <>
-      <div className={classes.dashboard}>
-        <h2 className={classes.homeTop}>Dashboard</h2>
-        <Button className={classes.root}>Create report</Button>
-      </div>
-    </>
+    <div className={classes.dashboard}>
+      <h2 className={classes.homeTop}>Dashboard</h2>
+      <Button className={classes.root}>Create report</Button>
+    </div>
   );
-};
+}
 export default HomePageTop;

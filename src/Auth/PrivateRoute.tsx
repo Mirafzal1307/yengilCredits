@@ -1,19 +1,13 @@
 import React from "react";
 import { Navigate, Route, Outlet } from "react-router-dom";
+import TokenService from "../Api/tokenService";
 
-const PrivateRoute = (props:any) => {
-  // const isAuth  = false
-// console.log(props);
-
-  const token = localStorage.getItem("auth");
-
-  // console.log("token", token);
+function PrivateRoute(props: any): any {
+  const token = TokenService.getLocalAccessToken();
   if (token) {
-    return <Outlet/>
-  } else {
-    return <Navigate to={token ? "/dashboard" : "/login"}/>
+    return <Outlet />;
   }
-  // return <>{token ? <Outlet /> : <Navigate to="/login" />}</>;
-};
+  return <Navigate to={token ? "/dashboard" : "/login"} />;
+}
 
 export default PrivateRoute;

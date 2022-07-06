@@ -1,55 +1,55 @@
+import React from "react";
+import axios from "axios";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  MenuItem,
+  Select,
+  Table,
+} from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { makeStyles } from "@material-ui/core/styles";
+import CloseIcon from "@mui/icons-material/Close";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import MoneyIcon from "@mui/icons-material/Money";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import { useAutocomplete } from "@mui/base/AutocompleteUnstyled";
+import { styled } from "@mui/material/styles";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import "./style.css";
+import emptyCard from "../../../Images/ShoppingCart.png";
+import Notification from "../../../adminContainer/Snackbar/Notification";
 import {
   deleteAllFromCart,
   deleteFromCart,
   updatePrice,
 } from "../../../redux/cart/action";
 import { rootState } from "../../../redux/reducers/index";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  Table,
-} from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import BackToTop from "../Navbar/Navbar";
-import Footer from "../Footer";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { makeStyles } from "@material-ui/core/styles";
-import CloseIcon from "@mui/icons-material/Close";
-import { API_URL, MINIO_FULL_ENDPOINT_FOR } from "../../../constants/ApiConstants";
-import React from "react";
-import { postProductOrder } from "../../../Api/client/CardOrderAPI";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import emptyCard from "../../../Images/ShoppingCart.png";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import Notification from "../../../adminContainer/Snackbar/Notification";
-import { SelectChangeEvent } from "@mui/material";
-import MoneyIcon from "@mui/icons-material/Money";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
-import "./style.css";
-import { useNavigate } from "react-router-dom";
-import { useAutocomplete } from "@mui/base/AutocompleteUnstyled";
-import { styled } from "@mui/material/styles";
-import { postPhone } from "./VerificationsApi";
-import axios from "axios";
-import { cities } from "./cities";
 
+import { postProductOrder } from "../../../Api/client/CardOrderAPI";
+import {
+  API_URL,
+  MINIO_FULL_ENDPOINT_FOR,
+} from "../../../constants/ApiConstants";
+import Footer from "../Footer";
+import BackToTop from "../Navbar/Navbar";
+import { postPhone } from "./VerificationsApi";
+import { cities } from "./cities";
+import TransitionsModal from "./CardModal";
 
 const Input = styled("input")(({ theme }) => ({
   width: 200,
   backgroundColor: theme.palette.background.paper,
   color: theme.palette.getContrastText(theme.palette.background.paper),
 }));
-
 const Listbox = styled("ul")(({ theme }) => ({
   width: 450,
   margin: 0,
@@ -72,19 +72,6 @@ const Listbox = styled("ul")(({ theme }) => ({
     color: "white",
   },
 }));
-
-// const style = {
-//   position: "absolute" as "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-
-//   bgcolor: "background.paper",
-//   borderRadius: "5px",
-//   boxShadow: 24,
-//   p: 3,
-// };
-
 const useStyles = makeStyles((theme) => ({
   style: {
     width: "450px",
@@ -392,21 +379,17 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     transform: "translate(-50%, -50%)",
     borderRadius: "5px",
-    boxShadow: '3px 3px 3px black 3px 3px 3px ',
-    padding: '15px',
-    width: '500px',
-    background: 'white',
+    boxShadow: "3px 3px 3px black 3px 3px 3px ",
+    padding: "20px 30px",
+    width: "500px",
+    background: "white",
     [theme.breakpoints.down(600)]: {
-
       top: "50%",
-      width: '300px',
-    }
-  }
+      width: "300px",
+    },
+  },
 }));
-
-
-
-export default function Cart() {
+export default function Cart(): JSX.Element {
   const [alignment, setAlignment] = React.useState<string | null>("Naqd");
   const [fullName, setFullName] = React.useState(null);
   const [phone, setPhone] = React.useState<any>(null);
@@ -419,84 +402,72 @@ export default function Cart() {
   const [start, setStart] = React.useState(false);
   const [disabled, setDisabled] = React.useState(true);
   const { cartProducts } = useSelector((state: rootState) => state.cartreducer);
-  // console.log(cartProducts);
   const [open, setOpen] = React.useState(false);
-  const [timer, setTimer] = React.useState('00:00');
-  const [count, setCount] = React.useState(60)
-  const [code, setCode] = React.useState(null)
-  const [status, setStatus] = React.useState<any>(null)
-
+  const [timer, setTimer] = React.useState("00:00");
+  const [count, setCount] = React.useState(60);
+  const [secStatus, setSecStatus] = React.useState(null);
+  const [code, setCode] = React.useState(null);
+  const [status, setStatus] = React.useState<any>(null);
+  const [buyer_id, setBuyer_id] = React.useState("");
+  const [amount, setAmount] = React.useState("");
   const Ref = React.useRef(null);
-  const handleOpen = () => {
-    if (phone.length == 13 && fullName) {
-      setOpen(true);
-      postPhone({ phone, fullName })
-      onClickReset()
-    }
-  };
 
-  //  This line is if for verification
-  const PostCode = async (mass: any) => {
-    const phone = mass[0]
-    const code = mass[1]
-    // console.log(phone, code);
-    // console.log(mass);
+  const PostCode = async (mass: any): Promise<any> => {
+    const phone = mass[0];
+    const code = mass[1];
     axios({
       url: `${API_URL}/sms/validation/${code}`,
       method: "GET",
       headers: {
-        "number": `${phone}`
-      }
+        number: `${phone}`,
+      },
     })
       .then((res) => {
-        setStatus(res.status)
-          ;
+        setStatus(res.status);
       })
-      .catch((err) => err)
+      .catch((err) => err);
+  };
 
-  }
-  // console.log(status);
-
-  const mass = [phone, code]
-  const handleClose = () => {
-    PostCode(mass)
-    if (status == 200) {
+  const mass = [phone, code];
+  const handleClose = (): void => {
+    PostCode(mass);
+    if (status === 200) {
       setOpen(false);
     }
+  };
 
+  const handleModalClose = (): void => {
+    setOpen(false);
   };
 
   const navigate = useNavigate();
-
   const refresh = (): void => {
     setTimeout(() => {
       window.location.reload();
     }, 2000);
   };
   const dispatch = useDispatch();
-  let total = cartProducts.reduce(
+  const total = cartProducts.reduce(
     (subtotal, product) => subtotal + product.price * product.quantity,
-    0
+    0,
   );
   const products = cartProducts.map((i) => ({
     product_id: i.id,
     quantity: i.quantity,
     price: i.price,
   }));
-
   const handleAlignment = (
     event: React.MouseEvent<HTMLElement>,
-    newAlignment: string | null
-  ) => {
+    newAlignment: string | null,
+  ): void => {
     setAlignment(newAlignment);
   };
-
-  const isEmpty = (e: React.FormEvent<HTMLInputElement>) => {
+  const isEmpty = (e: React.FormEvent<HTMLInputElement>): void => {
     e.preventDefault();
-    let name = fullName;
-    let ownAddress = address;
-    let telPhone = phone;
-    let ownCity = city;
+    const name = fullName;
+    // let ownAddress = address;
+    const telPhone = phone;
+    const ownCity = city;
     if (name !== null && telPhone !== null && ownCity !== null) {
       setDisabled(false);
     }
@@ -512,48 +483,46 @@ export default function Cart() {
     options: cities,
     getOptionLabel: (option) => option.title,
   });
-  let options: any = getInputProps();
+  const options: any = getInputProps();
   const address = options.value;
-
-  function Submit(e:any) {
-    e.preventDefault()
+  function Submit(): any {
+    // e.preventDefault();
     const form = JSON.stringify({
-      products: products,
+      products,
       buyer: {
         full_name: fullName,
         address: city,
-        phone: phone,
+        phone,
         city: address,
         pay_type: alignment,
       },
       total_price: total,
     });
-
-
     try {
       postProductOrder(form)
         .then(async (res: any) => {
-                   if (res.status === 200) {
-            dispatch(deleteAllFromCart());
+          console.log(res);
+          setAmount(res.data.amount);
+          setBuyer_id(res.data.buyer_id);
+          setSecStatus(res.status);
+          if (res.status === 200) {
             setTimeout(() => {
-              navigate("/");
-            }, 1000)
-            refresh();
-            setNotify({
-              isOpen: true,
-              message: "Sizning ma'lumotlaringiz jo'natildi",
-              type: "success",
-            });
-            
+              dispatch(deleteAllFromCart());
+            }, 2000);
+            // refresh();
+            setTimeout(() => {
+              setNotify({
+                isOpen: true,
+                message: "Sizning ma'lumotlaringiz jo'natildi",
+                type: "success",
+              });
+            }, 2000);
+            return <TransitionsModal />;
           }
         })
-        .catch((err) => {
-          setNotify({
-            isOpen: true,
-            message: "Iltimos barchasini to'ldiring",
-            type: "error",
-          });
-             });
+        .catch((err: any) => {
+          console.log(err);
+        });
     } catch (error) {
       setNotify({
         isOpen: true,
@@ -562,9 +531,7 @@ export default function Cart() {
       });
     }
   }
-  let { darktheme } = useSelector((state: rootState) => state.productsReducer);
   const classes = useStyles();
-
   const inp = document.querySelectorAll("input");
   inp.forEach((element) => {
     if (element.value.length === 0) {
@@ -576,70 +543,68 @@ export default function Cart() {
       element.style.borderColor = "#9F9F9F";
     }
   });
-
-
-  // Timer 
-  const getTimeRemaining = (e: any) => {
+  const getTimeRemaining = (e: any): any => {
     const total = Date.parse(e) - Date.parse(new Date() as any);
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);
-    // const hours = Math.floor((total / 1000 / 60 / 60) % 24);
     return {
-      total, minutes, seconds
+      total,
+      minutes,
+      seconds,
     };
-  }
-
-  const startTimer = (e: any) => {
-    let { total, minutes, seconds }
-      = getTimeRemaining(e);
+  };
+  const startTimer = (e: any): any => {
+    const { total, minutes, seconds } = getTimeRemaining(e);
     if (total >= 0) {
       setTimer(
-        (minutes > 9 ? minutes : '0' + minutes) + ':'
-        + (seconds > 9 ? seconds : '0' + seconds)
-      )
+        `${minutes > 9 ? minutes : `0${minutes}`}:${
+          seconds > 9 ? seconds : `0${seconds}`
+        }`,
+      );
     }
-  }
-
-  const clearTimer = (e: any) => {
-    setTimer('00:60');
-
+  };
+  const clearTimer = (e: any): any => {
+    setTimer("00:60");
     if (Ref.current) clearInterval(Ref.current);
     const id: any = setInterval(() => {
       startTimer(e);
-    }, 1000)
+    }, 1000);
     Ref.current = id;
-  }
-
-  const getDeadTime = () => {
-    let deadline = new Date();
+  };
+  const getDeadTime = (): any => {
+    const deadline = new Date();
     deadline.setSeconds(deadline.getSeconds() + count);
     return deadline;
-  }
-  // mount only
+  };
+  const onClickReset = (): void => {
+    clearTimer(getDeadTime());
+  };
+  const handleOpen = (): any => {
+    if (phone.length === 13 && fullName) {
+      setOpen(true);
+      postPhone({ phone, fullName });
+      onClickReset();
+    }
+  };
+
   React.useEffect(() => {
+    Submit();
     clearTimer(getDeadTime());
   }, []);
 
-  const onClickReset = () => {
-    clearTimer(getDeadTime());
-  }
-  // Timer ending
-  const handleResetTimer = () => {
+  const handleResetTimer = (): void => {
     if (timer === "00:00") {
-      postPhone({ phone, fullName })
-      onClickReset()
+      postPhone({ phone, fullName });
+      onClickReset();
     }
-  }
-
-
-
+  };
   return (
     <>
       <BackToTop />
       <Container maxWidth="xl">
         <div>
-          <Link to={"/"}>
-            <button className={classes.MainPage}>
+          <Link to="/">
+            <button className={classes.MainPage} type="button">
               <div className={classes.Inside}> Bosh sahifa</div>
               <KeyboardArrowRightIcon className={classes.ArrowIcon} />
               <div className={classes.Inside}> Savatcha </div>
@@ -665,96 +630,92 @@ export default function Cart() {
             <>
               <Grid item xs={12} md={8} className={classes.MinGrid}>
                 {cartProducts.length > 0 && (
-                  <Table>
-                    <div>
-                      {cartProducts &&
-                        cartProducts?.map((product: any) => (
-                          <div
-                            key={product.id}
-                            className={classes.cartMin}
-                            style={{ margin: "15px 0px " }}
-                          >
-                            <div style={{ width: "25%" }}>
-                              <Link
-                                to={`/product/client/details/${product.id}`}
-                              >
-                                <img
-                                  src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`}
-                                />
-                              </Link>
-                            </div>
-                            <div style={{ width: "50%" }}>
-                              <div style={{ display: "flex" }}>
-                                <div>
-                                  <h5 className={classes.nameRes}>
-                                    {product.short_name}
-                                  </h5>
-                                </div>
-                              </div>
-                              <div style={{ display: "flex" }}>
+                  // <Table>
+                  <div>
+                    {cartProducts &&
+                      cartProducts?.map((product: any) => (
+                        <div
+                          key={product.id}
+                          className={classes.cartMin}
+                          style={{ margin: "15px 0px " }}
+                        >
+                          <div style={{ width: "25%" }}>
+                            <Link to={`/product/client/details/${product.id}`}>
+                              <img
+                                src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`}
+                                alt=""
+                              />
+                            </Link>
+                          </div>
+                          <div style={{ width: "50%" }}>
+                            <div style={{ display: "flex" }}>
+                              <div>
                                 <h5 className={classes.nameRes}>
-                                  {product.price.toLocaleString()} so'm
+                                  {product.short_name}
                                 </h5>
                               </div>
                             </div>
-
-                            <div
-                              style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "space-around",
-                                width: "25%",
-                              }}
-                            >
-                              <Button
-                                onClick={() =>
-                                  dispatch(deleteFromCart(product))
-                                }
-                                value={product.short_name}
-                              >
-                                <CloseIcon className={classes.close} />
-                              </Button>
-                              <div style={{ width: "25%", marginLeft: "7px" }}>
-                                <Select
-                                  key={product.id}
-                                  name="quantity"
-                                  onChange={(event: any) =>
-                                    dispatch(
-                                      updatePrice(product, event.target.value)
-                                    )
-                                  }
-                                  defaultValue={product.quantity}
-                                  className={classes.dropDownMin}
-                                >
-                                  <MenuItem value="1">1</MenuItem>
-                                  <MenuItem value="2">2</MenuItem>
-                                  <MenuItem value="3">3</MenuItem>
-                                  <MenuItem value="4">4</MenuItem>
-                                  <MenuItem value="5">5</MenuItem>
-                                  <MenuItem value="6">6</MenuItem>
-                                </Select>
-                              </div>
+                            <div style={{ display: "flex" }}>
+                              <h5 className={classes.nameRes}>
+                                {product.price.toLocaleString()} so`m
+                              </h5>
                             </div>
                           </div>
-                        ))}
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-around",
-                        }}
-                      >
-                        <div>
-                          <p style={{ fontWeight: 600, fontSize: "17px" }}>
-                            {" "}
-                            Umumiy narx
-                          </p>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-around",
+                              width: "25%",
+                            }}
+                          >
+                            <Button
+                              onClick={() => dispatch(deleteFromCart(product))}
+                              value={product.short_name}
+                            >
+                              <CloseIcon className={classes.close} />
+                            </Button>
+                            <div style={{ width: "25%", marginLeft: "7px" }}>
+                              <Select
+                                key={product?.id}
+                                name="quantity"
+                                onChange={(event: any) =>
+                                  dispatch(
+                                    updatePrice(product, event.target.value),
+                                  )
+                                }
+                                defaultValue={product.quantity}
+                                className={classes.dropDownMin}
+                              >
+                                <MenuItem value="1">1</MenuItem>
+                                <MenuItem value="2">2</MenuItem>
+                                <MenuItem value="3">3</MenuItem>
+                                <MenuItem value="4">4</MenuItem>
+                                <MenuItem value="5">5</MenuItem>
+                                <MenuItem value="6">6</MenuItem>
+                              </Select>
+                            </div>
+                          </div>
                         </div>
+                      ))}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                      }}
+                    >
+                      <div>
                         <p style={{ fontWeight: 600, fontSize: "17px" }}>
-                          {total.toLocaleString()} so'm
+                          {" "}
+                          Umumiy narx
                         </p>
                       </div>
+                      <p style={{ fontWeight: 600, fontSize: "17px" }}>
+                        {total.toLocaleString()} so`m
+                      </p>
                     </div>
-                  </Table>
+                  </div>
+                  // </Table>
                 )}
               </Grid>
               <Grid item xs={12} md={8} className={classes.MaxGrid}>
@@ -771,14 +732,14 @@ export default function Cart() {
                     <tbody>
                       {cartProducts &&
                         cartProducts?.map((product: any) => (
-                          <tr key={product.id} className={classes.carts}>
+                          <tr className={classes.carts} key={product.id}>
                             <td>
-                              {/* {console.log(product)} */}
                               <Link
                                 to={`/product/client/details/${product.id}`}
                               >
                                 <img
                                   src={`${MINIO_FULL_ENDPOINT_FOR}/product/${product?.photos[0]?.name}`}
+                                  alt=""
                                 />
                               </Link>
                             </td>
@@ -793,7 +754,7 @@ export default function Cart() {
                                 name="quantity"
                                 onChange={(event: any) =>
                                   dispatch(
-                                    updatePrice(product, event.target.value)
+                                    updatePrice(product, event.target.value),
                                   )
                                 }
                                 defaultValue={product.quantity}
@@ -809,7 +770,7 @@ export default function Cart() {
                             </td>
                             <td>
                               <h5 className={classes.price}>
-                                {product.price.toLocaleString()} so'm
+                                {product.price.toLocaleString()} so`m
                               </h5>
                             </td>
                             <td>
@@ -828,7 +789,7 @@ export default function Cart() {
                         <td>
                           <h4>Umumiy narx</h4>
                         </td>
-                        <td>{total.toLocaleString()} so'm</td>
+                        <td>{total.toLocaleString()} so`m</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -836,15 +797,13 @@ export default function Cart() {
               </Grid>
             </>
           )}
-          {/*      card */}
-
           <Grid item xs={12} md={4}>
             <div className={classes.totalPage}>
               <form>
                 <p className={classes.TotalAmount}>Qiymat</p>
                 <div className={classes.TotalPageTop}>
                   <p className={classes.pPage}>Narx</p>
-                  <p className={classes.pPage}>{total.toLocaleString()} so'm</p>
+                  <p className={classes.pPage}>{total.toLocaleString()} so`m</p>
                 </div>
                 <div className={classes.TotalPageTop}>
                   <p className={classes.pPage}>Yetkazish Xaqqi</p>
@@ -852,7 +811,7 @@ export default function Cart() {
                 </div>
                 <p className={classes.insideOfPage}>
                   (Standart tarif - Narx mahsulot/maqsadga qarab farq qilishi
-                  mumkin. TECS xodimlari siz bilan bog'lanadi.)
+                  mumkin. TECS xodimlari siz bilan bog`lanadi.)
                 </p>
                 <div className={classes.TotalPageTop}>
                   <p className={classes.pPage}>Taxi</p>
@@ -862,19 +821,20 @@ export default function Cart() {
                   <p className={classes.pPage}>Umumiy qiymat</p>
                   <p className={classes.pPage}>
                     {total.toLocaleString()}
-                    so'm
+                    so`m
                   </p>
                 </div>
                 <button
                   className={classes.sale}
                   onClick={() => setStart(true)}
                   style={start ? { display: "none" } : { display: "block" }}
+                  type="button"
                 >
                   Xaridni boshlash
                 </button>
                 {start && (
                   <Grid item xs={12} sm={6} md={12}>
-                    <h3>Yetkazish ma'lumotlari</h3>
+                    <h3>Yetkazish ma`lumotlari</h3>
                     <Box>
                       <p className={classes.UniversalP}>
                         Ismingiz <span style={{ color: "red" }}>*</span>{" "}
@@ -886,7 +846,7 @@ export default function Cart() {
                         onKeyUp={isEmpty}
                         onChange={(e: any) => setFullName(e.target.value)}
                         className={classes.Input}
-                        disabled={status == 200 ? true : false}
+                        disabled={status === 200}
                       />
                     </Box>
                     <Box>
@@ -901,11 +861,11 @@ export default function Cart() {
                         limitMaxLength
                         id="phone"
                         onKeyUp={isEmpty}
-                        disabled={status == 200 ? true : false}
+                        disabled={status === 200}
                       />
                     </Box>
                     <Box>
-                      {status !== 200 &&
+                      {status !== 200 && (
                         <button
                           onClick={handleOpen}
                           className={classes.sale}
@@ -913,39 +873,83 @@ export default function Cart() {
                         >
                           Tasdiqlash
                         </button>
-                      }
+                      )}
                       <Modal
-                        // hideBackdrop
                         open={open}
                         onClose={handleClose}
                         aria-labelledby="child-modal-title"
                         aria-describedby="child-modal-description"
                       >
-                        <Box className={classes.smsVerification} >
+                        <Box className={classes.smsVerification}>
                           <h2>Tasdiqlash talab qilinadi</h2>
                           <p>
-                            Quyidagi raqamga kod yubordik {phone}
+                            Quyidagi raqamga kod yubordik
+                            {phone}
                           </p>
-                          <input onChange={(e: any) => setCode(e.target.value)} placeholder="Tasdiqlash kodini shu yerga kiriting..." className={classes.Input} required />
-                          {status === 200 && <Typography sx={{ color: "green", fontSize: "14px" }}>Kod tasdiqlandi</Typography>}
-                          {status === 400 && <Typography sx={{ color: "#FF4B4B", fontSize: "14px" }}>Telifon raqam yoki kod xato kiritildi</Typography>}
-                          <button className={classes.sale} onClick={handleClose}>
-                            {status === 200 && "Davom ettirish"} {status > 200 && "Davom ettirish"} {!status && "Tasdiqlash"}
+                          <input
+                            onChange={(e: any) => setCode(e.target.value)}
+                            placeholder="Tasdiqlash kodini shu yerga kiriting..."
+                            className={classes.Input}
+                            required
+                          />
+                          {status === 200 && (
+                            <Typography
+                              sx={{ color: "green", fontSize: "14px" }}
+                            >
+                              Kod tasdiqlandi
+                            </Typography>
+                          )}
+                          {status === 400 && (
+                            <Typography
+                              sx={{ color: "#FF4B4B", fontSize: "14px" }}
+                            >
+                              Telifon raqam yoki kod xato kiritildi
+                            </Typography>
+                          )}
+                          <button
+                            className={classes.sale}
+                            onClick={handleClose}
+                            type="button"
+                          >
+                            {status === 200 && "Davom ettirish"}{" "}
+                            {status > 200 && "Davom ettirish"}{" "}
+                            {!status && "Tasdiqlash"}
                           </button>
-                          <Typography onClick={handleResetTimer} sx={{ cursor: "pointer", textAlign: "center", mt: "20px", color: timer !== "00:00" ? "#FF4B4B" : "green" }} >Kodni qayta jo’natishni so’rash {timer !== "00:00" && timer}</Typography>
+                          <Typography
+                            onClick={handleResetTimer}
+                            sx={{
+                              cursor: "pointer",
+                              textAlign: "center",
+                              mt: "20px",
+                              color: timer !== "00:00" ? "#FF4B4B" : "green",
+                            }}
+                          >
+                            Kodni qayta jo’natishni so’rash
+                            {timer !== "00:00" && timer}
+                          </Typography>
+                          <CloseIcon
+                            onClick={handleModalClose}
+                            sx={{
+                              cursor: "pointer",
+                              position: "absolute",
+                              top: "15px",
+                              right: "15px",
+                            }}
+                            className={classes.close}
+                          />
                         </Box>
                       </Modal>
                     </Box>
                   </Grid>
                 )}
-                {
-                  status == 200 &&
+                {status === 200 && (
                   <>
                     <Grid className={classes.Grid} container spacing={2}>
                       <Grid item xs={12} sm={6} md={12}>
                         <Box>
                           <p className={classes.UniversalP}>
-                            Shahar, tuman <span style={{ color: "red" }}>*</span>
+                            Shahar, tuman{" "}
+                            <span style={{ color: "red" }}>*</span>
                           </p>
                           <div>
                             <div {...getRootProps()}>
@@ -958,10 +962,13 @@ export default function Cart() {
                               <Listbox {...getListboxProps()}>
                                 {(groupedOptions as typeof cities).map(
                                   (option, index) => (
-                                    <li {...getOptionProps({ option, index })}>
+                                    <li
+                                      {...getOptionProps({ option, index })}
+                                      key={Math.random()}
+                                    >
                                       {option.title}
                                     </li>
-                                  )
+                                  ),
                                 )}
                               </Listbox>
                             ) : null}
@@ -969,7 +976,8 @@ export default function Cart() {
                         </Box>
                         <Box>
                           <p className={classes.UniversalP}>
-                            Yashash manzili <span style={{ color: "red" }}>*</span>
+                            Yashash manzili{" "}
+                            <span style={{ color: "red" }}>*</span>
                           </p>
                           <input
                             type="text"
@@ -1007,104 +1015,22 @@ export default function Cart() {
 
                     <div>
                       <button
-                        onClick={
-                          Submit
-                          // dispatch(deleteAllFromCart());
-
-
-                        }
+                        onClick={Submit}
                         disabled={disabled}
-                        // onClick={handleOpen}
                         className={classes.sale}
+                        type="button"
                       >
                         Xarid qilish
+                        {secStatus === 200 && (
+                          <TransitionsModal
+                            buyer_id={buyer_id}
+                            amount={amount}
+                          />
+                        )}
                       </button>
-                      {/* <Modal
-                    keepMounted
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="keep-mounted-modal-title"
-                    aria-describedby="keep-mounted-modal-description"
-                  >
-                    <Box sx={style} className={classes.style}>
-                      <h3>Xarid qilingan mahsulotlar</h3>
-                      {cartProducts.map((p, i) => (
-                        <>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                            }}
-                          >
-                            <p
-                              key={i}
-                              style={{ margin: 0, padding: "4px 0px 4px 0px" }}
-                            >
-                              {p.short_name}
-                            </p>
-                            <p key={i} style={{ margin: 0 }}>
-                              {p?.price.toLocaleString()}
-                            </p>
-                          </div>
-                        </>
-                      ))}
-
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <h4 style={{ margin: 0 }}>Umumiy narx</h4>
-                        <h4 style={{ margin: 0 }}>{total.toLocaleString()}</h4>
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Button
-                          onClick={handleClose}
-                          sx={{
-                            background: "#FF4B4B",
-                            color: "white",
-                            textTransform: "capitalize",
-                            "&:hover": {
-                              background: "#FF4B4B",
-                            },
-                            marginTop: "10px",
-                          }}
-                        >
-                          Bekor qilish
-                        </Button>
-                        <Button
-                          sx={{
-                            background: "#065374",
-                            color: "white",
-                            textTransform: "capitalize",
-                            "&:hover": {
-                              background: "#065374",
-                            },
-                            marginTop: "10px",
-                          }}
-                          onClick={() => {
-                            Submit();
-                            handleClose();
-                            // refresh();
-                            dispatch(deleteAllFromCart());
-                          }}
-                        >
-                          Sotib olish
-                        </Button>
-                      </div>
-                    </Box>
-                  </Modal> */}
                     </div>
                   </>
-
-                }
-
+                )}
               </form>
             </div>
           </Grid>

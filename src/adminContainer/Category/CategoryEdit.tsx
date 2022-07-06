@@ -12,22 +12,20 @@ import {
   Tooltip,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import {
   getCategoryList,
   getCategoryById,
   putCategoryEdit,
 } from "../../Api/admin/AdminCategoryApi";
-import { useNavigate, useParams } from "react-router-dom";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import Notification from "../Snackbar/Notification";
-import { Link } from "react-router-dom";
 
 interface createDatas {
   name: string;
   id: number;
   date: number;
 }
-
 const useStyles = makeStyles({
   box: {
     position: "absolute",
@@ -52,7 +50,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     color: "#000000",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   cancel: {
     background: "#FF4B4B !important",
@@ -75,7 +73,7 @@ const useStyles = makeStyles({
     fontWeight: "normal",
     fontStyle: "normal",
     color: "#000000",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   input_name: {
     width: "33.2% !important",
@@ -83,43 +81,45 @@ const useStyles = makeStyles({
     fontSize: "15px !important",
     fontWeight: "400",
     padding: "9px 0px 8px 20px !important",
-    '&:focus': {
-      outline: 'none'
-    }
+    "&:focus": {
+      outline: "none",
+    },
+    borderRadius: "5px",
+    border: "1px solid #9F9F9F !important",
   },
   h4_second: {
     fontSize: "17px !important",
     fontWeight: "600 !important",
     margin: "0px !important",
     fontStyle: "normal !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   category_name: {
     color: "#464646 !important",
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "20px 0 10px 0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   category_category: {
     color: "#464646 !important",
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "10px 0 !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   em: {
     color: "#9F9F9F !important",
     font: "inherit !important",
     paddingLeft: "12px !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   menuItem_gutters: {
     color: "#9F9F9F !important",
     font: "inherit !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   parent_buttons: {
     minWidth: "220px !important",
@@ -139,7 +139,7 @@ const style = {
   pb: 3,
 };
 
-export default function CategoryEdit() {
+export default function CategoryEdit(): JSX.Element {
   const [rows, setRows] = React.useState<createDatas[]>([]);
   const [select, setSelect] = React.useState("");
   const [category, setCategory] = React.useState<any>("");
@@ -151,25 +151,20 @@ export default function CategoryEdit() {
   const { id } = useParams();
   const classes = useStyles();
   const navigate = useNavigate();
-
-  const getCategory = async () => {
-    let response: any = await getCategoryList("", {});
+  const getCategory = async (): Promise<any> => {
+    const response: any = await getCategoryList("", {});
     setRows(response.data.parent_categories[0]);
   };
-
-  const getCategoryByIds = async (id: any) => {
+  const getCategoryByIds = async (id: any): Promise<void> => {
     const res: any = await getCategoryById(id);
     setCategory(res.data.sub_category_info[0].name);
     setRows(res.data.parent_categories_list[0]);
   };
-
   React.useEffect(() => {
     getCategory();
   }, []);
-
-  const putCategory = () => {
+  const putCategory = (): any => {
     const data = { name: category, parent_id: select };
-
     try {
       putCategoryEdit(id, data)
         .then(async (res: any) => {
@@ -183,59 +178,50 @@ export default function CategoryEdit() {
               navigate("/category");
             }, 500);
           }
-        }).catch(err => {
+        })
+        .catch(() => {
           setNotify({
             isOpen: true,
-            message: 'Xatolik yuz berdi...',
-            type: 'error'
-          })
-        })
+            message: "Xatolik yuz berdi...",
+            type: "error",
+          });
+        });
     } catch (error) {
       setNotify({
         isOpen: true,
-        message: 'Xatolik yuz berdi...',
-        type: 'error'
-      })
+        message: "Xatolik yuz berdi...",
+        type: "error",
+      });
     }
-
-  }
-
-
+  };
   React.useEffect(() => {
     setCategory(getCategoryByIds(id));
   }, []);
 
-  const handleChangeCategory = (event: SelectChangeEvent) => {
+  const handleChangeCategory = (event: SelectChangeEvent): void => {
     setSelect(event.target.value);
   };
-
-  const inp = document.querySelector('input');
-
+  const inp = document.querySelector("input");
   if (inp?.value.length === 1) {
-    inp?.classList.add('active')
+    inp?.classList.add("active");
+  } else if (inp?.value.length === 2) {
+    inp?.classList.add("active");
+  } else if (inp?.value.length === 3) {
+    inp?.classList.add("active");
+  } else {
+    inp?.classList.remove("active");
   }
-  else if (inp?.value.length === 2) {
-    inp?.classList.add('active')
-  }
-  else if (inp?.value.length === 3) {
-    inp?.classList.add('active')
-  }
-  else {
-    inp?.classList.remove('active')
-  }
-
-
   return (
     <>
       <MiniDrawer />
-      <Container >
+      <Container>
         <h1 className={classes.h1}>Turkum</h1>
         <Box sx={style} className={classes.box}>
           <Paper style={{ boxShadow: "none" }}>
-            <h4 className={classes.h4_second}>Turkumni o'zgartirish</h4>
+            <h4 className={classes.h4_second}>Turkumni o`zgartirish</h4>
             <h5 className={classes.category_name}>Nomi</h5>
             <input
-              style={{ borderColor: '#9F9F9F' }}
+              style={{ borderColor: "#9F9F9F" }}
               className={classes.input_name}
               id="outlined-basic"
               placeholder="Turkumni nomi"
@@ -259,7 +245,7 @@ export default function CategoryEdit() {
                 {rows.map((row, index) => (
                   <MenuItem
                     value={row.id}
-                    key={index}
+                    key={row.id}
                     className={classes.menuItem_gutters}
                   >
                     {row.name}
@@ -269,9 +255,12 @@ export default function CategoryEdit() {
             </FormControl>
             <div className={classes.parent_buttons}>
               <Tooltip title="Turkumni o'zgartirish">
-
-                <Button className={classes.deletes} style={{ textTransform: "capitalize" }} onClick={putCategory}>
-                  Turkumni o'zgartirish
+                <Button
+                  className={classes.deletes}
+                  style={{ textTransform: "capitalize" }}
+                  onClick={putCategory}
+                >
+                  Turkumni o`zgartirish
                 </Button>
               </Tooltip>
             </div>

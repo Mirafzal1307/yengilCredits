@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
-import { useTypedSelector } from "../../hook/useTypedSelector";
-import { fetchProducts } from "../../redux/actions/productAction";
-import { fetchBrands } from "../../redux/actions/brandAction";
-import { useActions } from "../../hook/useActions";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
+import React from "react";
 import { Box, Container, Grid } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import BrandCreate from "./BrandCreate";
 import BrandRead from "./BrandRead";
-import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   title: {
@@ -79,16 +75,15 @@ const useStyles = makeStyles({
   },
 });
 
-const BrandList: React.FC = () => {
+function BrandList(): JSX.Element {
   const classes = useStyles();
 
   return (
     <>
       <MiniDrawer />
-
       <Container style={{ marginTop: "50px" }}>
         <h1 className={classes.title}>Brand</h1>
-        <Grid container spacing={2}>
+        <Grid container direction="row" spacing={2}>
           <Grid item xs={5}>
             <BrandCreate />
           </Grid>
@@ -101,6 +96,6 @@ const BrandList: React.FC = () => {
       </Container>
     </>
   );
-};
+}
 
 export default BrandList;

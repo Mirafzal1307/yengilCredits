@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     fontWeight: "600",
     fontSize: "22px",
     color: "#065374",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   deleteButton: {
     border: "none !important",
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     color: "#ffffff !important",
     marginRight: "20px",
     padding: "9px 20px 8px 20px !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   deletes: {
     background: "#065374 !important",
@@ -34,14 +34,23 @@ const useStyles = makeStyles({
     color: "#ffffff !important",
     margin: "0 0 0 20px !important",
     padding: "9px 20px 8px 20px !important",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
   },
   h2: {
     fontSize: "17px",
     fontWeight: "normal",
     fontStyle: "normal",
     color: "#000000",
-    fontFamily: "Poppins !important"
+    fontFamily: "Poppins !important",
+  },
+  Backdrop: {
+    zIndex: "-1",
+    position: "fixed",
+    right: 0,
+    bottom: 0,
+    top: 0,
+    left: 0,
+    backgroundColor: "rgba(6, 83, 116, 0.3)",
   },
 });
 
@@ -76,10 +85,10 @@ const style = {
   pb: 3,
 };
 
-export default function ModalUnstyledDemo() {
+export default function ModalUnstyledDemo(): JSX.Element {
   const [deleteOpen, setDeleteOpen] = React.useState(false);
-  const handleOpen = () => setDeleteOpen(true);
-  const handleClose = () => setDeleteOpen(false);
+  const handleOpen = (): void => setDeleteOpen(true);
+  const handleClose = (): void => setDeleteOpen(false);
   const classes = useStyles();
 
   return (
@@ -96,7 +105,7 @@ export default function ModalUnstyledDemo() {
         aria-describedby="unstyled-modal-description"
         open={deleteOpen}
         onClose={handleClose}
-        BackdropComponent={Backdrop}
+        className={classes.Backdrop}
       >
         <Box sx={style} className={classes.box}>
           <h1 className={classes.h1}>Diqqat !</h1>
@@ -108,7 +117,7 @@ export default function ModalUnstyledDemo() {
               Bekor qilish
             </Button>
             <Button onClick={handleClose} className={classes.deletes}>
-              O'chirish
+              O`chirish
             </Button>
           </div>
         </Box>

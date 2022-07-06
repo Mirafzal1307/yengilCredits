@@ -18,7 +18,6 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "light" ? "#1a90ff" : "#308fe8",
   },
 }));
-
 const useStyles = makeStyles({
   Marketing: {
     boxShadow:
@@ -84,7 +83,7 @@ const useStyles = makeStyles({
   },
 });
 
-const HomeMarketPage = () => {
+function HomeMarketPage(): JSX.Element {
   const classes = useStyles();
   return (
     <div>
@@ -102,7 +101,6 @@ const HomeMarketPage = () => {
         </Box>
         <Box sx={{ flexGrow: 1 }}>
           <p className={classes.Home_Instagram}>Instagram page</p>
-
           <BorderLinearProgress
             variant="determinate"
             value={65}
@@ -130,12 +128,12 @@ const HomeMarketPage = () => {
             className={classes.borderLinearProgress}
           />
         </Box>
-        <button className={classes.other_links}>
+        <button type="button" className={classes.other_links}>
           Open analytics <IosShareIcon className={classes.icon_button} />
         </button>
       </div>
     </div>
   );
-};
+}
 
 export default HomeMarketPage;

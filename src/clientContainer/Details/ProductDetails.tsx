@@ -1,29 +1,28 @@
-import { Box, Button, CircularProgress, Container, Grid } from "@mui/material";
+import { Box, CircularProgress, Container, Grid } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { useDispatch } from "react-redux";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode, Navigation, Thumbs } from "swiper";
 import { getProductItem } from "../../Api/admin/AdminProductApi";
 import { useActions } from "../../hook/useActions";
 import BackToTop from "../Home/Navbar/Navbar";
 import Footer from "../Home/Footer";
 import { getProductCards } from "../../Api/client/MainProductsApi";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import cart1 from "../../Images/cart1.svg";
+// import cart1 from "../../Images/cart1.svg";
 import cart2 from "../../Images/cart2.svg";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import { addToCart } from "../../redux/cart/action";
-import { useDispatch, useSelector } from "react-redux";
-import { rootState } from "../../redux/reducers/index";
+// import { rootState } from "../../redux/reducers/index";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import BigPhoto from "../../Images/BigPhoto.png";
 import Shop from "../../Images/baskets.png";
 import CancelBtnImg from "../../Images/GroupsBack.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
-import { Link } from "react-router-dom";
-// import { refresh } from "../../adminContainer/Modal/refresh";
+
 import "@splidejs/splide/dist/css/splide.min.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation, Thumbs } from "swiper";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
@@ -34,7 +33,7 @@ import ColorToggleButton from "./newFeature";
 const useStyles = makeStyles((theme) => ({
   DetailsBody: {
     padding: "45px 0",
-    background: 'white',
+    background: "white",
     [theme.breakpoints.down(600)]: {
       padding: "0 0 25px 0 !important",
     },
@@ -107,7 +106,6 @@ const useStyles = makeStyles((theme) => ({
         width: "60%",
         justifyContent: "center",
       },
-
       borderRadius: "0px",
       filter: "drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))",
     },
@@ -115,7 +113,6 @@ const useStyles = makeStyles((theme) => ({
       width: "20%",
       display: "block",
       marginTop: "20px",
-
       "& img": {
         width: "100%",
       },
@@ -142,7 +139,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   mainCard: {
-    // display: "flex",
     height: "90%",
   },
   bodyCard: {
@@ -199,13 +195,11 @@ const useStyles = makeStyles((theme) => ({
   },
   cardTitle: {
     fontFamily: "Poppins",
-    // fontWeight: 600,
     fontSize: "13px",
     color: "#000",
   },
   cardPrice: {
     fontFamily: "Poppins",
-    // fontWeight: "600",
     fontSize: "14px",
     color: "#000",
     margin: 0,
@@ -213,9 +207,6 @@ const useStyles = makeStyles((theme) => ({
   splide: {
     marginTop: "10px !important",
     marginBottom: "10px !important",
-    // width: "100% !important",
-    // display: "flex",
-    // justifyContent: "center"
   },
   cardBottom: {
     background: "#065374",
@@ -232,7 +223,6 @@ const useStyles = makeStyles((theme) => ({
   },
   bottomText: {
     fontFamily: "Poppins",
-    // fontWeight: "600",
     fontSize: "22px",
     color: "#fff",
   },
@@ -240,7 +230,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100% ",
     marginBottom: "50px",
     borderRadius: "5px",
-
     [theme.breakpoints.down(900)]: {
       marginTop: "40px",
     },
@@ -253,7 +242,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontWeight: 600,
     fontSize: "27px",
-
     [theme.breakpoints.down(700)]: {
       display: "block",
     },
@@ -270,7 +258,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "22px",
     display: "flex",
     justifyContent: "space-between",
-
     [theme.breakpoints.down(600)]: {
       fontSize: "16px",
       fontWeight: 600,
@@ -280,7 +267,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Poppins",
     fontWeight: 600,
     fontSize: "22px",
-
     [theme.breakpoints.down(600)]: {
       fontSize: "14px",
     },
@@ -293,7 +279,6 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     borderRadius: "50px",
     marginLeft: "21px",
-
     [theme.breakpoints.down(600)]: {
       margin: "0",
       display: "none !important",
@@ -307,7 +292,6 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     borderRadius: "50px",
     marginLeft: "21px",
-
     [theme.breakpoints.up(600)]: {
       display: "none !important",
     },
@@ -321,7 +305,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     paddingBottom: "30px",
-
     [theme.breakpoints.down(700)]: {
       display: "block",
       textAlign: "center",
@@ -331,14 +314,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-
     [theme.breakpoints.down(450)]: {
       display: "block",
     },
   },
   barchasi: {
     display: "none",
-
     "& a": {
       fontSize: "15px",
       color: "#065374",
@@ -453,13 +434,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
   inSplideSlide: {
-
-    // height: "500px",
-    // borderRadius: "10px",
-    // display: "block",
     [theme.breakpoints.down(600)]: {
-      // display: "none",
-      width: '100px'
+      width: "100px",
     },
   },
   bigBox: {
@@ -474,59 +450,45 @@ const useStyles = makeStyles((theme) => ({
   inSwiperSlide: {
     width: "150px",
     height: "150px",
-    // marginTop: "20px",
-    borderRadius: "10px"
+    borderRadius: "10px",
   },
-  NewFeatures:{
-    [theme.breakpoints.down(1000)]:{
-      flexDirection: 'column'
+  NewFeatures: {
+    [theme.breakpoints.down(1000)]: {
+      flexDirection: "column",
     },
-    [theme.breakpoints.up(750)]:{
-      flexDirection: 'unset !important'
-    }
+    [theme.breakpoints.up(750)]: {
+      flexDirection: "unset !important",
+    },
   },
-  Container:{
-   
-  }
+  Container: {},
 }));
 
-const ProductDetails = () => {
+function ProductDetails(): JSX.Element {
   const [products, setProducts] = useState<any>();
   const { fetchProductClientDetails } = useActions();
   const [recommended, setRecommended] = React.useState([]);
   const [popular, setPopular] = React.useState([]);
-
-  let pro: any = products?.Product;
-  let des: any = products?.Description[0];
-  // console.log(des);
-
+  const pro: any = products?.Product;
+  const des: any = products?.Description[0];
   const { id } = useParams();
   const classes = useStyles();
-
   const photo = pro?.map((i: any) => i?.photos);
-  const name23 = pro?.map((i: any) => i?.name);
-
   const [notify, setNotify] = useState<any>({
     isOpen: false,
     message: "",
     type: "",
   });
-  const refresh = () => {
-    setTimeout(() => window.location.reload(),
-    10)
-}
-
-  // console.log(photo);
-
+  const refresh = (): void => {
+    setTimeout(() => window.location.reload(), 10);
+  };
   const dispatch = useDispatch();
-  const loading = useTypedSelector((state) => state?.card?.loading);
+  const loading = useTypedSelector((state): any => state?.card?.loading);
 
-  async function getData() {
+  async function getData(): Promise<any> {
     const response: any = await getProductCards();
     setPopular(response?.data?.popular_products);
     setRecommended(response?.data?.recommended_products);
   }
-
   useEffect(() => {
     getData();
   }, []);
@@ -535,21 +497,15 @@ const ProductDetails = () => {
     fetchProductClientDetails(`${id}`);
   }, []);
 
-  useEffect(() => {
-    getProduct(id);
-  }, []);
-
-  const getProduct = async (id: any) => {
+  const getProduct = async (id: any): Promise<any> => {
     const res: any = await getProductItem(id);
     setProducts(res?.data);
   };
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-  // const swiper = new Swiper('.swiper', {
-  //   grid: {
-  //     rows: 2,
-  //   },
-  // });
 
+  useEffect(() => {
+    getProduct(id);
+  }, []);
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   return (
     <>
       <BackToTop />
@@ -559,7 +515,7 @@ const ProductDetails = () => {
         </Container>
         <Container maxWidth="xl">
           {pro?.map((product: any) => (
-            <div className={classes.BigPhotoBottom}>
+            <div className={classes.BigPhotoBottom} key={product.id}>
               <h2
                 className={classes.productName}
                 style={{
@@ -579,6 +535,7 @@ const ProductDetails = () => {
                 </p>
                 <div>
                   <button
+                    type="button"
                     className={classes.cardButtonBasket}
                     onClick={() => {
                       setNotify({
@@ -591,7 +548,6 @@ const ProductDetails = () => {
                   >
                     Savatchaga
                   </button>
-
                 </div>
               </div>
             </div>
@@ -603,18 +559,24 @@ const ProductDetails = () => {
             style={{ display: "flex", flexDirection: "column" }}
             className={classes.Container}
           >
-            <div >
-
+            <div>
               <div style={{ marginRight: "20px", marginTop: "8px" }}>
-                <Link to={"/"}>
+                <Link to="/">
                   <img src={CancelBtnImg} alt="Cancel" />
                 </Link>
               </div>
-              <div style={{ display: "flex", justifyContent: 'space-between' }} className={classes.NewFeatures} >
-                <Grid xs={12} md={6} >
+              <div
+                style={{ display: "flex", justifyContent: "space-between" }}
+                className={classes.NewFeatures}
+              >
+                <Grid item xs={12} md={6}>
                   <div className={classes.Links}>
                     <span
-                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "16px",
+                        color: "#000",
+                      }}
                     >
                       <Link to="/" style={{ color: "rgb(159 159 159)" }}>
                         Bosh sahifa
@@ -630,7 +592,11 @@ const ProductDetails = () => {
                       </Link>
                     </span>
                     <span
-                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "16px",
+                        color: "#000",
+                      }}
                       className={classes.spane}
                     >
                       {pro?.map((parCategory: any) => (
@@ -640,31 +606,27 @@ const ProductDetails = () => {
                             color: "rgb(159 159 159)",
                             textTransform: "capitalize",
                           }}
+                          key={parCategory.id}
                         >
-                          {parCategory?.category?.parent_category?.name}
-                          {/* <span
-                        style={{
-                          fontWeight: "500",
-                          fontSize: "16px",
-                          padding: "0px 5px",
-                        }}
-                      >
-                        ›
-                      </span> */}{" "}
-                          ›
+                          {parCategory?.category?.parent_category?.name} ›
                         </Link>
                       ))}
                     </span>
                     <span
-                      style={{ fontWeight: "600", fontSize: "16px", color: "#000" }}
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "16px",
+                        color: "#000",
+                      }}
                     >
-                      {pro?.map((SubCategory: any) => (
+                      {pro?.map((SubCategory: any, key: any) => (
                         <Link
                           to={`/product/product-by-category/${SubCategory?.category?.id}`}
                           style={{
                             color: "rgb(159 159 159)",
                             textTransform: "capitalize",
                           }}
+                          key={SubCategory.category.id}
                         >
                           {SubCategory?.category?.name}
                         </Link>
@@ -672,69 +634,61 @@ const ProductDetails = () => {
                     </span>
                   </div>
                 </Grid>
-                <Grid xs={12} sm={12} md={6} >
+                <Grid item xs={12} sm={12} md={6}>
                   {pro?.map((product: any) => (
-                    <div>
+                    <div key={product.id}>
                       <ColorToggleButton cost={product?.after_discount} />
                     </div>
                   ))}
                 </Grid>
-
               </div>
-
-
             </div>
-
           </Container>
         </div>
-
       </div>
       <div className={classes.DetailsBody}>
         <Container maxWidth="xl" className={classes.bigBox}>
           <Grid container style={{ display: "flex" }}>
             <Grid item xs={12} md={6}>
               <Swiper
-                // grid={module}
-                loop={true}
+                loop
                 spaceBetween={10}
                 navigation={false}
                 thumbs={{ swiper: thumbsSwiper }}
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper2"
               >
-                {photo?.map((item: any) =>
+                {photo?.map((item: any, key: any) =>
                   item?.map((value: any) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={Math.random()}>
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
-                        // className={classes.inSplideSlide}
                         style={
                           item?.length >= 2
-                            ? { width: "60%", }
-                            : { width: "auto", }
+                            ? { width: "60%" }
+                            : { width: "auto" }
                         }
                       />
                     </SwiperSlide>
-                  ))
+                  )),
                 )}
               </Swiper>
               <Swiper
                 onClick={setThumbsSwiper}
-                loop={true}
+                loop
                 spaceBetween={10}
                 slidesPerView={3}
-                freeMode={true}
-                watchSlidesProgress={true}
+                freeMode
+                watchSlidesProgress
                 modules={[FreeMode, Navigation, Thumbs]}
-
                 className="mySwiper"
-              // style={ photo?.length > 2 ? { display: "block" } : {display: "none"}}
               >
-                {photo?.map((item: any) =>
+                {photo?.map((item: any, index: any) =>
                   item?.map((value: any) => (
-                    <SwiperSlide>
+                    <SwiperSlide key={Math.random()}>
                       <img
+                        key={Math.random()}
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${value?.name}`}
                         alt="Rasm bor edi"
                         className={classes.inSwiperSlide}
@@ -745,7 +699,7 @@ const ProductDetails = () => {
                         }
                       />
                     </SwiperSlide>
-                  ))
+                  )),
                 )}
               </Swiper>
             </Grid>
@@ -760,7 +714,7 @@ const ProductDetails = () => {
                   <ul>
                     {pro?.map((product: any) => (
                       <>
-                        <div className={classes.parent_div}>
+                        <div className={classes.parent_div} key={product.id}>
                           <li className={classes.li}>Nomi</li>
                           <p className={classes.li_span}>
                             {product?.short_name}
@@ -782,29 +736,25 @@ const ProductDetails = () => {
                     ))}
                   </ul>
                   <ul>
-                    {des?.map((product: any) => (
-                      <>
-                        <div className={classes.parent_div}>
-                          <li className={classes.li}>
-                            {product?.character_name}
-                          </li>
-                          <p className={classes.li_span}>
-                            {product?.character_value}
-                          </p>
-                        </div>
-                      </>
+                    {des?.map((product: any, key: any) => (
+                      <div className={classes.parent_div} key={Math.random()}>
+                        <li className={classes.li}>
+                          {product?.character_name}
+                        </li>
+                        <p className={classes.li_span}>
+                          {product?.character_value}
+                        </p>
+                      </div>
                     ))}
                   </ul>
                   <ul>
                     {pro?.map((product: any) => (
-                      <>
-                        <div className={classes.parent_div}>
-                          <li className={classes.li}>Narxi</li>
-                          <p className={classes.li_span}>
-                            {product?.after_discount?.toLocaleString()} so’m
-                          </p>
-                        </div>
-                      </>
+                      <div className={classes.parent_div} key={product.id}>
+                        <li className={classes.li}>Narxi</li>
+                        <p className={classes.li_span}>
+                          {product?.after_discount?.toLocaleString()} so’m
+                        </p>
+                      </div>
                     ))}
                   </ul>
                 </div>
@@ -815,6 +765,8 @@ const ProductDetails = () => {
             <div>
               {pro?.map((product: any) => (
                 <button
+                  type="button"
+                  key={product.id}
                   className={classes.cardButtonBasketMin}
                   onClick={() => {
                     setNotify({
@@ -845,7 +797,7 @@ const ProductDetails = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              Barchasi
             </Link>
           </div>
         </div>
@@ -855,8 +807,6 @@ const ProductDetails = () => {
               perPage: 6,
               pagination: false,
               arrows: true,
-              //type: 'loop',
-              //drag: 'free',
               gap: "0.7rem",
               autoScroll: {
                 speed: 2,
@@ -888,11 +838,14 @@ const ProductDetails = () => {
               />
             ) : (
               recommended &&
-              recommended.map((item: any) => (
+              recommended.map((item: any, key: any) => (
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
-                      <Link to={`/product/client/details/${item?.id}`} onClick={refresh} >
+                      <Link
+                        to={`/product/client/details/${item?.id}`}
+                        onClick={refresh}
+                      >
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
@@ -939,7 +892,7 @@ const ProductDetails = () => {
                             display: "none !important",
                             paddingBottom: "22px",
                           }}
-                        ></p>
+                        />
                       ) : (
                         <p
                           className={classes.cardPrice}
@@ -951,11 +904,10 @@ const ProductDetails = () => {
                             display: "block !important",
                           }}
                         >
-                          {item?.price?.toLocaleString()} so'm
+                          {item?.price?.toLocaleString()} so`m
                         </p>
                       )}
-
-<p
+                      <p
                         className={classes.cardPrice}
                         style={{
                           fontWeight: "600",
@@ -965,18 +917,20 @@ const ProductDetails = () => {
                           margin: 0,
                         }}
                       >
-                        {
-                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
-                        } so'm
-                        <span style={{
-                          background: 'red',
-                          color: 'white',
-                          fontSize: '10px',
-                          borderRadius: '10px',
-                          padding: '1px 6px',
-                          marginLeft: '10px',
-                          
-                        }} >
+                        {Math.floor(
+                          (item.after_discount * 1.44) / 12,
+                        ).toLocaleString()}{" "}
+                        so`m
+                        <span
+                          style={{
+                            background: "red",
+                            color: "white",
+                            fontSize: "10px",
+                            borderRadius: "10px",
+                            padding: "1px 6px",
+                            marginLeft: "10px",
+                          }}
+                        >
                           12 oy
                         </span>
                       </p>
@@ -988,12 +942,11 @@ const ProductDetails = () => {
                           fontWeight: "500",
                         }}
                       >
-                        {item?.after_discount?.toLocaleString()} so'm
+                        {item?.after_discount?.toLocaleString()} so`m
                       </p>
-
-
                       {item.availability === true ? (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
                           onClick={() => {
@@ -1014,6 +967,7 @@ const ProductDetails = () => {
                         </button>
                       ) : (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
                         >
@@ -1025,7 +979,7 @@ const ProductDetails = () => {
                               border: "2px solid #C33E4D",
                             }}
                           />
-                          Sotuvda yo'q
+                          Sotuvda yo`q
                         </button>
                       )}
                       {item.discount === 0 ? (
@@ -1035,7 +989,7 @@ const ProductDetails = () => {
                             fontWeight: "600",
                             display: "none !important",
                           }}
-                        ></span>
+                        />
                       ) : (
                         <span
                           className={classes.cardSpan}
@@ -1077,7 +1031,7 @@ const ProductDetails = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              Barchasi
             </Link>
           </div>
         </div>
@@ -1087,8 +1041,6 @@ const ProductDetails = () => {
               perPage: 6,
               pagination: false,
               arrows: true,
-              //type: 'loop',
-              //drag: 'free',
               gap: "0.7rem",
               autoScroll: {
                 speed: 2,
@@ -1120,11 +1072,14 @@ const ProductDetails = () => {
               />
             ) : (
               popular &&
-              popular.map((item: any) => (
+              popular.map((item: any, key: any) => (
                 <SplideSlide className={classes.splide}>
                   <Box className={classes.bodyCard} key={item.id}>
                     <Box>
-                      <Link to={`/product/client/details/${item?.id}`} onClick={refresh} >
+                      <Link
+                        to={`/product/client/details/${item?.id}`}
+                        onClick={refresh}
+                      >
                         <div className={classes.BodyCardInside}>
                           <img
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0]?.name}`}
@@ -1171,7 +1126,7 @@ const ProductDetails = () => {
                             display: "none !important",
                             paddingBottom: "22px",
                           }}
-                        ></p>
+                        />
                       ) : (
                         <p
                           className={classes.cardPrice}
@@ -1183,7 +1138,7 @@ const ProductDetails = () => {
                             display: "block !important",
                           }}
                         >
-                          {item?.price?.toLocaleString()} so'm
+                          {item?.price?.toLocaleString()} so`m
                         </p>
                       )}
                       <p
@@ -1196,19 +1151,21 @@ const ProductDetails = () => {
                           margin: 0,
                         }}
                       >
-                        {
-                          Math.floor(item?.after_discount * 1.44 / 12).toLocaleString()
-                        } so'm
-                        <span style={{
-                          background: 'red',
-                          color: 'white',
-                          fontSize: '10px',
-                          borderRadius: '10px',
-                          padding: '1px 6px',
-                          marginLeft: '10px',
-                          
-                        }} >
-                           12 oy
+                        {Math.floor(
+                          (item.after_discount * 1.44) / 12,
+                        ).toLocaleString()}{" "}
+                        so`m
+                        <span
+                          style={{
+                            background: "red",
+                            color: "white",
+                            fontSize: "10px",
+                            borderRadius: "10px",
+                            padding: "1px 6px",
+                            marginLeft: "10px",
+                          }}
+                        >
+                          12 oy
                         </span>
                       </p>
                       <p
@@ -1219,12 +1176,11 @@ const ProductDetails = () => {
                           fontWeight: "500",
                         }}
                       >
-                        {item?.after_discount?.toLocaleString()} so'm
+                        {item?.after_discount?.toLocaleString()} so`m
                       </p>
-
-
                       {item.availability === true ? (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
                           onClick={() => {
@@ -1245,6 +1201,7 @@ const ProductDetails = () => {
                         </button>
                       ) : (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
                         >
@@ -1256,7 +1213,7 @@ const ProductDetails = () => {
                               border: "2px solid #C33E4D",
                             }}
                           />
-                          Sotuvda yo'q
+                          Sotuvda yo`q
                         </button>
                       )}
                       {item.discount === 0 ? (
@@ -1266,7 +1223,7 @@ const ProductDetails = () => {
                             fontWeight: "600",
                             display: "none !important",
                           }}
-                        ></span>
+                        />
                       ) : (
                         <span
                           className={classes.cardSpan}
@@ -1299,5 +1256,5 @@ const ProductDetails = () => {
       <Notification notify={notify} setNotify={setNotify} />
     </>
   );
-};
+}
 export default ProductDetails;

@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Link as NavLink } from "react-router-dom";
+import { Link as NavLink, Link } from "react-router-dom";
 import {
   FormControl,
   Grid,
@@ -18,20 +18,19 @@ import {
   TextField,
   Tooltip,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+
+import { makeStyles } from "@mui/styles";
 import {
   getAllOrders,
   getStatuses,
   searchUsers,
 } from "../../Api/admin/AdminOrderApi";
-import { makeStyles } from "@mui/styles";
 import notserved from "../../Images/notserved.svg";
 import served from "../../Images/served.svg";
 import inprogress from "../../Images/inprogress.svg";
 import clientcancel from "../../Images/clientcancel.svg";
 import admincancel from "../../Images/admincancel.svg";
 import detailsicon from "../../Images/detailsicon.svg";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 
 const useStyles = makeStyles({
   pagination: {
@@ -77,7 +76,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TableOrder: React.FC = () => {
+function TableOrder(): JSX.Element {
   const [query, setQuery] = React.useState("react");
   const [orders, setOrders] = React.useState([]);
   const [page, setPage] = React.useState(1);
@@ -85,29 +84,23 @@ const TableOrder: React.FC = () => {
   const [pageQty, setPageQty] = React.useState<number>(0);
   const [searchTerm, setSearchTerm] = React.useState();
   const [searchUser, setSearchUser] = React.useState<any>();
-  const [users, setUsers] = React.useState();
 
-  const getData = async () => {
-    let res: any = await getAllOrders(`${page - 1}`, {});
+  const getData = async (): Promise<any> => {
+    const res: any = await getAllOrders(`${page - 1}`, {});
     setOrders(res.data.content);
     setPageQty(res.data.totalPages);
   };
-
-  const handleChangeStatus = (e: any) => {
+  const handleChangeStatus = (e: any): void => {
     setSearchTerm(e.target.value);
   };
-
-  const getUsers = async () => {
-    let response: any = await searchUsers(searchUser);
-    setUsers(response.data.content);
-    let res: any = await getStatuses({});
+  const getUsers = async (): Promise<void> => {
+    await searchUsers(searchUser);
+    const res: any = await getStatuses({});
     setStatus(res.data);
   };
-
-  const handleChangeInput = (e: any) => {
+  const handleChangeInput = (e: any): void => {
     setSearchUser(e.target.value);
   };
-
   React.useEffect(() => {
     getData();
     if (pageQty < page) {
@@ -118,13 +111,11 @@ const TableOrder: React.FC = () => {
   React.useEffect(() => {
     getUsers();
   }, [searchUser]);
-
   const classes = useStyles();
-
   return (
-    <>
     <div>
       <Grid
+        item
         justifyContent="space-between"
         alignItems="center"
         sx={{ mt: "20px", borderBottom: "1px solid #9F9F9F" }}
@@ -134,13 +125,23 @@ const TableOrder: React.FC = () => {
           label="Buyurtmachi ismi yoki telefoni"
           variant="outlined"
           size="small"
-          sx={{ width: 400, mt: "40px", ml: "40px", mb: "40px" }}
+          sx={{
+            width: 400,
+            mt: "40px",
+            ml: "40px",
+            mb: "40px",
+          }}
           onChange={handleChangeInput}
         />
         <Tooltip title="Holati">
           <FormControl
             size="small"
-            sx={{ width: "250px", mt: "40px", float: "right", mr: "40px" }}
+            sx={{
+              width: "250px",
+              mt: "40px",
+              float: "right",
+              mr: "40px",
+            }}
           >
             <InputLabel id="demo-simple-select-label">
               <div className={classes.statusDefaultBox}>Holati</div>
@@ -154,11 +155,12 @@ const TableOrder: React.FC = () => {
               <MenuItem value="">
                 <em>Hammasi</em>
               </MenuItem>
+              {/* eslint no-nested-ternary: "off" */}
               {status?.map((item: any) => (
-                <MenuItem value={item.statusType}>
+                <MenuItem value={item.statusType} key={Math.random()}>
                   {item.statusType === "NOT_SERVED" ? (
                     <div className={classes.statusBox}>
-                      <img src={notserved} />
+                      <img alt="img" src={notserved} />
                       <p
                         className={classes.statusText}
                         style={{
@@ -167,12 +169,12 @@ const TableOrder: React.FC = () => {
                           marginBottom: 0,
                         }}
                       >
-                        Xizmat ko'rsatilmadi
+                        Xizmat ko`rsatilmadi
                       </p>
                     </div>
                   ) : item.statusType === "SERVED" ? (
                     <div className={classes.statusBox}>
-                      <img src={served} />
+                      <img alt="img" src={served} />
                       <p
                         className={classes.statusText}
                         style={{
@@ -181,12 +183,12 @@ const TableOrder: React.FC = () => {
                           marginBottom: 0,
                         }}
                       >
-                        Xizmat ko'rsatildi
+                        Xizmat ko`rsatildi
                       </p>
                     </div>
                   ) : item.statusType === "ADMIN_CANCEL" ? (
                     <div className={classes.statusBox}>
-                      <img src={admincancel} />
+                      <img alt="img" src={admincancel} />
                       <p
                         className={classes.statusText}
                         style={{
@@ -200,7 +202,7 @@ const TableOrder: React.FC = () => {
                     </div>
                   ) : item.statusType === "CLIENT_CANCEL" ? (
                     <div className={classes.statusBox}>
-                      <img src={clientcancel} />
+                      <img alt="img" src={clientcancel} />
                       <p
                         className={classes.statusText}
                         style={{
@@ -214,7 +216,7 @@ const TableOrder: React.FC = () => {
                     </div>
                   ) : item.statusType === "IN_PROGRESS" ? (
                     <div className={classes.statusBox}>
-                      <img src={inprogress} />
+                      <img alt="img" src={inprogress} />
                       <p
                         className={classes.statusText}
                         style={{
@@ -236,12 +238,13 @@ const TableOrder: React.FC = () => {
         </Tooltip>
       </Grid>
       <Grid
+        item
         container
         direction="row"
         justifyContent="center"
         alignItems="center"
       >
-        <Grid md={11}>
+        <Grid item md={11}>
           <TableContainer
             className="tableContainer"
             component={Paper}
@@ -303,14 +306,16 @@ const TableOrder: React.FC = () => {
                   .filter((val: any) => {
                     if (!searchTerm) {
                       return val;
-                    } else if (val.status == searchTerm) {
+                    }
+                    if (val.status === searchTerm) {
                       return val;
                     }
                   })
                   .filter((value: any) => {
                     if (!searchUser) {
                       return value;
-                    } else if (
+                    }
+                    if (
                       value.full_name
                         .toLowerCase()
                         .includes(searchUser.toLowerCase()) ||
@@ -321,10 +326,12 @@ const TableOrder: React.FC = () => {
                       return value;
                     }
                   })
-                  .map((list: any, key: any) => (
+                  .map((list: any) => (
                     <TableRow
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                      key={key}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                      key={list.journal_id}
                     >
                       <TableCell
                         align="left"
@@ -356,27 +363,27 @@ const TableOrder: React.FC = () => {
                         {" "}
                         {list.status === "NOT_SERVED" ? (
                           <div className={classes.statusBox}>
-                            <img src={notserved} />
+                            <img alt="img" src={notserved} />
                             <p
                               className={classes.statusText}
                               style={{ color: "#FF4B4B" }}
                             >
-                              Xizmat ko'rsatilmadi
+                              Xizmat ko`rsatilmadi
                             </p>
                           </div>
                         ) : list.status === "SERVED" ? (
                           <div className={classes.statusBox}>
-                            <img src={served} />
+                            <img alt="img" src={served} />
                             <p
                               className={classes.statusText}
                               style={{ color: "#22AA00" }}
                             >
-                              Xizmat ko'rsatildi
+                              Xizmat ko`rsatildi
                             </p>
                           </div>
                         ) : list.status === "ADMIN_CANCEL" ? (
                           <div className={classes.statusBox}>
-                            <img src={admincancel} />
+                            <img alt="img" src={admincancel} />
                             <p
                               className={classes.statusText}
                               style={{ color: "#065374" }}
@@ -386,7 +393,7 @@ const TableOrder: React.FC = () => {
                           </div>
                         ) : list.status === "CLIENT_CANCEL" ? (
                           <div className={classes.statusBox}>
-                            <img src={clientcancel} />
+                            <img alt="img" src={clientcancel} />
                             <p
                               className={classes.statusText}
                               style={{ color: "#27A8D1" }}
@@ -396,7 +403,7 @@ const TableOrder: React.FC = () => {
                           </div>
                         ) : list.status === "IN_PROGRESS" ? (
                           <div className={classes.statusBox}>
-                            <img src={inprogress} />
+                            <img alt="img" src={inprogress} />
                             <p
                               className={classes.statusText}
                               style={{ color: "#E9A426" }}
@@ -431,8 +438,8 @@ const TableOrder: React.FC = () => {
               </TableBody>
             </Table>
           </TableContainer>
-
           <Grid
+            item
             container
             sx={{ mr: "50px", mb: "40px", mt: "40px" }}
             xs={12}
@@ -453,7 +460,7 @@ const TableOrder: React.FC = () => {
                     to={`/order/?page${item.page}`}
                     {...item}
                     variant="outlined"
-                    shape={"rounded"}
+                    shape="rounded"
                   />
                 )}
               />
@@ -462,8 +469,7 @@ const TableOrder: React.FC = () => {
         </Grid>
       </Grid>
     </div>
-    </>
   );
-};
+}
 
 export default TableOrder;

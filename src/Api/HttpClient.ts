@@ -1,24 +1,53 @@
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosPromise,
+  AxiosRequestConfig,
+} from "axios";
 import { API_URL } from "../constants/ApiConstants";
+import { checkErrorOne, checkErrorThree, checkErrorTwo } from "./checkErrors";
+import TokenService from "./tokenService";
 
-import axios, { AxiosError, AxiosInstance, AxiosPromise, AxiosRequestConfig } from "axios";
-
-const accessToken = localStorage.getItem("auth");
 class ApiClient {
   instance: AxiosInstance;
-  user: any;
+
   constructor(baseURL: any) {
-    this.user = JSON.parse(JSON.stringify(localStorage.getItem('auth') || '{}'));
-    // console.log(this.user);
-    
     this.instance = axios.create({
       baseURL,
       headers: {
-        "Authorization": `Bearer ${this.user}`,
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-
-      }
-  });
+        "Content-Type": "application/json",
+      },
+      timeout: 5000,
+    });
+    console.log(baseURL, "baseURL");
+    this.instance.interceptors.request.use(
+      (config: any) => {
+        // console.log(config?.headers?.access_token);
+        const token = localStorage.getItem("accessToken");
+        console.log(token, "token");
+        if (token) {
+          config.headers["access_token"] = token; // for Node.js Express back-end
+        }
+        return config;
+      },
+      (error) => {
+        console.log(error);
+        return Promise.reject(error);
+      },
+    );
+    this.instance.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        const { data } = error.response;
+        const { status } = error.response;
+        checkErrorOne(data.slice(30, 36), status);
+        checkErrorTwo(data.slice(32, 38), status);
+        checkErrorThree(data.slice(63, 69), status);
+        return Promise.reject(error);
+      },
+    );
   }
 
   fetch<T>(config: AxiosRequestConfig): AxiosPromise<T> {
@@ -29,6 +58,7 @@ class ApiClient {
       },
     });
   }
+
   get<T>(url: string, params?: any): AxiosPromise<T> {
     return this.fetch<T>({ method: "GET", url, params });
   }
@@ -45,5 +75,4 @@ class ApiClient {
     return this.fetch<T>({ method: "PUT", url, data });
   }
 }
-export default () =>
-  new ApiClient(API_URL)
+export default (): any => new ApiClient(API_URL);

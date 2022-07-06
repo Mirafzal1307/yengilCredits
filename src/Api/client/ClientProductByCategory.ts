@@ -1,5 +1,5 @@
-import ApiClient from '../HttpClient'
+import ApiClient from "../HttpClient";
 
-export function getProductByCategory(id: any) {
-    return ApiClient().get(`/product/product-by-category/${id}`)
+export function getProductByCategory(id: any): any {
+  return ApiClient().get(`/product/product-by-category/${id}`);
 }

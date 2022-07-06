@@ -16,49 +16,53 @@ function createData(
   name: string,
   email: string,
   cost: number,
-  date: string
-) {
-  return { id, name, email, cost, date };
+  date: string,
+): any {
+  return {
+    id,
+    name,
+    email,
+    cost,
+    date,
+  };
 }
-
 const rows = [
   createData(
     11,
     "Jonh lghghue",
     "useggggggggggggggggg@email.com",
     623,
-    "11.05.2022"
+    "11.05.2022",
   ),
   createData(
     12,
     "Issachgh  Nueton",
     "useggggggggggggggg@email.com",
     9233,
-    "11.05.2022"
+    "11.05.2022",
   ),
   createData(
     13,
     "Eclahfghdir ",
     "usedddddddddddd@email.com",
     24235,
-    "11.05.2022"
+    "11.05.2022",
   ),
   createData(
     14,
     "Mirafhfdfhzal",
     "usedfgsdfgdgfd@email.com",
     8000,
-    "11.05.2022"
+    "11.05.2022",
   ),
   createData(
     15,
     "Gabrdfhfheal",
     "usegdsgsdgsgsgfsg@email.com",
     16400,
-    "11.05.2022"
+    "11.05.2022",
   ),
 ];
-
 const useStyles = makeStyles({
   header_table: {
     padding: "30px 15px 30px 15px !important",
@@ -106,45 +110,50 @@ const useStyles = makeStyles({
   },
 });
 
-const HomeChartTableButton = () => {
+function HomeChartTableButton(): JSX.Element {
   const classes = useStyles();
 
   return (
     <div>
-      <TableContainer component={Paper} className={classes.header_table}>
+      {/* <TableContainer component={Paper} className={classes.header_table}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-          <TableHead>
-            <Typography className={classes.header_name}>
-              Letest orders
-            </Typography>
+          <TableHead >
+              <TableRow>
+                <TableCell className={classes.header_name}>
+                Letest orders
+                </TableCell>
+              </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.map((row: any, key: any) => (
               <TableRow
-                key={row.name}
+                key={key}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 className={classes.header_table_insides}
               >
-                <TableCell className={classes.header_table_inside}>
+                <TableCell className={classes.header_table_inside} key={row.id}>
                   {row.id}
                 </TableCell>
                 <TableCell
                   component="th"
                   scope="row"
-                  className={`${classes.header_table_inside} 
-                                           ${classes.header_table_inside_name}`}
+                  className={`${classes.header_table_inside}
+               ${classes.header_table_inside_name}`}
+               key={row.id}
                 >
                   {row.name}
                 </TableCell>
                 <TableCell
                   align="right"
                   className={classes.header_table_inside}
+                  key={row.id}
                 >
                   {row.email}
                 </TableCell>
                 <TableCell
                   align="right"
                   className={classes.header_table_inside}
+                  key={row.id}
                 >
                   ${row.cost}
                 </TableCell>
@@ -182,9 +191,9 @@ const HomeChartTableButton = () => {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer> */}
     </div>
   );
-};
+}
 
 export default HomeChartTableButton;

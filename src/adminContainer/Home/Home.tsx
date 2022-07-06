@@ -1,26 +1,23 @@
 import * as React from "react";
 import { Container, Grid } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import HomePageTop from "./HomeTopName";
 import HomePageTopButtons from "./HomeTopButton";
 import HomeMarketPage from "./HomeMarketPage";
 import HomeChartTableButton from "./HomeChartTableBottom";
-import { makeStyles } from "@mui/styles";
-import { FC } from "react";
-import HomeChartTable from "./HomeChartTable";
 
 const useStyles = makeStyles({
   header: {
     backgroundColor: "#f8f9fa !important",
   },
 });
-
-const HomeHeader: FC = () => {
+function HomeHeader(): JSX.Element {
   const classes = useStyles();
   return (
     <div className={classes.header}>
       <MiniDrawer />
-      <Container  maxWidth="lg"  style={{ marginTop: "50px" }}>
+      <Container maxWidth="lg" style={{ marginTop: "50px" }}>
         <Grid container>
           <Grid item xs={12}>
             <HomePageTop />
@@ -28,11 +25,11 @@ const HomeHeader: FC = () => {
         </Grid>
         <HomePageTopButtons />
         <Grid container spacing={3}>
-          <Grid item xs={12} sx={{marginBottom: '30px'}} >
+          <Grid item xs={12} sx={{ marginBottom: "30px" }}>
             <HomeMarketPage />
           </Grid>
         </Grid>
-        <Grid container  sx={{marginBottom: '30px'}} >
+        <Grid container sx={{ marginBottom: "30px" }}>
           <Grid item xs={12}>
             <HomeChartTableButton />
           </Grid>
@@ -40,13 +37,9 @@ const HomeHeader: FC = () => {
       </Container>
     </div>
   );
-};
+}
 export default class Demo extends React.Component<object, object> {
   public render(): React.ReactNode {
-    return (
-      <>
-        <HomeHeader />
-      </>
-    );
+    return <HomeHeader />;
   }
 }

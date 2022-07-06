@@ -10,21 +10,22 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import React from "react";
-import BackUp from "../../Images/UploadPhoto.png";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import IconButton from "@material-ui/core/IconButton";
+import BasicModal from "./modal";
+import Notification from "../Snackbar/Notification";
+import MiniDrawer from "../../components/CoreLayout/AdminHeader";
+
 import {
   getProductCreate,
   postProductCreate,
 } from "../../Api/admin/AdminProductApi";
-import { Link as RouterLink } from "react-router-dom";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
-import Notification from "../Snackbar/Notification";
-import BasicModal from "./modal";
-import { v4 as uuidv4 } from 'uuid';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import IconButton from '@material-ui/core/IconButton';
-import { useNavigate } from "react-router-dom";
+import BackUp from "../../Images/UploadPhoto.png";
 import "./create.css";
+
 const useStyles = makeStyles({
   bigFirstBox: {
     background: "#FFFFFF",
@@ -134,7 +135,6 @@ const useStyles = makeStyles({
   },
   Select: {
     padding: "none !important",
-
     border: "2px solid #9F9F9F",
     borderRadius: "5px !important",
   },
@@ -234,11 +234,10 @@ const useStyles = makeStyles({
     padding: "5px 3px 5px 3px !important",
   },
   DynamicFeilds: {
-    flexDirection: 'column',
-    marginLeft: '56px',
-    marginTop: '5px',
-
-  }
+    flexDirection: "column",
+    marginLeft: "56px",
+    marginTop: "5px",
+  },
 });
 interface Brands {
   name: string;
@@ -256,13 +255,17 @@ interface characterProperties {
   value: string;
   id: number;
 }
-const ProductsCreate = () => {
+function ProductsCreate(): JSX.Element {
   const [productName, setProductName] = React.useState<any>({});
   const [productShortName, setProductShortName] = React.useState<any>({});
-  const [characterNames, setCharacterNames] = React.useState<characterNames[]>([]);
-  const [characterProperties, setCharacterProperties] = React.useState<characterProperties[]>([]);
+  const [characterNames, setCharacterNames] = React.useState<characterNames[]>(
+    [],
+  );
+  const [characterProperties, setCharacterProperties] = React.useState<
+    characterProperties[]
+  >([]);
   const [productPrice, setProductPrice] = React.useState<any>({});
-  const [productDiscount, setProductDiscount] = React.useState<any>('0');
+  const [productDiscount, setProductDiscount] = React.useState<any>("0");
   const [brands, setBrands] = React.useState<Brands[]>([]);
   const [categories, setCategories] = React.useState<Categories[]>([]);
   const [image, setImage] = React.useState<any>();
@@ -276,50 +279,47 @@ const ProductsCreate = () => {
     message: "",
     type: "",
   });
-  // console.log(image);
-  
-  const handleChangeBrand = (event: SelectChangeEvent) => {
+  const handleChangeBrand = (event: SelectChangeEvent): void => {
     setBrandName(event.target.value);
   };
-  const handleChangeCategory = (event: SelectChangeEvent) => {
+  const handleChangeCategory = (event: SelectChangeEvent): void => {
     setCategoryName(event.target.value);
   };
-
-  const handleChangeStatus = (event: SelectChangeEvent) => {
+  const handleChangeStatus = (event: SelectChangeEvent): void => {
     setProductStatus(event.target.value);
   };
   const [inputFields, setInputFields] = React.useState([
-    { id: uuidv4(), character: '', property: '' },
+    { id: uuidv4(), character: "", property: "" },
   ]);
-  const characters: any = inputFields.map(character => (
-    {
-      characterId: character.character,
-      propertyId: character.property
-    }
-  ))
-  const refresh = () => {
-    setTimeout(() => window.location.reload(),
-      2000)
-  }
-  const handleChangeInput = (id: any, event: any) => {
+  const characters: any = inputFields.map((character) => ({
+    characterId: character.character,
+    propertyId: character.property,
+  }));
+  const handleChangeInput = (id: any, event: any): any => {
     const newInputFields = inputFields.map((i: any) => {
       if (id === i.id) {
-        i[event.target.name] = event.target.value
+        i[event.target.name] = event.target.value;
       }
       return i;
-    })
+    });
     setInputFields(newInputFields);
-  }
-  const handleAddFields = () => {
-    setInputFields([...inputFields, { id: uuidv4(), character: '', property: '' }])
-  }
-  const handleRemoveFields = (id: any) => {
+  };
+  const handleAddFields = (): void => {
+    setInputFields([
+      ...inputFields,
+      { id: uuidv4(), character: "", property: "" },
+    ]);
+  };
+  const handleRemoveFields = (id: any): void => {
     const values = [...inputFields];
-    values.splice(values.findIndex(value => value.id === id), 1);
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1,
+    );
     setInputFields(values);
-  }
+  };
   const fileInputRef = React.useRef<any>();
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: any): void => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
       setImage(file);
@@ -327,9 +327,7 @@ const ProductsCreate = () => {
       setImage(null);
     }
   };
-  React.useEffect(() => {
-    getAllData();
-  }, []);
+
   React.useEffect(() => {
     if (image) {
       const reader = new FileReader();
@@ -341,15 +339,19 @@ const ProductsCreate = () => {
       setPreview(null);
     }
   }, [image]);
-  const getAllData = async () => {
-    let response: any = await getProductCreate();
+  const getAllData = async (): Promise<any> => {
+    const response: any = await getProductCreate();
     setCategories(response.data.all_categories[0]);
     setBrands(response.data.all_brands[0]);
     setCharacterNames(response.data.all_characters[0]);
     setCharacterProperties(response.data.all_properties[0]);
   };
+
+  React.useEffect(() => {
+    getAllData();
+  }, []);
   const navigate = useNavigate();
-  function onSubmit() {
+  function onSubmit(): any {
     const form = new FormData();
     form.append(
       "product",
@@ -367,11 +369,13 @@ const ProductsCreate = () => {
         ],
         {
           type: "application/json",
-        }
-      )
+        },
+      ),
     );
     form.append("files", image);
-    form.append("characters", new Blob([JSON.stringify(characters)], { type: 'application/json' })
+    form.append(
+      "characters",
+      new Blob([JSON.stringify(characters)], { type: "application/json" }),
     );
     try {
       postProductCreate(form)
@@ -379,75 +383,74 @@ const ProductsCreate = () => {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: `Muafaqiyatli yaratildi`,
+              message: "Muafaqiyatli yaratildi",
               type: "success",
             });
             setTimeout(() => {
               navigate("/product");
-            }, 1000)
+            }, 1000);
           }
         })
-        .catch((error) => {
+        .catch((error: any) => {
           setNotify({
             isOpen: true,
             message: `${error}`,
             type: "error",
           });
-
         });
     } catch (err) {
       setNotify({
-
         isOpen: true,
         message: `${err}`,
         type: "error",
       });
     }
-
   }
-  function length() {
-    const inp = document.querySelectorAll('input');
+  function length(): any {
+    const inp = document.querySelectorAll("input");
 
     inp?.forEach((element: any) => {
       if ((inp[4] as HTMLInputElement)?.value?.length === 0) {
-        (inp[4] as HTMLInputElement).style.borderColor = '#9F9F9F'
-      };
+        (inp[4] as HTMLInputElement).style.borderColor = "#9F9F9F";
+      }
       if ((inp[4] as HTMLInputElement)?.value?.length === 1) {
-        (inp[4] as HTMLInputElement).style.borderColor = '#9F9F9F'
-        element.title = 'Xatolik yuz berdi 2 tadan ko`p ma`lumot kiriting'
+        (inp[4] as HTMLInputElement).style.borderColor = "#9F9F9F";
+        element.title = "Xatolik yuz berdi 2 tadan ko`p ma`lumot kiriting";
       } else {
-        (inp[4] as any).style.borderColor = '#9F9F9F'
-      };
+        (inp[4] as any).style.borderColor = "#9F9F9F";
+      }
       if (element?.value?.length === 0) {
-        element.style.borderColor = '#9F9F9F'
+        element.style.borderColor = "#9F9F9F";
       } else if (element?.value?.length <= 3) {
-        element.style.borderColor = 'red'
-        element.title = 'Xatolik yuz berdi 3 tadan ko`p ma`lumot kiriting'
+        element.style.borderColor = "red";
+        element.title = "Xatolik yuz berdi 3 tadan ko`p ma`lumot kiriting";
       } else {
-        element.style.borderColor = '#9F9F9F'
-      };
+        element.style.borderColor = "#9F9F9F";
+      }
     });
   }
   length();
 
   return (
-    <React.Fragment>
+    <>
       <MiniDrawer />
       <Container
         style={{ marginTop: "50px" }}
         className={classes.CreateContainerTitle}
       >
-        <form action="" >
-          <h1 className={classes.CreateProductTitle}><span className="maxLength">Mahsulot Qo'shish</span> </h1>
+        <form action="">
+          <h1 className={classes.CreateProductTitle}>
+            <span className="maxLength">Mahsulot Qo`shish</span>{" "}
+          </h1>
           <Box className={classes.bigFirstBox}>
             <Box className={classes.itemBox}>
-              <h2 className={classes.boxFirstTitle}>1.Umumiy ma'lumot</h2>
+              <h2 className={classes.boxFirstTitle}>1.Umumiy ma`lumot</h2>
               <div className={classes.GeneralInfoInside}>
                 <Box>
-                  <h2 className={classes.boxSecondTitle}
-                  ><span className="let">Mahsulotning to'liq nomi</span> <span
-                    style={{ color: 'red' }} > *</span></h2>
-
+                  <h2 className={classes.boxSecondTitle}>
+                    <span className="let">Mahsulotning to`liq nomi</span>{" "}
+                    <span style={{ color: "red" }}> *</span>
+                  </h2>
                   <input
                     type="text"
                     placeholder="Nomi"
@@ -457,7 +460,10 @@ const ProductsCreate = () => {
                   />
                 </Box>
                 <Box>
-                  <h2 className={classes.boxSecondTitle}><span className="let">Qisqa nomi</span><span style={{ color: 'red' }} > *</span></h2>
+                  <h2 className={classes.boxSecondTitle}>
+                    <span className="let">Qisqa nomi</span>
+                    <span style={{ color: "red" }}> *</span>
+                  </h2>
                   <input
                     type="text"
                     placeholder="Nomi"
@@ -467,7 +473,10 @@ const ProductsCreate = () => {
                   />
                 </Box>
                 <Box>
-                  <h2 className={classes.boxSecondTitle}>Brend nomi<span style={{ color: 'red' }} > *</span></h2>
+                  <h2 className={classes.boxSecondTitle}>
+                    Brend nomi
+                    <span style={{ color: "red" }}> *</span>
+                  </h2>
                   <FormControl
                     sx={{ minWidth: 120 }}
                     className={classes.FormControl}
@@ -482,8 +491,8 @@ const ProductsCreate = () => {
                         <span className="notranslate">Brendni tanlang</span>
                       </MenuItem>
 
-                      {brands.map((brand, index) => (
-                        <MenuItem value={brand.id} key={index}>
+                      {brands.map((brand) => (
+                        <MenuItem value={brand.id} key={brand.id}>
                           {brand.name}
                         </MenuItem>
                       ))}
@@ -496,7 +505,10 @@ const ProductsCreate = () => {
               <h2 className={classes.boxFirstTitle}>2.Narxlash</h2>
               <div className={classes.Pricebox}>
                 <Box>
-                  <h2 className={classes.boxSecondTitle}>Mahsulot narxi<span style={{ color: 'red' }} > *</span></h2>
+                  <h2 className={classes.boxSecondTitle}>
+                    Mahsulot narxi
+                    <span style={{ color: "red" }}> *</span>
+                  </h2>
                   <input
                     type="number"
                     placeholder="Number"
@@ -506,7 +518,10 @@ const ProductsCreate = () => {
                   />
                 </Box>
                 <Box>
-                  <h2 className={classes.boxSecondTitle}>Chegirma<span style={{ color: 'red' }} > *</span>  </h2>
+                  <h2 className={classes.boxSecondTitle}>
+                    Chegirma
+                    <span style={{ color: "red" }}> *</span>{" "}
+                  </h2>
                   <input
                     maxLength={2}
                     type="text"
@@ -516,12 +531,12 @@ const ProductsCreate = () => {
                       marginTop: "5px",
                       marginRight: "5px",
                       border: "2px solid #9F9F9F",
-                      borderRadius: '5px',
+                      borderRadius: "5px",
                       outline: "none",
                       fontFamily: "Poppins",
-                      fontWeight: '400',
-                      fontSize: '14px',
-                      color: "black"
+                      fontWeight: "400",
+                      fontSize: "14px",
+                      color: "black",
                     }}
                     className="inpchegirma"
                     onChange={(e) => setProductDiscount(e.target.value)}
@@ -533,7 +548,10 @@ const ProductsCreate = () => {
             <Box className={classes.itemBoxCategory}>
               <h2 className={classes.boxFirstTitle}>3.Kategoriyalar</h2>
               <Box className={classes.CategoryBox}>
-                <h2 className={classes.boxCategoryTitle}>Kategoriya nomi<span style={{ color: 'red' }} > *</span></h2>
+                <h2 className={classes.boxCategoryTitle}>
+                  Kategoriya nomi
+                  <span style={{ color: "red" }}> *</span>
+                </h2>
                 <FormControl
                   sx={{ m: 1, minWidth: 120 }}
                   style={{ padding: "0 !important", margin: "0 !important" }}
@@ -548,8 +566,8 @@ const ProductsCreate = () => {
                       <b>Turkumni tanlang</b>
                     </MenuItem>
 
-                    {categories.map((category, index) => (
-                      <MenuItem value={category.id} key={index}>
+                    {categories.map((category) => (
+                      <MenuItem value={category.id} key={category.id}>
                         {category.name}
                       </MenuItem>
                     ))}
@@ -563,10 +581,14 @@ const ProductsCreate = () => {
                 style={{ marginLeft: "20px" }}
                 className={classes.ProducutPhoto}
               >
-                <h2 className={classes.boxSecondTitle}>Mahsulot rasmi<span style={{ color: 'red' }} > *</span></h2>
+                <h2 className={classes.boxSecondTitle}>
+                  Mahsulot rasmi
+                  <span style={{ color: "red" }}> *</span>
+                </h2>
                 <div className={classes.Photosettings}>
                   <form style={{ display: "flex", alignItems: "center" }}>
                     <img
+                      alt="img"
                       src={preview}
                       style={{ display: preview ? "block" : "none" }}
                       className={classes.forImagePreview}
@@ -590,32 +612,42 @@ const ProductsCreate = () => {
                       minLength={3}
                     />
                   </form>
-                  <div></div>
+                  <div />
                 </div>
               </Box>
             </Box>
-            <Box className={classes.itemBox}  >
-              <h2 className={classes.boxFirstTitle}>5.Mahsulot xususiyatlari</h2>
-              <div className={classes.DynamicFeilds} >
-                {inputFields.map(inputField => (
+            <Box className={classes.itemBox}>
+              <h2 className={classes.boxFirstTitle}>
+                5.Mahsulot xususiyatlari
+              </h2>
+              <div className={classes.DynamicFeilds}>
+                {inputFields.map((inputField) => (
                   <div key={inputField.id}>
                     <FormControl
                       sx={{ m: 1, minWidth: 120 }}
-                      style={{ padding: "0 !important", margin: "0 !important" }}
+                      style={{
+                        padding: "0 !important",
+                        margin: "0 !important",
+                      }}
                     >
                       <Select
-                        name='character'
+                        name="character"
                         value={inputField.character}
-                        onChange={event => handleChangeInput(inputField.id, event)}
+                        onChange={(event) =>
+                          handleChangeInput(inputField.id, event)
+                        }
                         displayEmpty
-                        style={{ marginRight: '20px', marginBottom: '20px' }}
+                        style={{ marginRight: "20px", marginBottom: "20px" }}
                         className={classes.Select}
                       >
                         <MenuItem value="">
                           <span>Xossa nomi </span>
                         </MenuItem>
-                        {characterNames.map((characterName, index) => (
-                          <MenuItem value={characterName.id} key={index}>
+                        {characterNames.map((characterName) => (
+                          <MenuItem
+                            value={characterName.id}
+                            key={characterName.id}
+                          >
                             {characterName.name}
                           </MenuItem>
                         ))}
@@ -624,31 +656,40 @@ const ProductsCreate = () => {
 
                     <FormControl
                       sx={{ m: 1, minWidth: 120 }}
-                      style={{ padding: "0 !important", margin: "0 !important" }}
+                      style={{
+                        padding: "0 !important",
+                        margin: "0 !important",
+                      }}
                     >
                       <Select
-                        name='property'
+                        name="property"
                         value={inputField.property}
-                        onChange={event => handleChangeInput(inputField.id, event)}
+                        onChange={(event) =>
+                          handleChangeInput(inputField.id, event)
+                        }
                         displayEmpty
                         className={classes.Select}
                       >
                         <MenuItem value="">
                           <span>Xossa qiymati </span>
                         </MenuItem>
-                        {characterProperties.map((characterProperty, index) => (
-                          <MenuItem value={characterProperty.id} key={index}>
+                        {characterProperties.map((characterProperty) => (
+                          <MenuItem
+                            value={characterProperty.id}
+                            key={characterProperty.id}
+                          >
                             {characterProperty.value}
                           </MenuItem>
                         ))}
                       </Select>
                     </FormControl>
-                    <IconButton disabled={inputFields?.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
+                    <IconButton
+                      disabled={inputFields?.length === 1}
+                      onClick={() => handleRemoveFields(inputField.id)}
+                    >
                       <RemoveIcon />
                     </IconButton>
-                    <IconButton
-                      onClick={handleAddFields}
-                    >
+                    <IconButton onClick={handleAddFields}>
                       <AddIcon />
                     </IconButton>
                   </div>
@@ -681,18 +722,17 @@ const ProductsCreate = () => {
             </Box>
             <div style={{ display: "flex" }}>
               <Button
-                sx={{ textTransform: 'capitalize' }}
+                sx={{ textTransform: "capitalize" }}
                 className={classes.forButton}
                 onClick={() => {
                   onSubmit();
-
                 }}
                 style={{ marginLeft: "auto", display: "flex" }}
               >
                 Saqlash
               </Button>
               <Button
-                sx={{ textTransform: 'capitalize' }}
+                sx={{ textTransform: "capitalize" }}
                 component={RouterLink as any}
                 to="/product"
                 className={classes.cancel}
@@ -704,8 +744,8 @@ const ProductsCreate = () => {
           <Notification notify={notify} setNotify={setNotify} />
         </form>
       </Container>
-    </React.Fragment>
+    </>
   );
-};
+}
 
 export default ProductsCreate;

@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, CircularProgress, Container } from "@mui/material";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { getProductCards } from "../../Api/client/MainProductsApi";
 import cart2 from "../../Images/cart2.svg";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { useActions } from "../../hook/useActions";
 import BrandClient from "./brandClient";
-import { Link, useParams } from "react-router-dom";
-import { rootState } from "../../redux/reducers/index";
-import { addToCart, productByCategory } from "../../redux/cart/action";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { addToCart } from "../../redux/cart/action";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import Notification from "../../adminContainer/Snackbar/Notification";
 import Shop from "../../Images/baskets.png";
@@ -164,35 +162,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CardProducts = () => {
+function CardProducts(): JSX.Element {
   const classes = useStyles();
   const [notify, setNotify] = useState<any>({
     isOpen: false,
     message: "",
     type: "",
   });
-  async function getData() {
-    const response: any = await getProductCards();
+  async function getData(): Promise<any> {
+    await getProductCards();
   }
-
   const dispatch = useDispatch();
   const products = useTypedSelector((state) => state?.card?.cards);
   const error = useTypedSelector((state) => state?.card?.error);
   const loading = useTypedSelector((state) => state?.card?.loading);
-
-  let discount = products?.with_discount_products;
-  let last = products?.last_added_products;
-  let popular = products?.popular_products;
-  let recommended = products?.recommended_products;
-
-  // console.log(recommended);
-
-  let { darktheme } = useSelector((state: rootState) => state.productsReducer);
-
-  const handleCategorySelect = (event: any) => {
-    dispatch(productByCategory(event.target.value));
-  };
-
+  const last = products?.last_added_products;
+  const popular = products?.popular_products;
+  const recommended = products?.recommended_products;
   const { fetchCards } = useActions();
   useEffect(() => {
     getData();
@@ -201,11 +187,6 @@ const CardProducts = () => {
   if (error) {
     return <h1 style={{ fontSize: "25px" }}>404 : Not found</h1>;
   }
-  var num: number = 1234567890,
-    result = num.toLocaleString();
-  // console.log(result);
-  // result will equal to "1 234 567 890"
-
   return (
     <>
       <Container maxWidth="xl" style={{ marginTop: "40px" }}>
@@ -221,7 +202,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              Barchasi
             </Link>
           </div>
         </div>
@@ -271,10 +252,9 @@ const CardProducts = () => {
             ) : (
               recommended &&
               recommended?.map((item: any) => (
-                <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item?.id}>
+                <SplideSlide className={classes.splide} key={item.id}>
+                  <Box className={classes.bodyCard}>
                     <Box style={{ margin: "0px 10px" }}>
-                      {/* {console.log(item)} */}
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
                           <img
@@ -321,7 +301,7 @@ const CardProducts = () => {
                             display: "none !important",
                             paddingBottom: "22px",
                           }}
-                        ></p>
+                        />
                       ) : (
                         <p
                           className={classes.cardPrice}
@@ -333,7 +313,7 @@ const CardProducts = () => {
                             display: "block !important",
                           }}
                         >
-                          {item?.price?.toLocaleString()} so'm
+                          {item?.price?.toLocaleString()} so`m
                         </p>
                       )}
                       <p
@@ -347,9 +327,9 @@ const CardProducts = () => {
                         }}
                       >
                         {Math.floor(
-                          (item?.after_discount * 1.44) / 12
+                          (item.after_discount * 1.44) / 12,
                         ).toLocaleString()}{" "}
-                        so'm
+                        so`m
                         <span
                           style={{
                             background: "red",
@@ -371,11 +351,12 @@ const CardProducts = () => {
                           fontWeight: "500",
                         }}
                       >
-                        {item?.after_discount?.toLocaleString()} so'm
+                        {item?.after_discount?.toLocaleString()} so`m
                       </p>
 
                       {item?.availability === true ? (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
                           onClick={() => {
@@ -398,6 +379,7 @@ const CardProducts = () => {
                         <button
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
+                          type="button"
                         >
                           <img
                             src={cart2}
@@ -407,7 +389,7 @@ const CardProducts = () => {
                               border: "2px solid #C33E4D",
                             }}
                           />
-                          Sotuvda yo'q
+                          Sotuvda yo`q
                         </button>
                       )}
                       {item?.discount === 0 ? (
@@ -417,7 +399,7 @@ const CardProducts = () => {
                             fontWeight: "600",
                             display: "none !important",
                           }}
-                        ></span>
+                        />
                       ) : (
                         <span
                           className={classes.cardSpan}
@@ -453,7 +435,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              Barchasi
             </Link>
           </div>
         </div>
@@ -504,8 +486,8 @@ const CardProducts = () => {
             ) : (
               popular &&
               popular?.map((item: any) => (
-                <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item?.id}>
+                <SplideSlide className={classes.splide} key={item.id}>
+                  <Box className={classes.bodyCard}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
@@ -554,7 +536,7 @@ const CardProducts = () => {
                             display: "none !important",
                             paddingBottom: "22px",
                           }}
-                        ></p>
+                        />
                       ) : (
                         <p
                           className={classes.cardPrice}
@@ -566,7 +548,7 @@ const CardProducts = () => {
                             display: "block !important",
                           }}
                         >
-                          {item?.price?.toLocaleString()} so'm
+                          {item?.price?.toLocaleString()} so`m
                         </p>
                       )}
 
@@ -581,9 +563,9 @@ const CardProducts = () => {
                         }}
                       >
                         {Math.floor(
-                          (item?.after_discount * 1.44) / 12
+                          (item.after_discount * 1.44) / 12,
                         ).toLocaleString()}{" "}
-                        so'm
+                        so`m
                         <span
                           style={{
                             background: "red",
@@ -605,13 +587,14 @@ const CardProducts = () => {
                           fontWeight: "500",
                         }}
                       >
-                        {item?.after_discount?.toLocaleString()} so'm
+                        {item?.after_discount?.toLocaleString()} so`m
                       </p>
 
                       {item.availability === true ? (
                         <button
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
+                          type="button"
                           onClick={() => {
                             dispatch(addToCart(item));
                             setNotify({
@@ -632,6 +615,7 @@ const CardProducts = () => {
                         <button
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
+                          type="button"
                         >
                           <img
                             src={cart2}
@@ -641,7 +625,7 @@ const CardProducts = () => {
                               border: "2px solid #C33E4D",
                             }}
                           />
-                          Sotuvda yo'q
+                          Sotuvda yo`q
                         </button>
                       )}
                       {item.discount === 0 ? (
@@ -651,7 +635,7 @@ const CardProducts = () => {
                             fontWeight: "600",
                             display: "none !important",
                           }}
-                        ></span>
+                        />
                       ) : (
                         <span
                           className={classes.cardSpan}
@@ -692,7 +676,7 @@ const CardProducts = () => {
           </h2>
           <div className={classes.barchasi}>
             <Link to="/all/card/1" style={{ fontWeight: "600" }}>
-              <a href="#">Barchasi</a>
+              Barchasi
             </Link>
           </div>
         </div>
@@ -743,8 +727,8 @@ const CardProducts = () => {
             ) : (
               last &&
               last.map((item: any) => (
-                <SplideSlide className={classes.splide}>
-                  <Box className={classes.bodyCard} key={item.id}>
+                <SplideSlide className={classes.splide} key={item.id}>
+                  <Box className={classes.bodyCard}>
                     <Box>
                       <Link to={`/product/client/details/${item?.id}`}>
                         <div className={classes.BodyCardInside}>
@@ -787,13 +771,12 @@ const CardProducts = () => {
                           style={{
                             color: "#065374",
                             fontSize: "14px",
-
                             textDecoration: "line-through",
                             fontWeight: "500",
                             display: "none !important",
                             paddingBottom: "22px",
                           }}
-                        ></p>
+                        />
                       ) : (
                         <p
                           className={classes.cardPrice}
@@ -805,7 +788,7 @@ const CardProducts = () => {
                             display: "block !important",
                           }}
                         >
-                          {item?.price?.toLocaleString()} so'm
+                          {item?.price?.toLocaleString()} so`m
                         </p>
                       )}
 
@@ -820,9 +803,9 @@ const CardProducts = () => {
                         }}
                       >
                         {Math.floor(
-                          (item?.after_discount * 1.44) / 12
+                          (item.after_discount * 1.44) / 12,
                         ).toLocaleString()}{" "}
-                        so'm
+                        so`m
                         <span
                           style={{
                             background: "red",
@@ -844,11 +827,11 @@ const CardProducts = () => {
                           fontWeight: "500",
                         }}
                       >
-                        {item?.after_discount?.toLocaleString()} so'm
+                        {item?.after_discount?.toLocaleString()} so`m
                       </p>
-
                       {item.availability === true ? (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
                           onClick={() => {
@@ -869,6 +852,7 @@ const CardProducts = () => {
                         </button>
                       ) : (
                         <button
+                          type="button"
                           className={classes.cardButton}
                           style={{ fontWeight: "600" }}
                         >
@@ -880,10 +864,9 @@ const CardProducts = () => {
                               border: "2px solid #C33E4D",
                             }}
                           />
-                          Sotuvda yo'q
+                          Sotuvda yo`q
                         </button>
                       )}
-
                       <span
                         className={classes.cardNewSpan}
                         style={{
@@ -900,7 +883,7 @@ const CardProducts = () => {
                             fontWeight: "600",
                             display: "none !important",
                           }}
-                        ></span>
+                        />
                       ) : (
                         <span
                           className={classes.cardNew}
@@ -933,6 +916,6 @@ const CardProducts = () => {
       <Notification notify={notify} setNotify={setNotify} />
     </>
   );
-};
+}
 
 export default CardProducts;

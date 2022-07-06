@@ -2,7 +2,8 @@ import { makeStyles } from "@mui/styles";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import Grid from "@mui/material/Grid";
+// import Grid from "@mui/material/Grid";
+import { Grid } from "@mui/material";
 
 const useStyles = makeStyles({
   button: {
@@ -56,43 +57,40 @@ const useStyles = makeStyles({
     backgroundColor: " rgba(253, 138, 20, .2) !important",
   },
 });
-
-const HomePageTopButtons = () => {
+function HomePageTopButtons(): JSX.Element {
   const classes = useStyles();
   return (
-    <>
-      <div>
-        <Grid container spacing={3}>
-          <Grid item xs={4}>
-            <div className={classes.button}>
-              <AttachMoneyIcon className={classes.icon} />
-              <div className={classes.button_inside}>
-                <h6>Total sales</h6>
-                <p> $ 120,321,154.20</p>
-              </div>
+    <div>
+      <Grid container direction="row" spacing={3}>
+        <Grid item xs={4}>
+          <div className={classes.button}>
+            <AttachMoneyIcon className={classes.icon} />
+            <div className={classes.button_inside}>
+              <h6>Total sales</h6>
+              <p> $ 120,321,154.20</p>
             </div>
-          </Grid>
-          <Grid item xs={4}>
-            <div className={classes.button}>
-              <LocalShippingIcon className={classes.icon_deliver} />
-              <div className={classes.button_inside}>
-                <h6>Total sales</h6>
-                <p> $ 120,321,154.20</p>
-              </div>
-            </div>
-          </Grid>
-          <Grid item xs={4}>
-            <div className={classes.button}>
-              <ShoppingBasketIcon className={classes.icon_basket} />
-              <div className={classes.button_inside}>
-                <h6>Total sales</h6>
-                <p> $ 120,321,154.20</p>
-              </div>
-            </div>
-          </Grid>
+          </div>
         </Grid>
-      </div>
-    </>
+        <Grid item xs={4}>
+          <div className={classes.button}>
+            <LocalShippingIcon className={classes.icon_deliver} />
+            <div className={classes.button_inside}>
+              <h6>Total sales</h6>
+              <p> $ 120,321,154.20</p>
+            </div>
+          </div>
+        </Grid>
+        <Grid item xs={4}>
+          <div className={classes.button}>
+            <ShoppingBasketIcon className={classes.icon_basket} />
+            <div className={classes.button_inside}>
+              <h6>Total sales</h6>
+              <p> $ 120,321,154.20</p>
+            </div>
+          </div>
+        </Grid>
+      </Grid>
+    </div>
   );
-};
+}
 export default HomePageTopButtons;

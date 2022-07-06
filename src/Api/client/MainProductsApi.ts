@@ -1,9 +1,8 @@
-import ApiClient from '../HttpClient';
+import ApiClient from "../HttpClient";
 
-export function  getProductCards() {
-    return ApiClient().get(`/main/`)
+export function getProductCards(): any {
+  return ApiClient().get("/main/");
 }
-
-export function getAllCards(id: any, page: any) {
-    return ApiClient().get(`/main/products/more/${id}?page=${page}`)
+export function getAllCards(id: any, page: any): any {
+  return ApiClient().get(`/main/products/more/${id}?page=${page}`);
 }

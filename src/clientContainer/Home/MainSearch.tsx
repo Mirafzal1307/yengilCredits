@@ -1,28 +1,29 @@
-import { Box, Container, Input, InputAdornment, Stack } from "@mui/material";
+import { Input, InputAdornment } from "@mui/material";
 import { useEffect, useState } from "react";
-import { searchProduct } from "../../Api/client/MainPageApi";
 import { makeStyles } from "@mui/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
-import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
-import cart1 from "../../Images/cart1.svg";
-import cart2 from "../../Images/cart2.svg";
+// import cart1 from "../../Images/cart1.svg";
+// import cart2 from "../../Images/cart2.svg";
+// import { addToCart } from "../../redux/cart/action";
+// import { useDispatch } from "react-redux";
+import * as React from "react";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+// import TableHead from '@mui/material/TableHead';
+// import TablePagination from '@mui/material/TablePagination';
+import TableRow from "@mui/material/TableRow";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Notification from "../../adminContainer/Snackbar/Notification";
-import { addToCart } from "../../redux/cart/action";
-import { useDispatch } from "react-redux";
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
+import { searchProduct } from "../../Api/client/MainPageApi";
+import { refresh } from "../../adminContainer/Modal/refresh";
+
 const useStyles = makeStyles({
   searchInput: {
-
     marginTop: "10px !important",
     background: "white",
     width: "100% !important",
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
       content: "",
       display: "none !important",
     },
-    border: '#065374',
+    border: "#065374",
     "&::after": {
       content: "",
       display: "none !important",
@@ -128,26 +129,22 @@ const useStyles = makeStyles({
     fontSize: "22px",
     color: "#fff",
   },
-  box_second: {
+  boxSend: {
     margin: "15px 0 !important",
   },
 });
-
-const MainSearch = () => {
+function MainSearch(): any {
   const [param, setParam] = useState<any>();
   const [products, setProducts] = useState<any>();
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: any): void => {
     setParam(e.target.value);
   };
-  const dispatch = useDispatch();
-  const getData = async () => {
-    // console.log(param?.length);
+  // const dispatch = useDispatch();
+  const getData = async (): Promise<any> => {
     if (param?.length > 2) {
       const response: any = await searchProduct(param);
       setProducts(response.data.content);
     }
-
-
   };
   const [notify, setNotify] = useState<any>({
     isOpen: false,
@@ -157,7 +154,6 @@ const MainSearch = () => {
   useEffect(() => {
     getData();
   }, [param]);
-
   const classes = useStyles();
   return (
     <>
@@ -173,85 +169,90 @@ const MainSearch = () => {
           }
           onChange={handleInputChange}
         />
-
       </div>
-      <Paper sx={{ width: '73.7%', overflow: 'hidden', position: 'absolute', top: '55px', marginLeft: '1px !important', borderRadius: '5px 5px 5px 5px' }}>
+      <Paper
+        sx={{
+          width: "73.7%",
+          overflow: "hidden",
+          position: "absolute",
+          top: "55px",
+          marginLeft: "1px !important",
+          borderRadius: "5px 5px 5px 5px",
+        }}
+      >
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableBody>
-              {param && products ? (
-                products.map((item: any) => (
-
-                  <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
-                    <TableCell>
-                      <Link to={`/product/client/details/${item.id}`}>
-                        <img
-                          src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
-                          alt="img"
-                          style={{ width: "75px", height: "70px", padding: '4px 0px 0px 20px' }}
-                        />
-                      </Link>
-                    </TableCell>
-                    <TableCell>
-                      <Link to={`/product/client/details/${item.id}`}>
-                        <h6
-                          className={classes.cardTitle}
-                          style={{
-                            margin: 0,
-                            marginTop: "10px",
-                            marginBottom: "10px",
-                            height: "30px",
-                            fontFamily: "Poppins",
-                            fontWeight: "500",
-                            fontSize: "16px",
-                          }}
+              {param && products
+                ? products.map((item: any) => (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={item.id}>
+                      <TableCell>
+                        <Link to={`/product/client/details/${item.id}`}>
+                          <img
+                            src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
+                            alt="img"
+                            style={{
+                              width: "75px",
+                              height: "70px",
+                              padding: "4px 0px 0px 20px",
+                            }}
+                          />
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Link
+                          to={`/product/client/details/${item.id}`}
+                          onClick={refresh}
                         >
-                          {item.short_name}
-                        </h6>
-                      </Link>
-
-                    </TableCell>
-                    <TableCell>
-                      <Link to={`/product/client/details/${item.id}`}>
-                        <h6
-                          className={classes.cardTitle}
-                          style={{
-                            margin: 0,
-                            marginTop: "10px",
-                            marginBottom: "10px",
-                            height: "30px",
-                            fontFamily: "Poppins",
-                            fontWeight: "500",
-                            fontSize: "16px",
-
-                          }}
-                        >
-                          {item.price}
-                        </h6>
-                    </Link>
-                    </TableCell>
-                    <TableCell>
-                      <Link to={`/product/client/details/${item.id}`}>
-                        <ChevronRightIcon style={{color:'#000'}} />
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-
-                ))
-              ) : (
-                <>
-
-                </>
-              )}
+                          <h6
+                            className={classes.cardTitle}
+                            style={{
+                              margin: 0,
+                              marginTop: "10px",
+                              marginBottom: "10px",
+                              height: "30px",
+                              fontFamily: "Poppins",
+                              fontWeight: "500",
+                              fontSize: "16px",
+                            }}
+                          >
+                            {item.short_name}
+                          </h6>
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Link to={`/product/client/details/${item.id}`}>
+                          <h6
+                            className={classes.cardTitle}
+                            style={{
+                              margin: 0,
+                              marginTop: "10px",
+                              marginBottom: "10px",
+                              height: "30px",
+                              fontFamily: "Poppins",
+                              fontWeight: "500",
+                              fontSize: "16px",
+                            }}
+                          >
+                            {item.price}
+                          </h6>
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        <Link to={`/product/client/details/${item.id}`}>
+                          <ChevronRightIcon style={{ color: "#000" }} />
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : null}
             </TableBody>
           </Table>
         </TableContainer>
-
       </Paper>
       <Notification notify={notify} setNotify={setNotify} />
-
     </>
   );
-};
+}
 
 export default MainSearch;

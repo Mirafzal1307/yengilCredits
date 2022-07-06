@@ -2,7 +2,7 @@ import { Container } from "@mui/material";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import CategoryList from "./CategoryList";
 
-const Category = () => {
+function Category(): JSX.Element {
   return (
     <>
       <MiniDrawer />
@@ -11,6 +11,6 @@ const Category = () => {
       </Container>
     </>
   );
-};
+}
 
 export default Category;

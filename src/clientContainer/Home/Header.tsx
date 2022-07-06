@@ -1,71 +1,61 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Container } from "@mui/material";
 import CarouselImg from "../../Images/Group 271 (1).png";
 import Footer from "./Footer";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
 import BackToTop from "./Navbar/Navbar";
 import BeforeFooter from "./beforeFooter";
 import CardProducts from "./CardProducts";
-import { Container } from "@mui/material";
-import { useState } from "react";
+// import { useState } from "react";
 import Navbarbottom from "./Navbar/Navbarbottom";
-import Partner from "./Navbar/ourClient";
 
-
-const useStyles = makeStyles((theme) => {
-  return {
-    Carousel: {
-      width: "100% !important",
-
-
-     
-      [theme.breakpoints.up(499)]: {
-        marginTop: '60px !important'
-      },
-      [theme.breakpoints.up(799)]: {
-        marginTop: '65px !important'
-      }, 
-      [theme.breakpoints.up(899)]: {
-        marginTop: '0px !important'
-      },
-      [theme.breakpoints.down(599)]: {
-        marginTop: '85px !important'
-      },
+const useStyles = makeStyles((theme) => ({
+  Carousel: {
+    width: "100% !important",
+    [theme.breakpoints.up(499)]: {
+      marginTop: "60px !important",
     },
-    carouselImg: {
+    [theme.breakpoints.up(799)]: {
+      marginTop: "65px !important",
+    },
+    [theme.breakpoints.up(899)]: {
+      marginTop: "0px !important",
+    },
+    [theme.breakpoints.down(599)]: {
+      marginTop: "85px !important",
+    },
+  },
+  carouselImg: {
+    width: "100%",
+    height: "auto",
+    [theme.breakpoints.down(499)]: {
       width: "100%",
-      height: "auto",
-      [theme.breakpoints.down(499)]: {
-      
-        width: "100%",
-        borderRadius: "5px !important",
-      },
       borderRadius: "5px !important",
     },
-    searchInput: {
-      marginBottom: "50px !important",
-      width: "100% !important",
-      "&::before": {
-        content: "",
-        display: "none !important",
-      },
-      border: "2px solid #9F9F9F",
-      "&::after": {
-        content: "",
-        display: "none !important",
-      },
-      "&::placeholder": {
-        color: "#9f9f9f !important",
-      },
-      padding: "5px 0 5px 10px",
-      borderRadius: "10px",
+    borderRadius: "5px !important",
+  },
+  searchInput: {
+    marginBottom: "50px !important",
+    width: "100% !important",
+    "&::before": {
+      content: "",
+      display: "none !important",
     },
-    SlideContainer: {
-      [theme.breakpoints.down(499)]: {
- 
-      },
-    }
-  };
-});
+    border: "2px solid #9F9F9F",
+    "&::after": {
+      content: "",
+      display: "none !important",
+    },
+    "&::placeholder": {
+      color: "#9f9f9f !important",
+    },
+    padding: "5px 0 5px 10px",
+    borderRadius: "10px",
+  },
+  SlideContainer: {
+    [theme.breakpoints.down(499)]: {},
+  },
+}));
 
 export type CartItemType = {
   id: number;
@@ -76,15 +66,15 @@ export type CartItemType = {
   image: string;
 };
 
-const Header = () => {
+function Header(): JSX.Element {
   const classes = useStyles();
-  const [searchTerm, setSearchTerm] = useState();
+  // const [searchTerm, setSearchTerm] = useState();
 
   return (
     <>
       <BackToTop />
 
-      <Container maxWidth="xl" className={classes.SlideContainer} >
+      <Container maxWidth="xl" className={classes.SlideContainer}>
         <Splide
           className={classes.Carousel}
           options={{
@@ -98,22 +88,22 @@ const Header = () => {
           }}
         >
           <SplideSlide>
-            <img src={CarouselImg} className={classes.carouselImg} />
+            <img src={CarouselImg} className={classes.carouselImg} alt="" />
           </SplideSlide>
           <SplideSlide>
-            <img src={CarouselImg} className={classes.carouselImg} />
+            <img src={CarouselImg} className={classes.carouselImg} alt="" />
           </SplideSlide>
-
         </Splide>
       </Container>
 
       <Navbarbottom />
+
       <CardProducts />
-      {/* <Partner /> */}
+
       <BeforeFooter />
 
       <Footer />
     </>
   );
-};
+}
 export default Header;

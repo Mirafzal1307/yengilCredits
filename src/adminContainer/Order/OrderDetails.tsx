@@ -1,5 +1,4 @@
 import React from "react";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import {
   Box,
   Container,
@@ -16,7 +15,8 @@ import {
   Tooltip,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import {
   editOrderStatus,
   getBuyerData,
@@ -33,7 +33,6 @@ import served from "../../Images/served.svg";
 import inprogress from "../../Images/inprogress.svg";
 import clientcancel from "../../Images/clientcancel.svg";
 import admincancel from "../../Images/admincancel.svg";
-import detailsicon from "../../Images/detailsIcon.svg";
 import Notification from "../Snackbar/Notification";
 
 const useStyles = makeStyles({
@@ -165,8 +164,7 @@ const useStyles = makeStyles({
     paddingRight: "5px",
   },
 });
-
-const OrderDetails = () => {
+function OrderDetails(): JSX.Element {
   const classes = useStyles();
   const { buyer_id } = useParams();
   const [buyer, setBuyer] = React.useState<any>();
@@ -174,36 +172,31 @@ const OrderDetails = () => {
   const [price, setPrice] = React.useState<any>();
   const [statuses, setStatuses] = React.useState<any>();
   const [status, setStatus] = React.useState();
-  const [date, setDate] = React.useState<any>();
   const [defaultStatus, setDefaultStatus] = React.useState<any>();
   const [notify, setNotify] = React.useState<any>({
     isOpen: false,
     message: "",
     type: "",
   });
-
-  const handleChange = (e: any) => {
+  const handleChange = (e: any): void => {
     setStatus(e.target.value);
   };
-  const getStatus = async () => {
-    let res: any = await getStatuses({});
+  const getStatus = async (): Promise<void> => {
+    const res: any = await getStatuses({});
     setStatuses(res?.data);
   };
-
-  const getData = async () => {
-    let res: any = await getBuyerData(buyer_id);
+  const getData = async (): Promise<void> => {
+    const res: any = await getBuyerData(buyer_id);
     setBuyer(res?.data?.buyer);
     setJournal(res?.data?.journal);
     setPrice(res?.data?.total_price_all);
     setDefaultStatus(res?.data?.status);
   };
-
   const navigate = useNavigate();
-
-  const sendDataToAPI = async () => {
-    const data = { buyer_id: buyer_id, status_id: status };
+  const sendDataToAPI = async (): Promise<any> => {
+    const data = { buyer_id, status_id: status };
     await editOrderStatus(data)
-      .then(function (res: any) {
+      .then((res: any) => {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
@@ -212,10 +205,10 @@ const OrderDetails = () => {
           });
           setTimeout(() => {
             navigate("/order");
-          }, 500)
+          }, 500);
         }
       })
-      .catch((error) => {
+      .catch(() => {
         setNotify({
           isOpen: true,
           message: "Hech narsa o'zgartirilmadi...",
@@ -223,14 +216,12 @@ const OrderDetails = () => {
         });
       });
   };
-
   React.useEffect(() => {
     getStatus();
   }, []);
   React.useEffect(() => {
     getData();
   }, []);
-
   return (
     <>
       <MiniDrawer />
@@ -239,6 +230,7 @@ const OrderDetails = () => {
       </Container>
       <Container className={classes.bigBox}>
         <Grid
+          direction="row"
           display="flex"
           justifyContent="space-between"
           alignItems="center !important"
@@ -247,15 +239,17 @@ const OrderDetails = () => {
         >
           <Box className={classes.insideBoxItem}>
             <img src={buyericon} alt="icon" />
-            <p className={classes.insideText}>{date}</p>
-            <p className={classes.insideText}>ID {buyer?.id}</p>
+            <p className={classes.insideText}>
+              ID
+              {buyer?.id}
+            </p>
           </Box>
           <Tooltip title="Holati">
             <FormControl size="small" sx={{ width: "250px" }}>
               <InputLabel id="demo-simple-select-label">
                 {defaultStatus === "NOT_SERVED" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={notserved} />
+                    <img src={notserved} alt="img" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -264,12 +258,12 @@ const OrderDetails = () => {
                         marginBottom: 0,
                       }}
                     >
-                      Xizmat ko'rsatilmadi
+                      Xizmat ko`rsatilmadi
                     </p>
                   </div>
                 ) : defaultStatus === "SERVED" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={served} />
+                    <img src={served} alt="img" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -278,12 +272,12 @@ const OrderDetails = () => {
                         marginBottom: 0,
                       }}
                     >
-                      Xizmat ko'rsatildi
+                      Xizmat ko`rsatildi
                     </p>
                   </div>
                 ) : defaultStatus === "ADMIN_CANCEL" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={admincancel} />
+                    <img src={admincancel} alt="img" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -297,7 +291,7 @@ const OrderDetails = () => {
                   </div>
                 ) : defaultStatus === "CLIENT_CANCEL" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={clientcancel} />
+                    <img src={clientcancel} alt="img" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -311,7 +305,7 @@ const OrderDetails = () => {
                   </div>
                 ) : defaultStatus === "IN_PROGRESS" ? (
                   <div className={classes.statusDefaultBox}>
-                    <img src={inprogress} />
+                    <img src={inprogress} alt="img" />
                     <p
                       className={classes.statusText}
                       style={{
@@ -333,11 +327,11 @@ const OrderDetails = () => {
                 label="Age"
                 onChange={handleChange}
               >
-                {statuses?.map((item: any, key: any) => (
-                  <MenuItem value={item?.id} key={key}>
+                {statuses?.map((item: any) => (
+                  <MenuItem value={item?.id} key={item.id}>
                     {item?.statusType === "NOT_SERVED" ? (
                       <div className={classes.statusBox}>
-                        <img src={notserved} />
+                        <img src={notserved} alt="img" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -346,12 +340,12 @@ const OrderDetails = () => {
                             marginBottom: 0,
                           }}
                         >
-                          Xizmat ko'rsatilmadi
+                          Xizmat ko`rsatilmadi
                         </p>
                       </div>
                     ) : item?.statusType === "SERVED" ? (
                       <div className={classes.statusBox}>
-                        <img src={served} />
+                        <img src={served} alt="img" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -360,12 +354,12 @@ const OrderDetails = () => {
                             marginBottom: 0,
                           }}
                         >
-                          Xizmat ko'rsatildi
+                          Xizmat ko`rsatildi
                         </p>
                       </div>
                     ) : item?.statusType === "ADMIN_CANCEL" ? (
                       <div className={classes.statusBox}>
-                        <img src={admincancel} />
+                        <img src={admincancel} alt="img" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -379,7 +373,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "CLIENT_CANCEL" ? (
                       <div className={classes.statusBox}>
-                        <img src={clientcancel} />
+                        <img src={clientcancel} alt="img" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -393,7 +387,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "IN_PROGRESS" ? (
                       <div className={classes.statusBox}>
-                        <img src={inprogress} />
+                        <img src={inprogress} alt="img" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -456,25 +450,40 @@ const OrderDetails = () => {
               </TableRow>
             </TableHead>
             {journal?.map((item: any) => (
-              <TableBody>
+              <TableBody key={item.id}>
                 <TableRow>
                   <TableCell align="left" className={classes.productRows}>
                     <div className={classes.productInfo}>
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photo}`}
                         className={classes.productImg}
+                        alt="rasm bor edi"
                       />
-                      <p className={classes.productName}>{item.product_name}</p>
+                      <p className={classes.productName} key={item.id}>
+                        {item.product_name}
+                      </p>
                     </div>
                   </TableCell>
-                  <TableCell align="left" className={classes.productRows}>
-                    {item?.price?.toLocaleString()} so'm
+                  <TableCell
+                    align="left"
+                    className={classes.productRows}
+                    key={item.id}
+                  >
+                    {item?.price?.toLocaleString()} so`m
                   </TableCell>
-                  <TableCell align="left" className={classes.productRows}>
+                  <TableCell
+                    align="left"
+                    className={classes.productRows}
+                    key={item.id}
+                  >
                     {item.quantity}
                   </TableCell>
-                  <TableCell align="left" className={classes.productRows}>
-                    {(item?.price * item.quantity)?.toLocaleString()}
+                  <TableCell
+                    align="left"
+                    className={classes.productRows}
+                    key={item.id}
+                  >
+                    {(item.price * item.quantity)?.toLocaleString()}
                   </TableCell>
                 </TableRow>
               </TableBody>
@@ -490,9 +499,14 @@ const OrderDetails = () => {
         >
           <Box className={classes.priceBox}>
             <p className={classes.priceText}>
-              Umumiy hisob: <span style={{ fontWeight: 500 }}>{price?.toLocaleString()}</span>
+              Umumiy hisob:{" "}
+              <span style={{ fontWeight: 500 }}>{price?.toLocaleString()}</span>
             </p>
-            <button className={classes.saveButton} onClick={sendDataToAPI}>
+            <button
+              type="button"
+              className={classes.saveButton}
+              onClick={sendDataToAPI}
+            >
               Saqlash
             </button>
           </Box>
@@ -501,6 +515,6 @@ const OrderDetails = () => {
       <Notification notify={notify} setNotify={setNotify} />
     </>
   );
-};
+}
 
 export default OrderDetails;

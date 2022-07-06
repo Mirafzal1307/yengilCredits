@@ -1,18 +1,14 @@
-import { Container, Tooltip } from "@mui/material";
+import { Container, Tooltip, Box, FormLabel } from "@mui/material";
 import React, { useEffect } from "react";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import { makeStyles } from "@mui/styles";
-import { Box, FormLabel } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
+import MiniDrawer from "../../components/CoreLayout/AdminHeader";
+
 import BackUp from "./images/Group 431.svg";
 import { updateBrandData, getBrand } from "../../Api/admin/AdminBrandApi";
-import { useNavigate, useParams } from "react-router-dom";
 import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import Notification from "../Snackbar/Notification";
-import { Navigate } from "react-router-dom";
-// import { Redirect } from "react-router-dom";
-import './brand.css';
-
-
+import "./brand.css";
 
 const useStyles = makeStyles({
   bigFirstBox: {
@@ -60,7 +56,6 @@ const useStyles = makeStyles({
     "&:focus": {
       outline: "none",
     },
-    // border: "2px solid #9F9F9F",
     borderRadius: "5px",
     fontFamily: "Poppins",
     fontWeight: 400,
@@ -73,9 +68,8 @@ const useStyles = makeStyles({
   },
 });
 
-const BrandEditPage = () => {
+function BrandEditPage(): JSX.Element {
   const [brand, setBrand] = React.useState<any>("");
-  const [name, setName] = React.useState<any>("");
   const [image, setImage] = React.useState<any>();
   const [photo, setPhoto] = React.useState<any>();
   const [preview, setPreview] = React.useState<any>();
@@ -88,8 +82,7 @@ const BrandEditPage = () => {
   });
   const classes = useStyles();
   const navigate = useNavigate();
-
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: any): any => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
       setImage(file);
@@ -97,11 +90,9 @@ const BrandEditPage = () => {
       setImage(null);
     }
   };
-  let img = `${MINIO_FULL_ENDPOINT_FOR}/brand/${photo}`;
-  // console.log(`Image from Minio----${img}`)
-  const sendDataToAPI = async () => {
-    let form = new FormData();
-
+  const img = `${MINIO_FULL_ENDPOINT_FOR}/brand/${photo}`;
+  const sendDataToAPI = async (): Promise<any> => {
+    const form = new FormData();
     form.append(
       "brand",
       new Blob(
@@ -112,26 +103,24 @@ const BrandEditPage = () => {
         ],
         {
           type: "application/json",
-        }
-      )
+        },
+      ),
     );
     form.append("photo", image);
-
     await updateBrandData(id, form)
-      .then(function (res: any) {
+      .then((res: any) => {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
             message: "Muvaffaqiyatli tahrirlandi.",
             type: "success",
           });
-          // return <Navigate to="/brand"/>
           setTimeout(() => {
             navigate("/brand");
           }, 500);
         }
       })
-      .catch((error) => {
+      .catch(() => {
         setNotify({
           isOpen: true,
           message: "Xatolik yuz berdi...",
@@ -139,10 +128,9 @@ const BrandEditPage = () => {
         });
       });
   };
-
   useEffect(() => {
     if (image) {
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader.onloadend = () => {
         setPreview(reader.result as string);
       };
@@ -152,10 +140,10 @@ const BrandEditPage = () => {
     }
   }, [image]);
 
-  const getImage = async (id: any) => {
+  const getImage = async (id: any): Promise<any> => {
     const res: any = await getBrand(id);
-    let img = `${MINIO_FULL_ENDPOINT_FOR}/brand/${res.data.photo_name}`;
-    setName(res.data.name);
+    const img = `${MINIO_FULL_ENDPOINT_FOR}/brand/${res.data.photo_name}`;
+    setBrand(res.data.name);
     setPhoto(res.data.photo_name);
     await fetch(img).then(async (response) => {
       const blob: any = await response.blob();
@@ -163,27 +151,20 @@ const BrandEditPage = () => {
       setImage(file);
     });
   };
-
   useEffect(() => {
     getImage(id);
   }, []);
-
-
-    const inpt = document.querySelector('input');
-    const bal = inpt?.value
-    if (bal?.length === 1) {
-      inpt?.classList.add('active')
-    }
-    else if (bal?.length === 2) {
-      inpt?.classList.add('active')
-    }
-    else if (bal?.length === 3) {
-      inpt?.classList.add('active')
-    }
-    else {
-      inpt?.classList.remove('active')
-    }
-
+  const inpt = document.querySelector("input");
+  const bal = inpt?.value;
+  if (bal?.length === 1) {
+    inpt?.classList.add("active");
+  } else if (bal?.length === 2) {
+    inpt?.classList.add("active");
+  } else if (bal?.length === 3) {
+    inpt?.classList.add("active");
+  } else {
+    inpt?.classList.remove("active");
+  }
 
   return (
     <>
@@ -196,7 +177,7 @@ const BrandEditPage = () => {
               <h2 className={classes.boxSecondTitle}>Brand name</h2>
               <input
                 type="text"
-                placeholder={name}
+                value={brand}
                 className={classes.forBoxInput}
                 onChange={(e) => setBrand(e?.target?.value)}
               />
@@ -209,8 +190,8 @@ const BrandEditPage = () => {
               <Box style={{ display: "flex", alignItems: "center" }}>
                 <form style={{ display: "flex", alignItems: "center" }}>
                   <img
-                    src={preview ? preview : img}
-                     alt="rasm bor edi"
+                    src={preview || img}
+                    alt="rasm bor edi"
                     className={classes.forImagePreview}
                   />
                   <FormLabel
@@ -235,6 +216,7 @@ const BrandEditPage = () => {
           </Box>
           <Tooltip title="Saqlash">
             <button
+              type="button"
               className={classes.forButton}
               style={{ marginLeft: "auto", display: "flex" }}
               onClick={sendDataToAPI}
@@ -247,6 +229,6 @@ const BrandEditPage = () => {
       </Container>
     </>
   );
-};
+}
 
 export default BrandEditPage;
