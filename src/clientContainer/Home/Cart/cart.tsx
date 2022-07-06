@@ -520,12 +520,8 @@ export default function Cart(): JSX.Element {
             return <TransitionsModal />;
           }
         })
-        .catch(() => {
-          setNotify({
-            isOpen: true,
-            message: "Iltimos barchasini to'ldiring",
-            type: "error",
-          });
+        .catch((err: any) => {
+          console.log(err);
         });
     } catch (error) {
       setNotify({
