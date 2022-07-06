@@ -37,17 +37,11 @@ class ApiClient {
     );
     this.instance.interceptors.response.use(
       (response) => {
-        // debugger;
         return response;
       },
       (error) => {
-        // debugger;
-        console.log(error);
-        const { data } = error?.response;
-        console.log(data, "data");
-        const { status } = error?.response;
-        console.log(status, "status");
-        // console.log(data.slice(63, 69), "data");
+        const { data } = error.response;
+        const { status } = error.response;
         checkErrorOne(data.slice(30, 36), status);
         checkErrorTwo(data.slice(32, 38), status);
         checkErrorThree(data.slice(63, 69), status);
