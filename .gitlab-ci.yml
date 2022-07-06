@@ -65,7 +65,7 @@ deploy_test:
     - chmod 400 $TEST_SSH_KEY
     - ssh -o StrictHostKeyChecking=no -i $TEST_SSH_KEY $TEST_USER@$TEST_SERVER_IP "docker login -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' $CI_REGISTRY"
     - ssh -o StrictHostKeyChecking=no -i $TEST_SSH_KEY $TEST_USER@$TEST_SERVER_IP "docker pull registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:pre-prod"
-    - ssh -o StrictHostKeyChecking=no -i $TEST_SSH_KEY $TEST_USER@$TEST_SERVER_IP "docker stop yengil_front_test && docker rm yengil_front_test && docker run -e "REACT_APP_BASE_URL=https://test.api.yengilcredit.uz" -e "PORT=2929" -e "REACT_APP_MINIO_ENPOINT=https://test.minio.yengilcredit.uz" -p 2929:2929 --name yengil_front_test -d registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:pre-prod"
+    - ssh -o StrictHostKeyChecking=no -i $TEST_SSH_KEY $TEST_USER@$TEST_SERVER_IP "docker stop yengil_front_test && docker rm yengil_front_test && docker run -e "REACT_APP_BASE_URL=https://test.api.yengilcredit.uz" -e "PORT=2929" -e "REACT_APP_MINIO_ENPOINT=https://test.minio.yengilcredit.uz" -e "REACT_APP_MERCHANT_ID=62a7601817d208a46387c0bf" -e "REACT_APP_PAYME_URL=https://checkout.paycom.uz/" -p 2929:2929 --name yengil_front_test -d registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:pre-prod"
 
 
 deploy_prod:
@@ -85,4 +85,4 @@ deploy_prod:
     - chmod 400 $SSH_PRIVATE_KEY
     - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker login -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' $CI_REGISTRY"
     - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker pull registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:main"
-    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker stop yengil_front && docker rm yengil_front && docker run -e "REACT_APP_BASE_URL=https://api.yengilcredit.uz" -e "PORT=1919" -e "REACT_APP_MINIO_ENPOINT=https://minio.yengilcredit.uz" -p 1919:1919 --name yengil_front -d registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:main"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY $USER@$PROD_SERVER_IP "docker stop yengil_front && docker rm yengil_front && docker run -e "REACT_APP_BASE_URL=https://api.yengilcredit.uz" -e "PORT=1919" -e "REACT_APP_MINIO_ENPOINT=https://minio.yengilcredit.uz" -e "REACT_APP_MERCHANT_ID=62a7601817d208a46387c0bf" -e "REACT_APP_PAYME_URL=https://checkout.paycom.uz/" -p 1919:1919 --name yengil_front -d registry.gitlab.com/1itech_company_uz/yengil_kredit_frontend:main"
