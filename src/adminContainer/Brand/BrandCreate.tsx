@@ -1,16 +1,17 @@
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import { Box, FormLabel, Tooltip } from "@mui/material";
-import React from "react";
+
+import { createTheme } from "@mui/material/styles";
 import {
   getAllBrandData,
   createBrandData,
 } from "../../Api/admin/AdminBrandApi";
 import BackUp from "./images/Group 429.svg";
-import { createTheme } from "@mui/material/styles";
 import Notification from "../Snackbar/Notification";
 import { refresh } from "../Modal/refresh";
-import './brand.css'
+import "./brand.css";
+
 const theme = createTheme();
 
 const useStyles = makeStyles({
@@ -84,7 +85,7 @@ const useStyles = makeStyles({
     width: "95px",
     height: "95px",
     border: "none !important",
-  }
+  },
 });
 
 interface Data {
@@ -93,7 +94,7 @@ interface Data {
   products_count: number;
 }
 
-const BrandCreate = () => {
+function BrandCreate(): JSX.Element {
   const [image, setImage] = useState<any>();
   const [preview, setPreview] = useState<any>();
   const [brand, setBrand] = React.useState<any>({});
@@ -104,24 +105,21 @@ const BrandCreate = () => {
     type: "",
   });
 
-  const inp = document.querySelector('input');
+  const inp = document.querySelector("input");
   const bal = inp?.value;
   if (bal?.length === 1) {
-    inp?.classList.add('active')
-  }
-  else if (bal?.length === 2) {
-    inp?.classList.add('active')
-  }
-  else if (bal?.length === 3) {
-    inp?.classList.add('active')
-  }
-  else {
-    inp?.classList.remove('active')
-    inp?.classList.add('noactive')
+    inp?.classList.add("active");
+  } else if (bal?.length === 2) {
+    inp?.classList.add("active");
+  } else if (bal?.length === 3) {
+    inp?.classList.add("active");
+  } else {
+    inp?.classList.remove("active");
+    inp?.classList.add("noactive");
   }
   const fileInputRef = useRef<any>();
   const classes = useStyles();
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: any): void => {
     const file = e.target.files[0];
     if (file && file.type.substr(0, 5) === "image") {
       setImage(file);
@@ -129,12 +127,12 @@ const BrandCreate = () => {
       setImage(null);
     }
   };
-  const getAllBrandDatas = async () => {
-    let response: any = await getAllBrandData();
+  const getAllBrandDatas = async (): Promise<void> => {
+    const response: any = await getAllBrandData();
     setData(response.data);
   };
 
-  function onSubmit() {
+  function onSubmit(): any {
     const form = new FormData();
     form.append("photo", image);
     form.append(
@@ -147,8 +145,8 @@ const BrandCreate = () => {
         ],
         {
           type: "application/json",
-        }
-      )
+        },
+      ),
     );
 
     try {
@@ -160,11 +158,11 @@ const BrandCreate = () => {
               message: "Muvaffaqiyatli yaratildi.",
               type: "success",
             });
-            refresh()
+            refresh();
           }
-          return await getAllBrandDatas();
+          return getAllBrandDatas();
         })
-        .catch((error) => {
+        .catch(() => {
           setNotify({
             isOpen: true,
             message: "Xatolik yuz berdi.",
@@ -191,16 +189,15 @@ const BrandCreate = () => {
     }
   }, [image]);
 
-
   return (
-    <React.Fragment>
+    <>
       <Box className={classes.bigFirstBox}>
         <Box className={classes.itemBox}>
           <h2 className={classes.boxFirstTitle}>1.Nomi</h2>
           <Box>
             <h2 className={classes.boxSecondTitle}>Brand nomi</h2>
             <input
-              style={{borderColor: '#9F9F9F'}}
+              style={{ borderColor: "#9F9F9F" }}
               type="text"
               name="brand"
               placeholder="type"
@@ -241,6 +238,7 @@ const BrandCreate = () => {
         </Box>
         <Tooltip title="Saqlash">
           <button
+            type="button"
             className={classes.forButton}
             onClick={() => {
               onSubmit();
@@ -251,9 +249,9 @@ const BrandCreate = () => {
           </button>
         </Tooltip>
       </Box>
-      <Notification notify={notify}  setNotify={setNotify} />
-    </React.Fragment>
+      <Notification notify={notify} setNotify={setNotify} />
+    </>
   );
-};
+}
 
 export default BrandCreate;

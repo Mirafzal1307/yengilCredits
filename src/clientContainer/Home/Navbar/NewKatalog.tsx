@@ -9,8 +9,6 @@ import Typography from "@mui/material/Typography";
 // import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 // import TreeItem from '@mui/lab/TreeItem';
-import { getCategoryForClient } from "../../../Api/client/ClientCategoryApi";
-import { getProductFromCategoryById } from "../../../Api/admin/AdminProductApi";
 import { Link } from "react-router-dom";
 // import GlobalStyles from '@mui/material/GlobalStyles';
 import { styled } from "@mui/material/styles";
@@ -23,7 +21,10 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ListIcon from "@mui/icons-material/List";
 import { makeStyles } from "@material-ui/core/styles";
-const useStyles = makeStyles((theme) => ({
+// import { getProductFromCategoryById } from "../../../Api/admin/AdminProductApi";
+import { getCategoryForClient } from "../../../Api/client/ClientCategoryApi";
+
+const useStyles = makeStyles(() => ({
   menuButton: {
     background: "rgba(255, 255, 255) !important",
     borderRadius: "34px !important",
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const style = {
-  position: "absolute" as "absolute",
+  position: "absolute" as const,
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -89,26 +90,28 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   padding: theme.spacing(2),
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
-export default function TransitionsModal() {
+export default function TransitionsModal(): JSX.Element {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = (): void => setOpen(true);
+  const handleClose = (): void => setOpen(false);
   const [category, setCategory] = React.useState<any>({});
+  // console.log(category);
+
   const classes = useStyles();
+  // const getCategoryProductById = async (id: any): Promise<any> => {
+  //   await getProductFromCategoryById(id, {});
+  // };
+  const refresh = (): void => {
+    setTimeout(() => window.location.reload(), 100);
+  };
+  const getCategoryForCleintPage = async (): Promise<any> => {
+    const response: any = await getCategoryForClient();
+    // const categories: any = response.data;
+    setCategory(response.data.menu);
+  };
   React.useEffect(() => {
     getCategoryForCleintPage();
   }, []);
-  const getCategoryProductById = async (id: any) => {
-    await getProductFromCategoryById(id, {});
-  };
-  const refresh = () => {
-    setTimeout(() => window.location.reload(), 100);
-  };
-  const getCategoryForCleintPage = async () => {
-    let response: any = await getCategoryForClient();
-    let categories: any = response.data;
-    setCategory(response.data.menu);
-  };
   const [expanded, setExpanded] = React.useState<string | false>(" ");
 
   const handleChange =
@@ -190,7 +193,7 @@ export default function TransitionsModal() {
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={key}
+                      key={item.sub_id}
                     >
                       <Button
                         sx={{
@@ -205,7 +208,7 @@ export default function TransitionsModal() {
                         {item.name}
                       </Button>
                     </Link>
-                  )
+                  ),
                 )}
               </AccordionDetails>
             </Accordion>
@@ -234,7 +237,7 @@ export default function TransitionsModal() {
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
-                    key={key}
+                    key={item.parent_id}
                   >
                     <Button
                       sx={{
@@ -278,7 +281,7 @@ export default function TransitionsModal() {
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={key}
+                      key={item.parent_id}
                     >
                       <Button
                         sx={{
@@ -293,7 +296,7 @@ export default function TransitionsModal() {
                         {item.name}
                       </Button>
                     </Link>
-                  )
+                  ),
                 )}
               </AccordionDetails>
             </Accordion>
@@ -323,7 +326,7 @@ export default function TransitionsModal() {
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={key}
+                      key={item.parent_id}
                     >
                       <Button
                         sx={{
@@ -338,7 +341,7 @@ export default function TransitionsModal() {
                         {item.name}
                       </Button>
                     </Link>
-                  )
+                  ),
                 )}
               </AccordionDetails>
             </Accordion>
@@ -368,7 +371,7 @@ export default function TransitionsModal() {
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={key}
+                      key={item.parent_id}
                     >
                       <Button
                         sx={{
@@ -383,7 +386,7 @@ export default function TransitionsModal() {
                         {item.name}
                       </Button>
                     </Link>
-                  )
+                  ),
                 )}
               </AccordionDetails>
             </Accordion>
@@ -413,7 +416,7 @@ export default function TransitionsModal() {
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={key}
+                      key={item.parent_id}
                     >
                       <Button
                         sx={{
@@ -428,7 +431,7 @@ export default function TransitionsModal() {
                         {item.name}
                       </Button>
                     </Link>
-                  )
+                  ),
                 )}
               </AccordionDetails>
             </Accordion>
@@ -457,7 +460,7 @@ export default function TransitionsModal() {
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
-                    key={key}
+                    key={item.parent_id}
                   >
                     <Button
                       sx={{
@@ -501,7 +504,7 @@ export default function TransitionsModal() {
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={key}
+                      key={item.sub_id}
                     >
                       <Button
                         sx={{
@@ -516,7 +519,7 @@ export default function TransitionsModal() {
                         {item.name}
                       </Button>
                     </Link>
-                  )
+                  ),
                 )}
               </AccordionDetails>
             </Accordion>
@@ -545,7 +548,7 @@ export default function TransitionsModal() {
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
-                    key={key}
+                    key={item.sub_id}
                   >
                     <Button
                       sx={{
@@ -587,7 +590,7 @@ export default function TransitionsModal() {
                 {category?.["Товары для авто"]?.map((item: any, key: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
-                    key={key}
+                    key={item.parent_id}
                     onClick={refresh}
                   >
                     <Button
@@ -631,7 +634,7 @@ export default function TransitionsModal() {
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
-                    key={key}
+                    key={item.parent_id}
                   >
                     <Button
                       sx={{

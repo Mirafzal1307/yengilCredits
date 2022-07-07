@@ -5,6 +5,7 @@ import LinearProgress, {
 import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import IosShareIcon from "@mui/icons-material/IosShare";
+
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
   borderRadius: 5,
@@ -82,7 +83,7 @@ const useStyles = makeStyles({
   },
 });
 
-const HomeMarketPage = () => {
+function HomeMarketPage(): JSX.Element {
   const classes = useStyles();
   return (
     <div>
@@ -127,12 +128,12 @@ const HomeMarketPage = () => {
             className={classes.borderLinearProgress}
           />
         </Box>
-        <button className={classes.other_links}>
+        <button type="button" className={classes.other_links}>
           Open analytics <IosShareIcon className={classes.icon_button} />
         </button>
       </div>
     </div>
   );
-};
+}
 
 export default HomeMarketPage;

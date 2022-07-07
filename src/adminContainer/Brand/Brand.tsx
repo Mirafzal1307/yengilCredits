@@ -1,9 +1,9 @@
 import React from "react";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import { Box, Container, Grid } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import BrandCreate from "./BrandCreate";
 import BrandRead from "./BrandRead";
-import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   title: {
@@ -75,7 +75,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BrandList: React.FC = () => {
+function BrandList(): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -96,6 +96,6 @@ const BrandList: React.FC = () => {
       </Container>
     </>
   );
-};
+}
 
 export default BrandList;

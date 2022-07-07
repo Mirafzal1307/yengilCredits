@@ -1,5 +1,4 @@
 import React from "react";
-import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import {
   Box,
   Container,
@@ -16,7 +15,8 @@ import {
   Tooltip,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import {
   editOrderStatus,
   getBuyerData,
@@ -34,6 +34,7 @@ import inprogress from "../../Images/inprogress.svg";
 import clientcancel from "../../Images/clientcancel.svg";
 import admincancel from "../../Images/admincancel.svg";
 import Notification from "../Snackbar/Notification";
+
 const useStyles = makeStyles({
   title: {
     fontFamily: "Poppins",
@@ -163,7 +164,7 @@ const useStyles = makeStyles({
     paddingRight: "5px",
   },
 });
-const OrderDetails = () => {
+function OrderDetails(): JSX.Element {
   const classes = useStyles();
   const { buyer_id } = useParams();
   const [buyer, setBuyer] = React.useState<any>();
@@ -177,25 +178,25 @@ const OrderDetails = () => {
     message: "",
     type: "",
   });
-  const handleChange = (e: any) => {
+  const handleChange = (e: any): void => {
     setStatus(e.target.value);
   };
-  const getStatus = async () => {
-    let res: any = await getStatuses({});
+  const getStatus = async (): Promise<void> => {
+    const res: any = await getStatuses({});
     setStatuses(res?.data);
   };
-  const getData = async () => {
-    let res: any = await getBuyerData(buyer_id);
+  const getData = async (): Promise<void> => {
+    const res: any = await getBuyerData(buyer_id);
     setBuyer(res?.data?.buyer);
     setJournal(res?.data?.journal);
     setPrice(res?.data?.total_price_all);
     setDefaultStatus(res?.data?.status);
   };
   const navigate = useNavigate();
-  const sendDataToAPI = async () => {
-    const data = { buyer_id: buyer_id, status_id: status };
+  const sendDataToAPI = async (): Promise<any> => {
+    const data = { buyer_id, status_id: status };
     await editOrderStatus(data)
-      .then(function (res: any) {
+      .then((res: any) => {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
@@ -207,7 +208,7 @@ const OrderDetails = () => {
           }, 500);
         }
       })
-      .catch((error) => {
+      .catch(() => {
         setNotify({
           isOpen: true,
           message: "Hech narsa o'zgartirilmadi...",
@@ -229,7 +230,7 @@ const OrderDetails = () => {
       </Container>
       <Container className={classes.bigBox}>
         <Grid
-        direction="row"
+          direction="row"
           display="flex"
           justifyContent="space-between"
           alignItems="center !important"
@@ -238,7 +239,10 @@ const OrderDetails = () => {
         >
           <Box className={classes.insideBoxItem}>
             <img src={buyericon} alt="icon" />
-            <p className={classes.insideText}>ID {buyer?.id}</p>
+            <p className={classes.insideText}>
+              ID
+              {buyer?.id}
+            </p>
           </Box>
           <Tooltip title="Holati">
             <FormControl size="small" sx={{ width: "250px" }}>
@@ -254,7 +258,7 @@ const OrderDetails = () => {
                         marginBottom: 0,
                       }}
                     >
-                      Xizmat ko'rsatilmadi
+                      Xizmat ko`rsatilmadi
                     </p>
                   </div>
                 ) : defaultStatus === "SERVED" ? (
@@ -268,7 +272,7 @@ const OrderDetails = () => {
                         marginBottom: 0,
                       }}
                     >
-                      Xizmat ko'rsatildi
+                      Xizmat ko`rsatildi
                     </p>
                   </div>
                 ) : defaultStatus === "ADMIN_CANCEL" ? (
@@ -323,8 +327,8 @@ const OrderDetails = () => {
                 label="Age"
                 onChange={handleChange}
               >
-                {statuses?.map((item: any, key: any) => (
-                  <MenuItem value={item?.id} key={key}>
+                {statuses?.map((item: any) => (
+                  <MenuItem value={item?.id} key={item.id}>
                     {item?.statusType === "NOT_SERVED" ? (
                       <div className={classes.statusBox}>
                         <img src={notserved} alt="img" />
@@ -336,7 +340,7 @@ const OrderDetails = () => {
                             marginBottom: 0,
                           }}
                         >
-                          Xizmat ko'rsatilmadi
+                          Xizmat ko`rsatilmadi
                         </p>
                       </div>
                     ) : item?.statusType === "SERVED" ? (
@@ -350,7 +354,7 @@ const OrderDetails = () => {
                             marginBottom: 0,
                           }}
                         >
-                          Xizmat ko'rsatildi
+                          Xizmat ko`rsatildi
                         </p>
                       </div>
                     ) : item?.statusType === "ADMIN_CANCEL" ? (
@@ -369,7 +373,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "CLIENT_CANCEL" ? (
                       <div className={classes.statusBox}>
-                        <img src={clientcancel} alt="img"/>
+                        <img src={clientcancel} alt="img" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -383,7 +387,7 @@ const OrderDetails = () => {
                       </div>
                     ) : item?.statusType === "IN_PROGRESS" ? (
                       <div className={classes.statusBox}>
-                        <img src={inprogress} alt="img"/>
+                        <img src={inprogress} alt="img" />
                         <p
                           className={classes.statusText}
                           style={{
@@ -445,26 +449,41 @@ const OrderDetails = () => {
                 </TableCell>
               </TableRow>
             </TableHead>
-            {journal?.map((item: any, key: any) => (
-              <TableBody key={key}>
+            {journal?.map((item: any) => (
+              <TableBody key={item.id}>
                 <TableRow>
                   <TableCell align="left" className={classes.productRows}>
                     <div className={classes.productInfo}>
                       <img
                         src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photo}`}
-                        className={classes.productImg} alt="rasm bor edi"
+                        className={classes.productImg}
+                        alt="rasm bor edi"
                       />
-                      <p className={classes.productName} key={item.id}>{item.product_name}</p>
+                      <p className={classes.productName} key={item.id}>
+                        {item.product_name}
+                      </p>
                     </div>
                   </TableCell>
-                  <TableCell align="left" className={classes.productRows} key={item.id}> 
-                    {item?.price?.toLocaleString()} so'm
+                  <TableCell
+                    align="left"
+                    className={classes.productRows}
+                    key={item.id}
+                  >
+                    {item?.price?.toLocaleString()} so`m
                   </TableCell>
-                  <TableCell align="left" className={classes.productRows} key={item.id}>
+                  <TableCell
+                    align="left"
+                    className={classes.productRows}
+                    key={item.id}
+                  >
                     {item.quantity}
                   </TableCell>
-                  <TableCell align="left" className={classes.productRows} key={item.id}>
-                    {(item?.price * item.quantity)?.toLocaleString()}
+                  <TableCell
+                    align="left"
+                    className={classes.productRows}
+                    key={item.id}
+                  >
+                    {(item.price * item.quantity)?.toLocaleString()}
                   </TableCell>
                 </TableRow>
               </TableBody>
@@ -483,15 +502,19 @@ const OrderDetails = () => {
               Umumiy hisob:{" "}
               <span style={{ fontWeight: 500 }}>{price?.toLocaleString()}</span>
             </p>
-            <button className={classes.saveButton} onClick={sendDataToAPI}>
+            <button
+              type="button"
+              className={classes.saveButton}
+              onClick={sendDataToAPI}
+            >
               Saqlash
             </button>
           </Box>
         </Box>
       </Container>
-      <Notification notify={notify}  setNotify={setNotify} />
+      <Notification notify={notify} setNotify={setNotify} />
     </>
   );
-};
+}
 
 export default OrderDetails;
