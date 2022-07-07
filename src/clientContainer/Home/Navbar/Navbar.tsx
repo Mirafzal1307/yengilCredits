@@ -397,10 +397,10 @@ const BackToTop = () => {
                       className={classes.mainMenu}
                     >
                       <SubMenu
-                        label="Telefonlar va smartfonlar"
+                        label="Телефоны, гаджеты и аксессуары"
                         className={classes.SubMenu}
                       >
-                        {category?.["Telefonlar va smartfonlar"]?.map(
+                        {category?.["Телефоны, гаджеты и аксессуары"]?.map(
                           (item: any, key: any) => (
                             <MenuItem
                               style={{
@@ -419,8 +419,11 @@ const BackToTop = () => {
                           )
                         )}
                       </SubMenu>
-                      <SubMenu label="Uy jihozlari" className={classes.SubMenu}>
-                        {category?.["Uy jihozlari"]?.map(
+                      <SubMenu
+                        label="Товары для дома"
+                        className={classes.SubMenu}
+                      >
+                        {category?.["Товары для дома"]?.map(
                           (item: any, key: any) => (
                             <MenuItem
                               style={{
@@ -695,10 +698,10 @@ const BackToTop = () => {
                   }
                 >
                   <SubMenu
-                    label="Telefonlar va smartfonlar"
+                    label="Телефоны, гаджеты и аксессуары"
                     className={classes.SubMenu}
                   >
-                    {category?.["Telefonlar va smartfonlar"]?.map(
+                    {category?.["Телефоны, гаджеты и аксессуары"]?.map(
                       (item: any, key: any) => (
                         <MenuItem
                           style={{
@@ -717,8 +720,203 @@ const BackToTop = () => {
                       )
                     )}
                   </SubMenu>
-                  <SubMenu label="Uy jihozlari" className={classes.SubMenu}>
-                    {category?.["Uy jihozlari"]?.map((item: any, key: any) => (
+                  <SubMenu label="Товары для дома" className={classes.SubMenu}>
+                    {category?.["Товары для дома"]?.map(
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
+                    )}
+                  </SubMenu>
+                  <SubMenu
+                    label="Телевизоры и видеотехника"
+                    className={classes.SubMenu}
+                  >
+                    {category?.["Телевизоры и видеотехника"]?.map(
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
+                    )}
+                  </SubMenu>
+                  <SubMenu
+                    label="Товары для спорта и отдыха"
+                    className={classes.SubMenu}
+                  >
+                    {category?.["Товары для спорта и отдыха"]?.map(
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
+                    )}
+                  </SubMenu>
+                  <SubMenu
+                    label="Красота и здоровье"
+                    className={classes.SubMenu}
+                  >
+                    {category?.["Красота и здоровье"]?.map(
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
+                    )}
+                  </SubMenu>
+                  <SubMenu
+                    label="Товары для строительства и ремонта"
+                    className={classes.SubMenu}
+                  >
+                    {category?.["Товары для строительства и ремонта"]?.map(
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
+                    )}
+                  </SubMenu>
+                  <SubMenu label="Бытовая техника" className={classes.SubMenu}>
+                    {category?.["Бытовая техника"]?.map(
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
+                    )}
+                  </SubMenu>
+                  <SubMenu
+                    label="Компьютеры и оргтехника"
+                    className={classes.SubMenu}
+                  >
+                    {category?.["Компьютеры и оргтехника"]?.map(
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
+                    )}
+                  </SubMenu>
+                  <SubMenu label="Детские товары" className={classes.SubMenu}>
+                    {category?.["Детские товары"]?.map(
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
+                    )}
+                  </SubMenu>
+                  <SubMenu label="Товары для авто" className={classes.SubMenu}>
+                    {category?.["Товары для авто"]?.map(
+                      (item: any, key: any) => (
+                        <MenuItem
+                          style={{
+                            width: "400px",
+                            marginLeft: "10px !important",
+                          }}
+                          key={key}
+                        >
+                          <Link
+                            to={`/product/product-by-category/${item.sub_id}`}
+                            className={classes.navLink}
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      )
+                    )}
+                  </SubMenu>
+                  <SubMenu label="Аудиосистемы" className={classes.SubMenu}>
+                    {category?.["Аудиосистемы"]?.map((item: any, key: any) => (
                       <MenuItem
                         style={{
                           width: "400px",
@@ -734,202 +932,6 @@ const BackToTop = () => {
                         </Link>
                       </MenuItem>
                     ))}
-                  </SubMenu>
-                  <SubMenu
-                    label="Televizorlar va videotexnikalar"
-                    className={classes.SubMenu}
-                  >
-                    {category?.["Televizorlar va videotexnikalar"]?.map(
-                      (item: any, key: any) => (
-                        <MenuItem
-                          style={{
-                            width: "400px",
-                            marginLeft: "10px !important",
-                          }}
-                          key={key}
-                        >
-                          <Link
-                            to={`/product/product-by-category/${item.sub_id}`}
-                            className={classes.navLink}
-                          >
-                            {item.name}
-                          </Link>
-                        </MenuItem>
-                      )
-                    )}
-                  </SubMenu>
-                  <SubMenu
-                    label="Sport va dam olish uchun mahsulotlar"
-                    className={classes.SubMenu}
-                  >
-                    {category?.["Sport va dam olish uchun mahsulotlar"]?.map(
-                      (item: any, key: any) => (
-                        <MenuItem
-                          style={{
-                            width: "400px",
-                            marginLeft: "10px !important",
-                          }}
-                          key={key}
-                        >
-                          <Link
-                            to={`/product/product-by-category/${item.sub_id}`}
-                            className={classes.navLink}
-                          >
-                            {item.name}
-                          </Link>
-                        </MenuItem>
-                      )
-                    )}
-                  </SubMenu>
-                  <SubMenu
-                    label="Sog'lik va go'zallik mahsulotlari"
-                    className={classes.SubMenu}
-                  >
-                    {category?.["Sog'lik va go'zallik mahsulotlari"]?.map(
-                      (item: any, key: any) => (
-                        <MenuItem
-                          style={{
-                            width: "400px",
-                            marginLeft: "10px !important",
-                          }}
-                          key={key}
-                        >
-                          <Link
-                            to={`/product/product-by-category/${item.sub_id}`}
-                            className={classes.navLink}
-                          >
-                            {item.name}
-                          </Link>
-                        </MenuItem>
-                      )
-                    )}
-                  </SubMenu>
-                  <SubMenu
-                    label="Qurilish va ta'mirlash uchun mahsulotlar"
-                    className={classes.SubMenu}
-                  >
-                    {category?.[
-                      "Qurilish va ta'mirlash uchun mahsulotlar"
-                    ]?.map((item: any, key: any) => (
-                      <MenuItem
-                        style={{
-                          width: "400px",
-                          marginLeft: "10px !important",
-                        }}
-                        key={key}
-                      >
-                        <Link
-                          to={`/product/product-by-category/${item.sub_id}`}
-                          className={classes.navLink}
-                        >
-                          {item.name}
-                        </Link>
-                      </MenuItem>
-                    ))}
-                  </SubMenu>
-                  <SubMenu label="Maishiy texnika" className={classes.SubMenu}>
-                    {category?.["Maishiy texnika"]?.map(
-                      (item: any, key: any) => (
-                        <MenuItem
-                          style={{
-                            width: "400px",
-                            marginLeft: "10px !important",
-                          }}
-                          key={key}
-                        >
-                          <Link
-                            to={`/product/product-by-category/${item.sub_id}`}
-                            className={classes.navLink}
-                          >
-                            {item.name}
-                          </Link>
-                        </MenuItem>
-                      )
-                    )}
-                  </SubMenu>
-                  <SubMenu
-                    label="Kompyuterlar va orgtexnika"
-                    className={classes.SubMenu}
-                  >
-                    {category?.["Kompyuterlar va orgtexnika"]?.map(
-                      (item: any, key: any) => (
-                        <MenuItem
-                          style={{
-                            width: "400px",
-                            marginLeft: "10px !important",
-                          }}
-                          key={key}
-                        >
-                          <Link
-                            to={`/product/product-by-category/${item.sub_id}`}
-                            className={classes.navLink}
-                          >
-                            {item.name}
-                          </Link>
-                        </MenuItem>
-                      )
-                    )}
-                  </SubMenu>
-                  <SubMenu
-                    label="Bolalar mahsulotlari"
-                    className={classes.SubMenu}
-                  >
-                    {category?.["Bolalar mahsulotlari"]?.map(
-                      (item: any, key: any) => (
-                        <MenuItem
-                          style={{
-                            width: "400px",
-                            marginLeft: "10px !important",
-                          }}
-                          key={key}
-                        >
-                          <Link
-                            to={`/product/product-by-category/${item.sub_id}`}
-                            className={classes.navLink}
-                          >
-                            {item.name}
-                          </Link>
-                        </MenuItem>
-                      )
-                    )}
-                  </SubMenu>
-                  <SubMenu label="Avto jihozlar" className={classes.SubMenu}>
-                    {category?.["Avto jihozlar"]?.map((item: any, key: any) => (
-                      <MenuItem
-                        style={{
-                          width: "400px",
-                          marginLeft: "10px !important",
-                        }}
-                        key={key}
-                      >
-                        <Link
-                          to={`/product/product-by-category/${item.sub_id}`}
-                          className={classes.navLink}
-                        >
-                          {item.name}
-                        </Link>
-                      </MenuItem>
-                    ))}
-                  </SubMenu>
-                  <SubMenu label="Audio tizimlar" className={classes.SubMenu}>
-                    {category?.["Audio tizimlar"]?.map(
-                      (item: any, key: any) => (
-                        <MenuItem
-                          style={{
-                            width: "400px",
-                            marginLeft: "10px !important",
-                          }}
-                          key={key}
-                        >
-                          <Link
-                            to={`/product/product-by-category/${item.sub_id}`}
-                            className={classes.navLink}
-                          >
-                            {item.name}
-                          </Link>
-                        </MenuItem>
-                      )
-                    )}
                   </SubMenu>
                 </Menu>
               </Grid>
