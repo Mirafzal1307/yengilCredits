@@ -313,6 +313,7 @@ const TableOrder: React.FC = () => {
                         return value;
                       }
                     })
+                    .reverse()
                     .map((list: any, key: any) => (
                       <TableRow
                         sx={{
