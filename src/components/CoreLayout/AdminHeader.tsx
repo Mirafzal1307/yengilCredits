@@ -177,7 +177,7 @@ export default function MiniDrawer(props: any): any {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = (): void => {
     setOpen(true);

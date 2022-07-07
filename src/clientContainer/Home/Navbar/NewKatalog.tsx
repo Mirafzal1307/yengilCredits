@@ -179,7 +179,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Telefonlar va smartfonlar</Typography>
+                <Typography>Телефоны, гаджеты и аксессуары</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -188,26 +188,28 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Telefonlar va smartfonlar"]?.map((item: any) => (
-                  <Link
-                    to={`/product/product-by-category/${item.sub_id}`}
-                    onClick={refresh}
-                    key={item.parent_id}
-                  >
-                    <Button
-                      sx={{
-                        color: "black",
-                        width: "100%",
-                        textAlign: "left !important",
-                        justifyContent: "left !important",
-                        alignItem: "left !important",
-                        textTransform: "capitalize",
-                      }}
+                {category?.["Телефоны, гаджеты и аксессуары"]?.map(
+                  (item: any, key: any) => (
+                    <Link
+                      to={`/product/product-by-category/${item.sub_id}`}
+                      onClick={refresh}
+                      key={item.sub_id}
                     >
-                      {item.name}
-                    </Button>
-                  </Link>
-                ))}
+                      <Button
+                        sx={{
+                          color: "black",
+                          width: "100%",
+                          textAlign: "left !important",
+                          justifyContent: "left !important",
+                          alignItem: "left !important",
+                          textTransform: "none",
+                        }}
+                      >
+                        {item.name}
+                      </Button>
+                    </Link>
+                  ),
+                )}
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -222,7 +224,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Uy jihozlari</Typography>
+                <Typography>Товары для дома</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -231,7 +233,7 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Uy jihozlari"]?.map((item: any) => (
+                {category?.["Товары для дома"]?.map((item: any, key: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
@@ -244,7 +246,7 @@ export default function TransitionsModal(): JSX.Element {
                         textAlign: "left !important",
                         justifyContent: "left !important",
                         alignItem: "left !important",
-                        textTransform: "capitalize",
+                        textTransform: "none",
                       }}
                     >
                       {item.name}
@@ -265,7 +267,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Televizorlar va videotexnikalar</Typography>
+                <Typography>Телевизоры и видеотехника</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -274,8 +276,8 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Televizorlar va videotexnikalar"]?.map(
-                  (item: any) => (
+                {category?.["Телевизоры и видеотехника"]?.map(
+                  (item: any, key: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
@@ -288,7 +290,7 @@ export default function TransitionsModal(): JSX.Element {
                           textAlign: "left !important",
                           justifyContent: "left !important",
                           alignItem: "left !important",
-                          textTransform: "capitalize",
+                          textTransform: "none",
                         }}
                       >
                         {item.name}
@@ -310,7 +312,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Sport va dam olish</Typography>
+                <Typography>Товары для спорта и отдыха</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -319,8 +321,8 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Sport va dam olish uchun mahsulotlar"]?.map(
-                  (item: any) => (
+                {category?.["Товары для спорта и отдыха"]?.map(
+                  (item: any, key: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
@@ -333,7 +335,7 @@ export default function TransitionsModal(): JSX.Element {
                           textAlign: "left !important",
                           justifyContent: "left !important",
                           alignItem: "left !important",
-                          textTransform: "capitalize",
+                          textTransform: "none",
                         }}
                       >
                         {item.name}
@@ -355,7 +357,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Sog`lik va go`zallik</Typography>
+                <Typography>Красота и здоровье</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -364,8 +366,8 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Sog'lik va go'zallik mahsulotlari"]?.map(
-                  (item: any) => (
+                {category?.["Красота и здоровье"]?.map(
+                  (item: any, key: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
@@ -378,7 +380,7 @@ export default function TransitionsModal(): JSX.Element {
                           textAlign: "left !important",
                           justifyContent: "left !important",
                           alignItem: "left !important",
-                          textTransform: "capitalize",
+                          textTransform: "none",
                         }}
                       >
                         {item.name}
@@ -400,7 +402,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Qurilish va ta`mirlash </Typography>
+                <Typography>Товары для строительства</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -409,8 +411,8 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Qurilish va ta'mirlash uchun mahsulotlar"]?.map(
-                  (item: any) => (
+                {category?.["Товары для строительства и ремонта"]?.map(
+                  (item: any, key: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
@@ -423,7 +425,7 @@ export default function TransitionsModal(): JSX.Element {
                           textAlign: "left !important",
                           justifyContent: "left !important",
                           alignItem: "left !important",
-                          textTransform: "capitalize",
+                          textTransform: "none",
                         }}
                       >
                         {item.name}
@@ -445,7 +447,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Maishiy texnika</Typography>
+                <Typography>Бытовая техника</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -454,7 +456,7 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Maishiy texnika"]?.map((item: any) => (
+                {category?.["Бытовая техника"]?.map((item: any, key: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
@@ -467,7 +469,7 @@ export default function TransitionsModal(): JSX.Element {
                         textAlign: "left !important",
                         justifyContent: "left !important",
                         alignItem: "left !important",
-                        textTransform: "capitalize",
+                        textTransform: "none",
                       }}
                     >
                       {item.name}
@@ -488,7 +490,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Kompyuterlar va orgtexnika</Typography>
+                <Typography>Компьютеры и оргтехника</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -497,26 +499,28 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Kompyuterlar va orgtexnika"]?.map((item: any) => (
-                  <Link
-                    to={`/product/product-by-category/${item.sub_id}`}
-                    onClick={refresh}
-                    key={item.parent_id}
-                  >
-                    <Button
-                      sx={{
-                        color: "black",
-                        width: "100%",
-                        textAlign: "left !important",
-                        justifyContent: "left !important",
-                        alignItem: "left !important",
-                        textTransform: "capitalize",
-                      }}
+                {category?.["Компьютеры и оргтехника"]?.map(
+                  (item: any, key: any) => (
+                    <Link
+                      to={`/product/product-by-category/${item.sub_id}`}
+                      onClick={refresh}
+                      key={item.sub_id}
                     >
-                      {item.name}
-                    </Button>
-                  </Link>
-                ))}
+                      <Button
+                        sx={{
+                          color: "black",
+                          width: "100%",
+                          textAlign: "left !important",
+                          justifyContent: "left !important",
+                          alignItem: "left !important",
+                          textTransform: "none",
+                        }}
+                      >
+                        {item.name}
+                      </Button>
+                    </Link>
+                  ),
+                )}
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -531,7 +535,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Bolalar mahsulotlari</Typography>
+                <Typography>Детские товары</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -540,11 +544,11 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Bolalar mahsulotlari"]?.map((item: any) => (
+                {category?.["Детские товары"]?.map((item: any, key: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
-                    key={item.parent_id}
+                    key={item.sub_id}
                   >
                     <Button
                       sx={{
@@ -553,7 +557,7 @@ export default function TransitionsModal(): JSX.Element {
                         textAlign: "left !important",
                         justifyContent: "left !important",
                         alignItem: "left !important",
-                        textTransform: "capitalize",
+                        textTransform: "none",
                       }}
                     >
                       {item.name}
@@ -574,7 +578,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Avto jihozlar</Typography>
+                <Typography>Товары для авто</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -583,7 +587,7 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Avto jihozlar"]?.map((item: any) => (
+                {category?.["Товары для авто"]?.map((item: any, key: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     key={item.parent_id}
@@ -596,7 +600,7 @@ export default function TransitionsModal(): JSX.Element {
                         textAlign: "left !important",
                         justifyContent: "left !important",
                         alignItem: "left !important",
-                        textTransform: "capitalize",
+                        textTransform: "none",
                       }}
                     >
                       {item.name}
@@ -617,7 +621,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Audio tizimlar</Typography>
+                <Typography>Аудиосистемы</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -626,7 +630,7 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Audio tizimlar"]?.map((item: any) => (
+                {category?.["Аудиосистемы"]?.map((item: any, key: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
@@ -639,7 +643,7 @@ export default function TransitionsModal(): JSX.Element {
                         textAlign: "left !important",
                         justifyContent: "left !important",
                         alignItem: "left !important",
-                        textTransform: "capitalize",
+                        textTransform: "none",
                       }}
                     >
                       {item.name}
