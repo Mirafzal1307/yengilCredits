@@ -179,7 +179,9 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Телефоны, гаджеты и аксессуары</Typography>
+                <Typography>
+                  Смартфоны, телефоны, гаджеты, аксессуары
+                </Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -188,7 +190,7 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Телефоны, гаджеты и аксессуары"]?.map(
+                {category?.["Смартфоны, телефоны, гаджеты, аксессуары"]?.map(
                   (item: any, key: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
@@ -224,7 +226,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Товары для дома</Typography>
+                <Typography>Ноутбуки, принтеры, компьютеры</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -233,26 +235,28 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Товары для дома"]?.map((item: any, key: any) => (
-                  <Link
-                    to={`/product/product-by-category/${item.sub_id}`}
-                    onClick={refresh}
-                    key={item.parent_id}
-                  >
-                    <Button
-                      sx={{
-                        color: "black",
-                        width: "100%",
-                        textAlign: "left !important",
-                        justifyContent: "left !important",
-                        alignItem: "left !important",
-                        textTransform: "none",
-                      }}
+                {category?.["Ноутбуки, принтеры, компьютеры"]?.map(
+                  (item: any, key: any) => (
+                    <Link
+                      to={`/product/product-by-category/${item.sub_id}`}
+                      onClick={refresh}
+                      key={item.parent_id}
                     >
-                      {item.name}
-                    </Button>
-                  </Link>
-                ))}
+                      <Button
+                        sx={{
+                          color: "black",
+                          width: "100%",
+                          textAlign: "left !important",
+                          justifyContent: "left !important",
+                          alignItem: "left !important",
+                          textTransform: "none",
+                        }}
+                      >
+                        {item.name}
+                      </Button>
+                    </Link>
+                  ),
+                )}
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -267,7 +271,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Телевизоры и видеотехника</Typography>
+                <Typography>Телевизоры, фото-видео и аудио</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -276,7 +280,7 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Телевизоры и видеотехника"]?.map(
+                {category?.["Телевизоры, фото-видео и аудио"]?.map(
                   (item: any, key: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
@@ -312,7 +316,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Товары для спорта и отдыха</Typography>
+                <Typography>Мебель</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -321,7 +325,267 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Товары для спорта и отдыха"]?.map(
+                {category?.["Мебель"]?.map((item: any, key: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.parent_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "none",
+                      }}
+                    >
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel5"}
+              onChange={handleChange("panel5")}
+              sx={{
+                border: "solid 1px #065374",
+                borderRadius: "4px !important",
+              }}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Для геймеров</Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  borderTop: "solid 1px #065374",
+                }}
+              >
+                {category?.["Для геймеров"]?.map((item: any, key: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.parent_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "none",
+                      }}
+                    >
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel6"}
+              onChange={handleChange("panel6")}
+              sx={{
+                border: "solid 1px #065374",
+                borderRadius: "4px !important",
+              }}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Бытовая техника</Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  borderTop: "solid 1px #065374",
+                }}
+              >
+                {category?.["Бытовая техника"]?.map((item: any, key: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.parent_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "none",
+                      }}
+                    >
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel7"}
+              onChange={handleChange("panel7")}
+              sx={{
+                border: "solid 1px #065374",
+                borderRadius: "4px !important",
+              }}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Все для кухни</Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  borderTop: "solid 1px #065374",
+                }}
+              >
+                {category?.["Все для кухни"]?.map((item: any, key: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.parent_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "none",
+                      }}
+                    >
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel8"}
+              onChange={handleChange("panel8")}
+              sx={{
+                border: "solid 1px #065374",
+                borderRadius: "4px !important",
+              }}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Книги</Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  borderTop: "solid 1px #065374",
+                }}
+              >
+                {category?.["Книги"]?.map((item: any, key: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.sub_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "none",
+                      }}
+                    >
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel10"}
+              onChange={handleChange("panel10")}
+              sx={{
+                border: "solid 1px #065374",
+                borderRadius: "4px !important",
+              }}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Все для офиса, дома и сада</Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  borderTop: "solid 1px #065374",
+                }}
+              >
+                {category?.["Все для офиса, дома и сада"]?.map(
+                  (item: any, key: any) => (
+                    <Link
+                      to={`/product/product-by-category/${item.sub_id}`}
+                      key={item.parent_id}
+                      onClick={refresh}
+                    >
+                      <Button
+                        sx={{
+                          color: "black",
+                          width: "100%",
+                          textAlign: "left !important",
+                          justifyContent: "left !important",
+                          alignItem: "left !important",
+                          textTransform: "none",
+                        }}
+                      >
+                        {item.name}
+                      </Button>
+                    </Link>
+                  ),
+                )}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel11"}
+              onChange={handleChange("panel11")}
+              sx={{
+                border: "solid 1px #065374",
+                borderRadius: "4px !important",
+              }}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Все для ремонта и строительства</Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  borderTop: "solid 1px #065374",
+                }}
+              >
+                {category?.["Все для ремонта и строительства"]?.map(
                   (item: any, key: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
@@ -346,8 +610,94 @@ export default function TransitionsModal(): JSX.Element {
               </AccordionDetails>
             </Accordion>
             <Accordion
-              expanded={expanded === "panel5"}
-              onChange={handleChange("panel5")}
+              expanded={expanded === "panel11"}
+              onChange={handleChange("panel11")}
+              sx={{
+                border: "solid 1px #065374",
+                borderRadius: "4px !important",
+              }}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Спорт товары</Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  borderTop: "solid 1px #065374",
+                }}
+              >
+                {category?.["Спорт товары"]?.map((item: any, key: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.parent_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "none",
+                      }}
+                    >
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel11"}
+              onChange={handleChange("panel11")}
+              sx={{
+                border: "solid 1px #065374",
+                borderRadius: "4px !important",
+              }}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Автотовары</Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  borderTop: "solid 1px #065374",
+                }}
+              >
+                {category?.["Автотовары"]?.map((item: any, key: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.parent_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "none",
+                      }}
+                    >
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel11"}
+              onChange={handleChange("panel11")}
               sx={{
                 border: "solid 1px #065374",
                 borderRadius: "4px !important",
@@ -391,8 +741,8 @@ export default function TransitionsModal(): JSX.Element {
               </AccordionDetails>
             </Accordion>
             <Accordion
-              expanded={expanded === "panel6"}
-              onChange={handleChange("panel6")}
+              expanded={expanded === "panel11"}
+              onChange={handleChange("panel11")}
               sx={{
                 border: "solid 1px #065374",
                 borderRadius: "4px !important",
@@ -402,7 +752,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Товары для строительства</Typography>
+                <Typography>Игрушки и товары для детей</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -411,7 +761,7 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Товары для строительства и ремонта"]?.map(
+                {category?.["Игрушки и товары для детей"]?.map(
                   (item: any, key: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
@@ -436,8 +786,8 @@ export default function TransitionsModal(): JSX.Element {
               </AccordionDetails>
             </Accordion>
             <Accordion
-              expanded={expanded === "panel7"}
-              onChange={handleChange("panel7")}
+              expanded={expanded === "panel11"}
+              onChange={handleChange("panel11")}
               sx={{
                 border: "solid 1px #065374",
                 borderRadius: "4px !important",
@@ -447,7 +797,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Бытовая техника</Typography>
+                <Typography>Канцелярские товары</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -456,55 +806,12 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Бытовая техника"]?.map((item: any, key: any) => (
-                  <Link
-                    to={`/product/product-by-category/${item.sub_id}`}
-                    onClick={refresh}
-                    key={item.parent_id}
-                  >
-                    <Button
-                      sx={{
-                        color: "black",
-                        width: "100%",
-                        textAlign: "left !important",
-                        justifyContent: "left !important",
-                        alignItem: "left !important",
-                        textTransform: "none",
-                      }}
-                    >
-                      {item.name}
-                    </Button>
-                  </Link>
-                ))}
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel8"}
-              onChange={handleChange("panel8")}
-              sx={{
-                border: "solid 1px #065374",
-                borderRadius: "4px !important",
-              }}
-            >
-              <AccordionSummary
-                aria-controls="panel1d-content"
-                id="panel1d-header"
-              >
-                <Typography>Компьютеры и оргтехника</Typography>
-              </AccordionSummary>
-              <AccordionDetails
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  borderTop: "solid 1px #065374",
-                }}
-              >
-                {category?.["Компьютеры и оргтехника"]?.map(
+                {category?.["Канцелярские товары"]?.map(
                   (item: any, key: any) => (
                     <Link
                       to={`/product/product-by-category/${item.sub_id}`}
                       onClick={refresh}
-                      key={item.sub_id}
+                      key={item.parent_id}
                     >
                       <Button
                         sx={{
@@ -524,8 +831,8 @@ export default function TransitionsModal(): JSX.Element {
               </AccordionDetails>
             </Accordion>
             <Accordion
-              expanded={expanded === "panel9"}
-              onChange={handleChange("panel9")}
+              expanded={expanded === "panel11"}
+              onChange={handleChange("panel11")}
               sx={{
                 border: "solid 1px #065374",
                 borderRadius: "4px !important",
@@ -535,7 +842,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Детские товары</Typography>
+                <Typography>Одежда и обувь</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -544,54 +851,11 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Детские товары"]?.map((item: any, key: any) => (
+                {category?.["Одежда и обувь"]?.map((item: any, key: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
-                    key={item.sub_id}
-                  >
-                    <Button
-                      sx={{
-                        color: "black",
-                        width: "100%",
-                        textAlign: "left !important",
-                        justifyContent: "left !important",
-                        alignItem: "left !important",
-                        textTransform: "none",
-                      }}
-                    >
-                      {item.name}
-                    </Button>
-                  </Link>
-                ))}
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              expanded={expanded === "panel10"}
-              onChange={handleChange("panel10")}
-              sx={{
-                border: "solid 1px #065374",
-                borderRadius: "4px !important",
-              }}
-            >
-              <AccordionSummary
-                aria-controls="panel1d-content"
-                id="panel1d-header"
-              >
-                <Typography>Товары для авто</Typography>
-              </AccordionSummary>
-              <AccordionDetails
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  borderTop: "solid 1px #065374",
-                }}
-              >
-                {category?.["Товары для авто"]?.map((item: any, key: any) => (
-                  <Link
-                    to={`/product/product-by-category/${item.sub_id}`}
                     key={item.parent_id}
-                    onClick={refresh}
                   >
                     <Button
                       sx={{
@@ -621,7 +885,7 @@ export default function TransitionsModal(): JSX.Element {
                 aria-controls="panel1d-content"
                 id="panel1d-header"
               >
-                <Typography>Аудиосистемы</Typography>
+                <Typography>Электротранспорт</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -630,7 +894,95 @@ export default function TransitionsModal(): JSX.Element {
                   borderTop: "solid 1px #065374",
                 }}
               >
-                {category?.["Аудиосистемы"]?.map((item: any, key: any) => (
+                {category?.["Электротранспорт"]?.map((item: any, key: any) => (
+                  <Link
+                    to={`/product/product-by-category/${item.sub_id}`}
+                    onClick={refresh}
+                    key={item.parent_id}
+                  >
+                    <Button
+                      sx={{
+                        color: "black",
+                        width: "100%",
+                        textAlign: "left !important",
+                        justifyContent: "left !important",
+                        alignItem: "left !important",
+                        textTransform: "none",
+                      }}
+                    >
+                      {item.name}
+                    </Button>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel9"}
+              onChange={handleChange("panel9")}
+              sx={{
+                border: "solid 1px #065374",
+                borderRadius: "4px !important",
+              }}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Подарки и сувениры</Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  borderTop: "solid 1px #065374",
+                }}
+              >
+                {category?.["Подарки и сувениры"]?.map(
+                  (item: any, key: any) => (
+                    <Link
+                      to={`/product/product-by-category/${item.sub_id}`}
+                      onClick={refresh}
+                      key={item.sub_id}
+                    >
+                      <Button
+                        sx={{
+                          color: "black",
+                          width: "100%",
+                          textAlign: "left !important",
+                          justifyContent: "left !important",
+                          alignItem: "left !important",
+                          textTransform: "none",
+                        }}
+                      >
+                        {item.name}
+                      </Button>
+                    </Link>
+                  ),
+                )}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel11"}
+              onChange={handleChange("panel11")}
+              sx={{
+                border: "solid 1px #065374",
+                borderRadius: "4px !important",
+              }}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Умный дом</Typography>
+              </AccordionSummary>
+              <AccordionDetails
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  borderTop: "solid 1px #065374",
+                }}
+              >
+                {category?.["Умный дом"]?.map((item: any, key: any) => (
                   <Link
                     to={`/product/product-by-category/${item.sub_id}`}
                     onClick={refresh}
