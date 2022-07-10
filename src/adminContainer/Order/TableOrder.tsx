@@ -303,6 +303,7 @@ function TableOrder(): JSX.Element {
               </TableHead>
               <TableBody>
                 {orders
+                  .reverse()
                   .filter((val: any) => {
                     if (!searchTerm) {
                       return val;
