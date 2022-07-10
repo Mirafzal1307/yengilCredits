@@ -584,7 +584,6 @@ function ProductList(): JSX.Element {
                           return val;
                         }
                       })
-                      .reverse()
                       .map((user, index) => {
                         const delProduct = (): void => {
                           deleteUserData(user.id);
