@@ -9,12 +9,13 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
-import { Button, Container, Tooltip } from "@mui/material";
+import { Button, Container, Grid, Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Link, useParams, Link as NavLink } from "react-router-dom";
 import {
   deleteCategoryItem,
   getCategoryByParentCategory,
+  postCategoryCreate,
 } from "../../Api/admin/AdminCategoryApi";
 import "./style.css";
 import Modal from "../Modal/Modal";
@@ -24,6 +25,7 @@ import Notification from "../Snackbar/Notification";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 
 import { fetchCategory } from "../../redux/actions/categoryAction";
+import { refresh } from "../Modal/refresh";
 
 interface Data {
   id: number;
@@ -104,9 +106,16 @@ const useStyles = makeStyles({
     fontFamily: "Poppins !important",
   },
   input_name: {
-    width: "500px !important",
+    width: "100% !important",
+    "&:focus": {
+      outline: "none",
+    },
     fontFamily: "Poppins !important",
-    fontStyle: "normal !important",
+    fontSize: "15px !important",
+    fontWeight: "400",
+    padding: "9px 0px 8px 20px !important",
+    borderRadius: "5px",
+    border: "1px solid #9F9F9F !important",
   },
   category_name: {
     color: "#464646 !important",
@@ -128,8 +137,7 @@ const useStyles = makeStyles({
   button_root: {
     backgroundColor: "#065374 !important",
     padding: "9px 20px 8px 20px !important",
-    marginTop: "20px !important",
-    marginLeft: "58% !important",
+    marginTop: "10px !important",
   },
   button: {
     padding: "0px !important",
@@ -159,7 +167,7 @@ const useStyles = makeStyles({
     paddingLeft: "12px !important",
     fontStyle: "normal !important",
     fontFamily: "Poppins !important",
-    marginTop: "20px !important",
+    // marginTop: "20px !important",
   },
   h4_second: {
     fontSize: "17px !important",
@@ -167,6 +175,7 @@ const useStyles = makeStyles({
     margin: "0px !important",
     fontStyle: "normal !important",
     fontFamily: "Poppins !important",
+    marginBottom: "10px !important",
   },
   button_one: {
     minWidth: "140px !important",
@@ -258,6 +267,9 @@ const useStyles = makeStyles({
     color: "#ffffff",
     borderRadius: "5px !important",
   },
+  forInput: {
+    padding: "10px 20px",
+  },
 });
 
 function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
@@ -298,8 +310,33 @@ export default function EnhancedTable(): JSX.Element {
     message: "",
     type: "",
   });
+  const [categoryName, setCategoryName] = React.useState<any>("");
+  const handleInputChange = (e: any): void => {
+    setCategoryName(e.target.value);
+  };
   const classes = useStyles();
   const { id } = useParams();
+
+  function onSubmit(): void {
+    const data = { name: categoryName, parent_id: id };
+    postCategoryCreate(data)
+      .then(async (res: any) => {
+        if (res.status === 200) {
+          setNotify({
+            isOpen: true,
+            message: "Muvaffaqiyatli yaratildi.",
+            type: "success",
+          });
+        }
+      })
+      .catch((err: any) => {
+        setNotify({
+          isOpen: true,
+          message: "Xatolik yuz berdi.",
+          type: "error",
+        });
+      });
+  }
 
   React.useEffect(() => {
     fetchCategory(`${page - 1}`);
@@ -351,6 +388,7 @@ export default function EnhancedTable(): JSX.Element {
             message: "Muvaffaqiyatli o'chirildi.",
             type: "success",
           });
+          refresh();
         }
       })
       .catch(() => {
@@ -371,96 +409,127 @@ export default function EnhancedTable(): JSX.Element {
       >
         <h1 className={classes.h1}>Turkum</h1>
         <Box className={classes.input_two}>
-          <Paper className={classes.paper}>
-            <TableContainer>
-              <h4 className={classes.h4}>2.Turkumlar</h4>
-              <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
-                <EnhancedTableHead
-                  numSelected={selected.length}
-                  onSelectAllClick={handleSelectAllClick}
-                  rowCount={category.length}
-                />
-                <TableBody>
-                  {category?.map((row: any, index: any) => {
-                    const deleteData = (): void => {
-                      deleteCategory(row?.id);
-                    };
-                    const isItemSelected = isSelected(row?.name);
-                    const labelId = `enhanced-table-checkbox-${index}`;
-                    return (
-                      <TableRow
-                        hover
-                        onClick={(event) => handleClick(event, row?.name)}
-                        role="checkbox"
-                        aria-checked={isItemSelected}
-                        tabIndex={-1}
-                        key={row.id}
-                        selected={isItemSelected}
-                      >
-                        <TableCell
-                          padding="checkbox"
-                          className={classes.tableCell}
-                        >
-                          <Checkbox
-                            color="primary"
-                            checked={isItemSelected}
-                            inputProps={{
-                              "aria-labelledby": labelId,
-                            }}
-                          />
-                        </TableCell>
-                        <TableCell
-                          component="th"
-                          id={labelId}
-                          scope="row"
-                          padding="none"
-                          className={classes.tableCell}
-                        >
-                          {row?.id}
-                        </TableCell>
-                        <TableCell
-                          className={classes.tableCell}
-                          align="left"
-                          key={row.id}
-                        >
-                          {row?.name}
-                        </TableCell>
-                        <TableCell
-                          className={classes.tableCell}
-                          align="left"
-                          key={row.id}
-                        >
-                          {row?.parent_category?.name}
-                        </TableCell>
-                        <TableCell className={classes.tableCell} align="left">
-                          <Link to="/product">
-                            <Tooltip title="Details">
-                              <Button>
-                                <img src={Details} alt="" />
-                              </Button>
-                            </Tooltip>
-                          </Link>
-                          <Link to={`/category/admin/edit-page/${row.id}`}>
-                            <Tooltip title="Edit">
-                              <Button>
-                                <img src={Edit} alt="ad" />
-                              </Button>
-                            </Tooltip>
-                          </Link>
-                          <Tooltip title="Delete">
-                            <Button className={classes.button}>
-                              <Modal data={deleteData} />
-                            </Button>
-                          </Tooltip>
-                          <Notification notify={notify} setNotify={setNotify} />
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
+          <Grid container direction="row" spacing={2}>
+            <Grid item xs={3}>
+              <h4 className={classes.h4_second}>1.Sub turkum yaratish</h4>
+              <input
+                style={{ borderColor: "#9F9F9F" }}
+                className={classes.input_name}
+                id="outlined-basic"
+                onChange={handleInputChange}
+                placeholder="Turkumni nomi"
+              />
+              <Button
+                variant="contained"
+                onClick={() => {
+                  onSubmit();
+                  refresh();
+                }}
+                className={classes.button_root}
+                style={{ textTransform: "capitalize" }}
+              >
+                Turkumni yarating
+              </Button>
+            </Grid>
+            <Grid item xs={9}>
+              <Paper className={classes.paper}>
+                <TableContainer>
+                  <h4 className={classes.h4}>2.Turkumlar</h4>
+                  <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
+                    <EnhancedTableHead
+                      numSelected={selected.length}
+                      onSelectAllClick={handleSelectAllClick}
+                      rowCount={category.length}
+                    />
+                    <TableBody>
+                      {category?.map((row: any, index: any) => {
+                        const deleteData = (): void => {
+                          deleteCategory(row?.id);
+                        };
+                        const isItemSelected = isSelected(row?.name);
+                        const labelId = `enhanced-table-checkbox-${index}`;
+                        return (
+                          <TableRow
+                            hover
+                            onClick={(event) => handleClick(event, row?.name)}
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
+                            key={row.id}
+                            selected={isItemSelected}
+                          >
+                            <TableCell
+                              padding="checkbox"
+                              className={classes.tableCell}
+                            >
+                              <Checkbox
+                                color="primary"
+                                checked={isItemSelected}
+                                inputProps={{
+                                  "aria-labelledby": labelId,
+                                }}
+                              />
+                            </TableCell>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="none"
+                              className={classes.tableCell}
+                            >
+                              {row?.id}
+                            </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="left"
+                              key={row.id}
+                            >
+                              {row?.name}
+                            </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="left"
+                              key={row.id}
+                            >
+                              {row?.parent_category?.name}
+                            </TableCell>
+                            <TableCell
+                              className={classes.tableCell}
+                              align="left"
+                            >
+                              <Link to="/product">
+                                <Tooltip title="Details">
+                                  <Button>
+                                    <img src={Details} alt="" />
+                                  </Button>
+                                </Tooltip>
+                              </Link>
+                              <Link to={`/category/admin/edit-page/${row.id}`}>
+                                <Tooltip title="Edit">
+                                  <Button>
+                                    <img src={Edit} alt="ad" />
+                                  </Button>
+                                </Tooltip>
+                              </Link>
+                              <Tooltip title="Delete">
+                                <Button className={classes.button}>
+                                  <Modal data={deleteData} />
+                                </Button>
+                              </Tooltip>
+                              <Notification
+                                notify={notify}
+                                setNotify={setNotify}
+                              />
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+            </Grid>
+          </Grid>
         </Box>
       </Container>
     </>
