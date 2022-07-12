@@ -304,7 +304,7 @@ export default function EnhancedTable(): JSX.Element {
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");
   const [category, setCategory] = React.useState<createDatas[]>([]);
-  const [param, setParam] = React.useState("");
+  console.log(category);
   const [notify, setNotify] = React.useState<any>({
     isOpen: false,
     message: "",
@@ -337,7 +337,6 @@ export default function EnhancedTable(): JSX.Element {
         });
       });
   }
-
   React.useEffect(() => {
     fetchCategory(`${page - 1}`);
     if (pageQty < page) {
@@ -407,7 +406,12 @@ export default function EnhancedTable(): JSX.Element {
         style={{ paddingBottom: "50px !important", marginRight: 0 }}
         maxWidth="xl"
       >
-        <h1 className={classes.h1}>Turkum</h1>
+        <h1 className={classes.h1}>
+          Turkum ›
+          <span className={classes.h1}>
+            {category[0]?.parent_category?.name}
+          </span>
+        </h1>
         <Box className={classes.input_two}>
           <Grid container direction="row" spacing={2}>
             <Grid item xs={3}>
