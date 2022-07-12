@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     fontWeight: "600",
     fontSize: "22px",
     color: "#065374",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   deleteButton: {
     border: "none !important",
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     color: "#ffffff !important",
     marginRight: "20px",
     padding: "9px 20px 8px 20px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   deletes: {
     background: "#065374 !important",
@@ -34,14 +34,14 @@ const useStyles = makeStyles({
     color: "#ffffff !important",
     margin: "0 0 0 20px !important",
     padding: "9px 20px 8px 20px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   h2: {
     fontSize: "17px",
     fontWeight: "normal",
     fontStyle: "normal",
     color: "#000000",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   Backdrop: {
     zIndex: "-1",
@@ -66,16 +66,6 @@ const StyledModal = styled(ModalUnstyled)`
   justify-content: center;
 `;
 
-const Backdrop = styled("div")`
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(6, 83, 116, 0.3);
-`;
-
 const style = {
   width: 600,
   bgcolor: "#ffffff !important",
@@ -98,7 +88,7 @@ export default function ModalUnstyledDemo(): JSX.Element {
         onClick={handleOpen}
         className={classes.deleteButton}
       >
-        <img src={deletePhoto} alt="rasm bor edi" />
+        <img src={deletePhoto} alt="изображения" />
       </button>
       <StyledModal
         aria-labelledby="unstyled-modal-title"
@@ -108,16 +98,16 @@ export default function ModalUnstyledDemo(): JSX.Element {
         className={classes.Backdrop}
       >
         <Box sx={style} className={classes.box}>
-          <h1 className={classes.h1}>Diqqat !</h1>
+          <h1 className={classes.h1}>Внимание !</h1>
           <h2 id="unstyled-modal-title" className={classes.h2}>
-            Siz rostdanham quyidagi turkumni o’chirmoqchimisiz
+            Вы реально хотите удалить категорию
           </h2>
           <div>
             <Button onClick={handleClose} className={classes.cancel}>
-              Bekor qilish
+              Отменить
             </Button>
             <Button onClick={handleClose} className={classes.deletes}>
-              O`chirish
+              Удалить
             </Button>
           </div>
         </Box>

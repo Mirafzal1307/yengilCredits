@@ -66,19 +66,19 @@ const headCells: readonly HeadCell[] = [
     id: "id",
     numeric: true,
     disablePadding: false,
-    label: "Nomi",
+    label: "Названия",
   },
   {
     id: "date",
     numeric: true,
     disablePadding: false,
-    label: "Turkum",
+    label: "Категория",
   },
   {
     id: "action",
     numeric: true,
     disablePadding: false,
-    label: "Amallar",
+    label: "Действия",
   },
 ];
 
@@ -103,36 +103,25 @@ const useStyles = makeStyles({
   h1: {
     fontSize: "28px !important",
     margin: "32px 0 20px 0 !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
+  },
+  h1_span: {
+    fontSize: "28px !important",
+    margin: "32px 0 20px 0 !important",
+    fontFamily: "Arial !important",
+    paddingLeft: "5px",
   },
   input_name: {
     width: "100% !important",
     "&:focus": {
       outline: "none",
     },
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     fontSize: "15px !important",
     fontWeight: "400",
     padding: "9px 0px 8px 20px !important",
     borderRadius: "5px",
     border: "1px solid #9F9F9F !important",
-  },
-  category_name: {
-    color: "#464646 !important",
-    fontSize: "17px !important",
-    fontWeight: "500 !important",
-    margin: "20px 0 10px 0 !important",
-    fontFamily: "Poppins !important",
-  },
-  category_category: {
-    color: "#464646 !important",
-    fontSize: "17px !important",
-    fontWeight: "500 !important",
-    margin: "10px 0 !important",
-    fontFamily: "Poppins !important",
-  },
-  datagrid: {
-    border: "none !important",
   },
   button_root: {
     backgroundColor: "#065374 !important",
@@ -147,17 +136,7 @@ const useStyles = makeStyles({
     font: "inherit !important",
     paddingLeft: "12px !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important",
-  },
-  menuItem_gutters: {
-    color: "#9F9F9F !important",
-    font: "inherit !important",
-    marginTop: "2px !important",
-    fontFamily: "Poppins !important",
-  },
-  update_buttons: {
-    width: "400px !important",
-    display: "flex !important",
+    fontFamily: "Arial !important",
   },
   h4: {
     fontSize: "17px !important",
@@ -166,7 +145,7 @@ const useStyles = makeStyles({
     paddingBottom: "10px !important",
     paddingLeft: "12px !important",
     fontStyle: "normal !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     // marginTop: "20px !important",
   },
   h4_second: {
@@ -174,73 +153,21 @@ const useStyles = makeStyles({
     fontWeight: "600 !important",
     margin: "0px !important",
     fontStyle: "normal !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     marginBottom: "10px !important",
-  },
-  button_one: {
-    minWidth: "140px !important",
-    height: "40px !important",
-    color: "white !important",
-    backgroundColor: "#FF4B4B !important",
-    margin: "20px 0 0 60px !important",
-    fontSize: "17px !important",
-    fontWeight: "400 !important",
-  },
-  category_button: {
-    minWidth: "140px !important",
-    margin: "20px 0 0 30px !important",
-    fontSize: "17px !important",
-    fontWeight: "400 !important",
-  },
-  update_button: {
-    minWidth: "220px !important",
-    height: "40px !important",
-    color: "white !important",
-    margin: "20px 0 0 80px !important",
-    fontSize: "17px !important",
-    fontWeight: "400 !important",
   },
   tableCell: {
     borderBottom: "1px solid black !important",
     padding: "0 !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
+  },
+  tableCell_parent: {
+    borderBottom: "1px solid black !important",
+    padding: "0 !important",
+    fontFamily: "Arial !important",
   },
   box: {
     textAlign: "center",
-  },
-  h1_second: {
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: "22px",
-    color: "#065374",
-    fontFamily: "Poppins !important",
-  },
-  deleteButton: {
-    border: "none !important",
-    background: "transparent !important",
-  },
-  cancel: {
-    background: "#FF4B4B!important",
-    borderRadius: "5px",
-    color: "#ffffff !important",
-    textTransform: "lowercase",
-    marginRight: "20px",
-    padding: "9px 20px 8px 20px !important",
-  },
-  deletes: {
-    background: "#065374 !important",
-    borderRadius: "5px",
-    color: "#ffffff !important",
-    textTransform: "lowercase",
-    margin: "0 0 0 20px !important",
-    padding: "9px 20px 8px 20px !important",
-  },
-  h2: {
-    fontSize: "17px",
-    fontWeight: "normal",
-    fontStyle: "normal",
-    color: "#000000",
-    fontFamily: "Poppins !important",
   },
   pagination: {
     width: "315px",
@@ -253,22 +180,6 @@ const useStyles = makeStyles({
     margin: "0 !important",
     borderRadius: "3px !important",
     padding: "20px 14px 20px 14px !important",
-  },
-  SearchInput: {
-    height: "40px !important",
-    borderRadius: "5px !important",
-    padding: "12px 150px 12px 20px",
-    border: "2px solid #9F9F9F !important",
-  },
-  SearchIcon: {
-    height: "40px !important",
-    marginLeft: "5px !important",
-    background: "#065374 !important",
-    color: "#ffffff",
-    borderRadius: "5px !important",
-  },
-  forInput: {
-    padding: "10px 20px",
   },
 });
 
@@ -304,7 +215,6 @@ export default function EnhancedTable(): JSX.Element {
   const [page, setPage] = React.useState(1);
   const [query, setQuery] = React.useState("react");
   const [category, setCategory] = React.useState<createDatas[]>([]);
-  console.log(category);
   const [notify, setNotify] = React.useState<any>({
     isOpen: false,
     message: "",
@@ -324,7 +234,7 @@ export default function EnhancedTable(): JSX.Element {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
-            message: "Muvaffaqiyatli yaratildi.",
+            message: "Создан успешно.",
             type: "success",
           });
         }
@@ -332,7 +242,7 @@ export default function EnhancedTable(): JSX.Element {
       .catch((err: any) => {
         setNotify({
           isOpen: true,
-          message: "Xatolik yuz berdi.",
+          message: "Что-то пошло не так.",
           type: "error",
         });
       });
@@ -384,7 +294,7 @@ export default function EnhancedTable(): JSX.Element {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
-            message: "Muvaffaqiyatli o'chirildi.",
+            message: "Удалено успешно.",
             type: "success",
           });
           refresh();
@@ -393,7 +303,7 @@ export default function EnhancedTable(): JSX.Element {
       .catch(() => {
         setNotify({
           isOpen: true,
-          message: "Xatolik yuz berdi.",
+          message: "Что-то пошло не так.",
           type: "error",
         });
       });
@@ -406,22 +316,24 @@ export default function EnhancedTable(): JSX.Element {
         style={{ paddingBottom: "50px !important", marginRight: 0 }}
         maxWidth="xl"
       >
-        <h1 className={classes.h1}>
-          Turkum ›
-          <span className={classes.h1}>
-            {category[0]?.parent_category?.name}
-          </span>
-        </h1>
+        <Link to="/category" style={{ color: "black" }}>
+          <h1 className={classes.h1}>
+            Категория ›
+            <span className={classes.h1_span}>
+              {category[0]?.parent_category?.name}
+            </span>
+          </h1>
+        </Link>
         <Box className={classes.input_two}>
           <Grid container direction="row" spacing={2}>
             <Grid item xs={3}>
-              <h4 className={classes.h4_second}>1.Sub turkum yaratish</h4>
+              <h4 className={classes.h4_second}>1.Создать подкатегорию</h4>
               <input
                 style={{ borderColor: "#9F9F9F" }}
                 className={classes.input_name}
                 id="outlined-basic"
                 onChange={handleInputChange}
-                placeholder="Turkumni nomi"
+                placeholder="Названия категории"
               />
               <Button
                 variant="contained"
@@ -430,15 +342,15 @@ export default function EnhancedTable(): JSX.Element {
                   refresh();
                 }}
                 className={classes.button_root}
-                style={{ textTransform: "capitalize" }}
+                style={{ textTransform: "none" }}
               >
-                Turkumni yarating
+                Создать категорию
               </Button>
             </Grid>
             <Grid item xs={9}>
               <Paper className={classes.paper}>
                 <TableContainer>
-                  <h4 className={classes.h4}>2.Turkumlar</h4>
+                  <h4 className={classes.h4}>2.Категории</h4>
                   <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
                     <EnhancedTableHead
                       numSelected={selected.length}
@@ -491,7 +403,7 @@ export default function EnhancedTable(): JSX.Element {
                               {row?.name}
                             </TableCell>
                             <TableCell
-                              className={classes.tableCell}
+                              className={classes.tableCell_parent}
                               align="left"
                               key={row.id}
                             >
