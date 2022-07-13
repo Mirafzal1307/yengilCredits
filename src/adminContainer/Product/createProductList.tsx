@@ -238,6 +238,9 @@ const useStyles = makeStyles({
     marginLeft: "56px",
     marginTop: "5px",
   },
+  headers: {
+    dispay: "flex",
+  },
 });
 interface Brands {
   name: string;
@@ -432,319 +435,321 @@ function ProductsCreate(): JSX.Element {
   length();
 
   return (
-    <>
+    <div className={classes.headers}>
       <MiniDrawer />
-      <Container
-        style={{ marginTop: "50px" }}
-        className={classes.CreateContainerTitle}
-      >
-        <form action="">
-          <h1 className={classes.CreateProductTitle}>
-            <span className="maxLength">Mahsulot Qo`shish</span>{" "}
-          </h1>
-          <Box className={classes.bigFirstBox}>
-            <Box className={classes.itemBox}>
-              <h2 className={classes.boxFirstTitle}>1.Umumiy ma`lumot</h2>
-              <div className={classes.GeneralInfoInside}>
-                <Box>
-                  <h2 className={classes.boxSecondTitle}>
-                    <span className="let">Mahsulotning to`liq nomi</span>{" "}
-                    <span style={{ color: "red" }}> *</span>
-                  </h2>
-                  <input
-                    type="text"
-                    placeholder="Nomi"
-                    className={classes.forBoxInput}
-                    onChange={(e) => setProductName(e.target.value)}
-                    minLength={3}
-                  />
-                </Box>
-                <Box>
-                  <h2 className={classes.boxSecondTitle}>
-                    <span className="let">Qisqa nomi</span>
-                    <span style={{ color: "red" }}> *</span>
-                  </h2>
-                  <input
-                    type="text"
-                    placeholder="Nomi"
-                    className={classes.forBoxInput}
-                    onChange={(e) => setProductShortName(e.target.value)}
-                    minLength={3}
-                  />
-                </Box>
-                <Box>
-                  <h2 className={classes.boxSecondTitle}>
-                    Brend nomi
+      <Box>
+        <Container
+          style={{ marginTop: "50px" }}
+          className={classes.CreateContainerTitle}
+        >
+          <form action="">
+            <h1 className={classes.CreateProductTitle}>
+              <span className="maxLength">Mahsulot Qo`shish</span>{" "}
+            </h1>
+            <Box className={classes.bigFirstBox}>
+              <Box className={classes.itemBox}>
+                <h2 className={classes.boxFirstTitle}>1.Umumiy ma`lumot</h2>
+                <div className={classes.GeneralInfoInside}>
+                  <Box>
+                    <h2 className={classes.boxSecondTitle}>
+                      <span className="let">Mahsulotning to`liq nomi</span>{" "}
+                      <span style={{ color: "red" }}> *</span>
+                    </h2>
+                    <input
+                      type="text"
+                      placeholder="Nomi"
+                      className={classes.forBoxInput}
+                      onChange={(e) => setProductName(e.target.value)}
+                      minLength={3}
+                    />
+                  </Box>
+                  <Box>
+                    <h2 className={classes.boxSecondTitle}>
+                      <span className="let">Qisqa nomi</span>
+                      <span style={{ color: "red" }}> *</span>
+                    </h2>
+                    <input
+                      type="text"
+                      placeholder="Nomi"
+                      className={classes.forBoxInput}
+                      onChange={(e) => setProductShortName(e.target.value)}
+                      minLength={3}
+                    />
+                  </Box>
+                  <Box>
+                    <h2 className={classes.boxSecondTitle}>
+                      Brend nomi
+                      <span style={{ color: "red" }}> *</span>
+                    </h2>
+                    <FormControl
+                      sx={{ minWidth: 120 }}
+                      className={classes.FormControl}
+                    >
+                      <Select
+                        value={brandName}
+                        onChange={handleChangeBrand}
+                        displayEmpty
+                        className={classes.Select}
+                      >
+                        <MenuItem value="">
+                          <span className="notranslate">Brendni tanlang</span>
+                        </MenuItem>
+
+                        {brands.map((brand) => (
+                          <MenuItem value={brand.id} key={brand.id}>
+                            {brand.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </div>
+              </Box>
+              <Box className={classes.itemBoxprice}>
+                <h2 className={classes.boxFirstTitle}>2.Narxlash</h2>
+                <div className={classes.Pricebox}>
+                  <Box>
+                    <h2 className={classes.boxSecondTitle}>
+                      Mahsulot narxi
+                      <span style={{ color: "red" }}> *</span>
+                    </h2>
+                    <input
+                      type="number"
+                      placeholder="Number"
+                      className={classes.forBoxInputPrice}
+                      onChange={(e) => setProductPrice(e.target.value)}
+                      minLength={3}
+                    />
+                  </Box>
+                  <Box>
+                    <h2 className={classes.boxSecondTitle}>
+                      Chegirma
+                      <span style={{ color: "red" }}> *</span>{" "}
+                    </h2>
+                    <input
+                      maxLength={2}
+                      type="text"
+                      style={{
+                        padding: "9px 2px 8px 17px",
+                        width: "80px",
+                        marginTop: "5px",
+                        marginRight: "5px",
+                        border: "2px solid #9F9F9F",
+                        borderRadius: "5px",
+                        outline: "none",
+                        fontFamily: "Poppins",
+                        fontWeight: "400",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                      className="inpchegirma"
+                      onChange={(e) => setProductDiscount(e.target.value)}
+                    />
+                    <span className={classes.spanDiscount}>%</span>
+                  </Box>
+                </div>
+              </Box>
+              <Box className={classes.itemBoxCategory}>
+                <h2 className={classes.boxFirstTitle}>3.Kategoriyalar</h2>
+                <Box className={classes.CategoryBox}>
+                  <h2 className={classes.boxCategoryTitle}>
+                    Kategoriya nomi
                     <span style={{ color: "red" }}> *</span>
                   </h2>
                   <FormControl
-                    sx={{ minWidth: 120 }}
-                    className={classes.FormControl}
+                    sx={{ m: 1, minWidth: 120 }}
+                    style={{ padding: "0 !important", margin: "0 !important" }}
                   >
                     <Select
-                      value={brandName}
-                      onChange={handleChangeBrand}
+                      value={categoryName}
+                      onChange={handleChangeCategory}
                       displayEmpty
                       className={classes.Select}
                     >
                       <MenuItem value="">
-                        <span className="notranslate">Brendni tanlang</span>
+                        <span className="notranslate">Выберите бренда.</span>
                       </MenuItem>
 
-                      {brands.map((brand) => (
-                        <MenuItem value={brand.id} key={brand.id}>
-                          {brand.name}
+                      {categories.map((category) => (
+                        <MenuItem value={category.id} key={category.id}>
+                          {category.name}
                         </MenuItem>
                       ))}
                     </Select>
                   </FormControl>
                 </Box>
-              </div>
-            </Box>
-            <Box className={classes.itemBoxprice}>
-              <h2 className={classes.boxFirstTitle}>2.Narxlash</h2>
-              <div className={classes.Pricebox}>
-                <Box>
+              </Box>
+              <Box className={classes.itemBox} style={{ marginTop: "35px" }}>
+                <h2 className={classes.boxFirstTitle}>4.Rasmlar</h2>
+                <Box
+                  style={{ marginLeft: "20px" }}
+                  className={classes.ProducutPhoto}
+                >
                   <h2 className={classes.boxSecondTitle}>
-                    Mahsulot narxi
+                    Mahsulot rasmi
                     <span style={{ color: "red" }}> *</span>
                   </h2>
-                  <input
-                    type="number"
-                    placeholder="Number"
-                    className={classes.forBoxInputPrice}
-                    onChange={(e) => setProductPrice(e.target.value)}
-                    minLength={3}
-                  />
-                </Box>
-                <Box>
-                  <h2 className={classes.boxSecondTitle}>
-                    Chegirma
-                    <span style={{ color: "red" }}> *</span>{" "}
-                  </h2>
-                  <input
-                    maxLength={2}
-                    type="text"
-                    style={{
-                      padding: "9px 2px 8px 17px",
-                      width: "80px",
-                      marginTop: "5px",
-                      marginRight: "5px",
-                      border: "2px solid #9F9F9F",
-                      borderRadius: "5px",
-                      outline: "none",
-                      fontFamily: "Poppins",
-                      fontWeight: "400",
-                      fontSize: "14px",
-                      color: "black",
-                    }}
-                    className="inpchegirma"
-                    onChange={(e) => setProductDiscount(e.target.value)}
-                  />
-                  <span className={classes.spanDiscount}>%</span>
-                </Box>
-              </div>
-            </Box>
-            <Box className={classes.itemBoxCategory}>
-              <h2 className={classes.boxFirstTitle}>3.Kategoriyalar</h2>
-              <Box className={classes.CategoryBox}>
-                <h2 className={classes.boxCategoryTitle}>
-                  Kategoriya nomi
-                  <span style={{ color: "red" }}> *</span>
-                </h2>
-                <FormControl
-                  sx={{ m: 1, minWidth: 120 }}
-                  style={{ padding: "0 !important", margin: "0 !important" }}
-                >
-                  <Select
-                    value={categoryName}
-                    onChange={handleChangeCategory}
-                    displayEmpty
-                    className={classes.Select}
-                  >
-                    <MenuItem value="">
-                      <b>Turkumni tanlang</b>
-                    </MenuItem>
-
-                    {categories.map((category) => (
-                      <MenuItem value={category.id} key={category.id}>
-                        {category.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-            </Box>
-            <Box className={classes.itemBox} style={{ marginTop: "35px" }}>
-              <h2 className={classes.boxFirstTitle}>4.Rasmlar</h2>
-              <Box
-                style={{ marginLeft: "20px" }}
-                className={classes.ProducutPhoto}
-              >
-                <h2 className={classes.boxSecondTitle}>
-                  Mahsulot rasmi
-                  <span style={{ color: "red" }}> *</span>
-                </h2>
-                <div className={classes.Photosettings}>
-                  <form style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      alt="img"
-                      src={preview}
-                      style={{ display: preview ? "block" : "none" }}
-                      className={classes.forImagePreview}
-                    />
-                    <FormLabel
-                      htmlFor="file-input"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        fileInputRef.current.click();
-                      }}
-                    >
-                      <img src={BackUp} alt="dddd" />
-                    </FormLabel>
-                    <input
-                      type="file"
-                      style={{ display: "none" }}
-                      ref={fileInputRef}
-                      multiple
-                      accept="image/*"
-                      onChange={handleInputChange}
-                      minLength={3}
-                    />
-                  </form>
-                  <div />
-                </div>
-              </Box>
-            </Box>
-            <Box className={classes.itemBox}>
-              <h2 className={classes.boxFirstTitle}>
-                5.Mahsulot xususiyatlari
-              </h2>
-              <div className={classes.DynamicFeilds}>
-                {inputFields.map((inputField) => (
-                  <div key={inputField.id}>
-                    <FormControl
-                      sx={{ m: 1, minWidth: 120 }}
-                      style={{
-                        padding: "0 !important",
-                        margin: "0 !important",
-                      }}
-                    >
-                      <Select
-                        name="character"
-                        value={inputField.character}
-                        onChange={(event) =>
-                          handleChangeInput(inputField.id, event)
-                        }
-                        displayEmpty
-                        style={{ marginRight: "20px", marginBottom: "20px" }}
-                        className={classes.Select}
+                  <div className={classes.Photosettings}>
+                    <form style={{ display: "flex", alignItems: "center" }}>
+                      <img
+                        alt="img"
+                        src={preview}
+                        style={{ display: preview ? "block" : "none" }}
+                        className={classes.forImagePreview}
+                      />
+                      <FormLabel
+                        htmlFor="file-input"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          fileInputRef.current.click();
+                        }}
                       >
-                        <MenuItem value="">
-                          <span>Xossa nomi </span>
-                        </MenuItem>
-                        {characterNames.map((characterName) => (
-                          <MenuItem
-                            value={characterName.id}
-                            key={characterName.id}
-                          >
-                            {characterName.name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-
-                    <FormControl
-                      sx={{ m: 1, minWidth: 120 }}
-                      style={{
-                        padding: "0 !important",
-                        margin: "0 !important",
-                      }}
-                    >
-                      <Select
-                        name="property"
-                        value={inputField.property}
-                        onChange={(event) =>
-                          handleChangeInput(inputField.id, event)
-                        }
-                        displayEmpty
-                        className={classes.Select}
-                      >
-                        <MenuItem value="">
-                          <span>Xossa qiymati </span>
-                        </MenuItem>
-                        {characterProperties.map((characterProperty) => (
-                          <MenuItem
-                            value={characterProperty.id}
-                            key={characterProperty.id}
-                          >
-                            {characterProperty.value}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                    <IconButton
-                      disabled={inputFields?.length === 1}
-                      onClick={() => handleRemoveFields(inputField.id)}
-                    >
-                      <RemoveIcon />
-                    </IconButton>
-                    <IconButton onClick={handleAddFields}>
-                      <AddIcon />
-                    </IconButton>
+                        <img src={BackUp} alt="dddd" />
+                      </FormLabel>
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        ref={fileInputRef}
+                        multiple
+                        accept="image/*"
+                        onChange={handleInputChange}
+                        minLength={3}
+                      />
+                    </form>
+                    <div />
                   </div>
-                ))}
-              </div>
-              <BasicModal />
-            </Box>
-            <Box className={classes.itemBox}>
-              <h2 className={classes.boxFirstTitle}>8.Mahsulot holati</h2>
-              <Box className={classes.statusBox}>
-                <h2 className={classes.boxSecondTitle}>Holat</h2>
-                <FormControl
-                  sx={{ m: 1, minWidth: 120 }}
-                  style={{ padding: "0 !important", margin: "0 !important" }}
-                >
-                  <Select
-                    className={classes.Select}
-                    value={productStatus}
-                    onChange={handleChangeStatus}
-                    displayEmpty
-                  >
-                    <MenuItem value="">
-                      <span>Holatni tanlang</span>
-                    </MenuItem>
-                    <MenuItem value="true">Sotuvda</MenuItem>
-                    <MenuItem value="false">Sotuvda emas</MenuItem>
-                  </Select>
-                </FormControl>
+                </Box>
               </Box>
+              <Box className={classes.itemBox}>
+                <h2 className={classes.boxFirstTitle}>
+                  5.Mahsulot xususiyatlari
+                </h2>
+                <div className={classes.DynamicFeilds}>
+                  {inputFields.map((inputField) => (
+                    <div key={inputField.id}>
+                      <FormControl
+                        sx={{ m: 1, minWidth: 120 }}
+                        style={{
+                          padding: "0 !important",
+                          margin: "0 !important",
+                        }}
+                      >
+                        <Select
+                          name="character"
+                          value={inputField.character}
+                          onChange={(event) =>
+                            handleChangeInput(inputField.id, event)
+                          }
+                          displayEmpty
+                          style={{ marginRight: "20px", marginBottom: "20px" }}
+                          className={classes.Select}
+                        >
+                          <MenuItem value="">
+                            <span>Xossa nomi </span>
+                          </MenuItem>
+                          {characterNames.map((characterName) => (
+                            <MenuItem
+                              value={characterName.id}
+                              key={characterName.id}
+                            >
+                              {characterName.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+
+                      <FormControl
+                        sx={{ m: 1, minWidth: 120 }}
+                        style={{
+                          padding: "0 !important",
+                          margin: "0 !important",
+                        }}
+                      >
+                        <Select
+                          name="property"
+                          value={inputField.property}
+                          onChange={(event) =>
+                            handleChangeInput(inputField.id, event)
+                          }
+                          displayEmpty
+                          className={classes.Select}
+                        >
+                          <MenuItem value="">
+                            <span>Xossa qiymati </span>
+                          </MenuItem>
+                          {characterProperties.map((characterProperty) => (
+                            <MenuItem
+                              value={characterProperty.id}
+                              key={characterProperty.id}
+                            >
+                              {characterProperty.value}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                      <IconButton
+                        disabled={inputFields?.length === 1}
+                        onClick={() => handleRemoveFields(inputField.id)}
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                      <IconButton onClick={handleAddFields}>
+                        <AddIcon />
+                      </IconButton>
+                    </div>
+                  ))}
+                </div>
+                <BasicModal />
+              </Box>
+              <Box className={classes.itemBox}>
+                <h2 className={classes.boxFirstTitle}>8.Mahsulot holati</h2>
+                <Box className={classes.statusBox}>
+                  <h2 className={classes.boxSecondTitle}>Holat</h2>
+                  <FormControl
+                    sx={{ m: 1, minWidth: 120 }}
+                    style={{ padding: "0 !important", margin: "0 !important" }}
+                  >
+                    <Select
+                      className={classes.Select}
+                      value={productStatus}
+                      onChange={handleChangeStatus}
+                      displayEmpty
+                    >
+                      <MenuItem value="">
+                        <span>Holatni tanlang</span>
+                      </MenuItem>
+                      <MenuItem value="true">Sotuvda</MenuItem>
+                      <MenuItem value="false">Sotuvda emas</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Box>
+              <div style={{ display: "flex" }}>
+                <Button
+                  sx={{ textTransform: "capitalize" }}
+                  className={classes.forButton}
+                  onClick={() => {
+                    onSubmit();
+                  }}
+                  style={{ marginLeft: "auto", display: "flex" }}
+                >
+                  Saqlash
+                </Button>
+                <Button
+                  sx={{ textTransform: "capitalize" }}
+                  component={RouterLink as any}
+                  to="/product"
+                  className={classes.cancel}
+                >
+                  Bekor qilish
+                </Button>
+              </div>
             </Box>
-            <div style={{ display: "flex" }}>
-              <Button
-                sx={{ textTransform: "capitalize" }}
-                className={classes.forButton}
-                onClick={() => {
-                  onSubmit();
-                }}
-                style={{ marginLeft: "auto", display: "flex" }}
-              >
-                Saqlash
-              </Button>
-              <Button
-                sx={{ textTransform: "capitalize" }}
-                component={RouterLink as any}
-                to="/product"
-                className={classes.cancel}
-              >
-                Bekor qilish
-              </Button>
-            </div>
-          </Box>
-          <Notification notify={notify} setNotify={setNotify} />
-        </form>
-      </Container>
-    </>
+            <Notification notify={notify} setNotify={setNotify} />
+          </form>
+        </Container>
+      </Box>
+    </div>
   );
 }
 

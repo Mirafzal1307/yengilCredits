@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     "&:focus": {
       outline: "none",
     },
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     fontSize: "15px !important",
     fontWeight: "400",
     padding: "9px 0px 8px 20px !important",
@@ -42,20 +42,20 @@ const useStyles = makeStyles({
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "20px 0 10px 0 !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   category_category: {
     color: "#464646 !important",
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "10px 0 !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   button_root: {
     backgroundColor: "#065374 !important",
     padding: "9px 20px 8px 20px !important",
     marginTop: "20px !important",
-    marginLeft: "62% !important",
+    marginLeft: "50% !important",
     fontFamily: "Poppins",
   },
   em: {
@@ -63,20 +63,20 @@ const useStyles = makeStyles({
     font: "inherit !important",
     paddingLeft: "12px !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   menuItem_gutters: {
     color: "#9F9F9F !important",
     font: "inherit !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   h4_second: {
     fontSize: "17px !important",
     fontWeight: "600 !important",
     margin: "0px !important",
     fontStyle: "normal !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
 });
 interface createDatas {
@@ -113,7 +113,7 @@ function CategoryCreate(): JSX.Element {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
-            message: "Muvaffaqiyatli yaratildi.",
+            message: "Создан успешно.",
             type: "success",
           });
         }
@@ -122,7 +122,7 @@ function CategoryCreate(): JSX.Element {
       .catch((err: any) => {
         setNotify({
           isOpen: true,
-          message: "Xatolik yuz berdi.",
+          message: "Что-то пошло не так.",
           type: "error",
         });
       });
@@ -139,16 +139,16 @@ function CategoryCreate(): JSX.Element {
   }
   return (
     <Box className={classes.input_one}>
-      <h4 className={classes.h4_second}>1.Turkum yaratish</h4>
-      <h5 className={classes.category_name}>Nomi</h5>
+      <h4 className={classes.h4_second}>1.Создать категорию</h4>
+      <h5 className={classes.category_name}>Названия</h5>
       <input
         style={{ borderColor: "#9F9F9F" }}
         className={classes.input_name}
         id="outlined-basic"
         onChange={(e) => setCategory(e.target.value)}
-        placeholder="Turkumni nomi"
+        placeholder="Названия категории"
       />
-      <h5 className={classes.category_category}>Turkum</h5>
+      <h5 className={classes.category_category}>Категория</h5>
       <FormControl sx={{ m: 1, minWidth: "100%", margin: 0 }}>
         <Select
           value={select}
@@ -159,7 +159,7 @@ function CategoryCreate(): JSX.Element {
           }}
         >
           <MenuItem value="">
-            <em className={classes.em}>Turkimni tanlang</em>
+            <em className={classes.em}>Выбор категории</em>
           </MenuItem>
           {rows.map((row) => (
             <MenuItem
@@ -180,9 +180,9 @@ function CategoryCreate(): JSX.Element {
             refresh();
           }}
           className={classes.button_root}
-          style={{ textTransform: "capitalize" }}
+          style={{ textTransform: "none" }}
         >
-          Turkumni yarating
+          Создать категорию
         </Button>
       </Tooltip>
       <Notification notify={notify} setNotify={setNotify} />

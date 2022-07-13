@@ -37,7 +37,7 @@ import Notification from "../Snackbar/Notification";
 
 const useStyles = makeStyles({
   title: {
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     fontWeight: "600",
     fontSize: "28px",
   },
@@ -45,7 +45,7 @@ const useStyles = makeStyles({
     background: "#fff",
     boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
     borderRadius: "5px",
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     padding: "30px !important",
   },
   insideBox: {
@@ -78,7 +78,7 @@ const useStyles = makeStyles({
   },
   titleRows: {
     color: "#065374 !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     fontWeight: "600 !important",
     fontSize: "17px !important",
     margin: 0,
@@ -95,7 +95,7 @@ const useStyles = makeStyles({
   },
   productRows: {
     padding: "16px 16px 16px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     color: "#000",
     fontWeight: "300 !important",
     fontSize: "17px !important",
@@ -113,12 +113,12 @@ const useStyles = makeStyles({
   },
   mainTitle: {
     color: "#065374",
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     fontWeight: 600,
     fontSize: "22px",
   },
   priceText: {
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     color: "#000",
     fontWeight: "300 !important",
     fontSize: "17px",
@@ -145,7 +145,7 @@ const useStyles = makeStyles({
   statusText: {
     marginLeft: "5px",
     fontSize: "17px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     fontWeight: "300 !important",
   },
   statusBox: {
@@ -200,7 +200,7 @@ function OrderDetails(): JSX.Element {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
-            message: "Holat o'zgartirildi...",
+            message: "Статус отредактирован.",
             type: "success",
           });
           setTimeout(() => {
@@ -211,7 +211,7 @@ function OrderDetails(): JSX.Element {
       .catch(() => {
         setNotify({
           isOpen: true,
-          message: "Hech narsa o'zgartirilmadi...",
+          message: "Что-то пошло не так.",
           type: "error",
         });
       });
@@ -226,7 +226,7 @@ function OrderDetails(): JSX.Element {
     <>
       <MiniDrawer />
       <Container style={{ marginTop: "50px" }}>
-        <h2 className={classes.title}>Buyurtma</h2>
+        <h2 className={classes.title}>Заказ</h2>
       </Container>
       <Container className={classes.bigBox}>
         <Grid
@@ -258,7 +258,7 @@ function OrderDetails(): JSX.Element {
                         marginBottom: 0,
                       }}
                     >
-                      Xizmat ko`rsatilmadi
+                      Не обслужена.
                     </p>
                   </div>
                 ) : defaultStatus === "SERVED" ? (
@@ -272,7 +272,7 @@ function OrderDetails(): JSX.Element {
                         marginBottom: 0,
                       }}
                     >
-                      Xizmat ko`rsatildi
+                      Обслужена.
                     </p>
                   </div>
                 ) : defaultStatus === "ADMIN_CANCEL" ? (
@@ -286,7 +286,7 @@ function OrderDetails(): JSX.Element {
                         marginBottom: 0,
                       }}
                     >
-                      Admin bekor qildi
+                      Отменено администратором.
                     </p>
                   </div>
                 ) : defaultStatus === "CLIENT_CANCEL" ? (
@@ -300,7 +300,7 @@ function OrderDetails(): JSX.Element {
                         marginBottom: 0,
                       }}
                     >
-                      Client bekor qildi
+                      Отменено клиентом.
                     </p>
                   </div>
                 ) : defaultStatus === "IN_PROGRESS" ? (
@@ -314,7 +314,7 @@ function OrderDetails(): JSX.Element {
                         marginBottom: 0,
                       }}
                     >
-                      Jarayonda
+                      В ходе выполнения.
                     </p>
                   </div>
                 ) : (
@@ -340,7 +340,7 @@ function OrderDetails(): JSX.Element {
                             marginBottom: 0,
                           }}
                         >
-                          Xizmat ko`rsatilmadi
+                          Не обслужена.
                         </p>
                       </div>
                     ) : item?.statusType === "SERVED" ? (
@@ -354,7 +354,7 @@ function OrderDetails(): JSX.Element {
                             marginBottom: 0,
                           }}
                         >
-                          Xizmat ko`rsatildi
+                          Обслужена.
                         </p>
                       </div>
                     ) : item?.statusType === "ADMIN_CANCEL" ? (
@@ -368,7 +368,7 @@ function OrderDetails(): JSX.Element {
                             marginBottom: 0,
                           }}
                         >
-                          Admin bekor qildi
+                          Отменено администратором.
                         </p>
                       </div>
                     ) : item?.statusType === "CLIENT_CANCEL" ? (
@@ -382,7 +382,7 @@ function OrderDetails(): JSX.Element {
                             marginBottom: 0,
                           }}
                         >
-                          Client bekor qildi
+                          Отменено клиентом.
                         </p>
                       </div>
                     ) : item?.statusType === "IN_PROGRESS" ? (
@@ -396,7 +396,7 @@ function OrderDetails(): JSX.Element {
                             marginBottom: 0,
                           }}
                         >
-                          Jarayonda
+                          В ходе выполнения.
                         </p>
                       </div>
                     ) : (
@@ -409,7 +409,7 @@ function OrderDetails(): JSX.Element {
           </Tooltip>
         </Grid>
         <Box>
-          <h2 className={classes.mainTitle}>Mijoz</h2>
+          <h2 className={classes.mainTitle}>Клиент</h2>
           <Box className={classes.clientBigBox}>
             <div className={classes.clientBox}>
               <img src={fullnameicon} alt="icon" />
@@ -436,16 +436,16 @@ function OrderDetails(): JSX.Element {
             <TableHead>
               <TableRow>
                 <TableCell align="left" className={classes.titleRows}>
-                  Mahsulot
+                  Продукт
                 </TableCell>
                 <TableCell align="left" className={classes.titleRows}>
-                  Narxi
+                  Цена
                 </TableCell>
                 <TableCell align="left" className={classes.titleRows}>
-                  Soni
+                  Количество
                 </TableCell>
                 <TableCell align="left" className={classes.titleRows}>
-                  Umumiy narx
+                  Итоговая цена
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -499,7 +499,7 @@ function OrderDetails(): JSX.Element {
         >
           <Box className={classes.priceBox}>
             <p className={classes.priceText}>
-              Umumiy hisob:{" "}
+              Итого:{" "}
               <span style={{ fontWeight: 500 }}>{price?.toLocaleString()}</span>
             </p>
             <button
@@ -507,7 +507,7 @@ function OrderDetails(): JSX.Element {
               className={classes.saveButton}
               onClick={sendDataToAPI}
             >
-              Saqlash
+              Сохранить
             </button>
           </Box>
         </Box>
