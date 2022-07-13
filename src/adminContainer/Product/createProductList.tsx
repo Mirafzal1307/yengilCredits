@@ -440,15 +440,15 @@ function ProductsCreate(): JSX.Element {
       >
         <form action="">
           <h1 className={classes.CreateProductTitle}>
-            <span className="maxLength">Mahsulot Qo`shish</span>{" "}
+            <span className="maxLength">Добавить продукта</span>{" "}
           </h1>
           <Box className={classes.bigFirstBox}>
             <Box className={classes.itemBox}>
-              <h2 className={classes.boxFirstTitle}>1.Umumiy ma`lumot</h2>
+              <h2 className={classes.boxFirstTitle}>1.Общая информация</h2>
               <div className={classes.GeneralInfoInside}>
                 <Box>
                   <h2 className={classes.boxSecondTitle}>
-                    <span className="let">Mahsulotning to`liq nomi</span>{" "}
+                    <span className="let">Полное название продукта.</span>{" "}
                     <span style={{ color: "red" }}> *</span>
                   </h2>
                   <input
@@ -461,7 +461,7 @@ function ProductsCreate(): JSX.Element {
                 </Box>
                 <Box>
                   <h2 className={classes.boxSecondTitle}>
-                    <span className="let">Qisqa nomi</span>
+                    <span className="let">Короткое название.</span>
                     <span style={{ color: "red" }}> *</span>
                   </h2>
                   <input
@@ -474,7 +474,7 @@ function ProductsCreate(): JSX.Element {
                 </Box>
                 <Box>
                   <h2 className={classes.boxSecondTitle}>
-                    Brend nomi
+                    Название бренда.
                     <span style={{ color: "red" }}> *</span>
                   </h2>
                   <FormControl
@@ -488,7 +488,7 @@ function ProductsCreate(): JSX.Element {
                       className={classes.Select}
                     >
                       <MenuItem value="">
-                        <span className="notranslate">Brendni tanlang</span>
+                        <span className="notranslate">Выберите бренда.</span>
                       </MenuItem>
 
                       {brands.map((brand) => (
@@ -502,11 +502,11 @@ function ProductsCreate(): JSX.Element {
               </div>
             </Box>
             <Box className={classes.itemBoxprice}>
-              <h2 className={classes.boxFirstTitle}>2.Narxlash</h2>
+              <h2 className={classes.boxFirstTitle}>2.Цена</h2>
               <div className={classes.Pricebox}>
                 <Box>
                   <h2 className={classes.boxSecondTitle}>
-                    Mahsulot narxi
+                    Цена продукта.
                     <span style={{ color: "red" }}> *</span>
                   </h2>
                   <input
@@ -519,7 +519,7 @@ function ProductsCreate(): JSX.Element {
                 </Box>
                 <Box>
                   <h2 className={classes.boxSecondTitle}>
-                    Chegirma
+                    Скидка.
                     <span style={{ color: "red" }}> *</span>{" "}
                   </h2>
                   <input
@@ -546,10 +546,10 @@ function ProductsCreate(): JSX.Element {
               </div>
             </Box>
             <Box className={classes.itemBoxCategory}>
-              <h2 className={classes.boxFirstTitle}>3.Kategoriyalar</h2>
+              <h2 className={classes.boxFirstTitle}>3.Категории</h2>
               <Box className={classes.CategoryBox}>
                 <h2 className={classes.boxCategoryTitle}>
-                  Kategoriya nomi
+                  Название категории.
                   <span style={{ color: "red" }}> *</span>
                 </h2>
                 <FormControl
@@ -563,7 +563,7 @@ function ProductsCreate(): JSX.Element {
                     className={classes.Select}
                   >
                     <MenuItem value="">
-                      <b>Turkumni tanlang</b>
+                      <b>Выберите категорию</b>
                     </MenuItem>
 
                     {categories.map((category) => (
@@ -576,13 +576,13 @@ function ProductsCreate(): JSX.Element {
               </Box>
             </Box>
             <Box className={classes.itemBox} style={{ marginTop: "35px" }}>
-              <h2 className={classes.boxFirstTitle}>4.Rasmlar</h2>
+              <h2 className={classes.boxFirstTitle}>4.Фото</h2>
               <Box
                 style={{ marginLeft: "20px" }}
                 className={classes.ProducutPhoto}
               >
                 <h2 className={classes.boxSecondTitle}>
-                  Mahsulot rasmi
+                  Фото продукта
                   <span style={{ color: "red" }}> *</span>
                 </h2>
                 <div className={classes.Photosettings}>
@@ -618,7 +618,7 @@ function ProductsCreate(): JSX.Element {
             </Box>
             <Box className={classes.itemBox}>
               <h2 className={classes.boxFirstTitle}>
-                5.Mahsulot xususiyatlari
+                5.Характеристики продукта
               </h2>
               <div className={classes.DynamicFeilds}>
                 {inputFields.map((inputField) => (
@@ -641,7 +641,7 @@ function ProductsCreate(): JSX.Element {
                         className={classes.Select}
                       >
                         <MenuItem value="">
-                          <span>Xossa nomi </span>
+                          <span>Название характеристики </span>
                         </MenuItem>
                         {characterNames.map((characterName) => (
                           <MenuItem
@@ -671,7 +671,7 @@ function ProductsCreate(): JSX.Element {
                         className={classes.Select}
                       >
                         <MenuItem value="">
-                          <span>Xossa qiymati </span>
+                          <span>Свойства характеристики </span>
                         </MenuItem>
                         {characterProperties.map((characterProperty) => (
                           <MenuItem
@@ -698,9 +698,9 @@ function ProductsCreate(): JSX.Element {
               <BasicModal />
             </Box>
             <Box className={classes.itemBox}>
-              <h2 className={classes.boxFirstTitle}>8.Mahsulot holati</h2>
+              <h2 className={classes.boxFirstTitle}>8.Статус продукта</h2>
               <Box className={classes.statusBox}>
-                <h2 className={classes.boxSecondTitle}>Holat</h2>
+                <h2 className={classes.boxSecondTitle}>Статус</h2>
                 <FormControl
                   sx={{ m: 1, minWidth: 120 }}
                   style={{ padding: "0 !important", margin: "0 !important" }}
@@ -712,10 +712,10 @@ function ProductsCreate(): JSX.Element {
                     displayEmpty
                   >
                     <MenuItem value="">
-                      <span>Holatni tanlang</span>
+                      <span>Выберите статус</span>
                     </MenuItem>
-                    <MenuItem value="true">Sotuvda</MenuItem>
-                    <MenuItem value="false">Sotuvda emas</MenuItem>
+                    <MenuItem value="true">В наличии</MenuItem>
+                    <MenuItem value="false">Нет в наличии</MenuItem>
                   </Select>
                 </FormControl>
               </Box>

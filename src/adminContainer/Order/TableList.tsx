@@ -9,14 +9,14 @@ function Order(): JSX.Element {
       <Container maxWidth="lg" style={{ marginTop: "50px" }}>
         <Typography
           sx={{
-            fontFamily: "Poppins",
+            fontFamily: "Arial",
             fontStyle: "normal",
             fontWeight: "600",
             fontSize: "28px",
           }}
           variant="h1"
         >
-          Buyurtma
+          Заказ
         </Typography>
 
         <Paper elevation={3}>

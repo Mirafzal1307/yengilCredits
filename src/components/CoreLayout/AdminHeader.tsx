@@ -16,7 +16,12 @@ import ListItemText from "@mui/material/ListItemText";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Link as RouterLink, useNavigate, Link } from "react-router-dom";
+import {
+  Link as RouterLink,
+  useNavigate,
+  Link,
+  useLocation,
+} from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -142,6 +147,8 @@ const useStyles = makeStyles({
 });
 export default function MiniDrawer(props: any): any {
   const [value, setValue] = React.useState(0);
+  const location = useLocation();
+
   const handleChange = (
     event: React.SyntheticEvent,
     newValue: number,
@@ -177,7 +184,13 @@ export default function MiniDrawer(props: any): any {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState<boolean>();
+
+  // if (location.pathname === "/dashboard") {
+  //   setOpen(true);
+  // } else {
+  //   setOpen(false);
+  // }
 
   const handleDrawerOpen = (): void => {
     setOpen(true);
