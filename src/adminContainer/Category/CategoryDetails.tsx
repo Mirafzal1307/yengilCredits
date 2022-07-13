@@ -99,6 +99,7 @@ const useStyles = makeStyles({
     boxShadow: "0px 0px 10px rgb(0 0 0 / 25%) !important",
     borderRadius: "5px !important",
     padding: "40px 60px !important",
+    marginLeft: "100px !important",
   },
   h1: {
     fontSize: "28px !important",
@@ -310,10 +311,15 @@ export default function EnhancedTable(): JSX.Element {
   };
 
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       <MiniDrawer />
       <Container
-        style={{ paddingBottom: "50px !important", marginRight: 0 }}
+        style={{
+          marginTop: "80px",
+          paddingBottom: "50px !important",
+          marginRight: "100px",
+          marginLeft: "-100px",
+        }}
         maxWidth="xl"
       >
         <Link to="/category" style={{ color: "black" }}>
@@ -448,6 +454,6 @@ export default function EnhancedTable(): JSX.Element {
           </Grid>
         </Box>
       </Container>
-    </>
+    </Box>
   );
 }

@@ -307,10 +307,13 @@ const useStyles = makeStyles({
     padding: "5px",
     textAlign: "right",
   },
+  title1: {
+    marginTop: "100px",
+  },
 });
 
 function ProductDetails(): JSX.Element {
-  const { products, error, loading } = useTypedSelector((state) => state?.byId);
+  const { products, error, loading } = useTypedSelector((state) => state.byId);
   const pro: any = products?.Product;
   const des: any = products?.Description;
   const classes = useStyles();
@@ -320,106 +323,111 @@ function ProductDetails(): JSX.Element {
     fetchProductsById(id);
   }, []);
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       <MiniDrawer />
-      <Container
-        style={{ marginTop: "50px" }}
-        className={classes.CreateContainerTitle}
-      >
-        {loading && products ? (
-          <CircularProgress disableShrink />
-        ) : (
-          <>
-            <Grid item xs={12}>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <h3 className={classes.ProductName}>{pro[0]?.name}</h3>
-                <i className={classes.BrandName}>{pro[0]?.brand?.name}</i>
-              </div>
-            </Grid>
-            <Box style={{ display: "flex", alignItems: "center" }}>
-              <Grid
-                item
-                xs={6}
-                style={{ display: "flex", flexDirection: "column" }}
-              >
+      <Box sx={{ ml: "0", mr: "50px", mb: "50px" }}>
+        <h2 className={classes.title1}>Tafsilotlar</h2>
+        <Container
+          style={{ marginTop: "20px" }}
+          className={classes.CreateContainerTitle}
+        >
+          {loading && products ? (
+            <CircularProgress disableShrink />
+          ) : (
+            <>
+              <Grid item xs={12}>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <h3 className={classes.ProductName}>{pro[0]?.name}</h3>
+                  <i className={classes.BrandName}>{pro[0]?.brand?.name}</i>
+                </div>
+              </Grid>
+              <Box style={{ display: "flex", alignItems: "center" }}>
+                <Grid
+                  item
+                  xs={6}
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  <div
+                    style={{
+                      textAlign: "center",
+                      filter: "drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))",
+                    }}
+                  >
+                    <img
+                      src={`${MINIO_FULL_ENDPOINT_FOR}/product/${pro[0]?.photos[0].name}`}
+                      alt="Rasm bor edi"
+                      className={classes.img}
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div className={classes.CharacterAndProperty}>
+                    <li className={classes.Character}>
+                      <h4>Xarakteriska Nomi</h4>
+                      {des[0]?.map((item: any, key: any) => (
+                        <div style={{ flexDirection: "column" }}>
+                          {item?.character_name}
+                        </div>
+                      ))}
+                    </li>
+                    <li
+                      className={classes.Character}
+                      style={{ textAlign: "right" }}
+                    >
+                      <h4>Xarakteriska Qiymati</h4>
+                      {des[0]?.map((item: any, key: any) => (
+                        <div style={{ flexDirection: "column" }}>
+                          {item?.character_value}
+                        </div>
+                      ))}
+                    </li>
+                  </div>
+                </Grid>
+              </Box>
+              <Grid item xs={12}>
                 <div
                   style={{
-                    textAlign: "center",
-                    filter: "drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "30px",
                   }}
                 >
-                  <img
-                    src={`${MINIO_FULL_ENDPOINT_FOR}/product/${pro[0]?.photos[0].name}`}
-                    alt="Rasm bor edi"
-                    className={classes.img}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <div className={classes.CharacterAndProperty}>
-                  <li className={classes.Character}>
-                    <h3>Xarakteriska Nomi</h3>
-                    {des[0]?.map((item: any, key: any) => (
-                      <div style={{ flexDirection: "column" }}>
-                        {item?.character_name}
-                      </div>
-                    ))}
-                  </li>
-                  <li
-                    className={classes.Character}
-                    style={{ textAlign: "right" }}
-                  >
-                    <h3>Xarakteriska Qiymati</h3>
-                    {des[0]?.map((item: any, key: any) => (
-                      <div style={{ flexDirection: "column" }}>
-                        {item?.character_value}
-                      </div>
-                    ))}
-                  </li>
-                </div>
-              </Grid>
-            </Box>
-            <Grid item xs={12}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginTop: "30px",
-                }}
-              >
-                <div>
-                  <h3 className={classes.ProductBottomName}>
-                    {pro?.[0]?.name}
-                  </h3>
-                  <h4 className={classes.ShortName}>{pro?.[0]?.short_name}</h4>
-                </div>
-                <div>
                   <div>
-                    <p className={classes.price}> {pro?.[0]?.price} so`m </p>
-                    <p className={classes.afterDiscount}>
-                      {" "}
-                      {pro?.[0]?.after_discount?.toLocaleString()} so`m{" "}
-                    </p>
-                    <p className={classes.discount}> {pro?.[0].discount} %</p>
+                    <h3 className={classes.ProductBottomName}>
+                      {pro[0]?.name}
+                    </h3>
+                    <h4 className={classes.ShortName}>{pro[0]?.short_name}</h4>
                   </div>
-                  <div style={{ display: "flex" }}>
-                    <Button className={classes.save}>Bekor qilish</Button>
-                    <Button
-                      component={RouterLink as any}
-                      to="/product"
-                      className={classes.cancel}
-                    >
-                      Saqlash
-                    </Button>
+                  <div>
+                    <div>
+                      <p className={classes.price}> {pro?.[0]?.price} so`m </p>
+                      <p className={classes.afterDiscount}>
+                        {" "}
+                        {pro?.[0]?.after_discount?.toLocaleString()} so`m{" "}
+                      </p>
+                      <p className={classes.discount}> {pro?.[0].discount} %</p>
+                    </div>
+                    <div style={{ display: "flex" }}>
+                      <Button className={classes.save}>Bekor qilish</Button>
+                      <Button
+                        component={RouterLink as any}
+                        to="/product"
+                        className={classes.cancel}
+                      >
+                        Saqlash
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Grid>
-          </>
-        )}
-        {error ? <h1>error</h1> : null}
-      </Container>
-    </>
+              </Grid>
+            </>
+          )}
+          {error ? <h1>error</h1> : null}
+        </Container>
+      </Box>
+    </Box>
   );
 }
 

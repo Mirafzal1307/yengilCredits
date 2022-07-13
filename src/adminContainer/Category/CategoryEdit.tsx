@@ -28,10 +28,10 @@ interface createDatas {
 const useStyles = makeStyles({
   box: {
     position: "absolute",
-    width: "1560px !important",
-    height: "860px !important",
-    left: "320px !important",
-    top: "155px !important",
+    width: "1200px !important",
+    minHeight: "400px !important",
+    left: "250px !important",
+    top: "150px !important",
     background: " #FFFFFF !important",
     boxShadow: "0px 0px 10px rgb(0 0 0 / 25%) !important",
     borderRadius: "5px !important",
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     position: "absolute",
     width: "111px",
     height: "39px",
-    left: "319px",
+    left: "250px",
     top: "70px",
     fontStyle: "normal",
     fontWeight: "600",
@@ -111,6 +111,13 @@ const useStyles = makeStyles({
     fontSize: "17px !important",
     fontWeight: "400 !important",
     marginTop: "20px !important",
+  },
+  header: {
+    display: "flex",
+  },
+  box2: {
+    display: "flex !importatnt",
+    position: "relative",
   },
 });
 

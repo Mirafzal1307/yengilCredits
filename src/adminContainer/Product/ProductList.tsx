@@ -407,7 +407,7 @@ function ProductList(): JSX.Element {
   }
 
   return (
-    <>
+    <Box>
       <div className={classes.productsTitle}>
         <h1 className={classes.product}>Продукты</h1>
         <Button
@@ -584,7 +584,6 @@ function ProductList(): JSX.Element {
                           return val;
                         }
                       })
-                      .reverse()
                       .map((user, index) => {
                         const delProduct = (): void => {
                           deleteUserData(user.id);
@@ -726,7 +725,7 @@ function ProductList(): JSX.Element {
         </Paper>
       </Box>
       <Notification notify={notify} setNotify={setNotify} />
-    </>
+    </Box>
   );
 }
 

@@ -1,12 +1,16 @@
 import { Container, Paper, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
 import TableOrder from "./TableOrder";
 
 function Order(): JSX.Element {
   return (
-    <div>
+    <Box sx={{ display: "flex", mt: "50px" }}>
       <MiniDrawer />
-      <Container maxWidth="lg" style={{ marginTop: "50px" }}>
+      <Container
+        maxWidth="lg"
+        style={{ marginTop: "50px", marginLeft: "0", marginRight: "80px" }}
+      >
         <Typography
           sx={{
             fontFamily: "Arial",
@@ -23,7 +27,7 @@ function Order(): JSX.Element {
           <TableOrder />
         </Paper>
       </Container>
-    </div>
+    </Box>
   );
 }
 
