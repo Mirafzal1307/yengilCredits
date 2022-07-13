@@ -242,31 +242,31 @@ const headCells: readonly HeadCell[] = [
     id: "calories",
     numeric: true,
     disablePadding: false,
-    label: "Mahsulot",
+    label: "Продукт",
   },
   {
     id: "fat",
     numeric: true,
     disablePadding: false,
-    label: "Mahsulot turkumi",
+    label: "Категория продукта",
   },
   {
     id: "carbs",
     numeric: true,
     disablePadding: false,
-    label: "Holat",
+    label: "Статус",
   },
   {
     id: "protein",
     numeric: true,
     disablePadding: false,
-    label: "Brand",
+    label: "Бренд",
   },
   {
     id: "protein",
     numeric: true,
     disablePadding: false,
-    label: "Amallar",
+    label: "Действия",
   },
 ];
 interface EnhancedTableProps {
@@ -409,7 +409,7 @@ function ProductList(): JSX.Element {
   return (
     <>
       <div className={classes.productsTitle}>
-        <h1 className={classes.product}>Mahsulotlar</h1>
+        <h1 className={classes.product}>Продукты</h1>
         <Button
           className={classes.createButton}
           component={RouterLink as any}
@@ -417,7 +417,7 @@ function ProductList(): JSX.Element {
           sx={{ textTransform: "capitalize" }}
           onClick={() => refresh()}
         >
-          + Qo`shish
+          + Добавить
         </Button>
       </div>
       <Box sx={{ maxWidth: "1200px", margin: "auto" }}>
@@ -427,7 +427,7 @@ function ProductList(): JSX.Element {
               <div style={{ display: "flex" }}>
                 <input
                   type="text"
-                  placeholder="Izlash..."
+                  placeholder="Искать"
                   onChange={handleInputChange}
                   className={classes.SearchInput}
                 />
@@ -448,7 +448,7 @@ function ProductList(): JSX.Element {
                           <p
                             style={{ margin: "0px", padding: "0px !important" }}
                           >
-                            Mahsulot turkumi{" "}
+                            Категория продукта{" "}
                           </p>
                         );
                       }
@@ -532,7 +532,7 @@ function ProductList(): JSX.Element {
                                   alt="rasm"
                                   className={classes.icon}
                                 />
-                                sotuvda
+                                В наличии
                               </p>
                             ) : (
                               <p className={classes.notSale}>
@@ -541,7 +541,7 @@ function ProductList(): JSX.Element {
                                   alt="rasm"
                                   className={classes.icon}
                                 />
-                                Sotuvda yo`q
+                                Нет в наличии
                               </p>
                             )}
                           </TableCell>
@@ -652,7 +652,7 @@ function ProductList(): JSX.Element {
                                     alt="rasm"
                                     className={classes.icon}
                                   />
-                                  sotuvda
+                                  В наличии
                                 </p>
                               ) : (
                                 <p className={classes.notSale}>
@@ -661,7 +661,7 @@ function ProductList(): JSX.Element {
                                     alt="rasm"
                                     className={classes.icon}
                                   />
-                                  Sotuvda yo`q
+                                  Нет в наличии
                                 </p>
                               )}
                             </TableCell>

@@ -91,12 +91,13 @@ function BasicModal(): JSX.Element {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Siz bu yerda yangi xossa nomi va qiymati qo`shishingiz mumkin!
+            Вы должны добавить Название характеристики и Свойства
+            характеристики.
           </Typography>
           <div style={divStyle}>
             <FormControl sx={{ width: "25ch" }}>
               <OutlinedInput
-                placeholder="Xossa nomi..."
+                placeholder="Название характеристики..."
                 type="text"
                 onChange={(e) => setCharacterName(e.target.value)}
                 required
@@ -104,7 +105,7 @@ function BasicModal(): JSX.Element {
             </FormControl>
             <FormControl sx={{ width: "25ch" }}>
               <OutlinedInput
-                placeholder="Xossa qiymati..."
+                placeholder="Свойства характеристики..."
                 type="text"
                 onChange={(e) => setPropertyName(e.target.value)}
                 required

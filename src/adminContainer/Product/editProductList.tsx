@@ -482,14 +482,14 @@ function EditProductList(): JSX.Element {
         style={{ marginTop: "50px" }}
         className={classes.CreateContainerTitle}
       >
-        <h1 className={classes.CreateProductTitle}>Mahsulotni O`zgartirish </h1>
+        <h1 className={classes.CreateProductTitle}>Изменить продукта </h1>
         <Box className={classes.bigFirstBox}>
           <Box className={classes.itemBox}>
-            <h2 className={classes.boxFirstTitle}>1.Umumiy ma`lumot</h2>
+            <h2 className={classes.boxFirstTitle}>1.Общая информация</h2>
             <div className={classes.GeneralInfoInside}>
               <Box>
                 <h2 className={classes.boxSecondTitle}>
-                  Mahsulotning to`liq nomi{" "}
+                  Полное название продукта.{" "}
                   <span style={{ color: "red" }}> *</span>{" "}
                 </h2>
                 <input
@@ -502,7 +502,7 @@ function EditProductList(): JSX.Element {
               </Box>
               <Box>
                 <h2 className={classes.boxSecondTitle}>
-                  Qisqa nomi
+                  Короткое название.
                   <span style={{ color: "red" }}> *</span>
                 </h2>
                 <input
@@ -515,7 +515,7 @@ function EditProductList(): JSX.Element {
               </Box>
               <Box>
                 <h2 className={classes.boxSecondTitle}>
-                  Brend nomi
+                  Название бренда.
                   <span style={{ color: "red" }}> *</span>
                 </h2>
                 <FormControl
@@ -529,7 +529,7 @@ function EditProductList(): JSX.Element {
                     className={classes.Select}
                   >
                     <MenuItem value="">
-                      <span className="notranslate">Brendni tanlang</span>
+                      <span className="notranslate">Выберите бренда.</span>
                     </MenuItem>
                     {brands.map((brand) => (
                       <MenuItem value={brand.id} key={brand.id}>
@@ -542,11 +542,11 @@ function EditProductList(): JSX.Element {
             </div>
           </Box>
           <Box className={classes.itemBoxprice}>
-            <h2 className={classes.boxFirstTitle}>2.Narxlash</h2>
+            <h2 className={classes.boxFirstTitle}>2.Цена</h2>
             <div className={classes.Pricebox}>
               <Box>
                 <h2 className={classes.boxSecondTitle}>
-                  Mahsulot narxi
+                  Цена продукта.
                   <span style={{ color: "red" }}> *</span>
                 </h2>
                 <input
@@ -559,7 +559,7 @@ function EditProductList(): JSX.Element {
               </Box>
               <Box>
                 <h2 className={classes.boxSecondTitle}>
-                  Chegirma
+                  Скидка.
                   <span style={{ color: "red" }}> *</span>{" "}
                 </h2>
                 <input
@@ -574,10 +574,10 @@ function EditProductList(): JSX.Element {
             </div>
           </Box>
           <Box className={classes.itemBoxCategory}>
-            <h2 className={classes.boxFirstTitle}>3.Kategoriyalar</h2>
+            <h2 className={classes.boxFirstTitle}>3.Категории</h2>
             <Box className={classes.CategoryBox}>
               <h2 className={classes.boxCategoryTitle}>
-                Kategoriya nomi
+                Название категории.
                 <span style={{ color: "red" }}> *</span>
               </h2>
               <FormControl
@@ -591,7 +591,7 @@ function EditProductList(): JSX.Element {
                   className={classes.Select}
                 >
                   <MenuItem value="">
-                    <span>Turkumni tanlang</span>
+                    <span>Выберите категорию</span>
                   </MenuItem>
                   {categories.map((category) => (
                     <MenuItem value={category.id} key={category.id}>
@@ -603,13 +603,13 @@ function EditProductList(): JSX.Element {
             </Box>
           </Box>
           <Box className={classes.itemBox} style={{ marginTop: "35px" }}>
-            <h2 className={classes.boxFirstTitle}>4.Rasmlar</h2>
+            <h2 className={classes.boxFirstTitle}>4.Фото</h2>
             <Box
               style={{ marginLeft: "20px" }}
               className={classes.ProducutPhoto}
             >
               <h2 className={classes.boxSecondTitle}>
-                Mahsulot rasmi
+                Фото продукта
                 <span style={{ color: "red" }}> *</span>
               </h2>
               <form style={{ display: "flex", alignItems: "center" }}>
@@ -640,7 +640,7 @@ function EditProductList(): JSX.Element {
             </Box>
           </Box>
           <Box className={classes.itemBox}>
-            <h2 className={classes.boxFirstTitle}>5.Mahsulot xususiyatlari</h2>
+            <h2 className={classes.boxFirstTitle}>5.Характеристики продукта</h2>
             <div className={classes.DynamicFeilds}>
               {inputFields.map((inputField) => (
                 <div key={inputField.id}>
@@ -659,7 +659,7 @@ function EditProductList(): JSX.Element {
                       className={classes.Select}
                     >
                       <MenuItem value="">
-                        <span>Xossa nomi </span>
+                        <span>Название характеристики </span>
                       </MenuItem>
                       {characterNames.map((characterName) => (
                         <MenuItem
@@ -686,7 +686,7 @@ function EditProductList(): JSX.Element {
                       className={classes.Select}
                     >
                       <MenuItem value="">
-                        <span>Xossa qiymati </span>
+                        <span>Свойства характеристики </span>
                       </MenuItem>
                       {characterProperties.map((characterProperty) => (
                         <MenuItem
@@ -713,10 +713,10 @@ function EditProductList(): JSX.Element {
             <BasicModal />
           </Box>
           <Box className={classes.itemBox}>
-            <h2 className={classes.boxFirstTitle}>8.Mahsulot holati</h2>
+            <h2 className={classes.boxFirstTitle}>8.Статус продукта</h2>
             <Box className={classes.statusBox}>
               <h2 className={classes.boxSecondTitle}>
-                Holat
+                Статус
                 <span style={{ color: "red" }}> *</span>
               </h2>
               <FormControl
@@ -730,11 +730,11 @@ function EditProductList(): JSX.Element {
                   displayEmpty
                 >
                   <MenuItem value="">
-                    <span>Holatni tanlang</span>
+                    <span>Выберите статус</span>
                   </MenuItem>
 
-                  <MenuItem value="true">Sotuvda</MenuItem>
-                  <MenuItem value="false">Sotuvda emas</MenuItem>
+                  <MenuItem value="true">В наличии</MenuItem>
+                  <MenuItem value="false">Нет в наличии</MenuItem>
                 </Select>
               </FormControl>
             </Box>
