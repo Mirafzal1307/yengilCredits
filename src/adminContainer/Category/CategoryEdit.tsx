@@ -29,10 +29,10 @@ interface createDatas {
 const useStyles = makeStyles({
   box: {
     position: "absolute",
-    width: "1560px !important",
-    height: "860px !important",
-    left: "320px !important",
-    top: "155px !important",
+    width: "1200px !important",
+    minHeight: "400px !important",
+    left: "250px !important",
+    top: "150px !important",
     background: " #FFFFFF !important",
     boxShadow: "0px 0px 10px rgb(0 0 0 / 25%) !important",
     borderRadius: "5px !important",
@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     position: "absolute",
     width: "111px",
     height: "39px",
-    left: "319px",
+    left: "250px",
     top: "70px",
     fontStyle: "normal",
     fontWeight: "600",
@@ -76,7 +76,7 @@ const useStyles = makeStyles({
     fontFamily: "Poppins !important",
   },
   input_name: {
-    width: "33.2% !important",
+    width: "500px !important",
     fontFamily: "Poppins !important",
     fontSize: "15px !important",
     fontWeight: "400",
@@ -127,6 +127,13 @@ const useStyles = makeStyles({
     fontSize: "17px !important",
     fontWeight: "400 !important",
     marginTop: "20px !important",
+  },
+  header: {
+    display: "flex",
+  },
+  box2: {
+    display: "flex !importatnt",
+    position: "relative",
   },
 });
 
@@ -214,60 +221,62 @@ export default function CategoryEdit(): JSX.Element {
   return (
     <>
       <MiniDrawer />
-      <Container>
-        <h1 className={classes.h1}>Turkum</h1>
-        <Box sx={style} className={classes.box}>
-          <Paper style={{ boxShadow: "none" }}>
-            <h4 className={classes.h4_second}>Turkumni o`zgartirish</h4>
-            <h5 className={classes.category_name}>Nomi</h5>
-            <input
-              style={{ borderColor: "#9F9F9F" }}
-              className={classes.input_name}
-              id="outlined-basic"
-              placeholder="Turkumni nomi"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            />
-            <h5 className={classes.category_category}>Turkum</h5>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <Select
-                value={select}
-                onChange={handleChangeCategory}
-                displayEmpty
-                style={{
-                  width: "500px",
-                  height: "40px",
-                }}
-              >
-                <MenuItem value="">
-                  <em className={classes.em}>Turkimni tanlang</em>
-                </MenuItem>
-                {rows.map((row, index) => (
-                  <MenuItem
-                    value={row.id}
-                    key={row.id}
-                    className={classes.menuItem_gutters}
-                  >
-                    {row.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <div className={classes.parent_buttons}>
-              <Tooltip title="Turkumni o'zgartirish">
-                <Button
-                  className={classes.deletes}
-                  style={{ textTransform: "capitalize" }}
-                  onClick={putCategory}
+      <Box>
+        <Container sx={{ ml: "0px", mr: "80px" }}>
+          <h1 className={classes.h1}>Turkum</h1>
+          <Box sx={style} className={classes.box}>
+            <Paper style={{ boxShadow: "none" }}>
+              <h4 className={classes.h4_second}>Turkumni o`zgartirish</h4>
+              <h5 className={classes.category_name}>Nomi</h5>
+              <input
+                style={{ borderColor: "#9F9F9F" }}
+                className={classes.input_name}
+                id="outlined-basic"
+                placeholder="Turkumni nomi"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <h5 className={classes.category_category}>Turkum</h5>
+              <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <Select
+                  value={select}
+                  onChange={handleChangeCategory}
+                  displayEmpty
+                  style={{
+                    width: "500px",
+                    height: "40px",
+                  }}
                 >
-                  Turkumni o`zgartirish
-                </Button>
-              </Tooltip>
-            </div>
-          </Paper>
-        </Box>
-        <Notification notify={notify} setNotify={setNotify} />
-      </Container>
+                  <MenuItem value="">
+                    <em className={classes.em}>Turkimni tanlang</em>
+                  </MenuItem>
+                  {rows.map((row, index) => (
+                    <MenuItem
+                      value={row.id}
+                      key={row.id}
+                      className={classes.menuItem_gutters}
+                    >
+                      {row.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <div className={classes.parent_buttons}>
+                <Tooltip title="Turkumni o'zgartirish">
+                  <Button
+                    className={classes.deletes}
+                    style={{ textTransform: "capitalize" }}
+                    onClick={putCategory}
+                  >
+                    Turkumni o`zgartirish
+                  </Button>
+                </Tooltip>
+              </div>
+            </Paper>
+          </Box>
+          <Notification notify={notify} setNotify={setNotify} />
+        </Container>
+      </Box>
     </>
   );
 }

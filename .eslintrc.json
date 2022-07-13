@@ -71,6 +71,7 @@
         "tsx": "never"
       }
     ],
+
     "import/prefer-default-export": "off",
     "eslint no-underscore-dangle": 0,
     "default-param-last": 0,

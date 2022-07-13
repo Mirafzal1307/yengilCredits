@@ -99,10 +99,11 @@ const useStyles = makeStyles({
     boxShadow: "0px 0px 10px rgb(0 0 0 / 25%) !important",
     borderRadius: "5px !important",
     padding: "40px 60px !important",
+    marginLeft: "100px !important",
   },
   h1: {
     fontSize: "28px !important",
-    margin: "32px 0 20px 0 !important",
+    margin: "32px 0 10px 0 !important",
     fontFamily: "Poppins !important",
   },
   input_name: {
@@ -270,6 +271,24 @@ const useStyles = makeStyles({
   forInput: {
     padding: "10px 20px",
   },
+  menu: {
+    marginLeft: "100px",
+    display: "flex",
+    flexDirection: "column",
+    // justifyContent: "space-between",
+  },
+  menuItem: {
+    color: "#065374",
+    fontWeight: "600",
+    cursor: "pointer",
+    marginLeft: "30px",
+  },
+  menuLink: {
+    marginBottom: "15px",
+  },
+  header: {
+    display: "flex",
+  },
 });
 
 function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
@@ -401,13 +420,20 @@ export default function EnhancedTable(): JSX.Element {
   };
 
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       <MiniDrawer />
       <Container
-        style={{ paddingBottom: "50px !important", marginRight: 0 }}
+        style={{
+          marginTop: "80px",
+          paddingBottom: "50px !important",
+          marginRight: "100px",
+          marginLeft: "-100px",
+        }}
         maxWidth="xl"
       >
-        <h1 className={classes.h1}>Turkum</h1>
+        <div className={classes.menu}>
+          <h1 className={classes.h1}>Turkum</h1>
+        </div>
         <Box className={classes.input_two}>
           <Grid container direction="row" spacing={2}>
             <Grid item xs={3}>
@@ -434,7 +460,6 @@ export default function EnhancedTable(): JSX.Element {
             <Grid item xs={9}>
               <Paper className={classes.paper}>
                 <TableContainer>
-                  <h4 className={classes.h4}>2.Turkumlar</h4>
                   <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
                     <EnhancedTableHead
                       numSelected={selected.length}
@@ -532,6 +557,6 @@ export default function EnhancedTable(): JSX.Element {
           </Grid>
         </Box>
       </Container>
-    </>
+    </Box>
   );
 }

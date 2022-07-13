@@ -79,9 +79,11 @@ function BrandList(): JSX.Element {
   const classes = useStyles();
 
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       <MiniDrawer />
-      <Container style={{ marginTop: "50px" }}>
+      <Container
+        style={{ marginTop: "80px", marginRight: "80px", marginLeft: "0" }}
+      >
         <h1 className={classes.title}>Brand</h1>
         <Grid container direction="row" spacing={2}>
           <Grid item xs={5}>
@@ -94,7 +96,7 @@ function BrandList(): JSX.Element {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </Box>
   );
 }
 

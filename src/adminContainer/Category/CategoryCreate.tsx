@@ -55,7 +55,7 @@ const useStyles = makeStyles({
     backgroundColor: "#065374 !important",
     padding: "9px 20px 8px 20px !important",
     marginTop: "20px !important",
-    marginLeft: "62% !important",
+    marginLeft: "50% !important",
     fontFamily: "Poppins",
   },
   em: {
@@ -141,6 +141,7 @@ function CategoryCreate(): JSX.Element {
     <Box className={classes.input_one}>
       <h4 className={classes.h4_second}>1.Turkum yaratish</h4>
       <h5 className={classes.category_name}>Nomi</h5>
+
       <input
         style={{ borderColor: "#9F9F9F" }}
         className={classes.input_name}

@@ -360,13 +360,11 @@ function EditProductList(): JSX.Element {
     await fetch(img).then(async (response) => {
       const blob: any = await response.blob();
       const file = new File([blob], photo, { type: blob.type });
-      setImage(file);
     });
   };
   React.useEffect(() => {
     getProduct(id);
   }, []);
-
   React.useEffect(() => {
     if (image) {
       const reader = new FileReader();
@@ -476,10 +474,14 @@ function EditProductList(): JSX.Element {
 
   length();
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       <MiniDrawer />
       <Container
-        style={{ marginTop: "50px" }}
+        style={{
+          marginTop: "80px",
+          marginLeft: "0",
+          marginRight: "80px",
+        }}
         className={classes.CreateContainerTitle}
       >
         <h1 className={classes.CreateProductTitle}>Mahsulotni O`zgartirish </h1>
@@ -762,7 +764,7 @@ function EditProductList(): JSX.Element {
         </Box>
         <Notification notify={notify} setNotify={setNotify} />
       </Container>
-    </>
+    </Box>
   );
 }
 

@@ -167,9 +167,16 @@ function BrandEditPage(): JSX.Element {
   }
 
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       <MiniDrawer />
-      <Container style={{ marginTop: "50px" }}>
+      <Container
+        style={{
+          marginTop: "100px",
+          marginLeft: "0",
+          marginRight: "80px",
+          marginBottom: "50px",
+        }}
+      >
         <Box className={classes.bigFirstBox}>
           <Box className={classes.itemBox}>
             <h2 className={classes.boxFirstTitle}>1.Name</h2>
@@ -227,7 +234,7 @@ function BrandEditPage(): JSX.Element {
         </Box>
         <Notification notify={notify} setNotify={setNotify} />
       </Container>
-    </>
+    </Box>
   );
 }
 
