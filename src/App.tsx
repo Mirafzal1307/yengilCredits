@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -23,9 +23,7 @@ import AllCards from "./clientContainer/Home/AllCards";
 import OrderDetails from "./adminContainer/Order/OrderDetails";
 import LoginPage from "./Auth/LoginPage";
 import PrivateRoute from "./Auth/PrivateRoute";
-import Payme from "./demoPayment";
-
-// let win = window
+// import Payme from "./demoPayment";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();

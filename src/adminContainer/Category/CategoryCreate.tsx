@@ -55,8 +55,8 @@ const useStyles = makeStyles({
     backgroundColor: "#065374 !important",
     padding: "9px 20px 8px 20px !important",
     marginTop: "20px !important",
-    marginLeft: "62% !important",
-    fontFamily: "Arial",
+    marginLeft: "50% !important",
+    fontFamily: "Poppins",
   },
   em: {
     color: "#9F9F9F !important",
