@@ -26,7 +26,8 @@ class ApiClient {
         const token = localStorage.getItem("accessToken");
         console.log(token, "token");
         if (token) {
-          config.headers["access_token"] = token; // for Node.js Express back-end
+          config.headers.Authorization = `Bearer ${token}`; // for Node.js Express back-end
+          // console.log(token);
         }
         return config;
       },
