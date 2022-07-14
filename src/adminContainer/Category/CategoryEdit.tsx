@@ -60,7 +60,7 @@ const useStyles = makeStyles({
     padding: "9px 20px 8px 20px !important",
   },
   input_name: {
-    width: "33.2% !important",
+    width: "44% !important",
     fontFamily: "Arial !important",
     fontSize: "15px !important",
     fontWeight: "400",

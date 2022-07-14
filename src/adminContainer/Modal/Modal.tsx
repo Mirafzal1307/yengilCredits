@@ -128,13 +128,13 @@ function Modal(props: any): JSX.Element {
         className={classes.Backdrop}
       >
         <Box sx={style} className={classes.box}>
-          <h1 className={classes.h1}>Diqqat!</h1>
+          <h1 className={classes.h1}>Внимание!</h1>
           <h2 id="unstyled-modal-title" className={classes.h2}>
-            Siz rostdan ham o’chirmoqchimisiz?
+            Вы реально хотите удалить?
           </h2>
           <div>
             <Button onClick={handleClose} className={classes.cancel}>
-              Bekor qilish
+              Отменить
             </Button>
             <Button
               onClick={() => {
@@ -144,7 +144,7 @@ function Modal(props: any): JSX.Element {
               }}
               className={classes.deletes}
             >
-              O`chirish
+              Удалить
             </Button>
           </div>
         </Box>
