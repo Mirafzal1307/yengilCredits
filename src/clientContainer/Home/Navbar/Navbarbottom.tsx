@@ -63,47 +63,47 @@ function Navbarbottom(): JSX.Element {
         }}
       >
         <SplideSlide className={classes.Slide}>
-          <Link to="/product/product-by-category/1007">
+          <Link to="/product/product-by-category/1004">
             <img src={Aksesuar} alt="rasm" className={classes.img} />
           </Link>
         </SplideSlide>
         <SplideSlide className={classes.Slide}>
-          <Link to="/product/product-by-category/1008">
+          <Link to="/product/product-by-category/1005">
             <img src={Desktop} alt="" className={classes.img} />
           </Link>
         </SplideSlide>
         <SplideSlide className={classes.Slide}>
-          <Link to="/product/product-by-category/1009">
+          <Link to="/product/product-by-category/1007">
             <img src={forKitchen} alt="" className={classes.img} />
           </Link>
         </SplideSlide>
         <SplideSlide className={classes.Slide}>
-          <Link to="/product/product-by-category/1011">
+          <Link to="/product/product-by-category/1010">
             <img src={refrigerators} alt="" className={classes.img} />
           </Link>
         </SplideSlide>
         <SplideSlide className={classes.Slide}>
-          <Link to="/product/product-by-category/1012">
+          <Link to="/product/product-by-category/1018">
             <img src={smartphones} alt="" className={classes.img} />
           </Link>
         </SplideSlide>
         <SplideSlide className={classes.Slide}>
-          <Link to="/product/product-by-category/1016">
+          <Link to="/product/product-by-category/1021">
             <img src={washingmashine} alt="" className={classes.img} />
           </Link>
         </SplideSlide>
         <SplideSlide className={classes.Slide}>
-          <Link to="/product/product-by-category/1018">
+          <Link to="/product/product-by-category/1017">
             <img src={washing} alt="" className={classes.img} />
           </Link>
         </SplideSlide>
         <SplideSlide className={classes.Slide}>
-          <Link to="/product/product-by-category/1015">
+          <Link to="/product/product-by-category/1014">
             <img src={six} alt="" className={classes.img} />
           </Link>
         </SplideSlide>
         <SplideSlide className={classes.Slide}>
-          <Link to="/product/product-by-category/1014">
+          <Link to="/product/product-by-category/1016">
             <img src={eight} alt="" className={classes.img} />
           </Link>
         </SplideSlide>
@@ -113,7 +113,7 @@ function Navbarbottom(): JSX.Element {
           </Link>
         </SplideSlide>
         <SplideSlide className={classes.Slide}>
-          <Link to="/product/product-by-category/1017">
+          <Link to="/product/product-by-category/1015">
             <img src={wash} alt="" className={classes.img} />
           </Link>
         </SplideSlide>

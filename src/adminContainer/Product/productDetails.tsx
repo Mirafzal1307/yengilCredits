@@ -1,31 +1,17 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import { useParams, Link as RouterLink } from "react-router-dom";
+import { useParams, Link as RouterLink, Link } from "react-router-dom";
 import { CircularProgress, Container, Grid, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { fontSize } from "@mui/system";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
-
-import { getProductCreate } from "../../Api/admin/AdminProductApi";
-import { API_URL, MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
+import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { useActions } from "../../hook/useActions";
-import { fetchProductsById } from "../../redux/actions/detailsByIdAction";
 
 const useStyles = makeStyles({
-  bigFirstBox: {
-    background: "#FFFFFF",
-    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
-    borderRadius: "5px",
-    padding: "20px 40px 40px 42px",
-    marginBottom: "70px !important",
-  },
   itemBox: {
     display: "flex",
     paddingTop: "40px",
-  },
-  itemBoxCategory: {
-    paddingTop: "30px",
   },
   itemBoxprice: {
     display: "flex",
@@ -408,7 +394,9 @@ function ProductDetails(): JSX.Element {
                       <p className={classes.discount}> {pro?.discount} %</p>
                     </div>
                     <div style={{ display: "flex" }}>
-                      <Button className={classes.save}>Отменить</Button>
+                      <Link to="/product">
+                        <Button className={classes.save}>Отменить</Button>
+                      </Link>
                       <Button
                         component={RouterLink as any}
                         to="/product"
