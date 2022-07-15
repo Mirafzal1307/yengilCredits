@@ -8,9 +8,7 @@ class AuthService {
       username,
       password,
     };
-    console.log(data, "data-->>");
     return getToken(data).then((response: any) => {
-      console.log(response, "response-->>");
       if (response.data.accessToken) {
         TokenService.setAdmin(response.data);
       }
@@ -19,8 +17,6 @@ class AuthService {
   }
 
   getrefreshToken(data: any): any {
-    console.log(data.refreshToken, "data------------------------------->>");
-    // debugger;
     return getRefreshToken(data);
   }
 

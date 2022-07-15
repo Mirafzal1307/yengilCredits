@@ -95,18 +95,13 @@ export default function TransitionsModal(): JSX.Element {
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
   const [category, setCategory] = React.useState<any>({});
-  // console.log(category);
 
   const classes = useStyles();
-  // const getCategoryProductById = async (id: any): Promise<any> => {
-  //   await getProductFromCategoryById(id, {});
-  // };
   const refresh = (): void => {
     setTimeout(() => window.location.reload(), 100);
   };
   const getCategoryForCleintPage = async (): Promise<any> => {
     const response: any = await getCategoryForClient();
-    // const categories: any = response.data;
     setCategory(response.data.menu);
   };
   React.useEffect(() => {
