@@ -219,13 +219,13 @@ const useStyles = makeStyles({
     marginLeft: "276px !important",
   },
   ProducutPhoto: {
-    marginLeft: "186px !important",
+    marginLeft: "219px !important",
   },
   characterBox: {
     marginLeft: "56px !important",
   },
   statusBox: {
-    marginLeft: "117px !important",
+    marginLeft: "134px !important",
   },
   cancel: {
     backgroundColor: "#464646!important",
@@ -425,7 +425,7 @@ function EditProductList(): JSX.Element {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: "Muvaffaqiyatli taxrirlandi.",
+              message: "Изменено успешно.",
               type: "success",
             });
             setTimeout(() => {
@@ -436,14 +436,14 @@ function EditProductList(): JSX.Element {
         .catch(() => {
           setNotify({
             isOpen: true,
-            message: "Xatolik yuz berdi...",
+            message: "Что-то пошло не так...",
             type: "error",
           });
         });
     } catch (err) {
       setNotify({
         isOpen: true,
-        message: "Xatolik yuz berdi...",
+        message: "Что-то пошло не так...",
         type: "error",
       });
     }
@@ -457,7 +457,7 @@ function EditProductList(): JSX.Element {
       }
       if (inp[4].value.length === 1) {
         inp[4].style.borderColor = "#9F9F9F";
-        element.title = "Xatolik yuz berdi 2 tadan ko`p ma`lumot kiriting";
+        element.title = "Ошибка, введите больше 2 символов";
       } else {
         inp[4].style.borderColor = "#9F9F9F";
       }
@@ -465,7 +465,7 @@ function EditProductList(): JSX.Element {
         element.style.borderColor = "#9F9F9F";
       } else if (element.value.length <= 3) {
         element.style.borderColor = "red";
-        element.title = "Xatolik yuz berdi 3 tadan ko`p ma`lumot kiriting";
+        element.title = "Ошибка, введите больше 3 символов";
       } else {
         element.style.borderColor = "#9F9F9F";
       }
@@ -546,7 +546,7 @@ function EditProductList(): JSX.Element {
           <Box className={classes.itemBoxprice}>
             <h2 className={classes.boxFirstTitle}>2.Цена</h2>
             <div className={classes.Pricebox}>
-              <Box>
+              <Box style={{ marginLeft: "35px" }}>
                 <h2 className={classes.boxSecondTitle}>
                   Цена продукта.
                   <span style={{ color: "red" }}> *</span>
@@ -750,14 +750,14 @@ function EditProductList(): JSX.Element {
               }}
               style={{ marginLeft: "auto", display: "flex", cursor: "pointer" }}
             >
-              Saqlash
+              Изменить
             </Button>
             <Link to="/product">
               <Button
                 sx={{ textTransform: "capitalize" }}
                 className={classes.cancel}
               >
-                Bekor qilish
+                Отменить
               </Button>
             </Link>
           </div>

@@ -19,20 +19,15 @@ class ApiClient {
       },
       timeout: 5000,
     });
-    console.log(baseURL, "baseURL");
     this.instance.interceptors.request.use(
       (config: any) => {
-        // console.log(config?.headers?.access_token);
         const token = localStorage.getItem("accessToken");
-        console.log(token, "token");
         if (token) {
           config.headers.Authorization = `Bearer ${token}`; // for Node.js Express back-end
-          // console.log(token);
         }
         return config;
       },
       (error) => {
-        console.log(error);
         return Promise.reject(error);
       },
     );

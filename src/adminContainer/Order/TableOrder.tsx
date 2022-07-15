@@ -155,7 +155,6 @@ function TableOrder(): JSX.Element {
               <MenuItem value="">
                 <em>Все</em>
               </MenuItem>
-              {/* eslint no-nested-ternary: "off" */}
               {status?.map((item: any) => (
                 <MenuItem value={item.statusType} key={Math.random()}>
                   {item.statusType === "NOT_SERVED" ? (
@@ -229,7 +228,7 @@ function TableOrder(): JSX.Element {
                       </p>
                     </div>
                   ) : (
-                    "Xatolik yuz berdi"
+                    "Произошло ошибка"
                   )}
                 </MenuItem>
               ))}
@@ -303,7 +302,6 @@ function TableOrder(): JSX.Element {
               </TableHead>
               <TableBody>
                 {orders
-                  .reverse()
                   .filter((val: any) => {
                     if (!searchTerm) {
                       return val;
@@ -413,7 +411,7 @@ function TableOrder(): JSX.Element {
                             </p>
                           </div>
                         ) : (
-                          "Xatolik yuz berdi"
+                          "Произошло ошибка"
                         )}
                       </TableCell>
                       <TableCell

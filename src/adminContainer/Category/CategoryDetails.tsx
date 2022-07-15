@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import { Button, Container, Grid, Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Link, useParams, Link as NavLink } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   deleteCategoryItem,
   getCategoryByParentCategory,
@@ -93,17 +93,18 @@ const useStyles = makeStyles({
     boxShadow: "none !important",
   },
   input_two: {
-    width: "1200px !important",
+    // width: "1000px",
+    maxWidth: "1200px",
     top: "140px !important",
     background: "#FFFFFF !important",
     boxShadow: "0px 0px 10px rgb(0 0 0 / 25%) !important",
     borderRadius: "5px !important",
     padding: "40px 60px !important",
-    marginLeft: "100px !important",
+    marginLeft: "80px",
   },
   h1: {
     fontSize: "28px !important",
-    margin: "32px 0 20px 0 !important",
+    margin: "32px 0 20px 80px !important",
     fontFamily: "Arial !important",
   },
   h1_span: {
@@ -147,7 +148,6 @@ const useStyles = makeStyles({
     paddingLeft: "12px !important",
     fontStyle: "normal !important",
     fontFamily: "Arial !important",
-    // marginTop: "20px !important",
   },
   h4_second: {
     fontSize: "17px !important",
@@ -174,13 +174,6 @@ const useStyles = makeStyles({
     width: "315px",
     marginRight: "unset !important",
     padding: "5px 5px 5px 5px !important",
-  },
-  paginationItem: {
-    width: "100%",
-    border: " solid 1px #9F9F9F !important",
-    margin: "0 !important",
-    borderRadius: "3px !important",
-    padding: "20px 14px 20px 14px !important",
   },
 });
 
@@ -315,12 +308,10 @@ export default function EnhancedTable(): JSX.Element {
       <MiniDrawer />
       <Container
         style={{
-          marginTop: "80px",
-          paddingBottom: "50px !important",
-          marginRight: "100px",
-          marginLeft: "-100px",
+          margin: "50px 100px 0 -100px",
+          flexGrow: "1",
         }}
-        maxWidth="xl"
+        maxWidth="lg"
       >
         <Link to="/category" style={{ color: "black" }}>
           <h1 className={classes.h1}>
@@ -357,7 +348,7 @@ export default function EnhancedTable(): JSX.Element {
               <Paper className={classes.paper}>
                 <TableContainer>
                   <h4 className={classes.h4}>2.Категории</h4>
-                  <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
+                  <Table sx={{ minWidth: 700 }} aria-labelledby="tableTitle">
                     <EnhancedTableHead
                       numSelected={selected.length}
                       onSelectAllClick={handleSelectAllClick}

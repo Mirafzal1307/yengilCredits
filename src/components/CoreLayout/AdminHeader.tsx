@@ -223,7 +223,7 @@ export default function MiniDrawer(props: any): any {
         onClick={handleMenuClose}
         style={{ fontFamily: "Poppins", fontSize: "16px" }}
       >
-        Profile
+        Профиль
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <div
@@ -239,7 +239,7 @@ export default function MiniDrawer(props: any): any {
             color: "#000",
           }}
         >
-          Logout
+          Выйти
         </div>
       </MenuItem>
     </Menu>
@@ -300,7 +300,7 @@ export default function MiniDrawer(props: any): any {
             </Tooltip>
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ minWidth: 120 }} className={classes.formControl}>
+          {/* <Box sx={{ minWidth: 120 }} className={classes.formControl}>
             <Tooltip title="Tilni tanlash">
               <FormControl fullWidth className={classes.formControl}>
                 <NativeSelect
@@ -315,7 +315,7 @@ export default function MiniDrawer(props: any): any {
                 </NativeSelect>
               </FormControl>
             </Tooltip>
-          </Box>
+          </Box> */}
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
@@ -373,7 +373,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <HomeIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Boshqaruv paneli" />
+              <ListItemText primary="Панель управления" />
             </ListItem>
           </Tooltip>
           <Tooltip title="Product Page">
@@ -386,7 +386,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <BusinessCenterIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Mahsulotlar" />
+              <ListItemText primary="Продукты" />
             </ListItem>
           </Tooltip>
           <Tooltip title="Category Page">
@@ -399,7 +399,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <TableViewIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Turkumlar" />
+              <ListItemText primary="Категории" />
             </ListItem>
           </Tooltip>
           <Tooltip title="Order Page">
@@ -412,7 +412,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <BookmarkBorderIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Buyurtmalar" />
+              <ListItemText primary="Заказы" />
             </ListItem>
           </Tooltip>
           <Tooltip title="Brand Page">
@@ -425,7 +425,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <FavoriteBorderIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Brendlar" />
+              <ListItemText primary="Бренды" />
             </ListItem>
           </Tooltip>
         </List>

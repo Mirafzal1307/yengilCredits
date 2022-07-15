@@ -184,7 +184,7 @@ const useStyles = makeStyles({
     padding: "none !important",
   },
   Pricebox: {
-    marginLeft: "185px !important",
+    marginLeft: "218px !important",
     display: "flex",
   },
   spanDiscount: {
@@ -196,13 +196,13 @@ const useStyles = makeStyles({
     marginLeft: "276px !important",
   },
   ProducutPhoto: {
-    marginLeft: "186px !important",
+    marginLeft: "219px !important",
   },
   characterBox: {
     marginLeft: "56px !important",
   },
   statusBox: {
-    marginLeft: "117px !important",
+    marginLeft: "134px !important",
   },
   cancel: {
     backgroundColor: "#464646!important",
@@ -386,7 +386,7 @@ function ProductsCreate(): JSX.Element {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: "Muafaqiyatli yaratildi",
+              message: "Создан успешно",
               type: "success",
             });
             setTimeout(() => {
@@ -418,7 +418,7 @@ function ProductsCreate(): JSX.Element {
       }
       if ((inp[4] as HTMLInputElement)?.value?.length === 1) {
         (inp[4] as HTMLInputElement).style.borderColor = "#9F9F9F";
-        element.title = "Xatolik yuz berdi 2 tadan ko`p ma`lumot kiriting";
+        element.title = "Ошибка, введите больше 2 символов";
       } else {
         (inp[4] as any).style.borderColor = "#9F9F9F";
       }
@@ -426,7 +426,7 @@ function ProductsCreate(): JSX.Element {
         element.style.borderColor = "#9F9F9F";
       } else if (element?.value?.length <= 3) {
         element.style.borderColor = "red";
-        element.title = "Xatolik yuz berdi 3 tadan ko`p ma`lumot kiriting";
+        element.title = "Ошибка, введите больше 3 символов";
       } else {
         element.style.borderColor = "#9F9F9F";
       }
@@ -444,20 +444,20 @@ function ProductsCreate(): JSX.Element {
         >
           <form action="">
             <h1 className={classes.CreateProductTitle}>
-              <span className="maxLength">Mahsulot Qo`shish</span>{" "}
+              <span className="maxLength">Добавить продукт</span>{" "}
             </h1>
             <Box className={classes.bigFirstBox}>
               <Box className={classes.itemBox}>
-                <h2 className={classes.boxFirstTitle}>1.Umumiy ma`lumot</h2>
+                <h2 className={classes.boxFirstTitle}>1.Общая информация</h2>
                 <div className={classes.GeneralInfoInside}>
                   <Box>
                     <h2 className={classes.boxSecondTitle}>
-                      <span className="let">Mahsulotning to`liq nomi</span>{" "}
+                      <span className="let">Полное название продукта</span>{" "}
                       <span style={{ color: "red" }}> *</span>
                     </h2>
                     <input
                       type="text"
-                      placeholder="Nomi"
+                      placeholder="Название"
                       className={classes.forBoxInput}
                       onChange={(e) => setProductName(e.target.value)}
                       minLength={3}
@@ -465,12 +465,12 @@ function ProductsCreate(): JSX.Element {
                   </Box>
                   <Box>
                     <h2 className={classes.boxSecondTitle}>
-                      <span className="let">Qisqa nomi</span>
+                      <span className="let">Краткое название</span>
                       <span style={{ color: "red" }}> *</span>
                     </h2>
                     <input
                       type="text"
-                      placeholder="Nomi"
+                      placeholder="Название"
                       className={classes.forBoxInput}
                       onChange={(e) => setProductShortName(e.target.value)}
                       minLength={3}
@@ -478,7 +478,7 @@ function ProductsCreate(): JSX.Element {
                   </Box>
                   <Box>
                     <h2 className={classes.boxSecondTitle}>
-                      Brend nomi
+                      Название бренда
                       <span style={{ color: "red" }}> *</span>
                     </h2>
                     <FormControl
@@ -492,7 +492,7 @@ function ProductsCreate(): JSX.Element {
                         className={classes.Select}
                       >
                         <MenuItem value="">
-                          <span className="notranslate">Brendni tanlang</span>
+                          <span className="notranslate">Выберите бренд</span>
                         </MenuItem>
 
                         {brands.map((brand) => (
@@ -506,11 +506,11 @@ function ProductsCreate(): JSX.Element {
                 </div>
               </Box>
               <Box className={classes.itemBoxprice}>
-                <h2 className={classes.boxFirstTitle}>2.Narxlash</h2>
+                <h2 className={classes.boxFirstTitle}>2.Цена</h2>
                 <div className={classes.Pricebox}>
                   <Box>
                     <h2 className={classes.boxSecondTitle}>
-                      Mahsulot narxi
+                      Цена продукта
                       <span style={{ color: "red" }}> *</span>
                     </h2>
                     <input
@@ -523,7 +523,7 @@ function ProductsCreate(): JSX.Element {
                   </Box>
                   <Box>
                     <h2 className={classes.boxSecondTitle}>
-                      Chegirma
+                      Скидка
                       <span style={{ color: "red" }}> *</span>{" "}
                     </h2>
                     <input
@@ -550,10 +550,10 @@ function ProductsCreate(): JSX.Element {
                 </div>
               </Box>
               <Box className={classes.itemBoxCategory}>
-                <h2 className={classes.boxFirstTitle}>3.Kategoriyalar</h2>
+                <h2 className={classes.boxFirstTitle}>3.Категории</h2>
                 <Box className={classes.CategoryBox}>
                   <h2 className={classes.boxCategoryTitle}>
-                    Kategoriya nomi
+                    Название категории
                     <span style={{ color: "red" }}> *</span>
                   </h2>
                   <FormControl
@@ -567,7 +567,7 @@ function ProductsCreate(): JSX.Element {
                       className={classes.Select}
                     >
                       <MenuItem value="">
-                        <span className="notranslate">Выберите бренда.</span>
+                        <span className="notranslate">Выберите категорию.</span>
                       </MenuItem>
 
                       {categories.map((category) => (
@@ -580,13 +580,13 @@ function ProductsCreate(): JSX.Element {
                 </Box>
               </Box>
               <Box className={classes.itemBox} style={{ marginTop: "35px" }}>
-                <h2 className={classes.boxFirstTitle}>4.Rasmlar</h2>
+                <h2 className={classes.boxFirstTitle}>4.Фото</h2>
                 <Box
                   style={{ marginLeft: "20px" }}
                   className={classes.ProducutPhoto}
                 >
                   <h2 className={classes.boxSecondTitle}>
-                    Mahsulot rasmi
+                    Фото продукта
                     <span style={{ color: "red" }}> *</span>
                   </h2>
                   <div className={classes.Photosettings}>
@@ -622,7 +622,7 @@ function ProductsCreate(): JSX.Element {
               </Box>
               <Box className={classes.itemBox}>
                 <h2 className={classes.boxFirstTitle}>
-                  5.Mahsulot xususiyatlari
+                  5.Характеристики продукта
                 </h2>
                 <div className={classes.DynamicFeilds}>
                   {inputFields.map((inputField) => (
@@ -645,7 +645,7 @@ function ProductsCreate(): JSX.Element {
                           className={classes.Select}
                         >
                           <MenuItem value="">
-                            <span>Xossa nomi </span>
+                            <span>Название характеристики </span>
                           </MenuItem>
                           {characterNames.map((characterName) => (
                             <MenuItem
@@ -675,7 +675,7 @@ function ProductsCreate(): JSX.Element {
                           className={classes.Select}
                         >
                           <MenuItem value="">
-                            <span>Xossa qiymati </span>
+                            <span>Свойства характеристики </span>
                           </MenuItem>
                           {characterProperties.map((characterProperty) => (
                             <MenuItem
@@ -702,9 +702,9 @@ function ProductsCreate(): JSX.Element {
                 <BasicModal />
               </Box>
               <Box className={classes.itemBox}>
-                <h2 className={classes.boxFirstTitle}>8.Mahsulot holati</h2>
+                <h2 className={classes.boxFirstTitle}>8.Статус продукта</h2>
                 <Box className={classes.statusBox}>
-                  <h2 className={classes.boxSecondTitle}>Holat</h2>
+                  <h2 className={classes.boxSecondTitle}>Статус</h2>
                   <FormControl
                     sx={{ m: 1, minWidth: 120 }}
                     style={{ padding: "0 !important", margin: "0 !important" }}
@@ -716,10 +716,10 @@ function ProductsCreate(): JSX.Element {
                       displayEmpty
                     >
                       <MenuItem value="">
-                        <span>Holatni tanlang</span>
+                        <span>Выберите статус</span>
                       </MenuItem>
-                      <MenuItem value="true">Sotuvda</MenuItem>
-                      <MenuItem value="false">Sotuvda emas</MenuItem>
+                      <MenuItem value="true">В наличии</MenuItem>
+                      <MenuItem value="false">Нет в наличии</MenuItem>
                     </Select>
                   </FormControl>
                 </Box>
@@ -733,7 +733,7 @@ function ProductsCreate(): JSX.Element {
                   }}
                   style={{ marginLeft: "auto", display: "flex" }}
                 >
-                  Saqlash
+                  Добавить
                 </Button>
                 <Button
                   sx={{ textTransform: "capitalize" }}
@@ -741,7 +741,7 @@ function ProductsCreate(): JSX.Element {
                   to="/product"
                   className={classes.cancel}
                 >
-                  Bekor qilish
+                  Отменить
                 </Button>
               </div>
             </Box>
