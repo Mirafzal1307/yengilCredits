@@ -21,6 +21,7 @@ import cart2 from "../../Images/cart2.svg";
 
 import { getProductFromCategoryById } from "../../Api/admin/AdminProductApi";
 // import { SelectChangeEvent } from "@mui/material";
+
 import BackToTop from "./Navbar/Navbar";
 import Footer from "./Footer";
 import { getCategoryForClient } from "../../Api/client/ClientCategoryApi";
