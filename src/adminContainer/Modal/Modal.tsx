@@ -3,7 +3,6 @@ import React from "react";
 import { styled } from "@mui/system";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
 import { makeStyles } from "@mui/styles";
-import { useNavigate } from "react-router-dom";
 import del from "../../Images/delete.png";
 import { refresh } from "./refresh";
 
@@ -18,7 +17,6 @@ const StyledModal = styled(ModalUnstyled)`
   align-items: center;
   justify-content: center;
 `;
-const Backdrop = styled("div")``;
 const style = {
   width: 600,
   bgcolor: "#ffffff !important",
@@ -108,7 +106,6 @@ function Modal(props: any): JSX.Element {
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
   const classes = useStyles();
-  // const navigate = useNavigate();
   return (
     <>
       <Tooltip title="Delete">

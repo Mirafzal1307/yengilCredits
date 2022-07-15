@@ -318,7 +318,7 @@ function OrderDetails(): JSX.Element {
                     </p>
                   </div>
                 ) : (
-                  "Xatolik yuz berdi"
+                  "Произошло ошибка"
                 )}
               </InputLabel>
               <Select
@@ -400,7 +400,7 @@ function OrderDetails(): JSX.Element {
                         </p>
                       </div>
                     ) : (
-                      "Xatolik yuz berdi"
+                      "Произошло ошибка"
                     )}
                   </MenuItem>
                 ))}
@@ -455,7 +455,7 @@ function OrderDetails(): JSX.Element {
                   <TableCell align="left" className={classes.productRows}>
                     <div className={classes.productInfo}>
                       <img
-                        src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photo}`}
+                        src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item?.photo}`}
                         className={classes.productImg}
                         alt="rasm bor edi"
                       />

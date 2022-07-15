@@ -144,12 +144,12 @@ export default function CategoryEdit(): JSX.Element {
   const navigate = useNavigate();
   const getCategory = async (): Promise<any> => {
     const response: any = await getCategoryList("", {});
-    setRows(response.data.parent_categories[0]);
+    setRows(response?.data?.parent_categories?.[0]);
   };
   const getCategoryByIds = async (id: any): Promise<void> => {
     const res: any = await getCategoryById(id);
-    setCategory(res.data.sub_category_info[0].name);
-    setRows(res.data.parent_categories_list[0]);
+    setCategory(res?.data?.sub_category_info?.[0].name);
+    setRows(res?.data?.parent_categories_list?.[0]);
   };
   React.useEffect(() => {
     getCategory();
@@ -235,7 +235,7 @@ export default function CategoryEdit(): JSX.Element {
                 <MenuItem value="">
                   <em className={classes.em}>Выберите категорию</em>
                 </MenuItem>
-                {rows.map((row) => (
+                {rows?.map((row) => (
                   <MenuItem
                     value={row.id}
                     key={row.id}

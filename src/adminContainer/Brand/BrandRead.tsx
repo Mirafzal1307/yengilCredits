@@ -16,8 +16,6 @@ import { useActions } from "../../hook/useActions";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { deleteBrandData, getBrand } from "../../Api/admin/AdminBrandApi";
 
-// console.warn = () => {};
-
 const useStyles = makeStyles({
   editButton: {
     background: "transparent",
@@ -80,7 +78,7 @@ function BrandTable(): JSX.Element {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
-            message: "Создан успешно.",
+            message: "Удалено успешно.",
             type: "success",
           });
         }
@@ -126,7 +124,7 @@ function BrandTable(): JSX.Element {
           </TableRow>
         </TableHead>
         <TableBody>
-          {brands.map((item: any, key: any) => {
+          {brands?.map((item: any) => {
             const delData = (): void => {
               deleteData(item.id);
             };
@@ -172,7 +170,7 @@ function BrandTable(): JSX.Element {
                         className={classes.editButton}
                         onClick={getBrandToUpdate}
                       >
-                        <img src={edit} alt="rasm bor edi" />
+                        <img src={edit} alt="изображения" />
                       </button>
                     </Tooltip>
                   </Link>

@@ -386,7 +386,7 @@ function ProductsCreate(): JSX.Element {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: "Изменено успешно",
+              message: "Создан успешно",
               type: "success",
             });
             setTimeout(() => {

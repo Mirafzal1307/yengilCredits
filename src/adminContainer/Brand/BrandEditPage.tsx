@@ -112,7 +112,7 @@ function BrandEditPage(): JSX.Element {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
-            message: "Создан успешно.",
+            message: "Изменено успешно.",
             type: "success",
           });
           setTimeout(() => {
