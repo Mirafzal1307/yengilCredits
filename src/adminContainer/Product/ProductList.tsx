@@ -170,6 +170,7 @@ const useStyles = makeStyles({
     background: "#065374 !important",
     color: "#ffffff",
     borderRadius: "5px !important",
+    border: "none",
   },
   pagination: {
     width: "auto",

@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import { Button, Container, Grid, Tooltip } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Link, useParams, Link as NavLink } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   deleteCategoryItem,
   getCategoryByParentCategory,
@@ -103,7 +103,7 @@ const useStyles = makeStyles({
   },
   h1: {
     fontSize: "28px !important",
-    margin: "32px 0 20px 0 !important",
+    margin: "32px 0 20px 100px !important",
     fontFamily: "Arial !important",
   },
   h1_span: {
@@ -147,7 +147,6 @@ const useStyles = makeStyles({
     paddingLeft: "12px !important",
     fontStyle: "normal !important",
     fontFamily: "Arial !important",
-    // marginTop: "20px !important",
   },
   h4_second: {
     fontSize: "17px !important",

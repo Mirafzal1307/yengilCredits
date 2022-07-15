@@ -57,7 +57,7 @@ function BasicModal(): JSX.Element {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: "Muvaffaqiyatli qo'shildi.",
+              message: "Добавлено успешно.",
               type: "success",
             });
           }
@@ -65,14 +65,14 @@ function BasicModal(): JSX.Element {
         .catch(() => {
           setNotify({
             isOpen: true,
-            message: "Xatolik yuz berdi...",
+            message: "Что-то пошло не так...",
             type: "error",
           });
         });
     } catch (err) {
       setNotify({
         isOpen: true,
-        message: "Xatolik...",
+        message: "Ошибка...",
         type: "error",
       });
     }
@@ -91,7 +91,7 @@ function BasicModal(): JSX.Element {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Вы должны добавить Название характеристики и Свойства
+            Вы должны добавить название характеристики и свойства
             характеристики.
           </Typography>
           <div style={divStyle}>
@@ -124,7 +124,7 @@ function BasicModal(): JSX.Element {
                 },
               }}
             >
-              Bekor qilish
+              Отменить
             </Button>
             <Button
               onClick={() => {
@@ -142,7 +142,7 @@ function BasicModal(): JSX.Element {
               }}
               type="submit"
             >
-              Saqlash
+              Добавить
             </Button>
           </div>
         </Box>
