@@ -318,6 +318,7 @@ const useStyles = makeStyles({
 
 function AllCards(): JSX.Element {
   const { id } = useParams();
+  console.log(id);
   const classes = useStyles();
   const [products, setProducts] = useState([]);
   // const [productPrice, setProductPrice] = useState("");
@@ -655,7 +656,7 @@ function AllCards(): JSX.Element {
                   <PaginationItem
                     className={classes.paginationItem}
                     component={NavLink}
-                    to={`/product/product-by-category/${id}?page=${item.page}`}
+                    to={`/all/card/${id}?page=${item.page}`}
                     {...item}
                     variant="text"
                     shape="rounded"
