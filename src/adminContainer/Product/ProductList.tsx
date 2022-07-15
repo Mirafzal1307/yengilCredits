@@ -305,8 +305,6 @@ function ProductList(): JSX.Element {
   const { products, error, loading } = useTypedSelector(
     (state) => state.product,
   );
-  // console.log(products);
-  // let p: number = products.totalPages
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(1);
   const [pageQty, setPageQty] = useState(products.totalPages);

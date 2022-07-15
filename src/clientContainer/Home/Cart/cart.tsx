@@ -501,7 +501,6 @@ export default function Cart(): JSX.Element {
     try {
       postProductOrder(form)
         .then(async (res: any) => {
-          console.log(res);
           setAmount(res.data.amount);
           setBuyer_id(res.data.buyer_id);
           setSecStatus(res.status);

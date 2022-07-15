@@ -223,7 +223,7 @@ export default function MiniDrawer(props: any): any {
         onClick={handleMenuClose}
         style={{ fontFamily: "Poppins", fontSize: "16px" }}
       >
-        Profile
+        Профиль
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <div
@@ -239,7 +239,7 @@ export default function MiniDrawer(props: any): any {
             color: "#000",
           }}
         >
-          Logout
+          Выйти
         </div>
       </MenuItem>
     </Menu>
@@ -300,7 +300,7 @@ export default function MiniDrawer(props: any): any {
             </Tooltip>
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ minWidth: 120 }} className={classes.formControl}>
+          {/* <Box sx={{ minWidth: 120 }} className={classes.formControl}>
             <Tooltip title="Tilni tanlash">
               <FormControl fullWidth className={classes.formControl}>
                 <NativeSelect
@@ -315,7 +315,7 @@ export default function MiniDrawer(props: any): any {
                 </NativeSelect>
               </FormControl>
             </Tooltip>
-          </Box>
+          </Box> */}
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
@@ -425,7 +425,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <FavoriteBorderIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Боенды" />
+              <ListItemText primary="Бренды" />
             </ListItem>
           </Tooltip>
         </List>
