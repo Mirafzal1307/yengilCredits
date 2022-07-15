@@ -314,8 +314,8 @@ const useStyles = makeStyles({
 
 function ProductDetails(): JSX.Element {
   const { products, error, loading } = useTypedSelector((state) => state.byId);
-  const pro: any = products?.Product;
-  const des: any = products?.Description;
+  const pro: any = products?.Product?.[0];
+  const des: any = products?.Description?.[0];
   const classes = useStyles();
   const { id } = useParams();
   const { fetchProductsById } = useActions();
@@ -326,7 +326,7 @@ function ProductDetails(): JSX.Element {
     <Box sx={{ display: "flex" }}>
       <MiniDrawer />
       <Box sx={{ ml: "0", mr: "50px", mb: "50px" }}>
-        <h2 className={classes.title1}>Tafsilotlar</h2>
+        <h2 className={classes.title1}>О продукте</h2>
         <Container
           style={{ marginTop: "20px" }}
           className={classes.CreateContainerTitle}
@@ -339,8 +339,8 @@ function ProductDetails(): JSX.Element {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <h3 className={classes.ProductName}>{pro[0]?.name}</h3>
-                  <i className={classes.BrandName}>{pro[0]?.brand?.name}</i>
+                  <h3 className={classes.ProductName}>{pro?.name}</h3>
+                  <i className={classes.BrandName}>{pro?.brand?.name}</i>
                 </div>
               </Grid>
               <Box style={{ display: "flex", alignItems: "center" }}>
@@ -356,7 +356,7 @@ function ProductDetails(): JSX.Element {
                     }}
                   >
                     <img
-                      src={`${MINIO_FULL_ENDPOINT_FOR}/product/${pro[0]?.photos[0].name}`}
+                      src={`${MINIO_FULL_ENDPOINT_FOR}/product/${pro?.photos?.[0].name}`}
                       alt="Rasm bor edi"
                       className={classes.img}
                     />
@@ -365,8 +365,8 @@ function ProductDetails(): JSX.Element {
                 <Grid item xs={6}>
                   <div className={classes.CharacterAndProperty}>
                     <li className={classes.Character}>
-                      <h4>Xarakteriska Nomi</h4>
-                      {des[0]?.map((item: any, key: any) => (
+                      <h4>Названия характеристики</h4>
+                      {des?.map((item: any) => (
                         <div style={{ flexDirection: "column" }}>
                           {item?.character_name}
                         </div>
@@ -376,8 +376,8 @@ function ProductDetails(): JSX.Element {
                       className={classes.Character}
                       style={{ textAlign: "right" }}
                     >
-                      <h4>Xarakteriska Qiymati</h4>
-                      {des[0]?.map((item: any, key: any) => (
+                      <h4>Свойства характеристики</h4>
+                      {des?.map((item: any) => (
                         <div style={{ flexDirection: "column" }}>
                           {item?.character_value}
                         </div>
@@ -395,28 +395,26 @@ function ProductDetails(): JSX.Element {
                   }}
                 >
                   <div>
-                    <h3 className={classes.ProductBottomName}>
-                      {pro[0]?.name}
-                    </h3>
-                    <h4 className={classes.ShortName}>{pro[0]?.short_name}</h4>
+                    <h3 className={classes.ProductBottomName}>{pro?.name}</h3>
+                    <h4 className={classes.ShortName}>{pro?.short_name}</h4>
                   </div>
                   <div>
                     <div>
-                      <p className={classes.price}> {pro?.[0]?.price} so`m </p>
+                      <p className={classes.price}> {pro?.price} сум </p>
                       <p className={classes.afterDiscount}>
                         {" "}
-                        {pro?.[0]?.after_discount?.toLocaleString()} so`m{" "}
+                        {pro?.after_discount?.toLocaleString()} сум{" "}
                       </p>
-                      <p className={classes.discount}> {pro?.[0].discount} %</p>
+                      <p className={classes.discount}> {pro?.discount} %</p>
                     </div>
                     <div style={{ display: "flex" }}>
-                      <Button className={classes.save}>Bekor qilish</Button>
+                      <Button className={classes.save}>Отменить</Button>
                       <Button
                         component={RouterLink as any}
                         to="/product"
                         className={classes.cancel}
                       >
-                        Saqlash
+                        Хранить
                       </Button>
                     </div>
                   </div>
