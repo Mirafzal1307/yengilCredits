@@ -528,7 +528,7 @@ function ProductDetails(): JSX.Element {
               </h2>
               <div className={classes.RightBtn}>
                 <p className={classes.priceSale}>
-                  <span style={{ marginRight: "10px" }}>Chegirma narxda:</span>{" "}
+                  <span style={{ marginRight: "10px" }}>Скидка. narxda:</span>{" "}
                   <span className={classes.productSaleSpan}>
                     {product?.after_discount?.toLocaleString()} so’m
                   </span>
@@ -979,7 +979,7 @@ function ProductDetails(): JSX.Element {
                               border: "2px solid #C33E4D",
                             }}
                           />
-                          Sotuvda yo`q
+                          Нет в наличии
                         </button>
                       )}
                       {item.discount === 0 ? (
@@ -1213,7 +1213,7 @@ function ProductDetails(): JSX.Element {
                               border: "2px solid #C33E4D",
                             }}
                           />
-                          Sotuvda yo`q
+                          Нет в наличии
                         </button>
                       )}
                       {item.discount === 0 ? (

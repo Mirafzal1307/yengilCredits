@@ -7,7 +7,7 @@ import BrandRead from "./BrandRead";
 
 const useStyles = makeStyles({
   title: {
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     fontSize: "28px",
     fontWeight: 600,
   },
@@ -23,14 +23,14 @@ const useStyles = makeStyles({
   },
   boxFirstTitle: {
     color: "#065374",
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     fontWeight: 600,
     fontSize: "17px",
     margin: 0,
   },
   boxSecondTitle: {
     color: "#464646",
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     fontWeight: 600,
     fontSize: "17px",
     margin: 0,
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     padding: "8px 20px 9px 15px",
     marginTop: "5px",
     "&::placeholder": {
-      fontFamily: "Poppins",
+      fontFamily: "Arial",
       fontWeight: 400,
       fontSize: "17px",
       color: "#9F9F9F",
@@ -50,7 +50,7 @@ const useStyles = makeStyles({
     },
     border: "2px solid #9F9F9F",
     borderRadius: "5px",
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     fontWeight: 400,
     color: "#9F9F9F",
   },
@@ -59,7 +59,7 @@ const useStyles = makeStyles({
     background: "#065374",
     color: "#fff",
     borderRadius: "5px",
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     border: "none",
   },
   inBox: {
@@ -79,9 +79,11 @@ function BrandList(): JSX.Element {
   const classes = useStyles();
 
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       <MiniDrawer />
-      <Container style={{ marginTop: "50px" }}>
+      <Container
+        style={{ marginTop: "80px", marginRight: "80px", marginLeft: "0" }}
+      >
         <h1 className={classes.title}>Brand</h1>
         <Grid container direction="row" spacing={2}>
           <Grid item xs={5}>
@@ -94,7 +96,7 @@ function BrandList(): JSX.Element {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </Box>
   );
 }
 

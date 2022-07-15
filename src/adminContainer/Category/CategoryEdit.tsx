@@ -8,7 +8,6 @@ import {
   Paper,
   Select,
   SelectChangeEvent,
-  TextField,
   Tooltip,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -29,10 +28,10 @@ interface createDatas {
 const useStyles = makeStyles({
   box: {
     position: "absolute",
-    width: "1560px !important",
-    height: "860px !important",
-    left: "320px !important",
-    top: "155px !important",
+    width: "1200px !important",
+    minHeight: "400px !important",
+    left: "250px !important",
+    top: "150px !important",
     background: " #FFFFFF !important",
     boxShadow: "0px 0px 10px rgb(0 0 0 / 25%) !important",
     borderRadius: "5px !important",
@@ -41,7 +40,7 @@ const useStyles = makeStyles({
     position: "absolute",
     width: "111px",
     height: "39px",
-    left: "319px",
+    left: "250px",
     top: "70px",
     fontStyle: "normal",
     fontWeight: "600",
@@ -50,15 +49,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     color: "#000000",
-    fontFamily: "Poppins !important",
-  },
-  cancel: {
-    background: "#FF4B4B !important",
-    borderRadius: "5px",
-    color: "#ffffff !important",
-    textTransform: "lowercase",
-    marginRight: "20px",
-    padding: "9px 20px 8px 20px !important",
+    fontFamily: "Arial !important",
   },
   deletes: {
     background: "#065374 !important",
@@ -68,16 +59,9 @@ const useStyles = makeStyles({
     margin: "0 0 0 317px !important",
     padding: "9px 20px 8px 20px !important",
   },
-  h2: {
-    fontSize: "17px",
-    fontWeight: "normal",
-    fontStyle: "normal",
-    color: "#000000",
-    fontFamily: "Poppins !important",
-  },
   input_name: {
-    width: "33.2% !important",
-    fontFamily: "Poppins !important",
+    width: "44% !important",
+    fontFamily: "Arial !important",
     fontSize: "15px !important",
     fontWeight: "400",
     padding: "9px 0px 8px 20px !important",
@@ -92,34 +76,34 @@ const useStyles = makeStyles({
     fontWeight: "600 !important",
     margin: "0px !important",
     fontStyle: "normal !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   category_name: {
     color: "#464646 !important",
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "20px 0 10px 0 !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   category_category: {
     color: "#464646 !important",
     fontSize: "17px !important",
     fontWeight: "500 !important",
     margin: "10px 0 !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   em: {
     color: "#9F9F9F !important",
     font: "inherit !important",
     paddingLeft: "12px !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   menuItem_gutters: {
     color: "#9F9F9F !important",
     font: "inherit !important",
     marginTop: "2px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   parent_buttons: {
     minWidth: "220px !important",
@@ -127,6 +111,13 @@ const useStyles = makeStyles({
     fontSize: "17px !important",
     fontWeight: "400 !important",
     marginTop: "20px !important",
+  },
+  header: {
+    display: "flex",
+  },
+  box2: {
+    display: "flex !importatnt",
+    position: "relative",
   },
 });
 
@@ -171,7 +162,7 @@ export default function CategoryEdit(): JSX.Element {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: "Muvaffaqiyatli o'zgardi!",
+              message: "Изменено успешно!",
               type: "success",
             });
             setTimeout(() => {
@@ -182,14 +173,14 @@ export default function CategoryEdit(): JSX.Element {
         .catch(() => {
           setNotify({
             isOpen: true,
-            message: "Xatolik yuz berdi...",
+            message: "Что-то пошло не так...",
             type: "error",
           });
         });
     } catch (error) {
       setNotify({
         isOpen: true,
-        message: "Xatolik yuz berdi...",
+        message: "Что-то пошло не так...",
         type: "error",
       });
     }
@@ -215,20 +206,22 @@ export default function CategoryEdit(): JSX.Element {
     <>
       <MiniDrawer />
       <Container>
-        <h1 className={classes.h1}>Turkum</h1>
+        <Link to="/category">
+          <h1 className={classes.h1}>Категория</h1>
+        </Link>
         <Box sx={style} className={classes.box}>
           <Paper style={{ boxShadow: "none" }}>
-            <h4 className={classes.h4_second}>Turkumni o`zgartirish</h4>
-            <h5 className={classes.category_name}>Nomi</h5>
+            <h4 className={classes.h4_second}>Изменить категорию</h4>
+            <h5 className={classes.category_name}>Названия</h5>
             <input
               style={{ borderColor: "#9F9F9F" }}
               className={classes.input_name}
               id="outlined-basic"
-              placeholder="Turkumni nomi"
+              placeholder="Названия категории"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             />
-            <h5 className={classes.category_category}>Turkum</h5>
+            <h5 className={classes.category_category}>Категория</h5>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <Select
                 value={select}
@@ -240,9 +233,9 @@ export default function CategoryEdit(): JSX.Element {
                 }}
               >
                 <MenuItem value="">
-                  <em className={classes.em}>Turkimni tanlang</em>
+                  <em className={classes.em}>Выберите категорию</em>
                 </MenuItem>
-                {rows.map((row, index) => (
+                {rows.map((row) => (
                   <MenuItem
                     value={row.id}
                     key={row.id}
@@ -257,10 +250,10 @@ export default function CategoryEdit(): JSX.Element {
               <Tooltip title="Turkumni o'zgartirish">
                 <Button
                   className={classes.deletes}
-                  style={{ textTransform: "capitalize" }}
+                  style={{ textTransform: "none" }}
                   onClick={putCategory}
                 >
-                  Turkumni o`zgartirish
+                  Изменить категорию
                 </Button>
               </Tooltip>
             </div>

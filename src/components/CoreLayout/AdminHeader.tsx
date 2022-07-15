@@ -16,7 +16,12 @@ import ListItemText from "@mui/material/ListItemText";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Link as RouterLink, useNavigate, Link } from "react-router-dom";
+import {
+  Link as RouterLink,
+  useNavigate,
+  Link,
+  useLocation,
+} from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
@@ -31,32 +36,6 @@ import Icon from "../../Images/Logo BT.svg";
 import Brand from "../../Images/Yengilcredit.uz.svg";
 
 const drawerWidth = 240;
-const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: "hidden",
-});
-const closedMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(9)} + 1px)`,
-  },
-});
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  ...theme.mixins.toolbar,
-}));
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
@@ -77,6 +56,39 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+
+const openedMixin = (theme: Theme): CSSObject => ({
+  width: drawerWidth,
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: "hidden",
+});
+
+const closedMixin = (theme: Theme): CSSObject => ({
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: "hidden",
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up("sm")]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+});
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+}));
+
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean;
+}
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -139,9 +151,14 @@ const useStyles = makeStyles({
   Tabs: {
     display: "flex unset !important",
   },
+  active: {
+    backgroundColor: "crimson",
+  },
 });
 export default function MiniDrawer(props: any): any {
   const [value, setValue] = React.useState(0);
+  const location = useLocation();
+
   const handleChange = (
     event: React.SyntheticEvent,
     newValue: number,
@@ -177,13 +194,13 @@ export default function MiniDrawer(props: any): any {
     setMobileMoreAnchorEl(event.currentTarget);
   };
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const handleDrawerClose = (): void => {
+    setOpen(false);
+  };
 
   const handleDrawerOpen = (): void => {
     setOpen(true);
-  };
-  const handleDrawerClose = (): void => {
-    setOpen(false);
   };
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -294,7 +311,6 @@ export default function MiniDrawer(props: any): any {
                   }}
                 >
                   <option value={10}>Russian</option>
-                  <option value={20}>English</option>
                   <option value={30}>Uzbek</option>
                 </NativeSelect>
               </FormControl>
@@ -357,7 +373,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <HomeIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Boshqaruv paneli" />
+              <ListItemText primary="Панель управления" />
             </ListItem>
           </Tooltip>
           <Tooltip title="Product Page">
@@ -370,7 +386,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <BusinessCenterIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Mahsulotlar" />
+              <ListItemText primary="Продукты" />
             </ListItem>
           </Tooltip>
           <Tooltip title="Category Page">
@@ -383,7 +399,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <TableViewIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Turkumlar" />
+              <ListItemText primary="Категории" />
             </ListItem>
           </Tooltip>
           <Tooltip title="Order Page">
@@ -396,7 +412,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <BookmarkBorderIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Buyurtmalar" />
+              <ListItemText primary="Заказы" />
             </ListItem>
           </Tooltip>
           <Tooltip title="Brand Page">
@@ -409,7 +425,7 @@ export default function MiniDrawer(props: any): any {
               <ListItemIcon>
                 <FavoriteBorderIcon className={classes.HomeIcon} />
               </ListItemIcon>
-              <ListItemText primary="Brendlar" />
+              <ListItemText primary="Боенды" />
             </ListItem>
           </Tooltip>
         </List>

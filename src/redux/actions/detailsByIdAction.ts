@@ -11,7 +11,7 @@ export const fetchProductsById =
       const datax: any = response?.data;
       dispatch({
         type: ProductActionByIdTypes.FETCH_PRODUCTS_BY_ID_SUCCESS,
-        payload: response.data,
+        payload: datax,
       });
     } catch (e) {
       dispatch({
