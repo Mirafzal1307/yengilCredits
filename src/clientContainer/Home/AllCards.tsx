@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { getAllCards } from "../../Api/client/MainProductsApi";
 
 import BackToTop from "./Navbar/Navbar";
-import BigPhoto from "../../Images/image 26.png";
+import BigPhoto from "../../Images/image26.png";
 import cart1 from "../../Images/cart1.svg";
 import cart2 from "../../Images/cart2.svg";
 import { getProductByBrand } from "../../Api/client/ClientBrandApi";
