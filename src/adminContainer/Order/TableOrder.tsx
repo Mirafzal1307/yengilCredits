@@ -48,7 +48,7 @@ const useStyles = makeStyles({
   statusText: {
     marginLeft: "5px",
     fontSize: "17px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     fontWeight: "300 !important",
   },
   statusBox: {
@@ -57,12 +57,12 @@ const useStyles = makeStyles({
   },
   tableText: {
     fontSize: "17px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     fontWeight: "300 !important",
   },
   tableHeadText: {
     fontSize: "17px !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     fontWeight: "600 !important",
     color: "#065374 !important",
   },
@@ -122,7 +122,7 @@ function TableOrder(): JSX.Element {
       >
         <TextField
           id="outlined-basic"
-          label="Buyurtmachi ismi yoki telefoni"
+          label="Имя или телефон заказчика"
           variant="outlined"
           size="small"
           sx={{
@@ -133,7 +133,7 @@ function TableOrder(): JSX.Element {
           }}
           onChange={handleChangeInput}
         />
-        <Tooltip title="Holati">
+        <Tooltip title="Статус">
           <FormControl
             size="small"
             sx={{
@@ -144,7 +144,7 @@ function TableOrder(): JSX.Element {
             }}
           >
             <InputLabel id="demo-simple-select-label">
-              <div className={classes.statusDefaultBox}>Holati</div>
+              <div className={classes.statusDefaultBox}>Статус</div>
             </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
@@ -153,9 +153,8 @@ function TableOrder(): JSX.Element {
               onChange={handleChangeStatus}
             >
               <MenuItem value="">
-                <em>Hammasi</em>
+                <em>Все</em>
               </MenuItem>
-              {/* eslint no-nested-ternary: "off" */}
               {status?.map((item: any) => (
                 <MenuItem value={item.statusType} key={Math.random()}>
                   {item.statusType === "NOT_SERVED" ? (
@@ -169,7 +168,7 @@ function TableOrder(): JSX.Element {
                           marginBottom: 0,
                         }}
                       >
-                        Xizmat ko`rsatilmadi
+                        Не обслужена.
                       </p>
                     </div>
                   ) : item.statusType === "SERVED" ? (
@@ -183,7 +182,7 @@ function TableOrder(): JSX.Element {
                           marginBottom: 0,
                         }}
                       >
-                        Xizmat ko`rsatildi
+                        Обслужена.
                       </p>
                     </div>
                   ) : item.statusType === "ADMIN_CANCEL" ? (
@@ -197,7 +196,7 @@ function TableOrder(): JSX.Element {
                           marginBottom: 0,
                         }}
                       >
-                        Admin bekor qildi
+                        Отменено администратором.
                       </p>
                     </div>
                   ) : item.statusType === "CLIENT_CANCEL" ? (
@@ -211,7 +210,7 @@ function TableOrder(): JSX.Element {
                           marginBottom: 0,
                         }}
                       >
-                        Client bekor qildi
+                        Отменено клиентом.
                       </p>
                     </div>
                   ) : item.statusType === "IN_PROGRESS" ? (
@@ -225,11 +224,11 @@ function TableOrder(): JSX.Element {
                           marginBottom: 0,
                         }}
                       >
-                        Jarayonda
+                        В ходе выполнения.
                       </p>
                     </div>
                   ) : (
-                    "Xatolik yuz berdi"
+                    "Произошло ошибка"
                   )}
                 </MenuItem>
               ))}
@@ -269,35 +268,35 @@ function TableOrder(): JSX.Element {
                     sx={{ borderBottom: "1px solid #000000" }}
                     className={classes.tableHeadText}
                   >
-                    Ism
+                    Имя
                   </TableCell>
                   <TableCell
                     align="left"
                     sx={{ borderBottom: "1px solid #000000" }}
                     className={classes.tableHeadText}
                   >
-                    Telefon
+                    Телефон
                   </TableCell>
                   <TableCell
                     align="left"
                     sx={{ borderBottom: "1px solid #000000" }}
                     className={classes.tableHeadText}
                   >
-                    Holat
+                    Статус
                   </TableCell>
                   <TableCell
                     align="left"
                     sx={{ borderBottom: "1px solid #000000" }}
                     className={classes.tableHeadText}
                   >
-                    Sana
+                    Дата
                   </TableCell>
                   <TableCell
                     align="left"
                     sx={{ borderBottom: "1px solid #000000" }}
                     className={classes.tableHeadText}
                   >
-                    Amallar
+                    Действия
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -368,7 +367,7 @@ function TableOrder(): JSX.Element {
                               className={classes.statusText}
                               style={{ color: "#FF4B4B" }}
                             >
-                              Xizmat ko`rsatilmadi
+                              Не обслужена.
                             </p>
                           </div>
                         ) : list.status === "SERVED" ? (
@@ -378,7 +377,7 @@ function TableOrder(): JSX.Element {
                               className={classes.statusText}
                               style={{ color: "#22AA00" }}
                             >
-                              Xizmat ko`rsatildi
+                              Обслужена.
                             </p>
                           </div>
                         ) : list.status === "ADMIN_CANCEL" ? (
@@ -388,7 +387,7 @@ function TableOrder(): JSX.Element {
                               className={classes.statusText}
                               style={{ color: "#065374" }}
                             >
-                              Admin bekor qildi
+                              Отменено администратором.
                             </p>
                           </div>
                         ) : list.status === "CLIENT_CANCEL" ? (
@@ -398,7 +397,7 @@ function TableOrder(): JSX.Element {
                               className={classes.statusText}
                               style={{ color: "#27A8D1" }}
                             >
-                              Client bekor qildi
+                              Отменено клиентом.
                             </p>
                           </div>
                         ) : list.status === "IN_PROGRESS" ? (
@@ -408,11 +407,11 @@ function TableOrder(): JSX.Element {
                               className={classes.statusText}
                               style={{ color: "#E9A426" }}
                             >
-                              Jarayonda
+                              В ходе выполнения.
                             </p>
                           </div>
                         ) : (
-                          "Xatolik yuz berdi"
+                          "Произошло ошибка"
                         )}
                       </TableCell>
                       <TableCell

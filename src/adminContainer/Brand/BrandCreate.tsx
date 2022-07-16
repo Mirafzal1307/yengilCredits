@@ -27,14 +27,14 @@ const useStyles = makeStyles({
   },
   boxFirstTitle: {
     color: "#065374",
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     fontWeight: 600,
     fontSize: "17px",
     margin: 0,
   },
   boxSecondTitle: {
     color: "#464646",
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     fontWeight: 600,
     fontSize: "17px",
     margin: 0,
@@ -44,7 +44,7 @@ const useStyles = makeStyles({
     padding: "8px 20px 9px 15px",
     marginTop: "5px",
     "&::placeholder": {
-      fontFamily: "Poppins",
+      fontFamily: "Arial",
       fontWeight: 400,
       fontSize: "17px",
       color: "#9F9F9F",
@@ -53,7 +53,7 @@ const useStyles = makeStyles({
       outline: "none",
     },
     borderRadius: "5px",
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     fontWeight: 400,
     color: "#9F9F9F",
   },
@@ -62,7 +62,7 @@ const useStyles = makeStyles({
     background: "#065374",
     color: "#fff",
     borderRadius: "5px",
-    fontFamily: "Poppins",
+    fontFamily: "Arial",
     border: "none",
   },
   inBox: {
@@ -155,7 +155,7 @@ function BrandCreate(): JSX.Element {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: "Muvaffaqiyatli yaratildi.",
+              message: "Создан успешно.",
               type: "success",
             });
             refresh();
@@ -165,14 +165,14 @@ function BrandCreate(): JSX.Element {
         .catch(() => {
           setNotify({
             isOpen: true,
-            message: "Xatolik yuz berdi.",
+            message: "Что-то пошло не так.",
             type: "error",
           });
         });
     } catch (err) {
       setNotify({
         isOpen: true,
-        message: "Xatolik yuz berdi.",
+        message: "Что-то пошло не так.",
         type: "error",
       });
     }
@@ -193,23 +193,23 @@ function BrandCreate(): JSX.Element {
     <>
       <Box className={classes.bigFirstBox}>
         <Box className={classes.itemBox}>
-          <h2 className={classes.boxFirstTitle}>1.Nomi</h2>
+          <h2 className={classes.boxFirstTitle}>1.Название</h2>
           <Box>
-            <h2 className={classes.boxSecondTitle}>Brand nomi</h2>
+            <h2 className={classes.boxSecondTitle}>Название бренда.</h2>
             <input
               style={{ borderColor: "#9F9F9F" }}
               type="text"
               name="brand"
-              placeholder="type"
+              placeholder="Название бренда."
               className={classes.forBoxInput}
               onChange={(e) => setBrand(e.target.value)}
             />
           </Box>
         </Box>
         <Box className={classes.itemBox} style={{ marginTop: "15px" }}>
-          <h2 className={classes.boxFirstTitle}>2.Media</h2>
+          <h2 className={classes.boxFirstTitle}>2.Медиа</h2>
           <Box style={{ marginLeft: "20px" }}>
-            <h2 className={classes.boxSecondTitle}>Rasmi</h2>
+            <h2 className={classes.boxSecondTitle}>Фото</h2>
             <form style={{ display: "flex", alignItems: "center" }}>
               <img
                 src={preview}
@@ -236,7 +236,7 @@ function BrandCreate(): JSX.Element {
             </form>
           </Box>
         </Box>
-        <Tooltip title="Saqlash">
+        <Tooltip title="Сохранить">
           <button
             type="button"
             className={classes.forButton}
@@ -245,7 +245,7 @@ function BrandCreate(): JSX.Element {
             }}
             style={{ marginLeft: "auto", display: "flex" }}
           >
-            Saqlash
+            Сохранить
           </button>
         </Tooltip>
       </Box>

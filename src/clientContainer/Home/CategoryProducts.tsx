@@ -14,13 +14,14 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useDispatch } from "react-redux";
 import AppsIcon from "@mui/icons-material/Apps";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import BigPhoto from "../../Images/image 26.png";
+import BigPhoto from "../../Images/image26.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import cart1 from "../../Images/cart1.svg";
 import cart2 from "../../Images/cart2.svg";
 
 import { getProductFromCategoryById } from "../../Api/admin/AdminProductApi";
 // import { SelectChangeEvent } from "@mui/material";
+
 import BackToTop from "./Navbar/Navbar";
 import Footer from "./Footer";
 import { getCategoryForClient } from "../../Api/client/ClientCategoryApi";
@@ -431,17 +432,31 @@ function CategoryProducts(): JSX.Element {
                       {item?.price?.toLocaleString()} so`m
                     </p>
                     <p
-                      className={classes.cardPriceDiscount}
+                      className={classes.cardPrice}
                       style={{
-                        background: "red",
-                        color: "white",
-                        fontSize: "10px",
-                        borderRadius: "10px",
-                        padding: "1px 5px",
-                        marginLeft: "10px",
+                        fontWeight: "600",
+                        fontFamily: "Poppins",
+                        fontSize: "18px",
+                        color: "#000",
+                        margin: 0,
                       }}
                     >
-                      12 oy
+                      {Math.floor(
+                        (item.after_discount * 1.44) / 12,
+                      ).toLocaleString()}{" "}
+                      so`m
+                      <span
+                        style={{
+                          background: "red",
+                          color: "white",
+                          fontSize: "10px",
+                          borderRadius: "10px",
+                          padding: "1px 5px",
+                          marginLeft: "10px",
+                        }}
+                      >
+                        12 oy
+                      </span>
                     </p>
                     <p
                       className={classes.cardPriceDiscount}

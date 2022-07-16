@@ -184,7 +184,7 @@ const useStyles = makeStyles({
     padding: "none !important",
   },
   Pricebox: {
-    marginLeft: "185px !important",
+    marginLeft: "218px !important",
     display: "flex",
   },
   spanDiscount: {
@@ -196,13 +196,13 @@ const useStyles = makeStyles({
     marginLeft: "276px !important",
   },
   ProducutPhoto: {
-    marginLeft: "186px !important",
+    marginLeft: "219px !important",
   },
   characterBox: {
     marginLeft: "56px !important",
   },
   statusBox: {
-    marginLeft: "117px !important",
+    marginLeft: "134px !important",
   },
   cancel: {
     backgroundColor: "#464646!important",
@@ -237,6 +237,9 @@ const useStyles = makeStyles({
     flexDirection: "column",
     marginLeft: "56px",
     marginTop: "5px",
+  },
+  headers: {
+    dispay: "flex",
   },
 });
 interface Brands {
@@ -383,7 +386,7 @@ function ProductsCreate(): JSX.Element {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: "Muafaqiyatli yaratildi",
+              message: "Создан успешно",
               type: "success",
             });
             setTimeout(() => {
@@ -415,7 +418,7 @@ function ProductsCreate(): JSX.Element {
       }
       if ((inp[4] as HTMLInputElement)?.value?.length === 1) {
         (inp[4] as HTMLInputElement).style.borderColor = "#9F9F9F";
-        element.title = "Xatolik yuz berdi 2 tadan ko`p ma`lumot kiriting";
+        element.title = "Ошибка, введите больше 2 символов";
       } else {
         (inp[4] as any).style.borderColor = "#9F9F9F";
       }
@@ -423,7 +426,7 @@ function ProductsCreate(): JSX.Element {
         element.style.borderColor = "#9F9F9F";
       } else if (element?.value?.length <= 3) {
         element.style.borderColor = "red";
-        element.title = "Xatolik yuz berdi 3 tadan ko`p ma`lumot kiriting";
+        element.title = "Ошибка, введите больше 3 символов";
       } else {
         element.style.borderColor = "#9F9F9F";
       }
@@ -432,319 +435,321 @@ function ProductsCreate(): JSX.Element {
   length();
 
   return (
-    <>
+    <div className={classes.headers}>
       <MiniDrawer />
-      <Container
-        style={{ marginTop: "50px" }}
-        className={classes.CreateContainerTitle}
-      >
-        <form action="">
-          <h1 className={classes.CreateProductTitle}>
-            <span className="maxLength">Mahsulot Qo`shish</span>{" "}
-          </h1>
-          <Box className={classes.bigFirstBox}>
-            <Box className={classes.itemBox}>
-              <h2 className={classes.boxFirstTitle}>1.Umumiy ma`lumot</h2>
-              <div className={classes.GeneralInfoInside}>
-                <Box>
-                  <h2 className={classes.boxSecondTitle}>
-                    <span className="let">Mahsulotning to`liq nomi</span>{" "}
-                    <span style={{ color: "red" }}> *</span>
-                  </h2>
-                  <input
-                    type="text"
-                    placeholder="Nomi"
-                    className={classes.forBoxInput}
-                    onChange={(e) => setProductName(e.target.value)}
-                    minLength={3}
-                  />
-                </Box>
-                <Box>
-                  <h2 className={classes.boxSecondTitle}>
-                    <span className="let">Qisqa nomi</span>
-                    <span style={{ color: "red" }}> *</span>
-                  </h2>
-                  <input
-                    type="text"
-                    placeholder="Nomi"
-                    className={classes.forBoxInput}
-                    onChange={(e) => setProductShortName(e.target.value)}
-                    minLength={3}
-                  />
-                </Box>
-                <Box>
-                  <h2 className={classes.boxSecondTitle}>
-                    Brend nomi
+      <Box>
+        <Container
+          style={{ marginTop: "50px" }}
+          className={classes.CreateContainerTitle}
+        >
+          <form action="">
+            <h1 className={classes.CreateProductTitle}>
+              <span className="maxLength">Добавить продукт</span>{" "}
+            </h1>
+            <Box className={classes.bigFirstBox}>
+              <Box className={classes.itemBox}>
+                <h2 className={classes.boxFirstTitle}>1.Общая информация</h2>
+                <div className={classes.GeneralInfoInside}>
+                  <Box>
+                    <h2 className={classes.boxSecondTitle}>
+                      <span className="let">Полное название продукта</span>{" "}
+                      <span style={{ color: "red" }}> *</span>
+                    </h2>
+                    <input
+                      type="text"
+                      placeholder="Название"
+                      className={classes.forBoxInput}
+                      onChange={(e) => setProductName(e.target.value)}
+                      minLength={3}
+                    />
+                  </Box>
+                  <Box>
+                    <h2 className={classes.boxSecondTitle}>
+                      <span className="let">Краткое название</span>
+                      <span style={{ color: "red" }}> *</span>
+                    </h2>
+                    <input
+                      type="text"
+                      placeholder="Название"
+                      className={classes.forBoxInput}
+                      onChange={(e) => setProductShortName(e.target.value)}
+                      minLength={3}
+                    />
+                  </Box>
+                  <Box>
+                    <h2 className={classes.boxSecondTitle}>
+                      Название бренда
+                      <span style={{ color: "red" }}> *</span>
+                    </h2>
+                    <FormControl
+                      sx={{ minWidth: 120 }}
+                      className={classes.FormControl}
+                    >
+                      <Select
+                        value={brandName}
+                        onChange={handleChangeBrand}
+                        displayEmpty
+                        className={classes.Select}
+                      >
+                        <MenuItem value="">
+                          <span className="notranslate">Выберите бренд</span>
+                        </MenuItem>
+
+                        {brands.map((brand) => (
+                          <MenuItem value={brand.id} key={brand.id}>
+                            {brand.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </div>
+              </Box>
+              <Box className={classes.itemBoxprice}>
+                <h2 className={classes.boxFirstTitle}>2.Цена</h2>
+                <div className={classes.Pricebox}>
+                  <Box>
+                    <h2 className={classes.boxSecondTitle}>
+                      Цена продукта
+                      <span style={{ color: "red" }}> *</span>
+                    </h2>
+                    <input
+                      type="number"
+                      placeholder="Number"
+                      className={classes.forBoxInputPrice}
+                      onChange={(e) => setProductPrice(e.target.value)}
+                      minLength={3}
+                    />
+                  </Box>
+                  <Box>
+                    <h2 className={classes.boxSecondTitle}>
+                      Скидка
+                      <span style={{ color: "red" }}> *</span>{" "}
+                    </h2>
+                    <input
+                      maxLength={2}
+                      type="text"
+                      style={{
+                        padding: "9px 2px 8px 17px",
+                        width: "80px",
+                        marginTop: "5px",
+                        marginRight: "5px",
+                        border: "2px solid #9F9F9F",
+                        borderRadius: "5px",
+                        outline: "none",
+                        fontFamily: "Poppins",
+                        fontWeight: "400",
+                        fontSize: "14px",
+                        color: "black",
+                      }}
+                      className="inpchegirma"
+                      onChange={(e) => setProductDiscount(e.target.value)}
+                    />
+                    <span className={classes.spanDiscount}>%</span>
+                  </Box>
+                </div>
+              </Box>
+              <Box className={classes.itemBoxCategory}>
+                <h2 className={classes.boxFirstTitle}>3.Категории</h2>
+                <Box className={classes.CategoryBox}>
+                  <h2 className={classes.boxCategoryTitle}>
+                    Название категории
                     <span style={{ color: "red" }}> *</span>
                   </h2>
                   <FormControl
-                    sx={{ minWidth: 120 }}
-                    className={classes.FormControl}
+                    sx={{ m: 1, minWidth: 120 }}
+                    style={{ padding: "0 !important", margin: "0 !important" }}
                   >
                     <Select
-                      value={brandName}
-                      onChange={handleChangeBrand}
+                      value={categoryName}
+                      onChange={handleChangeCategory}
                       displayEmpty
                       className={classes.Select}
                     >
                       <MenuItem value="">
-                        <span className="notranslate">Brendni tanlang</span>
+                        <span className="notranslate">Выберите категорию.</span>
                       </MenuItem>
 
-                      {brands.map((brand) => (
-                        <MenuItem value={brand.id} key={brand.id}>
-                          {brand.name}
+                      {categories.map((category) => (
+                        <MenuItem value={category.id} key={category.id}>
+                          {category.name}
                         </MenuItem>
                       ))}
                     </Select>
                   </FormControl>
                 </Box>
-              </div>
-            </Box>
-            <Box className={classes.itemBoxprice}>
-              <h2 className={classes.boxFirstTitle}>2.Narxlash</h2>
-              <div className={classes.Pricebox}>
-                <Box>
+              </Box>
+              <Box className={classes.itemBox} style={{ marginTop: "35px" }}>
+                <h2 className={classes.boxFirstTitle}>4.Фото</h2>
+                <Box
+                  style={{ marginLeft: "20px" }}
+                  className={classes.ProducutPhoto}
+                >
                   <h2 className={classes.boxSecondTitle}>
-                    Mahsulot narxi
+                    Фото продукта
                     <span style={{ color: "red" }}> *</span>
                   </h2>
-                  <input
-                    type="number"
-                    placeholder="Number"
-                    className={classes.forBoxInputPrice}
-                    onChange={(e) => setProductPrice(e.target.value)}
-                    minLength={3}
-                  />
-                </Box>
-                <Box>
-                  <h2 className={classes.boxSecondTitle}>
-                    Chegirma
-                    <span style={{ color: "red" }}> *</span>{" "}
-                  </h2>
-                  <input
-                    maxLength={2}
-                    type="text"
-                    style={{
-                      padding: "9px 2px 8px 17px",
-                      width: "80px",
-                      marginTop: "5px",
-                      marginRight: "5px",
-                      border: "2px solid #9F9F9F",
-                      borderRadius: "5px",
-                      outline: "none",
-                      fontFamily: "Poppins",
-                      fontWeight: "400",
-                      fontSize: "14px",
-                      color: "black",
-                    }}
-                    className="inpchegirma"
-                    onChange={(e) => setProductDiscount(e.target.value)}
-                  />
-                  <span className={classes.spanDiscount}>%</span>
-                </Box>
-              </div>
-            </Box>
-            <Box className={classes.itemBoxCategory}>
-              <h2 className={classes.boxFirstTitle}>3.Kategoriyalar</h2>
-              <Box className={classes.CategoryBox}>
-                <h2 className={classes.boxCategoryTitle}>
-                  Kategoriya nomi
-                  <span style={{ color: "red" }}> *</span>
-                </h2>
-                <FormControl
-                  sx={{ m: 1, minWidth: 120 }}
-                  style={{ padding: "0 !important", margin: "0 !important" }}
-                >
-                  <Select
-                    value={categoryName}
-                    onChange={handleChangeCategory}
-                    displayEmpty
-                    className={classes.Select}
-                  >
-                    <MenuItem value="">
-                      <b>Turkumni tanlang</b>
-                    </MenuItem>
-
-                    {categories.map((category) => (
-                      <MenuItem value={category.id} key={category.id}>
-                        {category.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-            </Box>
-            <Box className={classes.itemBox} style={{ marginTop: "35px" }}>
-              <h2 className={classes.boxFirstTitle}>4.Rasmlar</h2>
-              <Box
-                style={{ marginLeft: "20px" }}
-                className={classes.ProducutPhoto}
-              >
-                <h2 className={classes.boxSecondTitle}>
-                  Mahsulot rasmi
-                  <span style={{ color: "red" }}> *</span>
-                </h2>
-                <div className={classes.Photosettings}>
-                  <form style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      alt="img"
-                      src={preview}
-                      style={{ display: preview ? "block" : "none" }}
-                      className={classes.forImagePreview}
-                    />
-                    <FormLabel
-                      htmlFor="file-input"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        fileInputRef.current.click();
-                      }}
-                    >
-                      <img src={BackUp} alt="dddd" />
-                    </FormLabel>
-                    <input
-                      type="file"
-                      style={{ display: "none" }}
-                      ref={fileInputRef}
-                      multiple
-                      accept="image/*"
-                      onChange={handleInputChange}
-                      minLength={3}
-                    />
-                  </form>
-                  <div />
-                </div>
-              </Box>
-            </Box>
-            <Box className={classes.itemBox}>
-              <h2 className={classes.boxFirstTitle}>
-                5.Mahsulot xususiyatlari
-              </h2>
-              <div className={classes.DynamicFeilds}>
-                {inputFields.map((inputField) => (
-                  <div key={inputField.id}>
-                    <FormControl
-                      sx={{ m: 1, minWidth: 120 }}
-                      style={{
-                        padding: "0 !important",
-                        margin: "0 !important",
-                      }}
-                    >
-                      <Select
-                        name="character"
-                        value={inputField.character}
-                        onChange={(event) =>
-                          handleChangeInput(inputField.id, event)
-                        }
-                        displayEmpty
-                        style={{ marginRight: "20px", marginBottom: "20px" }}
-                        className={classes.Select}
+                  <div className={classes.Photosettings}>
+                    <form style={{ display: "flex", alignItems: "center" }}>
+                      <img
+                        alt="img"
+                        src={preview}
+                        style={{ display: preview ? "block" : "none" }}
+                        className={classes.forImagePreview}
+                      />
+                      <FormLabel
+                        htmlFor="file-input"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          fileInputRef.current.click();
+                        }}
                       >
-                        <MenuItem value="">
-                          <span>Xossa nomi </span>
-                        </MenuItem>
-                        {characterNames.map((characterName) => (
-                          <MenuItem
-                            value={characterName.id}
-                            key={characterName.id}
-                          >
-                            {characterName.name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-
-                    <FormControl
-                      sx={{ m: 1, minWidth: 120 }}
-                      style={{
-                        padding: "0 !important",
-                        margin: "0 !important",
-                      }}
-                    >
-                      <Select
-                        name="property"
-                        value={inputField.property}
-                        onChange={(event) =>
-                          handleChangeInput(inputField.id, event)
-                        }
-                        displayEmpty
-                        className={classes.Select}
-                      >
-                        <MenuItem value="">
-                          <span>Xossa qiymati </span>
-                        </MenuItem>
-                        {characterProperties.map((characterProperty) => (
-                          <MenuItem
-                            value={characterProperty.id}
-                            key={characterProperty.id}
-                          >
-                            {characterProperty.value}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                    <IconButton
-                      disabled={inputFields?.length === 1}
-                      onClick={() => handleRemoveFields(inputField.id)}
-                    >
-                      <RemoveIcon />
-                    </IconButton>
-                    <IconButton onClick={handleAddFields}>
-                      <AddIcon />
-                    </IconButton>
+                        <img src={BackUp} alt="dddd" />
+                      </FormLabel>
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        ref={fileInputRef}
+                        multiple
+                        accept="image/*"
+                        onChange={handleInputChange}
+                        minLength={3}
+                      />
+                    </form>
+                    <div />
                   </div>
-                ))}
-              </div>
-              <BasicModal />
-            </Box>
-            <Box className={classes.itemBox}>
-              <h2 className={classes.boxFirstTitle}>8.Mahsulot holati</h2>
-              <Box className={classes.statusBox}>
-                <h2 className={classes.boxSecondTitle}>Holat</h2>
-                <FormControl
-                  sx={{ m: 1, minWidth: 120 }}
-                  style={{ padding: "0 !important", margin: "0 !important" }}
-                >
-                  <Select
-                    className={classes.Select}
-                    value={productStatus}
-                    onChange={handleChangeStatus}
-                    displayEmpty
-                  >
-                    <MenuItem value="">
-                      <span>Holatni tanlang</span>
-                    </MenuItem>
-                    <MenuItem value="true">Sotuvda</MenuItem>
-                    <MenuItem value="false">Sotuvda emas</MenuItem>
-                  </Select>
-                </FormControl>
+                </Box>
               </Box>
+              <Box className={classes.itemBox}>
+                <h2 className={classes.boxFirstTitle}>
+                  5.Характеристики продукта
+                </h2>
+                <div className={classes.DynamicFeilds}>
+                  {inputFields.map((inputField) => (
+                    <div key={inputField.id}>
+                      <FormControl
+                        sx={{ m: 1, minWidth: 120 }}
+                        style={{
+                          padding: "0 !important",
+                          margin: "0 !important",
+                        }}
+                      >
+                        <Select
+                          name="character"
+                          value={inputField.character}
+                          onChange={(event) =>
+                            handleChangeInput(inputField.id, event)
+                          }
+                          displayEmpty
+                          style={{ marginRight: "20px", marginBottom: "20px" }}
+                          className={classes.Select}
+                        >
+                          <MenuItem value="">
+                            <span>Название характеристики </span>
+                          </MenuItem>
+                          {characterNames.map((characterName) => (
+                            <MenuItem
+                              value={characterName.id}
+                              key={characterName.id}
+                            >
+                              {characterName.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+
+                      <FormControl
+                        sx={{ m: 1, minWidth: 120 }}
+                        style={{
+                          padding: "0 !important",
+                          margin: "0 !important",
+                        }}
+                      >
+                        <Select
+                          name="property"
+                          value={inputField.property}
+                          onChange={(event) =>
+                            handleChangeInput(inputField.id, event)
+                          }
+                          displayEmpty
+                          className={classes.Select}
+                        >
+                          <MenuItem value="">
+                            <span>Свойства характеристики </span>
+                          </MenuItem>
+                          {characterProperties.map((characterProperty) => (
+                            <MenuItem
+                              value={characterProperty.id}
+                              key={characterProperty.id}
+                            >
+                              {characterProperty.value}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                      <IconButton
+                        disabled={inputFields?.length === 1}
+                        onClick={() => handleRemoveFields(inputField.id)}
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                      <IconButton onClick={handleAddFields}>
+                        <AddIcon />
+                      </IconButton>
+                    </div>
+                  ))}
+                </div>
+                <BasicModal />
+              </Box>
+              <Box className={classes.itemBox}>
+                <h2 className={classes.boxFirstTitle}>8.Статус продукта</h2>
+                <Box className={classes.statusBox}>
+                  <h2 className={classes.boxSecondTitle}>Статус</h2>
+                  <FormControl
+                    sx={{ m: 1, minWidth: 120 }}
+                    style={{ padding: "0 !important", margin: "0 !important" }}
+                  >
+                    <Select
+                      className={classes.Select}
+                      value={productStatus}
+                      onChange={handleChangeStatus}
+                      displayEmpty
+                    >
+                      <MenuItem value="">
+                        <span>Выберите статус</span>
+                      </MenuItem>
+                      <MenuItem value="true">В наличии</MenuItem>
+                      <MenuItem value="false">Нет в наличии</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Box>
+              <div style={{ display: "flex" }}>
+                <Button
+                  sx={{ textTransform: "capitalize" }}
+                  className={classes.forButton}
+                  onClick={() => {
+                    onSubmit();
+                  }}
+                  style={{ marginLeft: "auto", display: "flex" }}
+                >
+                  Добавить
+                </Button>
+                <Button
+                  sx={{ textTransform: "capitalize" }}
+                  component={RouterLink as any}
+                  to="/product"
+                  className={classes.cancel}
+                >
+                  Отменить
+                </Button>
+              </div>
             </Box>
-            <div style={{ display: "flex" }}>
-              <Button
-                sx={{ textTransform: "capitalize" }}
-                className={classes.forButton}
-                onClick={() => {
-                  onSubmit();
-                }}
-                style={{ marginLeft: "auto", display: "flex" }}
-              >
-                Saqlash
-              </Button>
-              <Button
-                sx={{ textTransform: "capitalize" }}
-                component={RouterLink as any}
-                to="/product"
-                className={classes.cancel}
-              >
-                Bekor qilish
-              </Button>
-            </div>
-          </Box>
-          <Notification notify={notify} setNotify={setNotify} />
-        </form>
-      </Container>
-    </>
+            <Notification notify={notify} setNotify={setNotify} />
+          </form>
+        </Container>
+      </Box>
+    </div>
   );
 }
 

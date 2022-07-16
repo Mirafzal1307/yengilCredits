@@ -1,31 +1,17 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import { useParams, Link as RouterLink } from "react-router-dom";
+import { useParams, Link as RouterLink, Link } from "react-router-dom";
 import { CircularProgress, Container, Grid, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { fontSize } from "@mui/system";
 import MiniDrawer from "../../components/CoreLayout/AdminHeader";
-
-import { getProductCreate } from "../../Api/admin/AdminProductApi";
-import { API_URL, MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
+import { MINIO_FULL_ENDPOINT_FOR } from "../../constants/ApiConstants";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { useActions } from "../../hook/useActions";
-import { fetchProductsById } from "../../redux/actions/detailsByIdAction";
 
 const useStyles = makeStyles({
-  bigFirstBox: {
-    background: "#FFFFFF",
-    boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.25)",
-    borderRadius: "5px",
-    padding: "20px 40px 40px 42px",
-    marginBottom: "70px !important",
-  },
   itemBox: {
     display: "flex",
     paddingTop: "40px",
-  },
-  itemBoxCategory: {
-    paddingTop: "30px",
   },
   itemBoxprice: {
     display: "flex",
@@ -307,12 +293,15 @@ const useStyles = makeStyles({
     padding: "5px",
     textAlign: "right",
   },
+  title1: {
+    marginTop: "100px",
+  },
 });
 
 function ProductDetails(): JSX.Element {
-  const { products, error, loading } = useTypedSelector((state) => state?.byId);
-  const pro: any = products?.Product;
-  const des: any = products?.Description;
+  const { products, error, loading } = useTypedSelector((state) => state.byId);
+  const pro: any = products?.Product?.[0];
+  const des: any = products?.Description?.[0];
   const classes = useStyles();
   const { id } = useParams();
   const { fetchProductsById } = useActions();
@@ -320,106 +309,111 @@ function ProductDetails(): JSX.Element {
     fetchProductsById(id);
   }, []);
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       <MiniDrawer />
-      <Container
-        style={{ marginTop: "50px" }}
-        className={classes.CreateContainerTitle}
-      >
-        {loading && products ? (
-          <CircularProgress disableShrink />
-        ) : (
-          <>
-            <Grid item xs={12}>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <h3 className={classes.ProductName}>{pro[0]?.name}</h3>
-                <i className={classes.BrandName}>{pro[0]?.brand?.name}</i>
-              </div>
-            </Grid>
-            <Box style={{ display: "flex", alignItems: "center" }}>
-              <Grid
-                item
-                xs={6}
-                style={{ display: "flex", flexDirection: "column" }}
-              >
+      <Box sx={{ ml: "0", mr: "50px", mb: "50px" }}>
+        <h2 className={classes.title1}>О продукте</h2>
+        <Container
+          style={{ marginTop: "20px" }}
+          className={classes.CreateContainerTitle}
+        >
+          {loading && products ? (
+            <CircularProgress disableShrink />
+          ) : (
+            <>
+              <Grid item xs={12}>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <h3 className={classes.ProductName}>{pro?.name}</h3>
+                  <i className={classes.BrandName}>{pro?.brand?.name}</i>
+                </div>
+              </Grid>
+              <Box style={{ display: "flex", alignItems: "center" }}>
+                <Grid
+                  item
+                  xs={6}
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  <div
+                    style={{
+                      textAlign: "center",
+                      filter: "drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))",
+                    }}
+                  >
+                    <img
+                      src={`${MINIO_FULL_ENDPOINT_FOR}/product/${pro?.photos?.[0].name}`}
+                      alt="Rasm bor edi"
+                      className={classes.img}
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <div className={classes.CharacterAndProperty}>
+                    <li className={classes.Character}>
+                      <h4>Названия характеристики</h4>
+                      {des?.map((item: any) => (
+                        <div style={{ flexDirection: "column" }}>
+                          {item?.character_name}
+                        </div>
+                      ))}
+                    </li>
+                    <li
+                      className={classes.Character}
+                      style={{ textAlign: "right" }}
+                    >
+                      <h4>Свойства характеристики</h4>
+                      {des?.map((item: any) => (
+                        <div style={{ flexDirection: "column" }}>
+                          {item?.character_value}
+                        </div>
+                      ))}
+                    </li>
+                  </div>
+                </Grid>
+              </Box>
+              <Grid item xs={12}>
                 <div
                   style={{
-                    textAlign: "center",
-                    filter: "drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25))",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "30px",
                   }}
                 >
-                  <img
-                    src={`${MINIO_FULL_ENDPOINT_FOR}/product/${pro[0]?.photos[0].name}`}
-                    alt="Rasm bor edi"
-                    className={classes.img}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={6}>
-                <div className={classes.CharacterAndProperty}>
-                  <li className={classes.Character}>
-                    <h3>Xarakteriska Nomi</h3>
-                    {des[0]?.map((item: any, key: any) => (
-                      <div style={{ flexDirection: "column" }}>
-                        {item?.character_name}
-                      </div>
-                    ))}
-                  </li>
-                  <li
-                    className={classes.Character}
-                    style={{ textAlign: "right" }}
-                  >
-                    <h3>Xarakteriska Qiymati</h3>
-                    {des[0]?.map((item: any, key: any) => (
-                      <div style={{ flexDirection: "column" }}>
-                        {item?.character_value}
-                      </div>
-                    ))}
-                  </li>
-                </div>
-              </Grid>
-            </Box>
-            <Grid item xs={12}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginTop: "30px",
-                }}
-              >
-                <div>
-                  <h3 className={classes.ProductBottomName}>
-                    {pro?.[0]?.name}
-                  </h3>
-                  <h4 className={classes.ShortName}>{pro?.[0]?.short_name}</h4>
-                </div>
-                <div>
                   <div>
-                    <p className={classes.price}> {pro?.[0]?.price} so`m </p>
-                    <p className={classes.afterDiscount}>
-                      {" "}
-                      {pro?.[0]?.after_discount?.toLocaleString()} so`m{" "}
-                    </p>
-                    <p className={classes.discount}> {pro?.[0].discount} %</p>
+                    <h3 className={classes.ProductBottomName}>{pro?.name}</h3>
+                    <h4 className={classes.ShortName}>{pro?.short_name}</h4>
                   </div>
-                  <div style={{ display: "flex" }}>
-                    <Button className={classes.save}>Bekor qilish</Button>
-                    <Button
-                      component={RouterLink as any}
-                      to="/product"
-                      className={classes.cancel}
-                    >
-                      Saqlash
-                    </Button>
+                  <div>
+                    <div>
+                      <p className={classes.price}> {pro?.price} сум </p>
+                      <p className={classes.afterDiscount}>
+                        {" "}
+                        {pro?.after_discount?.toLocaleString()} сум{" "}
+                      </p>
+                      <p className={classes.discount}> {pro?.discount} %</p>
+                    </div>
+                    <div style={{ display: "flex" }}>
+                      <Link to="/product">
+                        <Button className={classes.save}>Отменить</Button>
+                      </Link>
+                      <Button
+                        component={RouterLink as any}
+                        to="/product"
+                        className={classes.cancel}
+                      >
+                        Хранить
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Grid>
-          </>
-        )}
-        {error ? <h1>error</h1> : null}
-      </Container>
-    </>
+              </Grid>
+            </>
+          )}
+          {error ? <h1>error</h1> : null}
+        </Container>
+      </Box>
+    </Box>
   );
 }
 
