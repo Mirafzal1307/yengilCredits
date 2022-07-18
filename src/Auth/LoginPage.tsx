@@ -91,8 +91,6 @@ function LoginPage(): JSX.Element {
       setMessage("Please enter username and password");
       setLoading(false);
     } else {
-      // debugger;
-      console.log(username, password);
       AuthService.login(username, password)
         .then((res: any) => {
           if (res.status === 200) {

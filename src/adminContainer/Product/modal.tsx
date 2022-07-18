@@ -57,7 +57,7 @@ function BasicModal(): JSX.Element {
           if (res.status === 200) {
             setNotify({
               isOpen: true,
-              message: "Muvaffaqiyatli qo'shildi.",
+              message: "Добавлено успешно.",
               type: "success",
             });
           }
@@ -65,14 +65,14 @@ function BasicModal(): JSX.Element {
         .catch(() => {
           setNotify({
             isOpen: true,
-            message: "Xatolik yuz berdi...",
+            message: "Что-то пошло не так...",
             type: "error",
           });
         });
     } catch (err) {
       setNotify({
         isOpen: true,
-        message: "Xatolik...",
+        message: "Ошибка...",
         type: "error",
       });
     }
@@ -91,12 +91,13 @@ function BasicModal(): JSX.Element {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Siz bu yerda yangi xossa nomi va qiymati qo`shishingiz mumkin!
+            Вы должны добавить название характеристики и свойства
+            характеристики.
           </Typography>
           <div style={divStyle}>
             <FormControl sx={{ width: "25ch" }}>
               <OutlinedInput
-                placeholder="Xossa nomi..."
+                placeholder="Название характеристики..."
                 type="text"
                 onChange={(e) => setCharacterName(e.target.value)}
                 required
@@ -104,7 +105,7 @@ function BasicModal(): JSX.Element {
             </FormControl>
             <FormControl sx={{ width: "25ch" }}>
               <OutlinedInput
-                placeholder="Xossa qiymati..."
+                placeholder="Свойства характеристики..."
                 type="text"
                 onChange={(e) => setPropertyName(e.target.value)}
                 required
@@ -123,7 +124,7 @@ function BasicModal(): JSX.Element {
                 },
               }}
             >
-              Bekor qilish
+              Отменить
             </Button>
             <Button
               onClick={() => {
@@ -141,7 +142,7 @@ function BasicModal(): JSX.Element {
               }}
               type="submit"
             >
-              Saqlash
+              Добавить
             </Button>
           </div>
         </Box>

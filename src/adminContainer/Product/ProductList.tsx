@@ -170,6 +170,7 @@ const useStyles = makeStyles({
     background: "#065374 !important",
     color: "#ffffff",
     borderRadius: "5px !important",
+    border: "none",
   },
   pagination: {
     width: "auto",
@@ -211,20 +212,7 @@ interface Data {
   name: string;
   protein: number;
 }
-// interface Product {
-//     name: string,
-//     short_name: string,
-//     price: number,
-//     register_date: any,
-//     after_discount: number,
-//     availability: boolean,
-//     id: number,
-//     brand_id: number,
-//     category_id: number,
-//     discount: number,
-//     photo: string
 
-// }
 interface HeadCell {
   disablePadding: boolean;
   id: keyof Data;
@@ -242,31 +230,31 @@ const headCells: readonly HeadCell[] = [
     id: "calories",
     numeric: true,
     disablePadding: false,
-    label: "Mahsulot",
+    label: "Продукт",
   },
   {
     id: "fat",
     numeric: true,
     disablePadding: false,
-    label: "Mahsulot turkumi",
+    label: "Категория продукта",
   },
   {
     id: "carbs",
     numeric: true,
     disablePadding: false,
-    label: "Holat",
+    label: "Статус",
   },
   {
     id: "protein",
     numeric: true,
     disablePadding: false,
-    label: "Brand",
+    label: "Бренд",
   },
   {
     id: "protein",
     numeric: true,
     disablePadding: false,
-    label: "Amallar",
+    label: "Действия",
   },
 ];
 interface EnhancedTableProps {
@@ -304,8 +292,6 @@ function ProductList(): JSX.Element {
   const { products, error, loading } = useTypedSelector(
     (state) => state.product,
   );
-  // console.log(products);
-  // let p: number = products.totalPages
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(1);
   const [pageQty, setPageQty] = useState(products.totalPages);
@@ -345,7 +331,7 @@ function ProductList(): JSX.Element {
     event: React.ChangeEvent<HTMLInputElement>,
   ): any => {
     if (event.target.checked) {
-      const newSelecteds = product.map((pro: any, key: any) => pro.name);
+      const newSelecteds = product.map((pro: any) => pro.name);
       setSelected(newSelecteds);
       return;
     }
@@ -370,7 +356,6 @@ function ProductList(): JSX.Element {
   };
   const isSelected = (name: string): any => selected.indexOf(name) !== -1;
   const [status, setStatus] = React.useState("");
-  // const [categoryName, setCategoryName] = React.useState('');
   const handleChange = (event: any): void => {
     setStatus(event.target.value);
   };
@@ -379,13 +364,13 @@ function ProductList(): JSX.Element {
       if (res.status === 200) {
         setNotify({
           isOpen: true,
-          message: "Muvaffaqiyatli o'chirildi...",
-          type: "error",
+          message: "Удалено успешно...",
+          type: "success",
         });
       } else if (res.status === 400) {
         setNotify({
           isOpen: true,
-          message: "Xatolik yuz berdi...",
+          message: "Что-то пошло не так...",
           type: "error",
         });
       }
@@ -407,9 +392,9 @@ function ProductList(): JSX.Element {
   }
 
   return (
-    <>
+    <Box>
       <div className={classes.productsTitle}>
-        <h1 className={classes.product}>Mahsulotlar</h1>
+        <h1 className={classes.product}>Продукты</h1>
         <Button
           className={classes.createButton}
           component={RouterLink as any}
@@ -417,7 +402,7 @@ function ProductList(): JSX.Element {
           sx={{ textTransform: "capitalize" }}
           onClick={() => refresh()}
         >
-          + Qo`shish
+          + Добавить
         </Button>
       </div>
       <Box sx={{ maxWidth: "1200px", margin: "auto" }}>
@@ -427,7 +412,7 @@ function ProductList(): JSX.Element {
               <div style={{ display: "flex" }}>
                 <input
                   type="text"
-                  placeholder="Izlash..."
+                  placeholder="Искать"
                   onChange={handleInputChange}
                   className={classes.SearchInput}
                 />
@@ -448,7 +433,7 @@ function ProductList(): JSX.Element {
                           <p
                             style={{ margin: "0px", padding: "0px !important" }}
                           >
-                            Mahsulot turkumi{" "}
+                            Категория продукта{" "}
                           </p>
                         );
                       }
@@ -476,9 +461,6 @@ function ProductList(): JSX.Element {
                       const delProduct = (): void => {
                         deleteUserData(user.id);
                       };
-                      // const getProductToUpdate = () => {
-                      //   getProductByID(user.id);
-                      // };
                       const getProductToDetails = (): void => {
                         getProductByID(user.id);
                       };
@@ -532,7 +514,7 @@ function ProductList(): JSX.Element {
                                   alt="rasm"
                                   className={classes.icon}
                                 />
-                                sotuvda
+                                В наличии
                               </p>
                             ) : (
                               <p className={classes.notSale}>
@@ -541,7 +523,7 @@ function ProductList(): JSX.Element {
                                   alt="rasm"
                                   className={classes.icon}
                                 />
-                                Sotuvda yo`q
+                                Нет в наличии
                               </p>
                             )}
                           </TableCell>
@@ -651,7 +633,7 @@ function ProductList(): JSX.Element {
                                     alt="rasm"
                                     className={classes.icon}
                                   />
-                                  sotuvda
+                                  В наличии
                                 </p>
                               ) : (
                                 <p className={classes.notSale}>
@@ -660,7 +642,7 @@ function ProductList(): JSX.Element {
                                     alt="rasm"
                                     className={classes.icon}
                                   />
-                                  Sotuvda yo`q
+                                  Нет в наличии
                                 </p>
                               )}
                             </TableCell>
@@ -692,12 +674,10 @@ function ProductList(): JSX.Element {
                               >
                                 <img src={EditImage} alt="rasm bor edi" />
                               </Button>
-                              {/* <Button className={classes.button}> */}
                               <Modal
                                 data={delProduct}
                                 className={classes.imgDelete}
                               />
-                              {/* </Button> */}
                             </TableCell>
                           </TableRow>
                         );
@@ -725,7 +705,7 @@ function ProductList(): JSX.Element {
         </Paper>
       </Box>
       <Notification notify={notify} setNotify={setNotify} />
-    </>
+    </Box>
   );
 }
 

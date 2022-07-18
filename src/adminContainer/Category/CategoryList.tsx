@@ -53,13 +53,13 @@ const headCells: readonly HeadCell[] = [
     id: "id",
     numeric: true,
     disablePadding: false,
-    label: "Nomi",
+    label: "Названия",
   },
   {
     id: "action",
     numeric: true,
     disablePadding: false,
-    label: "Amallar",
+    label: "Действия",
   },
 ];
 
@@ -109,35 +109,7 @@ const useStyles = makeStyles({
   h1: {
     fontSize: "28px !important",
     margin: "32px 0 20px 0 !important",
-    fontFamily: "Poppins !important",
-  },
-  input_name: {
-    width: "500px !important",
-    fontFamily: "Poppins !important",
-    fontStyle: "normal !important",
-  },
-  category_name: {
-    color: "#464646 !important",
-    fontSize: "17px !important",
-    fontWeight: "500 !important",
-    margin: "20px 0 10px 0 !important",
-    fontFamily: "Poppins !important",
-  },
-  category_category: {
-    color: "#464646 !important",
-    fontSize: "17px !important",
-    fontWeight: "500 !important",
-    margin: "10px 0 !important",
-    fontFamily: "Poppins !important",
-  },
-  datagrid: {
-    border: "none !important",
-  },
-  button_root: {
-    backgroundColor: "#065374",
-    padding: "9px 20px 8px 20px !important",
-    marginTop: "20px !important",
-    marginLeft: "58% !important",
+    fontFamily: "Arial !important",
   },
   button: {
     padding: "0px !important",
@@ -149,16 +121,6 @@ const useStyles = makeStyles({
     marginTop: "2px !important",
     fontFamily: "Poppins !important",
   },
-  menuItem_gutters: {
-    color: "#9F9F9F !important",
-    font: "inherit !important",
-    marginTop: "2px !important",
-    fontFamily: "Poppins !important",
-  },
-  update_buttons: {
-    width: "400px !important",
-    display: "flex !important",
-  },
   h4: {
     fontSize: "17px !important",
     fontWeight: "600 !important",
@@ -166,79 +128,15 @@ const useStyles = makeStyles({
     paddingBottom: "10px !important",
     paddingLeft: "12px !important",
     fontStyle: "normal !important",
-    fontFamily: "Poppins !important",
-  },
-  h4_second: {
-    fontSize: "17px !important",
-    fontWeight: "600 !important",
-    margin: "0px !important",
-    fontStyle: "normal !important",
-    fontFamily: "Poppins !important",
-  },
-  button_one: {
-    minWidth: "140px !important",
-    height: "40px !important",
-    color: "white !important",
-    backgroundColor: "#FF4B4B !important",
-    margin: "20px 0 0 60px !important",
-    fontSize: "17px !important",
-    fontWeight: "400 !important",
-  },
-  category_button: {
-    minWidth: "140px !important",
-    margin: "20px 0 0 30px !important",
-    fontSize: "17px !important",
-    fontWeight: "400 !important",
-  },
-  update_button: {
-    minWidth: "220px !important",
-    height: "40px !important",
-    color: "white !important",
-    margin: "20px 0 0 80px !important",
-    fontSize: "17px !important",
-    fontWeight: "400 !important",
+    fontFamily: "Arial !important",
   },
   tableCell: {
     borderBottom: "1px solid black !important",
     padding: "0 !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
   },
   box: {
     textAlign: "center",
-  },
-  h1_second: {
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: "18px",
-    color: "#065374",
-    fontFamily: "Poppins !important",
-  },
-  deleteButton: {
-    border: "none !important",
-    background: "transparent !important",
-  },
-  cancel: {
-    background: "#FF4B4B!important",
-    borderRadius: "5px",
-    color: "#ffffff !important",
-    textTransform: "lowercase",
-    marginRight: "20px",
-    padding: "9px 20px 8px 20px !important",
-  },
-  deletes: {
-    background: "#065374 !important",
-    borderRadius: "5px",
-    color: "#ffffff !important",
-    textTransform: "lowercase",
-    margin: "0 0 0 20px !important",
-    padding: "9px 20px 8px 20px !important",
-  },
-  h2: {
-    fontSize: "17px",
-    fontWeight: "normal",
-    fontStyle: "normal",
-    color: "#000000",
-    fontFamily: "Poppins !important",
   },
   pagination: {
     width: "315px",
@@ -315,7 +213,7 @@ export default function EnhancedTable(): JSX.Element {
   return (
     <div className={loading ? "loading" : ""}>
       <Box>
-        <h1 className={classes.h1}>Turkum</h1>
+        <h1 className={classes.h1}>Категория</h1>
         <Grid container direction="row" spacing={2}>
           <Grid container item xs={5}>
             <Grid item xs={12}>
@@ -327,7 +225,7 @@ export default function EnhancedTable(): JSX.Element {
               <Box className={classes.input_two}>
                 <Paper className={classes.paper}>
                   <TableContainer>
-                    <h4 className={classes.h4}>2.Turkumlar</h4>
+                    <h4 className={classes.h4}>2.Категории</h4>
                     <Table sx={{ maxWidth: 750 }} aria-labelledby="tableTitle">
                       <EnhancedTableHead
                         numSelected={selected.length}

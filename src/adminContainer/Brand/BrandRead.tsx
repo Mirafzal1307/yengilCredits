@@ -16,8 +16,6 @@ import { useActions } from "../../hook/useActions";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 import { deleteBrandData, getBrand } from "../../Api/admin/AdminBrandApi";
 
-// console.warn = () => {};
-
 const useStyles = makeStyles({
   editButton: {
     background: "transparent",
@@ -27,7 +25,7 @@ const useStyles = makeStyles({
   },
   titleRows: {
     color: "#065374 !important",
-    fontFamily: "Poppins !important",
+    fontFamily: "Arial !important",
     fontWeight: "600 !important",
     fontSize: "17px !important",
     margin: 0,
@@ -80,7 +78,7 @@ function BrandTable(): JSX.Element {
         if (res.status === 200) {
           setNotify({
             isOpen: true,
-            message: "Muvaffaqiyatli o'chirildi...",
+            message: "Удалено успешно.",
             type: "success",
           });
         }
@@ -88,7 +86,7 @@ function BrandTable(): JSX.Element {
       .catch(() => {
         setNotify({
           isOpen: true,
-          message: "Xatolik yuz berdi...",
+          message: "Что-то пошло не так.",
           type: "error",
         });
       });
@@ -112,21 +110,21 @@ function BrandTable(): JSX.Element {
               />
             </TableCell>
             <TableCell className={classes.titleRows} align="center">
-              Rasmi
+              Фото
             </TableCell>
             <TableCell className={classes.titleRows} align="center">
-              Nomi
+              Название
             </TableCell>
             <TableCell className={classes.titleRows} align="center">
-              Soni
+              Количество
             </TableCell>
             <TableCell className={classes.titleRows} align="center">
-              Amallar
+              Действия
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {brands.map((item: any, key: any) => {
+          {brands?.map((item: any) => {
             const delData = (): void => {
               deleteData(item.id);
             };
@@ -172,7 +170,7 @@ function BrandTable(): JSX.Element {
                         className={classes.editButton}
                         onClick={getBrandToUpdate}
                       >
-                        <img src={edit} alt="rasm bor edi" />
+                        <img src={edit} alt="изображения" />
                       </button>
                     </Tooltip>
                   </Link>

@@ -3,7 +3,7 @@ import ApiClient from "../HttpClient";
 export function getProductList(page: string, data: object = {}): any {
   return ApiClient().get(`/product/list?page=${page}`, data);
 }
-export function getProductItem(id: string): any {
+export function getProductItem(id: any): any {
   return ApiClient().get(`/product/by-id/${id}`);
 }
 export function getProductSearch(name: string, data: object = {}): any {

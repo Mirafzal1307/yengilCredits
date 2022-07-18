@@ -42,6 +42,7 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "fs": "^0.0.1-security",
+    "i18next": "^21.8.13",
     "immutable": "^4.0.0",
     "npm": "^8.10.0",
     "numeral": "^2.0.6",

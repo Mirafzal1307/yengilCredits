@@ -14,7 +14,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import AppsIcon from "@mui/icons-material/Apps";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { useDispatch } from "react-redux";
-import BigPhoto from "../../Images/image 26.png";
+import BigPhoto from "../../Images/image26.png";
 import { useTypedSelector } from "../../hook/useTypedSelector";
 
 import { getProductByBrand } from "../../Api/client/ClientBrandApi";
@@ -279,7 +279,7 @@ const useStyles = makeStyles({
 });
 
 function BrandPage(): JSX.Element {
-  const { products, error, loading } = useTypedSelector(
+  const { error, loading } = useTypedSelector(
     (state) => state.productByCategoryReducer,
   );
   const classes = useStyles();
@@ -653,7 +653,7 @@ function BrandPage(): JSX.Element {
                   <PaginationItem
                     className={classes.paginationItem}
                     component={NavLink}
-                    to={`/product/product-by-category/${id}?page=${item.page}`}
+                    to={`/product/by-brand/${id}?page=${item.page}`}
                     {...item}
                     variant="text"
                     shape="rounded"

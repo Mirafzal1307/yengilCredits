@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { getAllCards } from "../../Api/client/MainProductsApi";
 
 import BackToTop from "./Navbar/Navbar";
-import BigPhoto from "../../Images/image 26.png";
+import BigPhoto from "../../Images/image26.png";
 import cart1 from "../../Images/cart1.svg";
 import cart2 from "../../Images/cart2.svg";
 import { getProductByBrand } from "../../Api/client/ClientBrandApi";
@@ -318,6 +318,7 @@ const useStyles = makeStyles({
 
 function AllCards(): JSX.Element {
   const { id } = useParams();
+  console.log(id);
   const classes = useStyles();
   const [products, setProducts] = useState([]);
   // const [productPrice, setProductPrice] = useState("");
@@ -532,8 +533,9 @@ function AllCards(): JSX.Element {
                             src={`${MINIO_FULL_ENDPOINT_FOR}/product/${item.photos[0].name}`}
                             alt="img"
                             style={{
-                              width: "auto",
-                              height: "70%",
+                              width: "75%",
+                              height: "auto",
+                              objectFit: "cover",
                               alignSelf: "center !important",
                               justifySelf: "center !important",
                             }}
@@ -654,7 +656,7 @@ function AllCards(): JSX.Element {
                   <PaginationItem
                     className={classes.paginationItem}
                     component={NavLink}
-                    to={`/product/product-by-category/${id}?page=${item.page}`}
+                    to={`/all/card/${id}?page=${item.page}`}
                     {...item}
                     variant="text"
                     shape="rounded"
