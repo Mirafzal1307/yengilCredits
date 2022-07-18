@@ -31,6 +31,7 @@ const useStyles = makeStyles({
       outline: "none",
     },
     fontFamily: "Arial !important",
+    color: "black !important",
     fontSize: "15px !important",
     fontWeight: "400",
     padding: "9px 0px 8px 20px !important",
@@ -55,7 +56,7 @@ const useStyles = makeStyles({
     backgroundColor: "#065374 !important",
     padding: "9px 20px 8px 20px !important",
     marginTop: "20px !important",
-    marginLeft: "50% !important",
+    marginLeft: "59% !important",
     fontFamily: "Poppins",
   },
   em: {
@@ -66,7 +67,7 @@ const useStyles = makeStyles({
     fontFamily: "Arial !important",
   },
   menuItem_gutters: {
-    color: "#9F9F9F !important",
+    color: "black !important",
     font: "inherit !important",
     marginTop: "2px !important",
     fontFamily: "Arial !important",
