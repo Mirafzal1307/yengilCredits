@@ -42,6 +42,7 @@ const useStyles = makeStyles({
   },
   forBoxInput: {
     padding: "8px 20px 9px 15px",
+    color: "black",
     marginTop: "5px",
     "&::placeholder": {
       fontFamily: "Arial",
@@ -55,7 +56,6 @@ const useStyles = makeStyles({
     borderRadius: "5px",
     fontFamily: "Arial",
     fontWeight: 400,
-    color: "#9F9F9F",
   },
   forButton: {
     padding: "9px 34px 8px 30px",
@@ -200,7 +200,7 @@ function BrandCreate(): JSX.Element {
               style={{ borderColor: "#9F9F9F" }}
               type="text"
               name="brand"
-              placeholder="Название бренда."
+              placeholder="Название бренда"
               className={classes.forBoxInput}
               onChange={(e) => setBrand(e.target.value)}
             />

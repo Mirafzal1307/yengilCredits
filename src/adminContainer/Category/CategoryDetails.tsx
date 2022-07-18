@@ -93,7 +93,6 @@ const useStyles = makeStyles({
     boxShadow: "none !important",
   },
   input_two: {
-    // width: "1000px",
     maxWidth: "1200px",
     top: "140px !important",
     background: "#FFFFFF !important",
