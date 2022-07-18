@@ -59,7 +59,7 @@ const useStyles = makeStyles({
     borderRadius: "5px",
     fontFamily: "Arial",
     fontWeight: 400,
-    color: "#9F9F9F",
+    color: "black",
   },
   forImagePreview: {
     width: "95px",

@@ -100,7 +100,7 @@ const useStyles = makeStyles({
     fontFamily: "Arial !important",
   },
   menuItem_gutters: {
-    color: "#9F9F9F !important",
+    color: "black !important",
     font: "inherit !important",
     marginTop: "2px !important",
     fontFamily: "Arial !important",
