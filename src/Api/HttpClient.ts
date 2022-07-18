@@ -28,6 +28,7 @@ class ApiClient {
         return config;
       },
       (error) => {
+        debugger;
         return Promise.reject(error);
       },
     );
@@ -36,9 +37,11 @@ class ApiClient {
         return response;
       },
       (error) => {
+        const datas = error.response.data;
+        console.log(datas);
         const { data } = error.response;
         const { status } = error.response;
-        checkErrorOne(data.slice(30, 36), status);
+        checkErrorOne(data.slice(31, 37), status);
         checkErrorTwo(data.slice(32, 38), status);
         checkErrorThree(data.slice(63, 69), status);
         return Promise.reject(error);
